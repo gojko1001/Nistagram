@@ -1,7 +1,7 @@
 # Nistagram
 Social network for sharing photos and videos
 
-### Contributors (Team 5):
+### Contributors (Team 10):
 |  | Student |
 | ------ | ------ |
 | Student 1 | Maja Stamenić RA 65/2017| 
