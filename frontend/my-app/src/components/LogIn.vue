@@ -2,7 +2,7 @@
     <div id="loginPage">
       <h1>Nistagram</h1>
       <br><br>
-      <!--<b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group id="input-group-1">
           <b-form-input
             id="email"
@@ -22,7 +22,7 @@
         <br>
         <b-button type="submit" variant="primary" style="width:200px;">Log in</b-button>
         <br>
-      </b-form>-->
+      </b-form>
 
       <hr>
       <b-link style="font-size:15px" @click="signIn">Don't have an account? Sign up</b-link>
@@ -34,7 +34,20 @@
 <script>
 export default {
   name: 'Login',
+  data() {
+      return {
+        form: {
+          email: '',
+          name: '',
+        },
+        show: true
+      }
+  },
   methods:{
+    onSubmit(event) {
+        event.preventDefault()
+        alert(JSON.stringify(this.form))
+      },
     signIn:function(){
       console.log("evo gaaa");
       window.location.href = "/registration";
