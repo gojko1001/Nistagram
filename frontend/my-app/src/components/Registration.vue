@@ -46,8 +46,6 @@
       </b-form>
       <hr>
       <b-link style="font-size:15px" @click="login">Have an account? Log in</b-link>
-      <br>
-      <b-link style="font-size:15px">Forgot password?</b-link>
   </div>
 </template>
 
