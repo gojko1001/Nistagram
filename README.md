@@ -8,3 +8,10 @@ Social network for sharing photos and videos
 | Student 2 | Gojko Novčić RA 208/2017| 
 | Student 3 | Nastasja Damjanac RA 38/2017|
 | Student 4 | Marija Milanović RA 197/2017|
+
+
+### Microservices:
+| Name | Port | About
+| ------ | ------ | ------ | 
+| Front service | 3000| |
+| Back service | ... | | 
