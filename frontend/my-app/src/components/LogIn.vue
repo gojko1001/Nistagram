@@ -13,11 +13,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-input type="password" id="password" aria-describedby="password-help-block" placeholder="Enter password"></b-form-input>
-        <b-form-text id="password-help-block">
-          Your password must be 8-20 characters long, contain letters and numbers, and must not
-          contain spaces or special characters.
-        </b-form-text>
+        <b-form-input type="password" id="password" placeholder="Enter password"></b-form-input>
 
         <br>
         <b-button type="submit" variant="primary" style="width:200px;">Log in</b-button>
@@ -25,7 +21,7 @@
       </b-form>
 
       <hr>
-      <b-link style="font-size:15px" @click="signIn">Don't have an account? Sign up</b-link>
+      <b-link style="font-size:15px" @click="signUp">Don't have an account? Sign up</b-link>
       <br>
       <b-link style="font-size:15px">Forgot password?</b-link>
   </div>
@@ -48,7 +44,18 @@ export default {
         event.preventDefault()
         alert(JSON.stringify(this.form))
       },
-    signIn:function(){
+    onReset(event) {
+        event.preventDefault()
+        // Reset our form values
+        this.form.email = ''
+        this.form.name = ''
+        // Trick to reset/clear native browser form validation state
+        this.show = false
+        this.$nextTick(() => {
+          this.show = true
+        })
+      },
+    signUp:function(){
       console.log("evo gaaa");
       window.location.href = "/registration";
     }
