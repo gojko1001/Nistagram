@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface IUserService {
     List<User> getAll();
+    User create(User user);
 }
