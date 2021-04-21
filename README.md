@@ -14,4 +14,4 @@ Social network for sharing photos and videos
 | Name | Port | About
 | ------ | ------ | ------ | 
 | Front service | 3000 | |
-| Back service | 3030 | | 
+| Back service (Agent) | 3030 | | 
