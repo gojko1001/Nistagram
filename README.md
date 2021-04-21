@@ -13,5 +13,5 @@ Social network for sharing photos and videos
 ### Microservices:
 | Name | Port | About
 | ------ | ------ | ------ | 
-| Front service | 3000| |
-| Back service | ... | | 
+| Front service | 3000 | |
+| Back service | 3030 | | 
