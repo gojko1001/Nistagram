@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <Navbar />
     <router-view/>
   </div>
@@ -17,8 +17,4 @@ export default {
 </script>
 
 <style>
-.nav-item{
-  font-size: 20px;
-}
-
 </style>

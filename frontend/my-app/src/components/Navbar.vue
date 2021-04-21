@@ -4,7 +4,7 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="/">
             <img src="../assets/logo.jpg"  height="40" alt="" />
-            <span class="brandName">Nistagram</span>
+            <!--<span class="brandName">Nistagram</span>-->
         </a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
