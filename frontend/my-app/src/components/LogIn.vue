@@ -1,6 +1,6 @@
 <template>
     <div id="loginPage">
-      <h1>Nistagram</h1>
+      <h1 class="brandName">Nistagram</h1>
       <br><br>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group id="input-group-1">
@@ -8,12 +8,12 @@
             id="email"
             v-model="form.email"
             type="email"
-            placeholder="Enter email"
+            placeholder="Email"
             required
           ></b-form-input>
         </b-form-group>
 
-        <b-form-input type="password" id="password" placeholder="Enter password"></b-form-input>
+        <b-form-input type="password" id="password" placeholder="Password"></b-form-input>
 
         <br>
         <b-button type="submit" variant="primary" style="width:200px;">Log in</b-button>
@@ -21,9 +21,9 @@
       </b-form>
 
       <hr>
-      <b-link style="font-size:15px" @click="signUp">Don't have an account? Sign up</b-link>
+      <b-link style="font-size:15px" href="/registration">Don't have an account? Sign up</b-link>
       <br>
-      <b-link style="font-size:15px">Forgot password?</b-link>
+      <b-link style="font-size:15px" href="/accRecovery">Forgot password?</b-link>
   </div>
 </template>
 
@@ -55,10 +55,9 @@ export default {
           this.show = true
         })
       },
-    signUp:function(){
-      console.log("evo gaaa");
-      window.location.href = "/registration";
-    }
+    // signUp:function(){
+    //   window.location.href = "/registration";
+    // }
   },
 }
 </script>
@@ -75,6 +74,6 @@ export default {
   margin-top: 60px;
   width: 25%;
   border: 3px solid lightblue;
-  padding: 10px;
+  padding: 50px;
 }
 </style>

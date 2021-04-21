@@ -1,6 +1,6 @@
 <template>
   <div id="registrationPage">
-    <h1>Nistagram</h1>
+    <h1 class="brandName">Nistagram</h1>
     <p style="font-size:15px">Sign up to see photos and videos from your friends.</p>
       <br>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
@@ -98,6 +98,6 @@ export default {
   margin-top: 60px;
   width: 40%;
   border: 3px solid lightblue;
-  padding: 10px;
+  padding: 50px;
 }
 </style>

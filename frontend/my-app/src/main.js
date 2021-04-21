@@ -6,6 +6,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 //View
 import Registration from './components/Registration.vue'
 import Login from './components/Login.vue'
+import AccountRecovery from './components/AccountRecovery.vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -30,6 +31,11 @@ const router = new VueRouter({
       name: 'Login',
       component: Login
     },
+    {
+      path: '/accRecovery',
+      name: 'AccountRecovery',
+      component: AccountRecovery
+    }
   ]
 });
 
