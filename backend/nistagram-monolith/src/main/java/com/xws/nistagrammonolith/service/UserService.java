@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 public class UserService implements IUserService {
 
     // TODO: updatePassword
+    // TODO: repeatNewPassword
 
     @Autowired
     private IUserRepository userRepository;
@@ -61,6 +62,7 @@ public class UserService implements IUserService {
         userCredentialsRepository.save(userCredentials);
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
+        user.setFullName(userReg.getFullName());
         return userRepository.save(user);
     }
 

@@ -3,7 +3,7 @@
     <h1 class="brandName">Nistagram</h1>
     <p style="font-size:15px">Sign up to see photos and videos from your friends.</p>
       <br>
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit.prevent="onSubmit" @reset="onReset" v-if="show">
         <b-form-group id="input-group-1">
           <b-form-input
             id="email"
@@ -32,7 +32,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-form-input type="password" id="password" aria-describedby="password-help-block" placeholder="Enter password"></b-form-input>
+        <b-form-input v-model="form.password" type="password" id="password" aria-describedby="password-help-block" placeholder="Enter password"></b-form-input>
         <b-form-text id="password-help-block">
           Your password must be 8-20 characters long, contain letters and numbers, and must not
           contain spaces or special characters.
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'Registration',
   data() {
@@ -64,9 +65,13 @@ export default {
       }
   },
   methods:{
-    onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
+    onSubmit() {
+        //event.preventDefault()
+        //alert(JSON.stringify(this.form))
+        console.log(this.form);
+        axios.post('http://localhost:3030/user', this.form)
+          .then(response => console.log(response))
+          .catch(error => console.log(error))
       },
       onReset(event) {
         event.preventDefault()
@@ -95,7 +100,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin: auto;
-  margin-top: 60px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   width: 40%;
   border: 3px solid lightblue;
   padding: 50px;

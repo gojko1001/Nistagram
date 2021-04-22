@@ -55,9 +55,6 @@ export default {
           this.show = true
         })
       },
-    // signUp:function(){
-    //   window.location.href = "/registration";
-    // }
   },
 }
 </script>
@@ -71,7 +68,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin: auto;
-  margin-top: 60px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   width: 25%;
   border: 3px solid lightblue;
   padding: 50px;
