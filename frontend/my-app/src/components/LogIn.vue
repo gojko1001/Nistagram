@@ -11,7 +11,6 @@
             required
           ></b-form-input>
         </b-form-group>
-
         <b-form-input v-model="form.password" type="password" id="password" placeholder="Password"></b-form-input>
         <br>
         <b-button type="submit" variant="primary" style="width:200px;">Log in</b-button>
