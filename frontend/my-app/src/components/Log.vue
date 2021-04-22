@@ -2,7 +2,7 @@
     <div id="loginPage">
       <h1 class="brandName">Nistagram</h1>
       <br><br>
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form @submit.prevent="onSubmit" @reset="onReset" v-if="show">
         <b-form-group>
           <b-form-input
             id="username"
@@ -11,8 +11,7 @@
             required
           ></b-form-input>
         </b-form-group>
-
-        <b-form-input type="password" id="password" placeholder="Password"></b-form-input>
+        <b-form-input v-model="form.password" type="password" id="password" placeholder="Password"></b-form-input>
         <br>
         <b-button type="submit" variant="primary" style="width:200px;">Log in</b-button>
         <br>
@@ -31,16 +30,20 @@ export default {
   data() {
       return {
         form: {
-          email: '',
           username: '',
+          password: '',
         },
         show: true
       }
   },
   methods:{
-    onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
+    onSubmit() {
+        console.log(this.form);
+        this.axios.post('/userCredentials', this.form)
+          .then(response => {alert("User has logged in.");
+                              console.log(response);})
+          .catch(error => {alert("Username or password is not correct.");
+                            console.log(error)})
       },
     onReset(event) {
         event.preventDefault()

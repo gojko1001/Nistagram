@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name: 'Registration',
   data() {
@@ -66,12 +65,12 @@ export default {
   },
   methods:{
     onSubmit() {
-        //event.preventDefault()
-        //alert(JSON.stringify(this.form))
         console.log(this.form);
-        axios.post('http://localhost:3030/user', this.form)
-          .then(response => console.log(response))
-          .catch(error => console.log(error))
+        this.axios.post('/user', this.form)
+          .then(response => {alert("User has been registered successfully");
+                              console.log(response);})
+          .catch(error => {alert("Error");
+                            console.log(error)})
       },
       onReset(event) {
         event.preventDefault()

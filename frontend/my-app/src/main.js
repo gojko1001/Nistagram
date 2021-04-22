@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 //View
@@ -12,11 +14,16 @@ import AccountRecovery from './components/AccountRecovery.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
 
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+
+Vue.axios.defaults.baseURL = 'http://localhost:3030';
+
 
 const router = new VueRouter({
   mode: 'history',
