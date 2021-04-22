@@ -1,9 +1,11 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.domain.User;
+import com.xws.nistagrammonolith.domain.UserCredentials;
+import com.xws.nistagrammonolith.domain.dto.UserRegistrationDto;
 import com.xws.nistagrammonolith.exception.AlreadyExistsException;
 import com.xws.nistagrammonolith.exception.BadRequestException;
-import com.xws.nistagrammonolith.exception.UnauthorizeException;
+import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private IUserCredentialsRepository userCredentialsRepository;
 
     public List<User> getAll(){
         List<User> users = userRepository.findAll();
@@ -30,19 +34,16 @@ public class UserService implements IUserService {
     }
 
 
-    public User create(User user) {
+    public User create(UserRegistrationDto userReg) {
         try {
-            User existingUser = userRepository.findByEmail(user.getEmail());
-            if (existingUser != null)
-                throw new AlreadyExistsException(String.format("User with email %s, already exists", user.getEmail()));
-            if (patternChecker(user.getEmail(), user.getPassword())) {
-                byte[] salt = makeSalt();
-                user.setSalt(Base64Utility.encode(salt));
-                user.setPassword(hashPassword(user.getPassword(), salt));
-                user.setTaggable(true);
-                user.setPublicDM(true);
-                user.setPublicProfile(true);
-                return userRepository.save(user);
+            User newUser = userRepository.findByUsername(userReg.getUsername());
+            if (newUser != null)
+                throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
+            if(userRepository.findByEmail(userReg.getEmail()) != null){
+                throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
+            }
+            if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
+                return createUserAndCredentials(userReg);
             }
             throw new BadRequestException("Email or password is in invalid format.");
         }catch (Exception e){
@@ -50,8 +51,21 @@ public class UserService implements IUserService {
         }
     }
 
+    public User createUserAndCredentials(UserRegistrationDto userReg){
+        User user = new User();
+        UserCredentials userCredentials = new UserCredentials();
+        byte[] salt = makeSalt();
+        userCredentials.setSalt(Base64Utility.encode(salt));
+        userCredentials.setPassword(hashPassword(userReg.getPassword(), salt));
+        userCredentials.setUsername(userReg.getUsername());
+        userCredentialsRepository.save(userCredentials);
+        user.setUsername(userReg.getUsername());
+        user.setEmail(userReg.getEmail());
+        return userRepository.save(user);
+    }
+
     public User updateUser(User user){
-        User dbUser = userRepository.findByEmail(user.getEmail());
+        User dbUser = userRepository.findByUsername(user.getUsername());
         if(dbUser != null){
             dbUser.setBio(user.getBio());
             dbUser.setBirthDate(user.getBirthDate());
@@ -59,9 +73,9 @@ public class UserService implements IUserService {
             dbUser.setUserGender(user.getUserGender());
             dbUser.setBio(user.getBio());
             dbUser.setUsername(user.getUsername());
-            dbUser.setPublicProfile(user.getPublicProfile());
-            dbUser.setPublicDM(user.getPublicDM());
-            dbUser.setTaggable(user.getTaggable());
+            dbUser.setPublicProfile(user.isPublicProfile());
+            dbUser.setPublicDM(user.isPublicDM());
+            dbUser.setTaggable(user.isTaggable());
             dbUser.setWebSite(user.getWebSite());
         }
         return dbUser;

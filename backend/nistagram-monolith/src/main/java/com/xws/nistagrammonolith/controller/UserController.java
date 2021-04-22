@@ -1,6 +1,7 @@
 package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.domain.User;
+import com.xws.nistagrammonolith.domain.dto.UserRegistrationDto;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    public User create(@RequestBody UserRegistrationDto userReg) {
+        return userService.create(userReg);
     }
 }

@@ -17,10 +17,6 @@ public class User {
     private Long id;
     @Column(nullable = false, unique = true)
     private String username;
-    @Column(nullable = false)
-    public String password;
-    @Column
-    public String salt;
     @Column
     private String fullName;
     @Column(nullable = false, unique = true)
@@ -36,21 +32,19 @@ public class User {
     @Column
     private Gender userGender;
     @Column
-    private Role userRole;
+    private Role userRole; // TODO: (nullable = false)
     @Column
-    private Boolean publicProfile;
+    private boolean publicProfile = true;
     @Column
-    private Boolean publicDM;
+    private boolean publicDM = true;
     @Column
-    private Boolean taggable;
+    private boolean taggable = true;
 
     public User() {}
 
-    public User(Long id, String username, String password, String salt, String fullName, String email, String phone, String webSite, String bio, Date birthDate, Gender userGender, Role userRole, Boolean publicProfile, Boolean publicDM, Boolean taggable) {
+    public User(Long id, String username, String fullName, String email, String phone, String webSite, String bio, Date birthDate, Gender userGender, Role userRole, boolean publicProfile, boolean publicDM, boolean taggable) {
         this.id = id;
         this.username = username;
-        this.password = password;
-        this.salt = salt;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
