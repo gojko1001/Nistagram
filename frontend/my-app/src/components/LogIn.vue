@@ -3,18 +3,16 @@
       <h1 class="brandName">Nistagram</h1>
       <br><br>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <b-form-group id="input-group-1">
+        <b-form-group>
           <b-form-input
-            id="email"
-            v-model="form.email"
-            type="email"
-            placeholder="Email"
+            id="username"
+            v-model="form.username"
+            placeholder="Username"
             required
           ></b-form-input>
         </b-form-group>
 
         <b-form-input type="password" id="password" placeholder="Password"></b-form-input>
-
         <br>
         <b-button type="submit" variant="primary" style="width:200px;">Log in</b-button>
         <br>
@@ -34,7 +32,7 @@ export default {
       return {
         form: {
           email: '',
-          name: '',
+          username: '',
         },
         show: true
       }

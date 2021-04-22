@@ -1,12 +1,12 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
 import com.xws.nistagrammonolith.domain.User;
-import com.xws.nistagrammonolith.domain.dto.UserRegistrationDto;
+import com.xws.nistagrammonolith.domain.dto.UserCredentialsDto;
 
 import java.util.List;
 
 public interface IUserService {
     List<User> getAll();
-    User create(UserRegistrationDto userReg);
-    User createUserAndCredentials(UserRegistrationDto userReg);
+    User create(UserCredentialsDto userReg);
+    User createUserAndCredentials(UserCredentialsDto userReg);
 }

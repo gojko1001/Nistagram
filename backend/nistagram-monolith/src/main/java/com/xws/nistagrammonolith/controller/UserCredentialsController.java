@@ -1,10 +1,12 @@
 package com.xws.nistagrammonolith.controller;
 
+import com.xws.nistagrammonolith.domain.UserCredentials;
+import com.xws.nistagrammonolith.domain.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/userCredentials")
@@ -12,4 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserCredentialsController {
     @Autowired
     private IUserCredentialsService userCredentialsService;
+
+    @PostMapping
+    public UserCredentials login(@RequestBody UserCredentialsDto userReg) throws IOException {
+        return userCredentialsService.login(userReg);
+    }
 }

@@ -2,19 +2,15 @@ package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
-import com.xws.nistagrammonolith.domain.dto.UserRegistrationDto;
+import com.xws.nistagrammonolith.domain.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.exception.AlreadyExistsException;
 import com.xws.nistagrammonolith.exception.BadRequestException;
-import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import util.Base64Utility;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -27,7 +23,7 @@ public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
     @Autowired
-    private IUserCredentialsRepository userCredentialsRepository;
+    private UserCredentialsService userCredentialsService;
 
     public List<User> getAll(){
         List<User> users = userRepository.findAll();
@@ -35,7 +31,7 @@ public class UserService implements IUserService {
     }
 
 
-    public User create(UserRegistrationDto userReg) {
+    public User create(UserCredentialsDto userReg) {
         try {
             User newUser = userRepository.findByUsername(userReg.getUsername());
             if (newUser != null)
@@ -52,14 +48,14 @@ public class UserService implements IUserService {
         }
     }
 
-    public User createUserAndCredentials(UserRegistrationDto userReg){
+    public User createUserAndCredentials(UserCredentialsDto userReg){
         User user = new User();
         UserCredentials userCredentials = new UserCredentials();
-        byte[] salt = makeSalt();
+        byte[] salt = userCredentialsService.makeSalt();
         userCredentials.setSalt(Base64Utility.encode(salt));
-        userCredentials.setPassword(hashPassword(userReg.getPassword(), salt));
+        userCredentials.setPassword(userCredentialsService.hashPassword(userReg.getPassword(), salt));
         userCredentials.setUsername(userReg.getUsername());
-        userCredentialsRepository.save(userCredentials);
+        userCredentialsService.create(userCredentials);
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
         user.setFullName(userReg.getFullName());
@@ -83,24 +79,7 @@ public class UserService implements IUserService {
         return dbUser;
     }
 
-    private String hashPassword(String password, byte[] salt) {
-        try {
-            MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
-            sha512.update(salt);
-            byte[] dataHash = sha512.digest(password.getBytes());
-            return Base64Utility.encode(dataHash);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
-    private byte[] makeSalt(){
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        return salt;
-    }
 
     public boolean patternChecker(String email, String password){
         Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
@@ -108,10 +87,6 @@ public class UserService implements IUserService {
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
 
-    // RAZMISLITII
-    /*int strength = 10; // work factor of bcrypt
-    BCryptPasswordEncoder bCryptPasswordEncoder =
-            new BCryptPasswordEncoder(strength, new SecureRandom());
-    String encodedPassword = bCryptPasswordEncoder.encode(plainPassword);*/
+
 
 }
