@@ -17,6 +17,7 @@ public class UserCredentialsController {
 
     @PostMapping
     public UserCredentials login(@RequestBody UserCredentialsDto userReg) throws IOException {
+        //TODO: Generate jwt token on successful login
         return userCredentialsService.login(userReg);
     }
 }
