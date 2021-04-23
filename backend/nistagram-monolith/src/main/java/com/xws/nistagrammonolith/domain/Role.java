@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.domain;
 
 public enum Role {
-    USER,
-    ADMIN,
-    AGENT
+    ROLE_USER,
+    ROLE_ADMIN,
+    ROLE_AGENT
 }

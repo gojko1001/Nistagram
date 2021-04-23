@@ -2,14 +2,17 @@ package com.xws.nistagrammonolith.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Table
 @Entity
 @Getter
 @Setter
-public class UserCredentials {
+public class UserCredentials implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,35 +32,30 @@ public class UserCredentials {
         this.salt = salt;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
 }

@@ -1,7 +1,6 @@
 package com.xws.nistagrammonolith.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,7 +33,7 @@ public class RequestFilter extends OncePerRequestFilter {
             String jwt = authorizationHeader.substring(7);
             String username = jwtService.extractUsername(jwt);
 
-            if(username != null){
+            if(username != null && SecurityContextHolder.getContext().getAuthentication() != null){
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if(jwtService.validateToken(jwt, userDetails)){
                     // TODO: Apply roles to token
