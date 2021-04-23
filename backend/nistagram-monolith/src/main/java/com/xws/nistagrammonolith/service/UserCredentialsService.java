@@ -1,10 +1,14 @@
 package com.xws.nistagrammonolith.service;
 
+import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
-import com.xws.nistagrammonolith.domain.dto.UserCredentialsDto;
+import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.exception.BadRequestException;
+import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
+import com.xws.nistagrammonolith.service.interfaces.IUserService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import util.Base64Utility;
@@ -18,6 +22,10 @@ import java.security.SecureRandom;
 public class UserCredentialsService implements IUserCredentialsService {
     @Autowired
     private IUserCredentialsRepository userCredentialsRepository;
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private EmailService emailService;
 
     public UserCredentials create(UserCredentials userCredentials){
         return userCredentialsRepository.save(userCredentials);
@@ -32,6 +40,21 @@ public class UserCredentialsService implements IUserCredentialsService {
             }
         }
         throw new BadRequestException("Username or password is not correct.");
+    }
+
+    public UserCredentials findByUsername(String username){
+        UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
+        if (userCredentials == null)
+            throw new NotFoundException("There is no user credentials with username "+username);
+        return userCredentials;
+    }
+
+    public void restartPassword(String username) {
+        User user = userService.findUserByUsername(username);
+        UserCredentials userCredentials = findByUsername(username);
+
+        userCredentials.setPassword(RandomString.make(10));
+        emailService.verificationPassword(user, userCredentials);
     }
 
 

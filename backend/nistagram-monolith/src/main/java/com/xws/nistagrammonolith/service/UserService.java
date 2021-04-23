@@ -2,9 +2,10 @@ package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
-import com.xws.nistagrammonolith.domain.dto.UserCredentialsDto;
+import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.exception.AlreadyExistsException;
 import com.xws.nistagrammonolith.exception.BadRequestException;
+import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,6 @@ public class UserService implements IUserService {
         List<User> users = userRepository.findAll();
         return users;
     }
-
 
     public User create(UserCredentialsDto userReg) {
         try {
@@ -62,6 +62,14 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public User findUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null)
+            throw new NotFoundException("There is no user with username "+ username);
+        return user;
+    }
+
     public User updateUser(User user){
         User dbUser = userRepository.findByUsername(user.getUsername());
         if(dbUser != null){
@@ -79,14 +87,10 @@ public class UserService implements IUserService {
         return dbUser;
     }
 
-
-
     public boolean patternChecker(String email, String password){
         Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
         Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}");
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
-
-
 
 }
