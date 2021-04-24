@@ -5,6 +5,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
+
 //View
 import Registration from './components/Registration.vue'
 import Login from './components/Login.vue'

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <link rel="stylesheet" 
+        href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
+        crossorigin="anonymous">
     <Navbar />
     <router-view/>
   </div>
@@ -32,5 +36,11 @@ export default {
   width: 25%;
   border: 3px solid lightblue;
   padding: 50px;
+}
+body{
+    background-image: linear-gradient(180deg, #ffffff, #e3f2fd, #47b0fa);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
 }
 </style>
