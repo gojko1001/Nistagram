@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -37,16 +37,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                // Prevent Cross Site Request Forgery
+                // Disable Cross Site Request Forgery security
                 .csrf().disable()
                 // Enable anyone to access methods of Quoted mapping (without Authorisation)
-                .authorizeRequests().antMatchers("/userCredentials").permitAll()
+                .authorizeRequests().antMatchers("/userCredentials/login").permitAll().antMatchers("/user").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Disables sessions for spring security (We use jwt to manage session)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // Makes RequestFilter class to execute before each controller method
-                .and().addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
+                .and().addFilterBefore(requestFilter, BasicAuthenticationFilter.class);
     }
 
     @Override
@@ -54,5 +54,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js");
+        web.ignoring().antMatchers(HttpMethod.POST, "/user", "/userCredentials/login");
     }
 }

@@ -9,5 +9,9 @@ public interface IUserCredentialsService {
 
     UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException;
 
+    UserCredentials findByUsername(String username);
+
     void restartPassword(String username) throws IOException;
+
+
 }

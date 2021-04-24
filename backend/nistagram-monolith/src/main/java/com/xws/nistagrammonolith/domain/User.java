@@ -32,8 +32,6 @@ public class User {
     @Column
     private Gender userGender;
     @Column
-    private Role userRole; // TODO: (nullable = false)
-    @Column
     private boolean publicProfile = true;
     @Column
     private boolean publicDM = true;
@@ -42,7 +40,7 @@ public class User {
 
     public User() {}
 
-    public User(Long id, String username, String fullName, String email, String phone, String webSite, String bio, Date birthDate, Gender userGender, Role userRole, boolean publicProfile, boolean publicDM, boolean taggable) {
+    public User(Long id, String username, String fullName, String email, String phone, String webSite, String bio, Date birthDate, Gender userGender, boolean publicProfile, boolean publicDM, boolean taggable) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -52,7 +50,6 @@ public class User {
         this.bio = bio;
         this.birthDate = birthDate;
         this.userGender = userGender;
-        this.userRole = userRole;
         this.publicProfile = publicProfile;
         this.publicDM = publicDM;
         this.taggable = taggable;

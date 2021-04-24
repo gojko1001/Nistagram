@@ -27,12 +27,10 @@ public class RequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        String authorizationHeader = request.getHeader("Authorization");
+        String jwt = jwtService.getToken(request);
 
-        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
-            String jwt = authorizationHeader.substring(7);
+        if(jwt != null){
             String username = jwtService.extractUsername(jwt);
-
             if(username != null && SecurityContextHolder.getContext().getAuthentication() != null){
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if(jwtService.validateToken(jwt, userDetails)){
