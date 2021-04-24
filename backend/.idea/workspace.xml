@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,23 +23,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e778a9d-dd77-409f-8f72-a23bd3f502e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IEmailService" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/BlackList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/IBlackListRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Users\majas\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\202.7660.26\plugins\maven\lib\maven3" />
-      </MavenGeneralSettings>
-    </option>
   </component>
   <component name="ProjectId" id="1rZECdMk8qNJDnNhDDLiUXuE8pE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -45,10 +52,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
@@ -58,6 +73,13 @@
         </value>
       </option>
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NistagramApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="nistagram-monolith" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xws.nistagrammonolith.NistagramApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -73,6 +95,12 @@
       <updated>1619175085807</updated>
       <workItem from="1619175090599" duration="38000" />
       <workItem from="1619175145516" duration="385000" />
+      <workItem from="1619265152617" duration="93000" />
+      <workItem from="1619265268436" duration="244000" />
+      <workItem from="1619265530557" duration="95000" />
+      <workItem from="1619265675902" duration="1723000" />
+      <workItem from="1619268839718" duration="1813000" />
+      <workItem from="1619272357592" duration="3759000" />
     </task>
     <servers />
   </component>
@@ -90,19 +118,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="137" y="19" width="1103" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1619175439426">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="137" y="19" width="1103" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1619175439426" />
-    <state x="433" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1619175273380">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="433" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1619175273380" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1619175126725">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1619175126725" />
   </component>
 </project>

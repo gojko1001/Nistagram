@@ -1,11 +1,14 @@
 package com.xws.nistagrammonolith.service;
 
+import com.xws.nistagrammonolith.domain.BlackList;
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.exception.AlreadyExistsException;
 import com.xws.nistagrammonolith.exception.BadRequestException;
 import com.xws.nistagrammonolith.exception.NotFoundException;
+import com.xws.nistagrammonolith.exception.InvalidActionException;
+import com.xws.nistagrammonolith.repository.IBlackListRepository;
 import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,8 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
     @Autowired
     private UserCredentialsService userCredentialsService;
+    @Autowired
+    private IBlackListRepository blackListRepository;
 
     public List<User> getAll(){
         List<User> users = userRepository.findAll();
@@ -53,6 +58,13 @@ public class UserService implements IUserService {
         UserCredentials userCredentials = new UserCredentials();
         byte[] salt = userCredentialsService.makeSalt();
         userCredentials.setSalt(Base64Utility.encode(salt));
+
+        List<BlackList> blackList = blackListRepository.findAll();
+        for(BlackList b: blackList){
+            if(b.getPassword().equalsIgnoreCase(userReg.getPassword())){
+                throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
+            }
+        }
         userCredentials.setPassword(userCredentialsService.hashPassword(userReg.getPassword(), salt));
         userCredentials.setUsername(userReg.getUsername());
         userCredentialsService.create(userCredentials);
