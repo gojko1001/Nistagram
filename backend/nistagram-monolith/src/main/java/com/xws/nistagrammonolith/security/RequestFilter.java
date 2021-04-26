@@ -22,7 +22,7 @@ public class RequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtService jwtService;
 
-    // Method that will be executed before every endpoint execution
+    // Method that will be executed once per request at time defined by WebSecurityConfig class
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -34,7 +34,6 @@ public class RequestFilter extends OncePerRequestFilter {
             if(username != null && SecurityContextHolder.getContext().getAuthentication() != null){
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 if(jwtService.validateToken(jwt, userDetails)){
-                    // TODO: Apply roles to token
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities());
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

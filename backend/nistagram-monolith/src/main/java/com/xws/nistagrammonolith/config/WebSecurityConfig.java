@@ -1,5 +1,8 @@
-package com.xws.nistagrammonolith.security;
+package com.xws.nistagrammonolith.config;
 
+import com.xws.nistagrammonolith.security.RequestFilter;
+import com.xws.nistagrammonolith.security.RestAuthenticationEntryPoint;
+import com.xws.nistagrammonolith.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     private RequestFilter requestFilter;
+    @Autowired
+    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,10 +44,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // Disable Cross Site Request Forgery security
                 .csrf().disable()
+                // Entry point for Unauthorized requests
+                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
                 // Enable anyone to access methods of Quoted mapping (without Authorisation)
-                .authorizeRequests().antMatchers("/userCredentials/login").permitAll().antMatchers("/user").permitAll()
+                .and().authorizeRequests().antMatchers("/userCredentials/login").permitAll().antMatchers("/user/add").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
+                // Enable CORS layer (WebMvcConfig class)
+                .and().cors()
                 // Disables sessions for spring security (We use jwt to manage session)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // Makes RequestFilter class to execute before each controller method
@@ -54,6 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js");
-        web.ignoring().antMatchers(HttpMethod.POST, "/user", "/userCredentials/login");
+        web.ignoring().antMatchers(HttpMethod.POST, "/user/add", "/userCredentials/login");
     }
 }

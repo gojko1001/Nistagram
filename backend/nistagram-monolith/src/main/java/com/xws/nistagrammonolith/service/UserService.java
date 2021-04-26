@@ -14,7 +14,7 @@ import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import util.Base64Utility;
+import com.xws.nistagrammonolith.util.Base64Utility;
 
 import java.util.List;
 import java.util.regex.Pattern;

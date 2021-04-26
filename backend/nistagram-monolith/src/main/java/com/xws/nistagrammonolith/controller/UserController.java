@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "${clientURL}")
 public class UserController {
     @Autowired
     private IUserService userService;
@@ -22,7 +21,7 @@ public class UserController {
         return userService.getAll();
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public User create(@RequestBody UserCredentialsDto userReg) {
         return userService.create(userReg);
     }
