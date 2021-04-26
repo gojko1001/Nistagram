@@ -20,14 +20,27 @@ public class EmailService {
     private String mailSender;
 
     @Async
-    public void verificationPassword(User user, UserCredentials userCredentials) throws MailException {
-
+    public void verificationPassword(User user) throws MailException {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
         simpleMailMessage.setTo(user.getEmail());
         simpleMailMessage.setSubject("Registration");
         String mailText = "Dear " + user.getFullName() + ",\n\n" +
-                "Welcome to ništagram" + "\n\n" +
+                "Welcome to Ništagram" + "\n\n" +
+                "Your username is "+ user.getUsername() +
+                "Best regards,";
+        simpleMailMessage.setText(mailText);
+        javaMailSender.send(simpleMailMessage);
+    }
+
+    @Async
+    public void restartPassword(User user, UserCredentials userCredentials) throws MailException {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(mailSender);
+        simpleMailMessage.setTo(user.getEmail());
+        simpleMailMessage.setSubject("Restart password");
+        String mailText = "Dear " + user.getFullName() + ",\n\n" +
+                "Welcome to Ništagram" + "\n\n" +
                 "Your password is "+ userCredentials.getPassword() +
                 "Best regards,";
         simpleMailMessage.setText(mailText);

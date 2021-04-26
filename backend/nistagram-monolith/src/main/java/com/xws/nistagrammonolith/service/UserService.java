@@ -23,14 +23,16 @@ import java.util.regex.Pattern;
 public class UserService implements IUserService {
 
     // TODO: updatePassword
-    // TODO: repeatNewPassword
 
     @Autowired
     private IUserRepository userRepository;
     @Autowired
     private UserCredentialsService userCredentialsService;
     @Autowired
-    private IBlackListRepository blackListRepository;
+    private IBlackListRepository blackListRepository;   //TODO: treba servis pozvati!
+    @Autowired
+    private EmailService emailService;
+
 
     public List<User> getAll(){
         return userRepository.findAll();
@@ -44,8 +46,14 @@ public class UserService implements IUserService {
             if(userRepository.findByEmail(userReg.getEmail()) != null){
                 throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
             }
+            if(!userReg.getPassword().equals(userReg.getRepeatPassword())){
+                throw new BadRequestException("Password and repeat password are not the same.");
+            }
             if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
-                return createUserAndCredentials(userReg);
+                User user = createUserAndCredentials(userReg);
+                // TODO: 401 na email service
+                // emailService.verificationPassword(user);
+                return user;
             }
             throw new BadRequestException("Email or password is in invalid format.");
         }catch (Exception e){

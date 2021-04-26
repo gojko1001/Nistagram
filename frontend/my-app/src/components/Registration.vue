@@ -37,7 +37,7 @@
           <b-form-input v-model="password" @input="checkPassword" type="password" id="password" placeholder="Enter password" required></b-form-input>
         </b-form-group>
         <b-form-group>
-          <b-form-input v-model="form.checkPassword" type="password" id="checkPassword" placeholder="Enter again password" required></b-form-input>
+          <b-form-input v-model="form.repeatPassword" type="password" id="repeatPassword" placeholder="Enter password again" required></b-form-input>
         </b-form-group>
         <ul>
           <li v-bind:class="{ is_valid: contains_eight_characters }">8-20 characters long</li>
@@ -66,7 +66,7 @@ export default {
           password:'',
           fullName:'',
           username: '',
-          checkPassword:'',
+          repeatPassword:'',
         },
         email: '',
         password:'',
@@ -91,7 +91,7 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.post('/user', this.form)
+        this.axios.post('/user/add', this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("User has been registered successfully. Check your email.", "success");
                                       window.location.href = "/";
