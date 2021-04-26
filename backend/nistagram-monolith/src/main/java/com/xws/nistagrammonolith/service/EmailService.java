@@ -34,7 +34,7 @@ public class EmailService {
     }
 
     @Async
-    public void restartPassword(User user, UserCredentials userCredentials) throws MailException {
+    public void sendPassword(User user, UserCredentials userCredentials) throws MailException {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
         simpleMailMessage.setTo(user.getEmail());
