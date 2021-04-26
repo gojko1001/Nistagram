@@ -3,6 +3,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuelidate from 'vuelidate'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 
@@ -18,10 +19,11 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
+Vue.use(Vuelidate);
 Vue.use(VueRouter);
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 Vue.axios.defaults.baseURL = 'http://localhost:3030';
 

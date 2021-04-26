@@ -102,7 +102,7 @@ public class UserService implements IUserService {
 
     public boolean patternChecker(String email, String password){
         Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
-        Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}");
+        Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
 

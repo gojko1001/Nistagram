@@ -56,6 +56,16 @@ export default {
           this.show = true
         })
       },
+    makeToast(message, variant) {
+      this.$bvToast.toast(message, {
+                            title: `Nistagram`,
+                            autoHideDelay: 5000,
+                            variant: variant,
+                            toaster: 'b-toaster-bottom-right',
+                            solid: true,
+                            appendToast: false
+                          })
+    }
   },
 }
 </script>
