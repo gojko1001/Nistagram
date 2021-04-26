@@ -34,8 +34,7 @@
 
         <b-form-input v-model="form.password" type="password" id="password" aria-describedby="password-help-block" placeholder="Enter password"></b-form-input>
         <b-form-text id="password-help-block">
-          Your password must be 8-20 characters long, contain letters and numbers, and must not
-          contain spaces or special characters.
+          Your password must be 8-20 characters long, one number required, and one uppercase letter required.
         </b-form-text>
 
         <br><br>
@@ -67,10 +66,14 @@ export default {
     onSubmit() {
         console.log(this.form);
         this.axios.post('/user', this.form)
-          .then(response => {alert("User has been registered successfully");
-                              console.log(response);})
-          .catch(error => {alert("Error");
-                            console.log(error)})
+          .then(response => { console.log(response);
+                              this.makeToast("User has been registered successfully. Check your email.", "success");
+                              
+        })
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occurred. User has not been registered successfully.", "danger");
+                          });
+                            
       },
       onReset(event) {
         event.preventDefault()
@@ -85,7 +88,17 @@ export default {
       },
     login:function(){
       window.location.href = "/";
-    }
+    },
+    makeToast(message, variant) {
+        this.$bvToast.toast(message, {
+                              title: `Nistagram`,
+                              autoHideDelay: 5000,
+                              variant: variant,
+                              toaster: 'b-toaster-bottom-right',
+                              solid: true,
+                              appendToast: false
+                            })
+      }
   },
 }
 </script>
