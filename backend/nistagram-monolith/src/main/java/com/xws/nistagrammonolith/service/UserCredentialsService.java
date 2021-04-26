@@ -54,7 +54,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         UserCredentials userCredentials = findByUsername(username);
 
         userCredentials.setPassword(RandomString.make(10));
-        emailService.restartPassword(user, userCredentials);
+        emailService.sendPassword(user, userCredentials);
     }
 
 
