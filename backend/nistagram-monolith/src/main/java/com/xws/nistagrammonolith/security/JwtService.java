@@ -4,18 +4,33 @@ import com.xws.nistagrammonolith.domain.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.function.Function;
 
 @Service
 public class JwtService {
 
-    private final String KEY = "rlwHsKbnKROj0bg";
+    @Value("rlwHsKbnKROj0bg")
+    private String KEY;
 
-    private final int EXPIRATION_PERIOD = 1000 * 60 * 60;
+    @Value("3600000")
+    private int EXPIRATION_PERIOD;
+
+    @Value("Authorization")
+    private String AUTH_HEADER;
+
+
+    public String getToken(HttpServletRequest request){
+        String authorizationHeader = request.getHeader(AUTH_HEADER);
+        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer "))
+            return authorizationHeader.substring(7);
+        return null;
+    }
 
 
     public String createToken(String username, Role role) {

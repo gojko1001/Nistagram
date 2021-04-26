@@ -1,9 +1,10 @@
 package com.xws.nistagrammonolith.controller;
 
-import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
+import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAll() {
         return userService.getAll();
     }

@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Table
@@ -22,40 +23,45 @@ public class UserCredentials implements UserDetails {
     private String password;
     @Column
     private String salt;
+    @Enumerated(EnumType.ORDINAL)
+    private Role userRole;
 
     public UserCredentials(){}
 
-    public UserCredentials(Long id, String username, String password, String salt) {
+    public UserCredentials(Long id, String username, String password, String salt, Role userRole) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.salt = salt;
+        this.userRole = userRole;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Collection<Authority> authorities = new ArrayList<>();
+        Authority authority = new Authority();
+        authority.setName(userRole.name());
+        authorities.add(authority);
+        return authorities;
     }
-
-
 }

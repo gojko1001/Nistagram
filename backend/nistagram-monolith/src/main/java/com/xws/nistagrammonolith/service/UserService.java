@@ -1,6 +1,7 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.domain.BlackList;
+import com.xws.nistagrammonolith.domain.Role;
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
@@ -32,8 +33,7 @@ public class UserService implements IUserService {
     private IBlackListRepository blackListRepository;
 
     public List<User> getAll(){
-        List<User> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
     }
 
     public User create(UserCredentialsDto userReg) {
@@ -67,6 +67,7 @@ public class UserService implements IUserService {
         }
         userCredentials.setPassword(userCredentialsService.hashPassword(userReg.getPassword(), salt));
         userCredentials.setUsername(userReg.getUsername());
+        userCredentials.setUserRole(Role.ROLE_USER);
         userCredentialsService.create(userCredentials);
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
