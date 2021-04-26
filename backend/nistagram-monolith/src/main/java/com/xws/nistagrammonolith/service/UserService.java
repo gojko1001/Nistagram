@@ -29,7 +29,10 @@ public class UserService implements IUserService {
     @Autowired
     private UserCredentialsService userCredentialsService;
     @Autowired
-    private IBlackListRepository blackListRepository;
+    private IBlackListRepository blackListRepository;   //TODO: treba servis pozvati!
+    @Autowired
+    private EmailService emailService;
+
 
     public List<User> getAll(){
         return userRepository.findAll();
@@ -47,7 +50,10 @@ public class UserService implements IUserService {
                 throw new BadRequestException("Password and repeat password are not the same.");
             }
             if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
-                return createUserAndCredentials(userReg);
+                User user = createUserAndCredentials(userReg);
+                // TODO: 401 na email service
+                // emailService.verificationPassword(user);
+                return user;
             }
             throw new BadRequestException("Email or password is in invalid format.");
         }catch (Exception e){
