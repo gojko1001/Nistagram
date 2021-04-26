@@ -26,8 +26,8 @@ public class EmailService {
         simpleMailMessage.setTo(user.getEmail());
         simpleMailMessage.setSubject("Registration");
         String mailText = "Dear " + user.getFullName() + ",\n\n" +
-                "Welcome to Ništagram" + "\n\n" +
-                "Your username is "+ user.getUsername() +
+                "Welcome to Ništagram \n\n" +
+                "Your username is "+ user.getUsername() + "\n\n" +
                 "Best regards,";
         simpleMailMessage.setText(mailText);
         javaMailSender.send(simpleMailMessage);
@@ -41,7 +41,7 @@ public class EmailService {
         simpleMailMessage.setSubject("Restart password");
         String mailText = "Dear " + user.getFullName() + ",\n\n" +
                 "Welcome to Ništagram" + "\n\n" +
-                "Your password is "+ userCredentials.getPassword() +
+                "Your password is "+ userCredentials.getPassword() + "\n\n" +
                 "Best regards,";
         simpleMailMessage.setText(mailText);
         javaMailSender.send(simpleMailMessage);

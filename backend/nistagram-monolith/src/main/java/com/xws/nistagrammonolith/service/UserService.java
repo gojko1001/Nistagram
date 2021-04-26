@@ -51,8 +51,7 @@ public class UserService implements IUserService {
             }
             if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
                 User user = createUserAndCredentials(userReg);
-                // TODO: 401 na email service
-                // emailService.verificationPassword(user);
+                emailService.verificationPassword(user);
                 return user;
             }
             throw new BadRequestException("Email or password is in invalid format.");
