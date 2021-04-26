@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/userCredentials")
+@CrossOrigin(origins = "${clientURL}")
 public class UserCredentialsController {
     @Autowired
     private IUserCredentialsService userCredentialsService;

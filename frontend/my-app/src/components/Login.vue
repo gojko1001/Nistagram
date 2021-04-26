@@ -40,10 +40,13 @@ export default {
     onSubmit() {
         console.log(this.form);
         this.axios.post('/userCredentials/login', this.form)
-          .then(response => {alert("User has logged in.");
-                              console.log(response);})
-          .catch(error => {alert("Username or password is not correct.");
-                            console.log(error)})
+          .then(response => { console.log(response);
+                              this.makeToast("User has been logged in successfully.", "success");
+                              window.location.href = "/home";
+                            })
+          .catch(error => { console.log(error);
+                            this.makeToast("Username or password is not correct.", "danger");
+                          })
       },
     onReset(event) {
         event.preventDefault()
