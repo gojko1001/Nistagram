@@ -14,4 +14,6 @@ public interface IUserService {
     User createUserAndCredentials(UserCredentialsDto userReg);
 
     User findUserByUsername(String username);
+
+    User verifyAccount(String username);
 }
