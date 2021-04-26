@@ -23,11 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e778a9d-dd77-409f-8f72-a23bd3f502e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/BlackList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/IBlackListRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/resources/import.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,20 +53,23 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="azure&#10;mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunConfigurationTargetLRU" value="5a5e7076-4703-47fb-8752-33e252766084" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Faks/ISA/ISA/pharmacy" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.NistagramApplication">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -76,6 +80,12 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="import.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/nistagram-monolith/src/main/resources/import.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="5a5e7076-4703-47fb-8752-33e252766084" />
+      <method v="2" />
     </configuration>
     <configuration name="NistagramApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="nistagram-monolith" />
@@ -101,6 +111,9 @@
       <workItem from="1619265675902" duration="1723000" />
       <workItem from="1619268839718" duration="1813000" />
       <workItem from="1619272357592" duration="3759000" />
+      <workItem from="1619281041818" duration="804000" />
+      <workItem from="1619447263488" duration="73000" />
+      <workItem from="1619447374921" duration="2990000" />
     </task>
     <servers />
   </component>
