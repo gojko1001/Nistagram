@@ -22,14 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e778a9d-dd77-409f-8f72-a23bd3f502e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/resources/import.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="5e778a9d-dd77-409f-8f72-a23bd3f502e3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,17 +63,6 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="Spring Boot.NistagramApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="import.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/nistagram-monolith/src/main/resources/import.sql" />
       <script-mode>FILE</script-mode>
@@ -113,7 +95,7 @@
       <workItem from="1619272357592" duration="3759000" />
       <workItem from="1619281041818" duration="804000" />
       <workItem from="1619447263488" duration="73000" />
-      <workItem from="1619447374921" duration="2990000" />
+      <workItem from="1619447374921" duration="3345000" />
     </task>
     <servers />
   </component>
