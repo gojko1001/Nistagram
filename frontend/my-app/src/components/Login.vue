@@ -39,7 +39,7 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.post('/userCredentials', this.form)
+        this.axios.post('/userCredentials/login', this.form)
           .then(response => {alert("User has logged in.");
                               console.log(response);})
           .catch(error => {alert("Username or password is not correct.");

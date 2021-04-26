@@ -11,7 +11,7 @@ import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import util.Base64Utility;
+import com.xws.nistagrammonolith.util.Base64Utility;
 
 import java.io.IOException;
 import java.security.MessageDigest;
