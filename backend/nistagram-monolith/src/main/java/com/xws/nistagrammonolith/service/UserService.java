@@ -113,4 +113,13 @@ public class UserService implements IUserService {
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
 
+    public User verifyAccount(String username){
+        User user = userRepository.findByUsername(username);
+        if(user != null){
+            user.setVerified(true);
+        }
+        userRepository.save(user);
+        return user;
+    }
+
 }

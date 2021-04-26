@@ -26,4 +26,9 @@ public class UserController {
     public User create(@RequestBody UserCredentialsDto userReg) {
         return userService.create(userReg);
     }
+
+    @PostMapping("/{username}")
+    public User verifyUser(@PathVariable String username){
+        return userService.verifyAccount(username);
+    }
 }

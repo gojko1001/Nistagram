@@ -28,6 +28,8 @@ public class EmailService {
         String mailText = "Dear " + user.getFullName() + ",\n\n" +
                 "Welcome to Ništagram \n\n" +
                 "Your username is "+ user.getUsername() + "\n\n" +
+                "You can verify your account here:" + "\t" +
+                "http://localhost:3030/user/" + user.getUsername() + "\n\n" +
                 "Best regards,";
         simpleMailMessage.setText(mailText);
         javaMailSender.send(simpleMailMessage);

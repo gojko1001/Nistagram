@@ -37,10 +37,12 @@ public class User {
     private boolean publicDM = true;
     @Column
     private boolean taggable = true;
+    @Column
+    private boolean verified = false;
 
     public User() {}
 
-    public User(Long id, String username, String fullName, String email, String phone, String webSite, String bio, Date birthDate, Gender userGender, boolean publicProfile, boolean publicDM, boolean taggable) {
+    public User(Long id, String username, String fullName, String email, String phone, String webSite, String bio, Date birthDate, Gender userGender, boolean publicProfile, boolean publicDM, boolean taggable, boolean verified) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -53,5 +55,6 @@ public class User {
         this.publicProfile = publicProfile;
         this.publicDM = publicDM;
         this.taggable = taggable;
+        this.verified = verified;
     }
 }
