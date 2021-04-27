@@ -18,19 +18,21 @@
         <b-form-group>
           <b-form-input
             id="fullName"
-            v-model="form.fullName"
+            v-model="fullName"
             placeholder="Enter full name"
             required
           ></b-form-input>
+          <span v-if="msg.fullName" style="color:red;">{{msg.fullName}}</span>
         </b-form-group>
 
         <b-form-group>
           <b-form-input
             id="username"
-            v-model="form.username"
+            v-model="username"
             placeholder="Enter username"
             required
           ></b-form-input>
+          <span v-if="msg.username" style="color:red;">{{msg.username}}</span>
         </b-form-group>
 
         <b-form-group>
@@ -70,9 +72,13 @@ export default {
         },
         email: '',
         password:'',
+        username:'',
+        fullName:'',
         msg:[],
         show: true,
         reg: /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+        regUsername: /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/,
+        regFullName: /^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$/,
         password_length: 0,
         contains_eight_characters: false,
         contains_number: false,
@@ -86,6 +92,14 @@ export default {
     email(value){
       this.form.email = value;
       this.validateEmail(value);
+    },
+    username(value){
+      this.form.username = value;
+      this.validateUsername(value);
+    },
+    fullName(value){
+      this.form.fullName = value;
+      this.validateFullName(value);
     }
   },
   methods:{
@@ -131,6 +145,22 @@ export default {
         this.msg['email'] = '';
       } else{
         this.msg['email'] = 'Invalid Email Address. Email format is: mymail@mail.com';
+      } 
+    },
+    validateFullName(value){
+      if (this.regFullName.test(value))
+      {
+        this.msg['fullName'] = '';
+      } else{
+        this.msg['fullName'] = 'Invalid full name format.';
+      } 
+    },
+    validateUsername(value){
+      if (this.regUsername.test(value))
+      {
+        this.msg['username'] = '';
+      } else{
+        this.msg['username'] = 'Invalid username format.';
       } 
     },
     checkPassword() {

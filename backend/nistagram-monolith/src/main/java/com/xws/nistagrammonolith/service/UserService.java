@@ -43,9 +43,12 @@ public class UserService implements IUserService {
             User newUser = userRepository.findByUsername(userReg.getUsername());
             if (newUser != null)
                 throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
-            if(userRepository.findByEmail(userReg.getEmail()) != null){
+            if(userRepository.findByEmail(userReg.getEmail()) != null)
                 throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
-            }
+            if(!checkUsername(userReg))
+                throw new BadRequestException("Username is in invalid format.");
+            if(!checkFullName(userReg))
+                throw  new BadRequestException("Full name is in invalid format.");
             if(!userReg.getPassword().equals(userReg.getRepeatPassword())){
                 throw new BadRequestException("Password and repeat password are not the same.");
             }
@@ -58,6 +61,16 @@ public class UserService implements IUserService {
         }catch (Exception e){
             throw new BadRequestException("Thread " + e.getMessage());
         }
+    }
+
+    public Boolean checkUsername(UserCredentialsDto userCredentialsDto){
+        Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
+        return patternUsername.matcher(userCredentialsDto.getUsername()).matches();
+    }
+
+    public Boolean checkFullName(UserCredentialsDto userCredentialsDto){
+        Pattern patternFullName = Pattern.compile("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
+        return patternFullName.matcher(userCredentialsDto.getFullName()).matches();
     }
 
     public User createUserAndCredentials(UserCredentialsDto userReg){
