@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { saveToken } from "./../util/token"
 export default {
   name: 'Login',
   data() {
@@ -42,6 +43,7 @@ export default {
         this.axios.post('/userCredentials/login', this.form)
           .then(response => { console.log(response);
                               this.makeToast("User has been logged in successfully.", "success");
+                              saveToken(response.data);
                               window.location.href = "/home";
                             })
           .catch(error => { console.log(error);
