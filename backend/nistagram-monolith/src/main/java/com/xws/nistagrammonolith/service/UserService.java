@@ -75,6 +75,7 @@ public class UserService implements IUserService {
         userCredentials.setPassword(userCredentialsService.hashPassword(userReg.getPassword(), salt));
         userCredentials.setUsername(userReg.getUsername());
         userCredentials.setUserRole(Role.ROLE_USER);
+        userCredentials.setVerified(true);  // TODO: treba false
         userCredentialsService.create(userCredentials);
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());

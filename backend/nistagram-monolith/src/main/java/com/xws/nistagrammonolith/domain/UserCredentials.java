@@ -25,15 +25,18 @@ public class UserCredentials implements UserDetails {
     private String salt;
     @Enumerated(EnumType.ORDINAL)
     private Role userRole;
+    @Column
+    private Boolean verified;
 
     public UserCredentials(){}
 
-    public UserCredentials(Long id, String username, String password, String salt, Role userRole) {
+    public UserCredentials(Long id, String username, String password, String salt, Role userRole, Boolean verified) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.salt = salt;
         this.userRole = userRole;
+        this.verified = verified;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class UserCredentials implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return verified;
     }
 
     @Override

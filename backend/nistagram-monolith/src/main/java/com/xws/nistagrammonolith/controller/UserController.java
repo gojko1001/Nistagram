@@ -22,12 +22,18 @@ public class UserController {
         return userService.getAll();
     }
 
+    @GetMapping("/{username}")
+    @PreAuthorize("hasRole('USER')")
+    public User getUserByUsername(@PathVariable String username){
+        return userService.findUserByUsername(username);
+    }
+
     @PostMapping("/add")
     public User create(@RequestBody UserCredentialsDto userReg) {
         return userService.create(userReg);
     }
 
-    @PostMapping("/{username}")
+    @PostMapping("/verify/{username}")
     public User verifyUser(@PathVariable String username){
         return userService.verifyAccount(username);
     }
