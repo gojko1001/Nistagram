@@ -20,3 +20,6 @@ insert into blacklist (password) values ("password1");
 insert into blacklist (password) values ("qqww1122");
 
 
+insert into authority (name) values ("ROLE_USER");
+insert into authority (name) values ("ROLE_ADMIN");
+insert into authority (name) values ("ROLE_AGENT");

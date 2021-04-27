@@ -1,22 +1,22 @@
 package com.xws.nistagrammonolith.service;
 
+import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.domain.BlackList;
-import com.xws.nistagrammonolith.domain.Role;
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
-import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.exception.AlreadyExistsException;
 import com.xws.nistagrammonolith.exception.BadRequestException;
-import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.exception.InvalidActionException;
+import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.repository.IBlackListRepository;
 import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.security.JwtService;
+import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
+import com.xws.nistagrammonolith.util.Base64Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.xws.nistagrammonolith.util.Base64Utility;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -38,6 +38,8 @@ public class UserService implements IUserService {
     private EmailService emailService;
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private IAuthorityService authService;
 
 
     public List<User> getAll(){
@@ -93,7 +95,7 @@ public class UserService implements IUserService {
         }
         userCredentials.setPassword(userCredentialsService.hashPassword(userReg.getPassword(), salt));
         userCredentials.setUsername(userReg.getUsername());
-        userCredentials.setUserRole(Role.ROLE_USER);
+        userCredentials.setUserRoles(authService.findByName("ROLE_USER"));
         userCredentials.setVerified(false);  // TODO: treba false
         userCredentialsService.create(userCredentials);
         user.setUsername(userReg.getUsername());

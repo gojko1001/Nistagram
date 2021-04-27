@@ -27,7 +27,7 @@ public class UserCredentialsController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
         UserCredentials credentials = userCredentialsService.login(userReg);
-        String jwt = jwtService.createToken(credentials.getUsername(), credentials.getUserRole());
+        String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getUserRoles().get(1)*/);
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 
