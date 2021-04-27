@@ -4,6 +4,7 @@ import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.exception.BadRequestException;
+import com.xws.nistagrammonolith.exception.InvalidActionException;
 import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
@@ -33,6 +34,9 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     public UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(userCredentialsDto.getUsername());
+        if(userCredentials.getVerified()==false){
+            throw new InvalidActionException("The account must be verified.");
+        }
         if(userCredentials != null){
             String hashEnteredPassword = hashPassword(userCredentialsDto.getPassword(), Base64Utility.decode(userCredentials.getSalt()));
             if(isPassword(userCredentials.getPassword(), hashEnteredPassword)) {
