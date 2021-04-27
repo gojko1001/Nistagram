@@ -10,7 +10,9 @@ import com.xws.nistagrammonolith.exception.BadRequestException;
 import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.exception.InvalidActionException;
 import com.xws.nistagrammonolith.repository.IBlackListRepository;
+import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.repository.IUserRepository;
+import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,9 +31,13 @@ public class UserService implements IUserService {
     @Autowired
     private UserCredentialsService userCredentialsService;
     @Autowired
+    private IUserCredentialsRepository userCredentialsRepository;
+    @Autowired
     private IBlackListRepository blackListRepository;   //TODO: treba servis pozvati!
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private JwtService jwtService;
 
 
     public List<User> getAll(){
@@ -75,7 +81,7 @@ public class UserService implements IUserService {
         userCredentials.setPassword(userCredentialsService.hashPassword(userReg.getPassword(), salt));
         userCredentials.setUsername(userReg.getUsername());
         userCredentials.setUserRole(Role.ROLE_USER);
-        userCredentials.setVerified(true);  // TODO: treba false
+        userCredentials.setVerified(false);  // TODO: treba false
         userCredentialsService.create(userCredentials);
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
@@ -114,13 +120,15 @@ public class UserService implements IUserService {
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
 
-    public User verifyAccount(String username){
-        User user = userRepository.findByUsername(username);
-        if(user != null){
-            user.setVerified(true);
+    public UserCredentials verifyAccount(String username){
+        String extractedUsername = jwtService.extractUsername(username);
+        UserCredentials userCredentials = userCredentialsService.findByUsername(extractedUsername);
+        if(userCredentials != null){
+            userCredentials.setVerified(true);
         }
-        userRepository.save(user);
-        return user;
+        userCredentialsRepository.save(userCredentials);
+        return userCredentials;
     }
+
 
 }

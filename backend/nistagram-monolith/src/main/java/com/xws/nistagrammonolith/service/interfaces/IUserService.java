@@ -2,6 +2,7 @@ package com.xws.nistagrammonolith.service.interfaces;
 
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
+import com.xws.nistagrammonolith.domain.UserCredentials;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface IUserService {
 
     User findUserByUsername(String username);
 
-    User verifyAccount(String username);
+    UserCredentials verifyAccount(String username);
 }

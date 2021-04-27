@@ -33,8 +33,5 @@ public class UserController {
         return userService.create(userReg);
     }
 
-    @PostMapping("/verify/{username}")
-    public User verifyUser(@PathVariable String username){
-        return userService.verifyAccount(username);
-    }
+
 }

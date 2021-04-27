@@ -1,9 +1,11 @@
 package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
+import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
+import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ public class UserCredentialsController {
     private IUserCredentialsService userCredentialsService;
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private IUserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
@@ -30,5 +34,9 @@ public class UserCredentialsController {
     @PutMapping("/{username}")
     public void restartPassword(@PathVariable String username) throws IOException {
         userCredentialsService.restartPassword(username);
+    }
+    @GetMapping("/verify/{username}")
+    public UserCredentials verifyUser(@PathVariable String username){
+        return userService.verifyAccount(username);
     }
 }
