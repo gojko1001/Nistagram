@@ -33,7 +33,7 @@ public class UserCredentialsController {
     public void sendPasswordLink(@PathVariable String email) throws IOException{
         userCredentialsService.sendResetPasswordLink(email);
     }
-//TODO Maja
+    //TODO Maja
     @PutMapping("/reset_password/{jwt}")
     public void restartPassword(@PathVariable String jwt) throws IOException {
         userCredentialsService.restartPassword(jwt);
