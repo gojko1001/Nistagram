@@ -17,4 +17,6 @@ public interface IUserService {
     User findUserByUsername(String username);
 
     UserCredentials verifyAccount(String username);
+
+    User findUserByEmail(String email);
 }

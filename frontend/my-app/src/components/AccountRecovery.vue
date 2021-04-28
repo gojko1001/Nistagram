@@ -15,7 +15,7 @@
         </b-form-group>
 
         <b-button type="submit" variant="secondary" style="width:100px" class="mr-3" href="/">Cancel</b-button>
-        <b-button type="submit" variant="primary" style="width:200px">Email me link</b-button>
+        <b-button type="submit" variant="primary" style="width:200px" href="/">Email me link</b-button>
         <br>
       </b-form>
   </div>
@@ -35,6 +35,7 @@ export default {
     methods:{
         onsubmit(event){
             event.preventDefault();
+            this.axios.get('https://localhost:3030/userCredentials/send_email/'+this.email)
         },
         onReset(event){
             event.preventDefault();

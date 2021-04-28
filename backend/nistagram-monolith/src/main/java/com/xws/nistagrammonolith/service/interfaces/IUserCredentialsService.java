@@ -13,5 +13,7 @@ public interface IUserCredentialsService {
 
     void restartPassword(String username) throws IOException;
 
+    void sendResetPasswordLink(String email) throws IOException;
+
 
 }

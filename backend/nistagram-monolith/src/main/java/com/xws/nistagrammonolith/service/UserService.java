@@ -143,5 +143,13 @@ public class UserService implements IUserService {
         return userCredentials;
     }
 
+    public User findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null)
+            throw new NotFoundException("User with email: "+ email+" doesn't exists.");
+
+        return user;
+    }
+
 
 }

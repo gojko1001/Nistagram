@@ -12,6 +12,7 @@ import Registration from './components/Registration.vue'
 import Login from './components/Login.vue'
 import AccountRecovery from './components/AccountRecovery.vue'
 import Home from './components/Home.vue'
+import ResetPassword from './components/ResetPassword.vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -51,6 +52,11 @@ const router = new VueRouter({
       path: '/home',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/reset_password/:jwt',
+      name: 'ResetPassword',
+      component: ResetPassword
     },
   ]
 });

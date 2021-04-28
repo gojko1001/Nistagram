@@ -43,16 +43,19 @@ public class EmailService {
     }
 
     @Async
-    public void sendPassword(User user, UserCredentials userCredentials) throws MailException {
+    public void resetPassword(User user) throws MailException {
+        String jwt = jwtService.createToken(user.getUsername(), Role.ROLE_USER);
+        String url = "https://localhost:3000/reset_password/" + jwt;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
         simpleMailMessage.setTo(user.getEmail());
         simpleMailMessage.setSubject("Restart password");
         String mailText = "Dear " + user.getFullName() + ",\n\n" +
                 "Welcome to Ništagram" + "\n\n" +
-                "Your password is "+ userCredentials.getPassword() + "\n\n" +
+                "<a href=\"" + url + "\">Reset password</a>" + "\n\n" +
                 "Best regards,";
         simpleMailMessage.setText(mailText);
         javaMailSender.send(simpleMailMessage);
     }
+
 }

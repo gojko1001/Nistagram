@@ -30,10 +30,14 @@ public class UserCredentialsController {
         String jwt = jwtService.createToken(credentials.getUsername(), credentials.getUserRole());
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
-
-    @PutMapping("/{username}")
-    public void restartPassword(@PathVariable String username) throws IOException {
-        userCredentialsService.restartPassword(username);
+    @GetMapping("/send_email/{email}")
+    public void sendPasswordLink(@PathVariable String email) throws IOException{
+        userCredentialsService.sendResetPasswordLink(email);
+    }
+//TODO Maja
+    @PutMapping("/reset_password/{jwt}")
+    public void restartPassword(@PathVariable String jwt) throws IOException {
+        userCredentialsService.restartPassword(jwt);
     }
     @GetMapping("/verify/{username}")
     public UserCredentials verifyUser(@PathVariable String username){

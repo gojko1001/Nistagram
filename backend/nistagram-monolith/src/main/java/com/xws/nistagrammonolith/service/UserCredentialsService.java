@@ -49,19 +49,23 @@ public class UserCredentialsService implements IUserCredentialsService {
         return userCredentials;
     }
 
+    //TODO Maja: ISPRAVITII
     public void restartPassword(String username) {
         User user = userService.findUserByUsername(username);
         UserCredentials userCredentials = findByUsername(username);
 
         userCredentials.setPassword(RandomString.make(10));
-        emailService.sendPassword(user, userCredentials);
+        emailService.resetPassword(user);
     }
 
+    public void sendResetPasswordLink(String email) {
+        User user = userService.findUserByEmail(email);
+        emailService.resetPassword(user);
+    }
 
     public boolean isPassword(String password1, String password2){
         return password1.equals(password2);
     }
-
 
     public String hashPassword(String password, byte[] salt) {
         try {
