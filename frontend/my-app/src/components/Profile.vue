@@ -1,8 +1,9 @@
 <template>
     <div>
-        This is user page
-        Username: {{user.username}}
-        Full Name: {{user.fullName}}
+        <h1>This is user page</h1>
+        Username: {{user.username}}<br/>
+        Full Name: {{user.fullName}}<br/>
+        E-mail: {{user.email}}
     </div>
 </template>
 
@@ -25,6 +26,7 @@ export default {
                         console.log(response.data);
     })
     .catch(error => {
+                        window.location.href = '/home'
                         console.error(error);
     })
     }
