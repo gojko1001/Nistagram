@@ -3,11 +3,13 @@ package com.xws.nistagrammonolith.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table
 @Entity
@@ -24,21 +26,21 @@ public class UserCredentials implements UserDetails {
     @Column
     private String salt;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
+    @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
-    private List<Authority> userRoles;
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
     @Column
     private Boolean verified;
 
     public UserCredentials(){}
 
-    public UserCredentials(Long id, String username, String password, String salt, List<Authority> userRole, Boolean verified) {
+    public UserCredentials(Long id, String username, String password, String salt, Collection<Role> roles, Boolean verified) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.salt = salt;
-        this.userRoles = userRole;
+        this.roles = roles;
         this.verified = verified;
     }
 
@@ -64,10 +66,12 @@ public class UserCredentials implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        Collection<Authority> authorities = new ArrayList<>();
-//        Authority authority = new Authority();
-//        authority.setName(userRole.getName());
-//        authorities.add(authority);
-        return userRoles;
+        Set permissions = new HashSet();
+        for(Role r : roles){
+            for(Permission p : r.getPermissions()){
+                permissions.add(new SimpleGrantedAuthority(p.getAuthority()));
+            }
+        }
+        return permissions;
     }
 }

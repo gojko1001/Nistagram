@@ -14,6 +14,9 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+    @Value("Nistagram")
+    private String APP_NAME;
+
     @Value("rlwHsKbnKROj0bg")
     private String KEY;
 
@@ -34,6 +37,7 @@ public class JwtService {
 
     public String createToken(String username/*, Role role*/) {
         return Jwts.builder()
+                .setIssuer(APP_NAME)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_PERIOD))
