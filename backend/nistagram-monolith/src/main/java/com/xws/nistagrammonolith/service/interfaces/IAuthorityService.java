@@ -1,10 +1,10 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
-import com.xws.nistagrammonolith.domain.Authority;
+import com.xws.nistagrammonolith.domain.Role;
 
 import java.util.List;
 
 public interface IAuthorityService {
-    List<Authority> findById(Long id);
-    List<Authority> findByName(String name);
+    List<Role> findById(Long id);
+    List<Role> findByName(String name);
 }

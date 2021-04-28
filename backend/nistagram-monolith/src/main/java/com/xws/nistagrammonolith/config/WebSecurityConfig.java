@@ -50,6 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
                 // Enable anyone to access methods of Quoted mapping (without Authorisation)
                 .and().authorizeRequests().antMatchers("/userCredentials/login").permitAll().antMatchers("/user/add").permitAll().antMatchers("/userCredentials/verify/{username}").permitAll().antMatchers("/userCredentials/reset_password/{jwt}").permitAll()
+                .and().authorizeRequests()
+                .antMatchers("/userCredentials/verify/{username}").permitAll()
+                .antMatchers("/userCredentials/login").permitAll()
+                .antMatchers("/user/add").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Enable CORS layer (WebMvcConfig class)

@@ -17,13 +17,13 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ALL_USERS')")
     public List<User> getAll() {
         return userService.getAll();
     }
 
     @GetMapping("/{username}")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAuthority('GET_USER')")
     public User getUserByUsername(@PathVariable String username){
         return userService.findUserByUsername(username);
     }
