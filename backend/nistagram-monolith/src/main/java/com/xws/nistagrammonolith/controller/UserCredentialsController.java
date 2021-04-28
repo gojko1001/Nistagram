@@ -1,7 +1,6 @@
 package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
-import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
