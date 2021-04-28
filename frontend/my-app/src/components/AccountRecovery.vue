@@ -46,7 +46,17 @@ export default {
         },
         onReset(event){
             event.preventDefault();
-        }
+        },
+        makeToast(message, variant) {
+        this.$root.$bvToast.toast(message, {
+                              title: `Nistagram`,
+                              autoHideDelay: 5000,
+                              variant: variant,
+                              toaster: 'b-toaster-bottom-right',
+                              solid: true,
+                              appendToast: false
+                            })
+      },
     }
 }
 </script>
