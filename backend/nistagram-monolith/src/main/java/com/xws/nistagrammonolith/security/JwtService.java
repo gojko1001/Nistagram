@@ -1,6 +1,5 @@
 package com.xws.nistagrammonolith.security;
 
-import com.xws.nistagrammonolith.domain.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -33,12 +32,12 @@ public class JwtService {
     }
 
 
-    public String createToken(String username, Role role) {
+    public String createToken(String username/*, Role role*/) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_PERIOD))
-                .claim("role", role)
+                //.claim("role", role)
                 .signWith(SignatureAlgorithm.HS256, KEY).compact();
     }
 

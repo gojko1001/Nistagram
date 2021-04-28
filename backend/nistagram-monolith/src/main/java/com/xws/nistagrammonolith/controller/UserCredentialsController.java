@@ -1,7 +1,6 @@
 package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
-import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
@@ -27,7 +26,7 @@ public class UserCredentialsController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
         UserCredentials credentials = userCredentialsService.login(userReg);
-        String jwt = jwtService.createToken(credentials.getUsername(), credentials.getUserRole());
+        String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getUserRoles().get(1)*/);
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
     @GetMapping("/send_email/{email}")

@@ -1,6 +1,5 @@
 package com.xws.nistagrammonolith.service;
 
-import com.xws.nistagrammonolith.domain.Role;
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.security.JwtService;
@@ -26,7 +25,7 @@ public class EmailService {
     private JwtService jwtService;
     @Async
     public void verificationPassword(User user) throws MailException {
-        String jwt = jwtService.createToken(user.getUsername(), Role.ROLE_USER);
+        String jwt = jwtService.createToken(user.getUsername()/*, Role.ROLE_USER*/);
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
         simpleMailMessage.setTo(user.getEmail());

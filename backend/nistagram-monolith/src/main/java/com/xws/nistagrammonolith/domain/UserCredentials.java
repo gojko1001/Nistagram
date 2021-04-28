@@ -6,8 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Table
 @Entity
@@ -23,19 +23,22 @@ public class UserCredentials implements UserDetails {
     private String password;
     @Column
     private String salt;
-    @Enumerated(EnumType.ORDINAL)
-    private Role userRole;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    private List<Authority> userRoles;
     @Column
     private Boolean verified;
 
     public UserCredentials(){}
 
-    public UserCredentials(Long id, String username, String password, String salt, Role userRole, Boolean verified) {
+    public UserCredentials(Long id, String username, String password, String salt, List<Authority> userRole, Boolean verified) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.salt = salt;
-        this.userRole = userRole;
+        this.userRoles = userRole;
         this.verified = verified;
     }
 
@@ -61,10 +64,10 @@ public class UserCredentials implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<Authority> authorities = new ArrayList<>();
-        Authority authority = new Authority();
-        authority.setName(userRole.name());
-        authorities.add(authority);
-        return authorities;
+//        Collection<Authority> authorities = new ArrayList<>();
+//        Authority authority = new Authority();
+//        authority.setName(userRole.getName());
+//        authorities.add(authority);
+        return userRoles;
     }
 }

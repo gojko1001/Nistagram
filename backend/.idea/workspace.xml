@@ -24,12 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5e778a9d-dd77-409f-8f72-a23bd3f502e3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IUserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,23 +59,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/nistagram-monolith" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="Spring Boot.NistagramApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="import.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/nistagram-monolith/src/main/resources/import.sql" />
       <script-mode>FILE</script-mode>
@@ -117,6 +100,7 @@
       <workItem from="1619447374921" duration="3345000" />
       <workItem from="1619451011925" duration="2656000" />
       <workItem from="1619469142110" duration="6716000" />
+      <workItem from="1619539050208" duration="43000" />
     </task>
     <servers />
   </component>
