@@ -43,7 +43,7 @@ public class EmailService {
 
     @Async
     public void resetPassword(User user) throws MailException {
-        String jwt = jwtService.createToken(user.getUsername(), Role.ROLE_USER);
+        String jwt = jwtService.createToken(user.getUsername()/*, Role.ROLE_USER*/);
         String url = "https://localhost:3000/reset_password/" + jwt;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
