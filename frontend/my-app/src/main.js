@@ -13,6 +13,8 @@ import Login from './components/Login.vue'
 import AccountRecovery from './components/AccountRecovery.vue'
 import Home from './components/Home.vue'
 import ResetPassword from './components/ResetPassword.vue'
+import AllUsers from './components/AllUsers'
+import Profile from './components/Profile'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -58,6 +60,16 @@ const router = new VueRouter({
       name: 'ResetPassword',
       component: ResetPassword
     },
+    {
+      path: '/allUsers',
+      name: 'AllUsers',
+      component: AllUsers
+    },
+    {
+      path: '/profile/:username',
+      name: 'Profile',
+      component: Profile
+    }
   ]
 });
 

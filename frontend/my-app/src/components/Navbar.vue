@@ -41,12 +41,12 @@
                   <i class="fas fa-user"></i>
                 </button>
             </li>
+            <li class="nav-item">
+                <button class="nav-btn" @click="logout">
+                  <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </li>
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
-        
     </div>
     </nav>
   </div>
@@ -61,7 +61,11 @@ export default {
   methods:{
     myProfile:function(){
       //TODO
-      window.location.href = "/";
+      window.location.href = "/profile/";
+    },
+    logout: function(){
+      localStorage.removeItem('JWT');
+      window.location.href = "/"
     }
   },
 }

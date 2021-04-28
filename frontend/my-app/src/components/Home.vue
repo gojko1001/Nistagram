@@ -7,6 +7,10 @@
 <script>
 export default {
   name: 'HomePage',
+  mounted: function(){
+    if(!localStorage.getItem('JWT'))
+      window.location.href = "/";
+    }
 }
 </script>
 
