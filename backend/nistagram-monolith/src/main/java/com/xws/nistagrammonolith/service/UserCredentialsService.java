@@ -1,12 +1,16 @@
 package com.xws.nistagrammonolith.service;
 
+import com.xws.nistagrammonolith.controller.dto.ResetPasswordDto;
+import com.xws.nistagrammonolith.domain.BlackList;
 import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.exception.BadRequestException;
 import com.xws.nistagrammonolith.exception.InvalidActionException;
 import com.xws.nistagrammonolith.exception.NotFoundException;
+import com.xws.nistagrammonolith.repository.IBlackListRepository;
 import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
+import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import net.bytebuddy.utility.RandomString;
@@ -18,6 +22,7 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.List;
 
 @Service
 public class UserCredentialsService implements IUserCredentialsService {
@@ -27,6 +32,10 @@ public class UserCredentialsService implements IUserCredentialsService {
     private IUserService userService;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private JwtService jwtService;
+    @Autowired
+    private IBlackListRepository blackListRepository;
 
     public UserCredentials create(UserCredentials userCredentials){
         return userCredentialsRepository.save(userCredentials);
@@ -53,13 +62,27 @@ public class UserCredentialsService implements IUserCredentialsService {
         return userCredentials;
     }
 
-    //TODO Maja: ISPRAVITII
-    public void restartPassword(String username) {
-        User user = userService.findUserByUsername(username);
-        UserCredentials userCredentials = findByUsername(username);
 
-        userCredentials.setPassword(RandomString.make(10));
-        emailService.resetPassword(user);
+    public void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) {
+        String extractedUsername = jwtService.extractUsername(jwt);
+        UserCredentials userCredentials = findByUsername(extractedUsername);
+        if(!isPassword(resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword())){
+            throw new BadRequestException("Passwords are not the same.");
+        }
+            byte[] salt = makeSalt();
+            userCredentials.setSalt(Base64Utility.encode(salt));
+
+            List<BlackList> blackList = blackListRepository.findAll();
+            for(BlackList b: blackList){
+                if(b.getPassword().equalsIgnoreCase(resetPasswordDto.getPassword())){
+                    throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
+                }
+            }
+
+            userCredentials.setPassword(hashPassword(resetPasswordDto.getPassword(), salt));
+
+            userCredentialsRepository.save(userCredentials);
+
     }
 
     public void sendResetPasswordLink(String email) {

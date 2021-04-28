@@ -1,5 +1,6 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
+import com.xws.nistagrammonolith.controller.dto.ResetPasswordDto;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 
@@ -11,7 +12,7 @@ public interface IUserCredentialsService {
 
     UserCredentials findByUsername(String username);
 
-    void restartPassword(String username) throws IOException;
+    void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) throws IOException;
 
     void sendResetPasswordLink(String email) throws IOException;
 

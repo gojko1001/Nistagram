@@ -1,5 +1,6 @@
 package com.xws.nistagrammonolith.controller;
 
+import com.xws.nistagrammonolith.controller.dto.ResetPasswordDto;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.security.JwtService;
@@ -33,13 +34,12 @@ public class UserCredentialsController {
     public void sendPasswordLink(@PathVariable String email) throws IOException{
         userCredentialsService.sendResetPasswordLink(email);
     }
-    //TODO Maja
     @PutMapping("/reset_password/{jwt}")
-    public void restartPassword(@PathVariable String jwt) throws IOException {
-        userCredentialsService.restartPassword(jwt);
+    public void restartPassword(@PathVariable String jwt, @RequestBody ResetPasswordDto resetPasswordDto) throws IOException {
+        userCredentialsService.restartPassword(jwt, resetPasswordDto);
     }
     @GetMapping("/verify/{username}")
-    public UserCredentials verifyUser(@PathVariable String username){
+    public String verifyUser(@PathVariable String username){
         return userService.verifyAccount(username);
     }
 }

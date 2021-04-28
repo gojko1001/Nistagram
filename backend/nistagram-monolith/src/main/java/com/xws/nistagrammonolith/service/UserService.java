@@ -135,14 +135,14 @@ public class UserService implements IUserService {
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
 
-    public UserCredentials verifyAccount(String username){
+    public String verifyAccount(String username){
         String extractedUsername = jwtService.extractUsername(username);
         UserCredentials userCredentials = userCredentialsService.findByUsername(extractedUsername);
         if(userCredentials != null){
             userCredentials.setVerified(true);
         }
         userCredentialsRepository.save(userCredentials);
-        return userCredentials;
+        return "Your account has been verified successfully";
     }
 
     public User findUserByEmail(String email) {

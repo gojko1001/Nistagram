@@ -31,6 +31,7 @@ export default {
           password:'',
           repeatPassword:'',
         },
+        jwt: this.$route.params.jwt,
         password:'',
         msg:[],
         show: true,
@@ -46,7 +47,7 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.put('/reset_password/maja', this.form)
+        this.axios.put('https://localhost:3030/userCredentials/reset_password/' + this.jwt, this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("Password changed successfully.", "success");
                                       window.location.href = "/";
