@@ -23,8 +23,6 @@ public class UserCredentials implements UserDetails {
     private String username;
     @Column
     private String password;
-    @Column
-    private String salt;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -35,11 +33,10 @@ public class UserCredentials implements UserDetails {
 
     public UserCredentials(){}
 
-    public UserCredentials(Long id, String username, String password, String salt, Collection<Role> roles, Boolean verified) {
+    public UserCredentials(Long id, String username, String password, Collection<Role> roles, Boolean verified) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.salt = salt;
         this.roles = roles;
         this.verified = verified;
     }

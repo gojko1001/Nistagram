@@ -14,13 +14,10 @@ import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
-import com.xws.nistagrammonolith.util.Base64Utility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -90,8 +87,6 @@ public class UserService implements IUserService {
     public User createUserAndCredentials(UserCredentialsDto userReg){
         User user = new User();
         UserCredentials userCredentials = new UserCredentials();
-        byte[] salt = userCredentialsService.makeSalt();
-        userCredentials.setSalt(Base64Utility.encode(salt));
 
         List<BlackList> blackList = blackListRepository.findAll();
         for(BlackList b: blackList){
@@ -99,6 +94,11 @@ public class UserService implements IUserService {
                 throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
             }
         }
+
+        if(!userCredentialsService.isPassword(userReg.getPassword(), userReg.getRepeatPassword())){
+            throw new BadRequestException("Passwords are not the same.");
+        }
+
         String encodedPassword = passwordEncoder.encode(userReg.getPassword());
         userCredentials.setPassword(encodedPassword);
         userCredentials.setUsername(userReg.getUsername());
