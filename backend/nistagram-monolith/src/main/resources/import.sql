@@ -24,12 +24,15 @@ insert into blacklist (password) values ("qqww1122");
 insert into roles (id, name) values (1, "ROLE_USER");
 insert into roles (id, name) values (2, "ROLE_ADMIN");
 insert into roles (id, name) values (3, "ROLE_AGENT");
+--insert into roles (id, name) values (4, "ROLE_GUEST");
 
 -- Permissions
+--insert into permission (id, name) values (1, "ALL_TAGS");
 insert into permission (id, name) values (10, "ALL_USERS");
 insert into permission (id, name) values (11, "GET_USER");
 insert into permission (id, name) values (99, "AGENT_TEST"); -- TODO: Delete after demonstration
 
+--insert into roles_permission (role_id, permission_id) values (4, 1);
 insert into roles_permission (role_id, permission_id) values (1, 11);
 insert into roles_permission (role_id, permission_id) values (2, 10);
 insert into roles_permission (role_id, permission_id) values (3, 99); -- TODO: Delete after demonstration
@@ -68,3 +71,22 @@ insert into user_role (user_id, role_id) values (701, 3);
 
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('nike', 'Nike', "nike@mailinator.com", "062/963-22-56", 'www.nike.com', 'Just Do It!', "1975-06-09", 2, true, true, true);
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('samsung', 'Samsung', "samsung@mailinator.com", "062/963-22-56", 'www.samsung.com', 'Be inspired to #DoWhatYouCant', "1990-12-08", 2, true, true, true);
+
+
+-- Tag
+insert into tag(name) values("life");
+insert into tag(name) values("love");
+insert into tag(name) values("dream");
+insert into tag(name) values("car");
+insert into tag(name) values("photooftheday");
+insert into tag(name) values("fashion");
+insert into tag(name) values("beautiful");
+insert into tag(name) values("friends");
+
+-- Location
+insert into location(name) values ("The Dunavska street");
+insert into location(name) values ("St Sava Church");
+insert into location(name) values ("Novi Sad, Serbia");
+insert into location(name) values ("Belgrade Beer Fest");
+insert into location(name) values ("Gardos");
+
