@@ -16,8 +16,11 @@ import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import com.xws.nistagrammonolith.util.Base64Utility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -25,6 +28,9 @@ import java.util.regex.Pattern;
 public class UserService implements IUserService {
 
     // TODO: updatePassword
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private IUserRepository userRepository;
@@ -93,7 +99,8 @@ public class UserService implements IUserService {
                 throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
             }
         }
-        userCredentials.setPassword(userCredentialsService.hashPassword(userReg.getPassword(), salt));
+        String encodedPassword = passwordEncoder.encode(userReg.getPassword());
+        userCredentials.setPassword(encodedPassword);
         userCredentials.setUsername(userReg.getUsername());
         userCredentials.setRoles(authService.findByName("ROLE_USER"));
         userCredentials.setVerified(false);

@@ -39,35 +39,35 @@ insert into roles_permission (role_id, permission_id) values (3, 99); -- TODO: D
 
 
 -- User Credentials : ADMIN
-insert into user_credentials (id, username, password, salt, verified) values (500, 'lubura', 'IWAdx77GJPMpCaxWwB80moyj2A782p3fOk10/tbRTa64ZLfWD21smW4zubX+u+DotJ+eZruiRKRm\r\nZMRnqxaZwQ==', 'lCIdtNAxgrb3bx4V8DVyyg==', true);
+insert into user_credentials (id, username, password, salt, verified) values (500, 'lubura', '$2a$10$s3iq1XL.6BS4ckuXO5flkOvwghjLs/ImwrYpY9RRuJXDFs9Z8qjV.', 'lCIdtNAxgrb3bx4V8DVyyg==', true);
 insert into user_role (user_id, role_id) values (500, 2);
--- pass: Lubura!1
+-- pass: Lubura123*
 
 -- USER
-insert into user_credentials (id, username, password, salt, verified) values (550, 'maja', 'x1Yj5nGWlCuhfslRRstZf8JMOKjrgYeJa4Q6tAlwftGN1VWWuG69QbXkANjJj4Q/XDnmfhV+wCcN\r\nWcFBmWGPpQ==', 'VTOgq56dx/7hcSbpKeBh', true);
+insert into user_credentials (id, username, password, salt, verified) values (550, 'maja', '$2a$10$awcKLtXVr3yW6eTjoYfSY.0Dnnpgz0WkjeY3Q63TuNa2z3xdeYJo6', 'VTOgq56dx/7hcSbpKeBh', true);
 insert into user_role (user_id, role_id) values (550, 1);
--- pass: Maja!123
-insert into user_credentials (id, username, password, salt, verified) values (551, 'tasa', 'Nab5/ZN1ogEdQq/EH3srED3eblsJ+jW2J2bwqAirex/Cjv7+mZqvgRL9cBdn0Sd8GZ3HqULNzM7a\r\nzxYWKOCrJQ==', 'pJbM+eo3RW2k06RA4+1pSg==', true);
+-- pass: Maja123*
+insert into user_credentials (id, username, password, salt, verified) values (551, 'tasa', '$2a$10$NIxgOguWYESwXmVYSEx/K.10C2UyuN..u/CL9ObBC/iQaOGZZ8FtO', 'pJbM+eo3RW2k06RA4+1pSg==', true);
 insert into user_role (user_id, role_id) values (551, 1);
--- pass: Tasa!123
-insert into user_credentials (id, username, password, salt, verified) values (552, 'masa', 'tXVU+3jGxhoJco+/yOIEzA+BF8xz9AbefXrJ7FhZkVnHukFneUi5xDHUaXYy0v7z/ELk6tlABulh\r\nEb8hppAqaA==', 'Gje7rw7nAEYo4zznLu5vMw==', true);
+-- pass: Tasa123*
+insert into user_credentials (id, username, password, salt, verified) values (552, 'masa', '$2a$10$jIXJCEzeey1J7ju2EJF24e/Bptz0vAsPB8AmgBB6spPTfjhNLqRpW', 'Gje7rw7nAEYo4zznLu5vMw==', true);
 insert into user_role (user_id, role_id) values (552, 1);
--- pass: Masa!123
-insert into user_credentials (id, username, password, salt, verified) values (553, 'gojko', 'ovj74wZG0AV/3VGQP2SFXUdCCpv0SPZQ6HUJnakEpcdPhh9eXWkDHk8epo6dy4uVZj5M4pJdpfds\r\nOEnaUHw9sA==', 'yFk7WWtK/hSjUPxV2Trt2Q==', true);
+-- pass: Masa123*
+insert into user_credentials (id, username, password, salt, verified) values (553, 'gojko', '$2a$10$aJHEn4Tr8f.ztJ3OnKnZ3endkbaN1ioLZxPmziVy/JIK/Sraaenxa', 'yFk7WWtK/hSjUPxV2Trt2Q==', true);
 insert into user_role (user_id, role_id) values (553, 1);
--- pass: Gojko!12
+-- pass: Gojko123*
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('maja', "Maja Stamenic", "maja@mailinator.com", "063/778-55-55", null, null, "1998-11-05", 1, false, true, true);
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('tasa', "Nastasja Damjanac", "tasa@mailinator.com", "066/522-63-63", null, null, "1998-08-10", 1, false, true, true);
-insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('masa', "Marija Milanovic", "masa@mailinator.com", "065/121-84-75", null, null, "1998-12-27", 1, false, true, true);
+insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('masa', "Marija Milanovic", "masa@mailinator.com", "065/121-84-75", null, null, "1998-12-28", 1, false, true, true);
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('gojko', "Gojko Novcic", "gojko@mailinator.com", "062/963-22-56", null, null, "1998-04-09", 0, false, true, true);
 
 -- AGENT
-insert into user_credentials (id, username, password, salt, verified) values (700, 'nike', 'jv1GPCPTZwBM577rNT5dIRAfERRxV4v+SkWfQ/4K+VvTgqyTLBmOKXdGMYvFVNqrbq85Rw3bijHf\r\nY7lHro0/TA==', 'HuQJDpdXDDKsMRDjZmSocg==', true);
+insert into user_credentials (id, username, password, salt, verified) values (700, 'nike', '$2a$10$OD1KiQdb8j7b1yPuzC3NQO8TnhCKaxe1zWc3.QgHBEH0y7hN6G7Ia', 'HuQJDpdXDDKsMRDjZmSocg==', true);
 insert into user_role (user_id, role_id) values (700, 3);
--- pass : Nike/123
-insert into user_credentials (id, username, password, salt, verified) values (701, 'samsung', 'aiFVVbe3byOtT04bdwc5RjeBmwaStQHSr7npIvO+2JgHjRxbI6oYm0fCdSzhh9yO4hpxIYm29iz+\r\n+0X9GzdFKg==', '8npMS7RVvWBA84P1tUqC3g==', true);
+-- pass : Nike123*
+insert into user_credentials (id, username, password, salt, verified) values (701, 'samsung', '$2a$10$jDvsku0joAHAfQk9i2Le4.AoW2jsVb5Zcsyx8ieR7hAbuTNl9MsGe', '8npMS7RVvWBA84P1tUqC3g==', true);
 insert into user_role (user_id, role_id) values (701, 3);
--- pass: Samsung/1
+-- pass: Samsung123*
 
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('nike', 'Nike', "nike@mailinator.com", "062/963-22-56", 'www.nike.com', 'Just Do It!', "1975-06-09", 2, true, true, true);
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('samsung', 'Samsung', "samsung@mailinator.com", "062/963-22-56", 'www.samsung.com', 'Be inspired to #DoWhatYouCant', "1990-12-08", 2, true, true, true);

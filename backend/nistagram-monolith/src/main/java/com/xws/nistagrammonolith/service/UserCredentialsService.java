@@ -15,6 +15,8 @@ import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.xws.nistagrammonolith.util.Base64Utility;
 
@@ -26,6 +28,10 @@ import java.util.List;
 
 @Service
 public class UserCredentialsService implements IUserCredentialsService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private IUserCredentialsRepository userCredentialsRepository;
     @Autowired
@@ -47,8 +53,7 @@ public class UserCredentialsService implements IUserCredentialsService {
             throw new InvalidActionException("The account must be verified.");
         }
         if(userCredentials != null){
-            String hashEnteredPassword = hashPassword(userCredentialsDto.getPassword(), Base64Utility.decode(userCredentials.getSalt()));
-            if(isPassword(userCredentials.getPassword(), hashEnteredPassword)) {
+            if(passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword())){
                 return userCredentials;
             }
         }
