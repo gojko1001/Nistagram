@@ -6,8 +6,8 @@
             <img src="../assets/logo.png" height="40" alt="" />
         </a>
         <form style="padding: 0px 0px 0px 60px;">
-          <input type="text" class="search-input">
-          <router-link :to="{ name: 'Search', params: { name: this.selected } }" class="search-btn">
+          <input type="text" class="search-input" v-model="searchInput">
+          <router-link :to="{ name: 'Search', params: { name: this.selected, find: searchInput } }" class="search-btn">
             <i class="fas fa-search"></i>
           </router-link>
           <br>
@@ -71,12 +71,13 @@ export default {
   name: 'Navbar',
   data() {
       return {
-        selected: 'profiles',
+        selected: 'profile',
         options: [
-          { item: 'profiles', name: 'Profiles' },
-          { item: 'tags', name: 'Tags' },
-          { item: 'locations', name: 'Locations' },
-        ]
+          { item: 'profile', name: 'Profiles' },
+          { item: 'tag', name: 'Tags' },
+          { item: 'location', name: 'Locations' },
+        ],
+        searchInput:'',
       }
   },
   methods:{
