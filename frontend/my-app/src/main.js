@@ -15,6 +15,7 @@ import Home from './components/Home.vue'
 import ResetPassword from './components/ResetPassword.vue'
 import AllUsers from './components/AllUsers'
 import Profile from './components/Profile'
+import Search from './components/Search'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -69,6 +70,11 @@ const router = new VueRouter({
       path: '/profile/:username',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/search/:name',
+      name: 'Search',
+      component: Search,
     }
   ]
 });

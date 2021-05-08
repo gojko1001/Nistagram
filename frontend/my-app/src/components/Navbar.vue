@@ -7,10 +7,23 @@
         </a>
         <form style="padding: 0px 0px 0px 60px;">
           <input type="text" class="search-input">
-          <button class="search-btn" type="submit">
+          <router-link :to="{ name: 'Search', params: { name: this.selected } }" class="search-btn">
             <i class="fas fa-search"></i>
-          </button>
+          </router-link>
+          <br>
+          <div>
+          <b-form-radio-group
+            v-model="selected"
+            :options="options"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
+          ></b-form-radio-group>
+        </div>
+
         </form>
+        
         <!-- <div align="center">
           <b-nav pills >
             <b-nav-item active>Explore</b-nav-item>
@@ -56,7 +69,15 @@
 <script>
 export default {
   name: 'Navbar',
-  components: {
+  data() {
+      return {
+        selected: 'profiles',
+        options: [
+          { item: 'profiles', name: 'Profiles' },
+          { item: 'tags', name: 'Tags' },
+          { item: 'locations', name: 'Locations' },
+        ]
+      }
   },
   methods:{
     myProfile:function(){
@@ -66,7 +87,7 @@ export default {
     logout: function(){
       localStorage.removeItem('JWT');
       window.location.href = "/"
-    }
+    },
   },
 }
 </script>
