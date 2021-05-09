@@ -2,36 +2,40 @@
     <div id="postImagePage">
       <h1>Post image</h1>
       <br><br>
-        <b-form-file
-            v-model="file1"
-            accept="image/jpeg, image/png"
-            :state="Boolean(file1)"
-            placeholder="Choose a file or drop it here..."
-            drop-placeholder="Drop file here..."
-        ></b-form-file>
-        <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div>
-        <br>
-        <b-form-tags
-            v-model="value"
-            tag-variant="primary"
-            tag-pills
-            size="lg"
-            separator=" "
-            placeholder="Enter new tags separated by space"
-        ></b-form-tags>
-        <p class="mt-2">Value: {{ value }}</p>
-        <br>
-        <!-- LOCATION fali -->
-        <br>
-        <b-form-input
-            id="description"
-            v-model="description"
-            placeholder="Write description"
-            required
-          ></b-form-input>
-      <br><br>
-      <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
-      <b-button type="submit" variant="primary" style="width:200px;">Post</b-button>
+        <!--<form ref="uploadForm" @submit.prevent="onSubmit">
+            <b-form-file
+                ref="uploadImage" @change="onImageUpload()" class="form-control"
+                accept="image/jpeg, image/png"
+                placeholder="Choose a file or drop it here..."
+                drop-placeholder="Drop file here..."
+            ></b-form-file>
+            <b-button type="submit"  @click="startupload" name="Upload" value="Upload"  variant="primary" style="width:200px;">Post</b-button>
+        </form>
+            <br>
+            <b-form-tags
+                v-model="value"
+                tag-variant="primary"
+                tag-pills
+                size="lg"
+                separator=" "
+                placeholder="Enter new tags separated by space"
+            ></b-form-tags>
+            <p class="mt-2">Value: {{ value }}</p>
+            <br>
+            <br>
+            <b-form-input
+                id="description"
+                v-model="description"
+                placeholder="Write description"
+            ></b-form-input>
+            <br><br>
+            <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
+      -->
+        <form ref="uploadForm" @submit.prevent="submit">
+          <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required>
+          <input type="button" @click="startupload" name="Upload" value="Upload" />
+        </form>
+        
     </div>
 </template>
 
@@ -44,6 +48,7 @@ export default {
         file2: null,
         description:'',
         value: ['love', 'life', 'smile'],
+        formData:null,
       }
     },
   mounted: function(){
@@ -52,9 +57,31 @@ export default {
     },
     methods:{
         back:function(){
-            //TODO
             window.location.href = "/profile/";
         },
+        onSubmit() {
+            console.log(this.form);
+            this.axios.post('/image', this.form)
+            .then(response => { console.log(response);
+                                })
+            .catch(error => { console.log(error);
+                            })
+      },
+      onImageUpload(){
+        let file = this.$refs.uploadImage.files[0];
+        this.formData = new FormData();
+        this.formData.append("file", file);
+      },
+      startupload(){
+        this.axios.post('/image', this.formData, {
+          headers:{
+            Accept: 'application/json',
+            'Content-Type':'multipart/form-data'
+          }
+        }).then(response => {
+          console.log(JSON.stringify(response.data));
+        })
+      },
     },
 }
 </script>

@@ -19,15 +19,14 @@ public class ImageController {
     private IImageService imageService;
 
     @PostMapping
-    public boolean saveImage(@RequestParam("image") MultipartFile multipartFile) throws IOException {
-
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+    public String saveImage(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());       //TODO: slucaj sa istim nazivima
         Image image = new Image();
         image.setFileName(fileName);
-        image.setUsername("marijamasa");
+        image.setUsername("marijamasa");        //TODO: fali parametar ImageDto
         imageService.create(image);
-        String uploadDir = "user-photos/bla";
+        String uploadDir = "user-photos";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        return true;
+        return String.format("File %s is uploaded", multipartFile.getOriginalFilename());
     }
 }
