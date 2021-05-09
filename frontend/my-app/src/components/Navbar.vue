@@ -35,7 +35,7 @@
 
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <button class="nav-btn">
+                <button class="nav-btn" @click='discoverPage'>
                   <i class="fas fa-globe"></i>
                 </button>
             </li>
@@ -89,6 +89,9 @@ export default {
       localStorage.removeItem('JWT');
       window.location.href = "/"
     },
+    discoverPage:function(){
+      window.location.href = "/discover";
+    }
   },
 }
 </script>

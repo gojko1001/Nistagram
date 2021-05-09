@@ -16,6 +16,8 @@ import ResetPassword from './components/ResetPassword.vue'
 import AllUsers from './components/AllUsers'
 import Profile from './components/Profile'
 import Search from './components/Search'
+import Discover from './components/Discover'
+import PostImage from './components/PostImage'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -75,7 +77,17 @@ const router = new VueRouter({
       path: '/search/:name/:find',
       name: 'Search',
       component: Search,
-    }
+    },
+    {
+      path: '/discover',
+      name: 'Discover',
+      component: Discover,
+    },
+    {
+      path: '/postimage',
+      name: 'PostImage',
+      component: PostImage,
+    },
   ]
 });
 
