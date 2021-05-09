@@ -57,11 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Entry point for Unauthorized requests
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
                 // Enable anyone to access methods of Quoted mapping (without Authorisation)
-                .and().authorizeRequests().antMatchers("/userCredentials/login").permitAll()
-                .antMatchers("/user/add").permitAll()
-                .antMatchers("/userCredentials/verify/{username}").permitAll()
-                .antMatchers("/userCredentials/reset_password/{jwt}").permitAll()
                 .and().authorizeRequests()
+                .antMatchers("/userCredentials/reset_password/{jwt}").permitAll()
                 .antMatchers("/userCredentials/verify/{username}").permitAll()
                 .antMatchers("/userCredentials/login").permitAll()
                 .antMatchers("/user/add").permitAll()

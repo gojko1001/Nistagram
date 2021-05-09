@@ -28,17 +28,9 @@ public class UserController {
         return userService.findUserByUsername(username);
     }
 
-    // TODO: Delete after demostration
-    @GetMapping("/agent")
-    @PreAuthorize("hasAuthority('AGENT_TEST')")
-    public String testAgentRole(){
-        return "Agent permitted API";
-    }
-
     @PostMapping("/add")
     public User create(@RequestBody UserCredentialsDto userReg) {
         return userService.create(userReg);
     }
-
 
 }

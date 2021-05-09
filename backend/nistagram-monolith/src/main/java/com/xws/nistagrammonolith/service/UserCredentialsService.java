@@ -42,21 +42,17 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     public UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(userCredentialsDto.getUsername());
-        if(userCredentials.getVerified()==false){
+        if(userCredentials == null || !passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword()))
+            throw new BadRequestException("Username or password is not correct.");
+        if(!userCredentials.getVerified())
             throw new InvalidActionException("The account must be verified.");
-        }
-        if(userCredentials != null){
-            if(passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword())){
-                return userCredentials;
-            }
-        }
-        throw new BadRequestException("Username or password is not correct.");
+        return userCredentials;
     }
 
     public UserCredentials findByUsername(String username){
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
         if (userCredentials == null)
-            throw new NotFoundException("There is no user credentials with username "+username);
+            throw new NotFoundException("There is no user credentials with username " + username);
         return userCredentials;
     }
 
@@ -88,7 +84,5 @@ public class UserCredentialsService implements IUserCredentialsService {
     public boolean isPassword(String password1, String password2){
         return password1.equals(password2);
     }
-
-
 
 }
