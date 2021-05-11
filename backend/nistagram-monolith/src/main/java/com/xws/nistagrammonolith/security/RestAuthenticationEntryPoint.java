@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
-//    @Autowired        //Uncomment to get real exceptions, swap lines in commence method 
+//    @Autowired        //Uncomment to get real exceptions, swap lines in commence method
 //    @Qualifier("handlerExceptionResolver")
 //    private HandlerExceptionResolver resolver;
 

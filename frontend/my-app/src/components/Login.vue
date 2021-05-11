@@ -26,6 +26,7 @@
 
 <script>
 import { saveToken } from "./../util/token"
+import { LOGIN_PATH, SERVER_NOT_RESPONDING } from "./../util/constants"
 export default {
   name: 'Login',
   data() {
@@ -40,14 +41,17 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.post('/userCredentials/login', this.form)
+        this.axios.post(LOGIN_PATH, this.form)
           .then(response => { console.log(response);
                               this.makeToast("User has been logged in successfully.", "success");
                               saveToken(response.data);
                               window.location.href = "/home";
                             })
           .catch(error => { console.log(error);
-                            this.makeToast("Username or password is not correct.", "danger");
+                            if(!error.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                            else
+                              this.makeToast("Username or password is not correct.", "danger");
                           })
       },
     onReset(event) {
