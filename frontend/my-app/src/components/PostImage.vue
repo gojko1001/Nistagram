@@ -34,16 +34,43 @@
         <form ref="uploadForm" @submit.prevent="submit">
           <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required>
           <input type="button" @click="startupload" name="Upload" value="Upload" />
+
+          <br><br>
+          <b-form-input
+                id="description"
+                v-model="form.description"
+                placeholder="Write description"
+          ></b-form-input>
+          <br>
+          <b-form-tags
+                v-model="value"
+                tag-variant="primary"
+                tag-pills
+                size="lg"
+                separator=" "
+                placeholder="Enter new tags separated by space"
+            ></b-form-tags>
+            <p class="mt-2">Value: {{ value }}</p>
+          <br>
+          <br>
+          <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
+          <b-button type="submit" variant="primary" style="width:200px;" aria-describedby="signup-block">Post</b-button>
         </form>
         
     </div>
 </template>
 
 <script>
+import { getEmailFromToken } from '../util/token';
 export default {
   name: 'PostImage',
   data() {
       return {
+        form: {
+          username: '',
+          fileName: '',
+          description:'',
+        },
         file1: null,
         file2: null,
         description:'',
@@ -52,10 +79,20 @@ export default {
       }
     },
   mounted: function(){
-    /*if(!localStorage.getItem('JWT'))
-      window.location.href = "/";*/
+    if(!localStorage.getItem('JWT'))
+      window.location.href = "/";
     },
     methods:{
+      makeToast(message, variant) {
+        this.$root.$bvToast.toast(message, {
+                              title: `Nistagram`,
+                              autoHideDelay: 5000,
+                              variant: variant,
+                              toaster: 'b-toaster-bottom-right',
+                              solid: true,
+                              appendToast: false
+                            })
+      },
         back:function(){
             window.location.href = "/profile/";
         },
@@ -79,9 +116,20 @@ export default {
             'Content-Type':'multipart/form-data'
           }
         }).then(response => {
-          console.log(JSON.stringify(response.data));
+          this.form.fileName = response.data;
         })
       },
+      submit(){
+        this.form.username = getEmailFromToken();
+        this.axios.post('/image/info', this.form)
+                  .then(response => { console.log(response);
+                                      this.makeToast("Image has been uploaded.", "success"); 
+                                      window.location.href = "/postimage";  
+                                                      
+                }).catch(error => { console.log(error);
+                                    this.makeToast("Error occurred..", "danger");
+                                  }); 
+      }
     },
 }
 </script>
@@ -101,4 +149,10 @@ export default {
   border: 3px solid lightblue;
   padding: 50px;
 }
+.uploadBtn{
+    width:100px;
+    color: #80A1D4;
+    border-radius: 7px
+}
+
 </style>

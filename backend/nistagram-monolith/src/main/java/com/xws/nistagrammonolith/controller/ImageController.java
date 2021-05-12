@@ -1,5 +1,6 @@
 package com.xws.nistagrammonolith.controller;
 
+import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.domain.Image;
 import com.xws.nistagrammonolith.service.FileUploadUtil;
 import com.xws.nistagrammonolith.service.interfaces.IImageService;
@@ -20,13 +21,21 @@ public class ImageController {
 
     @PostMapping
     public String saveImage(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());       //TODO: slucaj sa istim nazivima
-        Image image = new Image();
-        image.setFileName(fileName);
-        image.setUsername("marijamasa");        //TODO: fali parametar ImageDto
-        imageService.create(image);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename().replaceAll("\\s", ""));       //TODO: slucaj sa istim nazivima
         String uploadDir = "user-photos";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        return String.format("File %s is uploaded", multipartFile.getOriginalFilename());
+        return fileName;
     }
+
+    @PostMapping("/info")
+    public Image saveImageInfo(@RequestBody ImageDto imageDto){
+        Image image = new Image();
+        image.setFileName(imageDto.getFileName());
+        image.setUsername(imageDto.getUsername());
+        image.setDescription(imageDto.getDescription());
+        image.setLocation(imageDto.getLocation());
+        image.setTags(imageDto.getTags());
+        return imageService.create(image);
+    }
+
 }
