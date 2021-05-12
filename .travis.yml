@@ -7,4 +7,4 @@ cache:
   
 script:
   - cd backend/nistagram-monolith
-  - mvn clean install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
