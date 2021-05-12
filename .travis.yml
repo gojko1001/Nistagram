@@ -6,4 +6,5 @@ cache:
   - $HOME/.m2
   
 script:
-  - ./mvnw clean install
+  - cd backend
+  - mvn clean install
