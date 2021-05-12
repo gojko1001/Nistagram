@@ -43,14 +43,13 @@
           ></b-form-input>
           <br>
           <b-form-tags
-                v-model="value"
+                v-model="form.tags"
                 tag-variant="primary"
                 tag-pills
                 size="lg"
                 separator=" "
                 placeholder="Enter new tags separated by space"
             ></b-form-tags>
-            <p class="mt-2">Value: {{ value }}</p>
           <br>
           <br>
           <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
@@ -70,11 +69,12 @@ export default {
           username: '',
           fileName: '',
           description:'',
+          tags:[]
         },
         file1: null,
         file2: null,
         description:'',
-        value: ['love', 'life', 'smile'],
+        value: [],
         formData:null,
       }
     },
@@ -117,13 +117,14 @@ export default {
           }
         }).then(response => {
           this.form.fileName = response.data;
+          this.makeToast("Image has been uploaded.", "success");
         })
       },
       submit(){
         this.form.username = getEmailFromToken();
         this.axios.post('/image/info', this.form)
                   .then(response => { console.log(response);
-                                      this.makeToast("Image has been uploaded.", "success"); 
+                                      this.makeToast("Posted!", "success"); 
                                       window.location.href = "/postimage";  
                                                       
                 }).catch(error => { console.log(error);
