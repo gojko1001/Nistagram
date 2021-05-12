@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.domain.Role;
-import com.xws.nistagrammonolith.repository.IAuthorityRepository;
+import com.xws.nistagrammonolith.repository.IRoleRepository;
 import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,23 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AuthorityService implements IAuthorityService {
+public class RoleService implements IAuthorityService {
     @Autowired
-    private IAuthorityRepository authorityRepository;
+    private IRoleRepository roleRepository;
 
     @Override
     public List<Role> findById(Long id) {
-        Role auth = authorityRepository.getOne(id);
-        List<Role> auths = new ArrayList<>();
-        auths.add(auth);
-        return auths;
+        Role role = roleRepository.getOne(id);
+        List<Role> roles = new ArrayList<>();
+        roles.add(role);
+        return roles;
     }
 
     @Override
     public List<Role> findByName(String name) {
-        Role auth = authorityRepository.findByName(name);
-        List<Role> auths = new ArrayList<>();
-        auths.add(auth);
-        return auths;
+        Role role = roleRepository.findByName(name);
+        List<Role> roles = new ArrayList<>();
+        roles.add(role);
+        return roles;
     }
 }

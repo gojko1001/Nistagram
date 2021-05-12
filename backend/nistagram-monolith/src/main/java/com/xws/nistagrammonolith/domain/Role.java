@@ -18,6 +18,8 @@ public class Role {
     private Long id;
     @Column(name="name")
     private String name;
+    @ManyToMany(mappedBy = "roles")
+    private Collection<UserCredentials> users;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "roles_permission",
                joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),

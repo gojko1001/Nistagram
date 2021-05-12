@@ -75,6 +75,8 @@ export default {
 <style scoped>
     #userInfo{
         display: inline-block;
+        max-width: 200px;
+        word-wrap: break-word;
     }
     .profilePic{
         width: 150px;
