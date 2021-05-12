@@ -22,4 +22,12 @@ public class LocationService implements ILocationService {
     public Location create(Location location) {
         return locationRepository.save(location);
     }
+
+    @Override
+    public Location findById(Long id) {
+        return locationRepository.findLocationById(id);
+    }
+
+    @Override
+    public Location findByName(String name){ return locationRepository.findLocationByName(name); }
 }

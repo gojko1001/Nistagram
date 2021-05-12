@@ -2,39 +2,9 @@
     <div id="postImagePage">
       <h1>Post image</h1>
       <br><br>
-        <!--<form ref="uploadForm" @submit.prevent="onSubmit">
-            <b-form-file
-                ref="uploadImage" @change="onImageUpload()" class="form-control"
-                accept="image/jpeg, image/png"
-                placeholder="Choose a file or drop it here..."
-                drop-placeholder="Drop file here..."
-            ></b-form-file>
-            <b-button type="submit"  @click="startupload" name="Upload" value="Upload"  variant="primary" style="width:200px;">Post</b-button>
-        </form>
-            <br>
-            <b-form-tags
-                v-model="value"
-                tag-variant="primary"
-                tag-pills
-                size="lg"
-                separator=" "
-                placeholder="Enter new tags separated by space"
-            ></b-form-tags>
-            <p class="mt-2">Value: {{ value }}</p>
-            <br>
-            <br>
-            <b-form-input
-                id="description"
-                v-model="description"
-                placeholder="Write description"
-            ></b-form-input>
-            <br><br>
-            <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
-      -->
         <form ref="uploadForm" @submit.prevent="submit">
           <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required>
           <input type="button" @click="startupload" name="Upload" value="Upload" />
-
           <br><br>
           <b-form-input
                 id="description"
@@ -50,6 +20,11 @@
                 separator=" "
                 placeholder="Enter new tags separated by space"
             ></b-form-tags>
+          <br>
+          <!-- TODO: location -->
+          <select multiple="false" v-model="form.location">
+            <option v-for="(loc,i) in locations" :key="i">{{loc.name}}</option>
+          </select>
           <br>
           <br>
           <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
@@ -69,8 +44,13 @@ export default {
           username: '',
           fileName: '',
           description:'',
-          tags:[]
+          tags:[],
+          locationName:'',
+          location:[{
+            name:''
+          }],
         },
+        locations:[],
         file1: null,
         file2: null,
         description:'',
@@ -81,6 +61,13 @@ export default {
   mounted: function(){
     if(!localStorage.getItem('JWT'))
       window.location.href = "/";
+    this.axios.get('/location')
+    .then(response => {console.log(response);
+                        this.locations = response.data;
+                      })
+    .catch(error => { console.error(error)
+                      this.makeToast("Error occurred.", "danger");
+    })
     },
     methods:{
       makeToast(message, variant) {
@@ -122,6 +109,8 @@ export default {
       },
       submit(){
         this.form.username = getEmailFromToken();
+        console.log("evo");
+        this.form.locationName = this.form.location.toString();
         this.axios.post('/image/info', this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("Posted!", "success"); 
