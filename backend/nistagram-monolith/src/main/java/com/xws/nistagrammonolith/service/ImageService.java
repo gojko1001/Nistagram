@@ -23,4 +23,7 @@ public class ImageService implements IImageService {
     public Image create(Image image) {
         return imageRepository.save(image);
     }
+
+    @Override
+    public List<Image> getUserImages(String username){ return imageRepository.findImagesByUsername(username);}
 }

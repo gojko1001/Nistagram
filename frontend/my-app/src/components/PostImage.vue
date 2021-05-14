@@ -50,6 +50,7 @@ export default {
             name:''
           }],
         },
+        imageHasBeenUploaded:false,
         locations:[],
         file1: null,
         file2: null,
@@ -105,20 +106,24 @@ export default {
         }).then(response => {
           this.form.fileName = response.data;
           this.makeToast("Image has been uploaded.", "success");
+          this.imageHasBeenUploaded = true;
         })
       },
       submit(){
-        this.form.username = getEmailFromToken();
-        console.log("evo");
-        this.form.locationName = this.form.location.toString();
-        this.axios.post('/image/info', this.form)
-                  .then(response => { console.log(response);
-                                      this.makeToast("Posted!", "success"); 
-                                      window.location.href = "/postimage";  
-                                                      
-                }).catch(error => { console.log(error);
-                                    this.makeToast("Error occurred..", "danger");
-                                  }); 
+        if(this.imageHasBeenUploaded){
+          this.form.username = getEmailFromToken();
+          console.log("evo");
+          this.form.locationName = this.form.location.toString();
+          this.axios.post('/image/info', this.form)
+                    .then(response => { console.log(response);
+                                        this.makeToast("Posted!", "success"); 
+                                        window.location.href = "/postimage";                             
+                  }).catch(error => { console.log(error);
+                                      this.makeToast("Error occurred.", "danger");
+                                    }); 
+        }else{
+          this.makeToast("Please upload image.", "danger");
+        }
       }
     },
 }

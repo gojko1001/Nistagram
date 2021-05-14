@@ -1,19 +1,26 @@
 package com.xws.nistagrammonolith.controller;
 
+import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.domain.Image;
 import com.xws.nistagrammonolith.domain.Location;
-import com.xws.nistagrammonolith.domain.Tag;
+import com.xws.nistagrammonolith.repository.IImageRepository;
 import com.xws.nistagrammonolith.service.FileUploadUtil;
 import com.xws.nistagrammonolith.service.interfaces.IImageService;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
+import com.xws.nistagrammonolith.service.interfaces.IUserService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,16 +29,22 @@ import java.util.List;
 public class ImageController {
 
     @Autowired
+    private IImageRepository imageRepository;
+    @Autowired
     private IImageService imageService;
     @Autowired
     private ITagService tagService;
     @Autowired
     private ILocationService locationService;
+    @Autowired
+    private IUserService userService;
+
+    private static String uploadDir = "user-photos";
 
     @PostMapping
     public String saveImage(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename().replaceAll("\\s", ""));       //TODO: slucaj sa istim nazivima
-        String uploadDir = "user-photos";
+        uploadDir = "user-photos";
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return fileName;
     }
@@ -47,6 +60,28 @@ public class ImageController {
         image.setLocation(location);
         image.setTags(tagService.createTags(imageDto.getTags()));
         return imageService.create(image);
+    }
+
+    @GetMapping("/profile/{username}")
+    public ResponseEntity getImagesByUsername(@PathVariable("username") String username){
+        List<Image> userImages = imageRepository.findImagesByUsername(username);
+        List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath.concat("/" + uploadDir + "/");
+
+        for(Image image: userImages){
+            ImageBytesDto temp = new ImageBytesDto();
+            temp.setId(image.getId());
+            temp.setImageBytes(new ArrayList<>());
+            File in = new File(filePath + image.getFileName());
+            try {
+                temp.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageBytesDtos.add(temp);
+        }
+        return ResponseEntity.ok(imageBytesDtos);
     }
 
 }
