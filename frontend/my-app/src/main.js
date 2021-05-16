@@ -18,6 +18,7 @@ import Profile from './components/Profile'
 import Search from './components/Search'
 import Discover from './components/Discover'
 import PostImage from './components/PostImage'
+import EditProfile from './components/EditProfile'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -87,6 +88,11 @@ const router = new VueRouter({
       path: '/postimage',
       name: 'PostImage',
       component: PostImage,
+    },
+    {
+      path: '/edit_profile',
+      name: 'EditProfile',
+      component: EditProfile,
     },
   ]
 });

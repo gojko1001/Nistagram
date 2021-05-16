@@ -1,7 +1,6 @@
 package com.xws.nistagrammonolith.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +12,7 @@ import java.util.Set;
 
 @Table
 @Entity
-@Getter
-@Setter
+@Data
 public class UserCredentials implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,16 +28,6 @@ public class UserCredentials implements UserDetails {
     private Collection<Role> roles;
     @Column
     private Boolean verified;
-
-    public UserCredentials(){}
-
-    public UserCredentials(Long id, String username, String password, Collection<Role> roles, Boolean verified) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-        this.verified = verified;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -64,8 +52,8 @@ public class UserCredentials implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set permissions = new HashSet();
-        for(Role r : roles){
-            for(Permission p : r.getPermissions()){
+        for (Role r : roles) {
+            for (Permission p : r.getPermissions()) {
                 permissions.add(new SimpleGrantedAuthority(p.getAuthority()));
             }
         }

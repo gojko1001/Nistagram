@@ -1,10 +1,8 @@
 package com.xws.nistagrammonolith.controller.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class UserCredentialsDto {
     private String username;
     private String email;
@@ -12,13 +10,4 @@ public class UserCredentialsDto {
     private String repeatPassword;
     private String fullName;
 
-    UserCredentialsDto(){}
-
-    public UserCredentialsDto(String username, String email, String password, String repeatPassword, String fullName) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.repeatPassword = repeatPassword;
-        this.fullName = fullName;
-    }
 }

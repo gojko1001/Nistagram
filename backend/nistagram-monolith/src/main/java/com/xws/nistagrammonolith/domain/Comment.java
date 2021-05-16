@@ -1,13 +1,11 @@
 package com.xws.nistagrammonolith.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +15,4 @@ public class Comment {
     @Column(nullable = false)
     private String username;
 
-    public Comment(){}
-
-    public Comment(Long id, String text, String username) {
-        this.id = id;
-        this.text = text;
-        this.username = username;
-    }
 }
