@@ -112,7 +112,6 @@ export default {
       submit(){
         if(this.imageHasBeenUploaded){
           this.form.username = getEmailFromToken();
-          console.log("evo");
           this.form.locationName = this.form.location.toString();
           this.axios.post('/image/info', this.form)
                     .then(response => { console.log(response);

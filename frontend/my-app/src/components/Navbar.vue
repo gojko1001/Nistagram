@@ -67,6 +67,7 @@
 
 
 <script>
+import { getEmailFromToken } from '../util/token';
 export default {
   name: 'Navbar',
   data() {
@@ -77,13 +78,14 @@ export default {
           { item: 'tag', name: 'Tags' },
           { item: 'location', name: 'Locations' },
         ],
+        username:'',
         searchInput:'',
       }
   },
   methods:{
     myProfile:function(){
-      //TODO
-      window.location.href = "/profile/";
+      this.username = getEmailFromToken();
+      window.location.href = "/profile/" + this.username;
     },
     logout: function(){
       localStorage.removeItem('JWT');

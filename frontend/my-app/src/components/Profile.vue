@@ -32,31 +32,42 @@
 
 <script>
 import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
+import { getEmailFromToken } from '../util/token';
 export default {
     name: 'Profile',
     data(){
         return{
-            user: ''
+            user: '',
+            imagesByte:[{
+                image:[]
+            }],
+            username:''
         }
     },
     mounted: function(){
-        this.axios.get(USER_PATH + '/' + this.$route.params.username, {
-      headers:{
-        Authorization: "Bearer " + localStorage.getItem('JWT'),
-      }
-    })
-    .then(response => {
-                        this.user = response.data;
-                        console.log(response.data);
-    })
-    .catch(error => {
-                        if(!error.response){
-                            this.makeToast(SERVER_NOT_RESPONDING, "warning")
-                            return
-                        }
-                        window.location.href = '/home'
-                        console.error(error);
-    })
+        this.username = getEmailFromToken();
+        this.axios.get(USER_PATH + '/' + this.username, {
+        headers:{
+            Authorization: "Bearer " + localStorage.getItem('JWT'),
+        }
+        })
+        .then(response => {
+                            this.user = response.data;
+                            console.log(response.data);
+        })
+        .catch(error => {
+                            if(!error.response){
+                                this.makeToast(SERVER_NOT_RESPONDING, "warning")
+                                return
+                            }
+                            window.location.href = '/home'
+                            console.error(error);
+        })
+        this.axios.get('/image/profile/' + this.username)
+                    .then(response => { console.log(response);                            
+                    }).catch(error => { console.log(error);
+                                        this.makeToast("Error occurred.", "danger");
+                                    }); 
     },
     methods:{
         makeToast(message, variant) {
