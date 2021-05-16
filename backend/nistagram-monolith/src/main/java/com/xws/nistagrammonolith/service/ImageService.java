@@ -26,4 +26,5 @@ public class ImageService implements IImageService {
 
     @Override
     public List<Image> getUserImages(String username){ return imageRepository.findImagesByUsername(username);}
+
 }

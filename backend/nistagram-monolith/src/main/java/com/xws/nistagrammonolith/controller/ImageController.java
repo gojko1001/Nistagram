@@ -12,6 +12,7 @@ import com.xws.nistagrammonolith.service.interfaces.ITagService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -68,10 +69,13 @@ public class ImageController {
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
         String filePath = new File("").getAbsolutePath();
         filePath = filePath.concat("/" + uploadDir + "/");
-
         for(Image image: userImages){
             ImageBytesDto temp = new ImageBytesDto();
             temp.setId(image.getId());
+            temp.setUsername(image.getUsername());
+            temp.setDescription(image.getDescription());
+            temp.setLocation(image.getLocation());
+            temp.setTags(image.getTags());
             temp.setImageBytes(new ArrayList<>());
             File in = new File(filePath + image.getFileName());
             try {
@@ -81,7 +85,34 @@ public class ImageController {
             }
             imageBytesDtos.add(temp);
         }
-        return ResponseEntity.ok(imageBytesDtos);
+        return new ResponseEntity(imageBytesDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/discover/{username}")
+    public ResponseEntity getDiscoverImages(@PathVariable("username") String username){
+        List<Image> discoverImages = imageRepository.findAll();
+        // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
+        // TODO: clean code
+        List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath.concat("/" + uploadDir + "/");
+        for(Image image: discoverImages){
+            ImageBytesDto temp = new ImageBytesDto();
+            temp.setId(image.getId());
+            temp.setUsername(image.getUsername());
+            temp.setDescription(image.getDescription());
+            temp.setLocation(image.getLocation());
+            temp.setTags(image.getTags());
+            temp.setImageBytes(new ArrayList<>());
+            File in = new File(filePath + image.getFileName());
+            try {
+                temp.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageBytesDtos.add(temp);
+        }
+        return new ResponseEntity(imageBytesDtos, HttpStatus.OK);
     }
 
 }
