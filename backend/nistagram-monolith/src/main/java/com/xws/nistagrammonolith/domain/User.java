@@ -1,15 +1,13 @@
 package com.xws.nistagrammonolith.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "Users")
 @Entity
-@Getter
-@Setter
+@Data
 public class User {
 
     @Id
@@ -38,20 +36,4 @@ public class User {
     @Column
     private boolean taggable = true;
 
-    public User() {}
-
-    public User(Long id, String username, String fullName, String email, String phone, String webSite, String bio, Date birthDate, Gender userGender, boolean publicProfile, boolean publicDM, boolean taggable) {
-        this.id = id;
-        this.username = username;
-        this.fullName = fullName;
-        this.email = email;
-        this.phone = phone;
-        this.webSite = webSite;
-        this.bio = bio;
-        this.birthDate = birthDate;
-        this.userGender = userGender;
-        this.publicProfile = publicProfile;
-        this.publicDM = publicDM;
-        this.taggable = taggable;
-    }
 }

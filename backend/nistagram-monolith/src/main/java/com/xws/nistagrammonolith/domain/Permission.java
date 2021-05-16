@@ -1,7 +1,6 @@
 package com.xws.nistagrammonolith.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -9,8 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Table
-@Getter
-@Setter
+@Data
 public class Permission implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

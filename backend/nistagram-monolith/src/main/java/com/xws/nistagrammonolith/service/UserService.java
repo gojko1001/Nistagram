@@ -14,6 +14,7 @@ import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 public class UserService implements IUserService {
 
@@ -119,6 +121,21 @@ public class UserService implements IUserService {
         return user;
     }
 
+    public User edit(User user, String pastUsername) {
+        User dbUser = findUserByUsername(pastUsername);
+        dbUser.setFullName(user.getFullName());
+        dbUser.setEmail(user.getEmail());
+        dbUser.setPhone(user.getPhone());
+        dbUser.setUserGender(user.getUserGender());
+        dbUser.setBirthDate(user.getBirthDate());
+        dbUser.setUsername(user.getUsername());
+        dbUser.setWebSite(user.getWebSite());
+        dbUser.setBio(user.getBio());
+        log.info("Try to save updated user: " + pastUsername);
+        return userRepository.save(dbUser);
+    }
+
+    //TODO: Nepotrebna metoda?
     public User updateUser(User user){
         User dbUser = userRepository.findByUsername(user.getUsername());
         if(dbUser != null){
@@ -159,6 +176,5 @@ public class UserService implements IUserService {
 
         return user;
     }
-
 
 }

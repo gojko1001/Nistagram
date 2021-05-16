@@ -1,28 +1,26 @@
 package com.xws.nistagrammonolith.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
+@Data
 public class Role {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
     @ManyToMany(mappedBy = "roles")
     private Collection<UserCredentials> users;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "roles_permission",
-               joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id"))
     private Collection<Permission> permissions;
 }

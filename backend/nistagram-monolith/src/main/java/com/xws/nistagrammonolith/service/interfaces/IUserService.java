@@ -18,4 +18,8 @@ public interface IUserService {
     String verifyAccount(String username);
 
     User findUserByEmail(String email);
+
+    User updateUser(User user);
+
+    User edit(User user, String pastUsername);
 }

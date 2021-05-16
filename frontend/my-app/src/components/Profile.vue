@@ -5,7 +5,8 @@
             <span><span class="fullName">{{user.fullName}}</span><br>
                   @{{user.username}} <br>
                   {{user.bio}}<br>
-                  <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
+                  <a :href="'//' + user.webSite">{{user.webSite}}</a>
+                  <b-link href="/edit_profile">Edit profile</b-link><hr>
             </span>
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  0 Posts</b-btn> <br>
