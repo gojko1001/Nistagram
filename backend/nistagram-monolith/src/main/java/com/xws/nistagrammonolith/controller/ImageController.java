@@ -12,6 +12,7 @@ import com.xws.nistagrammonolith.service.interfaces.ITagService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +69,6 @@ public class ImageController {
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
         String filePath = new File("").getAbsolutePath();
         filePath = filePath.concat("/" + uploadDir + "/");
-
         for(Image image: userImages){
             ImageBytesDto temp = new ImageBytesDto();
             temp.setId(image.getId());
@@ -81,7 +81,7 @@ public class ImageController {
             }
             imageBytesDtos.add(temp);
         }
-        return ResponseEntity.ok(imageBytesDtos);
+        return new ResponseEntity(imageBytesDtos, HttpStatus.OK);
     }
 
 }

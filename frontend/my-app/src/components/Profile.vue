@@ -21,7 +21,11 @@
             </div>
             <div id="posts">
                 <b-tabs content-class="mt-3" fill>
-                    <b-tab title="Grid" active><p>Grided view</p></b-tab>
+                    <b-tab title="Grid" active>
+                        <div style="margin-top:20px; margin-left:100px" v-for="(img,i) in info" :key="i">
+                            <img v-bind:src="img" width="400" height="400">
+                        </div>
+                    </b-tab>
                     <b-tab title="List"><p>Single image view</p></b-tab>
                     <b-tab title="Tagged photos"><p>Photos user is tagged on</p></b-tab>
                 </b-tabs>
@@ -29,6 +33,8 @@
         </div>
     </div>
 </template>
+
+
 
 <script>
 import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
@@ -38,51 +44,52 @@ export default {
     data(){
         return{
             user: '',
-            imagesByte:[{
-                image:[]
-            }],
-            username:''
+            username:'',
+            info: [],
         }
     },
     mounted: function(){
         this.username = getEmailFromToken();
-        this.axios.get(USER_PATH + '/' + this.username, {
-        headers:{
-            Authorization: "Bearer " + localStorage.getItem('JWT'),
-        }
-        })
-        .then(response => {
-                            this.user = response.data;
-                            console.log(response.data);
-        })
-        .catch(error => {
-                            if(!error.response){
-                                this.makeToast(SERVER_NOT_RESPONDING, "warning")
-                                return
-                            }
-                            window.location.href = '/home'
-                            console.error(error);
-        })
+        this.axios.get(USER_PATH + '/' + this.username, {   headers:{
+                                                                Authorization: "Bearer " + localStorage.getItem('JWT'),
+                                                            }                                          
+            }).then(response => {
+                                this.user = response.data;
+                                console.log(response.data);
+            }).catch(error => { if(!error.response) {
+                                    this.makeToast(SERVER_NOT_RESPONDING, "warning");
+                                    return
+                                }
+                                window.location.href = '/home'
+            })
         this.axios.get('/image/profile/' + this.username)
-                    .then(response => { console.log(response);                            
+                    .then(response => { console.log(response.data);   
+                                        console.log(response.data.length);
+                                        for(let i=0; i< response.data.length; i++){
+                                            this.info[i] = 'data:image/jpeg;base64,' + response.data[i].imageBytes;
+                                            console.log(response.data[i].imageBytes)
+                                        }  
                     }).catch(error => { console.log(error);
                                         this.makeToast("Error occurred.", "danger");
-                                    }); 
+            }); 
     },
     methods:{
         makeToast(message, variant) {
-        this.$bvToast.toast(message, {
-                            title: `Nistagram`,
-                            autoHideDelay: 5000,
-                            variant: variant,
-                            toaster: 'b-toaster-bottom-right',
-                            solid: true,
-                            appendToast: false
-                          })
-        }
+            this.$bvToast.toast(message, {
+                                title: `Nistagram`,
+                                autoHideDelay: 5000,
+                                variant: variant,
+                                toaster: 'b-toaster-bottom-right',
+                                solid: true,
+                                appendToast: false
+                            })
+        },
     }
 }
 </script>
+
+
+
 <style scoped>
     #userInfo{
         display: inline-block;
