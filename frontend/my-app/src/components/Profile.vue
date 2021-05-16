@@ -21,28 +21,33 @@
             </div>
             <div id="posts">
                 <b-tabs content-class="mt-3" fill>
-                    <b-tab title="Grid" active>
-                        <div style="margin-top:20px; margin-left:100px;" v-for="(img,i) in info" :key="i">
+                    <b-tab title="Photos" active>
+                        <div v-for="(img,i) in info" :key="i">
                             <b-card
                                 tag="article"
-                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)"
-                                class="mb-2"
-                            >
-                            <h4>@{{img.username}}</h4>
-                            <p style="color:blue">{{img.location.name}}</p>
-                            <keep-alive>
-                                <img v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                            </keep-alive>
-                            <b-card-text>{{img.description}}<br>
-                            <span v-for="(tag,i) in img.tags" :key="i">
-                                #{{tag.name}}
-                            </span>
-                            </b-card-text>
-                         </b-card>
-                            
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
+                                class="mb-2">
+                                <h4>@{{img.username}}</h4>
+                                <p style="color:blue">{{img.location.name}}</p>
+                                <keep-alive>
+                                    <img v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                </keep-alive>
+                                <br>
+                                <button class="heart inter">
+                                <i class="fas fa-heart"></i>
+                                </button>
+                                <button class="comment inter">
+                                <i class="far fa-comment"></i>
+                                </button>
+                                <b-card-text><span><b>{{img.username}}:  </b></span>{{img.description}}<br>
+                                <span v-for="(tag,i) in img.tags" :key="i">
+                                    #{{tag.name}}
+                                </span>
+                                </b-card-text>
+                            </b-card>              
                         </div>
                     </b-tab>
-                    <b-tab title="List"><p>Single image view</p></b-tab>
+                    <!--<b-tab title="List"><p>Single image view</p></b-tab>-->
                     <b-tab title="Tagged photos"><p>Photos user is tagged on</p></b-tab>
                 </b-tabs>
             </div>
@@ -137,5 +142,14 @@ export default {
         border-left: 2px solid rgb(131, 131, 131);
         height: 400px;
         display: inline-block;
+    }
+    .inter{
+    color:black;
+    font-size: 25px;
+    background: transparent;
+    border: none;
+    }
+    .heart:hover{
+    color:red;
     }
 </style>
