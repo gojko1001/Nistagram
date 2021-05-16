@@ -72,6 +72,37 @@ public class ImageController {
         for(Image image: userImages){
             ImageBytesDto temp = new ImageBytesDto();
             temp.setId(image.getId());
+            temp.setUsername(image.getUsername());
+            temp.setDescription(image.getDescription());
+            temp.setLocation(image.getLocation());
+            temp.setTags(image.getTags());
+            temp.setImageBytes(new ArrayList<>());
+            File in = new File(filePath + image.getFileName());
+            try {
+                temp.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageBytesDtos.add(temp);
+        }
+        return new ResponseEntity(imageBytesDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/discover/{username}")
+    public ResponseEntity getDiscoverImages(@PathVariable("username") String username){
+        List<Image> discoverImages = imageRepository.findAll();
+        // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
+        // TODO: clean code
+        List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath.concat("/" + uploadDir + "/");
+        for(Image image: discoverImages){
+            ImageBytesDto temp = new ImageBytesDto();
+            temp.setId(image.getId());
+            temp.setUsername(image.getUsername());
+            temp.setDescription(image.getDescription());
+            temp.setLocation(image.getLocation());
+            temp.setTags(image.getTags());
             temp.setImageBytes(new ArrayList<>());
             File in = new File(filePath + image.getFileName());
             try {

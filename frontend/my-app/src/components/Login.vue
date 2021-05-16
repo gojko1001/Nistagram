@@ -45,7 +45,7 @@ export default {
           .then(response => { console.log(response);
                               this.makeToast("User has been logged in successfully.", "success");
                               saveToken(response.data);
-                              window.location.href = "/home";
+                              window.location.href = "/discover";
                             })
           .catch(error => { console.log(error);
                             if(!error.response)

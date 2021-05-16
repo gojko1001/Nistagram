@@ -22,8 +22,24 @@
             <div id="posts">
                 <b-tabs content-class="mt-3" fill>
                     <b-tab title="Grid" active>
-                        <div style="margin-top:20px; margin-left:100px" v-for="(img,i) in info" :key="i">
-                            <img v-bind:src="img" width="400" height="400">
+                        <div style="margin-top:20px; margin-left:100px;" v-for="(img,i) in info" :key="i">
+                            <b-card
+                                tag="article"
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)"
+                                class="mb-2"
+                            >
+                            <h4>@{{img.username}}</h4>
+                            <p style="color:blue">{{img.location.name}}</p>
+                            <keep-alive>
+                                <img v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                            </keep-alive>
+                            <b-card-text>{{img.description}}<br>
+                            <span v-for="(tag,i) in img.tags" :key="i">
+                                #{{tag.name}}
+                            </span>
+                            </b-card-text>
+                         </b-card>
+                            
                         </div>
                     </b-tab>
                     <b-tab title="List"><p>Single image view</p></b-tab>
@@ -63,13 +79,11 @@ export default {
                                 window.location.href = '/home'
             })
         this.axios.get('/image/profile/' + this.username)
-                    .then(response => { console.log(response.data);   
-                                        console.log(response.data.length);
+                    .then(response => { this.info = response.data;
                                         for(let i=0; i< response.data.length; i++){
-                                            this.info[i] = 'data:image/jpeg;base64,' + response.data[i].imageBytes;
-                                            console.log(response.data[i].imageBytes)
+                                            this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes;  
                                         }  
-                    }).catch(error => { console.log(error);
+                    }).catch(error => { console.log(error.message);
                                         this.makeToast("Error occurred.", "danger");
             }); 
     },
