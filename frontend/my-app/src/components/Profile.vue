@@ -5,7 +5,7 @@
             <span><span class="fullName">{{user.fullName}}</span><br>
                   @{{user.username}} <br>
                   {{user.bio}}<br>
-                  <a :href="'//' + user.webSite">{{user.webSite}}</a>
+                  <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
                   <b-link href="/edit_profile">Edit profile</b-link><hr>
             </span>
             <span>

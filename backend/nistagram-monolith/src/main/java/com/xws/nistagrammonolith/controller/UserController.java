@@ -43,6 +43,7 @@ public class UserController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('GET_USER')")
     public User edit(@RequestBody UserDto userDto){
         log.info("Try to edit user: " + userDto.getPastUsername());
         return userService.edit(UserMapper.mapUserDtoToUser(userDto), userDto.getPastUsername());
