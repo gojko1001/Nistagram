@@ -1,5 +1,6 @@
 <template>
     <div id="discoverPage">
+      <br>
         <div v-for="(img,i) in info" :key="i">
           <b-card
               tag="article"
@@ -22,6 +23,11 @@
                 #{{tag.name}}
             </span>
             </b-card-text>
+            <hr>
+            <span v-for="(comm,i) in img.comments" :key="i">
+                <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+            </span>
+            <br>
           </b-card>              
         </div>
         <a href="/postimage" class="float">

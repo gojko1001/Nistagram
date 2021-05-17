@@ -44,6 +44,11 @@
                                 <span v-for="(tag,i) in img.tags" :key="i">
                                     #{{tag.name}}
                                 </span>
+                                <hr>
+                                <span v-for="(comm,i) in img.comments" :key="i">
+                                    <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                                </span>
+                                <br>
                                 </b-card-text>
                             </b-card>              
                         </div>

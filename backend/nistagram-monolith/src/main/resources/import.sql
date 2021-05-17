@@ -144,9 +144,9 @@ insert into location(name) values ("Pacific Ocean");
     insert into comment (text, username) values ("meni black widow", "maja")
     insert into image_comments (image_id, comments_id) values (6, 8);
     insert into comment (text, username) values ("alo spajdermen je zakon", "gojko")
-    insert into image_comments (image_id, comments_id) values (6, 8);
+    insert into image_comments (image_id, comments_id) values (6, 9);
     insert into comment (text, username) values ("iron man ljudii", "tasa")
-    insert into image_comments (image_id, comments_id) values (6, 8);
+    insert into image_comments (image_id, comments_id) values (6, 10);
 -----
 
 
