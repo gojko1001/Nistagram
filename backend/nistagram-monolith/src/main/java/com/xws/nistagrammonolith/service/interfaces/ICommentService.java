@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface ICommentService {
     List<Comment> getAllByPost(Long id);
-    Comment create(Comment comment);
-    CreateCommentDto createCommentOnPost(CreateCommentDto createCommentDto);
+    Comment createCommentOnPost(CreateCommentDto createCommentDto);
 }

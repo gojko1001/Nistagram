@@ -63,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userCredentials/login").permitAll()
                 .antMatchers("/user/add").permitAll()
                 .antMatchers("/tag").permitAll()
+                .antMatchers("/comment").permitAll()
                 .antMatchers("/location").permitAll()
                 .antMatchers("/image").permitAll()
                 .antMatchers("/image/profile/{username}").permitAll()
@@ -81,6 +82,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/userCredentials/**", "/tag", "/location", "/image/**");
-        web.ignoring().antMatchers(HttpMethod.POST, "/user/add", "/userCredentials/login", "/image", "/image/info");
+        web.ignoring().antMatchers(HttpMethod.POST, "/user/add", "/userCredentials/login", "/image", "/image/info", "/comment");
     }
 }

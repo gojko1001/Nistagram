@@ -104,7 +104,7 @@ insert into location(name) values ("Pacific Ocean");
     insert into image_tags (image_id, tags_id) values (2, 4);
     insert into image_tags (image_id, tags_id) values (2, 8);
     -- Maja's posts
-    insert into image (description, file_name, username, location_id) values ("Ko zivi u ananusu nadnu mora?", "spongebob1.jpg", "maja", 7);
+    insert into image (description, file_name, username, location_id) values ("Ko zivi u ananusu na dnu mora?", "spongebob1.jpg", "maja", 7);
     insert into image_tags (image_id, tags_id) values (3, 9);
     insert into image_tags (image_id, tags_id) values (3, 2);
     insert into image_tags (image_id, tags_id) values (3, 10);
@@ -125,6 +125,32 @@ insert into location(name) values ("Pacific Ocean");
     insert into image_tags (image_id, tags_id) values (7, 7);
     insert into image_tags (image_id, tags_id) values (7, 8);
 -----
+
+-- COMMENTS
+    insert into comment (text, username) values ("bla bla bla komentar", "maja")
+    insert into image_comments (image_id, comments_id) values (1, 1);
+    insert into comment (text, username) values ("pikacuu mi je omiljen pokemon!!", "tasa")
+    insert into image_comments (image_id, comments_id) values (1, 2);
+    insert into comment (text, username) values ("gojko radi projekat", "tasa")
+    insert into image_comments (image_id, comments_id) values (2, 3);
+    insert into comment (text, username) values ("sundjer bob kockalone haha", "masa")
+    insert into image_comments (image_id, comments_id) values (3, 4);
+    insert into comment (text, username) values ("BALONCICI BALONCICI", "tasa")
+    insert into image_comments (image_id, comments_id) values (3, 5);
+    insert into comment (text, username) values ("majica vrednica", "gojko")
+    insert into image_comments (image_id, comments_id) values (5, 6);
+    insert into comment (text, username) values ("maja radi logovanje preko drustvenih mreza vuhuuu", "masa")
+    insert into image_comments (image_id, comments_id) values (5, 7);
+    insert into comment (text, username) values ("meni black widow", "maja")
+    insert into image_comments (image_id, comments_id) values (6, 8);
+    insert into comment (text, username) values ("alo spajdermen je zakon", "gojko")
+    insert into image_comments (image_id, comments_id) values (6, 8);
+    insert into comment (text, username) values ("iron man ljudii", "tasa")
+    insert into image_comments (image_id, comments_id) values (6, 8);
+-----
+
+
+
 
 
 

@@ -24,12 +24,7 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public Comment create(Comment comment) {
-        return commentRepository.save(comment);
-    }
-
-    @Override
-    public CreateCommentDto createCommentOnPost(CreateCommentDto createCommentDto) {
+    public Comment createCommentOnPost(CreateCommentDto createCommentDto) {
         Comment comment = new Comment();
         comment.setUsername(createCommentDto.getUsername());
         comment.setText(createCommentDto.getText());
@@ -38,7 +33,7 @@ public class CommentService implements ICommentService {
         List<Comment> comments = image.getComments();
         comments.add(comment);
         imageService.create(image);
-        return null;
+        return comment;
     }
 
 }

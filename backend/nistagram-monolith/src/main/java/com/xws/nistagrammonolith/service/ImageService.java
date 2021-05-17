@@ -68,6 +68,7 @@ public class ImageService implements IImageService {
                 temp.setDescription(image.getDescription());
                 temp.setLocation(image.getLocation());
                 temp.setTags(image.getTags());
+                temp.setComments(image.getComments());
                 temp.setImageBytes(new ArrayList<>());
                 File in = new File(filePath + image.getFileName());
                 try {
