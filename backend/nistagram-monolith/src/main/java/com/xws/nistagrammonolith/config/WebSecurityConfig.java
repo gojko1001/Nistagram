@@ -66,6 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/comment").permitAll()
                 .antMatchers("/location").permitAll()
                 .antMatchers("/image").permitAll()
+                .antMatchers("/image/{id}").permitAll()
                 .antMatchers("/image/profile/{username}").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()

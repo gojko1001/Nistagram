@@ -18,16 +18,17 @@
             <button class="comment inter">
               <i class="far fa-comment"></i>
             </button>
-            <b-card-text><span><b>{{img.username}}:  </b></span>{{img.description}}<br>
-            <span v-for="(tag,i) in img.tags" :key="i">
-                #{{tag.name}}
-            </span>
+            <b-card-text>
+              <span><b>{{img.username}}:  </b></span>{{img.description}}
+              <br>
+              <span v-for="(tag,t) in img.tags" :key="t">
+                  #{{tag.name}}
+              </span>
             </b-card-text>
             <hr>
-            <span v-for="(comm,i) in img.comments" :key="i">
+            <span v-for="(comm,c) in img.comments" :key="c">
                 <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
             </span>
-            <br>
           </b-card>              
         </div>
         <a href="/postimage" class="float">

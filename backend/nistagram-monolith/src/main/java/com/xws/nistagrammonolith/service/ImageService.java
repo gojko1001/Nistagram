@@ -2,6 +2,7 @@ package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
+import com.xws.nistagrammonolith.controller.mapping.ImageMapper;
 import com.xws.nistagrammonolith.domain.Image;
 import com.xws.nistagrammonolith.domain.Location;
 import com.xws.nistagrammonolith.repository.IImageRepository;
@@ -56,28 +57,38 @@ public class ImageService implements IImageService {
     }
 
     @Override
-    public List<ImageBytesDto> intoImageBytesDto(List<Image> images){
+    public List<ImageBytesDto> getImagesFiles(List<Image> images){
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
         if(images != null){
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/" + uploadDir + "/");
             for(Image image: images){
-                ImageBytesDto temp = new ImageBytesDto();
-                temp.setId(image.getId());
-                temp.setUsername(image.getUsername());
-                temp.setDescription(image.getDescription());
-                temp.setLocation(image.getLocation());
-                temp.setTags(image.getTags());
-                temp.setComments(image.getComments());
-                temp.setImageBytes(new ArrayList<>());
-                File in = new File(filePath + image.getFileName());
-                try {
-                    temp.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                imageBytesDtos.add(temp);
+                imageBytesDtos.add(imageFile(image, filePath));
             }
+        }
+        return imageBytesDtos;
+    }
+
+    @Override
+    public ImageBytesDto getImageFileById(Long id){
+        Image image = imageRepository.findImageById(id);
+        ImageBytesDto imageBytesDtos = new ImageBytesDto();
+        if(image != null){
+            String filePath = new File("").getAbsolutePath();
+            filePath = filePath.concat("/" + uploadDir + "/");
+            imageBytesDtos = imageFile(image, filePath);
+        }
+        return imageBytesDtos;
+    }
+
+    @Override
+    public ImageBytesDto imageFile(Image image, String filePath){
+        ImageBytesDto imageBytesDtos = ImageMapper.mapImageToImageBytesDto(image);
+        File in = new File(filePath + image.getFileName());
+        try {
+            imageBytesDtos.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return imageBytesDtos;
     }
@@ -86,5 +97,7 @@ public class ImageService implements IImageService {
     public Image getById(Long id){
         return imageRepository.findImageById(id);
     }
+
+
 
 }

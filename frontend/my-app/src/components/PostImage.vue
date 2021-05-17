@@ -21,7 +21,6 @@
                 placeholder="Enter new tags separated by space"
             ></b-form-tags>
           <br>
-          <!-- TODO: location -->
           <select multiple="false" v-model="form.location">
             <option v-for="(loc,i) in locations" :key="i">{{loc.name}}</option>
           </select>

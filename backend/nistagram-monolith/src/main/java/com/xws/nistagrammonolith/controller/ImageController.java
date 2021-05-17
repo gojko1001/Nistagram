@@ -45,7 +45,7 @@ public class ImageController {
     @GetMapping("/profile/{username}")
     public ResponseEntity getImagesByUsername(@PathVariable("username") String username){
         List<Image> userImages = imageRepository.findImagesByUsername(username);
-        return new ResponseEntity(imageService.intoImageBytesDto(userImages), HttpStatus.OK);
+        return new ResponseEntity(imageService.getImagesFiles(userImages), HttpStatus.OK);
     }
 
 
@@ -54,7 +54,12 @@ public class ImageController {
         List<Image> discoverImages = imageRepository.findAll();
         // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
         // TODO: clean code
-        return new ResponseEntity(imageService.intoImageBytesDto(discoverImages), HttpStatus.OK);
+        return new ResponseEntity(imageService.getImagesFiles(discoverImages), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getImageById(@PathVariable("id") Long id){
+        return new ResponseEntity(imageService.getImageFileById(id), HttpStatus.OK);
     }
 
 }
