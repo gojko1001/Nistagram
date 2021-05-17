@@ -12,4 +12,5 @@ public interface IImageService {
     List<Image> getUserImages(String username);
     Image saveImageInfo(ImageDto imageDto);
     List<ImageBytesDto> intoImageBytesDto(List<Image> images);
+    Image getById(Long id);
 }

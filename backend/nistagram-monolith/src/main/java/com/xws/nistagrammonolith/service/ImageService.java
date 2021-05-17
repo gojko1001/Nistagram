@@ -81,4 +81,9 @@ public class ImageService implements IImageService {
         return imageBytesDtos;
     }
 
+    @Override
+    public Image getById(Long id){
+        return imageRepository.findImageById(id);
+    }
+
 }
