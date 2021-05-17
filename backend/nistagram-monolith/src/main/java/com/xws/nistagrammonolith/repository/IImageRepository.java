@@ -11,4 +11,5 @@ public interface IImageRepository extends JpaRepository<Image, Long> {
     Image save(Image image);
     List<Image> findAll();
     List<Image> findImagesByUsername(String username);
+    Image findImageById(Long id);
 }

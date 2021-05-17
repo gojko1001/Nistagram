@@ -21,7 +21,7 @@ public class Image {
     private String description;
     @OneToOne
     private Location location;
-    @OneToMany
+    @ManyToMany
     private List<Tag> tags;
     @OneToMany
     private List<Comment> comments;        //TODO: fale like, dislike, favorites, album
