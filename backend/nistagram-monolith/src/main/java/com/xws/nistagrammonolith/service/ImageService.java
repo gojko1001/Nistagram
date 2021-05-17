@@ -3,7 +3,7 @@ package com.xws.nistagrammonolith.service;
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.controller.mapping.ImageMapper;
-import com.xws.nistagrammonolith.domain.Image;
+import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.domain.Location;
 import com.xws.nistagrammonolith.repository.IImageRepository;
 import com.xws.nistagrammonolith.service.interfaces.IImageService;
@@ -32,38 +32,41 @@ public class ImageService implements IImageService {
     private static String uploadDir = "user-photos";
 
     @Override
-    public List<Image> getAll() {
+    public List<Post> getAll() {
         return null;
     }
 
     @Override
-    public Image create(Image image) {
-        return imageRepository.save(image);
+    public Post create(Post post) {
+        return imageRepository.save(post);
     }
 
     @Override
-    public List<Image> getUserImages(String username){ return imageRepository.findImagesByUsername(username);}
+    public List<Post> getUserImages(String username){ return imageRepository.findImagesByUsername(username);}
 
     @Override
-    public Image saveImageInfo(ImageDto imageDto){
-        Image image = new Image();
-        image.setFileName(imageDto.getFileName());
-        image.setUsername(imageDto.getUsername());
-        image.setDescription(imageDto.getDescription());
+    public Post saveImageInfo(ImageDto imageDto){
+        Post post = new Post();
+        post.setFileName(imageDto.getFileName());
+        if(imageDto.getFileName().contains(".mp4")){
+            post.setImage(false);
+        }
+        post.setUsername(imageDto.getUsername());
+        post.setDescription(imageDto.getDescription());
         Location location = locationService.findByName(imageDto.getLocationName());
-        image.setLocation(location);
-        image.setTags(tagService.createTags(imageDto.getTags()));
-        return create(image);
+        post.setLocation(location);
+        post.setTags(tagService.createTags(imageDto.getTags()));
+        return create(post);
     }
 
     @Override
-    public List<ImageBytesDto> getImagesFiles(List<Image> images){
+    public List<ImageBytesDto> getImagesFiles(List<Post> posts){
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
-        if(images != null){
+        if(posts != null){
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/" + uploadDir + "/");
-            for(Image image: images){
-                imageBytesDtos.add(imageFile(image, filePath));
+            for(Post post : posts){
+                imageBytesDtos.add(imageFile(post, filePath));
             }
         }
         return imageBytesDtos;
@@ -71,20 +74,20 @@ public class ImageService implements IImageService {
 
     @Override
     public ImageBytesDto getImageFileById(Long id){
-        Image image = imageRepository.findImageById(id);
+        Post post = imageRepository.findImageById(id);
         ImageBytesDto imageBytesDtos = new ImageBytesDto();
-        if(image != null){
+        if(post != null){
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/" + uploadDir + "/");
-            imageBytesDtos = imageFile(image, filePath);
+            imageBytesDtos = imageFile(post, filePath);
         }
         return imageBytesDtos;
     }
 
     @Override
-    public ImageBytesDto imageFile(Image image, String filePath){
-        ImageBytesDto imageBytesDtos = ImageMapper.mapImageToImageBytesDto(image);
-        File in = new File(filePath + image.getFileName());
+    public ImageBytesDto imageFile(Post post, String filePath){
+        ImageBytesDto imageBytesDtos = ImageMapper.mapImageToImageBytesDto(post);
+        File in = new File(filePath + post.getFileName());
         try {
             imageBytesDtos.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
         } catch (IOException e) {
@@ -94,7 +97,7 @@ public class ImageService implements IImageService {
     }
 
     @Override
-    public Image getById(Long id){
+    public Post getById(Long id){
         return imageRepository.findImageById(id);
     }
 

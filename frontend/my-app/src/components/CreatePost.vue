@@ -36,7 +36,7 @@
 <script>
 import { getEmailFromToken } from '../util/token';
 export default {
-  name: 'PostImage',
+  name: 'CreatePost',
   data() {
       return {
         form: {

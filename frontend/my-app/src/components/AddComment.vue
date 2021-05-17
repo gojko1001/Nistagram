@@ -1,39 +1,3 @@
-<!--<template>
-    <div id="addCommentPage">
-      <br>
-        <b-card
-            tag="article"
-            style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
-            class="mb-2">
-        <h4>@{{img.username}}</h4>
-        <p style="color:blue">{{img.location.name}}</p>
-        <keep-alive>
-            <img v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-        </keep-alive>
-        <br>
-        <button class="heart inter">
-            <i class="fas fa-heart"></i>
-        </button>
-        <b-card-text><span><b>{{img.username}}:  </b></span>{{img.description}}<br>
-        <span v-for="(tag,t) in img.tags" :key="t">
-            #{{tag.name}}
-        </span>
-        </b-card-text>
-        <hr>
-        <span v-for="(comm,c) in img.comments" :key="c">
-            <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
-        </span>
-        <br>
-        <b-input-group>
-            <b-form-input placeholder="Add comment"></b-form-input>
-            <b-input-group-append>
-            <b-button variant="outline-dark">Post</b-button>
-            </b-input-group-append>
-        </b-input-group>
-        </b-card>              
-    </div>
-</template>-->
-
 <template>
     <div id="discoverPage">
       <br>
@@ -43,10 +7,11 @@
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
             <h4>@{{img.username}}</h4>
-            <!--<p style="color:blue">{{img.location.name}}</p>-->
-            <keep-alive>
-                <img v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-            </keep-alive>
+            <p style="color:blue">{{img.location.name}}</p>
+            <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+            <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+              The video is not supported by your browser.
+            </video>
             <br>
             <button class="heart inter">
               <i class="fas fa-heart"></i>
@@ -54,7 +19,7 @@
            <b-card-text>
                 <span><b>{{img.username}}:  </b></span>{{img.description}}
                 <br>
-                <span v-for="(tag,t) in img.tags" :key="t">#{{tag.name}}</span>
+                <span v-for="(tag,t) in img.tags" :key="t">#{{tag.name}}  </span>
             </b-card-text>
             <hr>
             <span v-for="(comm,c) in img.comments" :key="c">
@@ -80,11 +45,11 @@ export default {
   name: 'AddComment',
   data(){
         return{
-            user: '',
             username:'',
-            img: {},
+            img: {
+              location:{}
+            },
             postId:'',
-            numPost:0,
             form: {
                 postId: 0,
                 username: '',
@@ -96,9 +61,12 @@ export default {
     this.postId = this.$route.params.id;
     this.axios.get('/image/' + this.postId)
         .then(response => { this.img = response.data;
-                            console.log(this.img);
                             this.numPost = response.data.length;
-                            this.img.imageBytes = 'data:image/jpeg;base64,' + this.img.imageBytes;  
+                            if(this.info.image){
+                              this.info.imageBytes = 'data:image/jpeg;base64,' + this.info.imageBytes; 
+                            }else{
+                              this.info.imageBytes = 'data:video/mp4;base64,' + this.info.imageBytes;
+                            } 
                         })
         .catch(error => { console.log(error);
                             this.makeToast("Error occured. Try again later.", "danger");

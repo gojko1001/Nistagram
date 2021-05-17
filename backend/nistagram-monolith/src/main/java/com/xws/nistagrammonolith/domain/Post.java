@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Image {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,5 +25,7 @@ public class Image {
     private List<Tag> tags;
     @ManyToMany
     private List<Comment> comments;        //TODO: fale like, dislike, favorites, album
+    @Column
+    private boolean isImage = true;
 
 }

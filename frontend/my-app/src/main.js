@@ -17,7 +17,7 @@ import AllUsers from './components/AllUsers'
 import Profile from './components/Profile'
 import Search from './components/Search'
 import Discover from './components/Discover'
-import PostImage from './components/PostImage'
+import CreatePost from './components/CreatePost'
 import EditProfile from './components/EditProfile'
 import AddComment from './components/AddComment'
 
@@ -87,8 +87,8 @@ const router = new VueRouter({
     },
     {
       path: '/postimage',
-      name: 'PostImage',
-      component: PostImage,
+      name: 'CreatePost',
+      component: CreatePost,
     },
     {
       path: '/edit_profile',
