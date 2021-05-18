@@ -18,6 +18,8 @@
       </b-form>
 
       <hr>
+      <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+      <hr>
       <b-link style="font-size:15px" href="/registration">Don't have an account? Sign up</b-link>
       <br>
       <b-link style="font-size:15px" href="/accRecovery">Forgot password?</b-link>
@@ -25,20 +27,54 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login';
 import { saveToken } from "./../util/token"
-import { LOGIN_PATH, SERVER_NOT_RESPONDING } from "./../util/constants"
+import { LOGIN_PATH, SERVER_NOT_RESPONDING, LOGIN_GOOGLE_PATH } from "./../util/constants"
 export default {
   name: 'Login',
+  components: {
+      GoogleLogin
+  },
   data() {
       return {
+        params: {
+            client_id: "1070339341419-s21kkmq518ufq3evcjmt7sgq8mh5kph1.apps.googleusercontent.com"
+        },
+        renderParams: {
+                    width: 250,
+                    height: 50,
+                    longtitle: true
+        },
         form: {
           username: '',
           password: '',
         },
+        user: '',
+        userG: '',
         show: true
       }
   },
   methods:{
+    onSuccess(googleUser) {
+      // This only gets the user information: id, name, imageUrl and email
+      this.userG = googleUser.getBasicProfile();
+      this.user.email = this.userG.getEmail();
+      this.user.name = this.userG.getName();
+      this.axios.post(LOGIN_GOOGLE_PATH, this.user)
+        .then(response => {
+          this.makeToast("User has been logged in successfully.", "success");
+          saveToken(response.data);
+          window.location.href = "/discover";
+        })
+        .catch(error => { console.log(error);
+                            if(!error.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                            else
+                              this.makeToast("Can not sign in with google.", "danger");
+                          })
+
+    },
+    onFailure(){},
     onSubmit() {
         console.log(this.form);
         this.axios.post(LOGIN_PATH, this.form)

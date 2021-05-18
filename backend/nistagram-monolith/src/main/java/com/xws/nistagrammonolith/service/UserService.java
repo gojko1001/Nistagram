@@ -135,6 +135,10 @@ public class UserService implements IUserService {
         return userRepository.save(dbUser);
     }
 
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
     //TODO: Nepotrebna metoda?
     public User updateUser(User user){
         User dbUser = userRepository.findByUsername(user.getUsername());

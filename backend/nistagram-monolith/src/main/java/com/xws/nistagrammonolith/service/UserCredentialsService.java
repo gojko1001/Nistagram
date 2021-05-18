@@ -1,5 +1,6 @@
 package com.xws.nistagrammonolith.service;
 
+import com.xws.nistagrammonolith.controller.dto.LoginGoogleDto;
 import com.xws.nistagrammonolith.controller.dto.ResetPasswordDto;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.domain.BlackList;
@@ -11,6 +12,7 @@ import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.repository.IBlackListRepository;
 import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.security.JwtService;
+import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserCredentialsService implements IUserCredentialsService {
@@ -35,6 +38,8 @@ public class UserCredentialsService implements IUserCredentialsService {
     private JwtService jwtService;
     @Autowired
     private IBlackListRepository blackListRepository;
+    @Autowired
+    private IAuthorityService authorityService;
 
     public UserCredentials create(UserCredentials userCredentials){
         return userCredentialsRepository.save(userCredentials);
@@ -46,6 +51,25 @@ public class UserCredentialsService implements IUserCredentialsService {
             throw new BadRequestException("Username or password is not correct.");
         if(!userCredentials.getVerified())
             throw new InvalidActionException("The account must be verified.");
+        return userCredentials;
+    }
+
+    public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
+        UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail());
+        if(userCredentials == null){
+            userCredentials.setPassword(new Random().toString());
+            userCredentials.setUsername(loginGoogleDto.getEmail().split("@")[0]);
+            userCredentials.setVerified(true);
+            userCredentials.setRoles(authorityService.findByName("ROLE_USER"));
+
+            User user = new User();
+            user.setUsername(userCredentials.getUsername());
+            user.setFullName(loginGoogleDto.getName());
+
+            userService.save(user);
+
+            return create(userCredentials);
+        }
         return userCredentials;
     }
 
