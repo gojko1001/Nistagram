@@ -15,6 +15,7 @@ import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -57,7 +58,9 @@ public class UserCredentialsService implements IUserCredentialsService {
     public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail());
         if(userCredentials == null){
-            userCredentials.setPassword(new Random().toString());
+            userCredentials = new UserCredentials();
+            String encodedPassword = passwordEncoder.encode(RandomString.make(10));
+            userCredentials.setPassword(encodedPassword);
             userCredentials.setUsername(loginGoogleDto.getEmail().split("@")[0]);
             userCredentials.setVerified(true);
             userCredentials.setRoles(authorityService.findByName("ROLE_USER"));
@@ -65,8 +68,11 @@ public class UserCredentialsService implements IUserCredentialsService {
             User user = new User();
             user.setUsername(userCredentials.getUsername());
             user.setFullName(loginGoogleDto.getName());
+            user.setEmail(loginGoogleDto.getEmail());
 
             userService.save(user);
+
+            emailService.resetPassword(user);
 
             return create(userCredentials);
         }

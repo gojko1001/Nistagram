@@ -49,22 +49,26 @@ export default {
           username: '',
           password: '',
         },
-        user: '',
-        userG: '',
+        user: {
+          name: '',
+          email: '',
+        },
+        userGoogle: '',
         show: true
       }
   },
   methods:{
     onSuccess(googleUser) {
       // This only gets the user information: id, name, imageUrl and email
-      this.userG = googleUser.getBasicProfile();
-      this.user.email = this.userG.getEmail();
-      this.user.name = this.userG.getName();
+      this.userGoogle = googleUser.getBasicProfile();
+      this.user.name = this.userGoogle.Ue;
+      this.user.email = this.userGoogle.ou;
       this.axios.post(LOGIN_GOOGLE_PATH, this.user)
         .then(response => {
           this.makeToast("User has been logged in successfully.", "success");
           saveToken(response.data);
           window.location.href = "/discover";
+          this.makeToast("Check email and restart password.", "info");
         })
         .catch(error => { console.log(error);
                             if(!error.response)
