@@ -1,6 +1,7 @@
 // Paths
 export const USER_CREDENTIALS_PATH = "/userCredentials"
 export const LOGIN_PATH = USER_CREDENTIALS_PATH + "/login"
+export const LOGIN_GOOGLE_PATH = USER_CREDENTIALS_PATH + "/login_google"
 export const RESET_PASS_PATH = USER_CREDENTIALS_PATH + "/reset_password"
 export const VERIFY_ACC_PATH = USER_CREDENTIALS_PATH + "/verify"
 
