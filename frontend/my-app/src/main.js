@@ -17,8 +17,9 @@ import AllUsers from './components/AllUsers'
 import Profile from './components/Profile'
 import Search from './components/Search'
 import Discover from './components/Discover'
-import PostImage from './components/PostImage'
+import CreatePost from './components/CreatePost'
 import EditProfile from './components/EditProfile'
+import AddComment from './components/AddComment'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -86,13 +87,18 @@ const router = new VueRouter({
     },
     {
       path: '/postimage',
-      name: 'PostImage',
-      component: PostImage,
+      name: 'CreatePost',
+      component: CreatePost,
     },
     {
       path: '/edit_profile',
       name: 'EditProfile',
       component: EditProfile,
+    },
+    {
+      path: '/comment/:id',
+      name: 'AddComment',
+      component: AddComment
     },
   ]
 });

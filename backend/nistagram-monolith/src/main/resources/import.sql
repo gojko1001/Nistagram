@@ -95,36 +95,62 @@ insert into location(name) values ("Pacific Ocean");
 
 --POSTS
     -- Gojko's posts
-    insert into image (description, file_name, username, location_id) values ("pokemone biram tebe", "pokemon1.png", "gojko", 3);
-    insert into image_tags (image_id, tags_id) values (1, 1);
-    insert into image_tags (image_id, tags_id) values (1, 2);
-    insert into image_tags (image_id, tags_id) values (1, 3);
-    insert into image (description, file_name, username, location_id) values ("ovo je squirtle", "pokemon2.jpg", "gojko", 6);
-    insert into image_tags (image_id, tags_id) values (2, 1);
-    insert into image_tags (image_id, tags_id) values (2, 4);
-    insert into image_tags (image_id, tags_id) values (2, 8);
+    insert into post (description, file_name, username, location_id, is_image) values ("pokemone biram tebe", "pokemon1.png", "gojko", 3, true);
+    insert into post_tags (post_id, tags_id) values (1, 1);
+    insert into post_tags (post_id, tags_id) values (1, 2);
+    insert into post_tags (post_id, tags_id) values (1, 3);
+    insert into post (description, file_name, username, location_id, is_image) values ("ovo je squirtle", "pokemon2.jpg", "gojko", 6, true);
+    insert into post_tags (post_id, tags_id) values (2, 1);
+    insert into post_tags (post_id, tags_id) values (2, 4);
+    insert into post_tags (post_id, tags_id) values (2, 8);
     -- Maja's posts
-    insert into image (description, file_name, username, location_id) values ("Ko zivi u ananusu nadnu mora?", "spongebob1.jpg", "maja", 7);
-    insert into image_tags (image_id, tags_id) values (3, 9);
-    insert into image_tags (image_id, tags_id) values (3, 2);
-    insert into image_tags (image_id, tags_id) values (3, 10);
-    insert into image (description, file_name, username, location_id) values ("moji drugariiiiii", "spongebob2.jpg", "maja", 7);
-    insert into image_tags (image_id, tags_id) values (4, 4);
-    insert into image_tags (image_id, tags_id) values (4, 7);
-    insert into image_tags (image_id, tags_id) values (4, 9);
-    insert into image (description, file_name, username, location_id) values ("pcelica maja", "maya1.jpg", "maja", 1);
-    insert into image_tags (image_id, tags_id) values (5, 4);
-    insert into image_tags (image_id, tags_id) values (5, 6);
+    insert into post (description, file_name, username, location_id, is_image) values ("Ko zivi u ananusu na dnu mora?", "spongebob1.jpg", "maja", 7, true);
+    insert into post_tags (post_id, tags_id) values (3, 9);
+    insert into post_tags (post_id, tags_id) values (3, 2);
+    insert into post_tags (post_id, tags_id) values (3, 10);
+    insert into post (description, file_name, username, location_id, is_image) values ("moji drugariiiiii", "spongebob2.jpg", "maja", 7, true);
+    insert into post_tags (post_id, tags_id) values (4, 4);
+    insert into post_tags (post_id, tags_id) values (4, 7);
+    insert into post_tags (post_id, tags_id) values (4, 9);
+    insert into post (description, file_name, username, location_id, is_image) values ("pcelica maja", "maya1.jpg", "maja", 1, true);
+    insert into post_tags (post_id, tags_id) values (5, 4);
+    insert into post_tags (post_id, tags_id) values (5, 6);
     -- Tasa's posts
-    insert into image (description, file_name, username, location_id) values ("Pisite ispod koji je vas omiljeni marvelov lik :)", "marvel1.jpg", "tasa", 4);
-    insert into image_tags (image_id, tags_id) values (6, 11);
-    insert into image_tags (image_id, tags_id) values (6, 7);
-    insert into image_tags (image_id, tags_id) values (6, 8);
+    insert into post (description, file_name, username, location_id, is_image) values ("Pisite ispod koji je vas omiljeni marvelov lik :)", "marvel1.jpg", "tasa", 4, true);
+    insert into post_tags (post_id, tags_id) values (6, 11);
+    insert into post_tags (post_id, tags_id) values (6, 7);
+    insert into post_tags (post_id, tags_id) values (6, 8);
     -- Masa's posts
-    insert into image (description, file_name, username, location_id) values ("naruto, sakura, saske", "naruto1.jpeg", "masa", 5);
-    insert into image_tags (image_id, tags_id) values (7, 7);
-    insert into image_tags (image_id, tags_id) values (7, 8);
+    insert into post (description, file_name, username, location_id, is_image) values ("naruto, sakura, saske", "naruto1.jpeg", "masa", 5, true);
+    insert into post_tags (post_id, tags_id) values (7, 7);
+    insert into post_tags (post_id, tags_id) values (7, 8);
 -----
+
+-- COMMENTS
+    insert into comment (text, username) values ("bla bla bla komentar", "maja")
+    insert into post_comments (post_id, comments_id) values (1, 1);
+    insert into comment (text, username) values ("pikacuu mi je omiljen pokemon!!", "tasa")
+    insert into post_comments (post_id, comments_id) values (1, 2);
+    insert into comment (text, username) values ("gojko radi projekat", "tasa")
+    insert into post_comments (post_id, comments_id) values (2, 3);
+    insert into comment (text, username) values ("sundjer bob kockalone haha", "masa")
+    insert into post_comments (post_id, comments_id) values (3, 4);
+    insert into comment (text, username) values ("BALONCICI BALONCICI", "tasa")
+    insert into post_comments (post_id, comments_id) values (3, 5);
+    insert into comment (text, username) values ("majica vrednica", "gojko")
+    insert into post_comments (post_id, comments_id) values (5, 6);
+    insert into comment (text, username) values ("maja radi logovanje preko drustvenih mreza vuhuuu", "masa")
+    insert into post_comments (post_id, comments_id) values (5, 7);
+    insert into comment (text, username) values ("meni black widow", "maja")
+    insert into post_comments (post_id, comments_id) values (6, 8);
+    insert into comment (text, username) values ("alo spajdermen je zakon", "gojko")
+    insert into post_comments (post_id, comments_id) values (6, 9);
+    insert into comment (text, username) values ("iron man ljudii", "tasa")
+    insert into post_comments (post_id, comments_id) values (6, 10);
+-----
+
+
+
 
 
 

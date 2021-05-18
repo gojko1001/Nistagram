@@ -18,5 +18,6 @@ public class ImageBytesDto {
     private Location location;
     private List<Tag> tags;
     private List<Comment> comments;
+    private boolean isImage;
     private List<byte[]> imageBytes;
 }

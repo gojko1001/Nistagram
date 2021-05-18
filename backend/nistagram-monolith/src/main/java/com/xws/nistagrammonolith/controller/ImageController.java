@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
-import com.xws.nistagrammonolith.domain.Image;
+import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.repository.IImageRepository;
 import com.xws.nistagrammonolith.service.FileUploadUtil;
 import com.xws.nistagrammonolith.service.interfaces.IImageService;
@@ -37,24 +37,29 @@ public class ImageController {
 
 
     @PostMapping("/info")
-    public Image saveImageInfo(@RequestBody ImageDto imageDto){
+    public Post saveImageInfo(@RequestBody ImageDto imageDto){
         return imageService.saveImageInfo(imageDto);
     }
 
 
     @GetMapping("/profile/{username}")
     public ResponseEntity getImagesByUsername(@PathVariable("username") String username){
-        List<Image> userImages = imageRepository.findImagesByUsername(username);
-        return new ResponseEntity(imageService.intoImageBytesDto(userImages), HttpStatus.OK);
+        List<Post> userPosts = imageRepository.findImagesByUsername(username);
+        return new ResponseEntity(imageService.getImagesFiles(userPosts), HttpStatus.OK);
     }
 
 
     @GetMapping("/discover/{username}")
     public ResponseEntity getDiscoverImages(@PathVariable("username") String username){
-        List<Image> discoverImages = imageRepository.findAll();
+        List<Post> discoverPosts = imageRepository.findAll();
         // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
         // TODO: clean code
-        return new ResponseEntity(imageService.intoImageBytesDto(discoverImages), HttpStatus.OK);
+        return new ResponseEntity(imageService.getImagesFiles(discoverPosts), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getImageById(@PathVariable("id") Long id){
+        return new ResponseEntity(imageService.getImageFileById(id), HttpStatus.OK);
     }
 
 }
