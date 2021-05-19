@@ -27,5 +27,7 @@ public class Post {
     private List<Comment> comments;        //TODO: fale like, dislike, favorites, album
     @Column
     private boolean isImage = true;
+    @ManyToMany
+    private List<Like> likes;
 
 }

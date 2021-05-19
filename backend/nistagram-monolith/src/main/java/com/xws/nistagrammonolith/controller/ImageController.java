@@ -4,7 +4,7 @@ import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.repository.IImageRepository;
 import com.xws.nistagrammonolith.service.FileUploadUtil;
-import com.xws.nistagrammonolith.service.interfaces.IImageService;
+import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class ImageController {
     @Autowired
     private IImageRepository imageRepository;
     @Autowired
-    private IImageService imageService;
+    private IPostService imageService;
 
     private static String uploadDir = "user-photos";
 

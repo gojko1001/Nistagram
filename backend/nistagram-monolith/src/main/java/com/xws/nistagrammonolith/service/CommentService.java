@@ -5,7 +5,7 @@ import com.xws.nistagrammonolith.domain.Comment;
 import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.repository.ICommentRepository;
 import com.xws.nistagrammonolith.service.interfaces.ICommentService;
-import com.xws.nistagrammonolith.service.interfaces.IImageService;
+import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class CommentService implements ICommentService {
     @Autowired
     private ICommentRepository commentRepository;
     @Autowired
-    private IImageService imageService;
+    private IPostService imageService;
 
     @Override
     public List<Comment> getAllByPost(Long id) {
@@ -32,7 +32,7 @@ public class CommentService implements ICommentService {
         Post post = imageService.getById(createCommentDto.getPostId());
         List<Comment> comments = post.getComments();
         comments.add(comment);
-        imageService.create(post);
+        imageService.save(post);
         return comment;
     }
 

@@ -69,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/image").permitAll()
                 .antMatchers("/image/{id}").permitAll()
                 .antMatchers("/image/profile/{username}").permitAll()
+                .antMatchers("/like").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Enable CORS layer (WebMvcConfig class)
@@ -84,6 +85,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/userCredentials/**", "/tag", "/location", "/image/**");
-        web.ignoring().antMatchers(HttpMethod.POST, "/user/add", "/userCredentials/login", "/userCredentials//login_google/", "/image", "/image/info", "/comment");
+        web.ignoring().antMatchers(HttpMethod.POST, "/user/add", "/userCredentials/login", "/userCredentials//login_google/", "/image", "/image/info", "/comment", "/like");
     }
 }
