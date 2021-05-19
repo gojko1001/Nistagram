@@ -13,10 +13,11 @@
               The video is not supported by your browser.
             </video>
             <br>
-            <button class="heart inter">
+            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}">
               <i class="fas fa-heart"></i>
             </button>
-            <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter">
+            <span>{{img.numLikes}}</span>
+            <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
               <i class="far fa-comment"></i>
             </router-link>
             <b-card-text>
@@ -49,7 +50,11 @@ export default {
         return{
             user: '',
             username:'',
-            info: [],
+            info: [{
+              numLikes:'',
+              liked: false
+            }],
+            liked: false,
         }
     },
   mounted: function(){
@@ -67,18 +72,24 @@ export default {
                                 window.location.href = '/home'
             })
         this.$nextTick(function () {
-        this.axios.get('/image/discover/' + this.username)
-                    .then(response => { this.info = response.data;
-                                        for(let i=0; i< response.data.length; i++){
-                                            if(this.info[i].image){
-                                              this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
-                                            }else{
-                                              this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
-                                            }  
-                                        }  
-                    }).catch(error => { console.log(error);
-                                        this.makeToast("Error occurred.", "danger");
-            });
+          this.axios.get('/image/discover/' + this.username)
+                      .then(response => { this.info = response.data;
+                                          for(let i=0; i< response.data.length; i++){
+                                              if(this.info[i].image){
+                                                this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
+                                              }else{
+                                                this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
+                                              }
+                                              this.info[i].numLikes = this.info[i].likes.length;
+                                              for(var like of this.info[i].likes){
+                                                if(like.username == this.username){
+                                                    this.info[i].liked = true;
+                                                }
+                                              }
+                                          }  
+                      }).catch(error => { console.log(error);
+                                          this.makeToast("Error occurred.", "danger");
+              });
         })
   },
   methods:{
@@ -120,7 +131,13 @@ export default {
   background: transparent;
   border: none;
 }
-.heart:hover{
-  color:red;
+.link{
+  margin-left: 20px;
+}
+.black {
+  color: black;
+}
+.red {
+  color: red;
 }
 </style>

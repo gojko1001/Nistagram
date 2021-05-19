@@ -166,7 +166,7 @@ insert into location(name) values ("Pacific Ocean");
     insert into post_likes(post_id, likes_id) values (1, 1);
     insert into likes(username) values ("maja");
     insert into post_likes(post_id, likes_id) values (1, 2);
-    insert into likes(username) values ("maja");
+    insert into likes(username) values ("gojko");
     insert into post_likes(post_id, likes_id) values (2, 3);
     insert into likes(username) values ("maja");
     insert into post_likes(post_id, likes_id) values (3, 4);

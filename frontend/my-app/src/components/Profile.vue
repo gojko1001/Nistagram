@@ -35,10 +35,11 @@
                                     The video is not supported by your browser.
                                 </video>
                                 <br>
-                                <button class="heart inter">
-                                <i class="fas fa-heart"></i>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}">
+                                    <i class="fas fa-heart"></i>
                                 </button>
-                                <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter">
+                                <span>{{img.numLikes}}</span>
+                                <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
                                     <i class="far fa-comment"></i>
                                 </router-link>
                                 <b-card-text>
@@ -74,9 +75,13 @@ export default {
         return{
             user: '',
             username:'',
-            info: [],
+            info: [{
+                numLikes:'',
+                liked: false
+            }],
             hideCommenting: true,
             numPost:0,
+            liked: false,
         }
     },
     mounted: function(){
@@ -102,6 +107,12 @@ export default {
                                             }else{
                                               this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
                                             }  
+                                            this.info[i].numLikes = this.info[i].likes.length;
+                                            for(var like of this.info[i].likes){
+                                                if(like.username == this.username){
+                                                    this.info[i].liked = true;
+                                                }
+                                              }
                                         }    
                     }).catch(error => { console.log(error.message);
                                         this.makeToast("Error occurred.", "danger");
@@ -129,47 +140,53 @@ export default {
 
 
 <style scoped>
-    #userInfo{
-        display: inline-block;
-        max-width: 200px;
-        word-wrap: break-word;
-    }
-    .profilePic{
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin: 0 50px 20px auto;
-        display: block;
-    }
-    .fullName{
-        font-size: 1.2rem;
-        font-weight: 800;
-    }
-    .mainBtn{
-        margin: 5px
-    }
-    #userMedia{
-        margin-left: 20px;
-        position: absolute;
-        display: inline-block;
-    }
-    #posts{
-        width: 800px; /* Set width according to window */
-    }
-    .vl {
-        border-left: 2px solid rgb(131, 131, 131);
-        height: 400px;
-        display: inline-block;
-    }
-    .inter{
+#userInfo{
+    display: inline-block;
+    max-width: 200px;
+    word-wrap: break-word;
+}
+.profilePic{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 50px 20px auto;
+    display: block;
+}
+.fullName{
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+.mainBtn{
+    margin: 5px
+}
+#userMedia{
+    margin-left: 20px;
+    position: absolute;
+    display: inline-block;
+}
+#posts{
+    width: 800px; /* Set width according to window */
+}
+.vl {
+    border-left: 2px solid rgb(131, 131, 131);
+    height: 400px;
+    display: inline-block;
+}
+.inter{
     color:black;
     font-size: 25px;
     background: transparent;
     border: none;
     margin-left: 0px;
-    }
-    .heart:hover{
-    color:red;
-    }
+}
+.link{
+  margin-left: 20px;
+}
+.black {
+    color: black;
+}
+.red {
+    color: red;
+}
 </style>

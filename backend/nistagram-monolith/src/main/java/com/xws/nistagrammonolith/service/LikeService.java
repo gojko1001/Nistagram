@@ -33,11 +33,22 @@ public class LikeService implements ILikeService {
         return null;
     }
 
+    //TODO: za sada je nekoriscena na frontu
     @Override
-    public ResponseEntity countLikesOnPost(Long id) {
+    public Integer countLikesOnPost(Long id) {
         Post post = postService.getById(id);
-        if(post == null)
-            return new ResponseEntity("Post doesn't exist.", HttpStatus.BAD_REQUEST);
-        return new ResponseEntity(post.getLikes().size(), HttpStatus.OK);
+        /*if(post == null)
+            return new ResponseEntity("Post doesn't exist.", HttpStatus.BAD_REQUEST);*/
+        return post.getLikes().size();
+    }
+
+    @Override
+    public boolean hasBeenLiked(Long id, String username){
+        Post post = postService.getById(id);
+        for(Like like: post.getLikes()){
+            if(like.getUsername().equals(username))
+                return true;
+        }
+        return false;
     }
 }

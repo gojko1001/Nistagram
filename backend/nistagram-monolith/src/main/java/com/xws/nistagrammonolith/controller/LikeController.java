@@ -24,7 +24,13 @@ public class LikeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getImagesByUsername(@PathVariable("id") Long id){
+    public Integer getImagesByUsername(@PathVariable("id") Long id){
         return likeService.countLikesOnPost(id);
     }
+
+    @GetMapping("/post/{id}/{username}")
+    public boolean hasBeenLiked(@PathVariable("id") Long id, @PathVariable("username")String username){
+        return likeService.hasBeenLiked(id, username);
+    }
+
 }

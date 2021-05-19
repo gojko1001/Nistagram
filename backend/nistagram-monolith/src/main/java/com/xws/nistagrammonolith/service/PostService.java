@@ -2,7 +2,7 @@ package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
-import com.xws.nistagrammonolith.controller.mapping.ImageMapper;
+import com.xws.nistagrammonolith.controller.mapping.PostMapper;
 import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.domain.Location;
 import com.xws.nistagrammonolith.repository.IPostRepository;
@@ -86,7 +86,7 @@ public class PostService implements IPostService {
 
     @Override
     public ImageBytesDto imageFile(Post post, String filePath){
-        ImageBytesDto imageBytesDtos = ImageMapper.mapImageToImageBytesDto(post);
+        ImageBytesDto imageBytesDtos = PostMapper.mapImageToImageBytesDto(post);
         File in = new File(filePath + post.getFileName());
         try {
             imageBytesDtos.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));

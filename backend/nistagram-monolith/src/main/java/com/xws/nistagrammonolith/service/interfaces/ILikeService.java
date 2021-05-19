@@ -6,5 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface ILikeService {
     Like createLikeOnPost(CreateLikeDto createLikeDto);
-    ResponseEntity countLikesOnPost(Long id);
+    Integer countLikesOnPost(Long id);
+    boolean hasBeenLiked(Long id, String username);
 }

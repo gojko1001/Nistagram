@@ -6,7 +6,7 @@ import com.xws.nistagrammonolith.domain.Post;
 
 import java.util.ArrayList;
 
-public class ImageMapper {
+public class PostMapper {
     public static ImageBytesDto mapImageToImageBytesDto(Post post){
         ImageBytesDto imageBytesDto = new ImageBytesDto();
         imageBytesDto.setId(post.getId());
@@ -17,6 +17,7 @@ public class ImageMapper {
         imageBytesDto.setComments(post.getComments());
         imageBytesDto.setImage(post.isImage());
         imageBytesDto.setImageBytes(new ArrayList<>());
+        imageBytesDto.setLikes(post.getLikes());
         return imageBytesDto;
     }
 }
