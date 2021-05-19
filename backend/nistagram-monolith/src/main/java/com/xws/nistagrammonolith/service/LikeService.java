@@ -5,6 +5,7 @@ import com.xws.nistagrammonolith.domain.Like;
 import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.repository.ILikeRepository;
+import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ILikeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,21 @@ public class LikeService implements ILikeService {
 
     @Override
     public Like createLikeOnPost(CreateLikeDto createLikeDto) {
+        Post post = postService.getById(createLikeDto.getPostId());
+        for(Like like: post.getLikes()){
+            if(like.getUsername().equals(createLikeDto.getUsername())){
+                post.getLikes().remove(like);
+                postService.save(post);
+                likeRepository.delete(like);
+                return null;
+            }
+        }
         Like newLike = new Like();
         newLike.setUsername(createLikeDto.getUsername());
         likeRepository.save(newLike);
-        Post post = postService.getById(createLikeDto.getPostId());
-        List<Like> likes = post.getLikes();
-        likes.add(newLike);
+        post.getLikes().add(newLike);
         postService.save(post);
-        return null;
+        return newLike;
     }
 
     //TODO: za sada je nekoriscena na frontu

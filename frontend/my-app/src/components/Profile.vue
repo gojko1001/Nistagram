@@ -35,7 +35,7 @@
                                     The video is not supported by your browser.
                                 </video>
                                 <br>
-                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}">
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <span>{{img.numLikes}}</span>
@@ -82,6 +82,10 @@ export default {
             hideCommenting: true,
             numPost:0,
             liked: false,
+            formLike:{
+              postId: 0,
+              username:''
+            }
         }
     },
     mounted: function(){
@@ -132,7 +136,19 @@ export default {
         commenting: function(id){
             this.hideCommenting = false;
             console.log(id);
-        }
+        },
+        likePost(id) {
+        console.log(this.form);
+        this.formLike.postId = id;
+        this.formLike.username = getEmailFromToken();
+        this.axios.post('/like', this.formLike)
+          .then(response => { console.log(response.data);
+                              this.makeToast("Liked !!!", "success");
+                            })
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+      },
     }
 }
 </script>

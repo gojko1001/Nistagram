@@ -13,7 +13,7 @@
               The video is not supported by your browser.
             </video>
             <br>
-            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}">
+            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
               <i class="fas fa-heart"></i>
             </button>
             <span>{{img.numLikes}}</span>
@@ -58,6 +58,10 @@ export default {
                 username: '',
                 text: '',
             },
+            formLike:{
+              postId: 0,
+              username:''
+            }
         }
     },
   mounted: function(){
@@ -83,17 +87,17 @@ export default {
         })
   },
   methods:{
-        makeToast(message, variant) {
-            this.$bvToast.toast(message, {
-                                title: `Nistagram`,
-                                autoHideDelay: 5000,
-                                variant: variant,
-                                toaster: 'b-toaster-bottom-right',
-                                solid: true,
-                                appendToast: false
-                            })
-        },
-        onSubmit() {
+      makeToast(message, variant) {
+          this.$bvToast.toast(message, {
+                              title: `Nistagram`,
+                              autoHideDelay: 5000,
+                              variant: variant,
+                              toaster: 'b-toaster-bottom-right',
+                              solid: true,
+                              appendToast: false
+                          })
+      },
+      onSubmit() {
         console.log(this.form);
         this.form.postId = this.postId;
         this.form.username = getEmailFromToken();
@@ -101,6 +105,18 @@ export default {
           .then(response => { console.log(response.data);
                               this.makeToast("Comment has been posted.", "success");
                               window.location.href = '/profile/' + this.form.username;
+                            })
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+      },
+      likePost(id) {
+        console.log(this.form);
+        this.formLike.postId = id;
+        this.formLike.username = getEmailFromToken();
+        this.axios.post('/like', this.formLike)
+          .then(response => { console.log(response.data);
+                              this.makeToast("Liked !!!", "success");
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
