@@ -2,7 +2,7 @@ package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.domain.Post;
-import com.xws.nistagrammonolith.repository.IImageRepository;
+import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.service.FileUploadUtil;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +18,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/image")
 @CrossOrigin(origins = "${clientURL}")
-public class ImageController {
+public class PostController {
 
     @Autowired
-    private IImageRepository imageRepository;
+    private IPostRepository imageRepository;
     @Autowired
     private IPostService imageService;
 
@@ -44,7 +44,7 @@ public class ImageController {
 
     @GetMapping("/profile/{username}")
     public ResponseEntity getImagesByUsername(@PathVariable("username") String username){
-        List<Post> userPosts = imageRepository.findImagesByUsername(username);
+        List<Post> userPosts = imageRepository.findPostsByUsername(username);
         return new ResponseEntity(imageService.getImagesFiles(userPosts), HttpStatus.OK);
     }
 

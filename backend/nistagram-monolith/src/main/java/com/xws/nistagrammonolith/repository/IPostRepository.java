@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IImageRepository extends JpaRepository<Post, Long> {
+public interface IPostRepository extends JpaRepository<Post, Long> {
     Post save(Post post);
     List<Post> findAll();
-    List<Post> findImagesByUsername(String username);
-    Post findImageById(Long id);
+    List<Post> findPostsByUsername(String username);
+    Post findPostById(Long id);
 }

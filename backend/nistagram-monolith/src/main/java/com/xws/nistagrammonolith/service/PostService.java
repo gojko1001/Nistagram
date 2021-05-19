@@ -5,7 +5,7 @@ import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.controller.mapping.ImageMapper;
 import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.domain.Location;
-import com.xws.nistagrammonolith.repository.IImageRepository;
+import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
@@ -23,7 +23,7 @@ import java.util.List;
 public class PostService implements IPostService {
 
     @Autowired
-    private IImageRepository imageRepository;
+    private IPostRepository imageRepository;
     @Autowired
     private ILocationService locationService;
     @Autowired
@@ -42,7 +42,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<Post> getUserImages(String username){ return imageRepository.findImagesByUsername(username);}
+    public List<Post> getUserImages(String username){ return imageRepository.findPostsByUsername(username);}
 
     @Override
     public Post saveImageInfo(ImageDto imageDto){
@@ -74,7 +74,7 @@ public class PostService implements IPostService {
 
     @Override
     public ImageBytesDto getImageFileById(Long id){
-        Post post = imageRepository.findImageById(id);
+        Post post = imageRepository.findPostById(id);
         ImageBytesDto imageBytesDtos = new ImageBytesDto();
         if(post != null){
             String filePath = new File("").getAbsolutePath();
@@ -98,7 +98,7 @@ public class PostService implements IPostService {
 
     @Override
     public Post getById(Long id){
-        return imageRepository.findImageById(id);
+        return imageRepository.findPostById(id);
     }
 
 
