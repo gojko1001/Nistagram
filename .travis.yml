@@ -7,8 +7,15 @@ cache:
   
 services:
   - mysql
+
+addons:
+  sonarcloud:
+    organization: "gojko1001"
+    token:
+      secure: "778c39adc9ea23bb47fafcd1f525c48fff84546e" # encrypted value of your token
+
   
 script:
   - cd backend/nistagram-monolith
   - chmod +x mvnw
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=gojko1001_Nistagram
