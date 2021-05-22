@@ -12,7 +12,7 @@ addons:
   sonarcloud:
     organization: "gojko1001"
     token:
-      secure: "778c39adc9ea23bb47fafcd1f525c48fff84546e" # encrypted value of your token
+      secure: "crEuC6PoBMHn5DeQpdLr+khz84xZQ4XoVsjkZCdUIyyS8Rnwc0g6Ms8ieTkW3tcDuXZ1W9KVNWS87VRHa9r4zgG9DdZPOrigCAJxYefZnDBdrn4zfnjT3gdrnImWcTr3ijZz4Cm0EcBSc8IQw0oOh5xZOgB1zEDx5BZn13fVDmvtFua2byPiGoh//RHryp2P+wwU34lJ2IrrCLOcqCw7CGO5DgA+ur9LNiPZrR2TrOJBuSru4BbPp6OoJbOS+2Os6fiYHw4hF9u61y6OVC+SItKDhImCw5l0uFwX3QPA9x0TgyZeKmRrDsN0+hZ+2TEf+2zP593YZ9r/nPw40yMY2vzl5V1Kx95tEY3A9qFpaNVDz7jLn/udO8Q9JZql54ydj3ANuv17AWNlDhpS4hSVD/n/KauLJ3rqxsfStilduQ8k2UnFizsxi1a6h9UWhWWemYdmdIZTJyVw2Ro3/A4PHXqEq3ickGRjjo9t6skaoR6ajhZwZrmFG5uhXjP8zmtcQeQVbvDKqKdVjYvXpGVLjnKQ44WTcsWoW6x4DMmqS50sZt6mbSbLXAJl54MiAyfOtq0pLnyHwyPhHBWTgQM0c3fdmxNeao6+JBW16ksodRpXKM1d9hxHAD6uTousD5ctcpL/tyKcovjVR7rsPXjr7Mi91NTXrtAdH/h+YkRttAg=" # encrypted value of your token
 
   
 script:
