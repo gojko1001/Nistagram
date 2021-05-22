@@ -1,12 +1,9 @@
 language: java
-jdk: openjdk8
+jdk: oraclejdk8
 
 cache:
   directories:
   - $HOME/.m2
-  
-services:
-  - mysql
   
 script:
   - cd backend/nistagram-monolith
