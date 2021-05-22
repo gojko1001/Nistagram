@@ -21,9 +21,9 @@ import java.util.List;
 public class PostController {
 
     @Autowired
-    private IPostRepository imageRepository;
+    private IPostRepository postRepository;
     @Autowired
-    private IPostService imageService;
+    private IPostService postService;
 
     private static String uploadDir = "user-photos";
 
@@ -38,28 +38,28 @@ public class PostController {
 
     @PostMapping("/info")
     public Post saveImageInfo(@RequestBody ImageDto imageDto){
-        return imageService.saveImageInfo(imageDto);
+        return postService.saveImageInfo(imageDto);
     }
 
 
     @GetMapping("/profile/{username}")
     public ResponseEntity getImagesByUsername(@PathVariable("username") String username){
-        List<Post> userPosts = imageRepository.findPostsByUsername(username);
-        return new ResponseEntity(imageService.getImagesFiles(userPosts), HttpStatus.OK);
+        List<Post> userPosts = postRepository.findPostsByUsername(username);
+        return new ResponseEntity(postService.getImagesFiles(userPosts), HttpStatus.OK);
     }
 
 
     @GetMapping("/discover/{username}")
     public ResponseEntity getDiscoverImages(@PathVariable("username") String username){
-        List<Post> discoverPosts = imageRepository.findAll();
+        List<Post> discoverPosts = postRepository.findAll();
         // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
         // TODO: clean code
-        return new ResponseEntity(imageService.getImagesFiles(discoverPosts), HttpStatus.OK);
+        return new ResponseEntity(postService.getImagesFiles(discoverPosts), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getImageById(@PathVariable("id") Long id){
-        return new ResponseEntity(imageService.getImageFileById(id), HttpStatus.OK);
+        return new ResponseEntity(postService.getImageFileById(id), HttpStatus.OK);
     }
 
 }

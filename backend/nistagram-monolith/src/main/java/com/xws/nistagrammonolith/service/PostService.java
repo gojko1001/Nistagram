@@ -23,7 +23,7 @@ import java.util.List;
 public class PostService implements IPostService {
 
     @Autowired
-    private IPostRepository imageRepository;
+    private IPostRepository postRepository;
     @Autowired
     private ILocationService locationService;
     @Autowired
@@ -38,11 +38,11 @@ public class PostService implements IPostService {
 
     @Override
     public Post save(Post post) {
-        return imageRepository.save(post);
+        return postRepository.save(post);
     }
 
     @Override
-    public List<Post> getUserImages(String username){ return imageRepository.findPostsByUsername(username);}
+    public List<Post> getUserImages(String username){ return postRepository.findPostsByUsername(username);}
 
     @Override
     public Post saveImageInfo(ImageDto imageDto){
@@ -74,7 +74,7 @@ public class PostService implements IPostService {
 
     @Override
     public ImageBytesDto getImageFileById(Long id){
-        Post post = imageRepository.findPostById(id);
+        Post post = postRepository.findPostById(id);
         ImageBytesDto imageBytesDtos = new ImageBytesDto();
         if(post != null){
             String filePath = new File("").getAbsolutePath();
@@ -98,7 +98,7 @@ public class PostService implements IPostService {
 
     @Override
     public Post getById(Long id){
-        return imageRepository.findPostById(id);
+        return postRepository.findPostById(id);
     }
 
 
