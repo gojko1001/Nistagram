@@ -5,6 +5,9 @@ cache:
   directories:
   - $HOME/.m2
   
+services:
+  - mysql
+  
 script:
   - cd backend/nistagram-monolith
   - chmod +x mvnw
