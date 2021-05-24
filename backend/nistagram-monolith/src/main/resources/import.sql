@@ -162,29 +162,29 @@ insert into location(name) values ("Pacific Ocean");
 -----
 
 -- LIKES
-    insert into likes(username) values ("masa");
+    insert into likes(username, liked, post_id) values ("masa", true, 1);
     insert into post_likes(post_id, likes_id) values (1, 1);
-    insert into likes(username) values ("maja");
+    insert into likes(username, liked, post_id) values ("maja", true, 1);
     insert into post_likes(post_id, likes_id) values (1, 2);
-    insert into likes(username) values ("gojko");
+    insert into likes(username, liked, post_id) values ("gojko", true, 2);
     insert into post_likes(post_id, likes_id) values (2, 3);
-    insert into likes(username) values ("maja");
+    insert into likes(username, liked, post_id) values ("maja", true, 3);
     insert into post_likes(post_id, likes_id) values (3, 4);
-    insert into likes(username) values ("masa");
+    insert into likes(username, liked, post_id) values ("masa", true, 4);
     insert into post_likes(post_id, likes_id) values (4, 5);
-    insert into likes(username) values ("tasa");
+    insert into likes(username, liked, post_id) values ("tasa", true, 4);
     insert into post_likes(post_id, likes_id) values (4, 6);
-    insert into likes(username) values ("gojko");
+    insert into likes(username, liked, post_id) values ("gojko", true, 4);
     insert into post_likes(post_id, likes_id) values (4, 7);
-    insert into likes(username) values ("masa");
+    insert into likes(username, liked, post_id) values ("masa", true, 5);
     insert into post_likes(post_id, likes_id) values (5, 8);
-    insert into likes(username) values ("tasa");
+    insert into likes(username, liked, post_id) values ("tasa", true, 5);
     insert into post_likes(post_id, likes_id) values (5, 9);
-    insert into likes(username) values ("maja");
+    insert into likes(username, liked, post_id) values ("maja", true, 6);
     insert into post_likes(post_id, likes_id) values (6, 10);
-    insert into likes(username) values ("masa");
+    insert into likes(username, liked, post_id) values ("masa", true, 6);
     insert into post_likes(post_id, likes_id) values (6, 11);
-    insert into likes(username) values ("gojko");
+    insert into likes(username, liked, post_id) values ("gojko", true, 6);
     insert into post_likes(post_id, likes_id) values (6, 12);
 -----
 

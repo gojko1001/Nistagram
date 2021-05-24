@@ -4,8 +4,11 @@ import com.xws.nistagrammonolith.controller.dto.CreateLikeDto;
 import com.xws.nistagrammonolith.domain.Like;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ILikeService {
     Like createLikeOnPost(CreateLikeDto createLikeDto);
     Integer countLikesOnPost(Long id);
     boolean hasBeenLiked(Long id, String username);
+    List<Like> history(String username);
 }

@@ -1,5 +1,6 @@
 package com.xws.nistagrammonolith.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Like {
     @Column
     private boolean liked = true;
     @Column
+    @Temporal(TemporalType.DATE)
     private Date timestamp;
     @OneToOne
     private Post post;

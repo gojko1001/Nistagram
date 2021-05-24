@@ -33,4 +33,10 @@ public class LikeController {
         return likeService.hasBeenLiked(id, username);
     }
 
+    @GetMapping("/history/{username}")
+    public List<Like> history(@PathVariable("username")String username){
+        return likeService.history(username);
+    }
+
+
 }

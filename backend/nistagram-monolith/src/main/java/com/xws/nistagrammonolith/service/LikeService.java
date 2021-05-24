@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,16 +27,25 @@ public class LikeService implements ILikeService {
     @Override
     public Like createLikeOnPost(CreateLikeDto createLikeDto) {
         Post post = postService.getById(createLikeDto.getPostId());
+        Date currentDate = new Date();
+        System.out.println(currentDate);
         for(Like like: post.getLikes()){
             if(like.getUsername().equals(createLikeDto.getUsername())){
                 post.getLikes().remove(like);
                 postService.save(post);
-                likeRepository.delete(like);
-                return null;
+                Like oldLike = new Like();
+                oldLike.setUsername(createLikeDto.getUsername());
+                oldLike.setLiked(false);
+                oldLike.setTimestamp(currentDate);
+                oldLike.setPost(post);
+                return likeRepository.save(oldLike);
             }
         }
         Like newLike = new Like();
         newLike.setUsername(createLikeDto.getUsername());
+        newLike.setLiked(true);
+        newLike.setTimestamp(currentDate);
+        newLike.setPost(post);
         likeRepository.save(newLike);
         post.getLikes().add(newLike);
         postService.save(post);
@@ -58,5 +69,11 @@ public class LikeService implements ILikeService {
                 return true;
         }
         return false;
+    }
+
+    //TODO: mozda da se vraca bas slika a ne naziv
+    @Override
+    public List<Like> history(String username){
+        return likeRepository.findLikesByUsername(username);
     }
 }
