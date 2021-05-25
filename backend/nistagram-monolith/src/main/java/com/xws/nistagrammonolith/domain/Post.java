@@ -22,7 +22,7 @@ public class Post {
     @ManyToMany
     private List<Tag> tags;
     @ManyToMany
-    private List<Comment> comments;        //TODO: fale like, dislike, favorites, album
+    private List<Comment> comments;        //TODO: favorites, album
     @Column
     private boolean isImage = true;
     @ManyToMany
