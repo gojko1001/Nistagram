@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface ICommentRepository extends JpaRepository<Comment, Long> {
+
     Comment save(Comment comment);
+
     List<Comment> findAll();
 }

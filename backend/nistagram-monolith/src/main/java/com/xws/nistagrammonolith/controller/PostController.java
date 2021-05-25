@@ -37,20 +37,20 @@ public class PostController {
 
 
     @PostMapping("/info")
-    public Post saveImageInfo(@RequestBody ImageDto imageDto){
+    public Post saveImageInfo(@RequestBody ImageDto imageDto) {
         return postService.saveImageInfo(imageDto);
     }
 
 
     @GetMapping("/profile/{username}")
-    public ResponseEntity getImagesByUsername(@PathVariable("username") String username){
+    public ResponseEntity getImagesByUsername(@PathVariable("username") String username) {
         List<Post> userPosts = postRepository.findPostsByUsername(username);
         return new ResponseEntity(postService.getImagesFiles(userPosts), HttpStatus.OK);
     }
 
 
     @GetMapping("/discover/{username}")
-    public ResponseEntity getDiscoverImages(@PathVariable("username") String username){
+    public ResponseEntity getDiscoverImages(@PathVariable("username") String username) {
         List<Post> discoverPosts = postRepository.findAll();
         // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
         // TODO: clean code
@@ -58,7 +58,7 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getImageById(@PathVariable("id") Long id){
+    public ResponseEntity getImageById(@PathVariable("id") Long id) {
         return new ResponseEntity(postService.getImageFileById(id), HttpStatus.OK);
     }
 

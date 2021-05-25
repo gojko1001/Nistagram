@@ -20,6 +20,7 @@ import Discover from './components/Discover'
 import CreatePost from './components/CreatePost'
 import EditProfile from './components/EditProfile'
 import AddComment from './components/AddComment'
+import Messanger from './components/Messanger'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -99,6 +100,11 @@ const router = new VueRouter({
       path: '/comment/:id',
       name: 'AddComment',
       component: AddComment
+    },
+    {
+      path: '/messanger',
+      name: 'Messanger',
+      component: Messanger
     },
   ]
 });

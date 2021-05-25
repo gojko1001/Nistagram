@@ -68,7 +68,6 @@ export default {
           this.makeToast("User has been logged in successfully.", "success");
           saveToken(response.data);
           window.location.href = "/discover";
-          this.makeToast("Check email and restart password.", "info");
         })
         .catch(error => { console.log(error);
                             if(!error.response)

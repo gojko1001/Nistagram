@@ -25,10 +25,10 @@ public class TagService implements ITagService {
     }
 
     @Override
-    public List<Tag> createTags(List<String> tags){
+    public List<Tag> createTags(List<String> tags) {
         List<Tag> tagDb = new ArrayList<>();
-        for(String t: tags){
-            if(tagRepository.findByName(t) == null){
+        for (String t : tags) {
+            if (tagRepository.findByName(t) == null) {
                 Tag tag = new Tag();
                 tag.setName(t.toLowerCase());
                 tagRepository.save(tag);

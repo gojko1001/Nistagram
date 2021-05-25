@@ -6,9 +6,6 @@ import com.xws.nistagrammonolith.domain.Location;
 import com.xws.nistagrammonolith.domain.Tag;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 @Data

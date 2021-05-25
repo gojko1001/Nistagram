@@ -14,7 +14,7 @@ public class CommentController {
     private ICommentService commentService;
 
     @PostMapping
-    public Comment createCommentOnPost(@RequestBody CreateCommentDto createCommentDto){
+    public Comment createCommentOnPost(@RequestBody CreateCommentDto createCommentDto) {
         return commentService.createCommentOnPost(createCommentDto);
     }
 }

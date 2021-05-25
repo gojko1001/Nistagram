@@ -36,7 +36,7 @@ public class UserService implements IUserService {
     @Autowired
     private UserCredentialsService userCredentialsService;
     @Autowired
-    private IUserCredentialsRepository userCredentialsRepository;
+    private IUserCredentialsRepository userCredentialsRepository; //TODO: treba servis pozvati!
     @Autowired
     private IBlackListRepository blackListRepository;   //TODO: treba servis pozvati!
     @Autowired
@@ -47,7 +47,7 @@ public class UserService implements IUserService {
     private IAuthorityService authService;
 
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
@@ -56,13 +56,13 @@ public class UserService implements IUserService {
             User newUser = userRepository.findByUsername(userReg.getUsername());
             if (newUser != null)
                 throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
-            if(userRepository.findByEmail(userReg.getEmail()) != null)
+            if (userRepository.findByEmail(userReg.getEmail()) != null)
                 throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
-            if(!checkUsername(userReg))
+            if (!checkUsername(userReg))
                 throw new BadRequestException("Username is in invalid format.");
-            if(!checkFullName(userReg))
-                throw  new BadRequestException("Full name is in invalid format.");
-            if(!userReg.getPassword().equals(userReg.getRepeatPassword())){
+            if (!checkFullName(userReg))
+                throw new BadRequestException("Full name is in invalid format.");
+            if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
                 throw new BadRequestException("Password and repeat password are not the same.");
             }
             if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
@@ -71,33 +71,33 @@ public class UserService implements IUserService {
                 return user;
             }
             throw new BadRequestException("Email or password is in invalid format.");
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new BadRequestException("Thread " + e.getMessage());
         }
     }
 
-    public Boolean checkUsername(UserCredentialsDto userCredentialsDto){
+    public Boolean checkUsername(UserCredentialsDto userCredentialsDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
         return patternUsername.matcher(userCredentialsDto.getUsername()).matches();
     }
 
-    public Boolean checkFullName(UserCredentialsDto userCredentialsDto){
+    public Boolean checkFullName(UserCredentialsDto userCredentialsDto) {
         Pattern patternFullName = Pattern.compile("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
         return patternFullName.matcher(userCredentialsDto.getFullName()).matches();
     }
 
-    public User createUserAndCredentials(UserCredentialsDto userReg){
+    public User createUserAndCredentials(UserCredentialsDto userReg) {
         User user = new User();
         UserCredentials userCredentials = new UserCredentials();
 
         List<BlackList> blackList = blackListRepository.findAll();
-        for(BlackList b: blackList){
-            if(b.getPassword().equalsIgnoreCase(userReg.getPassword())){
+        for (BlackList b : blackList) {
+            if (b.getPassword().equalsIgnoreCase(userReg.getPassword())) {
                 throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
             }
         }
 
-        if(!userCredentialsService.isPassword(userReg.getPassword(), userReg.getRepeatPassword())){
+        if (!userCredentialsService.isPassword(userReg.getPassword(), userReg.getRepeatPassword())) {
             throw new BadRequestException("Passwords are not the same.");
         }
 
@@ -110,14 +110,17 @@ public class UserService implements IUserService {
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
         user.setFullName(userReg.getFullName());
+        log.info("Try to save user with username: " + user.getUsername());
         return userRepository.save(user);
     }
 
     @Override
     public User findUserByUsername(String username) {
         User user = userRepository.findByUsername(username);
-        if (user == null)
-            throw new NotFoundException("There is no user with username "+ username);
+        if (user == null){
+            log.info("There is no user with username: " + username);
+            throw new NotFoundException("There is no user with username " + username);
+        }
         return user;
     }
 
@@ -136,13 +139,14 @@ public class UserService implements IUserService {
     }
 
     public User save(User user) {
+        log.info("Try to save user with username: " + user.getUsername());
         return userRepository.save(user);
     }
 
     //TODO: Nepotrebna metoda?
-    public User updateUser(User user){
+    public User updateUser(User user) {
         User dbUser = userRepository.findByUsername(user.getUsername());
-        if(dbUser != null){
+        if (dbUser != null) {
             dbUser.setBio(user.getBio());
             dbUser.setBirthDate(user.getBirthDate());
             dbUser.setPhone(user.getPhone());
@@ -157,16 +161,16 @@ public class UserService implements IUserService {
         return dbUser;
     }
 
-    public boolean patternChecker(String email, String password){
+    public boolean patternChecker(String email, String password) {
         Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
         Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
 
-    public String verifyAccount(String username){
+    public String verifyAccount(String username) {
         String extractedUsername = jwtService.extractUsername(username);
         UserCredentials userCredentials = userCredentialsService.findByUsername(extractedUsername);
-        if(userCredentials != null){
+        if (userCredentials != null) {
             userCredentials.setVerified(true);
         }
         userCredentialsRepository.save(userCredentials);
@@ -175,9 +179,10 @@ public class UserService implements IUserService {
 
     public User findUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
-        if(user == null)
-            throw new NotFoundException("User with email: "+ email+" doesn't exists.");
-
+        if (user == null) {
+            log.info("There is no user with email: " + email);
+            throw new NotFoundException("User with email: " + email + " doesn't exists.");
+        }
         return user;
     }
 

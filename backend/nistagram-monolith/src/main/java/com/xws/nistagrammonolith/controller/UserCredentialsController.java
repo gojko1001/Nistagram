@@ -5,7 +5,8 @@ import com.xws.nistagrammonolith.controller.dto.ResetPasswordDto;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
 import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.security.JwtService;
-import com.xws.nistagrammonolith.service.interfaces.*;
+import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
+import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,15 +40,17 @@ public class UserCredentialsController {
     }
 
     @GetMapping("/send_email/{email}")
-    public void sendPasswordLink(@PathVariable String email) throws IOException{
+    public void sendPasswordLink(@PathVariable String email) throws IOException {
         userCredentialsService.sendResetPasswordLink(email);
     }
+
     @PutMapping("/reset_password/{jwt}")
     public void restartPassword(@PathVariable String jwt, @RequestBody ResetPasswordDto resetPasswordDto) throws IOException {
         userCredentialsService.restartPassword(jwt, resetPasswordDto);
     }
+
     @GetMapping("/verify/{username}")
-    public String verifyUser(@PathVariable String username){
+    public String verifyUser(@PathVariable String username) {
         return userService.verifyAccount(username);
     }
 }

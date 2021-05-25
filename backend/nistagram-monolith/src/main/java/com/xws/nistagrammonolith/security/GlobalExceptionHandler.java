@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AuthenticationException.class)
-    public UnauthorizeException handleAuthenticationException(AuthenticationException ex, HttpServletResponse response){
+    public UnauthorizeException handleAuthenticationException(AuthenticationException ex, HttpServletResponse response) {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         return new UnauthorizeException(ex.getMessage());
     }

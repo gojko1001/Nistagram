@@ -1,7 +1,6 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.domain.User;
-import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,9 +19,10 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String mailSender;
 
-    private String verifyUrl= "https://localhost:3030/userCredentials/verify/";
+    private String verifyUrl = "https://localhost:3030/userCredentials/verify/";
     @Autowired
     private JwtService jwtService;
+
     @Async
     public void verificationPassword(User user) throws MailException {
         String jwt = jwtService.createToken(user.getUsername()/*, Role.ROLE_USER*/);
@@ -30,10 +30,10 @@ public class EmailService {
         simpleMailMessage.setFrom(mailSender);
         simpleMailMessage.setTo(user.getEmail());
         simpleMailMessage.setSubject("Registration");
-        String url= verifyUrl + jwt;
+        String url = verifyUrl + jwt;
         String mailText = "Dear " + user.getFullName() + ",\n\n" +
                 "Welcome to Ništagram \n\n" +
-                "Your username is "+ user.getUsername() + "\n\n" +
+                "Your username is " + user.getUsername() + "\n\n" +
                 "You can verify your account here:" + "\t" +
                 "<a href=\"" + url + "\">Verify your account</a>" + "\n\n" +
                 "Best regards.";

@@ -8,8 +8,12 @@ import java.util.List;
 
 @Repository
 public interface ILocationRepository extends JpaRepository<Location, Long> {
+
     Location save(Location location);
+
     List<Location> findAll();
+
     Location findLocationByName(String name);
+
     Location findLocationById(Long id);
 }

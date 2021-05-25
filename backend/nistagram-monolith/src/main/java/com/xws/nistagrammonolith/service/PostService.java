@@ -3,11 +3,11 @@ package com.xws.nistagrammonolith.service;
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.controller.mapping.PostMapper;
-import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.domain.Location;
+import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.repository.IPostRepository;
-import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
+import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +42,15 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<Post> getUserImages(String username){ return postRepository.findPostsByUsername(username);}
+    public List<Post> getUserImages(String username) {
+        return postRepository.findPostsByUsername(username);
+    }
 
     @Override
-    public Post saveImageInfo(ImageDto imageDto){
+    public Post saveImageInfo(ImageDto imageDto) {
         Post post = new Post();
         post.setFileName(imageDto.getFileName());
-        if(imageDto.getFileName().contains(".mp4")){
+        if (imageDto.getFileName().contains(".mp4")) {
             post.setImage(false);
         }
         post.setUsername(imageDto.getUsername());
@@ -60,12 +62,12 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<ImageBytesDto> getImagesFiles(List<Post> posts){
+    public List<ImageBytesDto> getImagesFiles(List<Post> posts) {
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
-        if(posts != null){
+        if (posts != null) {
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/" + uploadDir + "/");
-            for(Post post : posts){
+            for (Post post : posts) {
                 imageBytesDtos.add(imageFile(post, filePath));
             }
         }
@@ -73,10 +75,10 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public ImageBytesDto getImageFileById(Long id){
+    public ImageBytesDto getImageFileById(Long id) {
         Post post = postRepository.findPostById(id);
         ImageBytesDto imageBytesDtos = new ImageBytesDto();
-        if(post != null){
+        if (post != null) {
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/" + uploadDir + "/");
             imageBytesDtos = imageFile(post, filePath);
@@ -85,7 +87,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public ImageBytesDto imageFile(Post post, String filePath){
+    public ImageBytesDto imageFile(Post post, String filePath) {
         ImageBytesDto imageBytesDtos = PostMapper.mapImageToImageBytesDto(post);
         File in = new File(filePath + post.getFileName());
         try {
@@ -97,10 +99,9 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Post getById(Long id){
+    public Post getById(Long id) {
         return postRepository.findPostById(id);
     }
-
 
 
 }

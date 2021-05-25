@@ -27,9 +27,9 @@ public class JwtService {
     private String AUTH_HEADER;
 
 
-    public String getToken(HttpServletRequest request){
+    public String getToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader(AUTH_HEADER);
-        if(authorizationHeader != null && authorizationHeader.startsWith("Bearer "))
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer "))
             return authorizationHeader.substring(7);
         return null;
     }
@@ -45,21 +45,21 @@ public class JwtService {
                 .signWith(SignatureAlgorithm.HS256, KEY).compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails){
+    public Boolean validateToken(String token, UserDetails userDetails) {
         String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         return claimsResolver.apply(extractAllClaims(token));
     }
 
-    public String extractUsername(String token){
+    public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public Date extractExpiration(String token){
+    public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
@@ -68,7 +68,7 @@ public class JwtService {
         return Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token){
+    private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 }

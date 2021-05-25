@@ -29,5 +29,7 @@ public class LocationService implements ILocationService {
     }
 
     @Override
-    public Location findByName(String name){ return locationRepository.findLocationByName(name); }
+    public Location findByName(String name) {
+        return locationRepository.findLocationByName(name);
+    }
 }

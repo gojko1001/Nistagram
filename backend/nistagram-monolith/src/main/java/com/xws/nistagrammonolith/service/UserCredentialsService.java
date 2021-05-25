@@ -15,6 +15,7 @@ import com.xws.nistagrammonolith.security.JwtService;
 import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
 import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,8 +23,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
+@Slf4j
 @Service
 public class UserCredentialsService implements IUserCredentialsService {
 
@@ -42,22 +43,24 @@ public class UserCredentialsService implements IUserCredentialsService {
     @Autowired
     private IAuthorityService authorityService;
 
-    public UserCredentials create(UserCredentials userCredentials){
+    public UserCredentials create(UserCredentials userCredentials) {
+        log.info("Try to save user credentials with username: " + userCredentials.getUsername());
         return userCredentialsRepository.save(userCredentials);
     }
 
     public UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException {
+        log.info("Try to find us");
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(userCredentialsDto.getUsername());
-        if(userCredentials == null || !passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword()))
+        if (userCredentials == null || !passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword()))
             throw new BadRequestException("Username or password is not correct.");
-        if(!userCredentials.getVerified())
+        if (!userCredentials.getVerified())
             throw new InvalidActionException("The account must be verified.");
         return userCredentials;
     }
 
     public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail());
-        if(userCredentials == null){
+        if (userCredentials == null) {
             userCredentials = new UserCredentials();
             String encodedPassword = passwordEncoder.encode(RandomString.make(10));
             userCredentials.setPassword(encodedPassword);
@@ -79,7 +82,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         return userCredentials;
     }
 
-    public UserCredentials findByUsername(String username){
+    public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
         if (userCredentials == null)
             throw new NotFoundException("There is no user credentials with username " + username);
@@ -90,13 +93,13 @@ public class UserCredentialsService implements IUserCredentialsService {
     public void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) {
         String extractedUsername = jwtService.extractUsername(jwt);
         UserCredentials userCredentials = findByUsername(extractedUsername);
-        if(!isPassword(resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword())){
+        if (!isPassword(resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword())) {
             throw new BadRequestException("Passwords are not the same.");
         }
 
         List<BlackList> blackList = blackListRepository.findAll();
-        for(BlackList b: blackList){
-            if(b.getPassword().equalsIgnoreCase(resetPasswordDto.getPassword())){
+        for (BlackList b : blackList) {
+            if (b.getPassword().equalsIgnoreCase(resetPasswordDto.getPassword())) {
                 throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
             }
         }
@@ -111,7 +114,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         emailService.resetPassword(user);
     }
 
-    public boolean isPassword(String password1, String password2){
+    public boolean isPassword(String password1, String password2) {
         return password1.equals(password2);
     }
 

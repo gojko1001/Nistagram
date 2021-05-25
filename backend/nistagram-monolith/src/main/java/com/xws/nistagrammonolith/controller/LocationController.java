@@ -15,7 +15,9 @@ public class LocationController {
     private ILocationService locationService;
 
     @GetMapping
-    public List<Location> getAll() { return locationService.getAll(); }
+    public List<Location> getAll() {
+        return locationService.getAll();
+    }
 
     @PostMapping
     public Location create(@RequestBody Location location) {

@@ -2,8 +2,8 @@ package com.xws.nistagrammonolith.service.interfaces;
 
 import com.xws.nistagrammonolith.controller.dto.LoginGoogleDto;
 import com.xws.nistagrammonolith.controller.dto.ResetPasswordDto;
-import com.xws.nistagrammonolith.domain.UserCredentials;
 import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
+import com.xws.nistagrammonolith.domain.UserCredentials;
 
 import java.io.IOException;
 

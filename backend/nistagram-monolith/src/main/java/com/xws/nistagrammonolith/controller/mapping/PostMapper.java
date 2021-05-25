@@ -7,7 +7,7 @@ import com.xws.nistagrammonolith.domain.Post;
 import java.util.ArrayList;
 
 public class PostMapper {
-    public static ImageBytesDto mapImageToImageBytesDto(Post post){
+    public static ImageBytesDto mapImageToImageBytesDto(Post post) {
         ImageBytesDto imageBytesDto = new ImageBytesDto();
         imageBytesDto.setId(post.getId());
         imageBytesDto.setUsername(post.getUsername());

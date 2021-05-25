@@ -4,7 +4,7 @@ import com.xws.nistagrammonolith.controller.dto.UserDto;
 import com.xws.nistagrammonolith.domain.User;
 
 public class UserMapper {
-    public static User mapUserDtoToUser(UserDto userDto){
+    public static User mapUserDtoToUser(UserDto userDto) {
         User user = new User();
         user.setFullName(userDto.getFullName());
         user.setEmail(userDto.getEmail());

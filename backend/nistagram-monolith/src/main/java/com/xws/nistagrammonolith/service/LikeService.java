@@ -3,17 +3,11 @@ package com.xws.nistagrammonolith.service;
 import com.xws.nistagrammonolith.controller.dto.CreateLikeDto;
 import com.xws.nistagrammonolith.domain.Like;
 import com.xws.nistagrammonolith.domain.Post;
-import com.xws.nistagrammonolith.exception.NotFoundException;
 import com.xws.nistagrammonolith.repository.ILikeRepository;
-import com.xws.nistagrammonolith.repository.IPostRepository;
-import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ILikeService;
+import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LikeService implements ILikeService {
@@ -25,8 +19,8 @@ public class LikeService implements ILikeService {
     @Override
     public Like createLikeOnPost(CreateLikeDto createLikeDto) {
         Post post = postService.getById(createLikeDto.getPostId());
-        for(Like like: post.getLikes()){
-            if(like.getUsername().equals(createLikeDto.getUsername())){
+        for (Like like : post.getLikes()) {
+            if (like.getUsername().equals(createLikeDto.getUsername())) {
                 post.getLikes().remove(like);
                 postService.save(post);
                 likeRepository.delete(like);
@@ -51,10 +45,10 @@ public class LikeService implements ILikeService {
     }
 
     @Override
-    public boolean hasBeenLiked(Long id, String username){
+    public boolean hasBeenLiked(Long id, String username) {
         Post post = postService.getById(id);
-        for(Like like: post.getLikes()){
-            if(like.getUsername().equals(username))
+        for (Like like : post.getLikes()) {
+            if (like.getUsername().equals(username))
                 return true;
         }
         return false;

@@ -1,6 +1,5 @@
 package com.xws.nistagrammonolith.controller.dto;
 
-import com.xws.nistagrammonolith.domain.Location;
 import lombok.Data;
 
 import java.util.List;

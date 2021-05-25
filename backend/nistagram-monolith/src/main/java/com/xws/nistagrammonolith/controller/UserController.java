@@ -7,7 +7,6 @@ import com.xws.nistagrammonolith.domain.User;
 import com.xws.nistagrammonolith.service.UserService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,7 @@ public class UserController {
 
     private IUserService userService;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -33,7 +32,7 @@ public class UserController {
 
     @GetMapping("/{username}")
     @PreAuthorize("hasAuthority('GET_USER')")
-    public User getUserByUsername(@PathVariable String username){
+    public User getUserByUsername(@PathVariable String username) {
         return userService.findUserByUsername(username);
     }
 
@@ -44,7 +43,7 @@ public class UserController {
 
     @PutMapping
     @PreAuthorize("hasAuthority('GET_USER')")
-    public User edit(@RequestBody UserDto userDto){
+    public User edit(@RequestBody UserDto userDto) {
         log.info("Try to edit user: " + userDto.getPastUsername());
         return userService.edit(UserMapper.mapUserDtoToUser(userDto), userDto.getPastUsername());
     }

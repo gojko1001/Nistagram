@@ -8,7 +8,10 @@ import java.util.List;
 
 @Repository
 public interface ITagRepository extends JpaRepository<Tag, Long> {
+
     Tag save(Tag tag);
+
     List<Tag> findAll();
+
     Tag findByName(String name);
 }
