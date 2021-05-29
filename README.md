@@ -13,6 +13,11 @@ Social network for sharing photos and videos
 ### Microservices:
 | Name | Port | About
 | ------ | ------ | ------ | 
-| Front service (Nistagram) | 3000 | |
-| Back service (Nistagram) | 3030 | | 
-| Back service (Agent) | ... | |
+| Front service | 3000 | |
+| Gateway | 3030 | | 
+| Authentication microservice | 3031 | |
+| User microservice | 3032 | |
+| Media microservice | 3033 | |
+| Campaign microservice | 3034 | |
+| Search microservice | 3035 | |
+
