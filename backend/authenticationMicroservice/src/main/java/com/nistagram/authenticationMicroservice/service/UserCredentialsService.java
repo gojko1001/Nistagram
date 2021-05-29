@@ -1,20 +1,16 @@
-package com.xws.nistagrammonolith.service;
+package com.nistagram.authenticationMicroservice.service;
 
-import com.xws.nistagrammonolith.controller.dto.LoginGoogleDto;
-import com.xws.nistagrammonolith.controller.dto.ResetPasswordDto;
-import com.xws.nistagrammonolith.controller.dto.UserCredentialsDto;
-import com.xws.nistagrammonolith.domain.BlackList;
-import com.xws.nistagrammonolith.domain.User;
-import com.xws.nistagrammonolith.domain.UserCredentials;
-import com.xws.nistagrammonolith.exception.BadRequestException;
-import com.xws.nistagrammonolith.exception.InvalidActionException;
-import com.xws.nistagrammonolith.exception.NotFoundException;
-import com.xws.nistagrammonolith.repository.IBlackListRepository;
-import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
-import com.xws.nistagrammonolith.security.JwtService;
-import com.xws.nistagrammonolith.service.interfaces.IRoleService;
-import com.xws.nistagrammonolith.service.interfaces.IUserCredentialsService;
-import com.xws.nistagrammonolith.service.interfaces.IUserService;
+import com.nistagram.authenticationMicroservice.domain.BlackList;
+import com.nistagram.authenticationMicroservice.domain.UserCredentials;
+import com.nistagram.authenticationMicroservice.dto.LoginGoogleDto;
+import com.nistagram.authenticationMicroservice.dto.ResetPasswordDto;
+import com.nistagram.authenticationMicroservice.dto.UserCredentialsDto;
+import com.nistagram.authenticationMicroservice.exception.BadRequestException;
+import com.nistagram.authenticationMicroservice.exception.InvalidActionException;
+import com.nistagram.authenticationMicroservice.exception.NotFoundException;
+import com.nistagram.authenticationMicroservice.repoistory.IBlackListRepository;
+import com.nistagram.authenticationMicroservice.repoistory.IUserCredentialsRepository;
+import com.nistagram.authenticationMicroservice.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +28,10 @@ public class UserCredentialsService implements IUserCredentialsService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private IUserCredentialsRepository userCredentialsRepository;
-    @Autowired
-    private IUserService userService;
-    @Autowired
-    private EmailService emailService;
+//    @Autowired
+//    private IUserService userService;
+//    @Autowired
+//    private EmailService emailService;
     @Autowired
     private JwtService jwtService;
     @Autowired
@@ -60,26 +56,26 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail());
-        if (userCredentials == null) {
-            userCredentials = new UserCredentials();
-            String encodedPassword = passwordEncoder.encode(RandomString.make(10));
-            userCredentials.setPassword(encodedPassword);
-            userCredentials.setUsername(loginGoogleDto.getEmail().split("@")[0]);
-            userCredentials.setVerified(true);
-            userCredentials.setRoles(authorityService.findByName("ROLE_USER"));
+        if (userCredentials != null)
+            return userCredentials;
+        userCredentials = new UserCredentials();
+        String encodedPassword = passwordEncoder.encode(RandomString.make(10));
+        userCredentials.setPassword(encodedPassword);
+        userCredentials.setUsername(loginGoogleDto.getEmail().split("@")[0]);
+        userCredentials.setVerified(true);
+        userCredentials.setRoles(authorityService.findByName("ROLE_USER"));
 
-            User user = new User();
-            user.setUsername(userCredentials.getUsername());
-            user.setFullName(loginGoogleDto.getName());
-            user.setEmail(loginGoogleDto.getEmail());
+//        User user = new User();
+//        user.setUsername(userCredentials.getUsername());
+//        user.setFullName(loginGoogleDto.getName());
+//        user.setEmail(loginGoogleDto.getEmail());
+//
+//        userService.save(user);           TODO: Premestiti u user microservice
 
-            userService.save(user);
+//        emailService.resetPassword(user); TODO: Notification microservice
 
-            emailService.resetPassword(user);
+        return create(userCredentials);
 
-            return create(userCredentials);
-        }
-        return userCredentials;
     }
 
     public UserCredentials findByUsername(String username) {
@@ -110,8 +106,18 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     public void sendResetPasswordLink(String email) {
-        User user = userService.findUserByEmail(email);
-        emailService.resetPassword(user);
+//        User user = userService.findUserByEmail(email);
+//        emailService.resetPassword(user);         TODO: User microservice?
+    }
+
+    public String verifyAccount(String username) {
+        String extractedUsername = jwtService.extractUsername(username);
+        UserCredentials userCredentials = findByUsername(extractedUsername);
+        if (userCredentials != null) {
+            userCredentials.setVerified(true);
+        }
+        userCredentialsRepository.save(userCredentials);
+        return "Your account has been verified successfully";
     }
 
     public boolean isPassword(String password1, String password2) {

@@ -12,7 +12,7 @@ import com.xws.nistagrammonolith.repository.IBlackListRepository;
 import com.xws.nistagrammonolith.repository.IUserCredentialsRepository;
 import com.xws.nistagrammonolith.repository.IUserRepository;
 import com.xws.nistagrammonolith.security.JwtService;
-import com.xws.nistagrammonolith.service.interfaces.IAuthorityService;
+import com.xws.nistagrammonolith.service.interfaces.IRoleService;
 import com.xws.nistagrammonolith.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class UserService implements IUserService {
     @Autowired
     private JwtService jwtService;
     @Autowired
-    private IAuthorityService authService;
+    private IRoleService authService;
 
 
     public List<User> getAll() {

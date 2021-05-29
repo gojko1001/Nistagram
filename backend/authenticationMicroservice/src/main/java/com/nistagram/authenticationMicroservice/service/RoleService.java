@@ -1,8 +1,7 @@
-package com.xws.nistagrammonolith.service;
+package com.nistagram.authenticationMicroservice.service;
 
-import com.xws.nistagrammonolith.domain.Role;
-import com.xws.nistagrammonolith.repository.IRoleRepository;
-import com.xws.nistagrammonolith.service.interfaces.IRoleService;
+import com.nistagram.authenticationMicroservice.domain.Role;
+import com.nistagram.authenticationMicroservice.repoistory.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

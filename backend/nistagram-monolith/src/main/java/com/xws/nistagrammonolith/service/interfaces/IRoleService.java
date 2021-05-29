@@ -4,7 +4,7 @@ import com.xws.nistagrammonolith.domain.Role;
 
 import java.util.List;
 
-public interface IAuthorityService {
+public interface IRoleService {
 
     List<Role> findById(Long id);
 

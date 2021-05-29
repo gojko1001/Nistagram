@@ -156,17 +156,6 @@ public class UserService implements IUserService {
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
 
-    public String verifyAccount(String username) {  // TODO: Autehentication microservice
-//        String extractedUsername = jwtService.extractUsername(username);
-//        UserCredentials userCredentials = userCredentialsService.findByUsername(extractedUsername);
-//        if (userCredentials != null) {
-//            userCredentials.setVerified(true);
-//        }
-//        userCredentialsRepository.save(userCredentials);
-//        return "Your account has been verified successfully";
-        return null;
-    }
-
     public User findUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
