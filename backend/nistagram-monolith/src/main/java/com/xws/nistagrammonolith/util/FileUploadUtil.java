@@ -1,4 +1,4 @@
-package com.xws.nistagrammonolith.service;
+package com.xws.nistagrammonolith.util;
 
 import org.springframework.web.multipart.MultipartFile;
 

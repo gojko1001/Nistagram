@@ -1,9 +1,11 @@
 package com.nistagram.userMicroservice.domain;
 
+import com.nistagram.userMicroservice.domain.enums.Gender;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "Users")
 @Entity
@@ -29,8 +31,12 @@ public class User {
     private Date birthDate;
     @Column
     private Gender userGender;
+    @OneToMany(mappedBy = "following")
+    private List<FollowingList> followingList;
+    @OneToOne
+    private VerificationRequest verificationRequest;
     @Column
-    private boolean publicProfile = true;
+    private boolean publicProfile = false;
     @Column
     private boolean publicDM = true;
     @Column

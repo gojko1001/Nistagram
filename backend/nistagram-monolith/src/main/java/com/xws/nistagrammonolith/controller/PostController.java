@@ -3,7 +3,7 @@ package com.xws.nistagrammonolith.controller;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.repository.IPostRepository;
-import com.xws.nistagrammonolith.service.FileUploadUtil;
+import com.xws.nistagrammonolith.util.FileUploadUtil;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

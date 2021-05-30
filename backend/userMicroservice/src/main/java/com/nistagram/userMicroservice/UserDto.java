@@ -1,6 +1,6 @@
 package com.nistagram.userMicroservice;
 
-import com.nistagram.userMicroservice.domain.Gender;
+import com.nistagram.userMicroservice.domain.enums.Gender;
 import lombok.Data;
 
 import java.util.Date;
