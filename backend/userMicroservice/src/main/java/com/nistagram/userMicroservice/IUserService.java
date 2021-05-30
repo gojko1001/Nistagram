@@ -10,13 +10,13 @@ public interface IUserService {
 
     List<User> getAll();
 
-    User create(UserCredentialsDto userReg);
-
-    User createUserAndCredentials(UserCredentialsDto userReg);
-
     User findUserByUsername(String username);
 
     User findUserByEmail(String email);
+
+    User create(UserCredentialsDto userReg);
+
+    User registerUser(UserCredentialsDto userReg);
 
     User updateUser(User user);
 

@@ -6,7 +6,6 @@ import com.nistagram.userMicroservice.exception.BadRequestException;
 import com.nistagram.userMicroservice.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,27 +17,36 @@ public class UserService implements IUserService {
 
     // TODO: updatePassword
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-
     @Autowired
     private IUserRepository userRepository;
 //    @Autowired
 //    private UserCredentialsService userCredentialsService;
 //    @Autowired
-//    private IUserCredentialsRepository userCredentialsRepository; //TODO: treba servis pozvati!
-//    @Autowired
-//    private IBlackListRepository blackListRepository;   //TODO: treba servis pozvati!
-//    @Autowired
 //    private EmailService emailService;
-//    @Autowired
-//    private JwtService jwtService;
-//    @Autowired
-//    private IAuthorityService authService;
 
 
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null){
+            log.info("There is no user with username: " + username);
+            throw new NotFoundException("There is no user with username " + username);
+        }
+        return user;
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            log.info("There is no user with email: " + email);
+            throw new NotFoundException("User with email: " + email + " doesn't exists.");
+        }
+        return user;
     }
 
     public User create(UserCredentialsDto userReg) {
@@ -56,7 +64,7 @@ public class UserService implements IUserService {
                 throw new BadRequestException("Password and repeat password are not the same.");
             }
             if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
-                User user = createUserAndCredentials(userReg);
+                User user = registerUser(userReg);
 //                emailService.verificationPassword(user); TODO: Notification Microservice
                 return user;
             }
@@ -66,35 +74,11 @@ public class UserService implements IUserService {
         }
     }
 
-    public Boolean checkUsername(UserCredentialsDto userCredentialsDto) {
-        Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
-        return patternUsername.matcher(userCredentialsDto.getUsername()).matches();
-    }
-
-    public Boolean checkFullName(UserCredentialsDto userCredentialsDto) {
-        Pattern patternFullName = Pattern.compile("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
-        return patternFullName.matcher(userCredentialsDto.getFullName()).matches();
-    }
-
-    public User createUserAndCredentials(UserCredentialsDto userReg) {
-//        List<BlackList> blackList = blackListRepository.findAll();
-//        for (BlackList b : blackList) {
-//            if (b.getPassword().equalsIgnoreCase(userReg.getPassword())) {
-//                throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
-//            }
-//        }
-//
-//        if (!userCredentialsService.isPassword(userReg.getPassword(), userReg.getRepeatPassword())) {
-//            throw new BadRequestException("Passwords are not the same.");
-//        }
-//        UserCredentials userCredentials = new UserCredentials();
-//
-//        String encodedPassword = passwordEncoder.encode(userReg.getPassword());
-//        userCredentials.setPassword(encodedPassword);
-//        userCredentials.setUsername(userReg.getUsername());
-//        userCredentials.setRoles(authService.findByName("ROLE_USER"));
-//        userCredentials.setVerified(false);
-//        userCredentialsService.create(userCredentials); TODO: Authentication service
+    public User registerUser(UserCredentialsDto userReg) {
+        if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
+            throw new BadRequestException("Passwords are not the same.");
+        }
+//        userCredentialsService.create(userCredentials); TODO: Authentication service: create(UserCredentials userCredentails)
         User user = new User();
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
@@ -103,28 +87,37 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public User findUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        if (user == null){
-            log.info("There is no user with username: " + username);
-            throw new NotFoundException("There is no user with username " + username);
-        }
-        return user;
-    }
-
     public User edit(User user, String pastUsername) {
         User dbUser = findUserByUsername(pastUsername);
-        dbUser.setFullName(user.getFullName());
-        dbUser.setEmail(user.getEmail());
-        dbUser.setPhone(user.getPhone());
-        dbUser.setUserGender(user.getUserGender());
-        dbUser.setBirthDate(user.getBirthDate());
-        dbUser.setUsername(user.getUsername());
-        dbUser.setWebSite(user.getWebSite());
-        dbUser.setBio(user.getBio());
+//        dbUser.setBio(user.getBio());                   // TODO: Redundant?
+//        dbUser.setBirthDate(user.getBirthDate());
+//        dbUser.setPhone(user.getPhone());
+//        dbUser.setUserGender(user.getUserGender());
+//        dbUser.setUsername(user.getUsername());
+//        dbUser.setWebSite(user.getWebSite());
+//        dbUser.setPublicProfile(user.isPublicProfile());
+//        dbUser.setPublicDM(user.isPublicDM());
+//        dbUser.setTaggable(user.isTaggable());
         log.info("Try to save updated user: " + pastUsername);
         return userRepository.save(dbUser);
+    }
+
+    // TODO: Redundant?
+    public User updateUser(User user) {
+        User dbUser = userRepository.findByUsername(user.getUsername());
+        if (dbUser == null)
+            throw new NotFoundException("User not found!");
+
+        dbUser.setBio(user.getBio());
+        dbUser.setBirthDate(user.getBirthDate());
+        dbUser.setPhone(user.getPhone());
+        dbUser.setUserGender(user.getUserGender());
+        dbUser.setUsername(user.getUsername());
+        dbUser.setWebSite(user.getWebSite());
+        dbUser.setPublicProfile(user.isPublicProfile());
+        dbUser.setPublicDM(user.isPublicDM());
+        dbUser.setTaggable(user.isTaggable());
+        return dbUser;
     }
 
     public User save(User user) {
@@ -132,37 +125,19 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    //TODO: Nepotrebna metoda?
-    public User updateUser(User user) {
-        User dbUser = userRepository.findByUsername(user.getUsername());
-        if (dbUser != null) {
-            dbUser.setBio(user.getBio());
-            dbUser.setBirthDate(user.getBirthDate());
-            dbUser.setPhone(user.getPhone());
-            dbUser.setUserGender(user.getUserGender());
-            dbUser.setBio(user.getBio());
-            dbUser.setUsername(user.getUsername());
-            dbUser.setPublicProfile(user.isPublicProfile());
-            dbUser.setPublicDM(user.isPublicDM());
-            dbUser.setTaggable(user.isTaggable());
-            dbUser.setWebSite(user.getWebSite());
-        }
-        return dbUser;
+    private boolean checkUsername(UserCredentialsDto userCredentialsDto) {
+        Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
+        return patternUsername.matcher(userCredentialsDto.getUsername()).matches();
     }
 
-    public boolean patternChecker(String email, String password) {
+    private boolean checkFullName(UserCredentialsDto userCredentialsDto) {
+        Pattern patternFullName = Pattern.compile("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
+        return patternFullName.matcher(userCredentialsDto.getFullName()).matches();
+    }
+
+    private boolean patternChecker(String email, String password) {
         Pattern pattern = Pattern.compile("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
         Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
-
-    public User findUserByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            log.info("There is no user with email: " + email);
-            throw new NotFoundException("User with email: " + email + " doesn't exists.");
-        }
-        return user;
-    }
-
 }

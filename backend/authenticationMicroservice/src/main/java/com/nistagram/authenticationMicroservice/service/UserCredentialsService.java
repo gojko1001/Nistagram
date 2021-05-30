@@ -1,6 +1,5 @@
 package com.nistagram.authenticationMicroservice.service;
 
-import com.nistagram.authenticationMicroservice.domain.BlackList;
 import com.nistagram.authenticationMicroservice.domain.UserCredentials;
 import com.nistagram.authenticationMicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationMicroservice.dto.ResetPasswordDto;
@@ -8,7 +7,6 @@ import com.nistagram.authenticationMicroservice.dto.UserCredentialsDto;
 import com.nistagram.authenticationMicroservice.exception.BadRequestException;
 import com.nistagram.authenticationMicroservice.exception.InvalidActionException;
 import com.nistagram.authenticationMicroservice.exception.NotFoundException;
-import com.nistagram.authenticationMicroservice.repoistory.IBlackListRepository;
 import com.nistagram.authenticationMicroservice.repoistory.IUserCredentialsRepository;
 import com.nistagram.authenticationMicroservice.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -35,11 +32,22 @@ public class UserCredentialsService implements IUserCredentialsService {
     @Autowired
     private JwtService jwtService;
     @Autowired
-    private IBlackListRepository blackListRepository;
+    private IBlacklistService blackListService;
     @Autowired
-    private IRoleService authorityService;
+    private IRoleService roleService;
+
+    public UserCredentials findByUsername(String username) {
+        UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
+        if (userCredentials == null)
+            throw new NotFoundException("There is no user credentials with username " + username);
+        return userCredentials;
+    }
 
     public UserCredentials create(UserCredentials userCredentials) {
+        blackListService.isBlacklisted(userCredentials.getPassword());
+        userCredentials.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
+        userCredentials.setRoles(roleService.findByName("ROLE_USER"));
+        userCredentials.setVerified(false);
         log.info("Try to save user credentials with username: " + userCredentials.getUsername());
         return userCredentialsRepository.save(userCredentials);
     }
@@ -63,7 +71,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentials.setPassword(encodedPassword);
         userCredentials.setUsername(loginGoogleDto.getEmail().split("@")[0]);
         userCredentials.setVerified(true);
-        userCredentials.setRoles(authorityService.findByName("ROLE_USER"));
+        userCredentials.setRoles(roleService.findByName("ROLE_USER"));
 
 //        User user = new User();
 //        user.setUsername(userCredentials.getUsername());
@@ -78,28 +86,14 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     }
 
-    public UserCredentials findByUsername(String username) {
-        UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
-        if (userCredentials == null)
-            throw new NotFoundException("There is no user credentials with username " + username);
-        return userCredentials;
-    }
-
-
     public void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) {
-        String extractedUsername = jwtService.extractUsername(jwt);
-        UserCredentials userCredentials = findByUsername(extractedUsername);
         if (!isPassword(resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword())) {
             throw new BadRequestException("Passwords are not the same.");
         }
+        blackListService.isBlacklisted(resetPasswordDto.getPassword());
 
-        List<BlackList> blackList = blackListRepository.findAll();
-        for (BlackList b : blackList) {
-            if (b.getPassword().equalsIgnoreCase(resetPasswordDto.getPassword())) {
-                throw new InvalidActionException("You can't use this password, it is in top 20 most common passwords");
-            }
-        }
-
+        String extractedUsername = jwtService.extractUsername(jwt);
+        UserCredentials userCredentials = findByUsername(extractedUsername);
         String encodedPassword = passwordEncoder.encode(resetPasswordDto.getPassword());
         userCredentials.setPassword(encodedPassword);
         userCredentialsRepository.save(userCredentials);
@@ -120,7 +114,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         return "Your account has been verified successfully";
     }
 
-    public boolean isPassword(String password1, String password2) {
+    private boolean isPassword(String password1, String password2) {
         return password1.equals(password2);
     }
 

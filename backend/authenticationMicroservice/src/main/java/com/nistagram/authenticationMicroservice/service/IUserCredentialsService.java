@@ -9,11 +9,13 @@ import java.io.IOException;
 
 public interface IUserCredentialsService {
 
+    UserCredentials findByUsername(String username);
+
+    UserCredentials create(UserCredentials userCredentials);
+
     UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException;
 
     UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException;
-
-    UserCredentials findByUsername(String username);
 
     void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) throws IOException;
 
