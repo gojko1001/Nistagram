@@ -2,12 +2,14 @@ package com.nistagram.authenticationMicroservice.service;
 
 import com.nistagram.authenticationMicroservice.domain.Role;
 import com.nistagram.authenticationMicroservice.repoistory.IRoleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class RoleService implements IRoleService {
     @Autowired
@@ -23,6 +25,7 @@ public class RoleService implements IRoleService {
 
     @Override
     public List<Role> findByName(String name) {
+        log.info("Try to find role: " + name);
         Role role = roleRepository.findByName(name);
         List<Role> roles = new ArrayList<>();
         roles.add(role);

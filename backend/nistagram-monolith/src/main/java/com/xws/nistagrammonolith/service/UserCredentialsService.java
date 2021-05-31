@@ -53,12 +53,15 @@ public class UserCredentialsService implements IUserCredentialsService {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(userCredentialsDto.getUsername());
         if (userCredentials == null || !passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword()))
             throw new BadRequestException("Username or password is not correct.");
-        if (!userCredentials.getVerified())
+        if (!userCredentials.getVerified()){
+            log.info("User " + userCredentials.getUsername() +" is not verified.");
             throw new InvalidActionException("The account must be verified.");
+        }
         return userCredentials;
     }
 
     public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
+        log.info("Try to find user credentials with email: " + loginGoogleDto.getEmail() + ". Login google");
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail());
         if (userCredentials == null) {
             userCredentials = new UserCredentials();
@@ -83,12 +86,12 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     public UserCredentials findByUsername(String username) {
+        log.info("Try to find user credentials with username: "+ username);
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
         if (userCredentials == null)
             throw new NotFoundException("There is no user credentials with username " + username);
         return userCredentials;
     }
-
 
     public void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) {
         String extractedUsername = jwtService.extractUsername(jwt);
