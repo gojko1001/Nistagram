@@ -53,6 +53,7 @@ public class UserService implements IUserService {
 
     public User create(UserCredentialsDto userReg) {
         try {
+            log.info("Try to find user credentials with username: " + userReg.getUsername());
             User newUser = userRepository.findByUsername(userReg.getUsername());
             if (newUser != null)
                 throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
@@ -90,6 +91,7 @@ public class UserService implements IUserService {
         User user = new User();
         UserCredentials userCredentials = new UserCredentials();
 
+        log.info("Try to get black list");
         List<BlackList> blackList = blackListRepository.findAll();
         for (BlackList b : blackList) {
             if (b.getPassword().equalsIgnoreCase(userReg.getPassword())) {
@@ -173,11 +175,13 @@ public class UserService implements IUserService {
         if (userCredentials != null) {
             userCredentials.setVerified(true);
         }
+        log.info("Try to save user credentials with username: " + userCredentials.getUsername());
         userCredentialsRepository.save(userCredentials);
         return "Your account has been verified successfully";
     }
 
     public User findUserByEmail(String email) {
+        log.info("Try to get user with email: " + email);
         User user = userRepository.findByEmail(email);
         if (user == null) {
             log.info("There is no user with email: " + email);

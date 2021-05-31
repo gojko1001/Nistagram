@@ -8,6 +8,7 @@ import com.xws.nistagrammonolith.repository.ILikeRepository;
 import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ILikeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Service
 public class LikeService implements ILikeService {
     @Autowired
@@ -38,6 +40,7 @@ public class LikeService implements ILikeService {
                 oldLike.setLiked(false);
                 oldLike.setTimestamp(currentDate);
                 oldLike.setPost(post);
+                log.info("Try to save like: " + oldLike.getId());
                 return likeRepository.save(oldLike);
             }
         }
@@ -46,6 +49,7 @@ public class LikeService implements ILikeService {
         newLike.setLiked(true);
         newLike.setTimestamp(currentDate);
         newLike.setPost(post);
+        log.info("Try to save like: " + newLike.getId());
         likeRepository.save(newLike);
         post.getLikes().add(newLike);
         postService.save(post);
@@ -55,6 +59,7 @@ public class LikeService implements ILikeService {
     //TODO: za sada je nekoriscena na frontu
     @Override
     public Integer countLikesOnPost(Long id) {
+        log.info("Try to get post likes: " + id);
         Post post = postService.getById(id);
         /*if(post == null)
             return new ResponseEntity("Post doesn't exist.", HttpStatus.BAD_REQUEST);*/
@@ -74,6 +79,7 @@ public class LikeService implements ILikeService {
     //TODO: mozda da se vraca bas slika a ne naziv
     @Override
     public List<Like> history(String username){
+        log.info("Try to find likes by username: " + username);
         return likeRepository.findLikesByUsername(username);
     }
 }

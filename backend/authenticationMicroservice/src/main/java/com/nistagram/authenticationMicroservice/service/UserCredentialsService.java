@@ -38,8 +38,10 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
-        if (userCredentials == null)
+        if (userCredentials == null){
+            log.info("Can not find user credentials with username: " + username);
             throw new NotFoundException("There is no user credentials with username " + username);
+        }
         return userCredentials;
     }
 
@@ -53,7 +55,7 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     public UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException {
-        log.info("Try to find us");
+        log.info("Try to find user credentials with username: " + userCredentialsDto.getUsername());
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(userCredentialsDto.getUsername());
         if (userCredentials == null || !passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword()))
             throw new BadRequestException("Username or password is not correct.");
@@ -81,7 +83,6 @@ public class UserCredentialsService implements IUserCredentialsService {
 //        userService.save(user);           TODO: Premestiti u user microservice
 
 //        emailService.resetPassword(user); TODO: Notification microservice
-
         return create(userCredentials);
 
     }

@@ -3,11 +3,13 @@ package com.xws.nistagrammonolith.service;
 import com.xws.nistagrammonolith.domain.Location;
 import com.xws.nistagrammonolith.repository.ILocationRepository;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class LocationService implements ILocationService {
     @Autowired
@@ -15,21 +17,27 @@ public class LocationService implements ILocationService {
 
     @Override
     public List<Location> getAll() {
-        return locationRepository.findAll();
+        List<Location> locations = locationRepository.findAll();
+        if(locations.isEmpty())
+            log.info("There is no any location");
+        return locations;
     }
 
     @Override
     public Location create(Location location) {
+        log.info("Try to save location: " + location.getName());
         return locationRepository.save(location);
     }
 
     @Override
     public Location findById(Long id) {
+        log.info("Try to find location with id: " + id);
         return locationRepository.findLocationById(id);
     }
 
     @Override
     public Location findByName(String name) {
+        log.info("Try to find location with name: " + name);
         return locationRepository.findLocationByName(name);
     }
 }

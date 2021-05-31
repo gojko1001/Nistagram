@@ -9,6 +9,7 @@ import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class PostService implements IPostService {
 
@@ -33,16 +35,21 @@ public class PostService implements IPostService {
 
     @Override
     public List<Post> getAll() {
-        return null;
+        List<Post> posts = postRepository.findAll();
+        if(posts.isEmpty())
+            log.info("There is no any posts.");
+        return posts;
     }
 
     @Override
     public Post save(Post post) {
+        log.info("Try to save post: " + post.getId());
         return postRepository.save(post);
     }
 
     @Override
     public List<Post> getUserImages(String username) {
+        log.info("Try to get post by username: " + username);
         return postRepository.findPostsByUsername(username);
     }
 
@@ -76,6 +83,7 @@ public class PostService implements IPostService {
 
     @Override
     public ImageBytesDto getImageFileById(Long id) {
+        log.info("Try to get post by id: " + id);
         Post post = postRepository.findPostById(id);
         ImageBytesDto imageBytesDtos = new ImageBytesDto();
         if (post != null) {
@@ -100,6 +108,7 @@ public class PostService implements IPostService {
 
     @Override
     public Post getById(Long id) {
+        log.info("Try to get post with id: " + id);
         return postRepository.findPostById(id);
     }
 

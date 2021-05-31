@@ -3,12 +3,14 @@ package com.xws.nistagrammonolith.service;
 import com.xws.nistagrammonolith.domain.Tag;
 import com.xws.nistagrammonolith.repository.ITagRepository;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class TagService implements ITagService {
     @Autowired
@@ -16,11 +18,15 @@ public class TagService implements ITagService {
 
     @Override
     public List<Tag> getAll() {
-        return tagRepository.findAll();
+        List<Tag> tags = tagRepository.findAll();
+        if(tags.isEmpty())
+            log.info("There is no any tag.");
+        return tags;
     }
 
     @Override
     public Tag create(Tag tag) {
+        log.info("Try to save tag: " + tag.getName());
         return tagRepository.save(tag);
     }
 
@@ -31,7 +37,7 @@ public class TagService implements ITagService {
             if (tagRepository.findByName(t) == null) {
                 Tag tag = new Tag();
                 tag.setName(t.toLowerCase());
-                tagRepository.save(tag);
+                create(tag);
                 tagDb.add(tag);
             }
         }
