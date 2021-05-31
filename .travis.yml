@@ -19,5 +19,5 @@ script:
   - cd backend/authentication-microservice
   - chmod +x mvnw
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=gojko1001_Nistagram
-  - cd ../backend/user-microservice
+  - cd ../user-microservice
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=gojko1001_Nistagram
