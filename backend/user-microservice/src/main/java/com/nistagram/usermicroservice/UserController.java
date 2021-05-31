@@ -32,15 +32,15 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public User create(@RequestBody UserCredentialsDto userReg) {
+    public User create(@RequestBody UserRegistrationDto userReg) {
         return userService.create(userReg);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('GET_USER')")
+    @PreAuthorize("hasAuthority('EDIT_PROFILE')")
     public User edit(@RequestBody UserDto userDto) {
         log.info("Try to edit user: " + userDto.getPastUsername());
-        return userService.edit(UserMapper.mapUserDtoToUser(userDto), userDto.getPastUsername());
+        return userService.updateUser(UserMapper.mapUserDtoToUser(userDto), userDto.getPastUsername());
     }
 
 }

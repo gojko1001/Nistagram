@@ -14,13 +14,11 @@ public interface IUserService {
 
     User findUserByEmail(String email);
 
-    User create(UserCredentialsDto userReg);
+    User create(UserRegistrationDto userReg);
 
-    User registerUser(UserCredentialsDto userReg);
+    User registerUser(UserRegistrationDto userReg);
 
-    User updateUser(User user);
-
-    User edit(User user, String pastUsername);
+    User updateUser(User user, String oldUsername);
 
     User save(User user);
 }
