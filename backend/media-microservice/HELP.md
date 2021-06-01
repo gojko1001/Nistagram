@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.nistagram.media-microservice' is invalid and this project uses 'com.nistagram.mediamicroservice' instead.
+* The original package name 'com.media-microservice.media-microservice' is invalid and this project uses 'com.mediamicroservice.mediamicroservice' instead.
 
 # Getting Started
 
