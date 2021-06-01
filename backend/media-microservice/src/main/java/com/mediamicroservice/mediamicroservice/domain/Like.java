@@ -3,18 +3,18 @@ package com.mediamicroservice.mediamicroservice.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Date;
 
-@Entity
 @Data
-public class Post {
+@Entity(name = "likes")
+public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Media media;
-    @ManyToMany
-    private List<Like> likes;
-    @ManyToMany
-    private List<Comment> comments;
+    @Column
+    private String username;
+    @Column
+    private boolean liked = true;
+    @Column
+    private Date timestamp;
 }

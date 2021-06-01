@@ -7,14 +7,12 @@ import java.util.List;
 
 @Entity
 @Data
-public class Post {
+public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Media media;
+    @Column
+    private String name;
     @ManyToMany
-    private List<Like> likes;
-    @ManyToMany
-    private List<Comment> comments;
+    private List<Favourite> favourites;
 }

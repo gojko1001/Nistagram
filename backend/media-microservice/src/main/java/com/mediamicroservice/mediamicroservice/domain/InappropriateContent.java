@@ -15,7 +15,7 @@ public class InappropriateContent {
     @Column
     private RequestStatus requestStatus;
     @Column
-    private String responedBy;
+    private String respondedBy;
     @OneToOne
     private Media media;
 }
