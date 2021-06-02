@@ -20,7 +20,6 @@ public class RabbitMQService {
     public void send(String text) {
         rabbitTemplate.convertAndSend(exchange, routingkey, text);
         System.out.println("Send msg = " + text);
-
     }
 
 }
