@@ -71,7 +71,7 @@ insert into users (username, full_name, email, phone, web_site, bio, birth_date,
 insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('samsung', 'Samsung', "samsung@mailinator.com", "062/963-22-56", 'www.samsung.com', 'Be inspired to #DoWhatYouCant', "1990-12-08", 2, true, true, true);
 
 
--- Tag
+-- Tag -- kopirala
 insert into tag(name) values("pokemon");
 insert into tag(name) values("pikachu");
 insert into tag(name) values("life");
@@ -84,7 +84,7 @@ insert into tag(name) values("pineapple");
 insert into tag(name) values("sponge");
 insert into tag(name) values("marvel");
 
--- Location
+-- Location -- kopirala
 insert into location(name) values ("The Dunavska street");
 insert into location(name) values ("St Sava Church");
 insert into location(name) values ("Novi Sad, Serbia");
@@ -93,7 +93,7 @@ insert into location(name) values ("Gardos");
 insert into location(name) values ("Disneyland, California");
 insert into location(name) values ("Pacific Ocean");
 
---POSTS
+--POSTS -- kopirala
     -- Gojko's posts
     insert into post (description, file_name, username, location_id, is_image) values ("pokemone biram tebe", "pokemon1.png", "gojko", 3, true);
     insert into post_tags (post_id, tags_id) values (1, 1);
@@ -138,7 +138,7 @@ insert into location(name) values ("Pacific Ocean");
     insert into post_tags (post_id, tags_id) values (10, 1);
 -----
 
--- COMMENTS
+-- COMMENTS -- kopirala
     insert into comment (text, username) values ("bla bla bla komentar", "maja")
     insert into post_comments (post_id, comments_id) values (1, 1);
     insert into comment (text, username) values ("pikacuu mi je omiljen pokemon!!", "tasa")
@@ -161,7 +161,7 @@ insert into location(name) values ("Pacific Ocean");
     insert into post_comments (post_id, comments_id) values (6, 10);
 -----
 
--- LIKES
+-- LIKES -- kopirala
     insert into likes(username, liked, post_id) values ("masa", true, 1);
     insert into post_likes(post_id, likes_id) values (1, 1);
     insert into likes(username, liked, post_id) values ("maja", true, 1);

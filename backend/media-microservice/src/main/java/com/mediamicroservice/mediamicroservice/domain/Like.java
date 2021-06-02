@@ -17,4 +17,6 @@ public class Like {
     private boolean liked = true;
     @Column
     private Date timestamp;
+    @OneToOne
+    private Post post;
 }

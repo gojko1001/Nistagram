@@ -21,9 +21,11 @@ public class Media {
     @Column
     private boolean isImage = true;
     @Column
-    private Date timastamp;
+    private Date timestamp;
     @ManyToMany
     private List<UserTag> userTags;
+    @ManyToMany
+    private List<Hashtag> hashtags;
     @OneToOne
     private Location location;
     @OneToOne
