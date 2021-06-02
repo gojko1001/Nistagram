@@ -1,9 +1,6 @@
 package com.xws.nistagrammonolith.controller.dto;
 
-import com.xws.nistagrammonolith.domain.Comment;
-import com.xws.nistagrammonolith.domain.Like;
-import com.xws.nistagrammonolith.domain.Location;
-import com.xws.nistagrammonolith.domain.Tag;
+import com.xws.nistagrammonolith.domain.media.*;
 import lombok.Data;
 
 import java.util.List;
@@ -14,7 +11,7 @@ public class ImageBytesDto {
     private String username;
     private String description;
     private Location location;
-    private List<Tag> tags;
+    private List<Hashtag> hashtags;
     private List<Comment> comments;
     private boolean isImage;
     private List<Like> likes;

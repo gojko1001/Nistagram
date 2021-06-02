@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
 import com.xws.nistagrammonolith.controller.dto.CreateLikeDto;
-import com.xws.nistagrammonolith.domain.Like;
+import com.xws.nistagrammonolith.domain.media.Like;
 
 import java.util.List;
 

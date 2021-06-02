@@ -1,6 +1,6 @@
 package com.xws.nistagrammonolith.service;
 
-import com.xws.nistagrammonolith.domain.Location;
+import com.xws.nistagrammonolith.domain.media.Location;
 import com.xws.nistagrammonolith.repository.ILocationRepository;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
 import lombok.extern.slf4j.Slf4j;

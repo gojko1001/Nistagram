@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.controller.dto.CreateCommentDto;
-import com.xws.nistagrammonolith.domain.Comment;
+import com.xws.nistagrammonolith.domain.media.Comment;
 import com.xws.nistagrammonolith.service.interfaces.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.controller;
 
 import com.xws.nistagrammonolith.controller.dto.CreateLikeDto;
-import com.xws.nistagrammonolith.domain.Like;
+import com.xws.nistagrammonolith.domain.media.Like;
 import com.xws.nistagrammonolith.service.interfaces.ILikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

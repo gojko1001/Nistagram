@@ -1,6 +1,6 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
-import com.xws.nistagrammonolith.domain.Location;
+import com.xws.nistagrammonolith.domain.media.Location;
 
 import java.util.List;
 

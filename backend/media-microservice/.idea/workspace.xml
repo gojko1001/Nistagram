@@ -5,12 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Album.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/InappropriateContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Media.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/RequestStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Story.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/UserTag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/IHashtagRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/IMediaRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IHashtagService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media-microservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/media-microservice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/LikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/LikeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/LocationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/TagController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/dto/ImageBytesDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/dto/ImageBytesDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/dto/ImageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/dto/PostDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/mapping/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/mapping/PostMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Like.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/media/Hashtag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ICommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ICommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ILikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ILikeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ILocationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ILocationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/IPostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/IPostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ITagRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/LikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/LikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/LocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/LocationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/TagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/HashtagService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ICommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ICommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ILikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ILikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ILocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ILocationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IPostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ITagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/resources/import.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,5 +122,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

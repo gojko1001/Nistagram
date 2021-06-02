@@ -1,14 +1,16 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
-import com.xws.nistagrammonolith.controller.dto.ImageDto;
+import com.xws.nistagrammonolith.controller.dto.PostDto;
 import com.xws.nistagrammonolith.controller.mapping.PostMapper;
-import com.xws.nistagrammonolith.domain.Location;
-import com.xws.nistagrammonolith.domain.Post;
+import com.xws.nistagrammonolith.domain.media.Location;
+import com.xws.nistagrammonolith.domain.media.Media;
+import com.xws.nistagrammonolith.domain.media.Post;
+import com.xws.nistagrammonolith.repository.IMediaRepository;
 import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
-import com.xws.nistagrammonolith.service.interfaces.ITagService;
+import com.xws.nistagrammonolith.service.interfaces.IHashtagService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -29,7 +32,9 @@ public class PostService implements IPostService {
     @Autowired
     private ILocationService locationService;
     @Autowired
-    private ITagService tagService;
+    private IHashtagService tagService;
+    @Autowired
+    private IMediaRepository mediaRepository;
 
     private static String uploadDir = "user-photos";
 
@@ -50,21 +55,25 @@ public class PostService implements IPostService {
     @Override
     public List<Post> getUserImages(String username) {
         log.info("Try to get post by username: " + username);
-        return postRepository.findPostsByUsername(username);
+        return postRepository.findPostsByMedia_Username(username);
     }
 
     @Override
-    public Post saveImageInfo(ImageDto imageDto) {
+    public Post saveImageInfo(PostDto imageDto) {
         Post post = new Post();
-        post.setFileName(imageDto.getFileName());
+        Media media = new Media();
+        media.setFileName(imageDto.getFileName());
         if (imageDto.getFileName().contains(".mp4")) {
-            post.setImage(false);
+            media.setImage(false);
         }
-        post.setUsername(imageDto.getUsername());
-        post.setDescription(imageDto.getDescription());
+        media.setUsername(imageDto.getUsername());
+        media.setDescription(imageDto.getDescription());
         Location location = locationService.findByName(imageDto.getLocationName());
-        post.setLocation(location);
-        post.setTags(tagService.createTags(imageDto.getTags()));
+        media.setLocation(location);
+        media.setHashtags(tagService.createTags(imageDto.getTags()));
+        media.setTimestamp(new Date());
+        mediaRepository.save(media);
+        post.setMedia(media);
         return save(post);
     }
 
@@ -96,8 +105,8 @@ public class PostService implements IPostService {
 
     @Override
     public ImageBytesDto imageFile(Post post, String filePath) {
-        ImageBytesDto imageBytesDtos = PostMapper.mapImageToImageBytesDto(post);
-        File in = new File(filePath + post.getFileName());
+        ImageBytesDto imageBytesDtos = PostMapper.mapPostToImageBytesDto(post);
+        File in = new File(filePath + post.getMedia().getFileName());
         try {
             imageBytesDtos.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
         } catch (IOException e) {
