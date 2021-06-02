@@ -5,20 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/dto/ImageBytesDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/mapping/PostMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/MediaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/PostService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/IMediaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/IPostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/media-microservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/media-microservice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IPostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IPostRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mediamicroservice/mediamicroservice/repository/IPostRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mediamicroservice/mediamicroservice/repository/IPostRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/TagController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/TagController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/dto/ImageBytesDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/dto/ImageBytesDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/mapping/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/mapping/PostMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/domain/Hashtag.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/rabbitmq/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/rabbitmq/RabbitMQConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/rabbitmq/RabbitMQService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/rabbitmq/RabbitMQService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ICommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ICommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ITagRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/repository/ITagRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/TagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/TagService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/IPostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ITagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/service/interfaces/ITagService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +39,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -62,12 +73,23 @@
       <recent name="G:\MASHA\XML projekat\Nistagram\backend\media-microservice\src\main\java\com\mediamicroservice\mediamicroservice" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mediamicroservice.mediamicroservice.dto" />
       <recent name="com.mediamicroservice.mediamicroservice.messaging" />
       <recent name="com.mediamicroservice.mediamicroservice.rabbitmq" />
-      <recent name="com.mediamicroservice.mediamicroservice.dto" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MediaMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="media-microservice" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.mediamicroservice.mediamicroservice.MediaMicroserviceApplication" />
@@ -88,6 +110,7 @@
       <workItem from="1622572575911" duration="560000" />
       <workItem from="1622616872913" duration="17140000" />
       <workItem from="1622646899448" duration="8028000" />
+      <workItem from="1622660395521" duration="4114000" />
     </task>
     <servers />
   </component>

@@ -25,6 +25,15 @@ public class RabbitMQConfig {
     Binding bindingCreateComment(@Qualifier("queueCreateComment") Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(routingkey);
     }
+
+    @Bean
+    Queue queuePostsByUsername() {
+        return new Queue("userposts.queue", false);
+    }
+    @Bean
+    Binding bindingPostsByUsername(@Qualifier("queuePostsByUsername") Queue queue, DirectExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(routingkey);
+    }
     ////
 
 

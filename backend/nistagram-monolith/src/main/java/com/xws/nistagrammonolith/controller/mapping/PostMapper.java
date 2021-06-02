@@ -13,7 +13,7 @@ public class PostMapper {
         imageBytesDto.setUsername(post.getUsername());
         imageBytesDto.setDescription(post.getDescription());
         imageBytesDto.setLocation(post.getLocation());
-        imageBytesDto.setTags(post.getTags());
+        imageBytesDto.setHashtags(post.getTags());
         imageBytesDto.setComments(post.getComments());
         imageBytesDto.setImage(post.isImage());
         imageBytesDto.setImageBytes(new ArrayList<>());

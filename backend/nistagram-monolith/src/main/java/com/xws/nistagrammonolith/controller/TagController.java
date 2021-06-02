@@ -1,6 +1,6 @@
 package com.xws.nistagrammonolith.controller;
 
-import com.xws.nistagrammonolith.domain.Tag;
+import com.xws.nistagrammonolith.domain.Hashtag;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +16,12 @@ public class TagController {
     private ITagService tagService;
 
     @GetMapping
-    public List<Tag> getAll() {
+    public List<Hashtag> getAll() {
         return tagService.getAll();
     }
 
     @PostMapping
-    public Tag create(@RequestBody Tag tag) {
+    public Hashtag create(@RequestBody Hashtag tag) {
         return tagService.create(tag);
     }
 }

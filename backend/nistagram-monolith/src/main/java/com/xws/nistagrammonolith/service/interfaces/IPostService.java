@@ -3,6 +3,7 @@ package com.xws.nistagrammonolith.service.interfaces;
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.domain.Post;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface IPostService {
     Post getById(Long id);
 
     ImageBytesDto getImageFileById(Long id);
+
+    List<Object> getPostsByUsername(String username);
 }

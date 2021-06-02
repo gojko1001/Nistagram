@@ -1,9 +1,9 @@
-package com.xws.nistagrammonolith.controller.dto;
+package com.mediamicroservice.mediamicroservice.dto;
 
-import com.xws.nistagrammonolith.domain.Comment;
-import com.xws.nistagrammonolith.domain.Like;
-import com.xws.nistagrammonolith.domain.Location;
-import com.xws.nistagrammonolith.domain.Hashtag;
+import com.mediamicroservice.mediamicroservice.domain.Comment;
+import com.mediamicroservice.mediamicroservice.domain.Hashtag;
+import com.mediamicroservice.mediamicroservice.domain.Like;
+import com.mediamicroservice.mediamicroservice.domain.Location;
 import lombok.Data;
 
 import java.util.List;

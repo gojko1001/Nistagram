@@ -1,8 +1,10 @@
 package com.xws.nistagrammonolith.service;
 
+import com.xws.nistagrammonolith.controller.dto.CreateCommentDto;
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
 import com.xws.nistagrammonolith.controller.dto.ImageDto;
 import com.xws.nistagrammonolith.controller.mapping.PostMapper;
+import com.xws.nistagrammonolith.domain.Comment;
 import com.xws.nistagrammonolith.domain.Location;
 import com.xws.nistagrammonolith.domain.Post;
 import com.xws.nistagrammonolith.repository.IPostRepository;
@@ -11,7 +13,11 @@ import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.modelmapper.ModelMapper;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -23,6 +29,8 @@ import java.util.List;
 @Slf4j
 @Service
 public class PostService implements IPostService {
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
 
     @Autowired
     private IPostRepository postRepository;
@@ -41,12 +49,14 @@ public class PostService implements IPostService {
         return posts;
     }
 
+    // TODO: uskoro obrisati
     @Override
     public Post save(Post post) {
         log.info("Try to save post: " + post.getId());
         return postRepository.save(post);
     }
 
+    // TODO: uskoro obrisati
     @Override
     public List<Post> getUserImages(String username) {
         log.info("Try to get post by username: " + username);
@@ -68,6 +78,7 @@ public class PostService implements IPostService {
         return save(post);
     }
 
+    // TODO: radim trenutno
     @Override
     public List<ImageBytesDto> getImagesFiles(List<Post> posts) {
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
@@ -110,6 +121,14 @@ public class PostService implements IPostService {
     public Post getById(Long id) {
         log.info("Try to get post with id: " + id);
         return postRepository.findPostById(id);
+    }
+
+    @Override
+    public List<Object> getPostsByUsername(String username) {
+        ModelMapper modelMapper = new ModelMapper();
+        List<Object> result = (List<Object>) rabbitTemplate.convertSendAndReceive("userposts.queue", username);
+        System.out.println(result);
+        return result;
     }
 
 

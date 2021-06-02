@@ -20,7 +20,7 @@ public class Post {
     @OneToOne
     private Location location;
     @ManyToMany
-    private List<Tag> tags;
+    private List<Hashtag> tags;
     @ManyToMany
     private List<Comment> comments;        //TODO: favorites, album
     @Column

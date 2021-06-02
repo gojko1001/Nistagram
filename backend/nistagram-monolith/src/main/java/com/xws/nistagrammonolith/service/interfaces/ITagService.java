@@ -1,14 +1,14 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
-import com.xws.nistagrammonolith.domain.Tag;
+import com.xws.nistagrammonolith.domain.Hashtag;
 
 import java.util.List;
 
 public interface ITagService {
 
-    List<Tag> getAll();
+    List<Hashtag> getAll();
 
-    Tag create(Tag tag);
+    Hashtag create(Hashtag tag);
 
-    List<Tag> createTags(List<String> tags);
+    List<Hashtag> createTags(List<String> tags);
 }

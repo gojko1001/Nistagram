@@ -1,17 +1,17 @@
 package com.xws.nistagrammonolith.repository;
 
-import com.xws.nistagrammonolith.domain.Tag;
+import com.xws.nistagrammonolith.domain.Hashtag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ITagRepository extends JpaRepository<Tag, Long> {
+public interface ITagRepository extends JpaRepository<Hashtag, Long> {
 
-    Tag save(Tag tag);
+    Hashtag save(Hashtag tag);
 
-    List<Tag> findAll();
+    List<Hashtag> findAll();
 
-    Tag findByName(String name);
+    Hashtag findByName(String name);
 }

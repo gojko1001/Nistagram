@@ -1,6 +1,6 @@
 package com.xws.nistagrammonolith.service;
 
-import com.xws.nistagrammonolith.domain.Tag;
+import com.xws.nistagrammonolith.domain.Hashtag;
 import com.xws.nistagrammonolith.repository.ITagRepository;
 import com.xws.nistagrammonolith.service.interfaces.ITagService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,25 +17,25 @@ public class TagService implements ITagService {
     private ITagRepository tagRepository;
 
     @Override
-    public List<Tag> getAll() {
-        List<Tag> tags = tagRepository.findAll();
+    public List<Hashtag> getAll() {
+        List<Hashtag> tags = tagRepository.findAll();
         if(tags.isEmpty())
             log.info("There is no any tag.");
         return tags;
     }
 
     @Override
-    public Tag create(Tag tag) {
+    public Hashtag create(Hashtag tag) {
         log.info("Try to save tag: " + tag.getName());
         return tagRepository.save(tag);
     }
 
     @Override
-    public List<Tag> createTags(List<String> tags) {
-        List<Tag> tagDb = new ArrayList<>();
+    public List<Hashtag> createTags(List<String> tags) {
+        List<Hashtag> tagDb = new ArrayList<>();
         for (String t : tags) {
             if (tagRepository.findByName(t) == null) {
-                Tag tag = new Tag();
+                Hashtag tag = new Hashtag();
                 tag.setName(t.toLowerCase());
                 create(tag);
                 tagDb.add(tag);
