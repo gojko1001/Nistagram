@@ -1,4 +1,4 @@
-package com.xws.nistagrammonolith.domain;
+package com.xws.nistagrammonolith.domain.media;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -12,13 +12,10 @@ public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column
     private String username;
     @Column
     private boolean liked = true;
     @Column
-    @Temporal(TemporalType.DATE)
     private Date timestamp;
-    @OneToOne
-    private Post post;
 }

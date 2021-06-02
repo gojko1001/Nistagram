@@ -45,7 +45,7 @@
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
                                     <br>
-                                    <span v-for="(tag,t) in img.tags" :key="t">
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
                                         #{{tag.name}}
                                     </span>
                                 </b-card-text>

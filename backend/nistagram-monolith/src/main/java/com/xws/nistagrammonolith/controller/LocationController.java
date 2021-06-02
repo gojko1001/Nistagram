@@ -1,6 +1,6 @@
 package com.xws.nistagrammonolith.controller;
 
-import com.xws.nistagrammonolith.domain.Location;
+import com.xws.nistagrammonolith.domain.media.Location;
 import com.xws.nistagrammonolith.service.interfaces.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

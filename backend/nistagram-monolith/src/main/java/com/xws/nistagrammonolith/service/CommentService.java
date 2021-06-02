@@ -1,8 +1,8 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.controller.dto.CreateCommentDto;
-import com.xws.nistagrammonolith.domain.Comment;
-import com.xws.nistagrammonolith.domain.Post;
+import com.xws.nistagrammonolith.domain.media.Comment;
+import com.xws.nistagrammonolith.domain.media.Post;
 import com.xws.nistagrammonolith.repository.ICommentRepository;
 import com.xws.nistagrammonolith.service.interfaces.ICommentService;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;

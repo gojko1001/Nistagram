@@ -1,13 +1,14 @@
-package com.xws.nistagrammonolith.domain;
+package com.xws.nistagrammonolith.domain.media;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
-public class Post {
+public class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,15 +18,16 @@ public class Post {
     private String username;
     @Column
     private String description;
-    @OneToOne
-    private Location location;
-    @ManyToMany
-    private List<Tag> tags;
-    @ManyToMany
-    private List<Comment> comments;        //TODO: favorites, album
     @Column
     private boolean isImage = true;
+    @Column
+    private Date timestamp;
     @ManyToMany
-    private List<Like> likes;
-
+    private List<UserTag> userTags;
+    @ManyToMany
+    private List<Hashtag> hashtags;
+    @OneToOne
+    private Location location;
+    @OneToOne
+    private Album album;
 }

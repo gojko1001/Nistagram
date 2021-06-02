@@ -1,6 +1,6 @@
 package com.xws.nistagrammonolith.repository;
 
-import com.xws.nistagrammonolith.domain.Comment;
+import com.xws.nistagrammonolith.domain.media.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
