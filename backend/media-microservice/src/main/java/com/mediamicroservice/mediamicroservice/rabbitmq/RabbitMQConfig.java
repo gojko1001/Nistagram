@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${media.rabbitmq.queue}")
-    String queueName;
+    /*@Value("${media.rabbitmq.queue}")
+    String queueName;*/
 
     @Value("${media.rabbitmq.exchange}")
     String exchange;
@@ -21,20 +21,20 @@ public class RabbitMQConfig {
     @Value("${media.rabbitmq.routingkey}")
     private String routingkey;
 
-    @Bean
+    /*@Bean
     Queue queue() {
         return new Queue(queueName, false);
-    }
+    }*/
 
     @Bean
     DirectExchange exchange() {
         return new DirectExchange(exchange);
     }
 
-    @Bean
+    /*@Bean
     Binding binding(Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(routingkey);
-    }
+    }*/
 
     @Bean
     public MessageConverter jsonMessageConverter() {

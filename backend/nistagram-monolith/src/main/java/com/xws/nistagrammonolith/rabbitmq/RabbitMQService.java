@@ -11,15 +11,17 @@ public class RabbitMQService {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
+    // TODO: verovatno obrisati
     @Value("${nistagram.rabbitmq.exchange}")
     private String exchange;
 
+    // TODO: verovatno obrisati
     @Value("${nistagram.rabbitmq.routingkey}")
     private String routingkey;
 
     public void send(String text) {
-        rabbitTemplate.convertAndSend(exchange, routingkey, text);
-        System.out.println("Send msg = " + text);
+        String result = (String) rabbitTemplate.convertSendAndReceive("createcomment.queue", text);
+        System.out.println("Response msg = " + result);
     }
 
 }
