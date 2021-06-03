@@ -87,7 +87,7 @@
                             </b-card>              
                         </div>
                     </b-tab>
-                    <b-tab title="Tagged posts"><p>Photos user is tagged on</p></b-tab>
+                    <b-tab title="Collections"><p>My collections</p></b-tab>
                     <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
                     <b-tab title="Story archive">
                         <div v-for="(img,j) in archivedStories" :key="j">
