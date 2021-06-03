@@ -19,8 +19,8 @@
         <div class="vl"></div>
         <div id="userMedia">
             <div id="stories">
-                <b-button v-b-modal.modal-1 style="font-size:25px;">Story  <i class="fas fa-camera-retro fa-lg"></i></b-button>
-                <b-modal id="modal-1" title="BootstrapVue">
+                <b-button v-b-modal.modal-1 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <b-modal id="modal-1">
                     <p>ovde ce biti storiji</p>
                 </b-modal>
             </div>
