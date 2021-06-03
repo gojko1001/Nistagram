@@ -21,6 +21,9 @@
             <div id="stories">
                 <b-button v-b-modal.modal-1 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
                 <b-modal id="modal-1">
+                    <button>
+                        <i class="fas fa-user-friends"></i>
+                    </button>
                      <div v-for="(img,p) in stories" :key="p">
                             <b-card
                                 tag="article"
