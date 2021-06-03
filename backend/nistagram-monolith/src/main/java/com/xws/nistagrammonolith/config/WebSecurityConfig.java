@@ -92,7 +92,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/tag",
                 "/location",
                 "/image/**",
-                "/like/**");
+                "/like/**",
+                "/story/**");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/user/add",
                 "/userCredentials/login",
@@ -102,6 +103,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/comment",
                 "/like",
                 "/rabbitmq",
-                "/story/*");
+                "/story/**");
     }
 }
