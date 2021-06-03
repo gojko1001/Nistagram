@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="" />
+    <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/CollectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/CollectionController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +38,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../nistagram-monolith/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
   </component>
   <component name="RunManager">
     <configuration name="MediaMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -58,6 +61,7 @@
       <workItem from="1622572575911" duration="560000" />
       <workItem from="1622702273018" duration="1458000" />
       <workItem from="1622706293050" duration="69000" />
+      <workItem from="1622741095608" duration="665000" />
     </task>
     <servers />
   </component>

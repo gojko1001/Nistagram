@@ -19,8 +19,8 @@
         <div class="vl"></div>
         <div id="userMedia">
             <div id="stories">
-                <b-button v-b-modal.modal-1 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
-                <b-modal id="modal-1">
+                <b-button v-b-modal.modal-2 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <b-modal id="modal-2">
                     <button>
                         <i class="fas fa-user-friends"></i>
                     </button>
@@ -70,6 +70,9 @@
                                 <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
                                     <i class="far fa-comment"></i>
                                 </router-link>
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                    <i class="fas fa-bookmark"></i>
+                                </router-link>
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
                                     <br>
@@ -84,7 +87,7 @@
                             </b-card>              
                         </div>
                     </b-tab>
-                    <b-tab title="Tagged posts"><p>Photos user is tagged on</p></b-tab>
+                    <b-tab title="Collections"><p>My collections</p></b-tab>
                     <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
                     <b-tab title="Story archive">
                         <div v-for="(img,j) in archivedStories" :key="j">
