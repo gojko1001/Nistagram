@@ -72,7 +72,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/like").permitAll()
                 .antMatchers("/like/{id}").permitAll()
                 .antMatchers("/rabbitmq").permitAll()
-                .antMatchers("/story").permitAll()
+                .antMatchers("/story/profile/{username}").permitAll()
+                .antMatchers("/story/archive/{username}").permitAll()
+                .antMatchers("/collection").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Enable CORS layer (WebMvcConfig class)
@@ -93,7 +95,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/location",
                 "/image/**",
                 "/like/**",
-                "/story/**");
+                "/story/**",
+                "/collection/**");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/user/add",
                 "/userCredentials/login",
@@ -103,6 +106,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/comment",
                 "/like",
                 "/rabbitmq",
-                "/story/**");
+                "/story/**",
+                "/collection/**");
     }
 }
