@@ -1,6 +1,6 @@
 package com.xws.nistagrammonolith.controller;
 
-import com.xws.nistagrammonolith.controller.dto.PostDto;
+import com.xws.nistagrammonolith.controller.dto.MediaDto;
 import com.xws.nistagrammonolith.domain.media.Post;
 import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.util.FileUploadUtil;
@@ -37,7 +37,7 @@ public class PostController {
 
 
     @PostMapping("/info")
-    public Post saveImageInfo(@RequestBody PostDto imageDto) {
+    public Post saveImageInfo(@RequestBody MediaDto imageDto) {
         return postService.saveImageInfo(imageDto);
     }
 

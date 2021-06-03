@@ -17,7 +17,7 @@
               <i class="fas fa-heart"></i>
             </button>
             <span>{{img.numLikes}}</span>
-            <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
+            <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
               <i class="far fa-comment"></i>
             </router-link>
             <b-card-text>
@@ -33,7 +33,7 @@
             </span>
           </b-card>              
         </div>
-        <a href="/postimage" class="float">
+        <a v-if="username != null" href="/postimage" class="float">
             <i class="fas fa-plus my-float"></i>
         </a>
     </div>
@@ -58,11 +58,12 @@ export default {
             formLike:{
               postId: 0,
               username:''
-            }
+            },
         }
     },
   mounted: function(){
     this.username = getEmailFromToken();
+    if(this.username != null){
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + localStorage.getItem('JWT'),
                                                             }                                          
@@ -73,28 +74,28 @@ export default {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
                                     return
                                 }
-                                window.location.href = '/home'
             })
-        this.$nextTick(function () {
-          this.axios.get('/image/discover/' + this.username)
-                      .then(response => { this.info = response.data;
-                                          for(let i=0; i< response.data.length; i++){
-                                              if(this.info[i].image){
-                                                this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
-                                              }else{
-                                                this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
-                                              }
-                                              this.info[i].numLikes = this.info[i].likes.length;
-                                              for(var like of this.info[i].likes){
-                                                if(like.username == this.username){
-                                                    this.info[i].liked = true;
-                                                }
-                                              }
-                                          }  
-                      }).catch(error => { console.log(error);
-                                          this.makeToast("Error occurred.", "danger");
-              });
-        })
+    }
+    this.$nextTick(function () {
+      this.axios.get('/image/discover/' + this.username)
+                  .then(response => { this.info = response.data;
+                                      for(let i=0; i< response.data.length; i++){
+                                          if(this.info[i].image){
+                                            this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
+                                          }else{
+                                            this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
+                                          }
+                                          this.info[i].numLikes = this.info[i].likes.length;
+                                          for(var like of this.info[i].likes){
+                                            if(like.username == this.username){
+                                                this.info[i].liked = true;
+                                            }
+                                          }
+                                      }  
+                  }).catch(error => { console.log(error);
+                                      this.makeToast("Error occurred.", "danger");
+          });
+    })
   },
   methods:{
         makeToast(message, variant) {
@@ -111,13 +112,18 @@ export default {
         console.log(this.form);
         this.formLike.postId = id;
         this.formLike.username = getEmailFromToken();
-        this.axios.post('/like', this.formLike)
+        if(this.formLike.username != null){
+          this.axios.post('/like', this.formLike)
           .then(response => { console.log(response.data);
                               this.makeToast("Liked !!!", "success");
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
+        
       },
     }
 }

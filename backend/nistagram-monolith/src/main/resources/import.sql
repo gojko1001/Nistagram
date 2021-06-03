@@ -134,7 +134,7 @@ insert into media_hashtags (media_id, hashtags_id) values (6, 7);
 insert into media_hashtags (media_id, hashtags_id) values (6, 8);
 -- Masa's posts
 -- 7
-insert into media (description, file_name, is_image, username, location_id, timestamp) values ("naruto, sakura, saske", "marvel1.jpg", true, "masa", 5, "2021-04-30");
+insert into media (description, file_name, is_image, username, location_id, timestamp) values ("naruto, sakura, saske", "naruto1.jpeg", true, "masa", 5, "2021-04-30");
 insert into post (media_id) values (7);
 insert into media_hashtags (media_id, hashtags_id) values (7, 7);
 insert into media_hashtags (media_id, hashtags_id) values (7, 8);
@@ -207,6 +207,21 @@ insert into post_comments (post_id, comments_id) values (6, 9);
 insert into comment (text, username, timestamp) values ("iron man ljudii", "tasa", "2021-05-27");
 insert into post_comments (post_id, comments_id) values (6, 10);
 -----
+
+
+-- STORIES
+-- Gojko's stories
+-- 11
+insert into media (description, file_name, is_image, username, location_id, timestamp) values ("moj prvi story", "waterfall1.jpg", true, "gojko", 5, "2021-06-03");
+insert into story (media_id, for_close_friends, highlighted) values (11, true, false);
+insert into media_hashtags (media_id, hashtags_id) values (11, 7);
+insert into media_hashtags (media_id, hashtags_id) values (11, 8);
+-- 12
+insert into media (description, file_name, is_image, username, location_id, timestamp) values ("moj drugiiiii story", "river1.jpg", true, "gojko", 6, "2021-06-04");
+insert into story (media_id, for_close_friends, highlighted) values (12, true, false);
+insert into media_hashtags (media_id, hashtags_id) values (12, 1);
+insert into media_hashtags (media_id, hashtags_id) values (12, 2);
+---
 
 
 

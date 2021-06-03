@@ -1,6 +1,13 @@
 <template>
     <div id="postImagePage">
-      <h1>Post image</h1>
+      <b-form-radio-group
+            v-model="selected"
+            :options="options"
+            class="mb-3"
+            value-field="item"
+            text-field="name"
+            disabled-field="notEnabled"
+          ></b-form-radio-group>
       <br><br>
         <form ref="uploadForm" @submit.prevent="submit">
           <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required>
@@ -49,6 +56,11 @@ export default {
             name:''
           }],
         },
+        selected: 'post',
+        options: [
+          { item: 'post', name: 'Post' },
+          { item: 'story', name: 'Story' },
+        ],
         imageHasBeenUploaded:false,
         locations:[],
         file1: null,
@@ -112,17 +124,28 @@ export default {
         if(this.imageHasBeenUploaded){
           this.form.username = getEmailFromToken();
           this.form.locationName = this.form.location.toString();
-          this.axios.post('/image/info', this.form)
-                    .then(response => { console.log(response);
-                                        this.makeToast("Posted!", "success"); 
-                                        window.location.href = "/postimage";                             
-                  }).catch(error => { console.log(error);
-                                      this.makeToast("Error occurred.", "danger");
-                                    }); 
+          console.log(this.selected)
+          if(this.selected == 'post'){
+            this.axios.post('/image/info', this.form)
+                                .then(response => { console.log(response);
+                                                    this.makeToast("Posted!", "success"); 
+                                                    window.location.href = "/postimage";                             
+                              }).catch(error => { console.log(error);
+                                                  this.makeToast("Error occurred.", "danger");
+                                                }); 
+          }else{
+            this.axios.post('/story/info', this.form)
+                                .then(response => { console.log(response);
+                                                    this.makeToast("Posted!", "success"); 
+                                                    window.location.href = "/postimage";                             
+                              }).catch(error => { console.log(error);
+                                                  this.makeToast("Error occurred.", "danger");
+                                                }); 
+          }
         }else{
           this.makeToast("Please upload image.", "danger");
         }
-      }
+      },
     },
 }
 </script>

@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
-import com.xws.nistagrammonolith.controller.dto.PostDto;
+import com.xws.nistagrammonolith.controller.dto.MediaDto;
 import com.xws.nistagrammonolith.controller.mapping.PostMapper;
 import com.xws.nistagrammonolith.domain.media.Location;
 import com.xws.nistagrammonolith.domain.media.Media;
@@ -59,7 +59,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Post saveImageInfo(PostDto imageDto) {
+    public Post saveImageInfo(MediaDto imageDto) {
         Post post = new Post();
         Media media = new Media();
         media.setFileName(imageDto.getFileName());
