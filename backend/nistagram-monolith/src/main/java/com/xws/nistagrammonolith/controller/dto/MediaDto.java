@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PostDto {
+public class MediaDto {
     private String username;
     private String fileName;
     private String description;

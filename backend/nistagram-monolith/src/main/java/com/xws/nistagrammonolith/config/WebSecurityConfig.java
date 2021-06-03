@@ -72,6 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/like").permitAll()
                 .antMatchers("/like/{id}").permitAll()
                 .antMatchers("/rabbitmq").permitAll()
+                .antMatchers("/story").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Enable CORS layer (WebMvcConfig class)
@@ -100,6 +101,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/image/info",
                 "/comment",
                 "/like",
-                "/rabbitmq");
+                "/rabbitmq",
+                "/story/*");
     }
 }
