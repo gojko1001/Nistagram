@@ -145,7 +145,7 @@ export default {
         }else{
           this.makeToast("Please upload image.", "danger");
         }
-      }
+      },
     },
 }
 </script>
