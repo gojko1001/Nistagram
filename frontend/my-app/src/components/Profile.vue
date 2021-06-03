@@ -15,11 +15,16 @@
             </span>
             <br/>
         </div>
+        <i class="fas fa-photo-video"></i>
         <div class="vl"></div>
         <div id="userMedia">
             <div id="stories">
-                <h2 style="text-align:center">Place for story highlights</h2><br>
+                <b-button v-b-modal.modal-1 style="font-size:25px;">Story  <i class="fas fa-camera-retro fa-lg"></i></b-button>
+                <b-modal id="modal-1" title="BootstrapVue">
+                    <p>ovde ce biti storiji</p>
+                </b-modal>
             </div>
+            <br>
             <div id="posts">
                 <b-tabs content-class="mt-3" fill>
                     <b-tab title="Photos" active>
@@ -56,8 +61,8 @@
                             </b-card>              
                         </div>
                     </b-tab>
-                    <!--<b-tab title="List"><p>Single image view</p></b-tab>-->
-                    <b-tab title="Tagged photos"><p>Photos user is tagged on</p></b-tab>
+                    <b-tab title="Tagged posts"><p>Photos user is tagged on</p></b-tab>
+                    <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
                 </b-tabs>
             </div>
         </div>
