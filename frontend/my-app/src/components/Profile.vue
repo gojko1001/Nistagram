@@ -15,11 +15,39 @@
             </span>
             <br/>
         </div>
+        <i class="fas fa-photo-video"></i>
         <div class="vl"></div>
         <div id="userMedia">
             <div id="stories">
-                <h2 style="text-align:center">Place for story highlights</h2><br>
+                <b-button v-b-modal.modal-2 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <b-modal id="modal-2">
+                    <button>
+                        <i class="fas fa-user-friends"></i>
+                    </button>
+                     <div v-for="(img,p) in stories" :key="p">
+                            <b-card
+                                tag="article"
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
+                                class="mb-2">
+                                <h4>@{{img.username}}</h4>
+                                <p style="color:blue">{{img.location.name}}</p>
+                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    The video is not supported by your browser.
+                                </video>
+                                <br>
+                                <b-card-text>
+                                    <span><b>{{img.username}}:  </b></span>{{img.description}}
+                                    <br>
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
+                                        #{{tag.name}}
+                                    </span>
+                                </b-card-text>
+                            </b-card>              
+                        </div>
+                </b-modal>
             </div>
+            <br>
             <div id="posts">
                 <b-tabs content-class="mt-3" fill>
                     <b-tab title="Photos" active>
@@ -42,10 +70,13 @@
                                 <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
                                     <i class="far fa-comment"></i>
                                 </router-link>
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                    <i class="fas fa-bookmark"></i>
+                                </router-link>
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
                                     <br>
-                                    <span v-for="(tag,t) in img.tags" :key="t">
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
                                         #{{tag.name}}
                                     </span>
                                 </b-card-text>
@@ -56,8 +87,31 @@
                             </b-card>              
                         </div>
                     </b-tab>
-                    <!--<b-tab title="List"><p>Single image view</p></b-tab>-->
-                    <b-tab title="Tagged photos"><p>Photos user is tagged on</p></b-tab>
+                    <b-tab title="Collections"><p>My collections</p></b-tab>
+                    <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
+                    <b-tab title="Story archive">
+                        <div v-for="(img,j) in archivedStories" :key="j">
+                            <b-card
+                                tag="article"
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
+                                class="mb-2">
+                                <h4>@{{img.username}}</h4>
+                                <p style="color:blue">{{img.location.name}}</p>
+                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    The video is not supported by your browser.
+                                </video>
+                                <br>
+                                <b-card-text>
+                                    <span><b>{{img.username}}:  </b></span>{{img.description}}
+                                    <br>
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
+                                        #{{tag.name}}
+                                    </span>
+                                </b-card-text>
+                            </b-card>              
+                        </div>
+                    </b-tab>
                 </b-tabs>
             </div>
         </div>
@@ -85,7 +139,9 @@ export default {
             formLike:{
               postId: 0,
               username:''
-            }
+            },
+            stories:[],
+            archivedStories:[]
         }
     },
     mounted: function(){
@@ -120,7 +176,9 @@ export default {
                                         }    
                     }).catch(error => { console.log(error.message);
                                         this.makeToast("Error occurred.", "danger");
-            }); 
+            });
+        this.getStories();
+        this.getArchivedStories();
     },
     methods:{
         makeToast(message, variant) {
@@ -149,6 +207,34 @@ export default {
                             this.makeToast("Error occured.", "danger");
                           })
       },
+      getStories(){
+        this.axios.get('/story/profile/' + this.username)
+                    .then(response => { this.stories = response.data;
+                                        for(let i=0; i< response.data.length; i++){
+                                            if(this.stories[i].image){
+                                              this.stories[i].imageBytes = 'data:image/jpeg;base64,' + this.stories[i].imageBytes; 
+                                            }else{
+                                              this.stories[i].imageBytes = 'data:video/mp4;base64,' + this.stories[i].imageBytes;
+                                            } 
+                                        }   
+                    }).catch(error => { console.log(error.message);
+                                        this.makeToast("Error occurred.", "danger");
+            });
+      },
+      getArchivedStories(){
+        this.axios.get('/story/archive/' + this.username)
+                    .then(response => { this.archivedStories = response.data;
+                                        for(let i=0; i< response.data.length; i++){
+                                            if(this.archivedStories[i].image){
+                                              this.archivedStories[i].imageBytes = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes; 
+                                            }else{
+                                              this.archivedStories[i].imageBytes = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes;
+                                            } 
+                                        }   
+                    }).catch(error => { console.log(error.message);
+                                        this.makeToast("Error occurred.", "danger");
+            });
+      }
     }
 }
 </script>

@@ -1,20 +1,15 @@
 package com.xws.nistagrammonolith.service;
 
 import com.xws.nistagrammonolith.controller.dto.CreateLikeDto;
-import com.xws.nistagrammonolith.domain.Like;
-import com.xws.nistagrammonolith.domain.Post;
-import com.xws.nistagrammonolith.exception.NotFoundException;
+import com.xws.nistagrammonolith.domain.media.Like;
+import com.xws.nistagrammonolith.domain.media.Post;
 import com.xws.nistagrammonolith.repository.ILikeRepository;
-import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
 import com.xws.nistagrammonolith.service.interfaces.ILikeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,12 +21,13 @@ public class LikeService implements ILikeService {
     @Autowired
     private IPostService postService;
 
+    //  todo: ispraviti
     @Override
     public Like createLikeOnPost(CreateLikeDto createLikeDto) {
         Post post = postService.getById(createLikeDto.getPostId());
         Date currentDate = new Date();
         System.out.println(currentDate);
-        for(Like like: post.getLikes()){
+        /*for(Like like: post.getLikes()){
             if(like.getUsername().equals(createLikeDto.getUsername())){
                 post.getLikes().remove(like);
                 postService.save(post);
@@ -43,12 +39,12 @@ public class LikeService implements ILikeService {
                 log.info("Try to save like: " + oldLike.getId());
                 return likeRepository.save(oldLike);
             }
-        }
+        }*/
         Like newLike = new Like();
         newLike.setUsername(createLikeDto.getUsername());
         newLike.setLiked(true);
         newLike.setTimestamp(currentDate);
-        newLike.setPost(post);
+        //newLike.setPost(post);
         log.info("Try to save like: " + newLike.getId());
         likeRepository.save(newLike);
         post.getLikes().add(newLike);

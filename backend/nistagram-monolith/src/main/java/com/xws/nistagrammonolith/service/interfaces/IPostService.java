@@ -1,8 +1,8 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
 import com.xws.nistagrammonolith.controller.dto.ImageBytesDto;
-import com.xws.nistagrammonolith.controller.dto.ImageDto;
-import com.xws.nistagrammonolith.domain.Post;
+import com.xws.nistagrammonolith.controller.dto.MediaDto;
+import com.xws.nistagrammonolith.domain.media.Post;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface IPostService {
 
     List<Post> getUserImages(String username);
 
-    Post saveImageInfo(ImageDto imageDto);
+    Post saveImageInfo(MediaDto imageDto);
 
     List<ImageBytesDto> getImagesFiles(List<Post> posts);
 

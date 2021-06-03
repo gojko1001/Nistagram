@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.controller;
 
-import com.xws.nistagrammonolith.controller.dto.ImageDto;
-import com.xws.nistagrammonolith.domain.Post;
+import com.xws.nistagrammonolith.controller.dto.MediaDto;
+import com.xws.nistagrammonolith.domain.media.Post;
 import com.xws.nistagrammonolith.repository.IPostRepository;
 import com.xws.nistagrammonolith.util.FileUploadUtil;
 import com.xws.nistagrammonolith.service.interfaces.IPostService;
@@ -37,14 +37,14 @@ public class PostController {
 
 
     @PostMapping("/info")
-    public Post saveImageInfo(@RequestBody ImageDto imageDto) {
+    public Post saveImageInfo(@RequestBody MediaDto imageDto) {
         return postService.saveImageInfo(imageDto);
     }
 
 
     @GetMapping("/profile/{username}")
     public ResponseEntity getImagesByUsername(@PathVariable("username") String username) {
-        List<Post> userPosts = postRepository.findPostsByUsername(username);
+        List<Post> userPosts = postRepository.findPostsByMedia_Username(username);
         return new ResponseEntity(postService.getImagesFiles(userPosts), HttpStatus.OK);
     }
 

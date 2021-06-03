@@ -18,7 +18,7 @@
       </b-form>
 
       <hr>
-      <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+      <GoogleLogin class="google-login" :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
       <hr>
       <b-link style="font-size:15px" href="/registration">Don't have an account? Sign up</b-link>
       <br>
@@ -132,5 +132,10 @@ export default {
   width: 25%;
   border: 3px solid lightblue;
   padding: 50px;
+}
+.google-login{
+  width:50%;
+  margin-left:25%;
+  margin-right:25%;
 }
 </style>

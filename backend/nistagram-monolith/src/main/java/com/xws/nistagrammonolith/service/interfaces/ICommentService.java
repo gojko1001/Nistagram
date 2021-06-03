@@ -1,7 +1,7 @@
 package com.xws.nistagrammonolith.service.interfaces;
 
 import com.xws.nistagrammonolith.controller.dto.CreateCommentDto;
-import com.xws.nistagrammonolith.domain.Comment;
+import com.xws.nistagrammonolith.domain.media.Comment;
 
 import java.util.List;
 
