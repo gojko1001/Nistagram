@@ -19,7 +19,19 @@
             <span>{{img.numLikes}}</span>
             <b-button v-b-modal.modal-1 class="inter" style="margin-left:330px"><i class="fas fa-bookmark"></i></b-button>
                 <b-modal id="modal-1">
-                    <p>mesto za kolekcije</p>
+                    <b-form-radio-group
+                      v-model="selected"
+                      :options="collections"
+                      class="mb-3"
+                      value-field="item"
+                      text-field="name"
+                      disabled-field="notEnabled"
+                    ></b-form-radio-group>
+                    <br>
+                    <b-form-input v-model="newCollection" placeholder="Add collection"></b-form-input>
+                    <b-input-group-append>
+                      <b-button variant="outline-dark" @click="createCollection(newCollection)">Add</b-button>
+                  </b-input-group-append>
                 </b-modal>
             <b-card-text>
                   <span><b>{{img.username}}:  </b></span>{{img.description}}
@@ -65,7 +77,11 @@ export default {
             formLike:{
               postId: 0,
               username:''
-            }
+            },
+            collections:[],
+            selected:'',
+            collection:{},
+            newCollection:''
         }
     },
   mounted: function(){
@@ -79,7 +95,6 @@ export default {
                               this.img.imageBytes = 'data:video/mp4;base64,' + this.img.imageBytes;
                             } 
                             this.img.numLikes = this.img.likes.length; 
-                            // TODO: izmeniti ako ostane vremena
                             for(var like of this.img.likes){
                               if(like.username == this.username){
                                   this.img.liked = true;
@@ -89,6 +104,7 @@ export default {
         .catch(error => { console.log(error);
                             this.makeToast("Error occured. Try again later.", "danger");
         })
+        this.getCollections();
   },
   methods:{
       makeToast(message, variant) {
@@ -126,6 +142,23 @@ export default {
                             this.makeToast("Error occured.", "danger");
                           })
       },
+      getCollections() {
+        var user = getEmailFromToken();
+        this.axios.get('/collection/' + user)
+          .then(response => { this.collections = response.data;})
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+      },
+      createCollection(name){
+        this.collection.username = getEmailFromToken();
+        this.collection.name = name;
+        this.axios.post('/collection', this.collection)
+          .then(response => { console.log(response.data)})
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+      }
     }
 }
 </script>

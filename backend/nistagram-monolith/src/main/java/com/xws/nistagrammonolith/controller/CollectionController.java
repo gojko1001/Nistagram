@@ -18,8 +18,8 @@ public class CollectionController {
         return collectionService.createCollection(collection);
     }
 
-    @GetMapping
-    public ResponseEntity findCollectionsByUsername(@RequestBody String username) {
+    @GetMapping("/{username}")
+    public ResponseEntity findCollectionsByUsername(@PathVariable("username") String username) {
         return collectionService.findCollectionsByUsername(username);
     }
 }
