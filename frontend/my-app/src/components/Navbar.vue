@@ -39,22 +39,22 @@
                   <i class="fas fa-globe"></i>
                 </button>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="username != null">
                 <button class="nav-btn">
                   <i class="fas fa-envelope"></i>
                 </button>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="username != null">
                 <button class="heart nav-btn">
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="username != null">
                 <button class="nav-btn" @click='myProfile'>
                   <i class="fas fa-user"></i>
                 </button>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="username != null">
                 <button class="nav-btn" @click="logout">
                   <i class="fas fa-sign-out-alt"></i>
                 </button>
@@ -82,9 +82,11 @@ export default {
         searchInput:'',
       }
   },
+  mounted: function(){
+    this.username = getEmailFromToken();
+  },
   methods:{
     myProfile:function(){
-      this.username = getEmailFromToken();
       window.location.href = "/profile/" + this.username;
     },
     logout: function(){

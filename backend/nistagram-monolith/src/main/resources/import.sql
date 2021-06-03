@@ -134,7 +134,7 @@ insert into media_hashtags (media_id, hashtags_id) values (6, 7);
 insert into media_hashtags (media_id, hashtags_id) values (6, 8);
 -- Masa's posts
 -- 7
-insert into media (description, file_name, is_image, username, location_id, timestamp) values ("naruto, sakura, saske", "marvel1.jpg", true, "masa", 5, "2021-04-30");
+insert into media (description, file_name, is_image, username, location_id, timestamp) values ("naruto, sakura, saske", "naruto1.jpeg", true, "masa", 5, "2021-04-30");
 insert into post (media_id) values (7);
 insert into media_hashtags (media_id, hashtags_id) values (7, 7);
 insert into media_hashtags (media_id, hashtags_id) values (7, 8);
