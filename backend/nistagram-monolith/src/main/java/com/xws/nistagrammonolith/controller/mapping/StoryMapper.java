@@ -15,6 +15,7 @@ public class StoryMapper {
         storyBytesDto.setHashtags(story.getMedia().getHashtags());
         storyBytesDto.setImage(story.getMedia().isImage());
         storyBytesDto.setImageBytes(new ArrayList<>());
+        storyBytesDto.setTimestamp(story.getMedia().getTimestamp());
         return storyBytesDto;
     }
 }

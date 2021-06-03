@@ -39,9 +39,15 @@ public class StoryController {
         return storyService.saveImageInfo(imageDto);
     }
 
+    @GetMapping("/archive/{username}")
+    public ResponseEntity getArchivedStoriesByUsername(@PathVariable("username") String username) {
+        List<Story> userPosts = storyRepository.findStoryByMedia_Username(username);
+        return new ResponseEntity(storyService.getImagesFiles(userPosts), HttpStatus.OK);
+    }
+
     @GetMapping("/profile/{username}")
     public ResponseEntity getStoriesByUsername(@PathVariable("username") String username) {
         List<Story> userPosts = storyRepository.findStoryByMedia_Username(username);
-        return new ResponseEntity(storyService.getImagesFiles(userPosts), HttpStatus.OK);
+        return new ResponseEntity(storyService.validStories(storyService.getImagesFiles(userPosts)), HttpStatus.OK);
     }
 }

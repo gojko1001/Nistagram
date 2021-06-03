@@ -66,6 +66,17 @@ public class StoryService implements IStoryService {
     }
 
     @Override
+    public List<StoryBytesDto> validStories(List<StoryBytesDto> stories){
+        List<StoryBytesDto> validStories = new ArrayList<>();
+        Date now = new Date();
+        for(StoryBytesDto storyBytesDto: stories){
+            if((storyBytesDto.getTimestamp().getTime() + 86400000) > now.getTime())
+                validStories.add(storyBytesDto);
+        }
+        return validStories;
+    }
+
+    @Override
     public List<StoryBytesDto> getImagesFiles(List<Story> stories) {
         List<StoryBytesDto> storyBytesDto = new ArrayList<>();
         if (stories != null) {
