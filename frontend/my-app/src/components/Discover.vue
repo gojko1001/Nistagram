@@ -20,6 +20,9 @@
             <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
               <i class="far fa-comment"></i>
             </router-link>
+            <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+              <i class="fas fa-bookmark"></i>
+            </router-link>
             <b-card-text>
               <span><b>{{img.username}}:  </b></span>{{img.description}}
               <br>

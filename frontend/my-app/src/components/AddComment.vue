@@ -17,6 +17,10 @@
               <i class="fas fa-heart"></i>
             </button>
             <span>{{img.numLikes}}</span>
+            <b-button v-b-modal.modal-1 class="inter" style="margin-left:330px"><i class="fas fa-bookmark"></i></b-button>
+                <b-modal id="modal-1">
+                    <p>mesto za kolekcije</p>
+                </b-modal>
             <b-card-text>
                   <span><b>{{img.username}}:  </b></span>{{img.description}}
                   <br>
