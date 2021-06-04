@@ -50,7 +50,8 @@
             <br>
             <div id="posts">
                 <b-tabs content-class="mt-3" fill>
-                    <b-tab title="Photos" active>
+                    <!-- My posts -->
+                    <b-tab title="Posts" active>
                         <div v-for="(img,i) in info" :key="i">
                             <b-card
                                 tag="article"
@@ -87,8 +88,16 @@
                             </b-card>              
                         </div>
                     </b-tab>
-                    <b-tab title="Collections"><p>My collections</p></b-tab>
+                    <!-- Collections -->
+                    <b-tab title="Collections">
+                        <div v-for="(coll,c) in collections" :key="c">
+                            <p style="font-size:30px">{{coll.name}}:</p>
+                            <hr>
+                        </div>
+                    </b-tab>
+                    <!-- Liked posts -->
                     <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
+                    <!-- Story archived -->
                     <b-tab title="Story archive">
                         <div v-for="(img,j) in archivedStories" :key="j">
                             <b-card
@@ -141,7 +150,8 @@ export default {
               username:''
             },
             stories:[],
-            archivedStories:[]
+            archivedStories:[],
+            collections:[]
         }
     },
     mounted: function(){
@@ -179,6 +189,7 @@ export default {
             });
         this.getStories();
         this.getArchivedStories();
+        this.getCollections();
     },
     methods:{
         makeToast(message, variant) {
@@ -206,35 +217,43 @@ export default {
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })
-      },
-      getStories(){
-        this.axios.get('/story/profile/' + this.username)
-                    .then(response => { this.stories = response.data;
-                                        for(let i=0; i< response.data.length; i++){
-                                            if(this.stories[i].image){
-                                              this.stories[i].imageBytes = 'data:image/jpeg;base64,' + this.stories[i].imageBytes; 
-                                            }else{
-                                              this.stories[i].imageBytes = 'data:video/mp4;base64,' + this.stories[i].imageBytes;
-                                            } 
-                                        }   
-                    }).catch(error => { console.log(error.message);
-                                        this.makeToast("Error occurred.", "danger");
-            });
-      },
-      getArchivedStories(){
-        this.axios.get('/story/archive/' + this.username)
-                    .then(response => { this.archivedStories = response.data;
-                                        for(let i=0; i< response.data.length; i++){
-                                            if(this.archivedStories[i].image){
-                                              this.archivedStories[i].imageBytes = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes; 
-                                            }else{
-                                              this.archivedStories[i].imageBytes = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes;
-                                            } 
-                                        }   
-                    }).catch(error => { console.log(error.message);
-                                        this.makeToast("Error occurred.", "danger");
-            });
-      }
+        },
+        getStories(){
+            this.axios.get('/story/profile/' + this.username)
+                        .then(response => { this.stories = response.data;
+                                            for(let i=0; i< response.data.length; i++){
+                                                if(this.stories[i].image){
+                                                this.stories[i].imageBytes = 'data:image/jpeg;base64,' + this.stories[i].imageBytes; 
+                                                }else{
+                                                this.stories[i].imageBytes = 'data:video/mp4;base64,' + this.stories[i].imageBytes;
+                                                } 
+                                            }   
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
+        getArchivedStories(){
+            this.axios.get('/story/archive/' + this.username)
+                        .then(response => { this.archivedStories = response.data;
+                                            for(let i=0; i< response.data.length; i++){
+                                                if(this.archivedStories[i].image){
+                                                this.archivedStories[i].imageBytes = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes; 
+                                                }else{
+                                                this.archivedStories[i].imageBytes = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes;
+                                                } 
+                                            }   
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
+        getCollections() {
+        var user = getEmailFromToken();
+        this.axios.get('/collection/' + user)
+          .then(response => { this.collections = response.data;})
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+        },
     }
 }
 </script>
