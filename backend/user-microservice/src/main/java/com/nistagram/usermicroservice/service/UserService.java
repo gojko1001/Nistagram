@@ -1,6 +1,8 @@
-package com.nistagram.usermicroservice;
+package com.nistagram.usermicroservice.service;
 
+import com.nistagram.usermicroservice.IUserRepository;
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
 import com.nistagram.usermicroservice.exception.InvalidActionException;
@@ -79,7 +81,7 @@ public class UserService implements IUserService {
         if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
             throw new BadRequestException("Passwords are not the same.");
         }
-//        userCredentialsService.create(userCredentials); TODO: Authentication service: create(UserCredentials userCredentails)
+//        userCredentialsService.create(userReg); TODO: Authentication service: create(UserCredentials userCredentails)
         User user = new User();
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
@@ -109,6 +111,7 @@ public class UserService implements IUserService {
         log.info("Try to save user with username: " + user.getUsername());
         return userRepository.save(user);
     }
+
 
     private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");

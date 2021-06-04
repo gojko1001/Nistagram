@@ -1,6 +1,7 @@
 package com.nistagram.usermicroservice;
 
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.dto.UserDto;
 
 public class UserMapper {
     public static User mapUserDtoToUser(UserDto userDto) {

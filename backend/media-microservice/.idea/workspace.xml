@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/CollectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../nistagram-monolith/src/main/java/com/xws/nistagrammonolith/controller/CollectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-microservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user-microservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-microservice/src/main/java/com/nistagram/usermicroservice/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-microservice/src/main/java/com/nistagram/usermicroservice/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-microservice/src/main/java/com/nistagram/usermicroservice/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../user-microservice/src/main/java/com/nistagram/usermicroservice/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../userMicroservice/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +41,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
     <configuration name="MediaMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -62,6 +69,7 @@
       <workItem from="1622702273018" duration="1458000" />
       <workItem from="1622706293050" duration="69000" />
       <workItem from="1622741095608" duration="665000" />
+      <workItem from="1622750258671" duration="1226000" />
     </task>
     <servers />
   </component>

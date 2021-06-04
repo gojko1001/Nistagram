@@ -32,7 +32,7 @@ public class User {
     @Column
     private Gender userGender;
     @OneToMany(mappedBy = "following")
-    private List<FollowingList> followingList;
+    private List<UserRelation> userRelations;
     @OneToOne
     private VerificationRequest verificationRequest;
     @Column

@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice;
+package com.nistagram.usermicroservice.dto;
 
 import com.nistagram.usermicroservice.domain.enums.Gender;
 import lombok.Data;

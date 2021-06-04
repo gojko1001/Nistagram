@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice;
+package com.nistagram.usermicroservice.dto;
 
 import lombok.Data;
 
