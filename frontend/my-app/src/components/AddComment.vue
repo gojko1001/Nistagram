@@ -17,22 +17,30 @@
               <i class="fas fa-heart"></i>
             </button>
             <span>{{img.numLikes}}</span>
-            <b-button v-b-modal.modal-1 class="inter" style="margin-left:330px"><i class="fas fa-bookmark"></i></b-button>
-                <b-modal id="modal-1">
-                    <b-form-radio-group
-                      v-model="selected"
-                      :options="collections"
-                      class="mb-3"
-                      value-field="item"
-                      text-field="name"
-                      disabled-field="notEnabled"
-                    ></b-form-radio-group>
-                    <br>
-                    <b-form-input v-model="newCollection" placeholder="Add collection"></b-form-input>
-                    <b-input-group-append>
-                      <b-button variant="outline-dark" @click="createCollection(newCollection)">Add</b-button>
-                  </b-input-group-append>
-                </b-modal>
+            <button class="inter" style="margin-left:330px" @click="showAllCollections()">
+              <i class="fas fa-bookmark"></i>
+            </button>
+            <b-form-radio-group
+              v-model="selected"
+              :options="collections"
+              class="mb-3"
+              value-field="item"
+              text-field="name"
+              disabled-field="notEnabled"
+              style="margin-left:280px;"
+              v-if="showCollections"
+            ></b-form-radio-group>
+            <b-button pill v-if="showCollections" style="margin-left:330px; font-size: 15px" @click="showAllCollections()">Add to collection</b-button>
+            <br>
+            <b-button variant="link" v-b-modal.modal-1 class="inter" style="margin-left:280px; font-size:15px">Add new collection</b-button>
+                <b-modal
+                id="modal-1"
+                ref="modal">
+                  <b-form-input v-model="newCollection" placeholder="Add collection"></b-form-input>
+                  <b-input-group-append>
+                  <b-button variant="outline-dark" @click="createCollection(newCollection)">Add</b-button>
+                </b-input-group-append>
+              </b-modal>
             <b-card-text>
                   <span><b>{{img.username}}:  </b></span>{{img.description}}
                   <br>
@@ -81,7 +89,9 @@ export default {
             collections:[],
             selected:'',
             collection:{},
-            newCollection:''
+            newCollection:'',
+            favourite:{},
+            showCollections: false
         }
     },
   mounted: function(){
@@ -145,7 +155,8 @@ export default {
       getCollections() {
         var user = getEmailFromToken();
         this.axios.get('/collection/' + user)
-          .then(response => { this.collections = response.data;})
+          .then(response => { this.collections = response.data;
+                            })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })
@@ -158,6 +169,24 @@ export default {
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })
+      },
+      addToCollection() {
+        this.favourite.postId = this.img.id;
+        console.log(this.selected)
+        this.favourite.collectionName = this.selected;
+        this.axios.post('/favourite', this.favourite)
+          .then(response => { console.log(response.data)})
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+      },
+      async showAllCollections(){
+        if(this.showCollections){
+          this.showCollections = false;
+        }else{
+          this.showCollections = true;
+        }
+        
       }
     }
 }

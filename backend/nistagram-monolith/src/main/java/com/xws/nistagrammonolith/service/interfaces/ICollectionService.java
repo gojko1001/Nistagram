@@ -9,4 +9,5 @@ public interface ICollectionService {
     Collection save(Collection collection);
     ResponseEntity createCollection (Collection collection);
     ResponseEntity findCollectionsByUsername(String username);
+    Collection findByName(String name);
 }

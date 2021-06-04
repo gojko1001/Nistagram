@@ -21,6 +21,11 @@ public class CollectionService implements ICollectionService {
     }
 
     @Override
+    public Collection findByName(String name){
+        return collectionRepository.findCollectionByName(name);
+    }
+
+    @Override
     public ResponseEntity createCollection(Collection collection){
         if(collectionRepository.findCollectionByNameAndUsername(collection.getName(), collection.getUsername()) != null)
             return new ResponseEntity("Collection with that name already exist.", HttpStatus.OK);
