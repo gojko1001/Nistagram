@@ -14,17 +14,19 @@ public class UserRelationService implements IUserRelationService {
     @Autowired
     private IUserService userService;
 
-    public void makeUserRelation(UserRelationDto relationDto){
-        if(relationDto.getStatus() != RelationStatus.BLOCKED && relationDto.getStatus() != RelationStatus.PENDING)
-            throw new InvalidActionException("Invalid action");
+
+    public void FollowUser(UserRelationDto relationDto){
+        if(findRelation(relationDto.getUsername(), relationDto.getRelatedUsername()) != null || isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
+            throw new InvalidActionException("You are already following or blocked eager user");
         User user = userService.findUserByUsername(relationDto.getUsername());
-        if(findRelation(relationDto.getUsername(), relationDto.getRelatedUsername()) != null && relationDto.getStatus() == RelationStatus.PENDING)
-            throw new InvalidActionException("Invalid action");
         User relatedUser = userService.findUserByUsername(relationDto.getRelatedUsername());
-        UserRelation userRelation = new UserRelation(user, relatedUser, relationDto.getStatus(), false);
-        user.getUserRelations().add(userRelation);
+        RelationStatus status = RelationStatus.PENDING;
+        if(relatedUser.isPublicProfile())
+            status = RelationStatus.FOLLOWING;
+        UserRelation relation = new UserRelation(user, relatedUser, status, false);
+        user.getUserRelations().add(relation);
         userService.save(user);
-    };
+    }
 
     public void AcceptFollower(UserRelationDto relationDto){
         User user = userService.findUserByUsername(relationDto.getRelatedUsername());
@@ -35,31 +37,40 @@ public class UserRelationService implements IUserRelationService {
         userService.save(user);
     }
 
-
     public void updateUserRelation(UserRelationDto relationDto){
+        if(relationDto.getStatus() != RelationStatus.FOLLOWING && relationDto.getStatus() != RelationStatus.MUTED &&
+            relationDto.getStatus() != RelationStatus.CLOSE_FRIEND || isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
+            throw new InvalidActionException("Invalid action");
         User user = userService.findUserByUsername(relationDto.getUsername());
         UserRelation userRelation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
         if(userRelation == null)
             throw new InvalidActionException("Invalid action");
-        switch (relationDto.getStatus()){
-            case BLOCKED:
-                userRelation.setRelationStatus(RelationStatus.BLOCKED);
-                break;
-            case FOLLOWING:
-            case MUTED:
-            case CLOSE_FRIEND:
-                userRelation.setRelationStatus(relationDto.getStatus());
-                break;
-            default:
-                throw new InvalidActionException("Invalid action!");
-        }
+        userRelation.setRelationStatus(relationDto.getStatus());
         // TODO: Zameniti novu relaciju?
         userService.save(user);
     }
 
-    public void removeUserRelation(UserRelationDto userRelationDto){
-        User user = userService.findUserByUsername(userRelationDto.getUsername());
-        UserRelation toDelete = findRelation(userRelationDto.getUsername(), userRelationDto.getRelatedUsername());
+    public void blockUser(UserRelationDto relationDto){
+        if(isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
+            throw new InvalidActionException("User unknown");
+        User user = userService.findUserByUsername(relationDto.getUsername());
+        UserRelation relation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
+        if(relation != null){
+            relation.setRelationStatus(RelationStatus.BLOCKED);
+            return;
+        }
+        User relatedUser = userService.findUserByUsername(relationDto.getRelatedUsername());
+        relation = new UserRelation(user, relatedUser, RelationStatus.BLOCKED, false);
+        user.getUserRelations().add(relation);
+        userService.save(user);
+        relationDto.setUsername(relatedUser.getUsername());
+        relationDto.setRelatedUsername(user.getUsername());
+        removeUserRelation(relationDto);
+    }
+
+    public void removeUserRelation(UserRelationDto relationDto){
+        User user = userService.findUserByUsername(relationDto.getUsername());
+        UserRelation toDelete = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
         user.getUserRelations().remove(toDelete);
         userService.save(user);
     }
@@ -69,5 +80,12 @@ public class UserRelationService implements IUserRelationService {
             if(relatedUser.getRelatedUser().getUsername().equals(relatedUsername))
                 return relatedUser;
         return null;
+    }
+
+    private boolean isBlocked(String username, String relatedUsername){
+        UserRelation relation = findRelation(username, relatedUsername);
+        if(relation == null)
+            return false;
+        return relation.getRelationStatus() == RelationStatus.BLOCKED;
     }
 }
