@@ -31,8 +31,10 @@ public class User {
     private Date birthDate;
     @Column
     private Gender userGender;
-    @OneToMany(mappedBy = "following")
+    @OneToMany(mappedBy = "user")
     private List<UserRelation> userRelations;
+    @OneToMany(mappedBy = "relatedUser")
+    private List<UserRelation> invertedRelations;
     @OneToOne
     private VerificationRequest verificationRequest;
     @Column

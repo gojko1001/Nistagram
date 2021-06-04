@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import lombok.Data;
 
@@ -13,11 +14,13 @@ public class UserRelation {
     private UserRelationKey id;
 
     @ManyToOne
+    @JsonBackReference
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JsonBackReference
     @MapsId("relatedUserId")
     @JoinColumn(name = "related_user_id")
     private User relatedUser;

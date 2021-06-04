@@ -3,9 +3,9 @@ package com.nistagram.usermicroservice.service;
 import com.nistagram.usermicroservice.dto.UserRelationDto;
 
 public interface IUserRelationService {
-    void FollowUser(UserRelationDto relationDto);
+    void followUser(UserRelationDto relationDto);
 
-    void AcceptFollower(UserRelationDto relationDto);
+    void acceptFollower(UserRelationDto relationDto);
 
     void blockUser(UserRelationDto relationDto);
 

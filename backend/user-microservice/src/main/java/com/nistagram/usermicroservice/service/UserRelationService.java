@@ -15,7 +15,7 @@ public class UserRelationService implements IUserRelationService {
     private IUserService userService;
 
 
-    public void FollowUser(UserRelationDto relationDto){
+    public void followUser(UserRelationDto relationDto){
         if(findRelation(relationDto.getUsername(), relationDto.getRelatedUsername()) != null || isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
             throw new InvalidActionException("You are already following or blocked eager user");
         User user = userService.findUserByUsername(relationDto.getUsername());
@@ -28,7 +28,7 @@ public class UserRelationService implements IUserRelationService {
         userService.save(user);
     }
 
-    public void AcceptFollower(UserRelationDto relationDto){
+    public void acceptFollower(UserRelationDto relationDto){
         User user = userService.findUserByUsername(relationDto.getRelatedUsername());
         UserRelation relation = findRelation(relationDto.getRelatedUsername(), relationDto.getUsername());
         if(relation == null)
@@ -54,14 +54,14 @@ public class UserRelationService implements IUserRelationService {
         if(isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
             throw new InvalidActionException("User unknown");
         User user = userService.findUserByUsername(relationDto.getUsername());
+        User relatedUser = userService.findUserByUsername(relationDto.getRelatedUsername());
         UserRelation relation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
         if(relation != null){
             relation.setRelationStatus(RelationStatus.BLOCKED);
-            return;
+        }else{
+            relation = new UserRelation(user, relatedUser, RelationStatus.BLOCKED, false);
+            user.getUserRelations().add(relation);
         }
-        User relatedUser = userService.findUserByUsername(relationDto.getRelatedUsername());
-        relation = new UserRelation(user, relatedUser, RelationStatus.BLOCKED, false);
-        user.getUserRelations().add(relation);
         userService.save(user);
         relationDto.setUsername(relatedUser.getUsername());
         relationDto.setRelatedUsername(user.getUsername());
