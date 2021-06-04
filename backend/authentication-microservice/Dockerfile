@@ -7,5 +7,5 @@ RUN mvn package -DskipTests
 FROM openjdk:8-jdk-alpine AS appRuntime
 WORKDIR /app
 COPY --from=appBuild /usr/src/authentication-microservice/target/authentication-microservice-0.0.1-SNAPSHOT.jar ./
-EXPOSE 3030
+EXPOSE 3031
 CMD java -jar authentication-microservice-0.0.1-SNAPSHOT.jar

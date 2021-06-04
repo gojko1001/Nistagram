@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nistagram-monolith/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../authentication-microservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-microservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../user-microservice/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-microservice/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-microservice/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-microservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user-microservice/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,23 +40,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../authentication-microservice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MediaMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="media-microservice" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.mediamicroservice.mediamicroservice.MediaMicroserviceApplication" />
@@ -81,6 +68,7 @@
       <workItem from="1622706293050" duration="69000" />
       <workItem from="1622741095608" duration="665000" />
       <workItem from="1622760757989" duration="2379000" />
+      <workItem from="1622814670609" duration="235000" />
     </task>
     <servers />
   </component>
