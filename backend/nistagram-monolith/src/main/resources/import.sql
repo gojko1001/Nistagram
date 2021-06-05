@@ -224,6 +224,47 @@ insert into media_hashtags (media_id, hashtags_id) values (12, 2);
 ---
 
 
+-- COLLECTIONS
+-- Gojko's collections
+insert into favourite (post_id) values (5);
+insert into favourite (post_id) values (7);
+insert into favourite (post_id) values (9);
+insert into favourite (post_id) values (10);
+insert into collection (name, username) values ("My first collection", "gojko");
+insert into collection_favourites (collection_id, favourites_id) values (1, 1);
+insert into collection_favourites (collection_id, favourites_id) values (1, 2);
+insert into collection (name, username) values ("Fav collection", "gojko");
+insert into collection_favourites (collection_id, favourites_id) values (2, 3);
+insert into collection_favourites (collection_id, favourites_id) values (2, 4);
+-- Maja's collections
+insert into favourite (post_id) values (1);
+insert into favourite (post_id) values (6);
+insert into favourite (post_id) values (7);
+insert into collection (name, username) values ("COLLECTION NO.1", "maja");
+insert into collection_favourites (collection_id, favourites_id) values (3, 5);
+insert into collection_favourites (collection_id, favourites_id) values (3, 6);
+insert into collection (name, username) values ("Pcelica maja", "maja");
+insert into collection_favourites (collection_id, favourites_id) values (4, 7);
+-- Tasa's collections
+insert into favourite (post_id) values (1);
+insert into favourite (post_id) values (6);
+insert into favourite (post_id) values (10);
+insert into collection (name, username) values ("collection123", "tasa");
+insert into collection_favourites (collection_id, favourites_id) values (5, 8);
+insert into collection_favourites (collection_id, favourites_id) values (5, 9);
+insert into collection_favourites (collection_id, favourites_id) values (5, 10);
+-- Masa's collections
+insert into favourite (post_id) values (1);
+insert into favourite (post_id) values (4);
+insert into favourite (post_id) values (6);
+insert into collection (name, username) values ("Fav posts", "masa");
+insert into collection_favourites (collection_id, favourites_id) values (6, 11);
+insert into collection_favourites (collection_id, favourites_id) values (6, 12);
+insert into collection_favourites (collection_id, favourites_id) values (6, 13);
+---
+
+
+
 
 
 
