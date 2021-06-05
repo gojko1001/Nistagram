@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../user-microservice/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../authentication-microservice/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-microservice/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../user-microservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../user-microservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConsumer.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +37,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -69,6 +66,7 @@
       <workItem from="1622741095608" duration="665000" />
       <workItem from="1622760757989" duration="2379000" />
       <workItem from="1622814670609" duration="235000" />
+      <workItem from="1622882132938" duration="329000" />
     </task>
     <servers />
   </component>
