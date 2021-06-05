@@ -115,6 +115,17 @@ public class UserRelationService implements IUserRelationService {
     }
 
 
+    public void setNotifications(UserRelationDto relationDto){
+        if(isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
+            throw new InvalidActionException("Notifications can't be recived from blocked user");
+        User user = userService.findUserByUsername(relationDto.getUsername());
+        UserRelation userRelation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
+        if(userRelation == null)
+            throw new InvalidActionException("You are not following user: " + relationDto.getRelatedUsername());
+        userRelation.setEnableNotification(relationDto.getEnableNotifications());
+        userService.save(user);
+    }
+
     private UserRelation findRelation(String username, String relatedUsername){
         for(UserRelation relatedUser : userService.findUserByUsername(username).getUserRelations())
             if(relatedUser.getRelatedUser().getUsername().equals(relatedUsername))

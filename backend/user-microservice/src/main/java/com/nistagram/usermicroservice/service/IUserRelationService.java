@@ -24,4 +24,7 @@ public interface IUserRelationService {
     void updateUserRelation(UserRelationDto relationDto);
 
     void removeUserRelation(UserRelationDto userRelationDto);
+
+
+    void setNotifications(UserRelationDto relationDto);
 }

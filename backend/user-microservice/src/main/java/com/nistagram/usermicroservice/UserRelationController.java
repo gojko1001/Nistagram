@@ -52,11 +52,16 @@ public class UserRelationController {
     }
 
     @PutMapping("/update")
-    public void UpdateRelation(@RequestBody UserRelationDto relationDto){
+    public void updateRelation(@RequestBody UserRelationDto relationDto){
         relationService.updateUserRelation(relationDto);
     }
 
-    @DeleteMapping()
+    @PutMapping("/notifications")
+    public void updateNotifications(@RequestBody UserRelationDto relationDto){
+        relationService.setNotifications(relationDto);
+    }
+
+    @DeleteMapping
     public void removeRelation(@RequestBody UserRelationDto relationDto){
         relationService.removeUserRelation(relationDto);
     }
