@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/rabbitmq/RabbitMQConsumer.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/import.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Collection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Collection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Favourite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Favourite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Like.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Media.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/UserTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/UserTag.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +44,31 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\MASHA\XML projekat\Nistagram\backend\media-microservice\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mediamicroservice.mediamicroservice.domain" />
+    </key>
+  </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MediaMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="media-microservice" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.mediamicroservice.mediamicroservice.MediaMicroserviceApplication" />
@@ -66,7 +92,7 @@
       <workItem from="1622741095608" duration="665000" />
       <workItem from="1622760757989" duration="2379000" />
       <workItem from="1622814670609" duration="235000" />
-      <workItem from="1622882132938" duration="329000" />
+      <workItem from="1622882132938" duration="803000" />
     </task>
     <servers />
   </component>

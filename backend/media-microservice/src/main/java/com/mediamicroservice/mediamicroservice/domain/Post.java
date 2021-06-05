@@ -17,4 +17,5 @@ public class Post {
     private List<Like> likes;
     @ManyToMany
     private List<Comment> comments;
+
 }
