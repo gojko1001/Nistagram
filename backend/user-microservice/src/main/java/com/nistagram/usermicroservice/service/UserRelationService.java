@@ -8,6 +8,9 @@ import com.nistagram.usermicroservice.exception.InvalidActionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserRelationService implements IUserRelationService {
 
@@ -78,6 +81,32 @@ public class UserRelationService implements IUserRelationService {
         UserRelation toDelete = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
         user.getUserRelations().remove(toDelete);
         userService.save(user);
+    }
+
+    public List<User> getUserFollowers(String username){
+        User user = userService.findUserByUsername(username);
+        List<User> followers = new ArrayList<>();
+        for(UserRelation u : user.getInvertedRelations()){
+            if(u.getRelationStatus() == RelationStatus.FOLLOWING ||
+                u.getRelationStatus() == RelationStatus.CLOSE_FRIEND ||
+                u.getRelationStatus() == RelationStatus.MUTED &&
+                !isBlocked(username, u.getUser().getUsername()))
+                    followers.add(u.getUser());
+        }
+        return followers;
+    }
+
+    public List<User> getUserFollowings(String username){
+        User user = userService.findUserByUsername(username);
+        List<User> following = new ArrayList<>();
+        for(UserRelation u : user.getUserRelations()){
+            if(u.getRelationStatus() == RelationStatus.FOLLOWING ||
+                u.getRelationStatus() == RelationStatus.CLOSE_FRIEND ||
+                u.getRelationStatus() == RelationStatus.MUTED &&
+                !isBlocked(u.getRelatedUser().getUsername(), username))
+                following.add(u.getRelatedUser());
+        }
+        return following;
     }
 
     private UserRelation findRelation(String username, String relatedUsername){

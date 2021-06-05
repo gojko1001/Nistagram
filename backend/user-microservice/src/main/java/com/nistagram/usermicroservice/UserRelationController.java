@@ -1,9 +1,12 @@
 package com.nistagram.usermicroservice;
 
+import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRelationDto;
 import com.nistagram.usermicroservice.service.IUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/userrelation")
@@ -11,6 +14,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
+
+    @GetMapping("/followings/{username}")
+    private List<UserDto> getFollowings(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowings(username));
+    }
+
+    @GetMapping("/followers/{username}")
+    private List<UserDto> getFollowers(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowers(username));
+    }
 
     @PostMapping("/follow")
     public void followUser(@RequestBody UserRelationDto relationDto){
