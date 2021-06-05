@@ -17,6 +17,7 @@ public interface IPostService {
     Post saveImageInfo(MediaDto imageDto);
 
     List<ImageBytesDto> getImagesFiles(List<Post> posts);
+    ImageBytesDto getImageFile(Post post);
 
     ImageBytesDto imageFile(Post post, String filePath);
 

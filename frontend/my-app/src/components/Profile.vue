@@ -50,7 +50,8 @@
             <br>
             <div id="posts">
                 <b-tabs content-class="mt-3" fill>
-                    <b-tab title="Photos" active>
+                    <!-- My posts -->
+                    <b-tab title="Posts" active>
                         <div v-for="(img,i) in info" :key="i">
                             <b-card
                                 tag="article"
@@ -87,8 +88,51 @@
                             </b-card>              
                         </div>
                     </b-tab>
-                    <b-tab title="Collections"><p>My collections</p></b-tab>
+                    <!-- Collections -->
+                    <b-tab title="Collections">
+                        <div v-for="(coll,c) in collections" :key="c">
+                            <p style="font-size:30px">{{coll.name}}:</p>
+                            <div v-for="(img,i) in coll.favourites" :key="i">
+                            <b-card
+                                tag="article"
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
+                                class="mb-2">
+                                <h4>@{{img.username}}</h4>
+                                <p style="color:blue">{{img.location.name}}</p>
+                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    The video is not supported by your browser.
+                                </video>
+                                <br>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <span>{{img.numLikes}}</span>
+                                <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
+                                    <i class="far fa-comment"></i>
+                                </router-link>
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                    <i class="fas fa-bookmark"></i>
+                                </router-link>
+                                <b-card-text>
+                                    <span><b>{{img.username}}:  </b></span>{{img.description}}
+                                    <br>
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
+                                        #{{tag.name}}
+                                    </span>
+                                </b-card-text>
+                                <hr>
+                                <span v-for="(comm,c) in img.comments" :key="c">
+                                    <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                                </span>
+                            </b-card>              
+                        </div>
+                            <hr>
+                        </div>
+                    </b-tab>
+                    <!-- Liked posts -->
                     <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
+                    <!-- Story archived -->
                     <b-tab title="Story archive">
                         <div v-for="(img,j) in archivedStories" :key="j">
                             <b-card
@@ -141,7 +185,8 @@ export default {
               username:''
             },
             stories:[],
-            archivedStories:[]
+            archivedStories:[],
+            collections:[]
         }
     },
     mounted: function(){
@@ -172,13 +217,14 @@ export default {
                                                 if(like.username == this.username){
                                                     this.info[i].liked = true;
                                                 }
-                                              }
+                                            }
                                         }    
                     }).catch(error => { console.log(error.message);
                                         this.makeToast("Error occurred.", "danger");
             });
         this.getStories();
         this.getArchivedStories();
+        this.getCollections();
     },
     methods:{
         makeToast(message, variant) {
@@ -196,45 +242,69 @@ export default {
             console.log(id);
         },
         likePost(id) {
-        console.log(this.form);
-        this.formLike.postId = id;
-        this.formLike.username = getEmailFromToken();
-        this.axios.post('/like', this.formLike)
-          .then(response => { console.log(response.data);
-                              this.makeToast("Liked !!!", "success");
+            console.log(this.form);
+            this.formLike.postId = id;
+            this.formLike.username = getEmailFromToken();
+            this.axios.post('/like', this.formLike)
+            .then(response => { console.log(response.data);
+                                this.makeToast("Liked !!!", "success");
+                                })
+            .catch(error => { console.log(error);
+                                this.makeToast("Error occured.", "danger");
+                            })
+        },
+        getStories(){
+            this.axios.get('/story/profile/' + this.username)
+                        .then(response => { this.stories = response.data;
+                                            for(let i=0; i< response.data.length; i++){
+                                                if(this.stories[i].image){
+                                                this.stories[i].imageBytes = 'data:image/jpeg;base64,' + this.stories[i].imageBytes; 
+                                                }else{
+                                                this.stories[i].imageBytes = 'data:video/mp4;base64,' + this.stories[i].imageBytes;
+                                                } 
+                                            }   
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
+        getArchivedStories(){
+            this.axios.get('/story/archive/' + this.username)
+                        .then(response => { this.archivedStories = response.data;
+                                            for(let i=0; i< response.data.length; i++){
+                                                if(this.archivedStories[i].image){
+                                                this.archivedStories[i].imageBytes = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes; 
+                                                }else{
+                                                this.archivedStories[i].imageBytes = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes;
+                                                } 
+                                            }   
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
+        getCollections() {
+        var user = getEmailFromToken();
+        this.axios.get('/collection/' + user)
+          .then(response => {   this.collections = response.data;
+                                for(let i=0; i< this.collections.length; i++){
+                                    for(let j=0; j < this.collections[i].favourites.length; j++){
+                                        if(this.collections[i].favourites[j].image){
+                                            this.collections[i].favourites[j].imageBytes = 'data:image/jpeg;base64,' + this.collections[i].favourites[j].imageBytes; 
+                                        }else{
+                                            this.collections[i].favourites[j].imageBytes = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes;
+                                        }
+                                        this.collections[i].favourites[j].numLikes = this.collections[i].favourites[j].likes.length;
+                                        for(var like of this.collections[i].favourites[j].likes){
+                                            if(like.username == this.username){
+                                                this.collections[i].favourites[j].liked = true;
+                                            }
+                                        }
+                                    }
+                                }
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })
-      },
-      getStories(){
-        this.axios.get('/story/profile/' + this.username)
-                    .then(response => { this.stories = response.data;
-                                        for(let i=0; i< response.data.length; i++){
-                                            if(this.stories[i].image){
-                                              this.stories[i].imageBytes = 'data:image/jpeg;base64,' + this.stories[i].imageBytes; 
-                                            }else{
-                                              this.stories[i].imageBytes = 'data:video/mp4;base64,' + this.stories[i].imageBytes;
-                                            } 
-                                        }   
-                    }).catch(error => { console.log(error.message);
-                                        this.makeToast("Error occurred.", "danger");
-            });
-      },
-      getArchivedStories(){
-        this.axios.get('/story/archive/' + this.username)
-                    .then(response => { this.archivedStories = response.data;
-                                        for(let i=0; i< response.data.length; i++){
-                                            if(this.archivedStories[i].image){
-                                              this.archivedStories[i].imageBytes = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes; 
-                                            }else{
-                                              this.archivedStories[i].imageBytes = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes;
-                                            } 
-                                        }   
-                    }).catch(error => { console.log(error.message);
-                                        this.makeToast("Error occurred.", "danger");
-            });
-      }
+        },
     }
 }
 </script>
