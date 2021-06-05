@@ -4,9 +4,9 @@ import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.service.IUserService;
-import com.nistagram.usermicroservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +17,8 @@ import java.util.List;
 @CrossOrigin(origins = "${gatewayURL}")
 public class UserController {
 
+    @Autowired
     private IUserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping
 //    @PreAuthorize("hasAuthority('ALL_USERS')")
