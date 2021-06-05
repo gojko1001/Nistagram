@@ -1,8 +1,11 @@
-package com.nistagram.usermicroservice;
+package com.nistagram.usermicroservice.service;
 
+import com.nistagram.usermicroservice.IUserRepository;
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
+import com.nistagram.usermicroservice.exception.InvalidActionException;
 import com.nistagram.usermicroservice.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,7 @@ import java.util.regex.Pattern;
 @Service
 public class UserService implements IUserService {
 
-    // TODO: updatePassword
+    // TODO: updatePassword - authentication microservice
 
     @Autowired
     private IUserRepository userRepository;
@@ -49,7 +52,7 @@ public class UserService implements IUserService {
         return user;
     }
 
-    public User create(UserCredentialsDto userReg) {
+    public User create(UserRegistrationDto userReg) {
         try {
             User newUser = userRepository.findByUsername(userReg.getUsername());
             if (newUser != null)
@@ -74,11 +77,11 @@ public class UserService implements IUserService {
         }
     }
 
-    public User registerUser(UserCredentialsDto userReg) {
+    public User registerUser(UserRegistrationDto userReg) {
         if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
             throw new BadRequestException("Passwords are not the same.");
         }
-//        userCredentialsService.create(userCredentials); TODO: Authentication service: create(UserCredentials userCredentails)
+//        userCredentialsService.create(userReg); TODO: Authentication service: create(UserCredentials userCredentails)
         User user = new User();
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
@@ -87,27 +90,10 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    public User edit(User user, String pastUsername) {
-        User dbUser = findUserByUsername(pastUsername);
-//        dbUser.setBio(user.getBio());                   // TODO: Redundant?
-//        dbUser.setBirthDate(user.getBirthDate());
-//        dbUser.setPhone(user.getPhone());
-//        dbUser.setUserGender(user.getUserGender());
-//        dbUser.setUsername(user.getUsername());
-//        dbUser.setWebSite(user.getWebSite());
-//        dbUser.setPublicProfile(user.isPublicProfile());
-//        dbUser.setPublicDM(user.isPublicDM());
-//        dbUser.setTaggable(user.isTaggable());
-        log.info("Try to save updated user: " + pastUsername);
-        return userRepository.save(dbUser);
-    }
-
-    // TODO: Redundant?
-    public User updateUser(User user) {
-        User dbUser = userRepository.findByUsername(user.getUsername());
-        if (dbUser == null)
-            throw new NotFoundException("User not found!");
-
+    public User updateUser(User user, String oldUsername) {
+        if(findUserByUsername(user.getUsername()) != null)
+            throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
+        User dbUser = findUserByUsername(oldUsername);
         dbUser.setBio(user.getBio());
         dbUser.setBirthDate(user.getBirthDate());
         dbUser.setPhone(user.getPhone());
@@ -117,7 +103,8 @@ public class UserService implements IUserService {
         dbUser.setPublicProfile(user.isPublicProfile());
         dbUser.setPublicDM(user.isPublicDM());
         dbUser.setTaggable(user.isTaggable());
-        return dbUser;
+        log.info("Try to save updated user: " + oldUsername);
+        return userRepository.save(dbUser);
     }
 
     public User save(User user) {
@@ -125,14 +112,15 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    private boolean checkUsername(UserCredentialsDto userCredentialsDto) {
+
+    private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
-        return patternUsername.matcher(userCredentialsDto.getUsername()).matches();
+        return patternUsername.matcher(userRegistrationDto.getUsername()).matches();
     }
 
-    private boolean checkFullName(UserCredentialsDto userCredentialsDto) {
+    private boolean checkFullName(UserRegistrationDto userRegistrationDto) {
         Pattern patternFullName = Pattern.compile("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
-        return patternFullName.matcher(userCredentialsDto.getFullName()).matches();
+        return patternFullName.matcher(userRegistrationDto.getFullName()).matches();
     }
 
     private boolean patternChecker(String email, String password) {

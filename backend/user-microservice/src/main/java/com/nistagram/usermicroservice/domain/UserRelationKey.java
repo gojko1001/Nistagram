@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
-public class FollowingListKey implements Serializable {
+public class UserRelationKey implements Serializable {
     @Column
     private Long userId;
     @Column
-    private Long followingId;
+    private Long relatedUserId;
 }
