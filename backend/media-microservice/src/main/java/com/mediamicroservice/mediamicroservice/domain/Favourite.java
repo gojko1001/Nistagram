@@ -10,8 +10,6 @@ public class Favourite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
-    private String username;
     @OneToOne
     private Post post;
 }

@@ -15,4 +15,6 @@ public class Collection {
     private String name;
     @ManyToMany
     private List<Favourite> favourites;
+    @Column
+    private String username;
 }

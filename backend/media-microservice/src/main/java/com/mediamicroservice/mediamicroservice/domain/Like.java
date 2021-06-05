@@ -5,8 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
 @Entity(name = "likes")
+@Data
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
