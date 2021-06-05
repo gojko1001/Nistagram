@@ -92,6 +92,41 @@
                     <b-tab title="Collections">
                         <div v-for="(coll,c) in collections" :key="c">
                             <p style="font-size:30px">{{coll.name}}:</p>
+                            <div v-for="(img,i) in coll.favourites" :key="i">
+                            <b-card
+                                tag="article"
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
+                                class="mb-2">
+                                <h4>@{{img.username}}</h4>
+                                <p style="color:blue">{{img.location.name}}</p>
+                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    The video is not supported by your browser.
+                                </video>
+                                <br>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <span>{{img.numLikes}}</span>
+                                <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
+                                    <i class="far fa-comment"></i>
+                                </router-link>
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                    <i class="fas fa-bookmark"></i>
+                                </router-link>
+                                <b-card-text>
+                                    <span><b>{{img.username}}:  </b></span>{{img.description}}
+                                    <br>
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
+                                        #{{tag.name}}
+                                    </span>
+                                </b-card-text>
+                                <hr>
+                                <span v-for="(comm,c) in img.comments" :key="c">
+                                    <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                                </span>
+                            </b-card>              
+                        </div>
                             <hr>
                         </div>
                     </b-tab>
@@ -249,7 +284,17 @@ export default {
         getCollections() {
         var user = getEmailFromToken();
         this.axios.get('/collection/' + user)
-          .then(response => { this.collections = response.data;})
+          .then(response => { this.collections = response.data;
+                                for(let i=0; i< this.collections.length; i++){
+                                    for(let j=0; j < this.collections[i].favourites.length; j++){
+                                        if(this.collections[i].favourites[j].image){
+                                            this.collections[i].favourites[j].imageBytes = 'data:image/jpeg;base64,' + this.collections[i].favourites[j].imageBytes; 
+                                        }else{
+                                            this.collections[i].favourites[j].imageBytes = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes;
+                                        }
+                                    }
+                                }
+                            })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })

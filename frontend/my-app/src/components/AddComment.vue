@@ -24,13 +24,13 @@
               v-model="selected"
               :options="collections"
               class="mb-3"
-              value-field="item"
+              value-field="name"
               text-field="name"
               disabled-field="notEnabled"
               style="margin-left:280px;"
               v-if="showCollections"
             ></b-form-radio-group>
-            <b-button pill v-if="showCollections" style="margin-left:330px; font-size: 15px" @click="showAllCollections()">Add to collection</b-button>
+            <b-button pill v-if="showCollections" style="margin-left:330px; font-size: 15px" @click="addToCollection()">Save</b-button>
             <br>
             <b-button variant="link" v-b-modal.modal-1 class="inter" style="margin-left:280px; font-size:15px">Add new collection</b-button>
                 <b-modal
@@ -156,6 +156,9 @@ export default {
         var user = getEmailFromToken();
         this.axios.get('/collection/' + user)
           .then(response => { this.collections = response.data;
+                              if(this.collections,length > 0){
+                                this.selected = this.collections[0].name;
+                              }
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
