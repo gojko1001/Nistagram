@@ -18,6 +18,37 @@ public class UserRelationService implements IUserRelationService {
     private IUserService userService;
 
 
+    public List<User> getUserFollowers(String username){
+        User user = userService.findUserByUsername(username);
+        List<User> followers = new ArrayList<>();
+        for(UserRelation u : user.getInvertedRelations()){
+            if(isRelationFollowingGroup(u) && !isBlocked(username, u.getUser().getUsername()))
+                followers.add(u.getUser());
+        }
+        return followers;
+    }
+
+    public List<User> getUserFollowings(String username){
+        User user = userService.findUserByUsername(username);
+        List<User> following = new ArrayList<>();
+        for(UserRelation u : user.getUserRelations()){
+            if(isRelationFollowingGroup(u) && !isBlocked(u.getRelatedUser().getUsername(), username))
+                following.add(u.getRelatedUser());
+        }
+        return following;
+    }
+
+    public List<User> getEagerFollowings(String username, RelationStatus status){
+        User user = userService.findUserByUsername(username);
+        List<User> following = new ArrayList<>();
+        for(UserRelation u : user.getUserRelations()){
+            if(u.getRelationStatus() == status && !isBlocked(u.getRelatedUser().getUsername(), username))
+                following.add(u.getRelatedUser());
+        }
+        return following;
+    }
+
+
     public void followUser(UserRelationDto relationDto){
         if(findRelation(relationDto.getUsername(), relationDto.getRelatedUsername()) != null ||
                 isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()) ||
@@ -83,37 +114,18 @@ public class UserRelationService implements IUserRelationService {
         userService.save(user);
     }
 
-    public List<User> getUserFollowers(String username){
-        User user = userService.findUserByUsername(username);
-        List<User> followers = new ArrayList<>();
-        for(UserRelation u : user.getInvertedRelations()){
-            if(u.getRelationStatus() == RelationStatus.FOLLOWING ||
-                u.getRelationStatus() == RelationStatus.CLOSE_FRIEND ||
-                u.getRelationStatus() == RelationStatus.MUTED &&
-                !isBlocked(username, u.getUser().getUsername()))
-                    followers.add(u.getUser());
-        }
-        return followers;
-    }
-
-    public List<User> getUserFollowings(String username){
-        User user = userService.findUserByUsername(username);
-        List<User> following = new ArrayList<>();
-        for(UserRelation u : user.getUserRelations()){
-            if(u.getRelationStatus() == RelationStatus.FOLLOWING ||
-                u.getRelationStatus() == RelationStatus.CLOSE_FRIEND ||
-                u.getRelationStatus() == RelationStatus.MUTED &&
-                !isBlocked(u.getRelatedUser().getUsername(), username))
-                following.add(u.getRelatedUser());
-        }
-        return following;
-    }
 
     private UserRelation findRelation(String username, String relatedUsername){
         for(UserRelation relatedUser : userService.findUserByUsername(username).getUserRelations())
             if(relatedUser.getRelatedUser().getUsername().equals(relatedUsername))
                 return relatedUser;
         return null;
+    }
+
+    private boolean isRelationFollowingGroup(UserRelation relation) {
+        return relation.getRelationStatus() == RelationStatus.FOLLOWING ||
+                relation.getRelationStatus() == RelationStatus.CLOSE_FRIEND ||
+                relation.getRelationStatus() == RelationStatus.MUTED;
     }
 
     private boolean isBlocked(String username, String relatedUsername){

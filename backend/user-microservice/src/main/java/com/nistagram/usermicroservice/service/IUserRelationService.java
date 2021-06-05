@@ -1,15 +1,19 @@
 package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.dto.UserRelationDto;
 
 import java.util.List;
 
 public interface IUserRelationService {
 
+    List<User> getUserFollowers(String username);
+
     List<User> getUserFollowings(String username);
 
-    List<User> getUserFollowers(String username);
+    List<User> getEagerFollowings(String username, RelationStatus status);
+
 
     void followUser(UserRelationDto relationDto);
 

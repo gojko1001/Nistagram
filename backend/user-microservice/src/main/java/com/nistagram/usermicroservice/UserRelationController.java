@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice;
 
+import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRelationDto;
 import com.nistagram.usermicroservice.service.IUserRelationService;
@@ -15,14 +16,24 @@ public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
 
+    @GetMapping("/followers/{username}")
+    private List<UserDto> getFollowers(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowers(username));
+    }
+
     @GetMapping("/followings/{username}")
     private List<UserDto> getFollowings(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowings(username));
     }
 
-    @GetMapping("/followers/{username}")
-    private List<UserDto> getFollowers(@PathVariable String username){
-        return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowers(username));
+    @GetMapping("/blocked/{username}")
+    private List<UserDto> getBlockedUsers(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.BLOCKED));
+    }
+
+    @GetMapping("/closefriends/{username}")
+    private List<UserDto> getCloseFriends(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.CLOSE_FRIEND));
     }
 
     @PostMapping("/follow")
