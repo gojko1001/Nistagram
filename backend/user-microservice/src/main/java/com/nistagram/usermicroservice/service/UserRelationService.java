@@ -8,11 +8,45 @@ import com.nistagram.usermicroservice.exception.InvalidActionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserRelationService implements IUserRelationService {
 
     @Autowired
     private IUserService userService;
+
+
+    public List<User> getUserFollowers(String username){
+        User user = userService.findUserByUsername(username);
+        List<User> followers = new ArrayList<>();
+        for(UserRelation u : user.getInvertedRelations()){
+            if(isRelationFollowingGroup(u) && !isBlocked(username, u.getUser().getUsername()))
+                followers.add(u.getUser());
+        }
+        return followers;
+    }
+
+    public List<User> getUserFollowings(String username){
+        User user = userService.findUserByUsername(username);
+        List<User> following = new ArrayList<>();
+        for(UserRelation u : user.getUserRelations()){
+            if(isRelationFollowingGroup(u) && !isBlocked(u.getRelatedUser().getUsername(), username))
+                following.add(u.getRelatedUser());
+        }
+        return following;
+    }
+
+    public List<User> getEagerFollowings(String username, RelationStatus status){
+        User user = userService.findUserByUsername(username);
+        List<User> following = new ArrayList<>();
+        for(UserRelation u : user.getUserRelations()){
+            if(u.getRelationStatus() == status && !isBlocked(u.getRelatedUser().getUsername(), username))
+                following.add(u.getRelatedUser());
+        }
+        return following;
+    }
 
 
     public void followUser(UserRelationDto relationDto){
@@ -80,11 +114,29 @@ public class UserRelationService implements IUserRelationService {
         userService.save(user);
     }
 
+
+    public void setNotifications(UserRelationDto relationDto){
+        if(isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
+            throw new InvalidActionException("Notifications can't be recived from blocked user");
+        User user = userService.findUserByUsername(relationDto.getUsername());
+        UserRelation userRelation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
+        if(userRelation == null)
+            throw new InvalidActionException("You are not following user: " + relationDto.getRelatedUsername());
+        userRelation.setEnableNotification(relationDto.getEnableNotifications());
+        userService.save(user);
+    }
+
     private UserRelation findRelation(String username, String relatedUsername){
         for(UserRelation relatedUser : userService.findUserByUsername(username).getUserRelations())
             if(relatedUser.getRelatedUser().getUsername().equals(relatedUsername))
                 return relatedUser;
         return null;
+    }
+
+    private boolean isRelationFollowingGroup(UserRelation relation) {
+        return relation.getRelationStatus() == RelationStatus.FOLLOWING ||
+                relation.getRelationStatus() == RelationStatus.CLOSE_FRIEND ||
+                relation.getRelationStatus() == RelationStatus.MUTED;
     }
 
     private boolean isBlocked(String username, String relatedUsername){

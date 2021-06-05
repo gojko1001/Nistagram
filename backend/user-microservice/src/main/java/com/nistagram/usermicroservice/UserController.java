@@ -1,15 +1,15 @@
 package com.nistagram.usermicroservice;
 
-import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.dto.UserUpdateDto;
 import com.nistagram.usermicroservice.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -39,9 +39,9 @@ public class UserController {
 
     @PutMapping("/{oldUsername}")
 //    @PreAuthorize("hasAuthority('EDIT_PROFILE')")
-    public UserDto edit(@RequestBody UserDto userDto, @PathVariable String oldUsername) {
+    public UserUpdateDto updateProfile(@RequestBody UserUpdateDto userUpdateDto, @PathVariable String oldUsername) {
         log.info("Try to edit user: " + oldUsername);
-        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), oldUsername));
+        return UserMapper.mapUserToUserUpdateDto(userService.updateUser(UserMapper.mapUserUpdateDtoToUser(userUpdateDto), oldUsername));
     }
 
 }
