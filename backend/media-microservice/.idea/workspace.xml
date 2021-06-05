@@ -5,14 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f64bc8-2689-4df5-a695-7b6470fd2e8e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/import.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/CollectionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/CommentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/LikeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/LocationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/PostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/StoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/TagController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/dto/CreateCommentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/dto/CreateLikeDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/dto/ImageBytesDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/dto/MediaDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/dto/StoryBytesDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/mapping/PostMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/controller/mapping/StoryMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/CollectionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/CommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/FavouriteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/HashtagService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/LikeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/LocationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/PostService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/StoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/ICollectionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/ICommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/IFavouriteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/IHashtagService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/ILikeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/ILocationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/IPostService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/service/interfaces/IStoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/util/FileUploadUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Collection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Collection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Favourite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Favourite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Like.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Media.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/UserTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/domain/UserTag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media-microservice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/media-microservice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IAlbumRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ICollectionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ICollectionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ICommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ICommentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IHashtagRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IHashtagRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IInappropriateContentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ILikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ILikeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ILocationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/ILocationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IPostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IPostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IStoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IStoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice/repository/IUserTagRepository.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,16 +80,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/mediamicroservice/mediamicroservice" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\MASHA\XML projekat\Nistagram\backend\media-microservice\src\main\java\com\mediamicroservice\mediamicroservice" />
       <recent name="G:\MASHA\XML projekat\Nistagram\backend\media-microservice\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.mediamicroservice.mediamicroservice.util" />
       <recent name="com.mediamicroservice.mediamicroservice.domain" />
     </key>
   </component>
@@ -92,7 +130,7 @@
       <workItem from="1622741095608" duration="665000" />
       <workItem from="1622760757989" duration="2379000" />
       <workItem from="1622814670609" duration="235000" />
-      <workItem from="1622882132938" duration="803000" />
+      <workItem from="1622882132938" duration="1994000" />
     </task>
     <servers />
   </component>
