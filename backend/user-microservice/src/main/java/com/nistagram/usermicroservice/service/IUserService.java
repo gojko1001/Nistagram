@@ -1,6 +1,7 @@
-package com.nistagram.usermicroservice;
+package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +15,11 @@ public interface IUserService {
 
     User findUserByEmail(String email);
 
-    User create(UserCredentialsDto userReg);
+    User create(UserRegistrationDto userReg);
 
-    User registerUser(UserCredentialsDto userReg);
+    User registerUser(UserRegistrationDto userReg);
 
-    User updateUser(User user);
-
-    User edit(User user, String pastUsername);
+    User updateUser(User user, String oldUsername);
 
     User save(User user);
 }

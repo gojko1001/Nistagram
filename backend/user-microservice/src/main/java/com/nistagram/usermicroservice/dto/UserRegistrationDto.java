@@ -1,13 +1,12 @@
-package com.nistagram.usermicroservice;
+package com.nistagram.usermicroservice.dto;
 
 import lombok.Data;
 
 @Data
-public class UserCredentialsDto {
+public class UserRegistrationDto {
     private String username;
     private String email;
     private String password;
     private String repeatPassword;
     private String fullName;
-
 }

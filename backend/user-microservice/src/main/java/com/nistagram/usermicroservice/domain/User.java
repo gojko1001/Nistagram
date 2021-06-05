@@ -31,8 +31,10 @@ public class User {
     private Date birthDate;
     @Column
     private Gender userGender;
-    @OneToMany(mappedBy = "following")
-    private List<FollowingList> followingList;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserRelation> userRelations;
+    @OneToMany(mappedBy = "relatedUser", cascade = CascadeType.ALL)
+    private List<UserRelation> invertedRelations;
     @OneToOne
     private VerificationRequest verificationRequest;
     @Column

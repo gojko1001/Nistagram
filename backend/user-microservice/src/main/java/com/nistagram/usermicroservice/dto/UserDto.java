@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice;
+package com.nistagram.usermicroservice.dto;
 
 import com.nistagram.usermicroservice.domain.enums.Gender;
 import lombok.Data;
@@ -15,5 +15,4 @@ public class UserDto {
     private String username;
     private String webSite;
     private String bio;
-    private String pastUsername;
 }
