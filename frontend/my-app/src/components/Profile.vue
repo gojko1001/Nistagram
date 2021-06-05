@@ -217,7 +217,7 @@ export default {
                                                 if(like.username == this.username){
                                                     this.info[i].liked = true;
                                                 }
-                                              }
+                                            }
                                         }    
                     }).catch(error => { console.log(error.message);
                                         this.makeToast("Error occurred.", "danger");
@@ -242,16 +242,16 @@ export default {
             console.log(id);
         },
         likePost(id) {
-        console.log(this.form);
-        this.formLike.postId = id;
-        this.formLike.username = getEmailFromToken();
-        this.axios.post('/like', this.formLike)
-          .then(response => { console.log(response.data);
-                              this.makeToast("Liked !!!", "success");
+            console.log(this.form);
+            this.formLike.postId = id;
+            this.formLike.username = getEmailFromToken();
+            this.axios.post('/like', this.formLike)
+            .then(response => { console.log(response.data);
+                                this.makeToast("Liked !!!", "success");
+                                })
+            .catch(error => { console.log(error);
+                                this.makeToast("Error occured.", "danger");
                             })
-          .catch(error => { console.log(error);
-                            this.makeToast("Error occured.", "danger");
-                          })
         },
         getStories(){
             this.axios.get('/story/profile/' + this.username)
@@ -284,13 +284,19 @@ export default {
         getCollections() {
         var user = getEmailFromToken();
         this.axios.get('/collection/' + user)
-          .then(response => { this.collections = response.data;
+          .then(response => {   this.collections = response.data;
                                 for(let i=0; i< this.collections.length; i++){
                                     for(let j=0; j < this.collections[i].favourites.length; j++){
                                         if(this.collections[i].favourites[j].image){
                                             this.collections[i].favourites[j].imageBytes = 'data:image/jpeg;base64,' + this.collections[i].favourites[j].imageBytes; 
                                         }else{
                                             this.collections[i].favourites[j].imageBytes = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes;
+                                        }
+                                        this.collections[i].favourites[j].numLikes = this.collections[i].favourites[j].likes.length;
+                                        for(var like of this.collections[i].favourites[j].likes){
+                                            if(like.username == this.username){
+                                                this.collections[i].favourites[j].liked = true;
+                                            }
                                         }
                                     }
                                 }
