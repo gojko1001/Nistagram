@@ -22,26 +22,26 @@ public class UserController {
 
     @GetMapping
 //    @PreAuthorize("hasAuthority('ALL_USERS')")
-    public List<User> getAll() {
-        return userService.getAll();
+    public List<UserDto> getAll() {
+        return UserMapper.mapUserListToUserDtoList(userService.getAll());
     }
 
     @GetMapping("/{username}")
 //    @PreAuthorize("hasAuthority('GET_USER')")
-    public User getUserByUsername(@PathVariable String username) {
-        return userService.findUserByUsername(username);
+    public UserDto getUserByUsername(@PathVariable String username) {
+        return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
     }
 
     @PostMapping("/add")
-    public User create(@RequestBody UserRegistrationDto userReg) {
-        return userService.create(userReg);
+    public UserDto create(@RequestBody UserRegistrationDto userReg) {
+        return UserMapper.mapUserToUserDto(userService.create(userReg));
     }
 
-    @PutMapping
+    @PutMapping("/{oldUsername}")
 //    @PreAuthorize("hasAuthority('EDIT_PROFILE')")
-    public User edit(@RequestBody UserDto userDto) {
-        log.info("Try to edit user: " + userDto.getPastUsername());
-        return userService.updateUser(UserMapper.mapUserDtoToUser(userDto), userDto.getPastUsername());
+    public UserDto edit(@RequestBody UserDto userDto, @PathVariable String oldUsername) {
+        log.info("Try to edit user: " + oldUsername);
+        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), oldUsername));
     }
 
 }

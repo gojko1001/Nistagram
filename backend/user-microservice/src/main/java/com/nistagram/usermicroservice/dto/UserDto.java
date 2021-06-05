@@ -15,5 +15,4 @@ public class UserDto {
     private String username;
     private String webSite;
     private String bio;
-    private String pastUsername;
 }
