@@ -91,6 +91,17 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public ImageBytesDto getImageFile(Post post) {
+        ImageBytesDto imageBytesDto = new ImageBytesDto();
+        if (post != null) {
+            String filePath = new File("").getAbsolutePath();
+            filePath = filePath.concat("/" + uploadDir + "/");
+            imageBytesDto = imageFile(post, filePath);
+        }
+        return imageBytesDto;
+    }
+
+    @Override
     public ImageBytesDto getImageFileById(Long id) {
         log.info("Try to get post by id: " + id);
         Post post = postRepository.findPostById(id);
