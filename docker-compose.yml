@@ -1,0 +1,124 @@
+version: "3.8"
+
+services:
+  eureka-server:
+    image: eureka-server
+    container_name: eureka-server
+    build: ./backend/eureka-server
+    tty: true
+    networks:
+      - demo
+    ports:
+      - "8761:8761"
+  
+  proxy-server:
+    image: proxy-server
+    container_name: proxy-server
+    build: ./backend/proxy-server
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-serviceregistry:8761/eureka/
+    tty: true
+    networks:
+      - demo
+    ports:
+      - "8762:8762"
+    depends_on:
+      - eureka-server
+
+  
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: on-failure
+    ports:
+      - "3030:3030"
+    networks:
+      - demo
+  
+  media-microservice:
+    image: media-microservice
+    container_name: media-microservice
+    build:
+      context: ./backend/media-microservice
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - "3033:3033"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: mediadb?createDatabaseIfNotExist=true&serverTimezone=UTC
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-serviceregistry:8761/eureka/
+    depends_on:
+      - eureka-server
+      - mysql
+   
+  user-microservice:
+    image: user-microservice
+    container_name: user-microservice
+    build:
+      context: ./backend/user-microservice
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - "3032:3032"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: nistagram_userdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-serviceregistry:8761/eureka/
+    depends_on:
+      - eureka-server
+      - mysql
+      
+  authentication-microservice:
+    image: authentication-microservice
+    container_name: authentication-microservice
+    build:
+      context: ./backend/authentication-microservice
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - "3031:3031"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: nistagramdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-serviceregistry:8761/eureka/
+    depends_on:
+      - eureka-server
+      - mysql
+      
+      
+  mysql:
+    image: mysql:8.0.19
+    container_name: mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    networks:
+      - demo
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+  
+      
+networks:
+  demo:
+    name: demo
+    driver: bridge
