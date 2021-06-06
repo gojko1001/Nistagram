@@ -1,9 +1,13 @@
 package com.nistagram.usermicroservice;
 
+import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRelationDto;
 import com.nistagram.usermicroservice.service.IUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/userrelation")
@@ -11,6 +15,26 @@ import org.springframework.web.bind.annotation.*;
 public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
+
+    @GetMapping("/followers/{username}")
+    private List<UserDto> getFollowers(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowers(username));
+    }
+
+    @GetMapping("/followings/{username}")
+    private List<UserDto> getFollowings(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowings(username));
+    }
+
+    @GetMapping("/blocked/{username}")
+    private List<UserDto> getBlockedUsers(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.BLOCKED));
+    }
+
+    @GetMapping("/closefriends/{username}")
+    private List<UserDto> getCloseFriends(@PathVariable String username){
+        return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.CLOSE_FRIEND));
+    }
 
     @PostMapping("/follow")
     public void followUser(@RequestBody UserRelationDto relationDto){
@@ -28,11 +52,16 @@ public class UserRelationController {
     }
 
     @PutMapping("/update")
-    public void UpdateRelation(@RequestBody UserRelationDto relationDto){
+    public void updateRelation(@RequestBody UserRelationDto relationDto){
         relationService.updateUserRelation(relationDto);
     }
 
-    @DeleteMapping()
+    @PutMapping("/notifications")
+    public void updateNotifications(@RequestBody UserRelationDto relationDto){
+        relationService.setNotifications(relationDto);
+    }
+
+    @DeleteMapping
     public void removeRelation(@RequestBody UserRelationDto relationDto){
         relationService.removeUserRelation(relationDto);
     }

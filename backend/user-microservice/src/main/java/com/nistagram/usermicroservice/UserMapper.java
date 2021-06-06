@@ -2,6 +2,7 @@ package com.nistagram.usermicroservice;
 
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.dto.UserDto;
+import com.nistagram.usermicroservice.dto.UserUpdateDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +39,22 @@ public class UserMapper {
         for(User u : users)
             userDtos.add(mapUserToUserDto(u));
         return userDtos;
+    }
+
+    public static User mapUserUpdateDtoToUser(UserUpdateDto updateDto){
+        User user = mapUserDtoToUser(updateDto.getUser());
+        user.setPublicProfile(updateDto.isPublicProfile());
+        user.setPublicDM(updateDto.isPublicDM());
+        user.setTaggable(updateDto.isTaggable());
+        return user;
+    }
+
+    public static UserUpdateDto mapUserToUserUpdateDto(User user){
+        UserUpdateDto updateDto = new UserUpdateDto();
+        updateDto.setUser(mapUserToUserDto(user));
+        updateDto.setPublicProfile(user.isPublicProfile());
+        updateDto.setPublicDM(user.isPublicDM());
+        updateDto.setTaggable(user.isTaggable());
+        return updateDto;
     }
 }
