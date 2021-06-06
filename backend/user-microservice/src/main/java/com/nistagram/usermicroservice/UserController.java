@@ -44,4 +44,10 @@ public class UserController {
         return UserMapper.mapUserToUserUpdateDto(userService.updateUser(UserMapper.mapUserUpdateDtoToUser(userUpdateDto), oldUsername));
     }
 
+    @GetMapping("/search")
+    public List<UserDto> search(@RequestParam String username){
+        log.info("Try to search users with username: " + username);
+        return UserMapper.mapUserListToUserDtoList(userService.search(username));
+    }
+
 }

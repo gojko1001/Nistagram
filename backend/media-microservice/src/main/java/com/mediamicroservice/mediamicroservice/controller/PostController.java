@@ -61,4 +61,14 @@ public class PostController {
         return new ResponseEntity(postService.getImageFileById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/search_tag")
+    public ResponseEntity search_tag(@RequestParam String tag){
+        return new ResponseEntity(postService.searchTag(tag), HttpStatus.OK);
+    }
+
+    @GetMapping("/search_location")
+    public ResponseEntity search_location(@RequestParam String location){
+        return new ResponseEntity(postService.searchLocation(location), HttpStatus.OK);
+    }
+
 }
