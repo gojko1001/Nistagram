@@ -64,14 +64,18 @@
                                     The video is not supported by your browser.
                                 </video>
                                 <br>
-                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
-                                    <i class="fas fa-heart"></i>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
+                                    <i class="fas fa-thumbs-up"></i>
                                 </button>
                                 <span>{{img.numLikes}}</span>
+                                <button class="heart inter" v-bind:class="{'black': !img.disliked, 'red': img.disliked}" @click="likePost(img.id, false)" style="margin-left:20px">
+                                    <i class="fas fa-thumbs-down"></i>
+                                </button>
+                                <span>{{img.numDislikes}}</span>
                                 <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
                                     <i class="far fa-comment"></i>
                                 </router-link>
-                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:250px">
                                     <i class="fas fa-bookmark"></i>
                                 </router-link>
                                 <b-card-text>
@@ -104,14 +108,18 @@
                                     The video is not supported by your browser.
                                 </video>
                                 <br>
-                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
-                                    <i class="fas fa-heart"></i>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
+                                    <i class="fas fa-thumbs-up"></i>
                                 </button>
                                 <span>{{img.numLikes}}</span>
+                                <button class="heart inter" v-bind:class="{'black': !img.disliked, 'red': img.disliked}" @click="likePost(img.id, false)" style="margin-left:20px">
+                                    <i class="fas fa-thumbs-down"></i>
+                                </button>
+                                <span>{{img.numDislikes}}</span>
                                 <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
                                     <i class="far fa-comment"></i>
                                 </router-link>
-                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:240px">
                                     <i class="fas fa-bookmark"></i>
                                 </router-link>
                                 <b-card-text>
@@ -175,7 +183,9 @@ export default {
             username:'',
             info: [{
                 numLikes:'',
-                liked: false
+                numDislikes:'',
+                liked: false,
+                disliked: false
             }],
             hideCommenting: true,
             numPost:0,
@@ -211,11 +221,23 @@ export default {
                                               this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
                                             }else{
                                               this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
-                                            }  
-                                            this.info[i].numLikes = this.info[i].likes.length;
-                                            for(var like of this.info[i].likes){
-                                                if(like.username == this.username){
-                                                    this.info[i].liked = true;
+                                            } 
+                                            this.info[i].numLikes = 0;
+                                            this.info[i].numDislikes = 0;
+                                            if(this.info[i].likes.length > 0){
+                                                for(var like of this.info[i].likes){
+                                                    if(like.liked){
+                                                    this.info[i].numLikes += 1;
+                                                    }else if(!like.liked){
+                                                    this.info[i].numDislikes += 1;
+                                                    }
+                                                    if(like.username == this.username){
+                                                        if(like.liked){
+                                                            this.info[i].liked = true;
+                                                        }else{
+                                                            this.info[i].disliked = true;
+                                                        } 
+                                                    }
                                                 }
                                             }
                                         }    
@@ -241,10 +263,11 @@ export default {
             this.hideCommenting = false;
             console.log(id);
         },
-        likePost(id) {
+        likePost(id, liked) {
             console.log(this.form);
             this.formLike.postId = id;
             this.formLike.username = getEmailFromToken();
+            this.formLike.liked = liked;
             this.axios.post('/like', this.formLike)
             .then(response => { console.log(response.data);
                                 this.makeToast("Liked !!!", "success");
@@ -292,10 +315,22 @@ export default {
                                         }else{
                                             this.collections[i].favourites[j].imageBytes = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes;
                                         }
-                                        this.collections[i].favourites[j].numLikes = this.collections[i].favourites[j].likes.length;
-                                        for(var like of this.collections[i].favourites[j].likes){
-                                            if(like.username == this.username){
-                                                this.collections[i].favourites[j].liked = true;
+                                        this.collections[i].favourites[j].numLikes = 0;
+                                        this.collections[i].favourites[j].numDislikes = 0;
+                                        if(this.collections[i].favourites[j].likes.length > 0){
+                                            for(var like of this.collections[i].favourites[j].likes){
+                                                if(like.liked){
+                                                this.info[i].numLikes += 1;
+                                                }else if(!like.liked){
+                                                this.info[i].numDislikes += 1;
+                                                }
+                                                if(like.username == this.username){
+                                                    if(like.liked){
+                                                        this.info[i].liked = true;
+                                                    }else{
+                                                        this.info[i].disliked = true;
+                                                    } 
+                                                }
                                             }
                                         }
                                     }
