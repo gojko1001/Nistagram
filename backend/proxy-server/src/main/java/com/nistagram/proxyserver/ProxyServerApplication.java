@@ -21,7 +21,7 @@ public class ProxyServerApplication {
 		SpringApplication.run(ProxyServerApplication.class, args);
 	}
 
-	@Bean
+    @Bean
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@EnableEurekaClient
 @RestController
+@EnableEurekaClient
 public class UserMicroserviceApplication {
 
 	@GetMapping
