@@ -25,32 +25,43 @@ public class LikeService implements ILikeService {
     @Override
     public Like createLikeOnPost(CreateLikeDto createLikeDto) {
         Post post = postService.getById(createLikeDto.getPostId());
+        if(post == null){
+            log.error("Post with id " + createLikeDto.getPostId() + " doesn't exist.");
+            return null;
+        }
         Date currentDate = new Date();
-        System.out.println(currentDate);
-        /*for(Like like: post.getLikes()){
-            if(like.getUsername().equals(createLikeDto.getUsername())){
-                post.getLikes().remove(like);
-                postService.save(post);
-                Like oldLike = new Like();
-                oldLike.setUsername(createLikeDto.getUsername());
-                oldLike.setLiked(false);
-                oldLike.setTimestamp(currentDate);
-                oldLike.setPost(post);
-                log.info("Try to save like: " + oldLike.getId());
-                return likeRepository.save(oldLike);
-            }
-        }*/
         Like newLike = new Like();
+        if(post.getLikes().size() > 0){
+            for(Like like: post.getLikes()){
+                if(like.getUsername().equals(createLikeDto.getUsername())){
+                    if(createLikeDto.isLiked() == like.isLiked()){
+                        post.getLikes().remove(like);
+                        postService.save(post);
+                        log.info("Removed like with id  " + like.getId() + " from post with id " + post.getId());
+                        likeRepository.delete(like);
+                        log.info("Removed like with id  " + like.getId());
+                        return  null;
+                    }else if(createLikeDto.isLiked() != like.isLiked()){
+                        like.setLiked(createLikeDto.isLiked());
+                        like.setTimestamp(currentDate);
+                        likeRepository.save(like);
+                        return null;
+                    }
+                }
+            }
+        }
+
+        newLike.setLiked(createLikeDto.isLiked());
         newLike.setUsername(createLikeDto.getUsername());
-        newLike.setLiked(true);
         newLike.setTimestamp(currentDate);
-        //newLike.setPost(post);
         log.info("Try to save like: " + newLike.getId());
         likeRepository.save(newLike);
+        log.info("Like: " + newLike.getId() + " has been saved.");
         post.getLikes().add(newLike);
         postService.save(post);
-        return newLike;
+        return  newLike;
     }
+
 
     //TODO: za sada je nekoriscena na frontu
     @Override
