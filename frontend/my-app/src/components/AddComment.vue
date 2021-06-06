@@ -13,14 +13,14 @@
               The video is not supported by your browser.
             </video>
             <br>
-            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
+            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>
             <span>{{img.numLikes}}</span>
-            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)" style="margin-left:20px">
+            <button class="heart inter" v-bind:class="{'black': !img.disliked, 'red': img.disliked}" @click="likePost(img.id, false)" style="margin-left:20px">
               <i class="fas fa-thumbs-down"></i>
             </button>
-            <span>{{img.numLikes}}</span>
+            <span>{{img.numDislikes}}</span>
             <button class="inter" style="margin-left:280px" @click="showAllCollections()">
               <i class="fas fa-bookmark"></i>
             </button>
@@ -78,7 +78,9 @@ export default {
             img: {
               location:{},
               numLikes:'',
+              numDislikes:'',
               liked: false,
+              disliked: false
             },
             postId:'',
             form: {
@@ -107,12 +109,24 @@ export default {
                               this.img.imageBytes = 'data:image/jpeg;base64,' + this.img.imageBytes; 
                             }else{
                               this.img.imageBytes = 'data:video/mp4;base64,' + this.img.imageBytes;
-                            } 
-                            this.img.numLikes = this.img.likes.length; 
-                            for(var like of this.img.likes){
-                              if(like.username == this.username){
-                                  this.img.liked = true;
-                              }
+                            }
+                            this.img.numLikes = 0;
+                            this.img.numDislikes = 0;
+                            if(this.img.likes.length > 0){
+                                for(var like of this.img.likes){
+                                    if(like.liked){
+                                      this.img.numLikes += 1;
+                                    }else if(!like.liked){
+                                      this.img.numDislikes += 1;
+                                    }
+                                    if(like.username == this.username){
+                                        if(like.liked){
+                                            this.img.liked = true;
+                                        }else{
+                                            this.img.disliked = true;
+                                        } 
+                                    }
+                                }
                             }
         })
         .catch(error => { console.log(error);
@@ -144,10 +158,11 @@ export default {
                             this.makeToast("Error occured.", "danger");
                           })
       },
-      likePost(id) {
+      likePost(id, liked) {
         console.log(this.form);
         this.formLike.postId = id;
         this.formLike.username = getEmailFromToken();
+        this.formLike.liked = liked;
         this.axios.post('/like', this.formLike)
           .then(response => { console.log(response.data);
                               this.makeToast("Liked !!!", "success");

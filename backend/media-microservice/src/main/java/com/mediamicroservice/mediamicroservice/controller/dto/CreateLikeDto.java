@@ -6,4 +6,5 @@ import lombok.Data;
 public class CreateLikeDto {
     private Long postId;
     private String username;
+    private boolean liked;
 }
