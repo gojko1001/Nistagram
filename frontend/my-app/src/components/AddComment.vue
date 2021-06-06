@@ -14,10 +14,14 @@
             </video>
             <br>
             <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
-              <i class="fas fa-heart"></i>
+              <i class="fas fa-thumbs-up"></i>
             </button>
             <span>{{img.numLikes}}</span>
-            <button class="inter" style="margin-left:330px" @click="showAllCollections()">
+            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)" style="margin-left:20px">
+              <i class="fas fa-thumbs-down"></i>
+            </button>
+            <span>{{img.numLikes}}</span>
+            <button class="inter" style="margin-left:280px" @click="showAllCollections()">
               <i class="fas fa-bookmark"></i>
             </button>
             <b-form-radio-group

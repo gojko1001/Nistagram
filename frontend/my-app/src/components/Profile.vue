@@ -65,13 +65,17 @@
                                 </video>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
-                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-thumbs-up"></i>
+                                </button>
+                                <span>{{img.numLikes}}</span>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)" style="margin-left:20px">
+                                    <i class="fas fa-thumbs-down"></i>
                                 </button>
                                 <span>{{img.numLikes}}</span>
                                 <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
                                     <i class="far fa-comment"></i>
                                 </router-link>
-                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:250px">
                                     <i class="fas fa-bookmark"></i>
                                 </router-link>
                                 <b-card-text>
@@ -105,13 +109,17 @@
                                 </video>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)">
-                                    <i class="fas fa-heart"></i>
+                                    <i class="fas fa-thumbs-up"></i>
+                                </button>
+                                <span>{{img.numLikes}}</span>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id)" style="margin-left:20px">
+                                    <i class="fas fa-thumbs-down"></i>
                                 </button>
                                 <span>{{img.numLikes}}</span>
                                 <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
                                     <i class="far fa-comment"></i>
                                 </router-link>
-                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:300px">
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:240px">
                                     <i class="fas fa-bookmark"></i>
                                 </router-link>
                                 <b-card-text>
