@@ -14,6 +14,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedMethods("*")
                 .allowedHeaders("*")
-                .allowedOrigins("${gatewayURL}");
+                .allowedOrigins("http://localhost:8762/**")
+                .allowedOrigins("https://localhost:3000/");
     }
 }

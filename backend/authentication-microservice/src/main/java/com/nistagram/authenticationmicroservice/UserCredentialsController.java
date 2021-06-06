@@ -15,7 +15,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/userCredentials")
-@CrossOrigin(origins = "${gatewayURL}")
 public class UserCredentialsController {
     @Autowired
     private IUserCredentialsService userCredentialsService;
