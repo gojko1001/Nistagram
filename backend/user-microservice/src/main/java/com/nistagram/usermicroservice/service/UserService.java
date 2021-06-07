@@ -112,6 +112,11 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public List<User> search(String username) {
+        return userRepository.search(username);
+    }
+
 
     private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");

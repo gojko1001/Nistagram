@@ -3,6 +3,7 @@ package com.mediamicroservice.mediamicroservice.service;
 import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.controller.mapping.PostMapper;
+import com.mediamicroservice.mediamicroservice.domain.Hashtag;
 import com.mediamicroservice.mediamicroservice.domain.Location;
 import com.mediamicroservice.mediamicroservice.domain.Media;
 import com.mediamicroservice.mediamicroservice.domain.Post;
@@ -132,5 +133,21 @@ public class PostService implements IPostService {
         return postRepository.findPostById(id);
     }
 
+    public List<ImageBytesDto> searchTag(String tag){
+        List<Post> allPosts = postRepository.findAll();
+        List<Post> posts = new ArrayList<>();
+        for(Post post: allPosts){
+            for(Hashtag hashtag: post.getMedia().getHashtags()){
+                if(hashtag.getName().toLowerCase().contains(tag.toLowerCase()))
+                    posts.add(post);
+            }
+        }
+        return getImagesFiles(posts);
+    }
+
+    public List<ImageBytesDto> searchLocation(String location) {
+        List<Post> posts = postRepository.searchLocation(location);
+        return getImagesFiles(posts);
+    }
 
 }
