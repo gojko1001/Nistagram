@@ -97,7 +97,7 @@ export default {
         },
         onSubmit() {
             console.log(this.form);
-            this.axios.post('/image', this.form)
+            this.axios.post('/media-api/image', this.form)
             .then(response => { console.log(response);
                                 })
             .catch(error => { console.log(error);
@@ -109,7 +109,7 @@ export default {
         this.formData.append("file", file);
       },
       startupload(){
-        this.axios.post('/image', this.formData, {
+        this.axios.post('/media-api/image', this.formData, {
           headers:{
             Accept: 'application/json',
             'Content-Type':'multipart/form-data'
@@ -126,7 +126,7 @@ export default {
           this.form.locationName = this.form.location.toString();
           console.log(this.selected)
           if(this.selected == 'post'){
-            this.axios.post('/image/info', this.form)
+            this.axios.post('/media-api/image/info', this.form)
                                 .then(response => { console.log(response);
                                                     this.makeToast("Posted!", "success"); 
                                                     window.location.href = "/postimage";                             
@@ -134,7 +134,7 @@ export default {
                                                   this.makeToast("Error occurred.", "danger");
                                                 }); 
           }else{
-            this.axios.post('/story/info', this.form)
+            this.axios.post('/media-api/story/info', this.form)
                                 .then(response => { console.log(response);
                                                     this.makeToast("Posted!", "success"); 
                                                     window.location.href = "/postimage";                             

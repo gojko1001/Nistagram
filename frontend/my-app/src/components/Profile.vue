@@ -213,7 +213,7 @@ export default {
                                 }
                                 window.location.href = '/home'
             })
-        this.axios.get('/image/profile/' + this.username)
+        this.axios.get('/media-api/image/profile/' + this.username)
                     .then(response => { this.info = response.data;
                                         this.numPost = response.data.length;
                                         for(let i=0; i< response.data.length; i++){
@@ -277,7 +277,7 @@ export default {
                             })
         },
         getStories(){
-            this.axios.get('/story/profile/' + this.username)
+            this.axios.get('/media-api/story/profile/' + this.username)
                         .then(response => { this.stories = response.data;
                                             for(let i=0; i< response.data.length; i++){
                                                 if(this.stories[i].image){
@@ -291,7 +291,7 @@ export default {
                 });
         },
         getArchivedStories(){
-            this.axios.get('/story/archive/' + this.username)
+            this.axios.get('/media-api/story/archive/' + this.username)
                         .then(response => { this.archivedStories = response.data;
                                             for(let i=0; i< response.data.length; i++){
                                                 if(this.archivedStories[i].image){
@@ -306,7 +306,7 @@ export default {
         },
         getCollections() {
         var user = getEmailFromToken();
-        this.axios.get('/collection/' + user)
+        this.axios.get('/media-api/collection/' + user)
           .then(response => {   this.collections = response.data;
                                 for(let i=0; i< this.collections.length; i++){
                                     for(let j=0; j < this.collections[i].favourites.length; j++){

@@ -103,7 +103,7 @@ export default {
   mounted: function(){
     this.postId = this.$route.params.id;
     this.username = getEmailFromToken();
-    this.axios.get('/image/' + this.postId)
+    this.axios.get('/media-api/image/' + this.postId)
         .then(response => { this.img = response.data;
                             if(this.img.image){
                               this.img.imageBytes = 'data:image/jpeg;base64,' + this.img.imageBytes; 
@@ -173,7 +173,7 @@ export default {
       },
       getCollections() {
         var user = getEmailFromToken();
-        this.axios.get('/collection/' + user)
+        this.axios.get('/media-api/collection/' + user)
           .then(response => { this.collections = response.data;
                               if(this.collections,length > 0){
                                 this.selected = this.collections[0].name;
@@ -186,7 +186,7 @@ export default {
       createCollection(name){
         this.collection.username = getEmailFromToken();
         this.collection.name = name;
-        this.axios.post('/collection', this.collection)
+        this.axios.post('/media-api/collection', this.collection)
           .then(response => { console.log(response.data)})
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");

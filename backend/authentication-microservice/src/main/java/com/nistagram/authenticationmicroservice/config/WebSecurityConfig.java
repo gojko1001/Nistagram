@@ -63,6 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userCredentials/login").permitAll()
                 .antMatchers("/userCredentials/login_google").permitAll()
                 .antMatchers("/user/add").permitAll()
+                .antMatchers("**/userCredentials/**").permitAll()
+                .antMatchers("**/user/**").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Enable CORS layer (WebMvcConfig class)
@@ -81,7 +83,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/userCredentials/**");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/user/add",
-                "/authentication-api/userCredentials/login",
-                "/userCredentials//login_google/");
+                "/userCredentials/login",
+                "/userCredentials/login_google/");
+        web.ignoring().antMatchers(HttpMethod.GET, "/**");
+        web.ignoring().antMatchers(HttpMethod.POST, "/**");
+        web.ignoring().antMatchers(HttpMethod.PUT, "/**");
+        web.ignoring().antMatchers(HttpMethod.DELETE, "/**");
     }
 }
