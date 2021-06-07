@@ -22,4 +22,6 @@ public interface IUserService {
     User updateUser(User user, String oldUsername);
 
     User save(User user);
+
+    List<User> search(String username);
 }

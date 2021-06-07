@@ -24,4 +24,8 @@ public interface IPostService {
     Post getById(Long id);
 
     ImageBytesDto getImageFileById(Long id);
+
+    List<ImageBytesDto> searchTag(String tag);
+
+    List<ImageBytesDto> searchLocation(String location);
 }

@@ -17,6 +17,12 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
+    protected void configure(HttpSecurity http) throws Exception{
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers("/").permitAll();
+    }
+
+    @Override
     public void configure(WebSecurity web) throws Exception {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
