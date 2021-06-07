@@ -1,12 +1,12 @@
 // Paths
 export const USER_CREDENTIALS_PATH = "/authentication-api/userCredentials"
+export const REGISTER_USER_PATH = USER_CREDENTIALS_PATH + "/add"
 export const LOGIN_PATH = USER_CREDENTIALS_PATH + "/login"
 export const LOGIN_GOOGLE_PATH = USER_CREDENTIALS_PATH + "/login_google"
 export const RESET_PASS_PATH = USER_CREDENTIALS_PATH + "/reset_password"
 export const VERIFY_ACC_PATH = USER_CREDENTIALS_PATH + "/verify"
 
-export const USER_PATH = "/user-api/api/user"
-export const ADD_USER_PATH = USER_PATH + "/add"
+export const USER_PATH = "/user-api/user"
 export const SEARCH_USER_PATH = USER_PATH + "/search"
 
 export const TAG_PATH = "/media-api/tag"

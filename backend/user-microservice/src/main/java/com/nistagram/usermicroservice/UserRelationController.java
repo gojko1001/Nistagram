@@ -17,22 +17,22 @@ public class UserRelationController {
     private IUserRelationService relationService;
 
     @GetMapping("/followers/{username}")
-    private List<UserDto> getFollowers(@PathVariable String username){
+    public List<UserDto> getFollowers(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowers(username));
     }
 
     @GetMapping("/followings/{username}")
-    private List<UserDto> getFollowings(@PathVariable String username){
+    public List<UserDto> getFollowings(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowings(username));
     }
 
     @GetMapping("/blocked/{username}")
-    private List<UserDto> getBlockedUsers(@PathVariable String username){
+    public List<UserDto> getBlockedUsers(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.BLOCKED));
     }
 
     @GetMapping("/closefriends/{username}")
-    private List<UserDto> getCloseFriends(@PathVariable String username){
+    public List<UserDto> getCloseFriends(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.CLOSE_FRIEND));
     }
 

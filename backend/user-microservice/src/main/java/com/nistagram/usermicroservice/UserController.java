@@ -13,8 +13,8 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("api/user")
-@CrossOrigin(origins = "${gatewayURL}")
+@RequestMapping("user")
+@CrossOrigin(origins = {"${gatewayURL}", "http://localhost:3031"})
 public class UserController {
 
     @Autowired
@@ -33,8 +33,13 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public UserDto create(@RequestBody UserRegistrationDto userReg) {
-        return UserMapper.mapUserToUserDto(userService.create(userReg));
+    public void registerUser(@RequestBody UserRegistrationDto userReg) {
+        userService.registerUser(userReg, false);
+    }
+
+    @PostMapping("/addGoogleUser")
+    public void registerGoogleUser(@RequestBody UserRegistrationDto userReg) {
+        userService.registerUser(userReg, true);
     }
 
     @PutMapping("/{oldUsername}")
