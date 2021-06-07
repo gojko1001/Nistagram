@@ -24,18 +24,4 @@ public class ProxyServerApplication {
 		SpringApplication.run(ProxyServerApplication.class, args);
 	}
 
-	@Bean
-	public CorsFilter corsFilter() {
-		final CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.addAllowedOrigin("*");
-		config.addAllowedHeader("*");
-		config.addAllowedMethod("*");
-
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", config);
-
-		return new CorsFilter(source);
-	}
-
 }

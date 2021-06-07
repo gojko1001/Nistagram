@@ -5,7 +5,7 @@ export const LOGIN_GOOGLE_PATH = USER_CREDENTIALS_PATH + "/login_google"
 export const RESET_PASS_PATH = USER_CREDENTIALS_PATH + "/reset_password"
 export const VERIFY_ACC_PATH = USER_CREDENTIALS_PATH + "/verify"
 
-export const USER_PATH = "/authentication-api/user"
+export const USER_PATH = "/user-api/api/user"
 export const ADD_USER_PATH = USER_PATH + "/add"
 export const SEARCH_USER_PATH = USER_PATH + "/search"
 
@@ -13,7 +13,7 @@ export const TAG_PATH = "/media-api/tag"
 
 export const LOCATION_PATH = "/media-api/location"
 
-export const IMAGE_PATH = "/media-api/image"
+export const IMAGE_PATH = "/media-api"
 export const SEARCH_TAG_PATH = IMAGE_PATH + "/search_tag";
 export const SEARCH_LOCATION_PATH = IMAGE_PATH + "/search_location";
 

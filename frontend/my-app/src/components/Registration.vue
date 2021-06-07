@@ -105,7 +105,7 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.post('/user/add', this.form)
+        this.axios.post('/authentication-api/user/add', this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("User has been registered successfully. Check your email.", "success");
                                       window.location.href = "/";
