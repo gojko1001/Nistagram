@@ -36,5 +36,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/authentication-api/**",
                 "/media-api/**",
                 "/gateway-api/**");
+        web.ignoring().antMatchers(HttpMethod.PUT,
+                "/user-api/**",
+                "/authentication-api/**",
+                "/media-api/**",
+                "/gateway-api/**");
+        web.ignoring().antMatchers(HttpMethod.DELETE,
+                "/user-api/**",
+                "/authentication-api/**",
+                "/media-api/**",
+                "/gateway-api/**");
     }
 }

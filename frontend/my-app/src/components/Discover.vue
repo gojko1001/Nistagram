@@ -86,7 +86,7 @@ export default {
             })
     }
     this.$nextTick(function () {
-      this.axios.get('/image/discover/' + this.username)
+      this.axios.get('/media-api/image/discover/' + this.username)
                   .then(response => { this.info = response.data;
                                       for(let i=0; i< response.data.length; i++){
                                           if(this.info[i].image){
@@ -135,7 +135,7 @@ export default {
         this.formLike.username = getEmailFromToken();
         this.formLike.liked = liked;
         if(this.formLike.username != null){
-          this.axios.post('/like', this.formLike)
+          this.axios.post('/media-api/like', this.formLike)
           .then(response => { console.log(response.data);
                               this.makeToast("Liked !!!", "success");
                             })
