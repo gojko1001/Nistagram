@@ -39,7 +39,7 @@ export default {
     }
   },
   mounted: function(){
-    this.axios.get('/user', {
+    this.axios.get('/authentication-api/user', {
       headers:{
         Authorization: "Bearer " + localStorage.getItem('JWT'),
       }
