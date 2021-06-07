@@ -12,7 +12,6 @@ import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
-import javafx.geometry.Pos;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @Service

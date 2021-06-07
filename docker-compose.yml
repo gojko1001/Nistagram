@@ -27,11 +27,11 @@ services:
 
   
   frontend:
-    build: ./frontend
+    build: ./frontend/my-app
     container_name: frontend
     restart: on-failure
     ports:
-      - "3030:3030"
+      - "3000:3000"
     networks:
       - demo
   
@@ -95,7 +95,7 @@ services:
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
-      DATABASE_SCHEMA: nistagramdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DATABASE_SCHEMA: authdb?createDatabaseIfNotExist=true&serverTimezone=UTC
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-serviceregistry:8761/eureka/
     depends_on:
       - eureka-server
