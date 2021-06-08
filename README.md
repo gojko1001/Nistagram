@@ -12,7 +12,9 @@ Social network for sharing photos and videos
 
 ### Microservices:
 | Name | Port | About
-| ------ | ------ | ------ | 
+| ------ | ------ | ------ |
+| Eureka-server | 8761 | Eureka for service discovery in the microservice environment. |
+| Proxy-server | 8762 | Zuul handles all the requests and performs the dynamic routing of microservice applications. |
 | Front service | 3000 | |
 | Gateway | 3030 | | 
 | Authentication microservice | 3031 | |
