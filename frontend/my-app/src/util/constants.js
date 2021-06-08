@@ -6,8 +6,16 @@ export const LOGIN_GOOGLE_PATH = USER_CREDENTIALS_PATH + "/login_google"
 export const RESET_PASS_PATH = USER_CREDENTIALS_PATH + "/reset_password"
 export const VERIFY_ACC_PATH = USER_CREDENTIALS_PATH + "/verify"
 
+
 export const USER_PATH = "/user-api/user"
 export const SEARCH_USER_PATH = USER_PATH + "/search"
+
+export const USER_RELATION_PATH = "/user-api/user_relation"
+export const GET_FOLLOWERS_PATH = USER_RELATION_PATH + "/followers"
+export const GET_FOLLOWINGS_PATH = USER_RELATION_PATH + "/followings"
+export const GET_BLOCKED_USERS_PATH = USER_RELATION_PATH + "/blocked"
+export const GET_CLOSE_FRIENDS_PATH = USER_RELATION_PATH + "/close_friends"
+
 
 export const TAG_PATH = "/media-api/tag"
 

@@ -101,7 +101,6 @@ public class UserCredentialsService implements IUserCredentialsService {
             throw new BadRequestException("Unsuccessfully added user!");
         }
 //        emailService.resetPassword(user); TODO: Notification microservice
-        log.info("SAVING USER");
         return userCredentialsRepository.save(userCredentials);
 
     }

@@ -10,8 +10,30 @@
             </span>
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
-                <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-users"></i>  0 Following</b-btn> <br>
-                <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-user-friends"></i>  0 Followers</b-btn>
+                <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn"><i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
+                <b-modal id="modal-followings" title="Following">
+                    <div v-for="(follow,p) in followings" :key="p">
+                        <span>@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <b-btn size="sm" variant="outline-info" class="float-right" @click="unfollowUser(follow.username)">Unfollow</b-btn><hr>
+                    </div>
+                    <template #modal-footer="{ cancel }">
+                        <b-button variant="secondary" @click="cancel()">
+                            Cancel
+                        </b-button>
+                    </template>
+                </b-modal>
+                <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn"><i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
+                <b-modal id="modal-followers" title="Followers">
+                    <div v-for="(follow,p) in followers" :key="p">
+                        <span>@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <b-btn size="sm" variant="outline-info" class="float-right">Remove</b-btn><hr>
+                    </div>
+                    <template #modal-footer="{ cancel }">
+                        <b-button variant="secondary" @click="cancel()">
+                            Cancel
+                        </b-button>
+                    </template>
+                </b-modal>
             </span>
             <br/>
         </div>
@@ -20,7 +42,7 @@
         <div id="userMedia">
             <div id="stories">
                 <b-button v-b-modal.modal-2 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
-                <b-modal id="modal-2">
+                <b-modal id="modal-2" title="Stories">
                     <button>
                         <i class="fas fa-user-friends"></i>
                     </button>
@@ -173,7 +195,7 @@
 
 
 <script>
-import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
+import { GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, USER_RELATION_PATH } from '../util/constants';
 import { getEmailFromToken } from '../util/token';
 export default {
     name: 'Profile',
@@ -196,7 +218,15 @@ export default {
             },
             stories:[],
             archivedStories:[],
-            collections:[]
+            collections:[],
+            numFollowing:0,
+            numFollowers:0,
+            followings:[],
+            followers:[],
+            relationDto: {
+                username: '',
+                relatedUsername: ''
+            }
         }
     },
     mounted: function(){
@@ -244,6 +274,16 @@ export default {
                     }).catch(error => { console.log(error.message);
                                         this.makeToast("Error occurred.", "danger");
             });
+        this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
+                        .then(response => {
+                            this.numFollowers = response.data.length;
+                            this.followers = response.data;
+                        })
+        this.axios.get(GET_FOLLOWINGS_PATH + "/" + this.username)
+                        .then(response => {
+                            this.numFollowing = response.data.length;
+                            this.followings = response.data;    
+                        })
         this.getStories();
         this.getArchivedStories();
         this.getCollections();
@@ -340,6 +380,17 @@ export default {
                             this.makeToast("Error occured.", "danger");
                           })
         },
+
+        unfollowUser(tounfollow){
+            this.relationDto.username = getEmailFromToken();
+            this.relationDto.relatedUsername = tounfollow;
+            this.axios.delete(USER_RELATION_PATH, this.relationDto)
+                    .then(() => {
+                        this.makeToast(tounfollow + " unfollowed!", "success");
+                    }).catch(err => {
+                        this.makeToast(err.message, "danger");
+                    })
+        }
     }
 }
 </script>

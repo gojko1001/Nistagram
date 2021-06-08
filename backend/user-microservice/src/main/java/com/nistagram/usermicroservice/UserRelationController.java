@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/userrelation")
+@RequestMapping("user_relation")
 @CrossOrigin(origins = "${gatewayURL}")
 public class UserRelationController {
     @Autowired
@@ -31,7 +31,7 @@ public class UserRelationController {
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.BLOCKED));
     }
 
-    @GetMapping("/closefriends/{username}")
+    @GetMapping("/close_friends/{username}")
     public List<UserDto> getCloseFriends(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.CLOSE_FRIEND));
     }
