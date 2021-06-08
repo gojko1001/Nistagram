@@ -24,4 +24,6 @@ public interface IUserService {
     User save(User user);
 
     List<User> search(String username);
+
+    List<String> arePublic(List<String> usernames);
 }
