@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/userrelation")
+@RequestMapping("/api/userrelation")
 //@CrossOrigin(origins = "${gatewayURL}")
 public class UserRelationController {
     @Autowired
