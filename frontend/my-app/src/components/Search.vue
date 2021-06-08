@@ -1,6 +1,6 @@
 <template>
     <div id="searchPage">
-      <table v-if="searchingType == 'profile' && !showProfile">
+      <table v-if="searchingType == 'profile' && showProfile==false">
       <tbody>
         <tr v-for="(res,i) in profiles" :key="i" :res="res">
           <td><button v-on:click="getProfile(res.username)" variant="primary" style="width:200px;">#{{res.fullName}}</button></td>
@@ -9,7 +9,8 @@
     </table>
     <br>
       <div v-if="searchingType == 'tag' || searchingType == 'location' || showProfile">
-        <div v-for="(img,i) in info" :key="i" :img="img">
+         <br>
+        <div v-for="(img,i) in info" :key="i">
           <b-card
               tag="article"
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
@@ -21,8 +22,9 @@
               The video is not supported by your browser.
             </video>
             <br>
+              <i class="fas fa-thumbs-up"></i>
             <span>{{img.numLikes}}</span>
-            <i class="fas fa-thumbs-down"></i>
+              <i class="fas fa-thumbs-down"></i>
             <span>{{img.numDislikes}}</span>
             <b-card-text>
               <span><b>{{img.username}}:  </b></span>{{img.description}}
@@ -38,6 +40,8 @@
           </b-card>              
         </div>
       </div>
+      <h3 v-if="info.length == 0">There is no any photo: {{this.searchingInput}}</h3>
+      <h3 v-if="profiles.length == 0">There is no user with username: {{this.searchingInput}}</h3>
     </div>
 </template>
 
@@ -78,25 +82,8 @@ export default {
         if(this.searchingType == "tag"){
           this.axios.get(SEARCH_TAG_PATH + "?tag=" + this.searchingInput)
               .then(response => { 
-                              this.results = response.data;
-                              for(let i=0; i< response.data.length; i++){
-                                          if(this.results[i].image){
-                                            this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.results[i].imageBytes; 
-                                          }else{
-                                            this.info[i].imageBytes = 'data:video/mp4;base64,' + this.results[i].imageBytes;
-                                          }
-                                          this.info[i].numLikes = 0;
-                                          this.info[i].numDislikes = 0;
-                                          if(this.results[i].likes.length > 0){
-                                              for(var like of this.results[i].likes){
-                                                  if(like.liked){
-                                                    this.info[i].numLikes += 1;
-                                                  }else if(!like.liked){
-                                                    this.info[i].numDislikes += 1;
-                                                  }
-                                              }
-                                          }
-                                      }  
+                              this.info = response.data;
+                              this.loadResults(response.data.length);
                             })
               .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -106,25 +93,8 @@ export default {
 
         if(this.searchingType == "location"){
           this.axios.get(SEARCH_LOCATION_PATH + "?location=" + this.searchingInput)
-              .then(response => { this.results = response.data;
-                                      for(let i=0; i< response.data.length; i++){
-                                          if(response.data[i].image){
-                                            this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.results[i].imageBytes; 
-                                          }else{
-                                            this.info[i].imageBytes = 'data:video/mp4;base64,' + this.results[i].imageBytes;
-                                          }
-                                          this.info[i].numLikes = 0;
-                                          this.info[i].numDislikes = 0;
-                                          if(response.data[i].likes.length > 0){
-                                              for(var like of response.data[i].likes){
-                                                  if(like.liked){
-                                                    this.info[i].numLikes += 1;
-                                                  }else if(!like.liked){
-                                                    this.info[i].numDislikes += 1;
-                                                  }
-                                              }
-                                          }
-                                      }  
+              .then(response => { this.info = response.data;
+                                  this.loadResults(response.data.length); 
                   }).catch(error => { console.log(error);
                                       this.makeToast("Error occurred.", "danger");
           });
@@ -142,31 +112,38 @@ methods:{
                             appendToast: false
                           })
     },
+
+    loadResults: function(length){
+      for(let i=0; i< length; i++){
+        if(this.info[i].image){
+          this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
+        }else{
+          this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
+        }
+        this.info[i].numLikes = 0;
+        this.info[i].numDislikes = 0;
+        if(this.info[i].likes.length > 0){
+          for(var like of this.info[i].likes){
+            if(like.liked){
+              this.info[i].numLikes += 1;
+            }else if(!like.liked){
+              this.info[i].numDislikes += 1;
+            }
+          }
+        }
+      }   
+
+    },
+
   getProfile: function(username) {
         console.log(username);
         this.axios.get('/media-api/image/profile/' + username)
                   .then(response => { console.log(response);
                     this.showProfile = true;
                     this.searchingType = '';
-                    this.results = response.data;
-                                      for(let i=0; i< response.data.length; i++){
-                                          if(response.data[i].image){
-                                            this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.results[i].imageBytes; 
-                                          }else{
-                                            this.info[i].imageBytes = 'data:video/mp4;base64,' + this.results[i].imageBytes;
-                                          }
-                                          this.info[i].numLikes = 0;
-                                          this.info[i].numDislikes = 0;
-                                          if(response.data[i].likes.length > 0){
-                                              for(var like of response.data[i].likes){
-                                                  if(like.liked){
-                                                    this.info[i].numLikes += 1;
-                                                  }else if(!like.liked){
-                                                    this.info[i].numDislikes += 1;
-                                                  }
-                                              }
-                                          }
-                                      }                      
+                    this.info = response.data;
+                    this.loadResults(response.data.length);
+                                                         
                 })
                   .catch(error => { console.log(error);
                                     this.makeToast("Error occurred. User has not been registered successfully.", "danger");
