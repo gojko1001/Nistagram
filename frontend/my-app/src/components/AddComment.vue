@@ -187,7 +187,9 @@ export default {
         this.collection.username = getEmailFromToken();
         this.collection.name = name;
         this.axios.post('/media-api/collection', this.collection)
-          .then(response => { console.log(response.data)})
+          .then(response => { console.log(response.data)
+                              this.makeToast("New collection.", "success");
+                            })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })
@@ -196,8 +198,10 @@ export default {
         this.favourite.postId = this.img.id;
         console.log(this.selected)
         this.favourite.collectionName = this.selected;
-        this.axios.post('/favourite', this.favourite)
-          .then(response => { console.log(response.data)})
+        this.axios.post('/media-api/favourite', this.favourite)
+          .then(response => { console.log(response.data)
+                              this.makeToast("Post has been added to collection.", "success");
+                            })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })

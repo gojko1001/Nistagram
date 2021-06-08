@@ -13,10 +13,10 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("api/user")
-//@CrossOrigin(origins = "${gatewayURL}")
+@RequestMapping("/api/user")
+@CrossOrigin(origins = "https://localhost:3000")
 public class UserController {
-
+// cjel mogu sad da pokrene
     @Autowired
     private IUserService userService;
 
