@@ -17,6 +17,7 @@ public interface IPostService {
     Post saveImageInfo(MediaDto imageDto);
 
     List<ImageBytesDto> getImagesFiles(List<Post> posts);
+
     ImageBytesDto getImageFile(Post post);
 
     ImageBytesDto imageFile(Post post, String filePath);
@@ -28,4 +29,6 @@ public interface IPostService {
     List<ImageBytesDto> searchTag(String tag);
 
     List<ImageBytesDto> searchLocation(String location);
+
+    List<Post> getPublicPosts();
 }

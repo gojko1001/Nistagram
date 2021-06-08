@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -115,6 +116,29 @@ public class UserService implements IUserService {
     @Override
     public List<User> search(String username) {
         return userRepository.search(username);
+    }
+
+    @Override
+    public List<String> arePublic(List<String> usernames) {
+        List<User> users = userRepository.findAll();
+        List<String> publicUsers = new ArrayList<>();
+        for(String username: usernames){
+            for(User u: users){
+                if(u.getUsername().equals(username) && u.isPublicProfile())
+                    publicUsers.add(username);
+            }
+        }
+        return publicUsers;
+    }
+
+    @Override
+    public List<String> getPublicUsers() {
+        List<String> usernames = new ArrayList<>();
+        for(User u: userRepository.findAll()){
+            if(u.isPublicProfile())
+                usernames.add(u.getUsername());
+        }
+        return usernames;
     }
 
 

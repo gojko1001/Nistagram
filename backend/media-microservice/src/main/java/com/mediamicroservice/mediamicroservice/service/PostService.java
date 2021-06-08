@@ -1,5 +1,6 @@
 package com.mediamicroservice.mediamicroservice.service;
 
+import com.mediamicroservice.mediamicroservice.connection.UserConnection;
 import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.controller.mapping.PostMapper;
@@ -20,9 +21,8 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -36,6 +36,9 @@ public class PostService implements IPostService {
     private IHashtagService tagService;
     @Autowired
     private IMediaRepository mediaRepository;
+    @Autowired
+    private UserConnection userConnection;
+
 
     private static String uploadDir = "user-photos";
 
@@ -115,6 +118,7 @@ public class PostService implements IPostService {
         return imageBytesDtos;
     }
 
+
     @Override
     public ImageBytesDto imageFile(Post post, String filePath) {
         ImageBytesDto imageBytesDtos = PostMapper.mapPostToImageBytesDto(post);
@@ -142,12 +146,47 @@ public class PostService implements IPostService {
                     posts.add(post);
             }
         }
+        List<String> publicProfiles = userConnection.publicProfiles(getUsernamesByPost(posts));
+        posts = filterPublicPostByUsernames(publicProfiles, posts);
         return getImagesFiles(posts);
     }
 
     public List<ImageBytesDto> searchLocation(String location) {
         List<Post> posts = postRepository.searchLocation(location);
+        List<String> publicProfiles = userConnection.publicProfiles(getUsernamesByPost(posts));
+        posts = filterPublicPostByUsernames(publicProfiles, posts);
         return getImagesFiles(posts);
+    }
+
+    @Override
+    public List<Post> getPublicPosts() {
+        List<Post> posts = postRepository.findAll();
+        List<String> usernames = userConnection.getPublicUsernames();
+
+        return filterPublicPostByUsernames(usernames, posts);
+    }
+
+    private List<String> getUsernamesByPost(List<Post> posts){
+        List<String> usernames = new ArrayList<>();
+        for(Post post: posts){
+            usernames.add(post.getMedia().getUsername());
+        }
+        Set<String> set = new HashSet<>(usernames);
+        usernames = set.stream().collect(Collectors.toList());
+        return usernames;
+    }
+
+    private List<Post> filterPublicPostByUsernames(List<String> usernames, List<Post> posts){
+        List<Post> publicPosts = new ArrayList<>();
+        for(Post post: posts){
+            for(String username: usernames){
+                if(post.getMedia().getUsername().equals(username))
+                    publicPosts.add(post);
+            }
+        }
+        Set<Post> set = new HashSet<>(publicPosts);
+        publicPosts = set.stream().collect(Collectors.toList());
+        return publicPosts;
     }
 
 }
