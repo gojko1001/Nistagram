@@ -16,7 +16,7 @@ services:
     container_name: proxy-server
     build: ./backend/proxy-server
     environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
     tty: true
     networks:
       - demo
@@ -47,34 +47,11 @@ services:
     ports:
       - "3033:3033"
     environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
       DATABASE_SCHEMA: mediadb?createDatabaseIfNotExist=true&serverTimezone=UTC
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
-    depends_on:
-      - eureka-server
-      - mysql
-
-
-  user-microservice:
-    image: user-microservice
-    container_name: user-microservice
-    build:
-      context: ./backend/user-microservice
-      dockerfile: Dockerfile
-    tty: true
-    restart: on-failure
-    networks:
-      - demo
-    ports:
-      - "3032:3032"
-    environment:
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: root
-      DATABASE_DOMAIN: mysql
-      DATABASE_SCHEMA: nistagram_userdb?createDatabaseIfNotExist=true&serverTimezone=UTC
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
       - mysql
@@ -93,30 +70,48 @@ services:
     ports:
       - "3031:3031"
     environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_DOMAIN: mysql
       DATABASE_SCHEMA: authdb?createDatabaseIfNotExist=true&serverTimezone=UTC
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
       - mysql
 
+  user-microservice:
+    image: user-microservice
+    container_name: user-microservice
+    build:
+      context: ./backend/user-microservice
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - "3032:3032"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: userdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on:
+      - eureka-server
+      - mysql
 
   mysql:
     image: mysql:8.0.19
     container_name: mysql
     restart: always
-    ports:
-      - "3307:3306"
     networks:
       - demo
     volumes:
       - ./mysql:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+
  
       
 networks:
