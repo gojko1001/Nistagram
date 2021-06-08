@@ -6,6 +6,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -14,7 +15,12 @@ import org.springframework.web.filter.CorsFilter;
 @EnableEurekaClient
 public class MediaMicroserviceApplication {
 
-	public static void main(String[] args) {
+    @Bean
+    public RestTemplate getRestTemplate(){
+        return new RestTemplate();
+    }
+
+    public static void main(String[] args) {
 		SpringApplication.run(MediaMicroserviceApplication.class, args);
 	}
 

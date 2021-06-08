@@ -55,4 +55,13 @@ public class UserController {
         return UserMapper.mapUserListToUserDtoList(userService.search(username));
     }
 
+    @PostMapping("/are_public")
+    public List<String> arePublic(@RequestBody List<String> usernames){
+        return userService.arePublic(usernames);
+    }
+
+    @GetMapping("/public_users")
+    public List<String> getPublicUsers(){
+        return userService.getPublicUsers();
+    }
 }
