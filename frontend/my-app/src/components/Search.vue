@@ -41,7 +41,7 @@
         </div>
       </div>
       <h3 v-if="info.length == 0">There is no any photo: {{this.searchingInput}}</h3>
-      <h3 v-if="profiles.length == 0">There is no user with username: {{this.searchingInput}}</h3>
+      <h3 v-if="profiles.length == 0 && searchingType == 'profile'">There is no user with username: {{this.searchingInput}}</h3>
     </div>
 </template>
 
@@ -150,6 +150,8 @@ methods:{
                                   });                  
       },
   },
+
+  
 }
 </script>
 
