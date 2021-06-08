@@ -218,6 +218,12 @@ export default {
                 liked: false,
                 disliked: false
             }],
+            favourites: [{
+                numLikes:'',
+                numDislikes:'',
+                liked: false,
+                disliked: false
+            }],
             hideCommenting: true,
             numPost:0,
             liked: false,
@@ -287,7 +293,7 @@ export default {
             this.formLike.postId = id;
             this.formLike.username = getEmailFromToken();
             this.formLike.liked = liked;
-            this.axios.post('/like', this.formLike)
+            this.axios.post('/media-api/like', this.formLike)
             .then(response => { console.log(response.data);
                                 this.makeToast("Liked !!!", "success");
                                 })
@@ -392,15 +398,15 @@ export default {
                                         if(this.collections[i].favourites[j].likes.length > 0){
                                             for(var like of this.collections[i].favourites[j].likes){
                                                 if(like.liked){
-                                                this.info[i].numLikes += 1;
+                                                this.favourites[i].numLikes += 1;
                                                 }else if(!like.liked){
-                                                this.info[i].numDislikes += 1;
+                                                this.favourites[i].numDislikes += 1;
                                                 }
                                                 if(like.username == this.username){
                                                     if(like.liked){
-                                                        this.info[i].liked = true;
+                                                        this.favourites[i].liked = true;
                                                     }else{
-                                                        this.info[i].disliked = true;
+                                                        this.favourites[i].disliked = true;
                                                     } 
                                                 }
                                             }

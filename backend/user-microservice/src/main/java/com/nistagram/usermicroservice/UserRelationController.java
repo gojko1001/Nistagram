@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("user_relation")
-@CrossOrigin(origins = "${gatewayURL}")
+@CrossOrigin(origins = "https://localhost:3000")
 public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;

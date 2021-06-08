@@ -23,7 +23,7 @@ export const TAG_PATH = "/media-api/tag"
 
 export const LOCATION_PATH = "/media-api/location"
 
-export const IMAGE_PATH = "/media-api"
+export const IMAGE_PATH = "/media-api/image"
 export const SEARCH_TAG_PATH = IMAGE_PATH + "/search_tag";
 export const SEARCH_LOCATION_PATH = IMAGE_PATH + "/search_location";
 

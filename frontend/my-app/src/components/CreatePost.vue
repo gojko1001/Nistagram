@@ -73,7 +73,7 @@ export default {
   mounted: function(){
     if(!localStorage.getItem('JWT'))
       window.location.href = "/";
-    this.axios.get('/location')
+    this.axios.get('/media-api/location')
     .then(response => {console.log(response);
                         this.locations = response.data;
                       })
