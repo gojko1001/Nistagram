@@ -31,7 +31,7 @@ export default {
   name: 'EditProfile',
   data() {
       return {
-        username: '',
+        username: getEmailFromToken(),
         form: '',
         show: true
       }
@@ -39,8 +39,6 @@ export default {
   mounted: function(){
     if(!localStorage.getItem('JWT'))
       window.location.href = "/";
-
-    this.username = getEmailFromToken();
     this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + localStorage.getItem('JWT'),
                                                             }                                          

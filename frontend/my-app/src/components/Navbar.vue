@@ -78,7 +78,7 @@ export default {
   },
   methods:{
     myProfile:function(){
-      window.location.href = "/" + this.username;
+      window.location.href = "/user/" + this.username;
     },
     logout: function(){
       localStorage.removeItem('JWT');

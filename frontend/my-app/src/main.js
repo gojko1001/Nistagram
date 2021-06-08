@@ -72,7 +72,7 @@ const router = new VueRouter({
       component: AllUsers
     },
     {
-      path: '/:pUsername',
+      path: '/user/:pUsername',
       name: 'Profile',
       component: Profile
     },
