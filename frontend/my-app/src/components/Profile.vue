@@ -6,7 +6,9 @@
                   @{{user.username}} <br>
                   {{user.bio}}<br>
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
-                  <b-link href="/edit_profile">Edit profile</b-link><hr>
+                  <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link>
+                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && isFollowing" variant="primary" @click="unfollowUser(username)">Unfollow</b-btn>
+                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && !isFollowing" variant="primary" @click="followUser()">Follow</b-btn><hr>
             </span>
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
@@ -39,7 +41,7 @@
         </div>
         <i class="fas fa-photo-video"></i>
         <div class="vl"></div>
-        <div id="userMedia">
+        <div v-if="isFollowing || isUserProfile" id="userMedia">
             <div id="stories">
                 <b-button v-b-modal.modal-2 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
                 <b-modal id="modal-2" title="Stories">
@@ -189,20 +191,27 @@
                 </b-tabs>
             </div>
         </div>
+        <div v-if="!isUserProfile && !isFollowing" id="locked">
+            <img src="../assets/locker.png" class="lockedImg" alt="Profile is private">
+            <h3>Profile is private</h3>
+        </div>
     </div>
 </template>
-
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 
 
 <script>
-import { GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, USER_RELATION_PATH } from '../util/constants';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH } from '../util/constants';
 import { getEmailFromToken } from '../util/token';
 export default {
     name: 'Profile',
     data(){
         return{
+            isUserProfile: false,
+            isFollowing: false,
             user: '',
-            username:'',
+            username: this.$route.params.pUsername,
             info: [{
                 numLikes:'',
                 numDislikes:'',
@@ -230,7 +239,7 @@ export default {
         }
     },
     mounted: function(){
-        this.username = getEmailFromToken();
+        this.isUserProfile = this.username == getEmailFromToken();
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + localStorage.getItem('JWT'),
                                                             }                                          
@@ -243,7 +252,71 @@ export default {
                                 }
                                 window.location.href = '/home'
             })
-        this.axios.get('/media-api/image/profile/' + this.username)
+        
+        this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
+                        .then(response => {
+                            this.numFollowers = response.data.length;
+                            this.followers = response.data;
+                            this.getUserMedia();
+                        })
+        this.axios.get(GET_FOLLOWINGS_PATH + "/" + this.username)
+                        .then(response => {
+                            this.numFollowing = response.data.length;
+                            this.followings = response.data;    
+                        })
+        
+        
+    },
+    methods:{
+        makeToast(message, variant) {
+            this.$bvToast.toast(message, {
+                                title: `Nistagram`,
+                                autoHideDelay: 5000,
+                                variant: variant,
+                                toaster: 'b-toaster-bottom-right',
+                                solid: true,
+                                appendToast: false
+                            })
+        },
+        commenting: function(id){
+            this.hideCommenting = false;
+            console.log(id);
+        },
+        likePost(id, liked) {
+            console.log(this.form);
+            this.formLike.postId = id;
+            this.formLike.username = getEmailFromToken();
+            this.formLike.liked = liked;
+            this.axios.post('/like', this.formLike)
+            .then(response => { console.log(response.data);
+                                this.makeToast("Liked !!!", "success");
+                                })
+            .catch(error => { console.log(error);
+                                this.makeToast("Error occured.", "danger");
+                            })
+        },
+        getUserMedia(){
+            if(this.isUserProfile){
+                this.getPosts();
+                this.getStories();
+                this.getArchivedStories();
+                this.getCollections();
+            }
+            else if(this.user.publicProfile){
+                this.getPosts();
+                this.getStories();
+            }else{
+                for(let follower of this.followers){
+                    if(follower.username == getEmailFromToken()){
+                        this.isFollowing = true,
+                        this.getPosts();
+                        this.getStories();
+                    }
+                }
+            }
+        },
+        getPosts(){
+            this.axios.get('/media-api/image/profile/' + this.username)
                     .then(response => { this.info = response.data;
                                         this.numPost = response.data.length;
                                         for(let i=0; i< response.data.length; i++){
@@ -274,47 +347,6 @@ export default {
                     }).catch(error => { console.log(error.message);
                                         this.makeToast("Error occurred.", "danger");
             });
-        this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
-                        .then(response => {
-                            this.numFollowers = response.data.length;
-                            this.followers = response.data;
-                        })
-        this.axios.get(GET_FOLLOWINGS_PATH + "/" + this.username)
-                        .then(response => {
-                            this.numFollowing = response.data.length;
-                            this.followings = response.data;    
-                        })
-        this.getStories();
-        this.getArchivedStories();
-        this.getCollections();
-    },
-    methods:{
-        makeToast(message, variant) {
-            this.$bvToast.toast(message, {
-                                title: `Nistagram`,
-                                autoHideDelay: 5000,
-                                variant: variant,
-                                toaster: 'b-toaster-bottom-right',
-                                solid: true,
-                                appendToast: false
-                            })
-        },
-        commenting: function(id){
-            this.hideCommenting = false;
-            console.log(id);
-        },
-        likePost(id, liked) {
-            console.log(this.form);
-            this.formLike.postId = id;
-            this.formLike.username = getEmailFromToken();
-            this.formLike.liked = liked;
-            this.axios.post('/like', this.formLike)
-            .then(response => { console.log(response.data);
-                                this.makeToast("Liked !!!", "success");
-                                })
-            .catch(error => { console.log(error);
-                                this.makeToast("Error occured.", "danger");
-                            })
         },
         getStories(){
             this.axios.get('/media-api/story/profile/' + this.username)
@@ -380,13 +412,25 @@ export default {
                             this.makeToast("Error occured.", "danger");
                           })
         },
+        
+        followUser(){
+            this.relationDto.username = getEmailFromToken();
+            this.relationDto.relatedUsername = this.username;
+            this.axios.post(FOLLOW_PATH, this.relationDto)
+                    .then(() => {
+                        this.makeToast("Follow request sent!", "success");
+                    }).catch(err => {
+                        this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                    })
+        },
 
         unfollowUser(tounfollow){
             this.relationDto.username = getEmailFromToken();
             this.relationDto.relatedUsername = tounfollow;
-            this.axios.delete(USER_RELATION_PATH, this.relationDto)
+            this.axios.put(DELETE_RELATION_PATH, this.relationDto)
                     .then(() => {
                         this.makeToast(tounfollow + " unfollowed!", "success");
+                        window.location.reload();
                     }).catch(err => {
                         this.makeToast(err.message, "danger");
                     })
@@ -426,6 +470,17 @@ export default {
 #posts{
     width: 800px; /* Set width according to window */
 }
+
+#locked {
+    display: inline-block;
+    position: absolute;
+    margin-left: 150px;
+}
+.lockedImg{
+    height: 150px;
+    width: 150px;
+}
+
 .vl {
     border-left: 2px solid rgb(131, 131, 131);
     height: 400px;

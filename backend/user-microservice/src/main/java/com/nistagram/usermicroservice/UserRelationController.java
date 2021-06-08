@@ -61,7 +61,7 @@ public class UserRelationController {
         relationService.setNotifications(relationDto);
     }
 
-    @DeleteMapping
+    @PutMapping("/remove")
     public void removeRelation(@RequestBody UserRelationDto relationDto){
         relationService.removeUserRelation(relationDto);
     }
