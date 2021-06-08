@@ -30,6 +30,21 @@ public class UserConnection {
         return response;
     }
 
+    public List<String> getPublicUsernames() {
+        String url = "http://localhost:8762/user-api/api/user/public_users";
+        List<String> response = new ArrayList<>();
+        try {
+            ResponseEntity<String[]> publicUsernames = restTemplate.exchange(url, HttpMethod.GET,
+                    new HttpEntity<>(new HttpHeaders()), String[].class, 1);
+            response = Arrays.asList(publicUsernames.getBody());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
 
 
 }

@@ -55,4 +55,8 @@ public class UserController {
         return userService.arePublic(usernames);
     }
 
+    @GetMapping("/public_users")
+    public List<String> getPublicUsers(){
+        return userService.getPublicUsers();
+    }
 }

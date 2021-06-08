@@ -118,6 +118,7 @@ public class PostService implements IPostService {
         return imageBytesDtos;
     }
 
+
     @Override
     public ImageBytesDto imageFile(Post post, String filePath) {
         ImageBytesDto imageBytesDtos = PostMapper.mapPostToImageBytesDto(post);
@@ -155,6 +156,14 @@ public class PostService implements IPostService {
         List<String> publicProfiles = userConnection.publicProfiles(getUsernamesByPost(posts));
         posts = filterPublicPostByUsernames(publicProfiles, posts);
         return getImagesFiles(posts);
+    }
+
+    @Override
+    public List<Post> getPublicPosts() {
+        List<Post> posts = postRepository.findAll();
+        List<String> usernames = userConnection.getPublicUsernames();
+
+        return filterPublicPostByUsernames(usernames, posts);
     }
 
     private List<String> getUsernamesByPost(List<Post> posts){

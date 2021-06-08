@@ -131,6 +131,16 @@ public class UserService implements IUserService {
         return publicUsers;
     }
 
+    @Override
+    public List<String> getPublicUsers() {
+        List<String> usernames = new ArrayList<>();
+        for(User u: userRepository.findAll()){
+            if(u.isPublicProfile())
+                usernames.add(u.getUsername());
+        }
+        return usernames;
+    }
+
 
     private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");

@@ -26,4 +26,6 @@ public interface IUserService {
     List<User> search(String username);
 
     List<String> arePublic(List<String> usernames);
+
+    List<String> getPublicUsers();
 }
