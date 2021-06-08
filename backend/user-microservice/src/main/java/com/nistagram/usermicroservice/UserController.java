@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("api/user")
-@CrossOrigin(origins = "${gatewayURL}")
+//@CrossOrigin(origins = "${gatewayURL}")
 public class UserController {
 
     @Autowired
