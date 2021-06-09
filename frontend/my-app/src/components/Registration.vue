@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { REGISTER_USER_PATH } from '../util/constants';
 export default {
   name: 'Registration',
   data() {
@@ -105,7 +106,7 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.post('/authentication-api/user/add', this.form)
+        this.axios.post(REGISTER_USER_PATH, this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("User has been registered successfully. Check your email.", "success");
                                       window.location.href = "/";

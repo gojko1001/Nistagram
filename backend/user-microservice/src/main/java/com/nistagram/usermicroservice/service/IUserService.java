@@ -15,9 +15,7 @@ public interface IUserService {
 
     User findUserByEmail(String email);
 
-    User create(UserRegistrationDto userReg);
-
-    User registerUser(UserRegistrationDto userReg);
+    User registerUser(UserRegistrationDto userReg, boolean isGoogleUser);
 
     User updateUser(User user, String oldUsername);
 

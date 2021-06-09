@@ -7,8 +7,8 @@ insert into users (id, username, full_name, email, phone, web_site, bio, birth_d
 insert into users (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (5, 'mark', "Mark Zukenber", "mark@mailinator.com", "069/689-55-47", "www.facebook.com", "Founder of Facebook", "1984-05-14", 0, true, true, true);
 
 -- Role:agent
-insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('nike', 'Nike', "nike@mailinator.com", "062/963-22-56", 'www.nike.com', 'Just Do It!', "1975-06-09", 2, true, true, true);
-insert into users (username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values ('samsung', 'Samsung', "samsung@mailinator.com", "062/963-22-56", 'www.samsung.com', 'Be inspired to #DoWhatYouCant', "1990-12-08", 2, true, true, true);
+insert into users (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (6, 'nike', 'Nike', "nike@mailinator.com", "062/963-22-56", 'www.nike.com', 'Just Do It!', "1975-06-09", 2, true, true, true);
+insert into users (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (7, 'samsung', 'Samsung', "samsung@mailinator.com", "062/963-22-56", 'www.samsung.com', 'Be inspired to #DoWhatYouCant', "1990-12-08", 2, true, true, true);
 
 
 -- UserRelation
@@ -16,6 +16,9 @@ insert into users (username, full_name, email, phone, web_site, bio, birth_date,
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 4, false, 1);
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 2, false, 3);
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 3, false, 0);
+insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 6, false, 1);
+insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 7, false, 1);
+
 -- to maja
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (4, 1, false, 0);
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (3, 1, false, 1);

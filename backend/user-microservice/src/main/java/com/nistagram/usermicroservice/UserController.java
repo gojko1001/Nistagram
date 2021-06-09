@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("user")
 @CrossOrigin(origins = "https://localhost:3000")
 public class UserController {
     // cjel mogu sad da pokrene
@@ -33,8 +33,13 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public UserDto create(@RequestBody UserRegistrationDto userReg) {
-        return UserMapper.mapUserToUserDto(userService.create(userReg));
+    public void registerUser(@RequestBody UserRegistrationDto userReg) {
+        userService.registerUser(userReg, false);
+    }
+
+    @PostMapping("/addGoogleUser")
+    public void registerGoogleUser(@RequestBody UserRegistrationDto userReg) {
+        userService.registerUser(userReg, true);
     }
 
     @PutMapping("/{oldUsername}")

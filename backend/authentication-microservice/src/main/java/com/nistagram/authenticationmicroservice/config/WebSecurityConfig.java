@@ -64,6 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userCredentials/login_google").permitAll()
                 .antMatchers("/user/add").permitAll()
                 .antMatchers("**/userCredentials/**").permitAll()
+                .antMatchers("**/userCredentials/add").permitAll()
                 .antMatchers("**/user/**").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()

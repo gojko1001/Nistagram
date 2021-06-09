@@ -1,6 +1,7 @@
 package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.IUserRepository;
+import com.nistagram.usermicroservice.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
@@ -23,6 +24,12 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserRepository userRepository;
+<<<<<<< HEAD
+=======
+//    @Autowired
+//    private EmailService emailService;
+
+>>>>>>> develop
 
     public List<User> getAll() {
         log.info("Read all users from database.");
@@ -49,6 +56,7 @@ public class UserService implements IUserService {
         return user;
     }
 
+<<<<<<< HEAD
     public User create(UserRegistrationDto userReg) {
         try {
             User newUser = findUserByUsername(userReg.getUsername());
@@ -83,6 +91,13 @@ public class UserService implements IUserService {
         user.setUsername(userReg.getUsername());
         user.setEmail(userReg.getEmail());
         user.setFullName(userReg.getFullName());
+=======
+    public User registerUser(UserRegistrationDto userReg, boolean isGoogleUser) {
+        if(!isGoogleUser)
+            verifyUserInput(userReg);
+        User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
+//                emailService.verificationPassword(user); TODO: Notification Microservice
+>>>>>>> develop
         return save(user);
     }
 
@@ -133,6 +148,30 @@ public class UserService implements IUserService {
         return usernames;
     }
 
+<<<<<<< HEAD
+=======
+
+    private void verifyUserInput(UserRegistrationDto userReg) {
+        try {
+            User newUser = userRepository.findByUsername(userReg.getUsername());
+            if (newUser != null)
+                throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
+            if (userRepository.findByEmail(userReg.getEmail()) != null)
+                throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
+            if (!checkUsername(userReg))
+                throw new BadRequestException("Username is in invalid format.");
+            if (!checkFullName(userReg))
+                throw new BadRequestException("Full name is in invalid format.");
+            if (!userReg.getPassword().equals(userReg.getRepeatPassword()))
+                throw new BadRequestException("Password and repeat password are not the same.");
+            if (!patternChecker(userReg.getEmail(), userReg.getPassword()))
+                throw new BadRequestException("Email or password is in invalid format.");
+        } catch (Exception e) {
+            throw new BadRequestException("Thread " + e.getMessage());
+        }
+    }
+
+>>>>>>> develop
     private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
         return patternUsername.matcher(userRegistrationDto.getUsername()).matches();

@@ -9,8 +9,8 @@ import java.io.Serializable;
 @Embeddable
 @Data
 public class UserRelationKey implements Serializable {
-    @Column
+    @Column(name = "user_id")
     private Long userId;
-    @Column
+    @Column(name = "related_user_id")
     private Long relatedUserId;
 }
