@@ -45,7 +45,7 @@ public class PostService implements IPostService {
     @Override
     public List<Post> getAll() {
         List<Post> posts = postRepository.findAll();
-        if(posts.isEmpty())
+        if (posts.isEmpty())
             log.info("There is no any posts.");
         return posts;
     }
@@ -137,12 +137,17 @@ public class PostService implements IPostService {
         return postRepository.findPostById(id);
     }
 
-    public List<ImageBytesDto> searchTag(String tag){
-        List<Post> allPosts = postRepository.findAll();
+    private List<Post> findAll() {
+        log.info("Read all posts from database.");
+        return postRepository.findAll();
+    }
+
+    public List<ImageBytesDto> searchTag(String tag) {
+        List<Post> allPosts = findAll();
         List<Post> posts = new ArrayList<>();
-        for(Post post: allPosts){
-            for(Hashtag hashtag: post.getMedia().getHashtags()){
-                if(hashtag.getName().toLowerCase().contains(tag.toLowerCase()))
+        for (Post post : allPosts) {
+            for (Hashtag hashtag : post.getMedia().getHashtags()) {
+                if (hashtag.getName().toLowerCase().contains(tag.toLowerCase()))
                     posts.add(post);
             }
         }
@@ -152,6 +157,7 @@ public class PostService implements IPostService {
     }
 
     public List<ImageBytesDto> searchLocation(String location) {
+        log.info("Search for locations who contains " + location + " in their name");
         List<Post> posts = postRepository.searchLocation(location);
         List<String> publicProfiles = userConnection.publicProfiles(getUsernamesByPost(posts));
         posts = filterPublicPostByUsernames(publicProfiles, posts);
@@ -160,15 +166,15 @@ public class PostService implements IPostService {
 
     @Override
     public List<Post> getPublicPosts() {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = findAll();
         List<String> usernames = userConnection.getPublicUsernames();
 
         return filterPublicPostByUsernames(usernames, posts);
     }
 
-    private List<String> getUsernamesByPost(List<Post> posts){
+    private List<String> getUsernamesByPost(List<Post> posts) {
         List<String> usernames = new ArrayList<>();
-        for(Post post: posts){
+        for (Post post : posts) {
             usernames.add(post.getMedia().getUsername());
         }
         Set<String> set = new HashSet<>(usernames);
@@ -176,11 +182,11 @@ public class PostService implements IPostService {
         return usernames;
     }
 
-    private List<Post> filterPublicPostByUsernames(List<String> usernames, List<Post> posts){
+    private List<Post> filterPublicPostByUsernames(List<String> usernames, List<Post> posts) {
         List<Post> publicPosts = new ArrayList<>();
-        for(Post post: posts){
-            for(String username: usernames){
-                if(post.getMedia().getUsername().equals(username))
+        for (Post post : posts) {
+            for (String username : usernames) {
+                if (post.getMedia().getUsername().equals(username))
                     publicPosts.add(post);
             }
         }

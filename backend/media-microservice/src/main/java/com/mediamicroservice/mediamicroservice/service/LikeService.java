@@ -25,23 +25,23 @@ public class LikeService implements ILikeService {
     @Override
     public Like createLikeOnPost(CreateLikeDto createLikeDto) {
         Post post = postService.getById(createLikeDto.getPostId());
-        if(post == null){
+        if (post == null) {
             log.error("Post with id " + createLikeDto.getPostId() + " doesn't exist.");
             return null;
         }
         Date currentDate = new Date();
         Like newLike = new Like();
-        if(post.getLikes().size() > 0){
-            for(Like like: post.getLikes()){
-                if(like.getUsername().equals(createLikeDto.getUsername())){
-                    if(createLikeDto.isLiked() == like.isLiked()){
+        if (post.getLikes().size() > 0) {
+            for (Like like : post.getLikes()) {
+                if (like.getUsername().equals(createLikeDto.getUsername())) {
+                    if (createLikeDto.isLiked() == like.isLiked()) {
                         post.getLikes().remove(like);
                         postService.save(post);
                         log.info("Removed like with id  " + like.getId() + " from post with id " + post.getId());
                         likeRepository.delete(like);
                         log.info("Removed like with id  " + like.getId());
-                        return  null;
-                    }else if(createLikeDto.isLiked() != like.isLiked()){
+                        return null;
+                    } else if (createLikeDto.isLiked() != like.isLiked()) {
                         like.setLiked(createLikeDto.isLiked());
                         like.setTimestamp(currentDate);
                         likeRepository.save(like);
@@ -59,7 +59,7 @@ public class LikeService implements ILikeService {
         log.info("Like: " + newLike.getId() + " has been saved.");
         post.getLikes().add(newLike);
         postService.save(post);
-        return  newLike;
+        return newLike;
     }
 
     //TODO: za sada je nekoriscena na frontu
@@ -73,10 +73,10 @@ public class LikeService implements ILikeService {
     }
 
     @Override
-    public boolean hasBeenLiked(Long id, String username){
+    public boolean hasBeenLiked(Long id, String username) {
         Post post = postService.getById(id);
-        for(Like like: post.getLikes()){
-            if(like.getUsername().equals(username))
+        for (Like like : post.getLikes()) {
+            if (like.getUsername().equals(username))
                 return true;
         }
         return false;
@@ -84,7 +84,7 @@ public class LikeService implements ILikeService {
 
     //TODO: mozda da se vraca bas slika a ne naziv
     @Override
-    public List<Like> history(String username){
+    public List<Like> history(String username) {
         log.info("Try to find likes by username: " + username);
         return likeRepository.findLikesByUsername(username);
     }

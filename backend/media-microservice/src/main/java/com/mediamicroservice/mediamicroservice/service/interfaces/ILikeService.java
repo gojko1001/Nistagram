@@ -1,7 +1,6 @@
 package com.mediamicroservice.mediamicroservice.service.interfaces;
 
 
-
 import com.mediamicroservice.mediamicroservice.controller.dto.CreateLikeDto;
 import com.mediamicroservice.mediamicroservice.domain.Like;
 
@@ -14,5 +13,6 @@ public interface ILikeService {
     Integer countLikesOnPost(Long id);
 
     boolean hasBeenLiked(Long id, String username);
+
     List<Like> history(String username);
 }

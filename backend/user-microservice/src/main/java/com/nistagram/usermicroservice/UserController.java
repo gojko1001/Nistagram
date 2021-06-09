@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("user")
 @CrossOrigin(origins = "https://localhost:3000")
 public class UserController {
-// cjel mogu sad da pokrene
+    // cjel mogu sad da pokrene
     @Autowired
     private IUserService userService;
 
@@ -50,18 +50,18 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public List<UserDto> search(@RequestParam String username){
+    public List<UserDto> search(@RequestParam String username) {
         log.info("Try to search users with username: " + username);
         return UserMapper.mapUserListToUserDtoList(userService.search(username));
     }
 
     @PostMapping("/are_public")
-    public List<String> arePublic(@RequestBody List<String> usernames){
+    public List<String> arePublic(@RequestBody List<String> usernames) {
         return userService.arePublic(usernames);
     }
 
     @GetMapping("/public_users")
-    public List<String> getPublicUsers(){
+    public List<String> getPublicUsers() {
         return userService.getPublicUsers();
     }
 }

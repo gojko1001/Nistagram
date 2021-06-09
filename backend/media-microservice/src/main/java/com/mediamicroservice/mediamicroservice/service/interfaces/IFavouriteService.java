@@ -6,5 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface IFavouriteService {
     Favourite create(Favourite favourite);
+
     ResponseEntity addFavouriteToCollection(CreateFavouriteDto createFavouriteDto);
 }

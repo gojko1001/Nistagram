@@ -24,16 +24,20 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserRepository userRepository;
+<<<<<<< HEAD
+=======
 //    @Autowired
 //    private EmailService emailService;
 
+>>>>>>> develop
 
     public List<User> getAll() {
+        log.info("Read all users from database.");
         return userRepository.findAll();
     }
 
-    @Override
     public User findUserByUsername(String username) {
+        log.info("Try to find " + username + " user in database.");
         User user = userRepository.findByUsername(username);
         if (user == null){
             log.info("There is no user with username: " + username);
@@ -42,8 +46,8 @@ public class UserService implements IUserService {
         return user;
     }
 
-    @Override
     public User findUserByEmail(String email) {
+        log.info("Try to find " + email + " user in database.");
         User user = userRepository.findByEmail(email);
         if (user == null) {
             log.info("There is no user with email: " + email);
@@ -52,11 +56,48 @@ public class UserService implements IUserService {
         return user;
     }
 
+<<<<<<< HEAD
+    public User create(UserRegistrationDto userReg) {
+        try {
+            User newUser = findUserByUsername(userReg.getUsername());
+            if (newUser != null)
+                throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
+            if (findUserByEmail(userReg.getEmail()) != null)
+                throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
+            if (!checkUsername(userReg))
+                throw new BadRequestException("Username is in invalid format.");
+            if (!checkFullName(userReg))
+                throw new BadRequestException("Full name is in invalid format.");
+            if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
+                throw new BadRequestException("Password and repeat password are not the same.");
+            }
+            if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
+                User user = registerUser(userReg);
+//                emailService.verificationPassword(user); TODO: Notification Microservice
+                return user;
+            }
+            throw new BadRequestException("Email or password is in invalid format.");
+        } catch (Exception e) {
+            throw new BadRequestException("Thread " + e.getMessage());
+        }
+    }
+
+    public User registerUser(UserRegistrationDto userReg) {
+        if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
+            throw new BadRequestException("Passwords are not the same.");
+        }
+//        userCredentialsService.create(userReg); TODO: Authentication service: create(UserCredentials userCredentails)
+        User user = new User();
+        user.setUsername(userReg.getUsername());
+        user.setEmail(userReg.getEmail());
+        user.setFullName(userReg.getFullName());
+=======
     public User registerUser(UserRegistrationDto userReg, boolean isGoogleUser) {
         if(!isGoogleUser)
             verifyUserInput(userReg);
         User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
 //                emailService.verificationPassword(user); TODO: Notification Microservice
+>>>>>>> develop
         return save(user);
     }
 
@@ -73,8 +114,7 @@ public class UserService implements IUserService {
         dbUser.setPublicProfile(user.isPublicProfile());
         dbUser.setPublicDM(user.isPublicDM());
         dbUser.setTaggable(user.isTaggable());
-        log.info("Try to save updated user: " + oldUsername);
-        return userRepository.save(dbUser);
+        return save(dbUser);
     }
 
     public User save(User user) {
@@ -82,14 +122,13 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
     public List<User> search(String username) {
+        log.info("Search: finding users whose username contains " + username);
         return userRepository.search(username);
     }
 
-    @Override
     public List<String> arePublic(List<String> usernames) {
-        List<User> users = userRepository.findAll();
+        List<User> users = getAll();
         List<String> publicUsers = new ArrayList<>();
         for(String username: usernames){
             for(User u: users){
@@ -100,16 +139,17 @@ public class UserService implements IUserService {
         return publicUsers;
     }
 
-    @Override
     public List<String> getPublicUsers() {
         List<String> usernames = new ArrayList<>();
-        for(User u: userRepository.findAll()){
+        for(User u: getAll()){
             if(u.isPublicProfile())
                 usernames.add(u.getUsername());
         }
         return usernames;
     }
 
+<<<<<<< HEAD
+=======
 
     private void verifyUserInput(UserRegistrationDto userReg) {
         try {
@@ -131,6 +171,7 @@ public class UserService implements IUserService {
         }
     }
 
+>>>>>>> develop
     private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
         return patternUsername.matcher(userRegistrationDto.getUsername()).matches();

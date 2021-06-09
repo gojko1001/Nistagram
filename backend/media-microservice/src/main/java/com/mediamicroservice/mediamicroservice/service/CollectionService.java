@@ -8,6 +8,7 @@ import com.mediamicroservice.mediamicroservice.domain.Favourite;
 import com.mediamicroservice.mediamicroservice.repository.ICollectionRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ICollectionService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CollectionService implements ICollectionService {
     @Autowired
@@ -24,32 +26,38 @@ public class CollectionService implements ICollectionService {
     private IPostService postService;
 
     @Override
-    public Collection save(Collection collection){
+    public Collection save(Collection collection) {
+        log.info("Try to save collection: " + collection.getName());
         return collectionRepository.save(collection);
     }
 
     @Override
-    public Collection findByName(String name){
+    public Collection findByName(String name) {
+        log.info("Read " + name + "collection.");
         return collectionRepository.findCollectionByName(name);
     }
 
+    private List<Collection> findByUsername(String username) {
+        return collectionRepository.findCollectionsByUsername(username);
+    }
+
     @Override
-    public ResponseEntity createCollection(Collection collection){
-        if(collectionRepository.findCollectionByNameAndUsername(collection.getName(), collection.getUsername()) != null)
+    public ResponseEntity createCollection(Collection collection) {
+        if (collectionRepository.findCollectionByNameAndUsername(collection.getName(), collection.getUsername()) != null)
             return new ResponseEntity("Collection with that name already exist.", HttpStatus.OK);
         return new ResponseEntity(save(collection), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity findCollectionsByUsername(String username){
-        if(collectionRepository.findCollectionsByUsername(username) == null){
+    public ResponseEntity findCollectionsByUsername(String username) {
+        if (findByUsername(username) == null) {
             return new ResponseEntity("User doesn't have collection.", HttpStatus.OK);
         }
         List<CollectionDto> resultCollections = new ArrayList<>();
-        List<Collection> collections = collectionRepository.findCollectionsByUsername(username);
-        for(Collection coll: collections){
-            List<ImageBytesDto> imageBytesDtos =  new ArrayList<>();
-            for(Favourite fav: coll.getFavourites()){
+        List<Collection> collections = findByUsername(username);
+        for (Collection coll : collections) {
+            List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
+            for (Favourite fav : coll.getFavourites()) {
                 imageBytesDtos.add(postService.getImageFile(fav.getPost()));
             }
             CollectionDto collectionDto = new CollectionDto();
@@ -59,7 +67,7 @@ public class CollectionService implements ICollectionService {
             collectionDto.setFavourites(imageBytesDtos);
             resultCollections.add(collectionDto);
         }
-        return  new ResponseEntity(resultCollections, HttpStatus.OK);
+        return new ResponseEntity(resultCollections, HttpStatus.OK);
     }
 
 }
