@@ -21,7 +21,7 @@ public class UserMapper {
         return user;
     }
 
-    public static UserDto mapUserToUserDto(User user){
+    public static UserDto mapUserToUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setUsername(user.getUsername());
         userDto.setFullName(user.getFullName());
@@ -34,14 +34,14 @@ public class UserMapper {
         return userDto;
     }
 
-    public static List<UserDto> mapUserListToUserDtoList(List<User> users){
+    public static List<UserDto> mapUserListToUserDtoList(List<User> users) {
         List<UserDto> userDtos = new ArrayList<>();
-        for(User u : users)
+        for (User u : users)
             userDtos.add(mapUserToUserDto(u));
         return userDtos;
     }
 
-    public static User mapUserUpdateDtoToUser(UserUpdateDto updateDto){
+    public static User mapUserUpdateDtoToUser(UserUpdateDto updateDto) {
         User user = mapUserDtoToUser(updateDto.getUser());
         user.setPublicProfile(updateDto.isPublicProfile());
         user.setPublicDM(updateDto.isPublicDM());
@@ -49,7 +49,7 @@ public class UserMapper {
         return user;
     }
 
-    public static UserUpdateDto mapUserToUserUpdateDto(User user){
+    public static UserUpdateDto mapUserToUserUpdateDto(User user) {
         UserUpdateDto updateDto = new UserUpdateDto();
         updateDto.setUser(mapUserToUserDto(user));
         updateDto.setPublicProfile(user.isPublicProfile());
