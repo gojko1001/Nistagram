@@ -25,7 +25,7 @@ public class UserCredentialsService implements IUserCredentialsService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private IUserCredentialsRepository userCredentialsRepository;
-//    @Autowired
+    //    @Autowired
 //    private IUserService userService;
 //    @Autowired
 //    private EmailService emailService;
@@ -38,7 +38,7 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
-        if (userCredentials == null){
+        if (userCredentials == null) {
             log.info("Can not find user credentials with username: " + username);
             throw new NotFoundException("There is no user credentials with username " + username);
         }

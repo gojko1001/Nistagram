@@ -19,7 +19,8 @@ public class UserRelationService implements IUserRelationService {
     @Autowired
     private IUserService userService;
 
-    private User findUserByUsername(String username){
+    private User findUserByUsername(String username) {
+        log.info("Read user with username: " + username + ".");
         return userService.findUserByUsername(username);
     }
 
@@ -117,7 +118,6 @@ public class UserRelationService implements IUserRelationService {
         user.getUserRelations().remove(toDelete);
         userService.save(user);
     }
-
 
     public void setNotifications(UserRelationDto relationDto) {
         if (isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))

@@ -29,7 +29,6 @@ public class UserService implements IUserService {
         return userRepository.findAll();
     }
 
-    @Override
     public User findUserByUsername(String username) {
         log.info("Try to find " + username + " user in database.");
         User user = userRepository.findByUsername(username);
@@ -40,7 +39,6 @@ public class UserService implements IUserService {
         return user;
     }
 
-    @Override
     public User findUserByEmail(String email) {
         log.info("Try to find " + email + " user in database.");
         User user = userRepository.findByEmail(email);
@@ -109,13 +107,11 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
     public List<User> search(String username) {
         log.info("Search: finding users whose username contains " + username);
         return userRepository.search(username);
     }
 
-    @Override
     public List<String> arePublic(List<String> usernames) {
         List<User> users = getAll();
         List<String> publicUsers = new ArrayList<>();
@@ -128,7 +124,6 @@ public class UserService implements IUserService {
         return publicUsers;
     }
 
-    @Override
     public List<String> getPublicUsers() {
         List<String> usernames = new ArrayList<>();
         for(User u: getAll()){
