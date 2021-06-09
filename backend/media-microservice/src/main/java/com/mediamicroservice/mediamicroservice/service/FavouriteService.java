@@ -9,11 +9,13 @@ import com.mediamicroservice.mediamicroservice.repository.IFavouriteRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ICollectionService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IFavouriteService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class FavouriteService implements IFavouriteService {
     @Autowired
@@ -24,19 +26,20 @@ public class FavouriteService implements IFavouriteService {
     private IPostService postService;
 
     @Override
-    public Favourite create(Favourite favourite){
+    public Favourite create(Favourite favourite) {
+        log.info("Try to save favourite: " + favourite.getId());
         return favouriteRepository.save(favourite);
     }
 
     @Override
-    public ResponseEntity addFavouriteToCollection(CreateFavouriteDto createFavouriteDto){
+    public ResponseEntity addFavouriteToCollection(CreateFavouriteDto createFavouriteDto) {
         Post post = postService.getById(createFavouriteDto.getPostId());
         Collection collection = collectionService.findByName(createFavouriteDto.getCollectionName());
-        if(collection == null)
-            return  new ResponseEntity("Collection doesn't exist.", HttpStatus.OK);
+        if (collection == null)
+            return new ResponseEntity("Collection doesn't exist.", HttpStatus.OK);
         Favourite favourite = new Favourite();
         favourite.setPost(post);
-        favouriteRepository.save(favourite);
+        create(favourite);
         collection.getFavourites().add(favourite);
         collectionService.save(collection);
         return new ResponseEntity("Post has been added to collection.", HttpStatus.OK);

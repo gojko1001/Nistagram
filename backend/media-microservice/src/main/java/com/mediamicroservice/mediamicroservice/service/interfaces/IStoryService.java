@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface IStoryService {
     Story save(Story story);
+
     Story saveImageInfo(MediaDto imageDto);
+
     List<StoryBytesDto> getImagesFiles(List<Story> stories);
+
     StoryBytesDto imageFile(Story story, String filePath);
+
     List<StoryBytesDto> validStories(List<StoryBytesDto> stories);
 }
