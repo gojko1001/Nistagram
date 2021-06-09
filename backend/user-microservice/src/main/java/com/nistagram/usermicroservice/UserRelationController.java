@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/userrelation")
-//@CrossOrigin(origins = "${gatewayURL}")
+@RequestMapping("user_relation")
+@CrossOrigin(origins = "https://localhost:3000")
 public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
 
     @GetMapping("/followers/{username}")
-    private List<UserDto> getFollowers(@PathVariable String username){
+    public List<UserDto> getFollowers(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowers(username));
     }
 
     @GetMapping("/followings/{username}")
-    private List<UserDto> getFollowings(@PathVariable String username){
+    public List<UserDto> getFollowings(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowings(username));
     }
 
     @GetMapping("/blocked/{username}")
-    private List<UserDto> getBlockedUsers(@PathVariable String username){
+    public List<UserDto> getBlockedUsers(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.BLOCKED));
     }
 
-    @GetMapping("/closefriends/{username}")
-    private List<UserDto> getCloseFriends(@PathVariable String username){
+    @GetMapping("/close_friends/{username}")
+    public List<UserDto> getCloseFriends(@PathVariable String username){
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.CLOSE_FRIEND));
     }
 
@@ -61,7 +61,7 @@ public class UserRelationController {
         relationService.setNotifications(relationDto);
     }
 
-    @DeleteMapping
+    @PutMapping("/remove")
     public void removeRelation(@RequestBody UserRelationDto relationDto){
         relationService.removeUserRelation(relationDto);
     }

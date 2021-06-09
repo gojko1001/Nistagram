@@ -1,6 +1,7 @@
 package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.IUserRepository;
+import com.nistagram.usermicroservice.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
@@ -23,8 +24,6 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserRepository userRepository;
-//    @Autowired
-//    private UserCredentialsService userCredentialsService;
 //    @Autowired
 //    private EmailService emailService;
 
@@ -53,42 +52,12 @@ public class UserService implements IUserService {
         return user;
     }
 
-    public User create(UserRegistrationDto userReg) {
-        try {
-            User newUser = userRepository.findByUsername(userReg.getUsername());
-            if (newUser != null)
-                throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
-            if (userRepository.findByEmail(userReg.getEmail()) != null)
-                throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
-            if (!checkUsername(userReg))
-                throw new BadRequestException("Username is in invalid format.");
-            if (!checkFullName(userReg))
-                throw new BadRequestException("Full name is in invalid format.");
-            if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
-                throw new BadRequestException("Password and repeat password are not the same.");
-            }
-            if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
-                User user = registerUser(userReg);
+    public User registerUser(UserRegistrationDto userReg, boolean isGoogleUser) {
+        if(!isGoogleUser)
+            verifyUserInput(userReg);
+        User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
 //                emailService.verificationPassword(user); TODO: Notification Microservice
-                return user;
-            }
-            throw new BadRequestException("Email or password is in invalid format.");
-        } catch (Exception e) {
-            throw new BadRequestException("Thread " + e.getMessage());
-        }
-    }
-
-    public User registerUser(UserRegistrationDto userReg) {
-        if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
-            throw new BadRequestException("Passwords are not the same.");
-        }
-//        userCredentialsService.create(userReg); TODO: Authentication service: create(UserCredentials userCredentails)
-        User user = new User();
-        user.setUsername(userReg.getUsername());
-        user.setEmail(userReg.getEmail());
-        user.setFullName(userReg.getFullName());
-        log.info("Try to save user with username: " + user.getUsername());
-        return userRepository.save(user);
+        return save(user);
     }
 
     public User updateUser(User user, String oldUsername) {
@@ -141,6 +110,26 @@ public class UserService implements IUserService {
         return usernames;
     }
 
+
+    private void verifyUserInput(UserRegistrationDto userReg) {
+        try {
+            User newUser = userRepository.findByUsername(userReg.getUsername());
+            if (newUser != null)
+                throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
+            if (userRepository.findByEmail(userReg.getEmail()) != null)
+                throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
+            if (!checkUsername(userReg))
+                throw new BadRequestException("Username is in invalid format.");
+            if (!checkFullName(userReg))
+                throw new BadRequestException("Full name is in invalid format.");
+            if (!userReg.getPassword().equals(userReg.getRepeatPassword()))
+                throw new BadRequestException("Password and repeat password are not the same.");
+            if (!patternChecker(userReg.getEmail(), userReg.getPassword()))
+                throw new BadRequestException("Email or password is in invalid format.");
+        } catch (Exception e) {
+            throw new BadRequestException("Thread " + e.getMessage());
+        }
+    }
 
     private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
