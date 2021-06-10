@@ -1,5 +1,6 @@
 package com.nistagram.authenticationmicroservice.service;
 
+import com.nistagram.authenticationmicroservice.connection.UserConnection;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
@@ -36,11 +37,10 @@ public class UserCredentialsService implements IUserCredentialsService {
     private IBlacklistService blackListService;
     @Autowired
     private IRoleService roleService;
+    @Autowired
+    private UserConnection userConnection;
 
     private final RestTemplate restTemplate = new RestTemplate();
-
-    private final String USER_MICROSERVICE_API = "http://localhost:3032";
-
 
     public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
@@ -59,8 +59,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentials.setRoles(roleService.findByName("ROLE_USER"));
         userCredentials.setVerified(false);
         try{
-            restTemplate.exchange(USER_MICROSERVICE_API + "/user/add",
-                    HttpMethod.POST, new HttpEntity<>(userCredentialsDto, new HttpHeaders()), ResponseEntity.class);
+            userConnection.registerUser(userCredentialsDto);
         }catch (Exception e){
             throw new BadRequestException("Unsuccessfully added user!");
         }
@@ -93,8 +92,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentialsDto.setFullName(loginGoogleDto.getName());
         userCredentialsDto.setEmail(loginGoogleDto.getEmail());
         try{
-            restTemplate.exchange(USER_MICROSERVICE_API + "/user/addGoogleUser",
-                    HttpMethod.POST, new HttpEntity<>(userCredentialsDto, new HttpHeaders()), ResponseEntity.class);
+            userConnection.registerGoogleUser(userCredentialsDto);
         }catch (Exception e){
             throw new BadRequestException("Unsuccessfully added user!");
         }

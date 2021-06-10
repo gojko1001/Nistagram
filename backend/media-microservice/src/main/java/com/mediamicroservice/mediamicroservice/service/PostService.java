@@ -151,7 +151,7 @@ public class PostService implements IPostService {
                     posts.add(post);
             }
         }
-        List<String> publicProfiles = userConnection.publicProfiles(getUsernamesByPost(posts));
+        List<String> publicProfiles = userConnection.arePublic(getUsernamesByPost(posts));
         posts = filterPublicPostByUsernames(publicProfiles, posts);
         return getImagesFiles(posts);
     }
@@ -159,7 +159,7 @@ public class PostService implements IPostService {
     public List<ImageBytesDto> searchLocation(String location) {
         log.info("Search for locations who contains " + location + " in their name");
         List<Post> posts = postRepository.searchLocation(location);
-        List<String> publicProfiles = userConnection.publicProfiles(getUsernamesByPost(posts));
+        List<String> publicProfiles = userConnection.arePublic(getUsernamesByPost(posts));
         posts = filterPublicPostByUsernames(publicProfiles, posts);
         return getImagesFiles(posts);
     }
@@ -167,7 +167,7 @@ public class PostService implements IPostService {
     @Override
     public List<Post> getPublicPosts() {
         List<Post> posts = findAll();
-        List<String> usernames = userConnection.getPublicUsernames();
+        List<String> usernames = userConnection.getPublicUsers();
 
         return filterPublicPostByUsernames(usernames, posts);
     }
