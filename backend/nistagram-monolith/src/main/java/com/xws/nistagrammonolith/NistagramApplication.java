@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-//@EnableEurekaClient
-//@RestController
+
+@RestController
 public class NistagramApplication {
 
-    /*@GetMapping
+    @GetMapping
     public String getMediaMicroservice(){
         return "Nistagram monolith called.";
-    }*/
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(NistagramApplication.class, args);

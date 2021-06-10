@@ -16,7 +16,7 @@ public class UserConnection {
     private RestTemplate restTemplate;
 
     public List<String> publicProfiles(List<String> usernames) {
-        String url = "http://localhost:8762/user-api/user/are_public";
+        String url = "http://localhost:3032/user/are_public";
         List<String> response = new ArrayList<>();
         try {
             ResponseEntity<String[]> publicUsernames = restTemplate.exchange(url, HttpMethod.POST,
@@ -31,7 +31,7 @@ public class UserConnection {
     }
 
     public List<String> getPublicUsernames() {
-        String url = "http://localhost:8762/user-api/user/public_users";
+        String url = "http://localhost:3032/user/public_users";
         List<String> response = new ArrayList<>();
         try {
             ResponseEntity<String[]> publicUsernames = restTemplate.exchange(url, HttpMethod.GET,

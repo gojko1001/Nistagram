@@ -35,7 +35,7 @@ Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-Vue.axios.defaults.baseURL = 'http://localhost:8762';
+Vue.axios.defaults.baseURL = 'https://localhost:8762';
 
 
 const router = new VueRouter({
