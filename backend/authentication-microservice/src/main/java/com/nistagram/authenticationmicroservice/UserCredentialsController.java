@@ -1,6 +1,5 @@
 package com.nistagram.authenticationmicroservice;
 
-import com.netflix.ribbon.proxy.annotation.Http;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;

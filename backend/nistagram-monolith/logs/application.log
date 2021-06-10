@@ -245,3 +245,129 @@ java.lang.NullPointerException: Cannot invoke "java.lang.CharSequence.toString()
 2021-06-09 09:15:35.444 DEBUG 13180 --- [http-nio-3030-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
 2021-06-09 11:43:20.523  WARN 13180 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h14m11s724ms556µs).
 2021-06-09 12:46:50.511  WARN 13180 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m7s97ms575µs800ns).
+2021-06-10 11:30:34.447  INFO 14064 --- [main] c.x.n.NistagramApplication               : Starting NistagramApplication on DESKTOP-04V8KLM with PID 14064 (C:\Users\majas\Desktop\xml\Nistagram\backend\nistagram-monolith\target\classes started by majas in C:\Users\majas\Desktop\xml\Nistagram\backend\nistagram-monolith)
+2021-06-10 11:30:34.447  INFO 14064 --- [main] c.x.n.NistagramApplication               : No active profile set, falling back to default profiles: default
+2021-06-10 11:30:35.580  INFO 14064 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-06-10 11:30:35.752  INFO 14064 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 157ms. Found 14 repository interfaces.
+2021-06-10 11:30:36.073  INFO 14064 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1a67f934] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:30:36.107  INFO 14064 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$b315c16e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:30:36.107  INFO 14064 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:30:36.107  INFO 14064 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3531f3ca' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:30:36.107  INFO 14064 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$d7ea6420] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:30:36.107  INFO 14064 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:30:36.357  INFO 14064 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 3030 (http)
+2021-06-10 11:30:36.389  INFO 14064 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-10 11:30:36.389  INFO 14064 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.19]
+2021-06-10 11:30:36.560  INFO 14064 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-10 11:30:36.560 DEBUG 14064 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-06-10 11:30:36.560  INFO 14064 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2068 ms
+2021-06-10 11:30:36.842  INFO 14064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-10 11:30:37.222  INFO 14064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-10 11:30:37.317  INFO 14064 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-06-10 11:30:37.399  INFO 14064 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.10.Final}
+2021-06-10 11:30:37.403  INFO 14064 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2021-06-10 11:30:37.645  INFO 14064 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-06-10 11:30:37.848  INFO 14064 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-10 11:30:37.895  INFO 14064 --- [main] o.h.e.j.e.i.LobCreatorBuilderImpl        : HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2021-06-10 11:30:40.177  INFO 14064 --- [main] o.h.t.schema.internal.SchemaCreatorImpl  : HHH000476: Executing import script 'ScriptSourceInputFromUrl(file:/C:/Users/majas/Desktop/xml/Nistagram/backend/nistagram-monolith/target/classes/import.sql)'
+2021-06-10 11:30:40.818  INFO 14064 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-10 11:30:41.230 DEBUG 14064 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: springSecurityFilterChain urls=[/*], characterEncodingFilter urls=[/*], requestFilter urls=[/*]
+2021-06-10 11:30:41.231 DEBUG 14064 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-06-10 11:30:41.633  WARN 14064 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-10 11:30:41.680 DEBUG 14064 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 33 mappings in 'requestMappingHandlerMapping'
+2021-06-10 11:30:41.742 DEBUG 14064 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-06-10 11:30:41.758 DEBUG 14064 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/webjars/**', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/*.html', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/*.html', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/*.css', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/*.js', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/userCredentials/**', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/tag', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/location', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/image/**', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/like/**', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/story/**', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/collection/**', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/favourite/**', GET], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/user/add', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/userCredentials/login', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/userCredentials//login_google/', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/image', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/image/info', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/comment', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/like', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/rabbitmq', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/story/**', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/collection/**', POST], []
+2021-06-10 11:30:41.852  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/favourite/**', POST], []
+2021-06-10 11:30:41.899  INFO 14064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@551725e4, org.springframework.security.web.context.SecurityContextPersistenceFilter@1784a296, org.springframework.security.web.header.HeaderWriterFilter@62ec4146, org.springframework.web.filter.CorsFilter@760d6350, org.springframework.security.web.authentication.logout.LogoutFilter@159408a7, com.xws.nistagrammonolith.security.RequestFilter@4d84688f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4af6839c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6b35b0f4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cb6b81b, org.springframework.security.web.session.SessionManagementFilter@5feb8e9a, org.springframework.security.web.access.ExceptionTranslationFilter@5f1c406e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7bdf8c92]
+2021-06-10 11:30:42.289  INFO 14064 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 3030 (http) with context path ''
+2021-06-10 11:30:42.289  INFO 14064 --- [main] c.x.n.NistagramApplication               : Started NistagramApplication in 8.383 seconds (JVM running for 9.757)
+2021-06-10 11:33:21.908  INFO 14636 --- [main] c.x.n.NistagramApplication               : Starting NistagramApplication on DESKTOP-04V8KLM with PID 14636 (C:\Users\majas\Desktop\xml\Nistagram\backend\nistagram-monolith\target\classes started by majas in C:\Users\majas\Desktop\xml\Nistagram\backend\nistagram-monolith)
+2021-06-10 11:33:21.911  INFO 14636 --- [main] c.x.n.NistagramApplication               : No active profile set, falling back to default profiles: default
+2021-06-10 11:33:23.137  INFO 14636 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-06-10 11:33:23.291  INFO 14636 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 148ms. Found 14 repository interfaces.
+2021-06-10 11:33:23.613  INFO 14636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f67880e6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:33:23.648  INFO 14636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$8f264920] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:33:23.654  INFO 14636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:33:23.656  INFO 14636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@4339e0de' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:33:23.658  INFO 14636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$b3faebd2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:33:23.661  INFO 14636 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-10 11:33:23.897  INFO 14636 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 3030 (http)
+2021-06-10 11:33:23.920  INFO 14636 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-10 11:33:23.921  INFO 14636 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.19]
+2021-06-10 11:33:24.066  INFO 14636 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-10 11:33:24.066 DEBUG 14636 --- [main] o.s.web.context.ContextLoader            : Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-06-10 11:33:24.067  INFO 14636 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1982 ms
+2021-06-10 11:33:24.328  INFO 14636 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-10 11:33:24.623  INFO 14636 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-10 11:33:24.701  INFO 14636 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-06-10 11:33:24.753  INFO 14636 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.10.Final}
+2021-06-10 11:33:24.756  INFO 14636 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2021-06-10 11:33:24.919  INFO 14636 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-06-10 11:33:25.095  INFO 14636 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-10 11:33:25.147  INFO 14636 --- [main] o.h.e.j.e.i.LobCreatorBuilderImpl        : HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2021-06-10 11:33:27.423  INFO 14636 --- [main] o.h.t.schema.internal.SchemaCreatorImpl  : HHH000476: Executing import script 'ScriptSourceInputFromUrl(file:/C:/Users/majas/Desktop/xml/Nistagram/backend/nistagram-monolith/target/classes/import.sql)'
+2021-06-10 11:33:28.061  INFO 14636 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-10 11:33:28.441 DEBUG 14636 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: springSecurityFilterChain urls=[/*], characterEncodingFilter urls=[/*], requestFilter urls=[/*]
+2021-06-10 11:33:28.441 DEBUG 14636 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2021-06-10 11:33:28.802  WARN 14636 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-10 11:33:28.871 DEBUG 14636 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 34 mappings in 'requestMappingHandlerMapping'
+2021-06-10 11:33:28.925 DEBUG 14636 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-06-10 11:33:28.950 DEBUG 14636 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-06-10 11:33:29.030  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/', GET], []
+2021-06-10 11:33:29.030  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/webjars/**', GET], []
+2021-06-10 11:33:29.030  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/*.html', GET], []
+2021-06-10 11:33:29.030  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/favicon.ico', GET], []
+2021-06-10 11:33:29.031  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/*.html', GET], []
+2021-06-10 11:33:29.031  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/*.css', GET], []
+2021-06-10 11:33:29.031  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/**/*.js', GET], []
+2021-06-10 11:33:29.031  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/userCredentials/**', GET], []
+2021-06-10 11:33:29.031  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/tag', GET], []
+2021-06-10 11:33:29.031  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/location', GET], []
+2021-06-10 11:33:29.031  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/image/**', GET], []
+2021-06-10 11:33:29.032  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/like/**', GET], []
+2021-06-10 11:33:29.032  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/story/**', GET], []
+2021-06-10 11:33:29.032  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/collection/**', GET], []
+2021-06-10 11:33:29.032  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/favourite/**', GET], []
+2021-06-10 11:33:29.032  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/user/add', POST], []
+2021-06-10 11:33:29.032  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/userCredentials/login', POST], []
+2021-06-10 11:33:29.032  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/userCredentials//login_google/', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/image', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/image/info', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/comment', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/like', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/rabbitmq', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/story/**', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/collection/**', POST], []
+2021-06-10 11:33:29.033  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/favourite/**', POST], []
+2021-06-10 11:33:29.065  INFO 14636 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49ea4b65, org.springframework.security.web.context.SecurityContextPersistenceFilter@22a22f1, org.springframework.security.web.header.HeaderWriterFilter@16eb93af, org.springframework.web.filter.CorsFilter@4af6839c, org.springframework.security.web.authentication.logout.LogoutFilter@4bc4ec43, com.xws.nistagrammonolith.security.RequestFilter@1958524b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@63c88994, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2e667e95, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f3e65f4, org.springframework.security.web.session.SessionManagementFilter@3d8e1fa6, org.springframework.security.web.access.ExceptionTranslationFilter@5c945ee7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@65b69ccb]
+2021-06-10 11:33:29.422  INFO 14636 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 3030 (http) with context path ''
+2021-06-10 11:33:29.424  INFO 14636 --- [main] c.x.n.NistagramApplication               : Started NistagramApplication in 8.18 seconds (JVM running for 9.134)

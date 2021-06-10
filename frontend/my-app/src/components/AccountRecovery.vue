@@ -35,7 +35,7 @@ export default {
     methods:{
         onSubmit(event){
             event.preventDefault();
-            this.axios.get('http://localhost:8762/authentication-api/userCredentials/send_email/'+ this.form.email)
+            this.axios.get('https://localhost:8762/authentication-api/userCredentials/send_email/'+ this.form.email)
             .then(response => { console.log(response);
                 this.makeToast("Check your email.", "success");
                 window.location.href = "/";

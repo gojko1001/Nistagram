@@ -1,50 +1,17 @@
 package com.mediamicroservice.mediamicroservice.connection;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.http.*;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-@Service
-public class UserConnection {
+@FeignClient(value = "user-microservice", url = "http://localhost:3032")
+public interface UserConnection {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @PostMapping("/user/are_public")
+    List<String> arePublic(@RequestBody List<String> usernames);
 
-    public List<String> publicProfiles(List<String> usernames) {
-        String url = "http://localhost:8762/user-api/user/are_public";
-        List<String> response = new ArrayList<>();
-        try {
-            ResponseEntity<String[]> publicUsernames = restTemplate.exchange(url, HttpMethod.POST,
-                    new HttpEntity<>(usernames, new HttpHeaders()), String[].class, 1);
-            response = Arrays.asList(publicUsernames.getBody());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return response;
-    }
-
-    public List<String> getPublicUsernames() {
-        String url = "http://localhost:8762/user-api/user/public_users";
-        List<String> response = new ArrayList<>();
-        try {
-            ResponseEntity<String[]> publicUsernames = restTemplate.exchange(url, HttpMethod.GET,
-                    new HttpEntity<>(new HttpHeaders()), String[].class, 1);
-            response = Arrays.asList(publicUsernames.getBody());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return response;
-    }
-
-
+    @GetMapping("/user/public_users")
+    List<String> getPublicUsers();
 
 }
