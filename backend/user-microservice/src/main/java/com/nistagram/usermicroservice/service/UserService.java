@@ -3,6 +3,7 @@ package com.nistagram.usermicroservice.service;
 import com.nistagram.usermicroservice.IUserRepository;
 import com.nistagram.usermicroservice.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
@@ -55,7 +56,9 @@ public class UserService implements IUserService {
             verifyUserInput(userReg);
         User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
 //                emailService.verificationPassword(user); TODO: Notification Microservice
-        return save(user);
+        user.setUserRelations(new ArrayList<UserRelation>());
+        user.setInvertedRelations(new ArrayList<UserRelation>());
+        return userRepository.save(user);
     }
 
     public User updateUser(User user, String oldUsername) {
