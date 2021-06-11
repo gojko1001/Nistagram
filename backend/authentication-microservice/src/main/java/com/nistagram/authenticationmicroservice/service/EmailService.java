@@ -1,7 +1,6 @@
-package com.xws.nistagrammonolith.service;
+package com.nistagram.authenticationmicroservice.service;
 
-import com.xws.nistagrammonolith.domain.User;
-import com.xws.nistagrammonolith.security.JwtService;
+import com.nistagram.authenticationmicroservice.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -19,21 +18,21 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String mailSender;
 
-    private String verifyUrl = "https://localhost:3030/userCredentials/verify/";
+    private String verifyUrl = "https://localhost:8762/authentication-api/userCredentials/verify/";
     @Autowired
     private JwtService jwtService;
 
     @Async
-    public void verificationPassword(User user) throws MailException {
-        String jwt = jwtService.createToken(user.getUsername()/*, Role.ROLE_USER*/);
+    public void verificationPassword(String username, String email, String fullName) throws MailException {
+        String jwt = jwtService.createToken(username);
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
-        simpleMailMessage.setTo(user.getEmail());
+        simpleMailMessage.setTo(email);
         simpleMailMessage.setSubject("Registration");
         String url = verifyUrl + jwt;
-        String mailText = "Dear " + user.getFullName() + ",\n\n" +
+        String mailText = "Dear " + fullName + ",\n\n" +
                 "Welcome to Ništagram \n\n" +
-                "Your username is " + user.getUsername() + "\n\n" +
+                "Your username is " + username + "\n\n" +
                 "You can verify your account here:" + "\t" +
                 "<a href=\"" + url + "\">Verify your account</a>" + "\n\n" +
                 "Best regards.";
@@ -41,9 +40,9 @@ public class EmailService {
         javaMailSender.send(simpleMailMessage);
     }
 
-    @Async
+    /*
     public void resetPassword(User user) throws MailException {
-        String jwt = jwtService.createToken(user.getUsername()/*, Role.ROLE_USER*/);
+        String jwt = jwtService.createToken(user.getUsername());
         String url = "https://localhost:3000/reset_password/" + jwt;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
@@ -55,6 +54,6 @@ public class EmailService {
                 "Best regards,";
         simpleMailMessage.setText(mailText);
         javaMailSender.send(simpleMailMessage);
-    }
+    }*/
 
 }

@@ -39,6 +39,8 @@ public class UserCredentialsService implements IUserCredentialsService {
     private IRoleService roleService;
     @Autowired
     private UserConnection userConnection;
+    @Autowired
+    private EmailService emailService;
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -58,6 +60,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentials.setPassword(passwordEncoder.encode(userCredentialsDto.getPassword()));
         userCredentials.setRoles(roleService.findByName("ROLE_USER"));
         userCredentials.setVerified(false);
+        emailService.verificationPassword(userCredentialsDto.getUsername(), userCredentialsDto.getEmail(), userCredentialsDto.getFullName());
         try{
             userConnection.registerUser(userCredentialsDto);
         }catch (Exception e){
