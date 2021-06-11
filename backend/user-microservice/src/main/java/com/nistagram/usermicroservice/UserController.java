@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "https://localhost:3000")
 public class UserController {
-// cjel mogu sad da pokrene
     @Autowired
     private IUserService userService;
 
@@ -39,9 +38,9 @@ public class UserController {
 
     @PutMapping("/{oldUsername}")
 //    @PreAuthorize("hasAuthority('EDIT_PROFILE')")
-    public UserUpdateDto updateProfile(@RequestBody UserUpdateDto userUpdateDto, @PathVariable String oldUsername) {
+    public UserUpdateDto updateProfile(@RequestBody UserDto userUpdateDto, @PathVariable String oldUsername) {
         log.info("Try to edit user: " + oldUsername);
-        return UserMapper.mapUserToUserUpdateDto(userService.updateUser(UserMapper.mapUserUpdateDtoToUser(userUpdateDto), oldUsername));
+        return UserMapper.mapUserToUserUpdateDto(userService.updateUser(UserMapper.mapUserDtoToUser(userUpdateDto), oldUsername));
     }
 
     @GetMapping("/search")

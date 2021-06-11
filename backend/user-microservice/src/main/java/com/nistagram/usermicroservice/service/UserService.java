@@ -91,8 +91,6 @@ public class UserService implements IUserService {
     }
 
     public User updateUser(User user, String oldUsername) {
-        if(findUserByUsername(user.getUsername()) != null)
-            throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
         User dbUser = findUserByUsername(oldUsername);
         dbUser.setBio(user.getBio());
         dbUser.setBirthDate(user.getBirthDate());

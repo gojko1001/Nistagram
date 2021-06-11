@@ -57,7 +57,7 @@ export default {
     methods: {
         onSubmit() {
         this.form.pastUsername = this.username;
-        this.axios.put(USER_PATH, this.form, {headers:{Authorization: "Bearer " + localStorage.getItem('JWT'),}})
+        this.axios.put(USER_PATH + "/" + this.form.pastUsername, this.form, {headers:{Authorization: "Bearer " + localStorage.getItem('JWT'),}})
           .then(response => { console.log(response);
                               this.makeToast("User has been updated successfully.", "success");
                               window.location.href = "/home";
