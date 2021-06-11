@@ -83,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/**/*.css", "/**/*.js",
                 "**/userCredentials/**");
         web.ignoring().antMatchers(HttpMethod.POST,
-                "/user/add",
+                "**/user/add",
                 "**/userCredentials/**",
                 "**/user/**",
                 "/userCredentials/login_google/");
