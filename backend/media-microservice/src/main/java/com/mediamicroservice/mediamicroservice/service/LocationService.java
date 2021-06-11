@@ -18,7 +18,7 @@ public class LocationService implements ILocationService {
     @Override
     public List<Location> getAll() {
         List<Location> locations = locationRepository.findAll();
-        if(locations.isEmpty())
+        if (locations.isEmpty())
             log.info("There is no any location");
         return locations;
     }

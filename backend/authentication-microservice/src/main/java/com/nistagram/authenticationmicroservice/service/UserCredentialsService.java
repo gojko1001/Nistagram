@@ -1,5 +1,6 @@
 package com.nistagram.authenticationmicroservice.service;
 
+import com.nistagram.authenticationmicroservice.connection.UserConnection;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
@@ -12,8 +13,13 @@ import com.nistagram.authenticationmicroservice.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -25,31 +31,38 @@ public class UserCredentialsService implements IUserCredentialsService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private IUserCredentialsRepository userCredentialsRepository;
-//    @Autowired
-//    private IUserService userService;
-//    @Autowired
-//    private EmailService emailService;
     @Autowired
     private JwtService jwtService;
     @Autowired
     private IBlacklistService blackListService;
     @Autowired
     private IRoleService roleService;
+    @Autowired
+    private UserConnection userConnection;
+
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
-        if (userCredentials == null){
+        if (userCredentials == null) {
             log.info("Can not find user credentials with username: " + username);
             throw new NotFoundException("There is no user credentials with username " + username);
         }
         return userCredentials;
     }
 
-    public UserCredentials create(UserCredentials userCredentials) {
-        blackListService.isBlacklisted(userCredentials.getPassword());
-        userCredentials.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
+    public UserCredentials create(UserCredentialsDto userCredentialsDto) {
+        blackListService.isBlacklisted(userCredentialsDto.getPassword());
+        UserCredentials userCredentials = new UserCredentials();
+        userCredentials.setUsername(userCredentialsDto.getUsername());
+        userCredentials.setPassword(passwordEncoder.encode(userCredentialsDto.getPassword()));
         userCredentials.setRoles(roleService.findByName("ROLE_USER"));
         userCredentials.setVerified(false);
+        try{
+            userConnection.registerUser(userCredentialsDto);
+        }catch (Exception e){
+            throw new BadRequestException("Unsuccessfully added user!");
+        }
         log.info("Try to save user credentials with username: " + userCredentials.getUsername());
         return userCredentialsRepository.save(userCredentials);
     }
@@ -65,25 +78,26 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
-        UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail());
+        UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail().split("@")[0]);
         if (userCredentials != null)
             return userCredentials;
         userCredentials = new UserCredentials();
-        String encodedPassword = passwordEncoder.encode(RandomString.make(10));
-        userCredentials.setPassword(encodedPassword);
         userCredentials.setUsername(loginGoogleDto.getEmail().split("@")[0]);
-        userCredentials.setVerified(true);
+        userCredentials.setPassword(passwordEncoder.encode(RandomString.make(10)));
         userCredentials.setRoles(roleService.findByName("ROLE_USER"));
+        userCredentials.setVerified(true);
 
-//        User user = new User();
-//        user.setUsername(userCredentials.getUsername());
-//        user.setFullName(loginGoogleDto.getName());
-//        user.setEmail(loginGoogleDto.getEmail());
-//
-//        userService.save(user);           TODO: Premestiti u user microservice
-
+        UserCredentialsDto userCredentialsDto = new UserCredentialsDto();
+        userCredentialsDto.setUsername(userCredentials.getUsername());
+        userCredentialsDto.setFullName(loginGoogleDto.getName());
+        userCredentialsDto.setEmail(loginGoogleDto.getEmail());
+        try{
+            userConnection.registerGoogleUser(userCredentialsDto);
+        }catch (Exception e){
+            throw new BadRequestException("Unsuccessfully added user!");
+        }
 //        emailService.resetPassword(user); TODO: Notification microservice
-        return create(userCredentials);
+        return userCredentialsRepository.save(userCredentials);
 
     }
 

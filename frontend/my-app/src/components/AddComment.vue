@@ -149,7 +149,7 @@ export default {
         console.log(this.form);
         this.form.postId = this.postId;
         this.form.username = getEmailFromToken();
-        this.axios.post('/comment', this.form)
+        this.axios.post('/media-api/comment', this.form)
           .then(response => { console.log(response.data);
                               this.makeToast("Comment has been posted.", "success");
                               window.location.href = '/profile/' + this.form.username;

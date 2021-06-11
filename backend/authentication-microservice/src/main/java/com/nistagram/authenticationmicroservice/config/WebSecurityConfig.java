@@ -62,8 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userCredentials/verify/{username}").permitAll()
                 .antMatchers("/userCredentials/login").permitAll()
                 .antMatchers("/userCredentials/login_google").permitAll()
-                .antMatchers("/user/add").permitAll()
-                .antMatchers("**/userCredentials/**").permitAll()
+                .antMatchers("**/user/add").permitAll()
+                .antMatchers("/userCredentials/**").permitAll()
+                .antMatchers("/userCredentials/add").permitAll()
                 .antMatchers("**/user/**").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
@@ -80,14 +81,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js",
-                "/userCredentials/**");
+                "**/userCredentials/**");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/user/add",
-                "/userCredentials/login",
+                "**/userCredentials/**",
+                "**/user/**",
                 "/userCredentials/login_google/");
-        web.ignoring().antMatchers(HttpMethod.GET, "/**");
-        web.ignoring().antMatchers(HttpMethod.POST, "/**");
-        web.ignoring().antMatchers(HttpMethod.PUT, "/**");
-        web.ignoring().antMatchers(HttpMethod.DELETE, "/**");
     }
 }

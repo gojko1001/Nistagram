@@ -25,13 +25,13 @@
 
 <script>
 import { USER_PATH, SERVER_NOT_RESPONDING } from "./../util/constants"
-import { getEmailFromToken } from '../util/token';
+import { getEmailFromToken, removeToken } from '../util/token';
 
 export default {
   name: 'EditProfile',
   data() {
       return {
-        username: '',
+        username: getEmailFromToken(),
         form: '',
         show: true
       }
@@ -39,8 +39,6 @@ export default {
   mounted: function(){
     if(!localStorage.getItem('JWT'))
       window.location.href = "/";
-
-    this.username = getEmailFromToken();
     this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + localStorage.getItem('JWT'),
                                                             }                                          
@@ -57,9 +55,14 @@ export default {
     methods: {
         onSubmit() {
         this.form.pastUsername = this.username;
-        this.axios.put(USER_PATH + "/" + this.form.pastUsername, this.form, {headers:{Authorization: "Bearer " + localStorage.getItem('JWT'),}})
+        this.axios.put(USER_PATH + '/' + this.form.pastUsername ,this.form, {headers:{Authorization: "Bearer " + localStorage.getItem('JWT'),}})
           .then(response => { console.log(response);
                               this.makeToast("User has been updated successfully.", "success");
+                              if(this.form.pastUsername != this.form.username){
+                                removeToken();
+                                this.makeToast("Please login.", "info");
+                                window.location.href = "";
+                              }
                               window.location.href = "/home";
                             })
           .catch(error => { console.log(error);

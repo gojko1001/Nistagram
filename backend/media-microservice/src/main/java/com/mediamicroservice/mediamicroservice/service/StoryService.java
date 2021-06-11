@@ -57,17 +57,18 @@ public class StoryService implements IStoryService {
         media.setLocation(location);
         media.setHashtags(hashtagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
+        log.info("Try to save media: " + media.getFileName());
         mediaRepository.save(media);
         story.setMedia(media);
         return save(story);
     }
 
     @Override
-    public List<StoryBytesDto> validStories(List<StoryBytesDto> stories){
+    public List<StoryBytesDto> validStories(List<StoryBytesDto> stories) {
         List<StoryBytesDto> validStories = new ArrayList<>();
         Date now = new Date();
-        for(StoryBytesDto storyBytesDto: stories){
-            if((storyBytesDto.getTimestamp().getTime() + 86400000) > now.getTime())
+        for (StoryBytesDto storyBytesDto : stories) {
+            if ((storyBytesDto.getTimestamp().getTime() + 86400000) > now.getTime())
                 validStories.add(storyBytesDto);
         }
         return validStories;

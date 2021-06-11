@@ -23,15 +23,6 @@
         </div>
 
         </form>
-        
-        <!-- <div align="center">
-          <b-nav pills >
-            <b-nav-item active>Explore</b-nav-item>
-            <b-nav-item>Following</b-nav-item>
-            <b-nav-item>Profile</b-nav-item>
-            <b-nav-item disabled>Disabled</b-nav-item>
-          </b-nav>
-        </div> -->
 
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">
@@ -87,7 +78,7 @@ export default {
   },
   methods:{
     myProfile:function(){
-      window.location.href = "/profile/" + this.username;
+      window.location.href = "/user/" + this.username;
     },
     logout: function(){
       localStorage.removeItem('JWT');

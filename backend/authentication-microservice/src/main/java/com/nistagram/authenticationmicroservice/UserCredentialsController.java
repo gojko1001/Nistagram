@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/userCredentials")
+@CrossOrigin(origins = "https://localhost:3000")
 public class UserCredentialsController {
     @Autowired
     private IUserCredentialsService userCredentialsService;
@@ -33,6 +34,11 @@ public class UserCredentialsController {
         UserCredentials credentials = userCredentialsService.loginGoogle(loginGoogleDto);
         String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getRoles().get(1)*/);
         return new ResponseEntity<>(jwt, HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> registerUser(@RequestBody UserCredentialsDto userReg) {
+        return new ResponseEntity<>(userCredentialsService.create(userReg).getUsername(), HttpStatus.OK);
     }
 
     @GetMapping("/send_email/{email}")

@@ -13,9 +13,10 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("user")
 @CrossOrigin(origins = "https://localhost:3000")
 public class UserController {
+    // cjel mogu sad da pokrene
     @Autowired
     private IUserService userService;
 
@@ -32,8 +33,13 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public UserDto create(@RequestBody UserRegistrationDto userReg) {
-        return UserMapper.mapUserToUserDto(userService.create(userReg));
+    public void registerUser(@RequestBody UserRegistrationDto userReg) {
+        userService.registerUser(userReg, false);
+    }
+
+    @PostMapping("/addGoogleUser")
+    public void registerGoogleUser(@RequestBody UserRegistrationDto userReg) {
+        userService.registerUser(userReg, true);
     }
 
     @PutMapping("/{oldUsername}")
@@ -44,9 +50,18 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public List<UserDto> search(@RequestParam String username){
+    public List<UserDto> search(@RequestParam String username) {
         log.info("Try to search users with username: " + username);
         return UserMapper.mapUserListToUserDtoList(userService.search(username));
     }
 
+    @PostMapping("/are_public")
+    public List<String> arePublic(@RequestBody List<String> usernames) {
+        return userService.arePublic(usernames);
+    }
+
+    @GetMapping("/public_users")
+    public List<String> getPublicUsers() {
+        return userService.getPublicUsers();
+    }
 }

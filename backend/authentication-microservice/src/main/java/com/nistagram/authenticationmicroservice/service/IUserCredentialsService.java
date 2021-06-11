@@ -11,7 +11,7 @@ public interface IUserCredentialsService {
 
     UserCredentials findByUsername(String username);
 
-    UserCredentials create(UserCredentials userCredentials);
+    UserCredentials create(UserCredentialsDto userCredentials);
 
     UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException;
 

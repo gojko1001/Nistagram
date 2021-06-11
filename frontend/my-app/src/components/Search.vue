@@ -146,7 +146,7 @@ methods:{
                                                          
                 })
                   .catch(error => { console.log(error);
-                                    this.makeToast("Error occurred. User has not been registered successfully.", "danger");
+                                    this.makeToast("Error occurred. ", "danger");
                                   });                  
       },
   },

@@ -15,13 +15,15 @@ public interface IUserService {
 
     User findUserByEmail(String email);
 
-    User create(UserRegistrationDto userReg);
-
-    User registerUser(UserRegistrationDto userReg);
+    User registerUser(UserRegistrationDto userReg, boolean isGoogleUser);
 
     User updateUser(User user, String oldUsername);
 
     User save(User user);
 
     List<User> search(String username);
+
+    List<String> arePublic(List<String> usernames);
+
+    List<String> getPublicUsers();
 }

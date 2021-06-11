@@ -1,7 +1,9 @@
 package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.IUserRepository;
+import com.nistagram.usermicroservice.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
@@ -11,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -22,18 +25,14 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserRepository userRepository;
-//    @Autowired
-//    private UserCredentialsService userCredentialsService;
-//    @Autowired
-//    private EmailService emailService;
-
 
     public List<User> getAll() {
+        log.info("Read all users from database.");
         return userRepository.findAll();
     }
 
-    @Override
     public User findUserByUsername(String username) {
+        log.info("Try to find " + username + " user in database.");
         User user = userRepository.findByUsername(username);
         if (user == null){
             log.info("There is no user with username: " + username);
@@ -42,8 +41,8 @@ public class UserService implements IUserService {
         return user;
     }
 
-    @Override
     public User findUserByEmail(String email) {
+        log.info("Try to find " + email + " user in database.");
         User user = userRepository.findByEmail(email);
         if (user == null) {
             log.info("There is no user with email: " + email);
@@ -52,41 +51,13 @@ public class UserService implements IUserService {
         return user;
     }
 
-    public User create(UserRegistrationDto userReg) {
-        try {
-            User newUser = userRepository.findByUsername(userReg.getUsername());
-            if (newUser != null)
-                throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
-            if (userRepository.findByEmail(userReg.getEmail()) != null)
-                throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
-            if (!checkUsername(userReg))
-                throw new BadRequestException("Username is in invalid format.");
-            if (!checkFullName(userReg))
-                throw new BadRequestException("Full name is in invalid format.");
-            if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
-                throw new BadRequestException("Password and repeat password are not the same.");
-            }
-            if (patternChecker(userReg.getEmail(), userReg.getPassword())) {
-                User user = registerUser(userReg);
+    public User registerUser(UserRegistrationDto userReg, boolean isGoogleUser) {
+        if(!isGoogleUser)
+            verifyUserInput(userReg);
+        User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
 //                emailService.verificationPassword(user); TODO: Notification Microservice
-                return user;
-            }
-            throw new BadRequestException("Email or password is in invalid format.");
-        } catch (Exception e) {
-            throw new BadRequestException("Thread " + e.getMessage());
-        }
-    }
-
-    public User registerUser(UserRegistrationDto userReg) {
-        if (!userReg.getPassword().equals(userReg.getRepeatPassword())) {
-            throw new BadRequestException("Passwords are not the same.");
-        }
-//        userCredentialsService.create(userReg); TODO: Authentication service: create(UserCredentials userCredentails)
-        User user = new User();
-        user.setUsername(userReg.getUsername());
-        user.setEmail(userReg.getEmail());
-        user.setFullName(userReg.getFullName());
-        log.info("Try to save user with username: " + user.getUsername());
+        user.setUserRelations(new ArrayList<UserRelation>());
+        user.setInvertedRelations(new ArrayList<UserRelation>());
         return userRepository.save(user);
     }
 
@@ -101,8 +72,7 @@ public class UserService implements IUserService {
         dbUser.setPublicProfile(user.isPublicProfile());
         dbUser.setPublicDM(user.isPublicDM());
         dbUser.setTaggable(user.isTaggable());
-        log.info("Try to save updated user: " + oldUsername);
-        return userRepository.save(dbUser);
+        return save(dbUser);
     }
 
     public User save(User user) {
@@ -110,11 +80,52 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
     public List<User> search(String username) {
+        log.info("Search: finding users whose username contains " + username);
         return userRepository.search(username);
     }
 
+    public List<String> arePublic(List<String> usernames) {
+        List<User> users = getAll();
+        List<String> publicUsers = new ArrayList<>();
+        for(String username: usernames){
+            for(User u: users){
+                if(u.getUsername().equals(username) && u.isPublicProfile())
+                    publicUsers.add(username);
+            }
+        }
+        return publicUsers;
+    }
+
+    public List<String> getPublicUsers() {
+        List<String> usernames = new ArrayList<>();
+        for(User u: getAll()){
+            if(u.isPublicProfile())
+                usernames.add(u.getUsername());
+        }
+        return usernames;
+    }
+
+
+    private void verifyUserInput(UserRegistrationDto userReg) {
+        try {
+            User newUser = userRepository.findByUsername(userReg.getUsername());
+            if (newUser != null)
+                throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
+            if (userRepository.findByEmail(userReg.getEmail()) != null)
+                throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
+            if (!checkUsername(userReg))
+                throw new BadRequestException("Username is in invalid format.");
+            if (!checkFullName(userReg))
+                throw new BadRequestException("Full name is in invalid format.");
+            if (!userReg.getPassword().equals(userReg.getRepeatPassword()))
+                throw new BadRequestException("Password and repeat password are not the same.");
+            if (!patternChecker(userReg.getEmail(), userReg.getPassword()))
+                throw new BadRequestException("Email or password is in invalid format.");
+        } catch (Exception e) {
+            throw new BadRequestException("Thread " + e.getMessage());
+        }
+    }
 
     private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
