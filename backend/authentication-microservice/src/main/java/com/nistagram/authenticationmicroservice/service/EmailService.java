@@ -40,20 +40,20 @@ public class EmailService {
         javaMailSender.send(simpleMailMessage);
     }
 
-    /*
-    public void resetPassword(User user) throws MailException {
-        String jwt = jwtService.createToken(user.getUsername());
+
+    public void resetPassword(String username, String email, String fullName) throws MailException {
+        String jwt = jwtService.createToken(username);
         String url = "https://localhost:3000/reset_password/" + jwt;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
-        simpleMailMessage.setTo(user.getEmail());
+        simpleMailMessage.setTo(email);
         simpleMailMessage.setSubject("Restart password");
-        String mailText = "Dear " + user.getFullName() + ",\n\n" +
+        String mailText = "Dear " + fullName + ",\n\n" +
                 "Welcome to Ništagram" + "\n\n" +
                 "<a href=\"" + url + "\">Reset password</a>" + "\n\n" +
                 "Best regards,";
         simpleMailMessage.setText(mailText);
         javaMailSender.send(simpleMailMessage);
-    }*/
+    }
 
 }

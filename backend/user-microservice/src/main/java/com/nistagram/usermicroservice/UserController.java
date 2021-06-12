@@ -33,6 +33,11 @@ public class UserController {
         Logger.info("Get user by username", username);
         return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
     }
+    @PostMapping("/find")
+//    @PreAuthorize("hasAuthority('GET_USER')")
+    public UserDto getUserByEmail(@RequestBody String email) {
+        return UserMapper.mapUserToUserDto(userService.findUserByEmail(email));
+    }
 
     @PostMapping("/add")
     public void registerUser(@RequestBody UserRegistrationDto userReg) {
