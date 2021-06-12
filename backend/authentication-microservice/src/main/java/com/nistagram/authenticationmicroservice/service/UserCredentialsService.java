@@ -5,6 +5,7 @@ import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
+import com.nistagram.authenticationmicroservice.dto.UserDto;
 import com.nistagram.authenticationmicroservice.exception.BadRequestException;
 import com.nistagram.authenticationmicroservice.exception.InvalidActionException;
 import com.nistagram.authenticationmicroservice.exception.NotFoundException;
@@ -111,8 +112,8 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     public void sendResetPasswordLink(String email) {
-//        User user = userService.findUserByEmail(email);
-//        emailService.resetPassword(user);         TODO: User microservice?
+        UserDto user = userConnection.getUserByEmail(email);
+        emailService.resetPassword(user.getUsername(), user.getEmail(), user.getFullName());
     }
 
     public String verifyAccount(String username) {

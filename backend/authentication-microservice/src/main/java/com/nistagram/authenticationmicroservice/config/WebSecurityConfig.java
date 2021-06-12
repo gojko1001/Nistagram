@@ -65,6 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("**/user/add").permitAll()
                 .antMatchers("/userCredentials/**").permitAll()
                 .antMatchers("/userCredentials/add").permitAll()
+                .antMatchers("/userCredentials/send_email/{email}").permitAll()
                 .antMatchers("**/user/**").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
@@ -80,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
-                "/**/*.css", "/**/*.js","/userCredentials/verify/{username}",
+                "/**/*.css", "/**/*.js","/userCredentials/verify/{username}","/userCredentials/send_email/{email}",
                 "/userCredentials/**","/userCredentials/add");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "**/user/add",

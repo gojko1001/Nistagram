@@ -46,18 +46,18 @@ public class UserCredentialsController {
 
     }
 
-    @GetMapping("/send_email/{email}")
+    @GetMapping("/send_email/{email:.+}")
     public void sendPasswordLink(@PathVariable String email) throws IOException {
         userCredentialsService.sendResetPasswordLink(email);
     }
 
-    @PutMapping("/reset_password/{jwt}")
+    @PutMapping("/reset_password/{jwt:.+}")
     public void restartPassword(@PathVariable String jwt, @RequestBody ResetPasswordDto resetPasswordDto) throws IOException {
         userCredentialsService.restartPassword(jwt, resetPasswordDto);
     }
 
-    @GetMapping("/verify/{username:.+}")
-    public String verifyUser(@PathVariable String username) {
-        return userCredentialsService.verifyAccount(username);
+    @GetMapping("/verify/{jwt:.+}")
+    public String verifyUser(@PathVariable String jwt) {
+        return userCredentialsService.verifyAccount(jwt);
     }
 }
