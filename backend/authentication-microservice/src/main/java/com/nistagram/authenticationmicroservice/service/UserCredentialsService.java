@@ -13,13 +13,8 @@ import com.nistagram.authenticationmicroservice.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -42,7 +37,6 @@ public class UserCredentialsService implements IUserCredentialsService {
     @Autowired
     private EmailService emailService;
 
-    private final RestTemplate restTemplate = new RestTemplate();
 
     public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
@@ -60,7 +54,6 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentials.setPassword(passwordEncoder.encode(userCredentialsDto.getPassword()));
         userCredentials.setRoles(roleService.findByName("ROLE_USER"));
         userCredentials.setVerified(false);
-        emailService.verificationPassword(userCredentialsDto.getUsername(), userCredentialsDto.getEmail(), userCredentialsDto.getFullName());
         try{
             userConnection.registerUser(userCredentialsDto);
         }catch (Exception e){

@@ -5,6 +5,7 @@ import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
 import com.nistagram.authenticationmicroservice.security.JwtService;
+import com.nistagram.authenticationmicroservice.service.EmailService;
 import com.nistagram.authenticationmicroservice.service.IUserCredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ public class UserCredentialsController {
     private IUserCredentialsService userCredentialsService;
     @Autowired
     private JwtService jwtService;
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
@@ -37,8 +40,10 @@ public class UserCredentialsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> registerUser(@RequestBody UserCredentialsDto userReg) {
-        return new ResponseEntity<>(userCredentialsService.create(userReg).getUsername(), HttpStatus.OK);
+    public void registerUser(@RequestBody UserCredentialsDto userReg) {
+        userCredentialsService.create(userReg);
+        emailService.verificationPassword(userReg.getUsername(), userReg.getEmail(), userReg.getFullName());
+
     }
 
     @GetMapping("/send_email/{email}")
@@ -51,7 +56,7 @@ public class UserCredentialsController {
         userCredentialsService.restartPassword(jwt, resetPasswordDto);
     }
 
-    @GetMapping("/verify/{username}")
+    @GetMapping("/verify/{username:.+}")
     public String verifyUser(@PathVariable String username) {
         return userCredentialsService.verifyAccount(username);
     }
