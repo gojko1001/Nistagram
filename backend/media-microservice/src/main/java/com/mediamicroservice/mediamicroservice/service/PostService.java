@@ -8,12 +8,12 @@ import com.mediamicroservice.mediamicroservice.domain.Hashtag;
 import com.mediamicroservice.mediamicroservice.domain.Location;
 import com.mediamicroservice.mediamicroservice.domain.Media;
 import com.mediamicroservice.mediamicroservice.domain.Post;
+import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 public class PostService implements IPostService {
 
@@ -46,20 +45,29 @@ public class PostService implements IPostService {
     public List<Post> getAll() {
         List<Post> posts = postRepository.findAll();
         if (posts.isEmpty())
-            log.info("There is no any posts.");
+            Logger.infoDb("There is no any posts.");
         return posts;
     }
 
     @Override
     public Post save(Post post) {
-        log.info("Try to save post: " + post.getId());
-        return postRepository.save(post);
+        Logger.infoDb("Try to save post: " + post.getId());
+        Post dbPost = new Post();
+        try {
+            dbPost = postRepository.save(post);
+        } catch (Exception e) {
+            Logger.errorDb("Cannot save post: " + post.getId(), e.getMessage());
+        }
+        return dbPost;
     }
 
     @Override
     public List<Post> getUserImages(String username) {
-        log.info("Try to get post by username: " + username);
-        return postRepository.findPostsByMedia_Username(username);
+        Logger.infoDb("Try to get post by username: " + username);
+        List<Post> posts = postRepository.findPostsByMedia_Username(username);
+        if (posts.isEmpty())
+            Logger.info("There is no any post", username);
+        return posts;
     }
 
     @Override
@@ -107,7 +115,7 @@ public class PostService implements IPostService {
 
     @Override
     public ImageBytesDto getImageFileById(Long id) {
-        log.info("Try to get post by id: " + id);
+        Logger.infoDb("Try to get post by id: " + id);
         Post post = postRepository.findPostById(id);
         ImageBytesDto imageBytesDtos = new ImageBytesDto();
         if (post != null) {
@@ -117,7 +125,6 @@ public class PostService implements IPostService {
         }
         return imageBytesDtos;
     }
-
 
     @Override
     public ImageBytesDto imageFile(Post post, String filePath) {
@@ -133,13 +140,19 @@ public class PostService implements IPostService {
 
     @Override
     public Post getById(Long id) {
-        log.info("Try to get post with id: " + id);
-        return postRepository.findPostById(id);
+        Logger.infoDb("Try to get post with id: " + id);
+        Post post = postRepository.findPostById(id);
+        if (post == null)
+            Logger.infoDb("There is no post with id: " + id);
+        return post;
     }
 
     private List<Post> findAll() {
-        log.info("Read all posts from database.");
-        return postRepository.findAll();
+        Logger.infoDb("Read all posts from database.");
+        List<Post> posts = postRepository.findAll();
+        if (posts.isEmpty())
+            Logger.infoDb("There is no any post.");
+        return posts;
     }
 
     public List<ImageBytesDto> searchTag(String tag) {
@@ -157,7 +170,7 @@ public class PostService implements IPostService {
     }
 
     public List<ImageBytesDto> searchLocation(String location) {
-        log.info("Search for locations who contains " + location + " in their name");
+        Logger.infoDb("Search for locations who contains " + location + " in their name");
         List<Post> posts = postRepository.searchLocation(location);
         List<String> publicProfiles = userConnection.arePublic(getUsernamesByPost(posts));
         posts = filterPublicPostByUsernames(publicProfiles, posts);

@@ -9,7 +9,7 @@ import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
 import com.nistagram.usermicroservice.exception.InvalidActionException;
 import com.nistagram.usermicroservice.exception.NotFoundException;
-import lombok.extern.slf4j.Slf4j;
+import com.nistagram.usermicroservice.logger.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-@Slf4j
 @Service
 public class UserService implements IUserService {
 
@@ -27,32 +26,33 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
 
     public List<User> getAll() {
-        log.info("Read all users from database.");
-        return userRepository.findAll();
+        Logger.infoDb("Read all users from database.");
+        List<User> users = userRepository.findAll();
+        return users;
     }
 
     public User findUserByUsername(String username) {
-        log.info("Try to find " + username + " user in database.");
+        Logger.infoDb("Try to find " + username + " user in database.");
         User user = userRepository.findByUsername(username);
-        if (user == null){
-            log.info("There is no user with username: " + username);
+        if (user == null) {
+            Logger.infoDb("There is no user with username: " + username);
             throw new NotFoundException("There is no user with username " + username);
         }
         return user;
     }
 
     public User findUserByEmail(String email) {
-        log.info("Try to find " + email + " user in database.");
+        Logger.infoDb("Try to find " + email + " user in database.");
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            log.info("There is no user with email: " + email);
+            Logger.infoDb("There is no user with email: " + email);
             throw new NotFoundException("User with email: " + email + " doesn't exists.");
         }
         return user;
     }
 
     public User registerUser(UserRegistrationDto userReg, boolean isGoogleUser) {
-        if(!isGoogleUser)
+        if (!isGoogleUser)
             verifyUserInput(userReg);
         User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
 //                emailService.verificationPassword(user); TODO: Notification Microservice
@@ -62,7 +62,7 @@ public class UserService implements IUserService {
     }
 
     public User updateUser(User user, String oldUsername) {
-        if(findUserByUsername(user.getUsername()) != null)
+        if (findUserByUsername(user.getUsername()) != null)
             throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
         User dbUser = findUserByUsername(oldUsername);
         dbUser.setBio(user.getBio());
@@ -78,21 +78,27 @@ public class UserService implements IUserService {
     }
 
     public User save(User user) {
-        log.info("Try to save user with username: " + user.getUsername());
-        return userRepository.save(user);
+        Logger.infoDb("Try to save user with username: " + user.getUsername());
+        User dbUser = new User();
+        try {
+            dbUser = userRepository.save(user);
+        } catch (Exception e) {
+            Logger.errorDb("Cannot save user: " + user.getUsername(), e.getMessage());
+        }
+        return dbUser;
     }
 
     public List<User> search(String username) {
-        log.info("Search: finding users whose username contains " + username);
+        Logger.infoDb("Search: finding users whose username contains " + username);
         return userRepository.search(username);
     }
 
     public List<String> arePublic(List<String> usernames) {
         List<User> users = getAll();
         List<String> publicUsers = new ArrayList<>();
-        for(String username: usernames){
-            for(User u: users){
-                if(u.getUsername().equals(username) && u.isPublicProfile())
+        for (String username : usernames) {
+            for (User u : users) {
+                if (u.getUsername().equals(username) && u.isPublicProfile())
                     publicUsers.add(username);
             }
         }
@@ -101,13 +107,12 @@ public class UserService implements IUserService {
 
     public List<String> getPublicUsers() {
         List<String> usernames = new ArrayList<>();
-        for(User u: getAll()){
-            if(u.isPublicProfile())
+        for (User u : getAll()) {
+            if (u.isPublicProfile())
                 usernames.add(u.getUsername());
         }
         return usernames;
     }
-
 
     private void verifyUserInput(UserRegistrationDto userReg) {
         try {

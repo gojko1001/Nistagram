@@ -4,6 +4,7 @@ import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
+import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.security.JwtService;
 import com.nistagram.authenticationmicroservice.service.IUserCredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserCredentialsController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
+        Logger.info("Try to login.", userReg.getUsername());
         UserCredentials credentials = userCredentialsService.login(userReg);
         String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getRoles().get(1)*/);
         return new ResponseEntity<>(jwt, HttpStatus.OK);
@@ -31,6 +33,7 @@ public class UserCredentialsController {
 
     @PostMapping("/login_google")
     public ResponseEntity<String> loginGoogle(@RequestBody LoginGoogleDto loginGoogleDto) throws IOException {
+        Logger.info("Try to login with google.", loginGoogleDto.getEmail());
         UserCredentials credentials = userCredentialsService.loginGoogle(loginGoogleDto);
         String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getRoles().get(1)*/);
         return new ResponseEntity<>(jwt, HttpStatus.OK);
@@ -43,16 +46,19 @@ public class UserCredentialsController {
 
     @GetMapping("/send_email/{email}")
     public void sendPasswordLink(@PathVariable String email) throws IOException {
+        Logger.info("Send reset password link.", email);
         userCredentialsService.sendResetPasswordLink(email);
     }
 
     @PutMapping("/reset_password/{jwt}")
     public void restartPassword(@PathVariable String jwt, @RequestBody ResetPasswordDto resetPasswordDto) throws IOException {
+        Logger.info("Reset passowrd.", jwtService.extractUsername(jwt));
         userCredentialsService.restartPassword(jwt, resetPasswordDto);
     }
 
     @GetMapping("/verify/{username}")
     public String verifyUser(@PathVariable String username) {
+        Logger.info("Verify user.", username);
         return userCredentialsService.verifyAccount(username);
     }
 }

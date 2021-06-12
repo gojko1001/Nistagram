@@ -1,15 +1,14 @@
 package com.mediamicroservice.mediamicroservice.service;
 
 import com.mediamicroservice.mediamicroservice.domain.Location;
+import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.ILocationRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service
 public class LocationService implements ILocationService {
     @Autowired
@@ -19,25 +18,41 @@ public class LocationService implements ILocationService {
     public List<Location> getAll() {
         List<Location> locations = locationRepository.findAll();
         if (locations.isEmpty())
-            log.info("There is no any location");
+            Logger.infoDb("There is no any location");
         return locations;
     }
 
     @Override
     public Location create(Location location) {
-        log.info("Try to save location: " + location.getName());
-        return locationRepository.save(location);
+        Location dbLocation = new Location();
+        try {
+            Logger.infoDb("Try to save location: " + location.getName());
+            dbLocation = locationRepository.save(location);
+        } catch (Exception e) {
+            Logger.errorDb("Cannot save location: " + location.getName(), e.getMessage());
+            e.printStackTrace();
+        }
+        return dbLocation;
     }
 
     @Override
     public Location findById(Long id) {
-        log.info("Try to find location with id: " + id);
-        return locationRepository.findLocationById(id);
+        Logger.infoDb("Try to find location with id: " + id);
+        Location location = locationRepository.findLocationById(id);
+
+        if (location == null) {
+            Logger.infoDb("There is no location with id: " + id);
+        }
+
+        return location;
     }
 
     @Override
     public Location findByName(String name) {
-        log.info("Try to find location with name: " + name);
-        return locationRepository.findLocationByName(name);
+        Logger.infoDb("Try to find location with name: " + name);
+        Location location = locationRepository.findLocationByName(name);
+        if (location == null)
+            Logger.infoDb("There is no location with name: " + name);
+        return location;
     }
 }
