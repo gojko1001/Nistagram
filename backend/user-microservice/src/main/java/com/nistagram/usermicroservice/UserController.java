@@ -3,13 +3,13 @@ package com.nistagram.usermicroservice;
 import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.dto.UserUpdateDto;
+import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @Slf4j
 @RestController
@@ -23,12 +23,14 @@ public class UserController {
     @GetMapping
 //    @PreAuthorize("hasAuthority('ALL_USERS')")
     public List<UserDto> getAll() {
+        Logger.info("Get all users", "");
         return UserMapper.mapUserListToUserDtoList(userService.getAll());
     }
 
     @GetMapping("/{username}")
 //    @PreAuthorize("hasAuthority('GET_USER')")
     public UserDto getUserByUsername(@PathVariable String username) {
+        Logger.info("Get user by username", username);
         return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
     }
     @PostMapping("/find")
@@ -50,7 +52,7 @@ public class UserController {
     @PutMapping("/{oldUsername}")
 //    @PreAuthorize("hasAuthority('EDIT_PROFILE')")
     public UserUpdateDto updateProfile(@RequestBody UserUpdateDto userUpdateDto, @PathVariable String oldUsername) {
-        log.info("Try to edit user: " + oldUsername);
+        Logger.info("Try to edit user: " + oldUsername, userUpdateDto.getUser().getUsername());
         return UserMapper.mapUserToUserUpdateDto(userService.updateUser(UserMapper.mapUserUpdateDtoToUser(userUpdateDto), oldUsername));
     }
 
@@ -67,6 +69,7 @@ public class UserController {
 
     @GetMapping("/public_users")
     public List<String> getPublicUsers() {
+        log.info("Get all public users");
         return userService.getPublicUsers();
     }
 }

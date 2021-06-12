@@ -1,16 +1,15 @@
 package com.mediamicroservice.mediamicroservice.service;
 
 import com.mediamicroservice.mediamicroservice.domain.Hashtag;
+import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IHashtagRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Service
 public class HashtagService implements IHashtagService {
     @Autowired
@@ -19,14 +18,14 @@ public class HashtagService implements IHashtagService {
     @Override
     public List<Hashtag> getAll() {
         List<Hashtag> tags = tagRepository.findAll();
-        if(tags.isEmpty())
-            log.info("There is no any tag.");
+        if (tags.isEmpty())
+            Logger.infoDb("There is no any tag.");
         return tags;
     }
 
     @Override
     public Hashtag create(Hashtag tag) {
-        log.info("Try to save tag: " + tag.getName());
+        Logger.infoDb("Try to save tag: " + tag.getName());
         return tagRepository.save(tag);
     }
 
