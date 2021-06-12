@@ -80,11 +80,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
-                "/**/*.css", "/**/*.js",
-                "**/userCredentials/**");
+                "/**/*.css", "/**/*.js","/userCredentials/verify/{username}",
+                "/userCredentials/**","/userCredentials/add");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "**/user/add",
-                "**/userCredentials/**",
+                "/userCredentials/**","/userCredentials/add",
                 "**/user/**",
                 "/userCredentials/login_google/");
     }
