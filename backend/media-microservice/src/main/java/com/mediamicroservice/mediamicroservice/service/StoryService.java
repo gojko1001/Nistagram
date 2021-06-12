@@ -6,12 +6,12 @@ import com.mediamicroservice.mediamicroservice.controller.mapping.StoryMapper;
 import com.mediamicroservice.mediamicroservice.domain.Location;
 import com.mediamicroservice.mediamicroservice.domain.Media;
 import com.mediamicroservice.mediamicroservice.domain.Story;
+import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IStoryRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IStoryService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Slf4j
 @Service
 public class StoryService implements IStoryService {
     @Autowired
@@ -39,8 +38,14 @@ public class StoryService implements IStoryService {
 
     @Override
     public Story save(Story story) {
-        log.info("Try to save story: " + story.getId());
-        return storyRepository.save(story);
+        Logger.infoDb("Try to save story: " + story.getId());
+        Story dbStory = new Story();
+        try {
+            dbStory = storyRepository.save(story);
+        } catch (Exception e) {
+            Logger.errorDb("Cannot save story: " + story.getId(), e.getMessage());
+        }
+        return dbStory;
     }
 
     @Override
@@ -57,7 +62,7 @@ public class StoryService implements IStoryService {
         media.setLocation(location);
         media.setHashtags(hashtagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
-        log.info("Try to save media: " + media.getFileName());
+        Logger.infoDb("Try to save media: " + media.getFileName());
         mediaRepository.save(media);
         story.setMedia(media);
         return save(story);

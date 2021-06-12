@@ -5,14 +5,13 @@ import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.dto.UserRelationDto;
 import com.nistagram.usermicroservice.exception.InvalidActionException;
-import lombok.extern.slf4j.Slf4j;
+import com.nistagram.usermicroservice.logger.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Service
 public class UserRelationService implements IUserRelationService {
 
@@ -20,7 +19,7 @@ public class UserRelationService implements IUserRelationService {
     private IUserService userService;
 
     private User findUserByUsername(String username) {
-        log.info("Read user with username: " + username + ".");
+        Logger.infoDb("Read user with username: " + username + ".");
         return userService.findUserByUsername(username);
     }
 

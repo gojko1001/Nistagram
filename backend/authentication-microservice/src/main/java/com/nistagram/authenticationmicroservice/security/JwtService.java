@@ -1,5 +1,6 @@
 package com.nistagram.authenticationmicroservice.security;
 
+import com.nistagram.authenticationmicroservice.logger.Logger;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -36,6 +37,7 @@ public class JwtService {
 
 
     public String createToken(String username/*, Role role*/) {
+        Logger.info("Try to create token for user.", username);
         return Jwts.builder()
                 .setIssuer(APP_NAME)
                 .setSubject(username)

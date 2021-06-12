@@ -8,6 +8,7 @@ import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
 import com.nistagram.authenticationmicroservice.exception.BadRequestException;
 import com.nistagram.authenticationmicroservice.exception.InvalidActionException;
 import com.nistagram.authenticationmicroservice.exception.NotFoundException;
+import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.repoistory.IUserCredentialsRepository;
 import com.nistagram.authenticationmicroservice.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Slf4j
 @Service
 public class UserCredentialsService implements IUserCredentialsService {
 
@@ -41,7 +41,7 @@ public class UserCredentialsService implements IUserCredentialsService {
     public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
         if (userCredentials == null) {
-            log.info("Can not find user credentials with username: " + username);
+            Logger.infoDb("Can not find user credentials with username: " + username);
             throw new NotFoundException("There is no user credentials with username " + username);
         }
         return userCredentials;
@@ -59,12 +59,12 @@ public class UserCredentialsService implements IUserCredentialsService {
         }catch (Exception e){
             throw new BadRequestException("Unsuccessfully added user!");
         }
-        log.info("Try to save user credentials with username: " + userCredentials.getUsername());
+        Logger.infoDb("Try to save user credentials with username: " + userCredentials.getUsername());
         return userCredentialsRepository.save(userCredentials);
     }
 
     public UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException {
-        log.info("Try to find user credentials with username: " + userCredentialsDto.getUsername());
+        Logger.infoDb("Try to find user credentials with username: " + userCredentialsDto.getUsername());
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(userCredentialsDto.getUsername());
         if (userCredentials == null || !passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword()))
             throw new BadRequestException("Username or password is not correct.");

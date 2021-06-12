@@ -12,6 +12,6 @@ public interface UserConnection {
     void registerUser(@RequestBody UserCredentialsDto userReg);
 
     @PostMapping("/user/addGoogleUser")
-    public void registerGoogleUser(@RequestBody UserCredentialsDto userReg);
+    void registerGoogleUser(@RequestBody UserCredentialsDto userReg);
 
 }
