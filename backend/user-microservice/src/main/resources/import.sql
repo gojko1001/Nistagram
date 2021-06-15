@@ -22,3 +22,10 @@ insert into user_relation (user_id, related_user_id, enable_notification, relati
 -- to maja
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (4, 1, false, 0);
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (3, 1, false, 1);
+
+-- UserCategory
+insert into user_category (name) values ('influencer');
+insert into user_category (name) values ('media');
+insert into user_category (name) values ('business');
+insert into user_category (name) values ('brand');
+insert into user_category (name) values ('organisation');

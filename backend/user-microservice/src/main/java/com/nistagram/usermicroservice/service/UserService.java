@@ -1,15 +1,13 @@
 package com.nistagram.usermicroservice.service;
 
-import com.nistagram.usermicroservice.IUserRepository;
-import com.nistagram.usermicroservice.UserMapper;
+import com.nistagram.usermicroservice.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.exception.AlreadyExistsException;
-import com.nistagram.usermicroservice.exception.BadRequestException;
-import com.nistagram.usermicroservice.exception.InvalidActionException;
-import com.nistagram.usermicroservice.exception.NotFoundException;
 import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.repository.IUserRepository;
+import com.nistagram.usermicroservice.controller.exception.*;
+import com.nistagram.usermicroservice.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
