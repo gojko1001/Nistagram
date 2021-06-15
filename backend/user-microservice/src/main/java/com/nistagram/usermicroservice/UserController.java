@@ -2,7 +2,6 @@ package com.nistagram.usermicroservice;
 
 import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.dto.UserUpdateDto;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,20 +20,18 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping
-//    @PreAuthorize("hasAuthority('ALL_USERS')")
     public List<UserDto> getAll() {
         Logger.info("Get all users", "");
         return UserMapper.mapUserListToUserDtoList(userService.getAll());
     }
 
     @GetMapping("/{username}")
-//    @PreAuthorize("hasAuthority('GET_USER')")
     public UserDto getUserByUsername(@PathVariable String username) {
         Logger.info("Get user by username", username);
         return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
     }
+
     @PostMapping("/find")
-//    @PreAuthorize("hasAuthority('GET_USER')")
     public UserDto getUserByEmail(@RequestBody String email) {
         return UserMapper.mapUserToUserDto(userService.findUserByEmail(email));
     }
@@ -50,10 +47,9 @@ public class UserController {
     }
 
     @PutMapping("/{oldUsername}")
-//    @PreAuthorize("hasAuthority('EDIT_PROFILE')")
-    public UserUpdateDto updateProfile(@RequestBody UserUpdateDto userUpdateDto, @PathVariable String oldUsername) {
-        Logger.info("Try to edit user: " + oldUsername, userUpdateDto.getUser().getUsername());
-        return UserMapper.mapUserToUserUpdateDto(userService.updateUser(UserMapper.mapUserUpdateDtoToUser(userUpdateDto), oldUsername));
+    public UserDto updateProfile(@RequestBody UserDto userDto, @PathVariable String oldUsername) {
+        Logger.info("Try to edit user: " + oldUsername, userDto.getUsername());
+        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), oldUsername));
     }
 
     @GetMapping("/search")

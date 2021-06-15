@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { getEmailFromToken } from '../util/token';
+import { getUsernameFromToken } from '../util/token';
 export default {
   name: 'CreatePost',
   data() {
@@ -122,7 +122,7 @@ export default {
       },
       submit(){
         if(this.imageHasBeenUploaded){
-          this.form.username = getEmailFromToken();
+          this.form.username = getUsernameFromToken();
           this.form.locationName = this.form.location.toString();
           console.log(this.selected)
           if(this.selected == 'post'){

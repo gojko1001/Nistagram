@@ -20,7 +20,7 @@ export function getParsedToken() {
 export function removeToken() {
     localStorage.removeItem("JWT");
 }
-export function getEmailFromToken() {
+export function getUsernameFromToken() {
     let parsedToken=getParsedToken();
     if(parsedToken == null){
         return null;

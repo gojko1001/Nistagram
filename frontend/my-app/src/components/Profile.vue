@@ -41,7 +41,7 @@
         </div>
         <i class="fas fa-photo-video"></i>
         <div class="vl"></div>
-        <div v-if="isFollowing || isUserProfile" id="userMedia">
+        <div v-if="isUserProfile || isFollowing || user.publicProfile" id="userMedia">
             <div id="stories">
                 <b-button v-b-modal.modal-2 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
                 <b-modal id="modal-2" title="Stories">
@@ -191,7 +191,7 @@
                 </b-tabs>
             </div>
         </div>
-        <div v-if="!isUserProfile && !isFollowing" id="locked">
+        <div v-if="!isUserProfile && !isFollowing && !user.publicProfile" id="locked">
             <img src="../assets/locker.png" class="lockedImg" alt="Profile is private">
             <h3>Profile is private</h3>
         </div>
@@ -203,7 +203,7 @@
 
 <script>
 import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH } from '../util/constants';
-import { getEmailFromToken } from '../util/token';
+import { getToken, getUsernameFromToken } from '../util/token';
 export default {
     name: 'Profile',
     data(){
@@ -245,26 +245,25 @@ export default {
         }
     },
     mounted: function(){
-        this.isUserProfile = this.username == getEmailFromToken();
+        this.isUserProfile = this.username == getUsernameFromToken();
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
-                                                                Authorization: "Bearer " + localStorage.getItem('JWT'),
+                                                                Authorization: "Bearer " + getToken(),
                                                             }                                          
             }).then(response => {
                                 this.user = response.data;
                                 console.log(response.data);
+                                this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
+                                            .then(response => {
+                                                this.numFollowers = response.data.length;
+                                                this.followers = response.data;
+                                                this.getUserMedia();
+                                            })
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
                                     return
                                 }
                                 window.location.href = '/home'
-            })
-        
-        this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
-                        .then(response => {
-                            this.numFollowers = response.data.length;
-                            this.followers = response.data;
-                            this.getUserMedia();
-                        })
+            });
         this.axios.get(GET_FOLLOWINGS_PATH + "/" + this.username)
                         .then(response => {
                             this.numFollowing = response.data.length;
@@ -291,7 +290,7 @@ export default {
         likePost(id, liked) {
             console.log(this.form);
             this.formLike.postId = id;
-            this.formLike.username = getEmailFromToken();
+            this.formLike.username = getUsernameFromToken();
             this.formLike.liked = liked;
             this.axios.post('/media-api/like', this.formLike)
             .then(response => { console.log(response.data);
@@ -313,7 +312,7 @@ export default {
                 this.getStories();
             }else{
                 for(let follower of this.followers){
-                    if(follower.username == getEmailFromToken()){
+                    if(follower.username == getUsernameFromToken()){
                         this.isFollowing = true,
                         this.getPosts();
                         this.getStories();
@@ -383,7 +382,7 @@ export default {
                 });
         },
         getCollections() {
-        var user = getEmailFromToken();
+        var user = getUsernameFromToken();
         this.axios.get('/media-api/collection/' + user)
           .then(response => {   this.collections = response.data;
                                 for(let i=0; i< this.collections.length; i++){
@@ -420,7 +419,7 @@ export default {
         },
         
         followUser(){
-            this.relationDto.username = getEmailFromToken();
+            this.relationDto.username = getUsernameFromToken();
             this.relationDto.relatedUsername = this.username;
             this.axios.post(FOLLOW_PATH, this.relationDto)
                     .then(() => {
@@ -431,7 +430,7 @@ export default {
         },
 
         unfollowUser(tounfollow){
-            this.relationDto.username = getEmailFromToken();
+            this.relationDto.username = getUsernameFromToken();
             this.relationDto.relatedUsername = tounfollow;
             this.axios.put(DELETE_RELATION_PATH, this.relationDto)
                     .then(() => {

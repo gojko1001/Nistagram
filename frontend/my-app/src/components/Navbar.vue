@@ -58,7 +58,7 @@
 
 
 <script>
-import { getEmailFromToken } from '../util/token';
+import { getUsernameFromToken } from '../util/token';
 export default {
   name: 'Navbar',
   data() {
@@ -74,7 +74,7 @@ export default {
       }
   },
   mounted: function(){
-    this.username = getEmailFromToken();
+    this.username = getUsernameFromToken();
   },
   methods:{
     myProfile:function(){

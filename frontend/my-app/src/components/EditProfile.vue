@@ -17,7 +17,7 @@
         <span>Web site:</span>
         <b-form-input v-model="form.webSite" type="phone" id="webSite">{{form.webSite}}</b-form-input>
         <span>Bio:</span>
-        <b-form-input v-model="form.bio" type="text" id="bio"></b-form-input><br>
+        <b-form-input v-model="form.bio" type="text" id="bio">{{form.bio}}</b-form-input><br>
         <b-button type="submit" variant="primary" style="width:200px;">Edit</b-button><br>
       </b-form>
     </div>
@@ -25,23 +25,22 @@
 
 <script>
 import { USER_PATH, SERVER_NOT_RESPONDING } from "./../util/constants"
-import { getEmailFromToken, removeToken } from '../util/token';
+import { getToken, getUsernameFromToken, removeToken } from '../util/token';
 
 export default {
   name: 'EditProfile',
   data() {
       return {
-        username: getEmailFromToken(),
+        username: getUsernameFromToken(),
         form: '',
         show: true
       }
   },
   mounted: function(){
-    if(!localStorage.getItem('JWT'))
+    if(getUsernameFromToken() == null)
       window.location.href = "/";
-    this.axios.get(USER_PATH + '/' + this.username, {   headers:{
-                                                                Authorization: "Bearer " + localStorage.getItem('JWT'),
-                                                            }                                          
+    this.axios.get(USER_PATH + '/' + this.username, {   
+                                                      headers:{ Authorization: "Bearer " + getToken() }                                          
             }).then(response => {
                                 this.form = response.data;
             }).catch(error => { if(!error.response) {
@@ -54,8 +53,7 @@ export default {
     },
     methods: {
         onSubmit() {
-        this.form.pastUsername = this.username;
-        this.axios.put(USER_PATH + '/' + this.form.pastUsername ,this.form, {headers:{Authorization: "Bearer " + localStorage.getItem('JWT'),}})
+        this.axios.put(USER_PATH + '/' + this.username, this.form, {headers:{Authorization: "Bearer " + getToken()}})
           .then(response => { console.log(response);
                               this.makeToast("User has been updated successfully.", "success");
                               if(this.form.pastUsername != this.form.username){
@@ -79,7 +77,7 @@ export default {
             .then(response => {
             this.form = response;
         })
-          this.form.pastUsername = getEmailFromToken(),
+          this.form.pastUsername = getUsernameFromToken(),
         // Trick to reset/clear native browser form validation state
         this.show = false
         this.$nextTick(() => {

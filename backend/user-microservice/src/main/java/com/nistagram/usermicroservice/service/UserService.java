@@ -55,25 +55,27 @@ public class UserService implements IUserService {
         if (!isGoogleUser)
             verifyUserInput(userReg);
         User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
-//                emailService.verificationPassword(user); TODO: Notification Microservice
         user.setUserRelations(new ArrayList<UserRelation>());
         user.setInvertedRelations(new ArrayList<UserRelation>());
         return userRepository.save(user);
     }
 
     public User updateUser(User user, String oldUsername) {
-        if (findUserByUsername(user.getUsername()) != null)
+        if (userRepository.findByUsername(user.getUsername()) != null && !user.getUsername().equals(oldUsername))
             throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
         User dbUser = findUserByUsername(oldUsername);
+        dbUser.setUsername(user.getUsername());
+        dbUser.setFullName(user.getFullName());
+        dbUser.setEmail(user.getEmail());
+        dbUser.setPhone(user.getPhone());
+        dbUser.setWebSite(user.getWebSite());
         dbUser.setBio(user.getBio());
         dbUser.setBirthDate(user.getBirthDate());
-        dbUser.setPhone(user.getPhone());
         dbUser.setUserGender(user.getUserGender());
-        dbUser.setUsername(user.getUsername());
-        dbUser.setWebSite(user.getWebSite());
         dbUser.setPublicProfile(user.isPublicProfile());
         dbUser.setPublicDM(user.isPublicDM());
         dbUser.setTaggable(user.isTaggable());
+        // TODO: Change username in userCredentials table, Generate new token
         return save(dbUser);
     }
 
