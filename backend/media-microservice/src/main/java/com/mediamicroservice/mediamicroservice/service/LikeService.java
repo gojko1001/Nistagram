@@ -42,6 +42,7 @@ public class LikeService implements ILikeService {
                         return null;
                     } else if (createLikeDto.isLiked() != like.isLiked()) {
                         like.setLiked(createLikeDto.isLiked());
+                        like.setPostId(createLikeDto.getPostId());
                         like.setTimestamp(currentDate);
                         likeRepository.save(like);
                         return null;
@@ -53,6 +54,7 @@ public class LikeService implements ILikeService {
         newLike.setLiked(createLikeDto.isLiked());
         newLike.setUsername(createLikeDto.getUsername());
         newLike.setTimestamp(currentDate);
+        newLike.setPostId(createLikeDto.getPostId());
         Logger.infoDb("Try to save like: " + newLike.getId());
         likeRepository.save(newLike);
         Logger.infoDb("Like: " + newLike.getId() + " has been saved.");

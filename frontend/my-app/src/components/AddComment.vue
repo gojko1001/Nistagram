@@ -152,7 +152,7 @@ export default {
         this.axios.post('/media-api/comment', this.form)
           .then(response => { console.log(response.data);
                               this.makeToast("Comment has been posted.", "success");
-                              window.location.href = '/profile/' + this.form.username;
+                              window.location.href = '/comment/' + this.form.postId;
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");

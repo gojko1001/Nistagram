@@ -43,11 +43,8 @@
         <div class="vl"></div>
         <div v-if="isFollowing || isUserProfile" id="userMedia">
             <div id="stories">
-                <b-button v-b-modal.modal-2 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <b-button v-b-modal.modal-2 style="font-size:25px;" @click="getStories()">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
                 <b-modal id="modal-2" title="Stories">
-                    <button>
-                        <i class="fas fa-user-friends"></i>
-                    </button>
                      <div v-for="(img,p) in stories" :key="p">
                             <b-card
                                 tag="article"
@@ -117,7 +114,7 @@
                         </div>
                     </b-tab>
                     <!-- Collections -->
-                    <b-tab title="Collections">
+                    <b-tab title="Collections" @click="getCollections()">
                         <div v-for="(coll,c) in collections" :key="c">
                             <p style="font-size:30px">{{coll.name}}:</p>
                             <div v-for="(img,i) in coll.favourites" :key="i">
@@ -167,7 +164,7 @@
                         
                     </b-tab>
                     <!-- Story archived -->
-                    <b-tab title="Story archive">
+                    <b-tab title="Story archive" @click="getArchivedStories()">
                         <div v-for="(img,j) in archivedStories" :key="j">
                             <b-card
                                 tag="article"
@@ -215,12 +212,18 @@ export default {
             user: '',
             username: this.$route.params.pUsername,
             info: [{
+                username:'',
+                location:{name:''},
                 numLikes:'',
                 numDislikes:'',
                 liked: false,
                 disliked: false
             }],
             favourites: [{
+                username:'',
+                location:{ name:''},
+                comments:[],
+                likes:[],
                 numLikes:'',
                 numDislikes:'',
                 liked: false,
@@ -244,7 +247,7 @@ export default {
                 username: '',
                 relatedUsername: ''
             },
-            history
+            history:[]
         }
     },
     mounted: function(){
@@ -307,9 +310,9 @@ export default {
         getUserMedia(){
             if(this.isUserProfile){
                 this.getPosts();
-                this.getStories();
-                this.getArchivedStories();
-                this.getCollections();
+                //this.getStories();
+                //this.getArchivedStories();
+                //this.getCollections();
             }
             else if(this.user.publicProfile){
                 this.getPosts();
@@ -401,15 +404,15 @@ export default {
                                         if(this.collections[i].favourites[j].likes.length > 0){
                                             for(var like of this.collections[i].favourites[j].likes){
                                                 if(like.liked){
-                                                this.favourites[i].numLikes += 1;
+                                                this.collections[i].favourites[j].numLikes += 1;
                                                 }else if(!like.liked){
-                                                this.favourites[i].numDislikes += 1;
+                                                this.collections[i].favourites[j].numDislikes += 1;
                                                 }
                                                 if(like.username == this.username){
                                                     if(like.liked){
-                                                        this.favourites[i].liked = true;
+                                                        this.collections[i].favourites[j].liked = true;
                                                     }else{
-                                                        this.favourites[i].disliked = true;
+                                                        this.collections[i].favourites[j].disliked = true;
                                                     } 
                                                 }
                                             }
