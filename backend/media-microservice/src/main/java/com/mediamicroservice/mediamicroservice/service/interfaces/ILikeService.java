@@ -2,6 +2,7 @@ package com.mediamicroservice.mediamicroservice.service.interfaces;
 
 
 import com.mediamicroservice.mediamicroservice.controller.dto.CreateLikeDto;
+import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.domain.Like;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public interface ILikeService {
 
     boolean hasBeenLiked(Long id, String username);
 
-    List<Like> history(String username);
+    List<ImageBytesDto> history(String username);
 }
