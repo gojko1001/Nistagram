@@ -5,6 +5,8 @@ import com.mediamicroservice.mediamicroservice.domain.Like;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILikeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,9 +36,9 @@ public class LikeController {
     }
 
     @GetMapping("/history/{username}")
-    public List<Like> history(@PathVariable("username")String username){
+    public ResponseEntity history(@PathVariable("username")String username){
         Logger.info("Get likes.", username);
-        return likeService.history(username);
+        return new ResponseEntity(likeService.history(username), HttpStatus.OK);
     }
 
 
