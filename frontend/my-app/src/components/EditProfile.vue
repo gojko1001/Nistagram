@@ -1,26 +1,113 @@
 <template>
-    <div id="editProfilePage">
-      <h1>Edit Profile</h1>
-       <b-form @submit.prevent="onSubmit" @reset="onReset">
-       <span>Full name:</span>
-        <b-form-input v-model="form.fullName" type="text" id="fullName" required>{{form.fullName}}</b-form-input>
-        <span>Email:</span>
-        <b-form-input v-model="form.email" type="email" id="email">{{form.email}}</b-form-input>
-        <span>Phone:</span>
-        <b-form-input v-model="form.phone" type="phone" id="phone">{{form.phone}}</b-form-input>
-        <span>Gender:</span>
-        <b-form-input v-model="form.userGender" type="text" id="userGender">{{form.userGender}}</b-form-input>
-        <span>Birth date:</span>
-        <b-form-input v-model="form.birthDate" value="form.birthDate" type="date" id="birthDate"></b-form-input>
-        <span>Username:</span>
-        <b-form-input v-model="form.username" type="text" id="username">{{form.username}}</b-form-input>
-        <span>Web site:</span>
-        <b-form-input v-model="form.webSite" type="phone" id="webSite">{{form.webSite}}</b-form-input>
-        <span>Bio:</span>
-        <b-form-input v-model="form.bio" type="text" id="bio">{{form.bio}}</b-form-input><br>
-        <b-button type="submit" variant="primary" style="width:200px;">Edit</b-button><br>
-      </b-form>
-    </div>
+<div id="editProfilePage">
+  <b-card no-body>
+    <b-tabs pills card vertical>
+      <b-tab title="Profile Info" active><b-card-text><h1>Edit Profile</h1></b-card-text>
+        <b-form @submit.prevent="onSubmit" @reset="onReset">
+          <table class="w-100 py-2">
+            <tr><td>Username:</td>
+            <td><b-form-input v-model="form.username" type="text" id="username">{{form.username}}</b-form-input></td></tr>
+            <tr><td>Full name:</td>
+            <td><b-form-input v-model="form.fullName" type="text" id="fullName" required>{{form.fullName}}</b-form-input></td></tr>
+            <tr><td>Bio:</td>
+            <td><b-form-input v-model="form.bio" type="text" id="bio">{{form.bio}}</b-form-input></td><br></tr>
+            <tr><td>Web site:</td>
+            <td><b-form-input v-model="form.webSite" type="phone" id="webSite">{{form.webSite}}</b-form-input></td></tr>
+            <tr>
+            <td>Gender:</td>
+              <td><b-form-radio-group
+                v-model="form.userGender"
+                :options="genderOpts"
+                class="mb-3"
+                value-field="value"
+                text-field="text"
+                disabled-field="notEnabled"
+              ></b-form-radio-group></td>
+            </tr>
+            <tr><td>Birth date:</td>
+            <td><b-form-input v-model="form.birthDate" value="form.birthDate" type="date" id="birthDate"></b-form-input></td></tr>
+            <tr><td>Email:</td>
+            <td><b-form-input v-model="form.email" type="email" id="email">{{form.email}}</b-form-input></td></tr>
+            <tr><td>Phone:</td>
+            <td><b-form-input v-model="form.phone" type="phone" id="phone">{{form.phone}}</b-form-input></td></tr>
+          </table>
+        
+          <b-button type="submit" variant="primary" style="width:200px;">Save changes</b-button><br>
+        </b-form>
+      </b-tab>
+      <b-tab title="Change Password"><b-card-text><h1>Change Password</h1></b-card-text>
+        <b-form @submit.prevent="resetPass" @reset="onReset">
+            <table class="w-100 py-2">
+              <tr><td>Current password:</td>
+              <b-form-input v-model="resetPassword.oldPassword" type="password" id="pass" required>{{resetPassword.oldPassword}}</b-form-input></tr>
+              <tr><td>New password:</td>
+              <b-form-input v-model="resetPassword.password" type="password" id="newPass">{{resetPassword.password}}</b-form-input></tr>
+              <tr><td>Repeat new password:</td>
+              <b-form-input v-model="resetPassword.repeatPassword" type="password" id="newPassRepeat">{{resetPassword.repeatPassword}}</b-form-input></tr>
+            </table>
+          
+          <br><b-button type="submit" variant="primary" style="width:200px;">Change</b-button><br>
+        </b-form>
+      </b-tab>
+      <b-tab title="Privacy"><b-card-text><h1>Privacy</h1></b-card-text>
+        <div style="text-align: left">
+          <div>
+            <h3>Account privacy</h3>
+            <b-form-checkbox
+              id="publicAcc"
+              v-model="form.publicProfile"
+              name="publicAcc"
+              value=true
+              unchecked-value=false>
+              Public profile
+            </b-form-checkbox>
+            <br>
+            <small class="optDesc">
+              By choosing this option, your photos and videos will be visible to anyone on Internet.<br>
+              If you disable it, your content will be shared only with your followers
+            </small>
+          </div>
+          <hr>
+          <div>
+            <h3>Messaging</h3>
+            <b-form-checkbox
+              id="publicMessage"
+              v-model="form.publicDM"
+              name="publicMessage"
+              value=true
+              unchecked-value=false>
+              Public Messaging
+            </b-form-checkbox>
+            <br>
+            <small class="optDesc">
+              By choosing this option, you allow any user to send you a message (even if they aren't follwing you)<br>
+              If you disable it, only your followers will be able to message you.
+            </small>
+          </div>
+          <hr>
+          <div>
+            <h3>Tagging</h3>
+            <b-form-checkbox
+              id="tagging"
+              v-model="form.taggable"
+              name="tagging"
+              value=true
+              unchecked-value=false>
+              Taggable profile
+            </b-form-checkbox>
+            <br>
+            <small class="optDesc">
+              By choosing this option, you allow any user to reference you in posts, comments and tag you on posts and stories (even if they aren't follwing you)<br>
+              If you disable it, no one could reference or tag you.
+            </small>
+          </div>
+        </div>
+        <br>
+        <b-button type="submit" variant="primary" style="width:200px;">Save changes</b-button><br>
+      </b-tab>
+    </b-tabs>
+  </b-card>
+</div>
 </template>
 
 <script>
@@ -33,6 +120,12 @@ export default {
       return {
         username: getUsernameFromToken(),
         form: '',
+        resetPassword: {oldPassword:'', password:'', repeatPassword:''},
+        genderOpts:[
+          { text: 'Male', value: 'MALE' },
+          { text: 'Female', value: 'FEMALE' },
+          { text: 'Other', value: 'OTHER' }
+        ],
         show: true
       }
   },
@@ -84,6 +177,10 @@ export default {
           this.show = true
         })
       },
+
+      resetPass(){
+
+      },
       makeToast(message, variant) {
       this.$bvToast.toast(message, {
                             title: `Nistagram`,
@@ -110,9 +207,19 @@ export default {
   margin: auto;
   margin-top: 40px;
   margin-bottom: 40px;
-  width: 25%;
+  width: 80%;
   border: 3px solid lightblue;
-  padding: 50px;
+  padding: 20px;
+}
+
+.optDesc{
+  font-family: cursive;
+  color: grey;
+}
+
+td{
+  padding-top: 10px;
+  padding-bottom: 10px
 }
 
 </style>
