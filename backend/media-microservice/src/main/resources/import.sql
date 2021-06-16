@@ -86,29 +86,29 @@ insert into media_hashtags (media_id, hashtags_id) values (10, 1);
 ---
 
 -- LIKES
-insert into likes(username, liked, timestamp) values ("masa", true, "2021-06-01");
+insert into likes(username, liked, timestamp) values ("masa", true, "2021-06-01", 1);
 insert into post_likes(post_id, likes_id) values (1, 1);
-insert into likes(username, liked, timestamp) values ("maja", true, "2021-06-03");
+insert into likes(username, liked, timestamp) values ("maja", true, "2021-06-03", 1);
 insert into post_likes(post_id, likes_id) values (1, 2);
-insert into likes(username, liked, timestamp) values ("gojko", true, "2021-06-06");
+insert into likes(username, liked, timestamp) values ("gojko", true, "2021-06-06", 2);
 insert into post_likes(post_id, likes_id) values (2, 3);
-insert into likes(username, liked, timestamp) values ("maja", true, "2021-06-03");
+insert into likes(username, liked, timestamp) values ("maja", true, "2021-06-03", 3);
 insert into post_likes(post_id, likes_id) values (3, 4);
-insert into likes(username, liked, timestamp) values ("masa", true, "2021-06-03");
+insert into likes(username, liked, timestamp) values ("masa", true, "2021-06-03", 4);
 insert into post_likes(post_id, likes_id) values (4, 5);
-insert into likes(username, liked, timestamp ) values ("tasa", true, "2021-06-03");
+insert into likes(username, liked, timestamp ) values ("tasa", true, "2021-06-03", 4);
 insert into post_likes(post_id, likes_id) values (4, 6);
-insert into likes(username, liked, timestamp) values ("gojko", true, "2021-06-05");
+insert into likes(username, liked, timestamp) values ("gojko", true, "2021-06-05", 4);
 insert into post_likes(post_id, likes_id) values (4, 7);
-insert into likes(username, liked, timestamp) values ("masa", true, "2021-06-08");
+insert into likes(username, liked, timestamp) values ("masa", true, "2021-06-08", 5);
 insert into post_likes(post_id, likes_id) values (5, 8);
-insert into likes(username, liked, timestamp) values ("tasa", true, "2021-06-09");
+insert into likes(username, liked, timestamp) values ("tasa", true, "2021-06-09", 5);
 insert into post_likes(post_id, likes_id) values (5, 9);
-insert into likes(username, liked, timestamp) values ("maja", true, "2021-05-25");
+insert into likes(username, liked, timestamp) values ("maja", true, "2021-05-25", 6);
 insert into post_likes(post_id, likes_id) values (6, 10);
-insert into likes(username, liked, timestamp) values ("masa", true, "2021-05-25");
+insert into likes(username, liked, timestamp) values ("masa", true, "2021-05-25", 6);
 insert into post_likes(post_id, likes_id) values (6, 11);
-insert into likes(username, liked, timestamp) values ("gojko", true, "2021-05-27");
+insert into likes(username, liked, timestamp) values ("gojko", true, "2021-05-27", 6);
 insert into post_likes(post_id, likes_id) values (6, 12);
 -----
 
