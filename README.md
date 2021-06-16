@@ -17,9 +17,9 @@ Social network for sharing photos and videos
 | Proxy-server | 8762 | Zuul handles all the requests and performs the dynamic routing of microservice applications. |
 | Front service | 3000 | Frontend for Nistagram |
 | Gateway | 3030 | ... | 
-| Authentication-microservice | 3031 | https://localhost:8762/authentication-api/ |
-| User-microservice | 3032 | https://localhost:8762/user-api/ |
-| Media-microservice | 3033 | https://localhost:8762/media-api/ |
+| Authentication-microservice | 3031 | http://localhost:8762/authentication-api/ |
+| User-microservice | 3032 | http://localhost:8762/user-api/ |
+| Media-microservice | 3033 | http://localhost:8762/media-api/ |
 | Campaign-microservice | 3034 | |
 | Search-microservice | 3035 | |
 
