@@ -1,6 +1,7 @@
 package com.mediamicroservice.mediamicroservice.service;
 
 import com.mediamicroservice.mediamicroservice.controller.dto.CreateLikeDto;
+import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.domain.Like;
 import com.mediamicroservice.mediamicroservice.domain.Post;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
@@ -10,6 +11,7 @@ import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +44,7 @@ public class LikeService implements ILikeService {
                         return null;
                     } else if (createLikeDto.isLiked() != like.isLiked()) {
                         like.setLiked(createLikeDto.isLiked());
+                        like.setPostId(createLikeDto.getPostId());
                         like.setTimestamp(currentDate);
                         likeRepository.save(like);
                         return null;
@@ -53,6 +56,7 @@ public class LikeService implements ILikeService {
         newLike.setLiked(createLikeDto.isLiked());
         newLike.setUsername(createLikeDto.getUsername());
         newLike.setTimestamp(currentDate);
+        newLike.setPostId(createLikeDto.getPostId());
         Logger.infoDb("Try to save like: " + newLike.getId());
         likeRepository.save(newLike);
         Logger.infoDb("Like: " + newLike.getId() + " has been saved.");
@@ -82,8 +86,15 @@ public class LikeService implements ILikeService {
 
     //TODO: mozda da se vraca bas slika a ne naziv
     @Override
-    public List<Like> history(String username) {
+    public List<ImageBytesDto> history(String username) {
         Logger.infoDb("Try to find likes by username: " + username);
-        return likeRepository.findLikesByUsername(username);
+        List<Like> likedPosts = likeRepository.findLikesByUsername(username);
+        List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
+        for(Like like : likedPosts){
+            Post post = postService.getById(like.getPostId());
+            ImageBytesDto imageBytesDto = postService.getImageFile(post);
+            imageBytesDtos.add(imageBytesDto);
+        }
+        return imageBytesDtos;
     }
 }

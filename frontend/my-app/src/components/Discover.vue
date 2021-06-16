@@ -7,6 +7,7 @@
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
             <h4>@{{img.username}}</h4>
+            <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
             <p style="color:blue">{{img.location.name}}</p>
             <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
             <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
@@ -58,6 +59,7 @@ export default {
             user: '',
             username:'',
             info: [{
+              location:{name:''},
               numLikes:'',
               numDislikes:'',
               liked: false,
