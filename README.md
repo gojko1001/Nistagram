@@ -16,7 +16,6 @@ Social network for sharing photos and videos
 | Eureka-server | 8761 | Eureka for service discovery in the microservice environment. |
 | Proxy-server | 8762 | Zuul handles all the requests and performs the dynamic routing of microservice applications. |
 | Front service | 3000 | Frontend for Nistagram |
-| Gateway | 3030 | ... | 
 | Authentication-microservice | 3031 | http://localhost:8762/authentication-api/ |
 | User-microservice | 3032 | http://localhost:8762/user-api/ |
 | Media-microservice | 3033 | http://localhost:8762/media-api/ |
