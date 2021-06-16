@@ -47,7 +47,7 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.put('https://localhost:8762/authentication-api/userCredentials/reset_password/' + this.jwt, this.form)
+        this.axios.put('http://localhost:8762/authentication-api/userCredentials/reset_password/' + this.jwt, this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("Password changed successfully.", "success");
                                       window.location.href = "/";

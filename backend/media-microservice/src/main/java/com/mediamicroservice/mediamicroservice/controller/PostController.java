@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin(origins = "https://localhost:3000")
 public class PostController {
 
     @Autowired
@@ -54,7 +55,7 @@ public class PostController {
 
     @GetMapping("/discover/{username}")
     public ResponseEntity getDiscoverImages(@PathVariable("username") String username) {
-        Logger.info("Get discover images.", username);
+        //Logger.info("Get discover images.", username);
         List<Post> discoverPosts = postService.getPublicPosts();
         // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
         // TODO: clean code

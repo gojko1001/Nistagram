@@ -181,8 +181,14 @@ public class PostService implements IPostService {
     public List<Post> getPublicPosts() {
         List<Post> posts = findAll();
         List<String> usernames = userConnection.getPublicUsers();
-
-        return filterPublicPostByUsernames(usernames, posts);
+        List<Post> postsToShow = new ArrayList<>();
+        for(String username : usernames){
+            List<Post> userPosts = postRepository.findPostsByMedia_Username(username);
+            for(Post post : userPosts){
+                postsToShow.add(post);
+            }
+        }
+        return postsToShow;
     }
 
     private List<String> getUsernamesByPost(List<Post> posts) {

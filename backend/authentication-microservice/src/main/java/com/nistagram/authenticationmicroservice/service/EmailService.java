@@ -18,7 +18,7 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String mailSender;
 
-    private String verifyUrl = "https://localhost:8762/authentication-api/userCredentials/verify/";
+    private String verifyUrl = "http://localhost:8762/authentication-api/userCredentials/verify/";
     @Autowired
     private JwtService jwtService;
 

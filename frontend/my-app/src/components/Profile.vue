@@ -163,7 +163,9 @@
                         </div>
                     </b-tab>
                     <!-- Liked posts -->
-                    <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
+                    <b-tab title="Liked posts">
+                        
+                    </b-tab>
                     <!-- Story archived -->
                     <b-tab title="Story archive">
                         <div v-for="(img,j) in archivedStories" :key="j">
@@ -241,7 +243,8 @@ export default {
             relationDto: {
                 username: '',
                 relatedUsername: ''
-            }
+            },
+            history
         }
     },
     mounted: function(){
@@ -440,7 +443,15 @@ export default {
                     }).catch(err => {
                         this.makeToast(err.message, "danger");
                     })
-        }
+        },
+        historyOfLikedPosts(){
+            this.axios.get('/media-api/like/history/' + this.username)
+                        .then(response => { this.history = response.data;
+                                             
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
     }
 }
 </script>

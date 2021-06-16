@@ -84,6 +84,7 @@ public class LikeService implements ILikeService {
     @Override
     public List<Like> history(String username) {
         Logger.infoDb("Try to find likes by username: " + username);
+        //<Like> likedPosts = likeRepository.findLikesByUsername(username);
         return likeRepository.findLikesByUsername(username);
     }
 }
