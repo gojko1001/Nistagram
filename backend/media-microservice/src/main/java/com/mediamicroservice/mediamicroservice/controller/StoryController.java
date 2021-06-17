@@ -1,5 +1,6 @@
 package com.mediamicroservice.mediamicroservice.controller;
 
+import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.domain.Story;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IStoryRepository;
@@ -7,10 +8,7 @@ import com.mediamicroservice.mediamicroservice.service.interfaces.IStoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,11 +22,11 @@ public class StoryController {
 
     private static String uploadDir = "user-photos";
 
-    /*@PostMapping("/info")
-    public Story saveImageInfo(@RequestBody MediaDto imageDto) {
-        Logger.info("Save image info: " + imageDto.getFileName(), imageDto.getUsername());
-        return storyService.saveImageInfo(imageDto);
-    }*/
+    @PostMapping("/info")
+    public ResponseEntity saveImageInfo(@RequestBody MediaDto mediaDto) {
+        Logger.info("Save image info.", mediaDto.getUsername());
+        return storyService.saveImageInfo(mediaDto);
+    }
 
     @GetMapping("/archive/{username}")
     public ResponseEntity getArchivedStoriesByUsername(@PathVariable("username") String username) {

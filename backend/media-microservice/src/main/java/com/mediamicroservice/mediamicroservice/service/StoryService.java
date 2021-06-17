@@ -3,19 +3,22 @@ package com.mediamicroservice.mediamicroservice.service;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.StoryBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.mapping.StoryMapper;
-import com.mediamicroservice.mediamicroservice.domain.Location;
-import com.mediamicroservice.mediamicroservice.domain.Media;
-import com.mediamicroservice.mediamicroservice.domain.Story;
+import com.mediamicroservice.mediamicroservice.domain.*;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
+import com.mediamicroservice.mediamicroservice.repository.IAlbumRepository;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IStoryRepository;
+import com.mediamicroservice.mediamicroservice.service.interfaces.IAlbumService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IStoryService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.xml.ws.Response;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,6 +36,8 @@ public class StoryService implements IStoryService {
     private IHashtagService hashtagService;
     @Autowired
     private IMediaRepository mediaRepository;
+    @Autowired
+    private IAlbumService albumService;
 
     private static String uploadDir = "user-photos";
 
@@ -49,23 +54,35 @@ public class StoryService implements IStoryService {
     }
 
     @Override
-    public Story saveImageInfo(MediaDto imageDto) {
-        Story story = new Story();
-        Media media = new Media();
-        //media.setFileName(imageDto.getFileName());
-        /*if (imageDto.getFileName().contains(".mp4")) {
-            media.setImage(false);
-        }*/
-        media.setUsername(imageDto.getUsername());
-        media.setDescription(imageDto.getDescription());
-        Location location = locationService.findByName(imageDto.getLocationName());
-        media.setLocation(location);
-        media.setHashtags(hashtagService.createTags(imageDto.getTags()));
-        media.setTimestamp(new Date());
-        Logger.infoDb("Try to save media: " + media.getFileName());
-        mediaRepository.save(media);
-        story.setMedia(media);
-        return save(story);
+    public ResponseEntity saveImageInfo(MediaDto imageDto) {
+        Long albumId = null;
+        if(imageDto.getFileNames().size() > 1){
+            Album album = new Album();
+            albumService.save(album);
+            albumId = album.getId();
+        }
+        for(String fileName : imageDto.getFileNames()){
+            Story story = new Story();
+            Media media = new Media();
+            media.setFileName(fileName);
+            if (fileName.contains(".mp4")) {
+                media.setImage(false);
+            }
+            media.setUsername(imageDto.getUsername());
+            media.setDescription(imageDto.getDescription());
+            Location location = locationService.findByName(imageDto.getLocationName());
+            media.setLocation(location);
+            if(albumId != null){
+                media.setAlbum(albumService.findAlbumById(albumId));
+            }
+            media.setHashtags(hashtagService.createTags(imageDto.getTags()));
+            media.setTimestamp(new Date());
+            Logger.infoDb("Try to save media: " + media.getFileName());
+            mediaRepository.save(media);
+            story.setMedia(media);
+            save(story);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Override

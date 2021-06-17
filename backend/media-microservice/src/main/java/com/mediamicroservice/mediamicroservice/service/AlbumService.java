@@ -17,4 +17,7 @@ public class AlbumService implements IAlbumService {
     public Album save(Album album) {
         return albumRepository.save(album);
     }
+
+    @Override
+    public Album findAlbumById(Long id){return albumRepository.findAlbumById(id);}
 }
