@@ -31,16 +31,18 @@ public class HashtagService implements IHashtagService {
 
     @Override
     public List<Hashtag> createTags(List<String> tags) {
-        List<Hashtag> tagDb = new ArrayList<>();
+        List<Hashtag> hashtags = new ArrayList<>();
         for (String t : tags) {
-            if (tagRepository.findByName(t) == null) {
-                Hashtag tag = new Hashtag();
-                tag.setName(t.toLowerCase());
-                create(tag);
-                tagDb.add(tag);
+            Hashtag hashtag = tagRepository.findByName(t);
+            if (hashtag == null) {
+                Hashtag newHashtag = new Hashtag();
+                newHashtag.setName(t.toLowerCase());
+                create(newHashtag);
+                hashtag = newHashtag;
             }
+            hashtags.add(hashtag);
         }
-        return tagDb;
+        return hashtags;
     }
 
 }

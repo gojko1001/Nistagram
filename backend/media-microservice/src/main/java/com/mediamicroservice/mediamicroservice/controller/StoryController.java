@@ -5,15 +5,11 @@ import com.mediamicroservice.mediamicroservice.domain.Story;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IStoryRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IStoryService;
-import com.mediamicroservice.mediamicroservice.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,18 +22,10 @@ public class StoryController {
 
     private static String uploadDir = "user-photos";
 
-    @PostMapping
-    public String saveImage(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-        Logger.info("Save image: " + multipartFile.getOriginalFilename(), "");
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename().replaceAll("\\s", ""));       //TODO: slucaj sa istim nazivima
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        return fileName;
-    }
-
     @PostMapping("/info")
-    public Story saveImageInfo(@RequestBody MediaDto imageDto) {
-        Logger.info("Save image info: " + imageDto.getFileName(), imageDto.getUsername());
-        return storyService.saveImageInfo(imageDto);
+    public ResponseEntity saveImageInfo(@RequestBody MediaDto mediaDto) {
+        Logger.info("Save image info.", mediaDto.getUsername());
+        return storyService.saveImageInfo(mediaDto);
     }
 
     @GetMapping("/archive/{username}")

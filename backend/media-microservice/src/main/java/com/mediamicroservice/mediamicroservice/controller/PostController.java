@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin(origins = "https://localhost:3000")
 public class PostController {
 
     @Autowired
@@ -28,19 +30,23 @@ public class PostController {
     private static String uploadDir = "user-photos";
 
     @PostMapping
-    public String saveImage(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+    public List<String> saveImage(@RequestParam("file") List<MultipartFile> multipartFiles) throws IOException {
         Logger.info("Save image.", "");
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename().replaceAll("\\s", ""));       //TODO: slucaj sa istim nazivima
-        uploadDir = "user-photos";
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        return fileName;
+        List<String> fileNames = new ArrayList<>();
+        for(MultipartFile mf : multipartFiles){
+            String fileName = StringUtils.cleanPath(mf.getOriginalFilename().replaceAll("\\s", ""));
+            uploadDir = "user-photos";
+            FileUploadUtil.saveFile(uploadDir, fileName, mf);
+            fileNames.add(fileName);
+        }
+        return fileNames;
     }
 
 
     @PostMapping("/info")
-    public Post saveImageInfo(@RequestBody MediaDto imageDto) {
-        Logger.info("Save image info.", imageDto.getUsername());
-        return postService.saveImageInfo(imageDto);
+    public ResponseEntity saveImageInfo(@RequestBody MediaDto mediaDto) {
+        Logger.info("Save image info.", mediaDto.getUsername());
+        return postService.saveImageInfo(mediaDto);
     }
 
 
@@ -54,7 +60,7 @@ public class PostController {
 
     @GetMapping("/discover/{username}")
     public ResponseEntity getDiscoverImages(@PathVariable("username") String username) {
-        Logger.info("Get discover images.", username);
+        //Logger.info("Get discover images.", username);
         List<Post> discoverPosts = postService.getPublicPosts();
         // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
         // TODO: clean code

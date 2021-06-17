@@ -43,11 +43,9 @@
         <div class="vl"></div>
         <div v-if="isFollowing || isUserProfile" id="userMedia">
             <div id="stories">
-                <b-button v-b-modal.modal-2 style="font-size:25px;">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <b-button v-b-modal.modal-2 style="font-size:25px;" @click="getStories()">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
-                    <button>
-                        <i class="fas fa-user-friends"></i>
-                    </button>
                      <div v-for="(img,p) in stories" :key="p">
                             <b-card
                                 tag="article"
@@ -55,10 +53,14 @@
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+
+                                <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+
                                 <br>
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
@@ -82,11 +84,17 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
+                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+                                
+                                <div v-for="(img, a) in img.imageBytes" :key="'P'+a">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+                                
+
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
@@ -117,7 +125,7 @@
                         </div>
                     </b-tab>
                     <!-- Collections -->
-                    <b-tab title="Collections">
+                    <b-tab title="Collections" @click="getCollections()">
                         <div v-for="(coll,c) in collections" :key="c">
                             <p style="font-size:30px">{{coll.name}}:</p>
                             <div v-for="(img,i) in coll.favourites" :key="i">
@@ -126,11 +134,15 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
+                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+
+                                <div v-for="(img, q) in img.imageBytes" :key="'C'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
@@ -163,20 +175,68 @@
                         </div>
                     </b-tab>
                     <!-- Liked posts -->
-                    <b-tab title="Liked posts"><p>Liked posts</p></b-tab>
+                    <b-tab title="Liked posts" @click="historyOfLikedPosts()">
+                        <div v-for="(img,u) in history" :key="u">
+                            <b-card
+                                tag="article"
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
+                                class="mb-2">
+                                <h4>@{{img.username}}</h4>
+                                <h6 style="margin-top:-30px; margin-left: 350px">Reacted on <br>{{img.date | formatDate}}</h6>
+                                <p style="color:blue">{{img.location.name}}</p>
+                                <div v-for="(img, q) in img.imageBytes" :key="'L'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+                                <br>
+                                <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
+                                    <i class="fas fa-thumbs-up"></i>
+                                </button>
+                                <span>{{img.numLikes}}</span>
+                                <button class="heart inter" v-bind:class="{'black': !img.disliked, 'red': img.disliked}" @click="likePost(img.id, false)" style="margin-left:20px">
+                                    <i class="fas fa-thumbs-down"></i>
+                                </button>
+                                <span>{{img.numDislikes}}</span>
+                                <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
+                                    <i class="far fa-comment"></i>
+                                </router-link>
+                                <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:250px">
+                                    <i class="fas fa-bookmark"></i>
+                                </router-link>
+                                <b-card-text>
+                                    <span><b>{{img.username}}:  </b></span>{{img.description}}
+                                    <br>
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
+                                        #{{tag.name}}
+                                    </span>
+                                </b-card-text>
+                                <hr>
+                                <span v-for="(comm,c) in img.comments" :key="c">
+                                    <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                                </span>
+                            </b-card>              
+                        </div>
+                    </b-tab>
                     <!-- Story archived -->
-                    <b-tab title="Story archive">
+                    <b-tab title="Story archive" @click="getArchivedStories()">
                         <div v-for="(img,j) in archivedStories" :key="j">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
+                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+
+                                <div v-for="(img, q) in img.imageBytes" :key="'SA'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+
                                 <br>
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
@@ -213,12 +273,25 @@ export default {
             user: '',
             username: this.$route.params.pUsername,
             info: [{
+                username:'',
+                location:{name:''},
+                imageBytes:[{
+                    imageByte:'',
+                    image:''
+                }],
                 numLikes:'',
                 numDislikes:'',
                 liked: false,
                 disliked: false
             }],
             favourites: [{
+                username:'',
+                location:{ name:''},
+                comments:[],
+                likes:[],
+                imageBytes:[{
+                    imageByte:''
+                }],
                 numLikes:'',
                 numDislikes:'',
                 liked: false,
@@ -241,7 +314,21 @@ export default {
             relationDto: {
                 username: '',
                 relatedUsername: ''
-            }
+            },
+            history:[{
+                location:{name:''},
+                comments:[],
+                imageBytes:[{
+                    image:'',
+                    imageByte:''
+                }],
+                likes:[],
+                numLikes:'',
+                numDislikes:'',
+                liked: false,
+                disliked: false,
+                date:''
+            }]
         }
     },
     mounted: function(){
@@ -304,9 +391,9 @@ export default {
         getUserMedia(){
             if(this.isUserProfile){
                 this.getPosts();
-                this.getStories();
-                this.getArchivedStories();
-                this.getCollections();
+                //this.getStories();
+                //this.getArchivedStories();
+                //this.getCollections();
             }
             else if(this.user.publicProfile){
                 this.getPosts();
@@ -326,11 +413,13 @@ export default {
                     .then(response => { this.info = response.data;
                                         this.numPost = response.data.length;
                                         for(let i=0; i< response.data.length; i++){
-                                            if(this.info[i].image){
-                                              this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
-                                            }else{
-                                              this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
-                                            } 
+                                            for(let j=0; j< this.info[i].imageBytes.length; j++){
+                                                if(this.info[i].imageBytes[j].image){
+                                                    this.info[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.info[i].imageBytes[j].imageByte; 
+                                                }else{
+                                                    this.info[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.info[i].imageBytes[j].imageByte;
+                                                }
+                                            }
                                             this.info[i].numLikes = 0;
                                             this.info[i].numDislikes = 0;
                                             if(this.info[i].likes.length > 0){
@@ -358,11 +447,13 @@ export default {
             this.axios.get('/media-api/story/profile/' + this.username)
                         .then(response => { this.stories = response.data;
                                             for(let i=0; i< response.data.length; i++){
-                                                if(this.stories[i].image){
-                                                this.stories[i].imageBytes = 'data:image/jpeg;base64,' + this.stories[i].imageBytes; 
-                                                }else{
-                                                this.stories[i].imageBytes = 'data:video/mp4;base64,' + this.stories[i].imageBytes;
-                                                } 
+                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                    if(this.stories[i].imageBytes[j].image){
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                                    } 
+                                                }
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
@@ -372,11 +463,13 @@ export default {
             this.axios.get('/media-api/story/archive/' + this.username)
                         .then(response => { this.archivedStories = response.data;
                                             for(let i=0; i< response.data.length; i++){
-                                                if(this.archivedStories[i].image){
-                                                this.archivedStories[i].imageBytes = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes; 
-                                                }else{
-                                                this.archivedStories[i].imageBytes = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes;
-                                                } 
+                                                for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
+                                                    if(this.archivedStories[i].imageBytes[j].image){
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
+                                                    } 
+                                                }
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
@@ -388,25 +481,27 @@ export default {
           .then(response => {   this.collections = response.data;
                                 for(let i=0; i< this.collections.length; i++){
                                     for(let j=0; j < this.collections[i].favourites.length; j++){
-                                        if(this.collections[i].favourites[j].image){
-                                            this.collections[i].favourites[j].imageBytes = 'data:image/jpeg;base64,' + this.collections[i].favourites[j].imageBytes; 
-                                        }else{
-                                            this.collections[i].favourites[j].imageBytes = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes;
+                                        for(let p=0; p<this.collections[i].favourites[j].imageBytes.length; p++){
+                                            if(this.collections[i].favourites[j].imageBytes[p].image){
+                                            this.collections[i].favourites[j].imageBytes[p].imageByte = 'data:image/jpeg;base64,' + this.collections[i].favourites[j].imageBytes[p].imageByte; 
+                                            }else{
+                                                this.collections[i].favourites[j].imageBytes[p].imageByte = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes[p].imageByte;
+                                            }
                                         }
                                         this.collections[i].favourites[j].numLikes = 0;
                                         this.collections[i].favourites[j].numDislikes = 0;
                                         if(this.collections[i].favourites[j].likes.length > 0){
                                             for(var like of this.collections[i].favourites[j].likes){
                                                 if(like.liked){
-                                                this.favourites[i].numLikes += 1;
+                                                this.collections[i].favourites[j].numLikes += 1;
                                                 }else if(!like.liked){
-                                                this.favourites[i].numDislikes += 1;
+                                                this.collections[i].favourites[j].numDislikes += 1;
                                                 }
                                                 if(like.username == this.username){
                                                     if(like.liked){
-                                                        this.favourites[i].liked = true;
+                                                        this.collections[i].favourites[j].liked = true;
                                                     }else{
-                                                        this.favourites[i].disliked = true;
+                                                        this.collections[i].favourites[j].disliked = true;
                                                     } 
                                                 }
                                             }
@@ -440,7 +535,43 @@ export default {
                     }).catch(err => {
                         this.makeToast(err.message, "danger");
                     })
-        }
+        },
+        historyOfLikedPosts(){
+            this.axios.get('/media-api/like/history/' + this.username)
+                        .then(response => { this.history = response.data;
+                                        for(let i=0; i< response.data.length; i++){
+                                            for(let j=0; j<this.history[i].imageBytes.length; j++){
+                                                if(this.history[i].imageBytes[j].image){
+                                                    this.history[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.history[i].imageBytes[j].imageByte; 
+                                                }else{
+                                                    this.history[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.history[i].imageBytes[j].imageByte;
+                                                }
+                                            }
+                                            this.history[i].numLikes = 0;
+                                            this.history[i].numDislikes = 0;
+                                            if(this.history[i].likes.length > 0){
+                                                for(var like of this.history[i].likes){
+                                                    if(like.liked){
+                                                        this.history[i].numLikes += 1;
+                                                    }else if(!like.liked){
+                                                        this.history[i].numDislikes += 1;
+                                                    }
+                                                    if(like.username == this.username){
+                                                        if(like.liked){
+                                                            this.history[i].liked = true;
+                                                            this.history[i].date = like.timestamp
+                                                        }else{
+                                                            this.history[i].disliked = true;
+                                                            this.history[i].date = like.timestamp
+                                                        } 
+                                                    }
+                                                }
+                                            }
+                                        }         
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
     }
 }
 </script>
