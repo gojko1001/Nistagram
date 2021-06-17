@@ -16,4 +16,5 @@ public class StoryBytesDto {
     private List<Hashtag> hashtags;
     private Date timestamp;
     private List<ImageByte> imageBytes;
+    private Long mediaId;
 }

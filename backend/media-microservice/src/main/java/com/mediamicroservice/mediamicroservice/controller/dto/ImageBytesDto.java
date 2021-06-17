@@ -25,4 +25,5 @@ public class ImageBytesDto {
     private List<Comment> comments;
     private List<Like> likes;
     private List<ImageByte> imageBytes;
+    private Long mediaId;
 }
