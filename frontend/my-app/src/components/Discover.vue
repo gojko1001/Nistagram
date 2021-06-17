@@ -9,10 +9,14 @@
             <h4>@{{img.username}}</h4>
             <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
             <p style="color:blue">{{img.location.name}}</p>
-            <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-            <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-              The video is not supported by your browser.
-            </video>
+
+            <div v-for="(img, q) in img.imageBytes" :key="'D'+q">
+                <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                    The video is not supported by your browser.
+                </video>
+            </div>
+
             <br>
             <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
@@ -60,6 +64,10 @@ export default {
             username:'',
             info: [{
               location:{name:''},
+              imageBytes:[{
+                image:'',
+                imageByte:''
+              }],
               numLikes:'',
               numDislikes:'',
               liked: false,
@@ -91,29 +99,31 @@ export default {
       this.axios.get('/media-api/image/discover/' + this.username)
                   .then(response => { this.info = response.data;
                                       for(let i=0; i< response.data.length; i++){
-                                          if(this.info[i].image){
-                                            this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
+                                        for(let j=0; j<this.info[i].imageBytes.length; j++){
+                                          if(this.info[i].imageBytes[j].image){
+                                            this.info[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.info[i].imageBytes[j].imageByte; 
                                           }else{
-                                            this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
+                                            this.info[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.info[i].imageBytes[j].imageByte;
                                           }
-                                          this.info[i].numLikes = 0;
-                                          this.info[i].numDislikes = 0;
-                                          if(this.info[i].likes.length > 0){
-                                              for(var like of this.info[i].likes){
-                                                  if(like.liked){
-                                                    this.info[i].numLikes += 1;
-                                                  }else if(!like.liked){
-                                                    this.info[i].numDislikes += 1;
-                                                  }
-                                                  if(like.username == this.username){
-                                                      if(like.liked){
-                                                          this.info[i].liked = true;
-                                                      }else{
-                                                          this.info[i].disliked = true;
-                                                      } 
-                                                  }
-                                              }
-                                          }
+                                        }
+                                        this.info[i].numLikes = 0;
+                                        this.info[i].numDislikes = 0;
+                                        if(this.info[i].likes.length > 0){
+                                            for(var like of this.info[i].likes){
+                                                if(like.liked){
+                                                  this.info[i].numLikes += 1;
+                                                }else if(!like.liked){
+                                                  this.info[i].numDislikes += 1;
+                                                }
+                                                if(like.username == this.username){
+                                                    if(like.liked){
+                                                        this.info[i].liked = true;
+                                                    }else{
+                                                        this.info[i].disliked = true;
+                                                    } 
+                                                }
+                                            }
+                                        }
                                       }  
                   }).catch(error => { console.log(error);
                                       this.makeToast("Error occurred.", "danger");

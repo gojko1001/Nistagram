@@ -9,10 +9,14 @@
             <h4>@{{img.username}}</h4>
             <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
             <p style="color:blue">{{img.location.name}}</p>
-            <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-            <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-              The video is not supported by your browser.
-            </video>
+
+            <div v-for="(img, q) in img.imageBytes" :key="'D'+q">
+                <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                    The video is not supported by your browser.
+                </video>
+            </div>
+
             <br>
             <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
@@ -78,6 +82,10 @@ export default {
             username:'',
             img: {
               location:{},
+              imageBytes:[{
+                image:'',
+                imageByte:''
+              }],
               numLikes:'',
               numDislikes:'',
               liked: false,
@@ -106,11 +114,14 @@ export default {
     this.username = getUsernameFromToken();
     this.axios.get('/media-api/image/' + this.postId)
         .then(response => { this.img = response.data;
-                            if(this.img.image){
-                              this.img.imageBytes = 'data:image/jpeg;base64,' + this.img.imageBytes; 
-                            }else{
-                              this.img.imageBytes = 'data:video/mp4;base64,' + this.img.imageBytes;
+                            for(let i=0; i<this.img.imageBytes.length; i++){
+                              if(this.img.imageBytes[i].image){
+                                this.img.imageBytes[i].imageByte = 'data:image/jpeg;base64,' + this.img.imageBytes[i].imageByte; 
+                              }else{
+                                this.img.imageBytes[i].imageByte = 'data:video/mp4;base64,' + this.img.imageBytes[i].imageByte;
+                              }
                             }
+                            
                             this.img.numLikes = 0;
                             this.img.numDislikes = 0;
                             if(this.img.likes.length > 0){

@@ -10,7 +10,7 @@
           ></b-form-radio-group>
       <br><br>
         <form ref="uploadForm" @submit.prevent="submit">
-          <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required>
+          <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required multiple>
           <input type="button" @click="startupload" name="Upload" value="Upload" />
           <br><br>
           <b-form-input
@@ -48,7 +48,7 @@ export default {
       return {
         form: {
           username: '',
-          fileName: '',
+          fileNames: [],
           description:'',
           tags:[],
           locationName:'',
@@ -68,6 +68,7 @@ export default {
         description:'',
         value: [],
         formData:null,
+        filesForm: [{}]
       }
     },
   mounted: function(){
@@ -104,9 +105,11 @@ export default {
                             })
       },
       onImageUpload(){
-        let file = this.$refs.uploadImage.files[0];
         this.formData = new FormData();
-        this.formData.append("file", file);
+        for(var i=0; i<this.$refs.uploadImage.files.length; i++){
+          let file = this.$refs.uploadImage.files[i];
+          this.formData.append("file", file);
+        }
       },
       startupload(){
         this.axios.post('/media-api/image', this.formData, {
@@ -115,7 +118,7 @@ export default {
             'Content-Type':'multipart/form-data'
           }
         }).then(response => {
-          this.form.fileName = response.data;
+          this.form.fileNames = response.data;
           this.makeToast("Image has been uploaded.", "success");
           this.imageHasBeenUploaded = true;
         })
@@ -145,6 +148,12 @@ export default {
         }else{
           this.makeToast("Please upload image.", "danger");
         }
+      },
+      addField(value, fieldType) {
+        fieldType.push({ value: "" });
+      },
+      removeField(index, fieldType) {
+        fieldType.splice(index, 1);
       },
     },
 }
