@@ -39,9 +39,9 @@ public class PostController {
 
 
     @PostMapping("/info")
-    public Post saveImageInfo(@RequestBody MediaDto imageDto) {
-        Logger.info("Save image info.", imageDto.getUsername());
-        return postService.saveImageInfo(imageDto);
+    public Post saveImageInfo(@RequestBody MediaDto mediaDto) {
+        Logger.info("Save image info.", mediaDto.getUsername());
+        return postService.saveImageInfo(mediaDto);
     }
 
 

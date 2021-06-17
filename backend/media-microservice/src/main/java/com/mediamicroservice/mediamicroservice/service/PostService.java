@@ -84,6 +84,7 @@ public class PostService implements IPostService {
         media.setLocation(location);
         media.setHashtags(tagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
+        media.setAlbum(media.getAlbum());
         mediaRepository.save(media);
         post.setMedia(media);
         return save(post);
