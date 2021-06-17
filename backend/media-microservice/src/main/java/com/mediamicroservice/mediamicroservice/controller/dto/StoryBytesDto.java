@@ -14,7 +14,7 @@ public class StoryBytesDto {
     private String description;
     private Location location;
     private List<Hashtag> hashtags;
-    private boolean isImage;
-    private List<byte[]> imageBytes;
     private Date timestamp;
+    private List<ImageByte> imageBytes;
+    private Long mediaId;
 }
