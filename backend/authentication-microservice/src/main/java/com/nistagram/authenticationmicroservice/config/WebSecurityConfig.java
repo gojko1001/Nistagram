@@ -62,10 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userCredentials/verify/{username}").permitAll()
                 .antMatchers("/userCredentials/login").permitAll()
                 .antMatchers("/userCredentials/login_google").permitAll()
-                .antMatchers("**/user/add").permitAll()
-                .antMatchers("/userCredentials/**").permitAll()
                 .antMatchers("/userCredentials/add").permitAll()
                 .antMatchers("/userCredentials/send_email/{email}").permitAll()
+                .antMatchers("**/user/add").permitAll()
                 .antMatchers("**/user/**").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()

@@ -7,12 +7,15 @@ import java.util.Date;
 
 @Data
 public class UserDto {
+    private String username;
     private String fullName;
     private String email;
     private String phone;
-    private Gender userGender;
-    private Date birthDate;
-    private String username;
     private String webSite;
     private String bio;
+    private Date birthDate;
+    private Gender userGender;
+    private boolean publicProfile;
+    private boolean publicDM;
+    private boolean taggable;
 }
