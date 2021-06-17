@@ -23,7 +23,8 @@ public class ImageBytesDto {
     private Date timestamp;
     private List<Hashtag> hashtags;
     private List<Comment> comments;
-    private boolean isImage;
+    //private boolean isImage;
     private List<Like> likes;
-    private List<byte[]> imageBytes;
+    //private List<byte[]> imageBytes;
+    private List<ImageByte> imageBytes;
 }

@@ -1,6 +1,6 @@
 package com.mediamicroservice.mediamicroservice.controller.dto;
 
-import com.mediamicroservice.mediamicroservice.domain.Album;
+import com.mediamicroservice.mediamicroservice.domain.MediaName;
 import lombok.Data;
 
 import java.util.List;
@@ -12,5 +12,5 @@ public class MediaDto {
     private String description;
     private String locationName;
     private List<String> tags;
-    private Album album;
+    private MediaName mediaName;
 }

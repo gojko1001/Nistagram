@@ -81,10 +81,15 @@
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+                                
+                                <div v-for="(img, a) in img.imageBytes" :key="'P'+a">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+                                
+
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
@@ -126,10 +131,13 @@
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+
+                                <div v-for="(img, q) in img.imageBytes" :key="'C'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
@@ -171,10 +179,12 @@
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 350px">Reacted on <br>{{img.date | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+                                <div v-for="(img, q) in img.imageBytes" :key="'L'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
@@ -256,6 +266,10 @@ export default {
             info: [{
                 username:'',
                 location:{name:''},
+                imageBytes:[{
+                    imageByte:'',
+                    image:''
+                }],
                 numLikes:'',
                 numDislikes:'',
                 liked: false,
@@ -266,6 +280,9 @@ export default {
                 location:{ name:''},
                 comments:[],
                 likes:[],
+                imageBytes:[{
+                    imageByte:''
+                }],
                 numLikes:'',
                 numDislikes:'',
                 liked: false,
@@ -292,6 +309,10 @@ export default {
             history:[{
                 location:{name:''},
                 comments:[],
+                imageBytes:[{
+                    image:'',
+                    imageByte:''
+                }],
                 likes:[],
                 numLikes:'',
                 numDislikes:'',
@@ -383,11 +404,13 @@ export default {
                     .then(response => { this.info = response.data;
                                         this.numPost = response.data.length;
                                         for(let i=0; i< response.data.length; i++){
-                                            if(this.info[i].image){
-                                              this.info[i].imageBytes = 'data:image/jpeg;base64,' + this.info[i].imageBytes; 
-                                            }else{
-                                              this.info[i].imageBytes = 'data:video/mp4;base64,' + this.info[i].imageBytes;
-                                            } 
+                                            for(let j=0; j< this.info[i].imageBytes.length; j++){
+                                                if(this.info[i].imageBytes[j].image){
+                                                    this.info[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.info[i].imageBytes[j].imageByte; 
+                                                }else{
+                                                    this.info[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.info[i].imageBytes[j].imageByte;
+                                                }
+                                            }
                                             this.info[i].numLikes = 0;
                                             this.info[i].numDislikes = 0;
                                             if(this.info[i].likes.length > 0){
@@ -445,10 +468,12 @@ export default {
           .then(response => {   this.collections = response.data;
                                 for(let i=0; i< this.collections.length; i++){
                                     for(let j=0; j < this.collections[i].favourites.length; j++){
-                                        if(this.collections[i].favourites[j].image){
-                                            this.collections[i].favourites[j].imageBytes = 'data:image/jpeg;base64,' + this.collections[i].favourites[j].imageBytes; 
-                                        }else{
-                                            this.collections[i].favourites[j].imageBytes = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes;
+                                        for(let p=0; p<this.collections[i].favourites[j].imageBytes.length; p++){
+                                            if(this.collections[i].favourites[j].imageBytes[p].image){
+                                            this.collections[i].favourites[j].imageBytes[p].imageByte = 'data:image/jpeg;base64,' + this.collections[i].favourites[j].imageBytes[p].imageByte; 
+                                            }else{
+                                                this.collections[i].favourites[j].imageBytes[p].imageByte = 'data:video/mp4;base64,' + this.collections[i].favourites[j].imageBytes[p].imageByte;
+                                            }
                                         }
                                         this.collections[i].favourites[j].numLikes = 0;
                                         this.collections[i].favourites[j].numDislikes = 0;
@@ -502,11 +527,13 @@ export default {
             this.axios.get('/media-api/like/history/' + this.username)
                         .then(response => { this.history = response.data;
                                         for(let i=0; i< response.data.length; i++){
-                                            if(this.history[i].image){
-                                              this.history[i].imageBytes = 'data:image/jpeg;base64,' + this.history[i].imageBytes; 
-                                            }else{
-                                              this.history[i].imageBytes = 'data:video/mp4;base64,' + this.history[i].imageBytes;
-                                            } 
+                                            for(let j=0; j<this.history[i].imageBytes.length; j++){
+                                                if(this.history[i].imageBytes[j].image){
+                                                    this.history[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.history[i].imageBytes[j].imageByte; 
+                                                }else{
+                                                    this.history[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.history[i].imageBytes[j].imageByte;
+                                                }
+                                            }
                                             this.history[i].numLikes = 0;
                                             this.history[i].numDislikes = 0;
                                             if(this.history[i].likes.length > 0){
