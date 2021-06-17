@@ -34,11 +34,11 @@ public class StoryController {
         return fileName;
     }
 
-    @PostMapping("/info")
+    /*@PostMapping("/info")
     public Story saveImageInfo(@RequestBody MediaDto imageDto) {
         Logger.info("Save image info: " + imageDto.getFileName(), imageDto.getUsername());
         return storyService.saveImageInfo(imageDto);
-    }
+    }*/
 
     @GetMapping("/archive/{username}")
     public ResponseEntity getArchivedStoriesByUsername(@PathVariable("username") String username) {

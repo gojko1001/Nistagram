@@ -52,10 +52,10 @@ public class StoryService implements IStoryService {
     public Story saveImageInfo(MediaDto imageDto) {
         Story story = new Story();
         Media media = new Media();
-        media.setFileName(imageDto.getFileName());
-        if (imageDto.getFileName().contains(".mp4")) {
+        //media.setFileName(imageDto.getFileName());
+        /*if (imageDto.getFileName().contains(".mp4")) {
             media.setImage(false);
-        }
+        }*/
         media.setUsername(imageDto.getUsername());
         media.setDescription(imageDto.getDescription());
         Location location = locationService.findByName(imageDto.getLocationName());

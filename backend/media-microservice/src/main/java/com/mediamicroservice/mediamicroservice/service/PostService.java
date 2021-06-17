@@ -4,11 +4,9 @@ import com.mediamicroservice.mediamicroservice.connection.UserConnection;
 import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.controller.mapping.PostMapper;
-import com.mediamicroservice.mediamicroservice.domain.Hashtag;
-import com.mediamicroservice.mediamicroservice.domain.Location;
-import com.mediamicroservice.mediamicroservice.domain.Media;
-import com.mediamicroservice.mediamicroservice.domain.Post;
+import com.mediamicroservice.mediamicroservice.domain.*;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
+import com.mediamicroservice.mediamicroservice.repository.IAlbumRepository;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
@@ -16,6 +14,8 @@ import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationServi
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -37,6 +37,8 @@ public class PostService implements IPostService {
     private IMediaRepository mediaRepository;
     @Autowired
     private UserConnection userConnection;
+    @Autowired
+    private IAlbumRepository albumRepository;
 
 
     private static String uploadDir = "user-photos";
@@ -71,23 +73,35 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Post saveImageInfo(MediaDto imageDto) {
-        Post post = new Post();
-        Media media = new Media();
-        media.setFileName(imageDto.getFileName());
-        if (imageDto.getFileName().contains(".mp4")) {
-            media.setImage(false);
+    public ResponseEntity saveImageInfo(MediaDto imageDto) {
+        Long albumId = null;
+        if(imageDto.getFileNames().size() > 1){
+            Album album = new Album();
+            albumRepository.save(album);
+            albumId = album.getId();
         }
-        media.setUsername(imageDto.getUsername());
-        media.setDescription(imageDto.getDescription());
-        Location location = locationService.findByName(imageDto.getLocationName());
-        media.setLocation(location);
-        media.setHashtags(tagService.createTags(imageDto.getTags()));
-        media.setTimestamp(new Date());
-        media.setAlbum(media.getAlbum());
-        mediaRepository.save(media);
-        post.setMedia(media);
-        return save(post);
+        for(String fileName : imageDto.getFileNames()){
+            Post post = new Post();
+            Media media = new Media();
+            media.setFileName(fileName);
+            if (fileName.contains(".mp4")) {
+                media.setImage(false);
+            }
+            media.setUsername(imageDto.getUsername());
+            media.setDescription(imageDto.getDescription());
+            Location location = locationService.findByName(imageDto.getLocationName());
+            media.setLocation(location);
+            if(albumId != null){
+                media.setAlbum(albumRepository.findAlbumById(albumId));
+            }
+            media.setHashtags(tagService.createTags(imageDto.getTags()));
+            media.setTimestamp(new Date());
+            media.setAlbum(media.getAlbum());
+            mediaRepository.save(media);
+            post.setMedia(media);
+            save(post);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Override
