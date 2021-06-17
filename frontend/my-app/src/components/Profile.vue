@@ -44,6 +44,7 @@
         <div v-if="isFollowing || isUserProfile" id="userMedia">
             <div id="stories">
                 <b-button v-b-modal.modal-2 style="font-size:25px;" @click="getStories()">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
                      <div v-for="(img,p) in stories" :key="p">
                             <b-card
@@ -52,10 +53,14 @@
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+
+                                <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+
                                 <br>
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
@@ -224,10 +229,14 @@
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
-                                <img v-if="img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                <video autoplay controls v-if="!img.image" v-bind:src="img.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                                    The video is not supported by your browser.
-                                </video>
+
+                                <div v-for="(img, q) in img.imageBytes" :key="'SA'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+
                                 <br>
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
@@ -438,11 +447,13 @@ export default {
             this.axios.get('/media-api/story/profile/' + this.username)
                         .then(response => { this.stories = response.data;
                                             for(let i=0; i< response.data.length; i++){
-                                                if(this.stories[i].image){
-                                                this.stories[i].imageBytes = 'data:image/jpeg;base64,' + this.stories[i].imageBytes; 
-                                                }else{
-                                                this.stories[i].imageBytes = 'data:video/mp4;base64,' + this.stories[i].imageBytes;
-                                                } 
+                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                    if(this.stories[i].imageBytes[j].image){
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                                    } 
+                                                }
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
@@ -452,11 +463,13 @@ export default {
             this.axios.get('/media-api/story/archive/' + this.username)
                         .then(response => { this.archivedStories = response.data;
                                             for(let i=0; i< response.data.length; i++){
-                                                if(this.archivedStories[i].image){
-                                                this.archivedStories[i].imageBytes = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes; 
-                                                }else{
-                                                this.archivedStories[i].imageBytes = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes;
-                                                } 
+                                                for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
+                                                    if(this.archivedStories[i].imageBytes[j].image){
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
+                                                    } 
+                                                }
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
