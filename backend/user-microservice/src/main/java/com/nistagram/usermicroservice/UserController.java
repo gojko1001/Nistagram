@@ -56,7 +56,7 @@ public class UserController {
         if(username == null)
             throw new UnauthorizedException("Access denied");
         Logger.info("Try to edit user: " + username, userDto.getUsername());
-        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), username));
+        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), username, jwt));
     }
 
     @GetMapping("/search")

@@ -17,6 +17,8 @@ public interface IUserCredentialsService {
 
     UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException;
 
+    void changeUsername(String oldUsername, String newUsername);
+
     void changePassword(ResetPasswordDto resetPasswordDto, String jwt);
 
     void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) throws IOException;

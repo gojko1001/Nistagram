@@ -104,6 +104,13 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     @Override
+    public void changeUsername(String oldUsername, String newUsername){
+        UserCredentials credentials = findByUsername(oldUsername);
+        credentials.setUsername(newUsername);
+        userCredentialsRepository.save(credentials);
+    }
+
+    @Override
     public void changePassword(ResetPasswordDto resetPasswordDto, String jwt){
         String username = jwtService.extractUsername(jwt.substring(7));
         if(username == null){
@@ -123,7 +130,7 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     @Override
     public void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) {
-        if (!isPassword(resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword())) {
+        if (!resetPasswordDto.getPassword().equals(resetPasswordDto.getRepeatPassword())) {
             throw new BadRequestException("Passwords are not the same.");
         }
         blackListService.isBlacklisted(resetPasswordDto.getPassword());
@@ -152,9 +159,6 @@ public class UserCredentialsService implements IUserCredentialsService {
         return "Your account has been verified successfully";
     }
 
-    private boolean isPassword(String password1, String password2) {
-        return password1.equals(password2);
-    }
 
     private boolean passwordPatternChecker(String password) {
         Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");

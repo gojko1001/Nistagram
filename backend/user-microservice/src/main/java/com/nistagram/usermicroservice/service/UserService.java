@@ -2,6 +2,7 @@ package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.IUserRepository;
 import com.nistagram.usermicroservice.UserMapper;
+import com.nistagram.usermicroservice.connection.AuthConnection;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
@@ -20,10 +21,10 @@ import java.util.regex.Pattern;
 @Service
 public class UserService implements IUserService {
 
-    // TODO: updatePassword - authentication microservice
-
     @Autowired
     private IUserRepository userRepository;
+    @Autowired
+    private AuthConnection authConnection;
 
     public List<User> getAll() {
         Logger.infoDb("Read all users from database.");
@@ -60,7 +61,10 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(User user, String oldUsername) {
+    public User updateUser(User user, String oldUsername, String jwt) {
+        if(!checkUsername(user.getUsername())){
+            throw new BadRequestException("New username doesn't match the pattern!");
+        }
         if (userRepository.findByUsername(user.getUsername()) != null && !user.getUsername().equals(oldUsername))
             throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
         User dbUser = findUserByUsername(oldUsername);
@@ -75,7 +79,10 @@ public class UserService implements IUserService {
         dbUser.setPublicProfile(user.isPublicProfile());
         dbUser.setPublicDM(user.isPublicDM());
         dbUser.setTaggable(user.isTaggable());
-        // TODO: Change username in userCredentials table, Generate new token
+
+        if(!user.getUsername().equals(oldUsername)){
+            authConnection.changeUsername(user.getUsername(), jwt);
+        }
         return save(dbUser);
     }
 
@@ -123,9 +130,9 @@ public class UserService implements IUserService {
                 throw new AlreadyExistsException(String.format("User with username %s, already exists", userReg.getUsername()));
             if (userRepository.findByEmail(userReg.getEmail()) != null)
                 throw new AlreadyExistsException(String.format("User with email %s, already exists", userReg.getEmail()));
-            if (!checkUsername(userReg))
+            if (!checkUsername(userReg.getUsername()))
                 throw new BadRequestException("Username is in invalid format.");
-            if (!checkFullName(userReg))
+            if (!checkFullName(userReg.getFullName()))
                 throw new BadRequestException("Full name is in invalid format.");
             if (!userReg.getPassword().equals(userReg.getRepeatPassword()))
                 throw new BadRequestException("Password and repeat password are not the same.");
@@ -136,14 +143,14 @@ public class UserService implements IUserService {
         }
     }
 
-    private boolean checkUsername(UserRegistrationDto userRegistrationDto) {
+    private boolean checkUsername(String username) {
         Pattern patternUsername = Pattern.compile("^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{0,29}$");
-        return patternUsername.matcher(userRegistrationDto.getUsername()).matches();
+        return patternUsername.matcher(username).matches();
     }
 
-    private boolean checkFullName(UserRegistrationDto userRegistrationDto) {
+    private boolean checkFullName(String fullName) {
         Pattern patternFullName = Pattern.compile("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
-        return patternFullName.matcher(userRegistrationDto.getFullName()).matches();
+        return patternFullName.matcher(fullName).matches();
     }
 
     private boolean patternChecker(String email, String password) {

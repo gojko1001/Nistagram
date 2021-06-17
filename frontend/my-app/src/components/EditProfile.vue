@@ -140,9 +140,6 @@ export default {
                                                       headers:{ Authorization: "Bearer " + getToken() }                                          
             }).then(response => {
                                 this.form = response.data;
-                                // this.privacy.publicProfile = response.data.publicProfile;
-                                // this.privacy.publicDM = response.data.publicDM;
-                                // this.privacy.taggable = response.data.taggable;
                                 this.privacy = response.data;
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");

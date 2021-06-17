@@ -31,12 +31,15 @@ insert into roles (id, name) values (3, "ROLE_AGENT");
 insert into permission (id, name) values (10, "ALL_USERS");
 insert into permission (id, name) values (11, "GET_USER");
 insert into permission (id, name) values (12, "CHANGE_PASS");
+insert into permission (id, name) values (13, "CHANGE_USERNAME");
+
 
 
 --insert into roles_permission (role_id, permission_id) values (4, 1);
 insert into roles_permission (role_id, permission_id) values (1, 11);
 insert into roles_permission (role_id, permission_id) values (2, 10);
 insert into roles_permission (role_id, permission_id) values (1, 12);
+insert into roles_permission (role_id, permission_id) values (1, 13);
 
 
 -- User Credentials : ADMIN

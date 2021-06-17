@@ -1,10 +1,10 @@
 package com.nistagram.authenticationmicroservice;
 
-import com.netflix.ribbon.proxy.annotation.Http;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
+import com.nistagram.authenticationmicroservice.exception.UnauthorizedException;
 import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.security.JwtService;
 import com.nistagram.authenticationmicroservice.service.EmailService;
@@ -16,7 +16,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/userCredentials")
@@ -65,9 +64,19 @@ public class UserCredentialsController {
         userCredentialsService.changePassword(resetPasswordDto, jwt);
     }
 
+    @PreAuthorize("hasAuthority('CHANGE_USERNAME')")
+    @PutMapping("/change_username")
+    public void changeUsername(@RequestBody String newUsername,
+                               @RequestHeader("Authorization") String jwt){
+        String username = jwtService.extractUsername(jwt.substring(7));
+        if(username == null)
+            throw new UnauthorizedException("Access denied");
+        userCredentialsService.changeUsername(username, newUsername);
+    }
+
     @PutMapping("/reset_password/{jwt:.+}")
     public void restartPassword(@PathVariable String jwt, @RequestBody ResetPasswordDto resetPasswordDto) throws IOException {
-        Logger.info("Reset passowrd.", jwtService.extractUsername(jwt));
+        Logger.info("Reset password.", jwtService.extractUsername(jwt));
         userCredentialsService.restartPassword(jwt, resetPasswordDto);
     }
 
