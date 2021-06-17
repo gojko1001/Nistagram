@@ -74,7 +74,7 @@
 
 
 <script>
-import { getEmailFromToken } from '../util/token';
+import { getUsernameFromToken } from '../util/token';
 export default {
   name: 'AddComment',
   data(){
@@ -111,7 +111,7 @@ export default {
     },
   mounted: function(){
     this.postId = this.$route.params.id;
-    this.username = getEmailFromToken();
+    this.username = getUsernameFromToken();
     this.axios.get('/media-api/image/' + this.postId)
         .then(response => { this.img = response.data;
                             for(let i=0; i<this.img.imageBytes.length; i++){
@@ -160,7 +160,7 @@ export default {
       onSubmit() {
         console.log(this.form);
         this.form.postId = this.postId;
-        this.form.username = getEmailFromToken();
+        this.form.username = getUsernameFromToken();
         this.axios.post('/media-api/comment', this.form)
           .then(response => { console.log(response.data);
                               this.makeToast("Comment has been posted.", "success");
@@ -173,7 +173,7 @@ export default {
       likePost(id, liked) {
         console.log(this.form);
         this.formLike.postId = id;
-        this.formLike.username = getEmailFromToken();
+        this.formLike.username = getUsernameFromToken();
         this.formLike.liked = liked;
         this.axios.post('/like', this.formLike)
           .then(response => { console.log(response.data);
@@ -184,7 +184,7 @@ export default {
                           })
       },
       getCollections() {
-        var user = getEmailFromToken();
+        var user = getUsernameFromToken();
         this.axios.get('/media-api/collection/' + user)
           .then(response => { this.collections = response.data;
                               if(this.collections,length > 0){
@@ -196,7 +196,7 @@ export default {
                           })
       },
       createCollection(name){
-        this.collection.username = getEmailFromToken();
+        this.collection.username = getUsernameFromToken();
         this.collection.name = name;
         this.axios.post('/media-api/collection', this.collection)
           .then(response => { console.log(response.data)

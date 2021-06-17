@@ -59,7 +59,7 @@
 
 <script>
 import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
-import { getEmailFromToken } from '../util/token';
+import { getUsernameFromToken, getToken } from '../util/token';
 export default {
   name: 'Discover',
   data(){
@@ -89,10 +89,10 @@ export default {
         }
     },
   mounted: function(){
-    this.username = getEmailFromToken();
+    this.username = getUsernameFromToken();
     if(this.username != null){
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
-                                                                Authorization: "Bearer " + localStorage.getItem('JWT'),
+                                                                Authorization: "Bearer " + getToken(),
                                                             }                                          
             }).then(response => {
                                 this.user = response.data;
@@ -152,7 +152,7 @@ export default {
         likePost(id, liked) {
         console.log(this.form);
         this.formLike.postId = id;
-        this.formLike.username = getEmailFromToken();
+        this.formLike.username = getUsernameFromToken();
         this.formLike.liked = liked;
         if(this.formLike.username != null){
           this.axios.post('/media-api/like', this.formLike)

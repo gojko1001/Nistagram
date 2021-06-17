@@ -5,6 +5,7 @@ import com.netflix.zuul.context.RequestContext;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 @Component
 public class Filter extends ZuulFilter {
@@ -15,7 +16,7 @@ public class Filter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 1;
+        return 10000;
     }
 
     @Override
@@ -27,6 +28,10 @@ public class Filter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
+
+        Set<String> headers = (Set<String>) ctx.get("ignoredHeaders");
+        headers.remove("authorization");
+
 
         return null;
     }
