@@ -9,8 +9,8 @@ export const VERIFY_ACC_PATH = USER_CREDENTIALS_PATH + "/verify"
 
 export const USER_PATH = "/user-api/user"
 export const SEARCH_USER_PATH = USER_PATH + "/search"
-export const GET_CATEGORIES_PATH = USER_PATH + "/categories"
-export const VERIFY_USER_PATH = USER_PATH + "/verification_request"
+export const VERIFY_USER_PATH = "/user-api/verify"
+export const GET_CATEGORIES_PATH = VERIFY_USER_PATH + "/categories"
 
 export const USER_RELATION_PATH = "/user-api/user_relation"
 export const GET_FOLLOWERS_PATH = USER_RELATION_PATH + "/followers"

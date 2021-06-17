@@ -1,5 +1,8 @@
 package com.nistagram.usermicroservice.verify_account.service;
 
+import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.verify_account.controller.dto.ShowVerifyRequestDto;
 import com.nistagram.usermicroservice.verify_account.controller.dto.VerifyRequestDto;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationRequest;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
@@ -19,6 +22,8 @@ public class VerificationRequestService implements IVerificationRequestService {
 
     @Autowired
     private VerificationRequestRepository verificationRequestRepository;
+    @Autowired
+    private IUserService userService;
 
     private static String uploadDir = "id-photos";
 
@@ -26,21 +31,26 @@ public class VerificationRequestService implements IVerificationRequestService {
         return verificationRequestRepository.save(verificationRequest);
     }
 
-    public VerificationRequest createVerifyRequest(VerificationRequest verificationRequest) {
+    public VerificationRequest createVerifyRequest(VerificationRequest verificationRequest, User user) {
         verificationRequest.setStatus(VerificationStatus.PENDING);
+        if(user != null){
+            user.setVerificationRequest(verificationRequest);
+            userService.save(user);
+        }
         return save(verificationRequest);
     }
 
     public VerificationRequest updateVerifyRequest(VerificationRequest verificationRequest) {
         VerificationRequest dbVerificationRequest = verificationRequestRepository.getVerificationRequestById(verificationRequest.getId());
-        dbVerificationRequest.setApprovedByUsername(verificationRequest.getApprovedByUsername());
+        if(verificationRequest.getApprovedByUsername() != null)
+            dbVerificationRequest.setApprovedByUsername(verificationRequest.getApprovedByUsername());
         dbVerificationRequest.setStatus(verificationRequest.getStatus());
         return save(dbVerificationRequest);
 
     }
 
-    public List<VerifyRequestDto> getIdImages(List<VerifyRequestDto> verifyRequestDtos) {
-        for (VerifyRequestDto verifyRequestDto : verifyRequestDtos) {
+    public List<ShowVerifyRequestDto> getIdImages(List<ShowVerifyRequestDto> verifyRequestDtos) {
+        for (ShowVerifyRequestDto verifyRequestDto : verifyRequestDtos) {
             verifyRequestDto.setImageBytes(getImage(verifyRequestDto.getFileName()));
         }
         return verifyRequestDtos;

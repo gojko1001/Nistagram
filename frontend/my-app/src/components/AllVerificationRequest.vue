@@ -12,10 +12,12 @@
             <h5>Category: {{request.category.name}}</h5>
 
             <div>
-              <img v-bind:src="request.imageBytes" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+              <img v-bind:src="request.imageBytes" width="400" height="250" style="display:block; margin-left:auto; margin-right:auto">
             </div>
             <hr/>
 
+            <b-button type="submit" @click="onSubmit(i)" style="width:100px; background-color: green"><i class="fa fa-check"/> Accept</b-button>
+            <b-button type="submit" @click="deniedRequest(i)" style="width:100px; background-color: red;margin: 15px"><i class="fa fa-ban"/> Reject</b-button>
             
           </b-card>              
         </div>
@@ -38,6 +40,19 @@ export default {
               fullName:'',
               category:'',
             }],
+            form: {
+              id: '',
+              fullName:'',
+              category:'',
+              status: '',
+              approvedByUsername: '',
+              fileName: '',
+            },
+            status: {
+              'PENDING': 0,
+              'APPROVED': 1,
+              'DENIED': 2,
+            }
         }
     },
   mounted: function(){
@@ -54,6 +69,8 @@ export default {
                                     return
                                 }
             })
+    }else{
+      window.location.href="/";
     }
     this.$nextTick(function () {
       this.axios.get('/user-api/verify')
@@ -78,7 +95,44 @@ export default {
                                 appendToast: false
                             })
         },
-    }
+        onSubmit(i){
+          this.form.id = this.info[i].id;
+          this.form.approvedByUsername = this.user.username;
+          this.form.status = this.status.APPROVED;
+          this.form.category = this.info[i].category;
+          this.form.fileName = this.info[i].fileName;
+          this.form.fullName = this.info[i].fullName;
+          console.log(this.form);
+            this.axios.put('/user-api/verify', this.form)
+            .then(response => { 
+              console.log(response);
+              this.makeToast("Verified", "success");
+              this.$router.go(this.$router.currentRoute);
+            })
+            .catch(error => { 
+              console.log(error);
+              this.makeToast("Error occurred.", "danger");
+            })
+        },
+        deniedRequest(i){
+            this.form.id = this.info[i].id;
+            this.form.status = this.status.APPROVED;
+            this.form.category = this.info[i].category;
+            this.form.approvedByUsername = this.user.username;
+            this.form.fileName = this.info[i].fileName;
+            this.form.fullName = this.info[i].fullName;
+            console.log(this.form);
+            this.axios.put('/user-api/verify', this.form)
+            .then(response => { console.log(response);
+                                this.makeToast("Denied", "success");
+                                this.$router.go(this.$router.currentRoute);
+                                })
+            .catch(error => { 
+              console.log(error);
+              this.makeToast("Error occurred.", "danger");
+            })
+        },
+    },
 }
 </script>
 

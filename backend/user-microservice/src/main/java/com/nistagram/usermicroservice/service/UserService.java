@@ -53,6 +53,11 @@ public class UserService implements IUserService {
         return user;
     }
 
+    @Override
+    public User findUserByFullName(String fullName) {
+        return userRepository.findByFullName(fullName);
+    }
+
     public User registerUser(UserRegistrationDto userReg, boolean isGoogleUser) {
         if (!isGoogleUser)
             verifyUserInput(userReg);

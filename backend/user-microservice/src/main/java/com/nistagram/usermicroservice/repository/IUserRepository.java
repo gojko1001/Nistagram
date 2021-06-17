@@ -25,4 +25,6 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     List<User> findByVerificationRequest_Status(VerificationStatus status);
 
+    User findByFullName(String fullName);
+
 }
