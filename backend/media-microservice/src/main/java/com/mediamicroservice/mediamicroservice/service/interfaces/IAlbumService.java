@@ -6,5 +6,5 @@ import com.mediamicroservice.mediamicroservice.domain.Album;
 import java.util.List;
 
 public interface IAlbumService {
-    Album createAlbumAndMedia(List<MediaDto> mediaDtos);
+    Album save(Album album);
 }
