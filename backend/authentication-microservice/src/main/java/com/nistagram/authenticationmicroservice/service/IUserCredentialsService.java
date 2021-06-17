@@ -13,9 +13,11 @@ public interface IUserCredentialsService {
 
     UserCredentials create(UserCredentialsDto userCredentials);
 
-    UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException;
+    UserCredentials login(String username, String password) throws IOException;
 
     UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException;
+
+    void changePassword(ResetPasswordDto resetPasswordDto, String jwt);
 
     void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) throws IOException;
 

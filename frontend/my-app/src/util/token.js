@@ -14,7 +14,12 @@ export function getParsedToken() {
     }
     var base64Payload = token.split(".")[1];
     var payload = Buffer.from(base64Payload, "base64");
-    return JSON.parse(payload.toString());
+    try{
+        return JSON.parse(payload.toString());
+    }catch{
+        return null;
+    }
+    
 }
 
 export function removeToken() {

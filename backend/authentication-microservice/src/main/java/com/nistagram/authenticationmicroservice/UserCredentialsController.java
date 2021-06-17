@@ -1,5 +1,6 @@
 package com.nistagram.authenticationmicroservice;
 
+import com.netflix.ribbon.proxy.annotation.Http;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
@@ -11,9 +12,11 @@ import com.nistagram.authenticationmicroservice.service.IUserCredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/userCredentials")
@@ -29,7 +32,7 @@ public class UserCredentialsController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
         Logger.info("Try to login.", userReg.getUsername());
-        UserCredentials credentials = userCredentialsService.login(userReg);
+        UserCredentials credentials = userCredentialsService.login(userReg.getUsername(), userReg.getPassword());
         String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getRoles().get(1)*/);
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
@@ -53,6 +56,13 @@ public class UserCredentialsController {
     public void sendPasswordLink(@PathVariable String email) throws IOException {
         Logger.info("Send reset password link.", email);
         userCredentialsService.sendResetPasswordLink(email);
+    }
+
+    @PreAuthorize("hasAuthority('CHANGE_PASS')")
+    @PutMapping("/change_password")
+    public void changePassword(@RequestBody ResetPasswordDto resetPasswordDto,
+                               @RequestHeader(value = "Authorization", required = false) String jwt){
+        userCredentialsService.changePassword(resetPasswordDto, jwt);
     }
 
     @PutMapping("/reset_password/{jwt:.+}")

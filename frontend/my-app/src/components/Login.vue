@@ -13,7 +13,7 @@
         </b-form-group>
         <b-form-input v-model="form.password" type="password" id="password" placeholder="Password"></b-form-input>
         <br>
-        <b-button type="submit" variant="primary" style="width:200px;">Log in</b-button>
+        <b-button type="submit" variant="primary" style="width:100%;">Log in</b-button>
         <br>
       </b-form>
 
@@ -134,8 +134,7 @@ export default {
   padding: 50px;
 }
 .google-login{
-  width:50%;
-  margin-left:25%;
-  margin-right:25%;
+  width:100%;
+  margin-left: 15px;
 }
 </style>

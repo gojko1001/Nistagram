@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { USER_PATH, SERVER_NOT_RESPONDING } from "./../util/constants"
+import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH } from "./../util/constants"
 import { getToken, getUsernameFromToken, removeToken } from '../util/token';
 
 export default {
@@ -130,8 +130,11 @@ export default {
       }
   },
   mounted: function(){
-    if(getUsernameFromToken() == null)
+    if(getUsernameFromToken() == null){
+      removeToken();
       window.location.href = "/";
+    }
+      
     this.axios.get(USER_PATH + '/' + this.username, {   
                                                       headers:{ Authorization: "Bearer " + getToken() }                                          
             }).then(response => {
@@ -179,7 +182,17 @@ export default {
       },
 
       resetPass(){
-
+        this.axios.put(CHANGE_PASSWORD_PATH, this.resetPassword, {
+                                 headers:{ Authorization: "Bearer " + getToken()}})
+                .then(() => {
+                    this.makeToast("Password updated!", "success");
+                    window.location.href = "/user/" + this.username;
+                }).catch(error => {
+                    if(!error.response)
+                      this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                    else
+                      this.makeToast("Something went wrong, try retyping passwords!", "warning");    
+                })
       },
       makeToast(message, variant) {
       this.$bvToast.toast(message, {
