@@ -1,7 +1,7 @@
 package com.nistagram.usermicroservice.controller;
 
 import com.nistagram.usermicroservice.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.verify_account.controller.dto.CreateVerifyRequestDto;
+import com.nistagram.usermicroservice.verify_account.controller.dto.VerifyRequestDto;
 import com.nistagram.usermicroservice.verify_account.controller.mapping.VerifyAccountMapper;
 import com.nistagram.usermicroservice.verify_account.domain.UserCategory;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationRequest;
@@ -85,8 +85,8 @@ public class UserController {
     }
 
     @PostMapping("/verification_request")
-    public VerificationRequest createVerifyRequest(@RequestBody CreateVerifyRequestDto createVerifyRequestDto){
-        return verificationRequestService.createVerifyRequest(VerifyAccountMapper.mapCreateVerifyRequestDtoToVerificationRequest(createVerifyRequestDto));
+    public VerificationRequest createVerifyRequest(@RequestBody VerifyRequestDto verifyRequestDto){
+        return verificationRequestService.createVerifyRequest(VerifyAccountMapper.mapVerifyRequestDtoToVerificationRequest(verifyRequestDto));
     }
 
     @GetMapping("/categories")

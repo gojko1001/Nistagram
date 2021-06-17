@@ -1,8 +1,6 @@
 package com.nistagram.usermicroservice.verify_account.domain;
 
 
-import com.nistagram.usermicroservice.domain.enums.VerificationStatus;
-import com.nistagram.usermicroservice.verify_account.domain.UserCategory;
 import lombok.Data;
 
 import javax.persistence.*;

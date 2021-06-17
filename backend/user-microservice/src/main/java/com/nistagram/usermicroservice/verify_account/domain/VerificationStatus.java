@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice.domain.enums;
+package com.nistagram.usermicroservice.verify_account.domain;
 
 public enum VerificationStatus {
     PENDING,

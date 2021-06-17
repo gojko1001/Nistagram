@@ -1,6 +1,7 @@
 package com.nistagram.usermicroservice.repository;
 
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,5 +22,7 @@ public interface IUserRepository extends JpaRepository<User, Long> {
     @Query(value = "select u from User u where lower(u.username) like concat('%', lower(:username), '%' ) " +
             "and u.publicProfile = true")
     List<User> search(String username);
+
+    List<User> findByVerificationRequest_Status(VerificationStatus status);
 
 }

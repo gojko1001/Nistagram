@@ -1,13 +1,17 @@
 package com.nistagram.usermicroservice.service;
 
+import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.controller.exception.AlreadyExistsException;
+import com.nistagram.usermicroservice.controller.exception.BadRequestException;
+import com.nistagram.usermicroservice.controller.exception.InvalidActionException;
+import com.nistagram.usermicroservice.controller.exception.NotFoundException;
 import com.nistagram.usermicroservice.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.UserRelation;
-import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.repository.IUserRepository;
-import com.nistagram.usermicroservice.controller.exception.*;
 import com.nistagram.usermicroservice.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,6 +116,16 @@ public class UserService implements IUserService {
         return usernames;
     }
 
+    public List<User> getUsersWithVerifyRequestPending() {
+        List<User> users = userRepository.findAll();
+        List<User> userList = new ArrayList<>();
+        for (User user : users) {
+            if (user.getVerificationRequest() != null && user.getVerificationRequest().getStatus().equals(VerificationStatus.PENDING))
+                userList.add(user);
+        }
+        return userList;
+    }
+
     private void verifyUserInput(UserRegistrationDto userReg) {
         try {
             User newUser = userRepository.findByUsername(userReg.getUsername());
@@ -147,4 +161,6 @@ public class UserService implements IUserService {
         Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
+
+
 }

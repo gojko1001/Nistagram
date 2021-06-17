@@ -26,4 +26,6 @@ public interface IUserService {
     List<String> arePublic(List<String> usernames);
 
     List<String> getPublicUsers();
+
+    List<User> getUsersWithVerifyRequestPending();
 }
