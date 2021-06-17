@@ -55,7 +55,7 @@
             <h3>Account privacy</h3>
             <b-form-checkbox
               id="publicAcc"
-              v-model="form.publicProfile"
+              v-model="privacy.publicProfile"
               name="publicAcc"
               value=true
               unchecked-value=false>
@@ -72,7 +72,7 @@
             <h3>Messaging</h3>
             <b-form-checkbox
               id="publicMessage"
-              v-model="form.publicDM"
+              v-model="privacy.publicDM"
               name="publicMessage"
               value=true
               unchecked-value=false>
@@ -89,7 +89,7 @@
             <h3>Tagging</h3>
             <b-form-checkbox
               id="tagging"
-              v-model="form.taggable"
+              v-model="privacy.taggable"
               name="tagging"
               value=true
               unchecked-value=false>
@@ -103,7 +103,7 @@
           </div>
         </div>
         <br>
-        <b-button type="submit" variant="primary" style="width:200px;">Save changes</b-button><br>
+        <b-button type="submit" variant="primary" style="width:200px;" v-on:click="updatePrivacySettings()">Save changes</b-button><br>
       </b-tab>
     </b-tabs>
   </b-card>
@@ -120,6 +120,7 @@ export default {
       return {
         username: getUsernameFromToken(),
         form: '',
+        privacy:{ username:getUsernameFromToken(), publicProfile:false, publicDM:false, taggable: false},
         resetPassword: {oldPassword:'', password:'', repeatPassword:''},
         genderOpts:[
           { text: 'Male', value: 'MALE' },
@@ -139,6 +140,10 @@ export default {
                                                       headers:{ Authorization: "Bearer " + getToken() }                                          
             }).then(response => {
                                 this.form = response.data;
+                                // this.privacy.publicProfile = response.data.publicProfile;
+                                // this.privacy.publicDM = response.data.publicDM;
+                                // this.privacy.taggable = response.data.taggable;
+                                this.privacy = response.data;
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
                                     return
@@ -149,15 +154,15 @@ export default {
     },
     methods: {
         onSubmit() {
-        this.axios.put(USER_PATH + '/' + this.username, this.form, {headers:{Authorization: "Bearer " + getToken()}})
+        this.axios.put(USER_PATH, this.form, {headers:{Authorization: "Bearer " + getToken()}})
           .then(response => { console.log(response);
                               this.makeToast("User has been updated successfully.", "success");
-                              if(this.form.pastUsername != this.form.username){
+                              if(this.username != this.form.username){
                                 removeToken();
                                 this.makeToast("Please login.", "info");
                                 window.location.href = "";
                               }
-                              window.location.href = "/home";
+                              window.location.href = "/user/" + this.username;
                             })
           .catch(error => { console.log(error);
                             if(!error.response)
@@ -193,6 +198,19 @@ export default {
                     else
                       this.makeToast("Something went wrong, try retyping passwords!", "warning");    
                 })
+      },
+      updatePrivacySettings(){
+        this.axios.put(USER_PATH, this.privacy, {headers:{Authorization: "Bearer " + getToken()}})
+          .then(response => { console.log(response);
+                              this.makeToast("Privacy settings updated!", "success");
+                              window.location.href = "/user/" + this.username;
+                            })
+          .catch(error => { console.log(error);
+                            if(!error.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                            else
+                              this.makeToast("Error while updating.", "danger");
+                            })
       },
       makeToast(message, variant) {
       this.$bvToast.toast(message, {

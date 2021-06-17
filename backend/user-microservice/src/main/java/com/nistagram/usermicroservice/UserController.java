@@ -2,6 +2,7 @@ package com.nistagram.usermicroservice;
 
 import com.nistagram.usermicroservice.dto.UserDto;
 import com.nistagram.usermicroservice.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,8 @@ public class UserController {
     // cjel mogu sad da pokrene
     @Autowired
     private IUserService userService;
+    @Autowired
+    private jwtService jwtService;
 
     @GetMapping
     public List<UserDto> getAll() {
@@ -46,10 +49,14 @@ public class UserController {
         userService.registerUser(userReg, true);
     }
 
-    @PutMapping("/{oldUsername}")
-    public UserDto updateProfile(@RequestBody UserDto userDto, @PathVariable String oldUsername) {
-        Logger.info("Try to edit user: " + oldUsername, userDto.getUsername());
-        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), oldUsername));
+    @PutMapping()
+    public UserDto updateProfile(@RequestBody UserDto userDto,
+                                 @RequestHeader("Authorization") String jwt) {
+        String username = jwtService.extractUsername(jwt);
+        if(username == null)
+            throw new UnauthorizedException("Access denied");
+        Logger.info("Try to edit user: " + username, userDto.getUsername());
+        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), username));
     }
 
     @GetMapping("/search")

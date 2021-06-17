@@ -20,7 +20,7 @@ public class UserMapper {
         user.setUserGender(userDto.getUserGender());
         user.setPublicProfile(userDto.isPublicProfile());
         user.setPublicDM(userDto.isPublicDM());
-        user.setTaggable(user.isTaggable());
+        user.setTaggable(userDto.isTaggable());
         return user;
     }
 
