@@ -13,7 +13,7 @@ public class StoryMapper {
         storyBytesDto.setDescription(story.getMedia().getDescription());
         storyBytesDto.setLocation(story.getMedia().getLocation());
         storyBytesDto.setHashtags(story.getMedia().getHashtags());
-        storyBytesDto.setImage(story.getMedia().isImage());
+        //storyBytesDto.setImage(story.getMedia().getMediaName());
         storyBytesDto.setImageBytes(new ArrayList<>());
         storyBytesDto.setTimestamp(story.getMedia().getTimestamp());
         return storyBytesDto;

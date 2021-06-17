@@ -1,14 +1,13 @@
 package com.mediamicroservice.mediamicroservice.service;
 
 import com.mediamicroservice.mediamicroservice.connection.UserConnection;
+import com.mediamicroservice.mediamicroservice.controller.dto.ImageByte;
 import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.controller.mapping.PostMapper;
-import com.mediamicroservice.mediamicroservice.domain.Hashtag;
-import com.mediamicroservice.mediamicroservice.domain.Location;
-import com.mediamicroservice.mediamicroservice.domain.Media;
-import com.mediamicroservice.mediamicroservice.domain.Post;
+import com.mediamicroservice.mediamicroservice.domain.*;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
+import com.mediamicroservice.mediamicroservice.repository.IMediaNameRepository;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
@@ -16,6 +15,8 @@ import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationServi
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -37,6 +38,8 @@ public class PostService implements IPostService {
     private IMediaRepository mediaRepository;
     @Autowired
     private UserConnection userConnection;
+    @Autowired
+    private IMediaNameRepository mediaNameRepository;
 
 
     private static String uploadDir = "user-photos";
@@ -71,12 +74,18 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public Post saveImageInfo(MediaDto imageDto) {
+    public ResponseEntity saveImageInfo(MediaDto imageDto) {
         Post post = new Post();
         Media media = new Media();
-        media.setFileName(imageDto.getFileName());
-        if (imageDto.getFileName().contains(".mp4")) {
-            media.setImage(false);
+        List<MediaName> mediaNames = new ArrayList<>();
+        for(String fileName : imageDto.getFileNames()){
+            MediaName mediaName = new MediaName();
+            mediaName.setFileName(fileName);
+            if (fileName.contains(".mp4")) {
+                mediaName.setImage(false);
+            }
+            mediaNameRepository.save(mediaName);
+            mediaNames.add(mediaName);
         }
         media.setUsername(imageDto.getUsername());
         media.setDescription(imageDto.getDescription());
@@ -84,9 +93,11 @@ public class PostService implements IPostService {
         media.setLocation(location);
         media.setHashtags(tagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
+        media.setMediaName(mediaNames);
         mediaRepository.save(media);
         post.setMedia(media);
-        return save(post);
+        save(post);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Override
@@ -129,11 +140,16 @@ public class PostService implements IPostService {
     @Override
     public ImageBytesDto imageFile(Post post, String filePath) {
         ImageBytesDto imageBytesDtos = PostMapper.mapPostToImageBytesDto(post);
-        File in = new File(filePath + post.getMedia().getFileName());
-        try {
-            imageBytesDtos.getImageBytes().add(IOUtils.toByteArray(new FileInputStream(in)));
-        } catch (IOException e) {
-            e.printStackTrace();
+        for(MediaName mediaName : post.getMedia().getMediaName()){
+            File in = new File(filePath + mediaName.getFileName());
+            ImageByte imageByte = new ImageByte();
+            try {
+                imageByte.setImageByte(IOUtils.toByteArray(new FileInputStream(in)));
+                imageByte.setImage(mediaName.isImage());
+                imageBytesDtos.getImageBytes().add(imageByte);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return imageBytesDtos;
     }

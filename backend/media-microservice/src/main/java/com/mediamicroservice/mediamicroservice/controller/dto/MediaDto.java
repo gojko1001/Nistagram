@@ -1,5 +1,6 @@
 package com.mediamicroservice.mediamicroservice.controller.dto;
 
+import com.mediamicroservice.mediamicroservice.domain.MediaName;
 import lombok.Data;
 
 import java.util.List;
@@ -7,8 +8,9 @@ import java.util.List;
 @Data
 public class MediaDto {
     private String username;
-    private String fileName;
+    private List<String> fileNames;
     private String description;
     private String locationName;
     private List<String> tags;
+    private MediaName mediaName;
 }
