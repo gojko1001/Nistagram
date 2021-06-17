@@ -1,7 +1,7 @@
 package com.nistagram.usermicroservice.service.interfaces;
 
 import com.nistagram.usermicroservice.domain.User;
-import com.nistagram.usermicroservice.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -77,7 +77,7 @@ export default {
             'Content-Type':'multipart/form-data'
           }
         }).then(response => {
-          this.form.fileName = response.data;
+          this.form.fileName = response.data[0];
           this.makeToast("Image has been uploaded.", "success");
           this.imageHasBeenUploaded = true;
         })

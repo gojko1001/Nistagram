@@ -2,8 +2,8 @@ package com.nistagram.usermicroservice.controller;
 
 import com.nistagram.usermicroservice.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
-import com.nistagram.usermicroservice.dto.UserDto;
-import com.nistagram.usermicroservice.dto.UserRelationDto;
+import com.nistagram.usermicroservice.controller.dto.UserDto;
+import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.interfaces.IUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;

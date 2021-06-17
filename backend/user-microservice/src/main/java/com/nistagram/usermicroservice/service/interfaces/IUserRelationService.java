@@ -2,7 +2,7 @@ package com.nistagram.usermicroservice.service.interfaces;
 
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
-import com.nistagram.usermicroservice.dto.UserRelationDto;
+import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.nistagram.usermicroservice.controller.mapper;
 
 import com.nistagram.usermicroservice.domain.User;
-import com.nistagram.usermicroservice.dto.UserDto;
-import com.nistagram.usermicroservice.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.dto.UserUpdateDto;
+import com.nistagram.usermicroservice.controller.dto.UserDto;
+import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.controller.dto.UserUpdateDto;
 
 import java.util.ArrayList;
 import java.util.List;

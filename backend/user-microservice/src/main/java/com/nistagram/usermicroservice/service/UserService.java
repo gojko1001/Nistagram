@@ -3,7 +3,7 @@ package com.nistagram.usermicroservice.service;
 import com.nistagram.usermicroservice.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.UserRelation;
-import com.nistagram.usermicroservice.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.repository.IUserRepository;
 import com.nistagram.usermicroservice.controller.exception.*;
