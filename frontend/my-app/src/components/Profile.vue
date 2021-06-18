@@ -45,7 +45,8 @@
         <div class="vl"></div>
         <div v-if="isUserProfile || isFollowing || user.publicProfile" id="userMedia">
             <div id="stories">
-                <b-button v-b-modal.modal-2 style="font-size:25px;" @click="getStories()">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <b-button v-b-modal.modal-2 style="font-size:20px;" @click="getStories()">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
+                <b-button v-b-modal.modal-3 style="font-size:20px;margin-left:20px" @click="getHighlightedStories()">highlighted stories <i class="fas fa-highlighter fa-lg" style="margin-left:15px"></i></b-button>
                 <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
                      <div v-for="(img,p) in stories" :key="p">
@@ -57,6 +58,34 @@
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
+                                <p style="color:blue">{{img.location.name}}</p>
+
+                                <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
+                                    <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                    <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                                        The video is not supported by your browser.
+                                    </video>
+                                </div>
+
+                                <br>
+                                <b-card-text>
+                                    <span><b>{{img.username}}:  </b></span>{{img.description}}
+                                    <br>
+                                    <span v-for="(tag,t) in img.hashtags" :key="t">
+                                        #{{tag.name}}
+                                    </span>
+                                </b-card-text>
+                            </b-card>              
+                        </div>
+                </b-modal>
+                <!-- Highlighted stories -->
+                <b-modal id="modal-3" title="Highlighted stories">
+                     <div v-for="(img,p) in stories" :key="p">
+                            <b-card
+                                tag="article"
+                                style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
+                                class="mb-2">
+                                <h4>@{{img.username}}</h4>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
@@ -250,7 +279,9 @@
                                         The video is not supported by your browser.
                                     </video>
                                 </div>
-
+                                <button class="heart inter" v-bind:class="{'black': !img.highlighted, 'red': img.highlighted}" @click="highlightStory(img.id)" style="margin-left:380px">
+                                    <i class="fas fa-highlighter"></i>
+                                </button>
                                 <br>
                                 <b-card-text>
                                     <span><b>{{img.username}}:  </b></span>{{img.description}}
@@ -484,7 +515,7 @@ export default {
                                                         this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
                                                     }else{
                                                         this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
-                                                    } 
+                                                    }
                                                 }
                                             }   
                         }).catch(error => { console.log(error.message);
@@ -505,6 +536,30 @@ export default {
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
+                });
+        },
+        getHighlightedStories(){
+            this.axios.get('/media-api/story/highlights/' + this.username)
+                        .then(response => { this.stories = response.data;
+                                            for(let i=0; i< response.data.length; i++){
+                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                    if(this.stories[i].imageBytes[j].image){
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                                    }
+                                                }
+                                            }     
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
+        highlightStory(storyId){
+            this.axios.post('/media-api/story/highlight/' + storyId)
+                        .then(response => { console.log(response.data); 
+                                            this.makeToast(response.data, "success");                
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast(error.message, "danger");
                 });
         },
         getCollections() {

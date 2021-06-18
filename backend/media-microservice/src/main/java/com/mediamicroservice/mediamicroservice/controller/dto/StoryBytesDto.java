@@ -4,6 +4,7 @@ import com.mediamicroservice.mediamicroservice.domain.Hashtag;
 import com.mediamicroservice.mediamicroservice.domain.Location;
 import lombok.Data;
 
+import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
 
@@ -17,4 +18,6 @@ public class StoryBytesDto {
     private Date timestamp;
     private List<ImageByte> imageBytes;
     private Long mediaId;
+    private boolean highlighted;
+    private boolean forCloseFriends;
 }

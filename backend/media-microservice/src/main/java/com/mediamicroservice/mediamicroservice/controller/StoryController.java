@@ -38,7 +38,19 @@ public class StoryController {
     @GetMapping("/profile/{username}")
     public ResponseEntity getStoriesByUsername(@PathVariable("username") String username) {
         Logger.info("Get stories.", username);
-        List<Story> userPosts = storyRepository.findStoryByMedia_Username(username);
-        return new ResponseEntity(storyService.validStories(storyService.getImagesFiles(userPosts)), HttpStatus.OK);
+        List<Story> userStories = storyRepository.findStoryByMedia_Username(username);
+        return new ResponseEntity(storyService.validStories(storyService.getImagesFiles(userStories)), HttpStatus.OK);
+    }
+
+    @GetMapping("/highlights/{username}")
+    public ResponseEntity getHighlightedStoriesByUsername(@PathVariable("username") String username) {
+        Logger.info("Get highlights.", username);
+        List<Story> userStories = storyRepository.findStoryByMedia_Username(username);
+        return new ResponseEntity(storyService.highlightedStories(storyService.getImagesFiles(userStories)), HttpStatus.OK);
+    }
+
+    @PostMapping("/highlight/{storyId}")
+    public ResponseEntity highlightStory(@PathVariable("storyId") Long storyId) {
+        return storyService.highlightStory(storyId);
     }
 }
