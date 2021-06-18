@@ -92,6 +92,17 @@ public class StoryService implements IStoryService {
     }
 
     @Override
+    public List<StoryBytesDto> highlightedStories(List<StoryBytesDto> stories) {
+        List<StoryBytesDto> validStories = new ArrayList<>();
+        Date now = new Date();
+        for (StoryBytesDto storyBytesDto : stories) {
+            if (storyBytesDto.isHighlighted())
+                validStories.add(storyBytesDto);
+        }
+        return validStories;
+    }
+
+    @Override
     public List<StoryBytesDto> getImagesFiles(List<Story> stories) {
         List<StoryBytesDto> storyBytesDto = new ArrayList<>();
         if (stories != null) {

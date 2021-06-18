@@ -18,4 +18,6 @@ public interface IStoryService {
     StoryBytesDto imageFile(Story story, String filePath, boolean isImage);
 
     List<StoryBytesDto> validStories(List<StoryBytesDto> stories);
+
+    List<StoryBytesDto> highlightedStories(List<StoryBytesDto> stories);
 }
