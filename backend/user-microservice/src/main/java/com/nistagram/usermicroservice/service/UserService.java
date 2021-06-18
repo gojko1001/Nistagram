@@ -1,16 +1,18 @@
 package com.nistagram.usermicroservice.service;
 
-import com.nistagram.usermicroservice.IUserRepository;
-import com.nistagram.usermicroservice.UserMapper;
 import com.nistagram.usermicroservice.connection.AuthConnection;
+import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.controller.exception.AlreadyExistsException;
+import com.nistagram.usermicroservice.controller.exception.BadRequestException;
+import com.nistagram.usermicroservice.controller.exception.InvalidActionException;
+import com.nistagram.usermicroservice.controller.exception.NotFoundException;
+import com.nistagram.usermicroservice.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.UserRelation;
-import com.nistagram.usermicroservice.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.exception.AlreadyExistsException;
-import com.nistagram.usermicroservice.exception.BadRequestException;
-import com.nistagram.usermicroservice.exception.InvalidActionException;
-import com.nistagram.usermicroservice.exception.NotFoundException;
 import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.repository.IUserRepository;
+import com.nistagram.usermicroservice.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +54,11 @@ public class UserService implements IUserService {
         return user;
     }
 
+    @Override
+    public User findUserByFullName(String fullName) {
+        return userRepository.findByFullName(fullName);
+    }
+
     public User registerUser(UserRegistrationDto userReg, boolean isGoogleUser) {
         if (!isGoogleUser)
             verifyUserInput(userReg);
@@ -62,7 +69,7 @@ public class UserService implements IUserService {
     }
 
     public User updateUser(User user, String oldUsername, String jwt) {
-        if(!checkUsername(user.getUsername())){
+        if (!checkUsername(user.getUsername())) {
             throw new BadRequestException("New username doesn't match the pattern!");
         }
         if (userRepository.findByUsername(user.getUsername()) != null && !user.getUsername().equals(oldUsername))
@@ -80,7 +87,7 @@ public class UserService implements IUserService {
         dbUser.setPublicDM(user.isPublicDM());
         dbUser.setTaggable(user.isTaggable());
 
-        if(!user.getUsername().equals(oldUsername)){
+        if (!user.getUsername().equals(oldUsername)) {
             authConnection.changeUsername(user.getUsername(), jwt);
         }
         return save(dbUser);
@@ -123,6 +130,16 @@ public class UserService implements IUserService {
         return usernames;
     }
 
+    public List<User> getUsersWithVerifyRequestPending() {
+        List<User> users = userRepository.findAll();
+        List<User> userList = new ArrayList<>();
+        for (User user : users) {
+            if (user.getVerificationRequest() != null && user.getVerificationRequest().getStatus().equals(VerificationStatus.PENDING))
+                userList.add(user);
+        }
+        return userList;
+    }
+
     private void verifyUserInput(UserRegistrationDto userReg) {
         try {
             User newUser = userRepository.findByUsername(userReg.getUsername());
@@ -158,4 +175,6 @@ public class UserService implements IUserService {
         Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");
         return (pattern.matcher(email).matches() && patternPass.matcher(password).matches());
     }
+
+
 }

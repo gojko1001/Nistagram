@@ -20,13 +20,13 @@ public class Media {
     @Column
     private String description;
     @Column
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+02:00")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp;
-    @ManyToMany
-    private List<UserTag> userTags;
     @ManyToMany
     private List<Hashtag> hashtags;
     @OneToOne
     private Location location;
+    @ManyToMany
+    private List<UserTag> userTags;
 
 }
