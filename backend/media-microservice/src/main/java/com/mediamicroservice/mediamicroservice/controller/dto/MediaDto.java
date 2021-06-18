@@ -13,4 +13,5 @@ public class MediaDto {
     private String locationName;
     private List<String> tags;
     private MediaName mediaName;
+    private List<String> userTags;
 }

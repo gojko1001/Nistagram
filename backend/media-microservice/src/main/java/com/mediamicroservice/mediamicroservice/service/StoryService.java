@@ -98,25 +98,25 @@ public class StoryService implements IStoryService {
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/" + uploadDir + "/");
             for (Story story : stories) {
-                storyBytesDto.add(imageFile(story, filePath));
+                for(MediaName mn : story.getMedia().getMediaName()){
+                    storyBytesDto.add(imageFile(story, filePath + mn.getFileName(), mn.isImage()));
+                }
             }
         }
         return storyBytesDto;
     }
 
     @Override
-    public StoryBytesDto imageFile(Story story, String filePath) {
+    public StoryBytesDto imageFile(Story story, String filePath, boolean isImage) {
         StoryBytesDto storyBytesDto = StoryMapper.mapStoryToStoryBytesDto(story);
-        for(MediaName mediaName : story.getMedia().getMediaName()){
-            File in = new File(filePath + mediaName.getFileName());
-            ImageByte imageByte = new ImageByte();
-            try {
-                imageByte.setImageByte(IOUtils.toByteArray(new FileInputStream(in)));
-                imageByte.setImage(mediaName.isImage());
-                storyBytesDto.getImageBytes().add(imageByte);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        File in = new File(filePath);
+        ImageByte imageByte = new ImageByte();
+        try {
+            imageByte.setImageByte(IOUtils.toByteArray(new FileInputStream(in)));
+            imageByte.setImage(isImage);
+            storyBytesDto.getImageBytes().add(imageByte);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return storyBytesDto;
     }
