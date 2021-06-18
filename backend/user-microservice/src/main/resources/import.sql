@@ -1,14 +1,27 @@
+-- UserCategory
+insert into user_category (name) values ('influencer');
+insert into user_category (name) values ('media');
+insert into user_category (name) values ('business');
+insert into user_category (name) values ('brand');
+insert into user_category (name) values ('organisation');
+
+-- VerficationRequests
+insert into verification_request (file_path, status, category_id) values ('id1.jpg', 1, 1);
+insert into verification_request (file_path, status, category_id) values ('id2.jpg', 2, 2);
+insert into verification_request (file_path, status, category_id) values ('id3.jpg', 0, 3);
+insert into verification_request (file_path, status, category_id) values ('id4.jpg', 0, 4);
+
 -- User
 -- Role:user
-insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (1, 'maja', "Maja Stamenic", "maja@mailinator.com", "063/778-55-55", null, null, "1998-11-05", 1, true, true, true);
+insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable, verification_request_id) values (1, 'maja', "Maja Stamenic", "maja@mailinator.com", "063/778-55-55", null, null, "1998-11-05", 1, true, true, true, 1);
 insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (2, 'tasa', "Nastasja Damjanac", "tasa@mailinator.com", "066/522-63-63", null, null, "1998-08-10", 1, false, true, true);
 insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (3, 'masa', "Marija Milanovic", "masa@mailinator.com", "065/121-84-75", null, null, "1998-12-28", 1, false, true, true);
 insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (4, 'gojko', "Gojko Novcic", "gojko@mailinator.com", "062/963-22-56", null, null, "1998-04-09", 0, false, true, true);
-insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (5, 'mark', "Mark Zukenber", "mark@mailinator.com", "069/689-55-47", "www.facebook.com", "Founder of Facebook", "1984-05-14", 0, true, true, true);
+insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable, verification_request_id) values (5, 'mark', "Mark Zukenber", "mark@mailinator.com", "069/689-55-47", "www.facebook.com", "Founder of Facebook", "1984-05-14", 0, true, true, true, 2);
 
 -- Role:agent
-insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (6, 'nike', 'Nike', "nike@mailinator.com", "062/963-22-56", 'www.nike.com', 'Just Do It!', "1975-06-09", 2, true, true, true);
-insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (7, 'samsung', 'Samsung', "samsung@mailinator.com", "062/963-22-56", 'www.samsung.com', 'Be inspired to #DoWhatYouCant', "1990-12-08", 2, true, true, true);
+insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable, verification_request_id) values (6, 'nike', 'Nike', "nike@mailinator.com", "062/963-22-56", 'www.nike.com', 'Just Do It!', "1975-06-09", 2, true, true, true, 3);
+insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable, verification_request_id) values (7, 'samsung', 'Samsung', "samsung@mailinator.com", "062/963-22-56", 'www.samsung.com', 'Be inspired to #DoWhatYouCant', "1990-12-08", 2, true, true, true, 4);
 
 
 -- UserRelation

@@ -1,6 +1,7 @@
 package com.nistagram.usermicroservice.domain;
 
 import com.nistagram.usermicroservice.domain.enums.Gender;
+import com.nistagram.usermicroservice.verify_account.domain.VerificationRequest;
 import lombok.Data;
 
 import javax.persistence.*;
