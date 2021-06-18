@@ -48,4 +48,9 @@ public class StoryController {
         List<Story> userStories = storyRepository.findStoryByMedia_Username(username);
         return new ResponseEntity(storyService.highlightedStories(storyService.getImagesFiles(userStories)), HttpStatus.OK);
     }
+
+    @PostMapping("/highlight/{storyId}")
+    public ResponseEntity highlightStory(@PathVariable("storyId") Long storyId) {
+        return storyService.highlightStory(storyId);
+    }
 }

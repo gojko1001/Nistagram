@@ -44,7 +44,7 @@
         <div v-if="isUserProfile || isFollowing || user.publicProfile" id="userMedia">
             <div id="stories">
                 <b-button v-b-modal.modal-2 style="font-size:20px;" @click="getStories()">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
-                <b-button v-b-modal.modal-3 style="font-size:20px;margin-left:20px" >highlighted stories <i class="fas fa-highlighter fa-lg" style="margin-left:15px"></i></b-button>
+                <b-button v-b-modal.modal-3 style="font-size:20px;margin-left:20px" @click="getHighlightedStories()">highlighted stories <i class="fas fa-highlighter fa-lg" style="margin-left:15px"></i></b-button>
                 <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
                      <div v-for="(img,p) in stories" :key="p">
@@ -501,6 +501,22 @@ export default {
                                                     } 
                                                 }
                                             }   
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast("Error occurred.", "danger");
+                });
+        },
+        getHighlightedStories(){
+            this.axios.get('/media-api/story/highlights/' + this.username)
+                        .then(response => { this.stories = response.data;
+                                            for(let i=0; i< response.data.length; i++){
+                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                    if(this.stories[i].imageBytes[j].image){
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                                    }
+                                                }
+                                            }     
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
                 });

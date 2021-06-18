@@ -20,4 +20,6 @@ public interface IStoryService {
     List<StoryBytesDto> validStories(List<StoryBytesDto> stories);
 
     List<StoryBytesDto> highlightedStories(List<StoryBytesDto> stories);
+
+    ResponseEntity highlightStory(Long storyId);
 }

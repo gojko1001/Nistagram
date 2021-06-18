@@ -103,6 +103,20 @@ public class StoryService implements IStoryService {
     }
 
     @Override
+    public ResponseEntity highlightStory(Long storyId){
+        Story story = storyRepository.findStoryById(storyId);
+        if(story == null)
+            return new ResponseEntity("Choosen story doesn't exist.", HttpStatus.BAD_REQUEST);
+        if(story.isHighlighted()){
+            story.setHighlighted(false);
+        }else{
+            story.setHighlighted(true);
+        }
+        storyRepository.save(story);
+        return  new ResponseEntity(HttpStatus.OK);
+    }
+
+    @Override
     public List<StoryBytesDto> getImagesFiles(List<Story> stories) {
         List<StoryBytesDto> storyBytesDto = new ArrayList<>();
         if (stories != null) {
