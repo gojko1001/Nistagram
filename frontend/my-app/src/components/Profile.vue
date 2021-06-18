@@ -52,6 +52,9 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
+                                <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
+                                    <i class="fa fa-ban fa-fw"></i>
+                                </button>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
@@ -85,6 +88,9 @@
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
+                                    <i class="fa fa-ban fa-fw"></i>
+                                </button>
                                 <p style="color:blue">{{img.location.name}}</p>
                                 
                                 <div v-for="(img, a) in img.imageBytes" :key="'P'+a">
@@ -183,6 +189,9 @@
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 350px">Reacted on <br>{{img.date | formatDate}}</h6>
+                                <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
+                                    <i class="fa fa-ban fa-fw"></i>
+                                </button>
                                 <p style="color:blue">{{img.location.name}}</p>
                                 <div v-for="(img, q) in img.imageBytes" :key="'L'+q">
                                     <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
@@ -228,6 +237,9 @@
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
+                                    <i class="fa fa-ban fa-fw"></i>
+                                </button>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'SA'+q">
@@ -315,6 +327,10 @@ export default {
                 username: '',
                 relatedUsername: ''
             },
+            report:{
+              requestedBy: '',
+              mediaId:''
+            },
             history:[{
                 location:{name:''},
                 comments:[],
@@ -374,6 +390,21 @@ export default {
             this.hideCommenting = false;
             console.log(id);
         },
+        reportPost(id){
+        this.report.requestedBy = getUsernameFromToken();
+        this.report.mediaId = id;
+        if(this.report.requestedBy != null){
+          this.axios.post('/media-api/inappropriate', this.report)
+          .then(response => { console.log(response.data);
+                              this.makeToast("Reported !!!", "success");
+                            })
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
+      },
         likePost(id, liked) {
             console.log(this.form);
             this.formLike.postId = id;
@@ -573,6 +604,7 @@ export default {
         },
     }
 }
+
 </script>
 
 

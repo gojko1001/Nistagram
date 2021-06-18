@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IMediaRepository extends JpaRepository<Media, Long> {
+
+    Media findMediaById(Long id);
 }
