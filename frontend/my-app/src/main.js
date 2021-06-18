@@ -22,6 +22,8 @@ import CreatePost from './components/CreatePost'
 import EditProfile from './components/EditProfile'
 import AddComment from './components/AddComment'
 import Messanger from './components/Messanger'
+import VerificationRequest from './components/VerificationRequest'
+import AllVerificationRequest from './components/AllVerificationRequest'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -113,6 +115,16 @@ const router = new VueRouter({
       name: 'Messanger',
       component: Messanger
     },
+    {
+      path: '/verification_request',
+      name: 'Verification request',
+      component: VerificationRequest
+    },
+    {
+      path: '/all_requests',
+      name: 'AllVerificationRequest',
+      component: AllVerificationRequest
+    }
   ]
 });
 

@@ -39,7 +39,7 @@ public class UserConnection {
         String url = "http://localhost:8762/user-api/user/add";
         try {
             restTemplate.exchange(url, HttpMethod.POST,
-                    new HttpEntity<>(userReq, new HttpHeaders()), Void.class, 1);
+                    new HttpEntity<>(userReq, new HttpHeaders()), Void.class);
 
         } catch (Exception e) {
             e.printStackTrace();

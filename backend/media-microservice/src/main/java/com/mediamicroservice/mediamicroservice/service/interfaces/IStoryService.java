@@ -15,7 +15,11 @@ public interface IStoryService {
 
     List<StoryBytesDto> getImagesFiles(List<Story> stories);
 
-    StoryBytesDto imageFile(Story story, String filePath);
+    StoryBytesDto imageFile(Story story, String filePath, boolean isImage);
 
     List<StoryBytesDto> validStories(List<StoryBytesDto> stories);
+
+    List<StoryBytesDto> highlightedStories(List<StoryBytesDto> stories);
+
+    ResponseEntity highlightStory(Long storyId);
 }

@@ -92,31 +92,59 @@ public class StoryService implements IStoryService {
     }
 
     @Override
+    public List<StoryBytesDto> highlightedStories(List<StoryBytesDto> stories) {
+        List<StoryBytesDto> validStories = new ArrayList<>();
+        Date now = new Date();
+        for (StoryBytesDto storyBytesDto : stories) {
+            if (storyBytesDto.isHighlighted())
+                validStories.add(storyBytesDto);
+        }
+        return validStories;
+    }
+
+    @Override
+    public ResponseEntity highlightStory(Long storyId){
+        Story story = storyRepository.findStoryById(storyId);
+        if(story == null)
+            return new ResponseEntity("Choosen story doesn't exist.", HttpStatus.BAD_REQUEST);
+        String message = "";
+        if(story.isHighlighted()){
+            story.setHighlighted(false);
+            message = "Story has been removed from highlights.";
+        }else{
+            story.setHighlighted(true);
+            message = "Story has been added to highlights.";
+        }
+        storyRepository.save(story);
+        return  new ResponseEntity(message, HttpStatus.OK);
+    }
+
+    @Override
     public List<StoryBytesDto> getImagesFiles(List<Story> stories) {
         List<StoryBytesDto> storyBytesDto = new ArrayList<>();
         if (stories != null) {
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/" + uploadDir + "/");
             for (Story story : stories) {
-                storyBytesDto.add(imageFile(story, filePath));
+                for(MediaName mn : story.getMedia().getMediaName()){
+                    storyBytesDto.add(imageFile(story, filePath + mn.getFileName(), mn.isImage()));
+                }
             }
         }
         return storyBytesDto;
     }
 
     @Override
-    public StoryBytesDto imageFile(Story story, String filePath) {
+    public StoryBytesDto imageFile(Story story, String filePath, boolean isImage) {
         StoryBytesDto storyBytesDto = StoryMapper.mapStoryToStoryBytesDto(story);
-        for(MediaName mediaName : story.getMedia().getMediaName()){
-            File in = new File(filePath + mediaName.getFileName());
-            ImageByte imageByte = new ImageByte();
-            try {
-                imageByte.setImageByte(IOUtils.toByteArray(new FileInputStream(in)));
-                imageByte.setImage(mediaName.isImage());
-                storyBytesDto.getImageBytes().add(imageByte);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        File in = new File(filePath);
+        ImageByte imageByte = new ImageByte();
+        try {
+            imageByte.setImageByte(IOUtils.toByteArray(new FileInputStream(in)));
+            imageByte.setImage(isImage);
+            storyBytesDto.getImageBytes().add(imageByte);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return storyBytesDto;
     }
