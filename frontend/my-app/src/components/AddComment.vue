@@ -18,11 +18,11 @@
             </div>
 
             <br>
-            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
+            <button class="heart inter" v-bind:class="{'black': !watchLiked, 'red': watchLiked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>
             <span>{{img.numLikes}}</span>
-            <button class="heart inter" v-bind:class="{'black': !img.disliked, 'red': img.disliked}" @click="likePost(img.id, false)" style="margin-left:20px">
+            <button class="heart inter" v-bind:class="{'black': !watchDisliked, 'red': watchDisliked}" @click="likePost(img.id, false)" style="margin-left:20px">
               <i class="fas fa-thumbs-down"></i>
             </button>
             <span>{{img.numDislikes}}</span>
@@ -106,8 +106,14 @@ export default {
             collection:{},
             newCollection:'',
             favourite:{},
-            showCollections: false
-        }
+            showCollections: false,
+            watch:[],
+            watchLiked: false,
+            watchDisliked: false,
+            item: {
+              foo: 'foo'
+            }
+      }
     },
   mounted: function(){
     this.postId = this.$route.params.id;
@@ -134,8 +140,10 @@ export default {
                                     if(like.username == this.username){
                                         if(like.liked){
                                             this.img.liked = true;
+                                            this.watchLiked = true;
                                         }else{
                                             this.img.disliked = true;
+                                            this.watchDisliked = true;
                                         } 
                                     }
                                 }
@@ -145,6 +153,14 @@ export default {
                             this.makeToast("Error occured. Try again later.", "danger");
         })
         this.getCollections();
+  },
+  watch: {
+    watchLiked: function() {
+      console.log(this.img.liked)
+    },
+    watchDisliked: function() {
+      console.log(this.img.liked)
+    },
   },
   methods:{
       makeToast(message, variant) {
@@ -175,13 +191,26 @@ export default {
         this.formLike.postId = id;
         this.formLike.username = getUsernameFromToken();
         this.formLike.liked = liked;
-        this.axios.post('/like', this.formLike)
-          .then(response => { console.log(response.data);
-                              this.makeToast("Liked !!!", "success");
+        this.item.foo = "masha";
+        this.axios.post('/media-api/like', this.formLike)
+        .then(response => { this.watch = response.data;
+                            console.log(this.watch);
+                            if(this.watch.liked == true){
+                              this.watchLiked = true;
+                              this.watchDisliked = false;
+                            }else if(this.watch.liked == false){
+                              this.watchLiked = false;
+                              this.watchDisliked = true;
+                            }else{
+                              this.watchLiked = false;
+                              this.watchDisliked = false;
+                            }
+                              
+                            this.makeToast("Liked !!!", "success");
                             })
-          .catch(error => { console.log(error);
+        .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
-                          })
+                        })
       },
       getCollections() {
         var user = getUsernameFromToken();
