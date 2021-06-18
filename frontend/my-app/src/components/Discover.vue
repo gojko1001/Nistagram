@@ -8,6 +8,10 @@
               class="mb-2">
             <h4>@{{img.username}}</h4>
             <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+            <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
+              <i class="fa fa-ban fa-fw"></i>
+            </button>
+            
             <p style="color:blue">{{img.location.name}}</p>
 
             <div v-for="(img, q) in img.imageBytes" :key="'D'+q">
@@ -78,6 +82,10 @@ export default {
               postId: 0,
               username:''
             },
+            report:{
+              requestedBy: '',
+              mediaId:''
+            },
         }
     },
   mounted: function(){
@@ -96,7 +104,7 @@ export default {
             })
     }
     this.$nextTick(function () {
-      this.axios.get('/media-api/image/discover/' + this.username)
+      this.axios.get('/media-api/image/discover')
                   .then(response => { this.info = response.data;
                                       for(let i=0; i< response.data.length; i++){
                                         for(let j=0; j<this.info[i].imageBytes.length; j++){
@@ -159,6 +167,21 @@ export default {
         }
         
       },
+      reportPost(id){
+        this.report.requestedBy = getUsernameFromToken();
+        this.report.mediaId = id;
+        if(this.report.requestedBy != null){
+          this.axios.post('/media-api/inappropriate', this.report)
+          .then(response => { console.log(response.data);
+                              this.makeToast("Reported !!!", "success");
+                            })
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
+      }
     }
 }
 </script>

@@ -58,8 +58,8 @@ public class PostController {
     }
 
 
-    @GetMapping("/discover/{username}")
-    public ResponseEntity getDiscoverImages(@PathVariable("username") String username) {
+    @GetMapping("/discover")
+    public ResponseEntity getDiscoverImages() {
         //Logger.info("Get discover images.", username);
         List<Post> discoverPosts = postService.getPublicPosts();
         // TODO: provera da l je profil public i da l se prate ili je u pitanju gost
