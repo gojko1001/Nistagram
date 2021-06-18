@@ -29,7 +29,7 @@
 
 <script>
 import { VERIFY_USER_PATH, GET_CATEGORIES_PATH, USER_PATH, SERVER_NOT_RESPONDING } from '../util/constants';
-import { getEmailFromToken } from '../util/token';
+import { getUsernameFromToken } from '../util/token';
 export default {
   name: 'VerificationRequest',
   data() {
@@ -44,7 +44,7 @@ export default {
       }
   },
   mounted: function(){
-        this.username = getEmailFromToken();
+        this.username = getUsernameFromToken();
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + localStorage.getItem('JWT'),
                                                             }                                          
