@@ -168,7 +168,7 @@ export default {
         
       },
       reportPost(id){
-        this.report.requestedBy = getEmailFromToken();
+        this.report.requestedBy = getUsernameFromToken();
         this.report.mediaId = id;
         if(this.report.requestedBy != null){
           this.axios.post('/media-api/inappropriate', this.report)
