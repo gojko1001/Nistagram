@@ -33,7 +33,7 @@ public class UserMapper {
         userDto.setBirthDate(user.getBirthDate());
         userDto.setUserGender(user.getUserGender());
         if(user.getVerificationRequest() != null)
-            userDto.setStatus(user.getVerificationRequest().getStatus().name());
+            userDto.setStatus(user.getVerificationRequest().getStatus());
         return userDto;
     }
 

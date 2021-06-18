@@ -12,9 +12,9 @@
             required
           ></b-form-input>
           <br>
-          <select v-model="form.category" id="categories">
+          <b-form-select v-model="form.category" id="categories">
             <option v-for="c in categories" :key="c.id" :value="c">{{ c.name }}</option>
-          </select>
+          </b-form-select>
           <br>
           <span>ID card: </span>
           <input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required>
@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import { VERIFY_USER_PATH, GET_CATEGORIES_PATH } from '../util/constants';
+import { VERIFY_USER_PATH, GET_CATEGORIES_PATH, USER_PATH, SERVER_NOT_RESPONDING } from '../util/constants';
+import { getEmailFromToken } from '../util/token';
 export default {
   name: 'VerificationRequest',
   data() {
@@ -38,10 +39,25 @@ export default {
           category: '',
           fileName: '',
         },
+        username: '',
         categories: [],
       }
   },
   mounted: function(){
+        this.username = getEmailFromToken();
+        this.axios.get(USER_PATH + '/' + this.username, {   headers:{
+                                                                Authorization: "Bearer " + localStorage.getItem('JWT'),
+                                                            }                                          
+            }).then(response => {
+                                this.user = response.data;
+                                console.log(response.data);
+            }).catch(error => { if(!error.response) {
+                                    this.makeToast(SERVER_NOT_RESPONDING, "warning");
+                                    return
+                                }
+                                window.location.href = '/home'
+            })
+
         this.axios.get(GET_CATEGORIES_PATH)
                         .then(response => {
                             this.categories = response.data;
@@ -50,7 +66,7 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.post(VERIFY_USER_PATH, this.form)
+        this.axios.post(VERIFY_USER_PATH + '/' + this.username, this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("Your verification request has been sent successfully.", "success");
                                       window.location.href = "/discover";
@@ -71,7 +87,7 @@ export default {
         this.formData.append("file", file);
       },
       startupload(){
-        this.axios.post('/media-api/image', this.formData, {
+        this.axios.post('/user-api/verify/save_id', this.formData, {
           headers:{
             Accept: 'application/json',
             'Content-Type':'multipart/form-data'

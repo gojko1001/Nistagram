@@ -2,11 +2,13 @@
     <div style="padding:30px 20%; width: 100%;">
         <div id="userInfo">
             <img src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
-            <span><span class="fullName"><i v-if="user.verificationStatus == 'APPROVED'" class="fas fa-user-check"/> {{user.fullName}}</span><br>
+            <span><span class="fullName"><i v-if="user.status == 'APPROVED'" class="fas fa-user-check"/> {{user.fullName}}</span><br>
                   @{{user.username}}<br>
                   {{user.bio}}<br>
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
-                  <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link>
+                  <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
+                  <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
+                  <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && isFollowing" variant="primary" @click="unfollowUser(username)">Unfollow</b-btn>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && !isFollowing" variant="primary" @click="followUser()">Follow</b-btn><hr>
             </span>

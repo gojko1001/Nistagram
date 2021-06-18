@@ -33,11 +33,10 @@ public class VerificationRequestService implements IVerificationRequestService {
 
     public VerificationRequest createVerifyRequest(VerificationRequest verificationRequest, User user) {
         verificationRequest.setStatus(VerificationStatus.PENDING);
-        if(user != null){
-            user.setVerificationRequest(verificationRequest);
-            userService.save(user);
-        }
-        return save(verificationRequest);
+        VerificationRequest dbRequest = save(verificationRequest);
+        user.setVerificationRequest(verificationRequest);
+        userService.save(user);
+        return dbRequest;
     }
 
     public VerificationRequest updateVerifyRequest(VerificationRequest verificationRequest) {
