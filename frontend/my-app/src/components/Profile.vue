@@ -265,7 +265,7 @@
                                         The video is not supported by your browser.
                                     </video>
                                 </div>
-                                <button class="heart inter" v-bind:class="{'black': !img.highlighted, 'red': img.highlighted}" style="margin-left:380px">
+                                <button class="heart inter" v-bind:class="{'black': !img.highlighted, 'red': img.highlighted}" @click="highlightStory(img.id)" style="margin-left:380px">
                                     <i class="fas fa-highlighter"></i>
                                 </button>
                                 <br>
@@ -519,6 +519,14 @@ export default {
                                             }     
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
+                });
+        },
+        highlightStory(storyId){
+            this.axios.post('/media-api/story/highlight/' + storyId)
+                        .then(response => { console.log(response.data); 
+                                            this.makeToast(response.data, "success");                
+                        }).catch(error => { console.log(error.message);
+                                            this.makeToast(error.message, "danger");
                 });
         },
         getCollections() {

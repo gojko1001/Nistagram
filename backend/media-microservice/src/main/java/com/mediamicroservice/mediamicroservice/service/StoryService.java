@@ -107,13 +107,16 @@ public class StoryService implements IStoryService {
         Story story = storyRepository.findStoryById(storyId);
         if(story == null)
             return new ResponseEntity("Choosen story doesn't exist.", HttpStatus.BAD_REQUEST);
+        String message = "";
         if(story.isHighlighted()){
             story.setHighlighted(false);
+            message = "Story has been removed from highlights.";
         }else{
             story.setHighlighted(true);
+            message = "Story has been added to highlights.";
         }
         storyRepository.save(story);
-        return  new ResponseEntity(HttpStatus.OK);
+        return  new ResponseEntity(message, HttpStatus.OK);
     }
 
     @Override
