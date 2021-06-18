@@ -28,7 +28,7 @@
 
 <script>
 import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
-import { getEmailFromToken } from '../util/token';
+import { getUsernameFromToken } from '../util/token';
 export default {
   name: 'AllVerificationRequest',
   data(){
@@ -56,7 +56,7 @@ export default {
         }
     },
   mounted: function(){
-    this.username = getEmailFromToken();
+    this.username = getUsernameFromToken();
     if(this.username != null){
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + localStorage.getItem('JWT'),
