@@ -19,7 +19,7 @@ public interface IUserService {
 
     User registerUser(UserRegistrationDto userReg, boolean isGoogleUser);
 
-    User updateUser(User user, String oldUsername);
+    User updateUser(User user, String oldUsername, String jwt);
 
     User save(User user);
 

@@ -9,6 +9,7 @@ import com.nistagram.authenticationmicroservice.dto.UserDto;
 import com.nistagram.authenticationmicroservice.exception.BadRequestException;
 import com.nistagram.authenticationmicroservice.exception.InvalidActionException;
 import com.nistagram.authenticationmicroservice.exception.NotFoundException;
+import com.nistagram.authenticationmicroservice.exception.UnauthorizedException;
 import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.repoistory.IUserCredentialsRepository;
 import com.nistagram.authenticationmicroservice.security.JwtService;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 @Service
 public class UserCredentialsService implements IUserCredentialsService {
@@ -38,7 +40,7 @@ public class UserCredentialsService implements IUserCredentialsService {
     @Autowired
     private EmailService emailService;
 
-
+    @Override
     public UserCredentials findByUsername(String username) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
         if (userCredentials == null) {
@@ -48,6 +50,7 @@ public class UserCredentialsService implements IUserCredentialsService {
         return userCredentials;
     }
 
+    @Override
     public UserCredentials create(UserCredentialsDto userCredentialsDto) {
         blackListService.isBlacklisted(userCredentialsDto.getPassword());
         UserCredentials userCredentials = new UserCredentials();
@@ -64,16 +67,18 @@ public class UserCredentialsService implements IUserCredentialsService {
         return userCredentialsRepository.save(userCredentials);
     }
 
-    public UserCredentials login(UserCredentialsDto userCredentialsDto) throws IOException {
-        Logger.infoDb("Try to find user credentials with username: " + userCredentialsDto.getUsername());
-        UserCredentials userCredentials = userCredentialsRepository.findByUsername(userCredentialsDto.getUsername());
-        if (userCredentials == null || !passwordEncoder.matches(userCredentialsDto.getPassword(), userCredentials.getPassword()))
+    @Override
+    public UserCredentials login(String username, String password) {
+        Logger.infoDb("Try to find user credentials with username: " + username);
+        UserCredentials userCredentials = userCredentialsRepository.findByUsername(username);
+        if (userCredentials == null || !passwordEncoder.matches(password, userCredentials.getPassword()))
             throw new BadRequestException("Username or password is not correct.");
         if (!userCredentials.getVerified())
             throw new InvalidActionException("The account must be verified.");
         return userCredentials;
     }
 
+    @Override
     public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail().split("@")[0]);
         if (userCredentials != null)
@@ -98,8 +103,34 @@ public class UserCredentialsService implements IUserCredentialsService {
 
     }
 
+    @Override
+    public void changeUsername(String oldUsername, String newUsername){
+        UserCredentials credentials = findByUsername(oldUsername);
+        credentials.setUsername(newUsername);
+        userCredentialsRepository.save(credentials);
+    }
+
+    @Override
+    public void changePassword(ResetPasswordDto resetPasswordDto, String jwt){
+        String username = jwtService.extractUsername(jwt.substring(7));
+        if(username == null){
+            throw new UnauthorizedException("Bad credentials!");
+        }
+        login(username, resetPasswordDto.getOldPassword());
+        if(!resetPasswordDto.getPassword().equals(resetPasswordDto.getRepeatPassword()))
+            throw new BadRequestException("Repeated password is incorrect!");
+        blackListService.isBlacklisted(resetPasswordDto.getPassword());
+        if(!passwordPatternChecker(resetPasswordDto.getPassword()))
+            throw new BadRequestException("Password is too weak");
+
+        UserCredentials user = userCredentialsRepository.findByUsername(username);
+        user.setPassword(passwordEncoder.encode(resetPasswordDto.getPassword()));
+        userCredentialsRepository.save(user);
+    }
+
+    @Override
     public void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) {
-        if (!isPassword(resetPasswordDto.getPassword(), resetPasswordDto.getRepeatPassword())) {
+        if (!resetPasswordDto.getPassword().equals(resetPasswordDto.getRepeatPassword())) {
             throw new BadRequestException("Passwords are not the same.");
         }
         blackListService.isBlacklisted(resetPasswordDto.getPassword());
@@ -111,11 +142,13 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentialsRepository.save(userCredentials);
     }
 
+    @Override
     public void sendResetPasswordLink(String email) {
         UserDto user = userConnection.getUserByEmail(email);
         emailService.resetPassword(user.getUsername(), user.getEmail(), user.getFullName());
     }
 
+    @Override
     public String verifyAccount(String username) {
         String extractedUsername = jwtService.extractUsername(username);
         UserCredentials userCredentials = findByUsername(extractedUsername);
@@ -126,8 +159,9 @@ public class UserCredentialsService implements IUserCredentialsService {
         return "Your account has been verified successfully";
     }
 
-    private boolean isPassword(String password1, String password2) {
-        return password1.equals(password2);
-    }
 
+    private boolean passwordPatternChecker(String password) {
+        Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");
+        return patternPass.matcher(password).matches();
+    }
 }

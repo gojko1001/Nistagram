@@ -1,18 +1,12 @@
 package com.nistagram.usermicroservice.controller;
 
-import com.nistagram.usermicroservice.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.domain.User;
-import com.nistagram.usermicroservice.verify_account.controller.dto.VerifyRequestDto;
-import com.nistagram.usermicroservice.verify_account.controller.mapping.VerifyAccountMapper;
-import com.nistagram.usermicroservice.verify_account.domain.UserCategory;
-import com.nistagram.usermicroservice.verify_account.domain.VerificationRequest;
 import com.nistagram.usermicroservice.controller.dto.UserDto;
 import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.controller.dto.UserUpdateDto;
+import com.nistagram.usermicroservice.controller.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.controller.mapper.UserMapper;
+import com.nistagram.usermicroservice.jwtService;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.interfaces.IUserService;
-import com.nistagram.usermicroservice.verify_account.service.interfaces.IUserCategoryService;
-import com.nistagram.usermicroservice.verify_account.service.interfaces.IVerificationRequestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,25 +22,21 @@ public class UserController {
     @Autowired
     private IUserService userService;
     @Autowired
-    private IVerificationRequestService verificationRequestService;
-    @Autowired
-    private IUserCategoryService userCategoryService;
+    private jwtService jwtService;
 
     @GetMapping
-//    @PreAuthorize("hasAuthority('ALL_USERS')")
     public List<UserDto> getAll() {
         Logger.info("Get all users", "");
         return UserMapper.mapUserListToUserDtoList(userService.getAll());
     }
 
     @GetMapping("/{username}")
-//    @PreAuthorize("hasAuthority('GET_USER')")
     public UserDto getUserByUsername(@PathVariable String username) {
         Logger.info("Get user by username", username);
         return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
     }
+
     @PostMapping("/find")
-//    @PreAuthorize("hasAuthority('GET_USER')")
     public UserDto getUserByEmail(@RequestBody String email) {
         return UserMapper.mapUserToUserDto(userService.findUserByEmail(email));
     }
@@ -61,11 +51,14 @@ public class UserController {
         userService.registerUser(userReg, true);
     }
 
-    @PutMapping("/{oldUsername}")
-//    @PreAuthorize("hasAuthority('EDIT_PROFILE')")
-    public UserUpdateDto updateProfile(@RequestBody UserUpdateDto userUpdateDto, @PathVariable String oldUsername) {
-        Logger.info("Try to edit user: " + oldUsername, userUpdateDto.getUser().getUsername());
-        return UserMapper.mapUserToUserUpdateDto(userService.updateUser(UserMapper.mapUserUpdateDtoToUser(userUpdateDto), oldUsername));
+    @PutMapping()
+    public UserDto updateProfile(@RequestBody UserDto userDto,
+                                 @RequestHeader("Authorization") String jwt) {
+        String username = jwtService.extractUsername(jwt);
+        if (username == null)
+            throw new UnauthorizedException("Access denied");
+        Logger.info("Try to edit user: " + username, userDto.getUsername());
+        return UserMapper.mapUserToUserDto(userService.updateUser(UserMapper.mapUserDtoToUser(userDto), username, jwt));
     }
 
     @GetMapping("/search")

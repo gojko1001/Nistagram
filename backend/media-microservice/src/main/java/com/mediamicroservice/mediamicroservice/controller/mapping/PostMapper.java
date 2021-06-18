@@ -16,9 +16,9 @@ public class PostMapper {
         imageBytesDto.setTimestamp(post.getMedia().getTimestamp());
         imageBytesDto.setHashtags(post.getMedia().getHashtags());
         imageBytesDto.setComments(post.getComments());
-        //imageBytesDto.setImage(post.getMedia().isImage());
         imageBytesDto.setImageBytes(new ArrayList<>());
         imageBytesDto.setLikes(post.getLikes());
+        imageBytesDto.setMediaId(post.getMedia().getId());
         return imageBytesDto;
     }
 }

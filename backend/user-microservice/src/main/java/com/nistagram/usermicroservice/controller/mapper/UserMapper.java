@@ -1,9 +1,8 @@
 package com.nistagram.usermicroservice.controller.mapper;
 
-import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.controller.dto.UserDto;
 import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.controller.dto.UserUpdateDto;
+import com.nistagram.usermicroservice.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +10,17 @@ import java.util.List;
 public class UserMapper {
     public static User mapUserDtoToUser(UserDto userDto) {
         User user = new User();
+        user.setUsername(userDto.getUsername());
         user.setFullName(userDto.getFullName());
         user.setEmail(userDto.getEmail());
         user.setPhone(userDto.getPhone());
-        user.setUserGender(userDto.getUserGender());
-        user.setBirthDate(userDto.getBirthDate());
-        user.setUsername(userDto.getUsername());
         user.setWebSite(userDto.getWebSite());
         user.setBio(userDto.getBio());
+        user.setBirthDate(userDto.getBirthDate());
+        user.setUserGender(userDto.getUserGender());
+        user.setPublicProfile(userDto.isPublicProfile());
+        user.setPublicDM(userDto.isPublicDM());
+        user.setTaggable(userDto.isTaggable());
         return user;
     }
 
@@ -32,8 +34,11 @@ public class UserMapper {
         userDto.setBio(user.getBio());
         userDto.setBirthDate(user.getBirthDate());
         userDto.setUserGender(user.getUserGender());
-        if(user.getVerificationRequest() != null)
+        if (user.getVerificationRequest() != null)
             userDto.setStatus(user.getVerificationRequest().getStatus());
+        userDto.setPublicProfile(user.isPublicProfile());
+        userDto.setPublicDM(user.isPublicDM());
+        userDto.setTaggable(user.isTaggable());
         return userDto;
     }
 
@@ -44,24 +49,7 @@ public class UserMapper {
         return userDtos;
     }
 
-    public static User mapUserUpdateDtoToUser(UserUpdateDto updateDto) {
-        User user = mapUserDtoToUser(updateDto.getUser());
-        user.setPublicProfile(updateDto.isPublicProfile());
-        user.setPublicDM(updateDto.isPublicDM());
-        user.setTaggable(updateDto.isTaggable());
-        return user;
-    }
-
-    public static UserUpdateDto mapUserToUserUpdateDto(User user) {
-        UserUpdateDto updateDto = new UserUpdateDto();
-        updateDto.setUser(mapUserToUserDto(user));
-        updateDto.setPublicProfile(user.isPublicProfile());
-        updateDto.setPublicDM(user.isPublicDM());
-        updateDto.setTaggable(user.isTaggable());
-        return updateDto;
-    }
-
-    public static User mapUserRegistrationDtoToUser(UserRegistrationDto regDto){
+    public static User mapUserRegistrationDtoToUser(UserRegistrationDto regDto) {
         User user = new User();
         user.setUsername(regDto.getUsername());
         user.setFullName(regDto.getFullName());
