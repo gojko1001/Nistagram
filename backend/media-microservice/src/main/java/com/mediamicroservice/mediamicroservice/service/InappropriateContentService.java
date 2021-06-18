@@ -1,6 +1,7 @@
 package com.mediamicroservice.mediamicroservice.service;
 
 import com.mediamicroservice.mediamicroservice.controller.dto.CreateInappropriateContentDto;
+import com.mediamicroservice.mediamicroservice.controller.dto.ReportConfirmationDto;
 import com.mediamicroservice.mediamicroservice.domain.InappropriateContent;
 import com.mediamicroservice.mediamicroservice.domain.Media;
 import com.mediamicroservice.mediamicroservice.domain.RequestStatus;
@@ -11,6 +12,7 @@ import com.mediamicroservice.mediamicroservice.service.interfaces.IInappropriate
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,5 +45,44 @@ public class InappropriateContentService implements IInappropriateContentService
 
         inappropriateContentRepository.save(inappropriateContent1);
         return inappropriateContent1;
+    }
+
+    @Override
+    public List<CreateInappropriateContentDto> getAllWithPendingStatus() {
+        List<CreateInappropriateContentDto> list = new ArrayList<>();
+        List<InappropriateContent> all = getAll();
+        for(InappropriateContent ic:all)
+            if(ic.getRequestStatus().equals(RequestStatus.PENDING)){
+                CreateInappropriateContentDto createInappropriateContentDto =new CreateInappropriateContentDto();
+                createInappropriateContentDto.setMediaId(ic.getMedia().getId());
+                createInappropriateContentDto.setRequestedBy(ic.getRequestedBy());
+                list.add(createInappropriateContentDto);
+            }
+
+        return list;
+    }
+
+    @Override
+    public void reportConfirmation(ReportConfirmationDto reportConfirmationDto) {
+        InappropriateContent inappropriateContent = inappropriateContentRepository.findInappropriateContentById(reportConfirmationDto.getId());
+        List<InappropriateContent> inappropriateContentList = getAll();
+        if(reportConfirmationDto.getConfirmed().equals("confirmed")){
+            inappropriateContent.setRequestStatus(RequestStatus.ACCEPTED);
+            inappropriateContent.setRespondedBy(reportConfirmationDto.getConfirmedBy());
+            inappropriateContentRepository.save(inappropriateContent);
+            for(InappropriateContent ic:inappropriateContentList){
+                if(ic.getMedia().getId().equals(inappropriateContent.getMedia().getId()) && ic.getRequestStatus().equals(RequestStatus.PENDING)){
+                    ic.setRequestStatus(RequestStatus.DENIED);
+                    ic.setRespondedBy(reportConfirmationDto.getConfirmedBy());
+                    inappropriateContentRepository.save(ic);
+
+                }
+            }
+        }
+        else{
+            inappropriateContent.setRequestStatus(RequestStatus.DENIED);
+            inappropriateContent.setRespondedBy(reportConfirmationDto.getConfirmedBy());
+            inappropriateContentRepository.save(inappropriateContent);
+        }
     }
 }

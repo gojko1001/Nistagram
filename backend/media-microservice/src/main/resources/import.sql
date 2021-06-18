@@ -219,6 +219,9 @@ insert into inappropriate_content(request_status, requested_by, responded_by,med
 insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "masa","nikola", 2);
 insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "tasa","nikola", 3);
 insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "tasa","nikola", 4);
+insert into inappropriate_content(request_status, requested_by,media_id) values(0, "gojko", 2);
+insert into inappropriate_content(request_status, requested_by, media_id) values(0, "tasa", 2);
+insert into inappropriate_content(request_status, requested_by, media_id) values(0, "gojko", 4);
 
 
 
