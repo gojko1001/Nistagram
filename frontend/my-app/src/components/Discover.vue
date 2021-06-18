@@ -104,7 +104,7 @@ export default {
             })
     }
     this.$nextTick(function () {
-      this.axios.get('/media-api/image/discover')
+      this.axios.get('/media-api/image/discover/' + this.username)
                   .then(response => { this.info = response.data;
                                       for(let i=0; i< response.data.length; i++){
                                         for(let j=0; j<this.info[i].imageBytes.length; j++){
