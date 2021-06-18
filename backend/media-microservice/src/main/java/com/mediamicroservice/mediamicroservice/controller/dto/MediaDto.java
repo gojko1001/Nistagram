@@ -14,4 +14,5 @@ public class MediaDto {
     private List<String> tags;
     private MediaName mediaName;
     private List<String> userTags;
+    private boolean forCloseFriends;
 }
