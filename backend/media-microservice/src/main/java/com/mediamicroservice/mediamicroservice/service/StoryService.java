@@ -8,10 +8,7 @@ import com.mediamicroservice.mediamicroservice.domain.*;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IStoryRepository;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IMediaNameService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IStoryService;
+import com.mediamicroservice.mediamicroservice.service.interfaces.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +34,9 @@ public class StoryService implements IStoryService {
     private IMediaRepository mediaRepository;
     @Autowired
     private IMediaNameService mediaNameService;
+    @Autowired
+    private IInappropriateContentService inappropriateContentService;
+
 
     private static String uploadDir = "user-photos";
 
@@ -127,11 +127,25 @@ public class StoryService implements IStoryService {
             filePath = filePath.concat("/src/" + uploadDir + "/");
             for (Story story : stories) {
                 for(MediaName mn : story.getMedia().getMediaName()){
-                    storyBytesDto.add(imageFile(story, filePath + mn.getFileName(), mn.isImage()));
+                    if(!isReported(story.getMedia().getId()))
+                        storyBytesDto.add(imageFile(story, filePath + mn.getFileName(), mn.isImage()));
                 }
             }
         }
         return storyBytesDto;
+    }
+
+    public boolean isReported(Long mediaId){
+        boolean isReported = false;
+        List<InappropriateContent> inappropriateContentList = inappropriateContentService.getAll();
+        for(InappropriateContent ic:inappropriateContentList) {
+            if (ic.getMedia().getId().equals(mediaId) && ic.getRequestStatus().equals(RequestStatus.ACCEPTED)) {
+                isReported = true;
+                break;
+            }else
+                isReported = false;
+        }
+        return isReported;
     }
 
     @Override

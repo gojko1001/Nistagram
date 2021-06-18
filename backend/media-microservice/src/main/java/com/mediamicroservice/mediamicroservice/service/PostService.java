@@ -11,8 +11,10 @@ import com.mediamicroservice.mediamicroservice.repository.IMediaNameRepository;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
+import com.mediamicroservice.mediamicroservice.service.interfaces.IInappropriateContentService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +42,8 @@ public class PostService implements IPostService {
     private UserConnection userConnection;
     @Autowired
     private IMediaNameRepository mediaNameRepository;
+    @Autowired
+    private IInappropriateContentService inappropriateContentService;
 
 
     private static String uploadDir = "user-photos";
@@ -71,6 +75,19 @@ public class PostService implements IPostService {
         if (posts.isEmpty())
             Logger.info("There is no any post", username);
         return posts;
+    }
+
+    public boolean isReported(Long mediaId){
+        boolean isReported = false;
+        List<InappropriateContent> inappropriateContentList = inappropriateContentService.getAll();
+        for(InappropriateContent ic:inappropriateContentList) {
+            if (ic.getMedia().getId().equals(mediaId) && ic.getRequestStatus().equals(RequestStatus.ACCEPTED)) {
+                isReported = true;
+                break;
+            }else
+                isReported = false;
+        }
+        return isReported;
     }
 
     @Override
@@ -107,7 +124,8 @@ public class PostService implements IPostService {
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/src/" + uploadDir + "/");
             for (Post post : posts) {
-                imageBytesDtos.add(imageFile(post, filePath));
+                if(!isReported(post.getMedia().getId()))
+                    imageBytesDtos.add(imageFile(post, filePath));
             }
         }
         return imageBytesDtos;
