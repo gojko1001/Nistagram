@@ -124,7 +124,7 @@ public class StoryService implements IStoryService {
         List<StoryBytesDto> storyBytesDto = new ArrayList<>();
         if (stories != null) {
             String filePath = new File("").getAbsolutePath();
-            filePath = filePath.concat("/" + uploadDir + "/");
+            filePath = filePath.concat("/src/" + uploadDir + "/");
             for (Story story : stories) {
                 for(MediaName mn : story.getMedia().getMediaName()){
                     storyBytesDto.add(imageFile(story, filePath + mn.getFileName(), mn.isImage()));
