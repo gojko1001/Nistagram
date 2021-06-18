@@ -2,8 +2,8 @@
     <div style="padding:30px 20%; width: 100%;">
         <div id="userInfo">
             <img src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
-            <span><span class="fullName">{{user.fullName}}</span><br>
-                  @{{user.username}} <br>
+            <span><span class="fullName"><i v-if="user.verificationStatus == 'APPROVED'" class="fas fa-user-check"/> {{user.fullName}}</span><br>
+                  @{{user.username}}<br>
                   {{user.bio}}<br>
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link>

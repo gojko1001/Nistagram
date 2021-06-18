@@ -3,7 +3,7 @@
       <table v-if="searchingType == 'profile' && showProfile==false">
       <tbody>
         <tr v-for="(res,i) in profiles" :key="i" :res="res">
-          <td><button v-on:click="getProfile(res.username)" variant="primary" style="width:200px;">#{{res.fullName}}</button></td>
+          <td><button v-on:click="getProfile(res.username)" variant="primary" style="width:200px;"><i v-if="res.verificationStatus === 'APPROVED'" class="fas fa-user-check"/> {{res.fullName}}</button></td>
         </tr>
       </tbody>
     </table>
@@ -142,8 +142,7 @@ methods:{
                     this.showProfile = true;
                     this.searchingType = '';
                     this.info = response.data;
-                    this.loadResults(response.data.length);
-                                                         
+                    this.loadResults(response.data.length);                               
                 })
                   .catch(error => { console.log(error);
                                     this.makeToast("Error occurred. ", "danger");

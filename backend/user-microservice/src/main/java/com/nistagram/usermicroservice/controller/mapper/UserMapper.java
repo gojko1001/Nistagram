@@ -32,6 +32,8 @@ public class UserMapper {
         userDto.setBio(user.getBio());
         userDto.setBirthDate(user.getBirthDate());
         userDto.setUserGender(user.getUserGender());
+        if(user.getVerificationRequest() != null)
+            userDto.setStatus(user.getVerificationRequest().getStatus().name());
         return userDto;
     }
 
