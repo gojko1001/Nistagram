@@ -130,7 +130,11 @@
                                         The video is not supported by your browser.
                                     </video>
                                 </div>
-                                
+                                <div style="margin-top:-30px; margin-left:20px">
+                                    <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                                        <i class="fas fa-user-tag"></i> {{tag.username}}
+                                    </span>
+                                </div>
 
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
@@ -179,6 +183,11 @@
                                     <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
                                         The video is not supported by your browser.
                                     </video>
+                                </div>
+                                <div style="margin-top:-30px; margin-left:20px">
+                                    <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                                        <i class="fas fa-user-tag"></i> {{tag.username}}
+                                    </span>
                                 </div>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
@@ -229,6 +238,11 @@
                                     <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
                                         The video is not supported by your browser.
                                     </video>
+                                </div>
+                                <div style="margin-top:-30px; margin-left:20px">
+                                    <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                                        <i class="fas fa-user-tag"></i> {{tag.username}}
+                                    </span>
                                 </div>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
@@ -320,6 +334,7 @@ export default {
             info: [{
                 username:'',
                 location:{name:''},
+                userTags:[{username:''}],
                 imageBytes:[{
                     imageByte:'',
                     image:''
@@ -332,6 +347,7 @@ export default {
             favourites: [{
                 username:'',
                 location:{ name:''},
+                userTags:[{username:''}],
                 comments:[],
                 likes:[],
                 imageBytes:[{

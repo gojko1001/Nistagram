@@ -19,6 +19,7 @@ public class PostMapper {
         imageBytesDto.setImageBytes(new ArrayList<>());
         imageBytesDto.setLikes(post.getLikes());
         imageBytesDto.setMediaId(post.getMedia().getId());
+        imageBytesDto.setUserTags(post.getMedia().getUserTags());
         return imageBytesDto;
     }
 }

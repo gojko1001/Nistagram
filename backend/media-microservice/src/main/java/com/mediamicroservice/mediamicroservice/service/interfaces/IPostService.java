@@ -32,4 +32,6 @@ public interface IPostService {
     List<ImageBytesDto> searchLocation(String location);
 
     List<Post> getPublicPosts();
+
+    ResponseEntity getDiscoverImages(String username);
 }

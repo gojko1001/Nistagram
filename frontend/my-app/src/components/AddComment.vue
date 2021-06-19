@@ -16,6 +16,11 @@
                     The video is not supported by your browser.
                 </video>
             </div>
+            <div style="margin-top:-30px; margin-left:20px">
+              <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                  <i class="fas fa-user-tag"></i> {{tag.username}}
+              </span>
+            </div>
 
             <br>
             <button class="heart inter" v-bind:class="{'black': !watchLiked, 'red': watchLiked}" @click="likePost(img.id, true)">
@@ -82,6 +87,7 @@ export default {
             username:'',
             img: {
               location:{},
+              userTags:[{username:''}],
               imageBytes:[{
                 image:'',
                 imageByte:''

@@ -10,10 +10,7 @@ import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IMediaNameRepository;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IInappropriateContentService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
+import com.mediamicroservice.mediamicroservice.service.interfaces.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,9 +37,11 @@ public class PostService implements IPostService {
     @Autowired
     private UserConnection userConnection;
     @Autowired
-    private IMediaNameRepository mediaNameRepository;
+    private IMediaNameService mediaNameService;
     @Autowired
     private IInappropriateContentService inappropriateContentService;
+    @Autowired
+    private IUserTagService userTagService;
 
 
     private static String uploadDir = "user-photos";
@@ -100,7 +99,7 @@ public class PostService implements IPostService {
             if (fileName.contains(".mp4")) {
                 mediaName.setImage(false);
             }
-            mediaNameRepository.save(mediaName);
+            mediaNameService.save(mediaName);
             mediaNames.add(mediaName);
         }
         media.setUsername(imageDto.getUsername());
@@ -109,6 +108,16 @@ public class PostService implements IPostService {
         media.setLocation(location);
         media.setHashtags(tagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
+        List<UserTag> userTags = new ArrayList<>();
+        if(imageDto.getUserTags() != null){
+            for(String username : imageDto.getUserTags()){
+                UserTag userTag = new UserTag();
+                userTag.setUsername(username);
+                userTagService.save(userTag);
+                userTags.add(userTag);
+            }
+        }
+        media.setUserTags(userTags);
         media.setMediaName(mediaNames);
         mediaRepository.save(media);
         post.setMedia(media);
@@ -245,6 +254,26 @@ public class PostService implements IPostService {
         Set<Post> set = new HashSet<>(publicPosts);
         publicPosts = set.stream().collect(Collectors.toList());
         return publicPosts;
+    }
+
+    @Override
+    public ResponseEntity getDiscoverImages(String username){
+        List<Post> discoverPosts = new ArrayList<>();
+        if(username.equals("null")){  // for guests
+            discoverPosts = getPublicPosts();
+        }else{                      // for logged user
+            List<String> usernames = userTagService.getUserTagsByUsername(username);
+            usernames.add(username);
+            for(String u : usernames){
+                List<Post> posts = postRepository.findPostsByMedia_Username(u);
+                if(posts != null){
+                    for(Post p : posts){
+                        discoverPosts.add(p);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity(getImagesFiles(discoverPosts), HttpStatus.OK);
     }
 
 }
