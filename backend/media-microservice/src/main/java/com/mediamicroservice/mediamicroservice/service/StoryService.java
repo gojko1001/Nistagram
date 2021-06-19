@@ -87,6 +87,7 @@ public class StoryService implements IStoryService {
         media.setMediaName(mediaNames);
         mediaRepository.save(media);
         story.setMedia(media);
+        story.setForCloseFriends(imageDto.isForCloseFriends());
         save(story);
 
         return new ResponseEntity(HttpStatus.OK);
