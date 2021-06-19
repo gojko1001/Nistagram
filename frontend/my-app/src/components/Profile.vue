@@ -461,10 +461,13 @@ export default {
             else if(this.user.publicProfile){
                 this.getPosts();
                 this.getStories();
+                for(let follower of this.followers)
+                    if(follower.username == getUsernameFromToken())
+                        this.isFollowing = true
             }else{
                 for(let follower of this.followers){
                     if(follower.username == getUsernameFromToken()){
-                        this.isFollowing = true,
+                        this.isFollowing = true;
                         this.getPosts();
                         this.getStories();
                     }

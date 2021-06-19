@@ -33,5 +33,4 @@ insert into user_relation (user_id, related_user_id, enable_notification, relati
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 7, false, 1);
 
 -- to maja
-insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (4, 1, false, 0);
 insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (3, 1, false, 1);

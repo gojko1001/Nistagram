@@ -2,6 +2,7 @@ package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.UserRelation;
+import com.nistagram.usermicroservice.domain.UserRelationKey;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
 import com.nistagram.usermicroservice.controller.exception.*;
@@ -66,6 +67,7 @@ public class UserRelationService implements IUserRelationService {
         if (relatedUser.isPublicProfile())
             status = RelationStatus.FOLLOWING;
         UserRelation relation = new UserRelation(user, relatedUser, status, false);
+        relation.setId(new UserRelationKey(user.getId(), relatedUser.getId()));
         user.getUserRelations().add(relation);
         userService.save(user);
     }
@@ -103,6 +105,7 @@ public class UserRelationService implements IUserRelationService {
         UserRelation relation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
         if (relation != null) {
             relation.setRelationStatus(RelationStatus.BLOCKED);
+            relation.setId(new UserRelationKey(user.getId(), relatedUser.getId()));
         } else {
             relation = new UserRelation(user, relatedUser, RelationStatus.BLOCKED, false);
             user.getUserRelations().add(relation);
