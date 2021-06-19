@@ -85,4 +85,5 @@ public class PostController {
         return new ResponseEntity(postService.searchLocation(location), HttpStatus.OK);
     }
 
+
 }

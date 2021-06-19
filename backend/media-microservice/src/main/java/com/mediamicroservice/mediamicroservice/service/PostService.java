@@ -10,10 +10,7 @@ import com.mediamicroservice.mediamicroservice.logger.Logger;
 import com.mediamicroservice.mediamicroservice.repository.IMediaNameRepository;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IInappropriateContentService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
-import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
+import com.mediamicroservice.mediamicroservice.service.interfaces.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +40,8 @@ public class PostService implements IPostService {
     private IMediaNameRepository mediaNameRepository;
     @Autowired
     private IInappropriateContentService inappropriateContentService;
+    @Autowired
+    private IUserTagService userTagService;
 
 
     private static String uploadDir = "user-photos";
@@ -109,6 +108,16 @@ public class PostService implements IPostService {
         media.setLocation(location);
         media.setHashtags(tagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
+        List<UserTag> userTags = new ArrayList<>();
+        if(imageDto.getUserTags() != null){
+            for(String username : imageDto.getUserTags()){
+                UserTag userTag = new UserTag();
+                userTag.setUsername(username);
+                userTagService.save(userTag);
+                userTags.add(userTag);
+            }
+        }
+        media.setUserTags(userTags);
         media.setMediaName(mediaNames);
         mediaRepository.save(media);
         post.setMedia(media);

@@ -2,6 +2,7 @@ package com.mediamicroservice.mediamicroservice.controller.dto;
 
 import com.mediamicroservice.mediamicroservice.domain.Hashtag;
 import com.mediamicroservice.mediamicroservice.domain.Location;
+import com.mediamicroservice.mediamicroservice.domain.UserTag;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -20,4 +21,5 @@ public class StoryBytesDto {
     private Long mediaId;
     private boolean highlighted;
     private boolean forCloseFriends;
+    private List<UserTag> userTags;
 }

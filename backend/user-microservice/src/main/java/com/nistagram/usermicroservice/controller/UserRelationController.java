@@ -77,4 +77,5 @@ public class UserRelationController {
         Logger.info("Remove relation with user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
         relationService.removeUserRelation(relationDto);
     }
+
 }

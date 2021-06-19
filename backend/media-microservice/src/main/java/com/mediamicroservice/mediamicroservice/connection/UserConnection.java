@@ -1,5 +1,6 @@
 package com.mediamicroservice.mediamicroservice.connection;
 
+import com.mediamicroservice.mediamicroservice.controller.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpEntity;
@@ -59,5 +60,8 @@ public interface UserConnection {
 
     @GetMapping("/user/public_users")
     List<String> getPublicUsers();
+
+    @GetMapping("/user_relation//followings/{username}")
+    List<UserDto> getFollowings(@PathVariable String username);
 
 }
