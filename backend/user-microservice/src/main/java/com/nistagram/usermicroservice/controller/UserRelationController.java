@@ -1,9 +1,14 @@
 package com.nistagram.usermicroservice.controller;
 
-import com.nistagram.usermicroservice.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.JwtService;
 import com.nistagram.usermicroservice.controller.dto.UserDto;
 import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
+import com.nistagram.usermicroservice.controller.exception.NotFoundException;
+import com.nistagram.usermicroservice.controller.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.controller.mapper.RelationMapper;
+import com.nistagram.usermicroservice.controller.mapper.UserMapper;
+import com.nistagram.usermicroservice.domain.UserRelation;
+import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.interfaces.IUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,18 @@ import java.util.List;
 public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
+    @Autowired
+    private JwtService jwtService;
+
+    @GetMapping("/{relatedUsername}")
+    public UserRelationDto getUserRelation(@PathVariable String relatedUsername,
+                                           @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        UserRelation relation = relationService.findRelation(username, relatedUsername);
+        if(relation == null)
+            throw new NotFoundException("No relation found!");
+        return RelationMapper.mapRelationToRelationDto(relation);
+    }
 
     @GetMapping("/followers/{username}")
     public List<UserDto> getFollowers(@PathVariable String username){
@@ -76,5 +93,12 @@ public class UserRelationController {
     public void removeRelation(@RequestBody UserRelationDto relationDto){
         Logger.info("Remove relation with user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
         relationService.removeUserRelation(relationDto);
+    }
+
+    private String getUsernameFromToken(String tokenHeader){
+        String username = jwtService.extractUsername(tokenHeader);
+        if (username == null)
+            throw new UnauthorizedException("Access denied");
+        return username;
     }
 }

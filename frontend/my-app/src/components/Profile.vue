@@ -10,14 +10,15 @@
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
                   <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && isFollowing" variant="primary" @click="unfollowUser(username)">Unfollow</b-btn>
-                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && !isFollowing" variant="primary" @click="followUser()">Follow</b-btn><hr>
+                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'PENDING'" variant="outline-primary" @click="unfollowUser(username)">Pending</b-btn>
+                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'NOT_FOLLOWING'" variant="primary" @click="followUser()">Follow</b-btn><hr>
             </span>
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
                 <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn"><i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
                 <b-modal id="modal-followings" title="Following">
                     <div v-for="(follow,p) in followings" :key="p">
-                        <span>@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <span v-on:click="goToProfile(follow.username)">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right" @click="unfollowUser(follow.username)">Unfollow</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
@@ -29,7 +30,7 @@
                 <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn"><i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
                 <b-modal id="modal-followers" title="Followers">
                     <div v-for="(follow,p) in followers" :key="p">
-                        <span>@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <span @click="goToProfile(follow.username)">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right">Remove</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
@@ -307,7 +308,7 @@
 
 
 <script>
-import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH } from '../util/constants';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH } from '../util/constants';
 import { getToken, getUsernameFromToken } from '../util/token';
 export default {
     name: 'Profile',
@@ -315,6 +316,7 @@ export default {
         return{
             isUserProfile: false,
             isFollowing: false,
+            userRelation: {status: 'NOT_FOLLOWING', enableNotifications: false},
             user: '',
             username: this.$route.params.pUsername,
             info: [{
@@ -382,6 +384,18 @@ export default {
     },
     mounted: function(){
         this.isUserProfile = this.username == getUsernameFromToken();
+        if(!this.isUserProfile)
+            this.axios.get(USER_RELATION_PATH + "/" + this.username, {  headers:{
+                                                                            Authorization: "Bearer " + getToken(),
+                                                                        }   
+                
+            }).then(response => {
+                                this.userRelation.status = response.data.status,
+                                this.userRelation.enableNotifications = response.data.enableNotifications
+                                if(response.data.status == "FOLLOWING" || response.data.status == "MUTED" ||
+                                    response.data.status == "CLOSE_FRIEND")
+                                    this.isFollowing = true;
+            })
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + getToken(),
                                                             }                                          
@@ -392,7 +406,8 @@ export default {
                                             .then(response => {
                                                 this.numFollowers = response.data.length;
                                                 this.followers = response.data;
-                                                this.getUserMedia();
+                                                // this.getUserMedia();
+                                                this.getPosts();
                                             })
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
@@ -418,6 +433,9 @@ export default {
                                 solid: true,
                                 appendToast: false
                             })
+        },
+        goToProfile(username){
+            window.location.href = "/user/" + username;
         },
         commenting: function(id){
             this.hideCommenting = false;
@@ -451,29 +469,20 @@ export default {
                                 this.makeToast("Error occured.", "danger");
                             })
         },
-        getUserMedia(){
-            if(this.isUserProfile){
-                this.getPosts();
-                //this.getStories();
-                //this.getArchivedStories();
-                //this.getCollections();
-            }
-            else if(this.user.publicProfile){
-                this.getPosts();
-                this.getStories();
-                for(let follower of this.followers)
-                    if(follower.username == getUsernameFromToken())
-                        this.isFollowing = true
-            }else{
-                for(let follower of this.followers){
-                    if(follower.username == getUsernameFromToken()){
-                        this.isFollowing = true;
-                        this.getPosts();
-                        this.getStories();
-                    }
-                }
-            }
-        },
+        // getUserMedia(){
+        //     if(this.isUserProfile){
+        //         this.getPosts();
+        //     }
+        //     else if(this.user.publicProfile){
+        //         this.getPosts();
+        //     }else{
+        //         for(let follower of this.followers){
+        //             if(follower.username == getUsernameFromToken()){
+        //                 this.getPosts();
+        //             }
+        //         }
+        //     }
+        // },
         getPosts(){
             this.axios.get('/media-api/image/profile/' + this.username)
                     .then(response => { this.info = response.data;
@@ -610,6 +619,7 @@ export default {
             this.axios.post(FOLLOW_PATH, this.relationDto)
                     .then(() => {
                         this.makeToast("Follow request sent!", "success");
+                        window.location.reload();
                     }).catch(err => {
                         this.makeToast(SERVER_NOT_RESPONDING, "danger");
                     })

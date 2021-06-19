@@ -1,6 +1,7 @@
 package com.nistagram.usermicroservice.service.interfaces;
 
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
 
@@ -25,4 +26,6 @@ public interface IUserRelationService {
     void removeUserRelation(UserRelationDto userRelationDto);
 
     void setNotifications(UserRelationDto relationDto);
+
+    UserRelation findRelation(String username, String relatedUsername);
 }
