@@ -14,7 +14,6 @@ import com.mediamicroservice.mediamicroservice.service.interfaces.IHashtagServic
 import com.mediamicroservice.mediamicroservice.service.interfaces.IInappropriateContentService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.ILocationService;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

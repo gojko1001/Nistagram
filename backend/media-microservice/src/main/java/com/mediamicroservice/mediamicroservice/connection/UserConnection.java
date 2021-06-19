@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/*
 @Service
 public class UserConnection {
 
@@ -36,6 +36,7 @@ public class UserConnection {
 
     public List<String> getPublicUsers() {
         String url = "http://localhost:8762/user-api/user/public_users";
+
         List<String> list = new ArrayList<>();
         try {
             ResponseEntity<String[]> response = restTemplate.getForEntity(url, String[].class);
@@ -47,15 +48,16 @@ public class UserConnection {
         return list;
     }
 
-}
+} */
 
 //@FeignClient(value = "user-microservice", url = "http://localhost:3032")
-//public interface UserConnection {
-//
-//    @PostMapping("/user/are_public")
-//    List<String> arePublic(@RequestBody List<String> usernames);
-//
-//    @GetMapping("/user/public_users")
-//    List<String> getPublicUsers();
-//
-//}
+@FeignClient(name = "user-microservice")
+public interface UserConnection {
+
+    @PostMapping("/user/are_public")
+    List<String> arePublic(@RequestBody List<String> usernames);
+
+    @GetMapping("/user/public_users")
+    List<String> getPublicUsers();
+
+}
