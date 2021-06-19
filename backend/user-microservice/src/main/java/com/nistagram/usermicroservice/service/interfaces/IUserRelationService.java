@@ -15,15 +15,15 @@ public interface IUserRelationService {
 
     List<User> getEagerFollowings(String username, RelationStatus status);
 
-    void followUser(UserRelationDto relationDto);
+    void followUser(String username, String relatedUsername);
 
-    void acceptFollower(UserRelationDto relationDto);
+    void acceptFollower(String username, String relatedUsername);
 
-    void blockUser(UserRelationDto relationDto);
+    void blockUser(String username, String relatedUsername);
 
     void updateUserRelation(UserRelationDto relationDto);
 
-    void removeUserRelation(UserRelationDto userRelationDto);
+    void removeUserRelation(String username, String relatedUsername);
 
     void setNotifications(UserRelationDto relationDto);
 

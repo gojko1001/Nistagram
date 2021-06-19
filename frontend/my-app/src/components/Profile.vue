@@ -15,8 +15,9 @@
             </span>
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
-                <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn"><i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
-                <b-modal id="modal-followings" title="Following">
+                <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn" >
+                    <i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
+                <b-modal id="modal-followings" title="Following" @show="checkPermission">
                     <div v-for="(follow,p) in followings" :key="p">
                         <span v-on:click="goToProfile(follow.username)">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right" @click="unfollowUser(follow.username)">Unfollow</b-btn><hr>
@@ -27,8 +28,9 @@
                         </b-button>
                     </template>
                 </b-modal>
-                <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn"><i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
-                <b-modal id="modal-followers" title="Followers">
+                <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn">
+                    <i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
+                <b-modal id="modal-followers" title="Followers" @show="checkPermission">
                     <div v-for="(follow,p) in followers" :key="p">
                         <span @click="goToProfile(follow.username)">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right">Remove</b-btn><hr>
@@ -157,7 +159,7 @@
                                 </b-card-text>
                                 <hr>
                                 <span v-for="(comm,c) in img.comments" :key="c">
-                                    <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                                    <span @click="goToProfile(comm.username)"><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
                                 </span>
                             </b-card>              
                         </div>
@@ -406,8 +408,7 @@ export default {
                                             .then(response => {
                                                 this.numFollowers = response.data.length;
                                                 this.followers = response.data;
-                                                // this.getUserMedia();
-                                                this.getPosts();
+                                                this.getPosts(); // TODO: Hide posts from non followers
                                             })
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
@@ -469,20 +470,6 @@ export default {
                                 this.makeToast("Error occured.", "danger");
                             })
         },
-        // getUserMedia(){
-        //     if(this.isUserProfile){
-        //         this.getPosts();
-        //     }
-        //     else if(this.user.publicProfile){
-        //         this.getPosts();
-        //     }else{
-        //         for(let follower of this.followers){
-        //             if(follower.username == getUsernameFromToken()){
-        //                 this.getPosts();
-        //             }
-        //         }
-        //     }
-        // },
         getPosts(){
             this.axios.get('/media-api/image/profile/' + this.username)
                     .then(response => { this.info = response.data;
@@ -614,10 +601,10 @@ export default {
         },
         
         followUser(){
-            this.relationDto.username = getUsernameFromToken();
-            this.relationDto.relatedUsername = this.username;
-            this.axios.post(FOLLOW_PATH, this.relationDto)
-                    .then(() => {
+            this.axios.post(FOLLOW_PATH + "/" + this.username, null, {   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).then(() => {
                         this.makeToast("Follow request sent!", "success");
                         window.location.reload();
                     }).catch(err => {
@@ -625,12 +612,12 @@ export default {
                     })
         },
 
-        unfollowUser(tounfollow){
-            this.relationDto.username = getUsernameFromToken();
-            this.relationDto.relatedUsername = tounfollow;
-            this.axios.put(DELETE_RELATION_PATH, this.relationDto)
-                    .then(() => {
-                        this.makeToast(tounfollow + " unfollowed!", "success");
+        unfollowUser(toUnfollow){
+            this.axios.delete(DELETE_RELATION_PATH + "/" + toUnfollow,{   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            }
+                    }).then(() => {
+                        this.makeToast(toUnfollow + " unfollowed!", "success");
                         window.location.reload();
                     }).catch(err => {
                         this.makeToast(err.message, "danger");
@@ -672,6 +659,12 @@ export default {
                                             this.makeToast("Error occurred.", "danger");
                 });
         },
+
+
+        checkPermission(bvModalEvt){
+            if(!this.isUserProfile && !this.isFollowing && !this.user.publicProfile)
+                bvModalEvt.preventDefault();
+        }
     }
 }
 

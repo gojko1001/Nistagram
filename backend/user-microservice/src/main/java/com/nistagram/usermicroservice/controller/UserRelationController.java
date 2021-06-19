@@ -59,22 +59,28 @@ public class UserRelationController {
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.CLOSE_FRIEND));
     }
 
-    @PostMapping("/follow")
-    public void followUser(@RequestBody UserRelationDto relationDto){
-        Logger.info("Follow user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.followUser(relationDto);
+    @PostMapping("/follow/{relatedUsername}")
+    public void followUser(@PathVariable String relatedUsername,
+                           @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Follow user: " + relatedUsername, username);
+        relationService.followUser(username, relatedUsername);
     }
 
-    @PutMapping("/accept")
-    public void acceptFollower(@RequestBody UserRelationDto relationDto){
-        Logger.info("Accept follower: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.acceptFollower(relationDto);
+    @PutMapping("/accept/{relatedUsername}")
+    public void acceptFollower(@PathVariable String relatedUsername,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Accept follower: " + relatedUsername, username);
+        relationService.acceptFollower(username, relatedUsername);
     }
 
-    @PutMapping("/block")
-    public void blockUser(@RequestBody UserRelationDto relationDto){
-        Logger.info("Block user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.blockUser(relationDto);
+    @PutMapping("/block/{relatedUsername}")
+    public void blockUser(@PathVariable String relatedUsername,
+                          @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Block user: " + relatedUsername, username);
+        relationService.blockUser(username, relatedUsername);
     }
 
     @PutMapping("/update")
@@ -89,10 +95,12 @@ public class UserRelationController {
         relationService.setNotifications(relationDto);
     }
 
-    @PutMapping("/remove")
-    public void removeRelation(@RequestBody UserRelationDto relationDto){
-        Logger.info("Remove relation with user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.removeUserRelation(relationDto);
+    @DeleteMapping("/remove/{relatedUsername}")
+    public void removeRelation(@PathVariable String relatedUsername,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Remove relation with user: " + relatedUsername, username);
+        relationService.removeUserRelation(username, relatedUsername);
     }
 
     private String getUsernameFromToken(String tokenHeader){
