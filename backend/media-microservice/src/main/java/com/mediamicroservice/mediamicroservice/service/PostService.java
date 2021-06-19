@@ -37,7 +37,7 @@ public class PostService implements IPostService {
     @Autowired
     private UserConnection userConnection;
     @Autowired
-    private IMediaNameRepository mediaNameRepository;
+    private IMediaNameService mediaNameService;
     @Autowired
     private IInappropriateContentService inappropriateContentService;
     @Autowired
@@ -99,7 +99,7 @@ public class PostService implements IPostService {
             if (fileName.contains(".mp4")) {
                 mediaName.setImage(false);
             }
-            mediaNameRepository.save(mediaName);
+            mediaNameService.save(mediaName);
             mediaNames.add(mediaName);
         }
         media.setUsername(imageDto.getUsername());
@@ -254,6 +254,26 @@ public class PostService implements IPostService {
         Set<Post> set = new HashSet<>(publicPosts);
         publicPosts = set.stream().collect(Collectors.toList());
         return publicPosts;
+    }
+
+    @Override
+    public ResponseEntity getDiscoverImages(String username){
+        List<Post> discoverPosts = new ArrayList<>();
+        if(username.equals("null")){  // for guests
+            discoverPosts = getPublicPosts();
+        }else{                      // for logged user
+            List<String> usernames = userTagService.getUserTagsByUsername(username);
+            usernames.add(username);
+            for(String u : usernames){
+                List<Post> posts = postRepository.findPostsByMedia_Username(u);
+                if(posts != null){
+                    for(Post p : posts){
+                        discoverPosts.add(p);
+                    }
+                }
+            }
+        }
+        return new ResponseEntity(getImagesFiles(discoverPosts), HttpStatus.OK);
     }
 
 }
