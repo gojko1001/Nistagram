@@ -47,7 +47,7 @@ public class LikeService implements ILikeService {
                         like.setPostId(createLikeDto.getPostId());
                         like.setTimestamp(currentDate);
                         likeRepository.save(like);
-                        return null;
+                        return like;
                     }
                 }
             }
