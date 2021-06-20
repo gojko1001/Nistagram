@@ -16,6 +16,11 @@ import org.springframework.web.filter.CorsFilter;
 @EnableFeignClients
 public class MediaMicroserviceApplication {
 
+    @Bean
+    public RestTemplate getRestTemplate(){
+        return new RestTemplate();
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(MediaMicroserviceApplication.class, args);
     }

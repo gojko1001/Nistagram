@@ -1,10 +1,11 @@
 package com.nistagram.usermicroservice.service.interfaces;
 
 import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
-import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public interface IUserRelationService {
 
@@ -14,15 +15,17 @@ public interface IUserRelationService {
 
     List<User> getEagerFollowings(String username, RelationStatus status);
 
-    void followUser(UserRelationDto relationDto);
+    void followUser(String username, String relatedUsername);
 
-    void acceptFollower(UserRelationDto relationDto);
+    void acceptFollower(String username, String relatedUsername);
 
-    void blockUser(UserRelationDto relationDto);
+    void blockUser(String username, String relatedUsername);
 
-    void updateUserRelation(UserRelationDto relationDto);
+    void updateUserRelation(String username, String relatedUsername, RelationStatus status);
 
-    void removeUserRelation(UserRelationDto userRelationDto);
+    void removeUserRelation(String username, String relatedUsername);
 
-    void setNotifications(UserRelationDto relationDto);
+    void setRelationBoolean(String username, String relatedUsername, BiConsumer<UserRelation, Boolean> relationFunction, Boolean isMuted);
+
+    UserRelation findRelation(String username, String relatedUsername);
 }

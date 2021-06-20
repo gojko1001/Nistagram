@@ -21,4 +21,5 @@ Social network for sharing photos and videos
 | Media-microservice | 3033 | http://localhost:8762/media-api/ |
 | Campaign-microservice | 3034 | |
 | Search-microservice | 3035 | |
+| Notification-microservice | 3036 | http://localhost:8762/notification-api/ |
 

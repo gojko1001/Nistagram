@@ -9,15 +9,46 @@
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
                   <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
-                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && isFollowing" variant="primary" @click="unfollowUser(username)">Unfollow</b-btn>
-                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && !isFollowing" variant="primary" @click="followUser()">Follow</b-btn><hr>
+                  <b-dropdown id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
+                    <b-dropdown-text><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
+                        value="CLOSE_FRIEND"
+                        unchecked-value="FOLLOWING">
+                        Close friend
+                    </b-form-checkbox></b-dropdown-text>
+                    <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.mutePost" name="PostMute" switch @change="mutePost()"
+                            value=true
+                            unchecked-value=false>
+                            Mute posts
+                        </b-form-checkbox></b-dropdown-text>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.muteStory" name="StoryMute" switch @change="muteStory()"
+                            value=true
+                            unchecked-value=false>
+                            Mute stories
+                        </b-form-checkbox></b-dropdown-text>
+                    <b-dd-divider></b-dd-divider>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.notifyPost" name="PostNotification" switch @change="notifyPost()"
+                            value=true
+                            unchecked-value=false>
+                            Post notifications
+                        </b-form-checkbox></b-dropdown-text>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.notifyStory" name="StoryNotification" switch @change="notifyStory()"
+                            value=true
+                            unchecked-value=false>
+                            Story notifications
+                        </b-form-checkbox></b-dropdown-text>
+                    <b-dropdown-item-button @click="unfollowUser(username)" variant="danger">Unfollow</b-dropdown-item-button>
+                  </b-dropdown>
+                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'PENDING'" variant="outline-primary" @click="unfollowUser(username)">Pending</b-btn>
+                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'NOT_FOLLOWING'" variant="primary" @click="followUser()">Follow</b-btn><hr>
             </span>
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
-                <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn"><i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
-                <b-modal id="modal-followings" title="Following">
+                <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn" >
+                    <i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
+                <b-modal id="modal-followings" title="Following" @show="checkPermission">
                     <div v-for="(follow,p) in followings" :key="p">
-                        <span>@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <span v-on:click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right" @click="unfollowUser(follow.username)">Unfollow</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
@@ -26,10 +57,11 @@
                         </b-button>
                     </template>
                 </b-modal>
-                <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn"><i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
-                <b-modal id="modal-followers" title="Followers">
+                <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn">
+                    <i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
+                <b-modal id="modal-followers" title="Followers" @show="checkPermission">
                     <div v-for="(follow,p) in followers" :key="p">
-                        <span>@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <span @click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right">Remove</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
@@ -54,7 +86,7 @@
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
-                                <h4>@{{img.username}}</h4>
+                                <h4>@{{img.username}}</h4> <i v-if="img.forCloseFriends" class="fas fa-star fa-lg" style="color: #00cc00;"></i>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -130,7 +162,11 @@
                                         The video is not supported by your browser.
                                     </video>
                                 </div>
-                                
+                                <div style="margin-top:-30px; margin-left:20px">
+                                    <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                                        <i class="fas fa-user-tag"></i> {{tag.username}}
+                                    </span>
+                                </div>
 
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
@@ -156,7 +192,7 @@
                                 </b-card-text>
                                 <hr>
                                 <span v-for="(comm,c) in img.comments" :key="c">
-                                    <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                                    <span @click="goToProfile(comm.username)" class="clickable"><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
                                 </span>
                             </b-card>              
                         </div>
@@ -179,6 +215,11 @@
                                     <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
                                         The video is not supported by your browser.
                                     </video>
+                                </div>
+                                <div style="margin-top:-30px; margin-left:20px">
+                                    <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                                        <i class="fas fa-user-tag"></i> {{tag.username}}
+                                    </span>
                                 </div>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
@@ -229,6 +270,11 @@
                                     <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
                                         The video is not supported by your browser.
                                     </video>
+                                </div>
+                                <div style="margin-top:-30px; margin-left:20px">
+                                    <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                                        <i class="fas fa-user-tag"></i> {{tag.username}}
+                                    </span>
                                 </div>
                                 <br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
@@ -307,7 +353,7 @@
 
 
 <script>
-import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH } from '../util/constants';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH } from '../util/constants';
 import { getToken, getUsernameFromToken } from '../util/token';
 export default {
     name: 'Profile',
@@ -315,11 +361,13 @@ export default {
         return{
             isUserProfile: false,
             isFollowing: false,
+            userRelation: {status: 'NOT_FOLLOWING', mutePost: false, muteStory: false, notifyPost: false, notifyStory: false},
             user: '',
             username: this.$route.params.pUsername,
             info: [{
                 username:'',
                 location:{name:''},
+                userTags:[{username:''}],
                 imageBytes:[{
                     imageByte:'',
                     image:''
@@ -332,6 +380,7 @@ export default {
             favourites: [{
                 username:'',
                 location:{ name:''},
+                userTags:[{username:''}],
                 comments:[],
                 likes:[],
                 imageBytes:[{
@@ -382,6 +431,17 @@ export default {
     },
     mounted: function(){
         this.isUserProfile = this.username == getUsernameFromToken();
+        if(!this.isUserProfile)
+            this.axios.get(USER_RELATION_PATH + "/" + this.username, {  headers:{
+                                                                            Authorization: "Bearer " + getToken(),
+                                                                        }   
+                
+            }).then(response => {
+                                this.userRelation = response.data
+                                if(response.data.status == "FOLLOWING" || response.data.status == "MUTED" ||
+                                    response.data.status == "CLOSE_FRIEND")
+                                    this.isFollowing = true;
+            })
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
                                                                 Authorization: "Bearer " + getToken(),
                                                             }                                          
@@ -391,8 +451,8 @@ export default {
                                 this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
                                             .then(response => {
                                                 this.numFollowers = response.data.length;
-                                                this.followers = response.data;
-                                                this.getUserMedia();
+                                                this.followers = response.data.reverse();
+                                                this.getPosts();
                                             })
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
@@ -403,7 +463,7 @@ export default {
         this.axios.get(GET_FOLLOWINGS_PATH + "/" + this.username)
                         .then(response => {
                             this.numFollowing = response.data.length;
-                            this.followings = response.data;    
+                            this.followings = response.data.reverse();    
                         })
         
         
@@ -418,6 +478,9 @@ export default {
                                 solid: true,
                                 appendToast: false
                             })
+        },
+        goToProfile(username){
+            window.location.href = "/user/" + username;
         },
         commenting: function(id){
             this.hideCommenting = false;
@@ -450,26 +513,6 @@ export default {
             .catch(error => { console.log(error);
                                 this.makeToast("Error occured.", "danger");
                             })
-        },
-        getUserMedia(){
-            if(this.isUserProfile){
-                this.getPosts();
-                //this.getStories();
-                //this.getArchivedStories();
-                //this.getCollections();
-            }
-            else if(this.user.publicProfile){
-                this.getPosts();
-                this.getStories();
-            }else{
-                for(let follower of this.followers){
-                    if(follower.username == getUsernameFromToken()){
-                        this.isFollowing = true,
-                        this.getPosts();
-                        this.getStories();
-                    }
-                }
-            }
         },
         getPosts(){
             this.axios.get('/media-api/image/profile/' + this.username)
@@ -600,29 +643,6 @@ export default {
                             this.makeToast("Error occured.", "danger");
                           })
         },
-        
-        followUser(){
-            this.relationDto.username = getUsernameFromToken();
-            this.relationDto.relatedUsername = this.username;
-            this.axios.post(FOLLOW_PATH, this.relationDto)
-                    .then(() => {
-                        this.makeToast("Follow request sent!", "success");
-                    }).catch(err => {
-                        this.makeToast(SERVER_NOT_RESPONDING, "danger");
-                    })
-        },
-
-        unfollowUser(tounfollow){
-            this.relationDto.username = getUsernameFromToken();
-            this.relationDto.relatedUsername = tounfollow;
-            this.axios.put(DELETE_RELATION_PATH, this.relationDto)
-                    .then(() => {
-                        this.makeToast(tounfollow + " unfollowed!", "success");
-                        window.location.reload();
-                    }).catch(err => {
-                        this.makeToast(err.message, "danger");
-                    })
-        },
         historyOfLikedPosts(){
             this.axios.get('/media-api/like/history/' + this.username)
                         .then(response => { this.history = response.data;
@@ -659,6 +679,101 @@ export default {
                                             this.makeToast("Error occurred.", "danger");
                 });
         },
+
+        followUser(){
+            this.axios.post(FOLLOW_PATH + "/" + this.username, null, {   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).then(() => {
+                        this.makeToast("Follow request sent!", "success");
+                        window.location.reload();
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
+        },
+        unfollowUser(toUnfollow){
+            this.axios.delete(DELETE_RELATION_PATH + "/" + toUnfollow,{   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            }
+                    }).then(() => {
+                        this.makeToast(toUnfollow + " unfollowed!", "success");
+                        window.location.reload();
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
+        },
+        closeChange(){
+            this.axios.put(RELATION_STATUS_UPDATE_PATH + "/" + this.username + "/" + this.userRelation.status, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update relation status!", "danger");
+                    })
+        },
+
+        mutePost(){
+            this.axios.put(MUTE_POST_PATH + "/" + this.username + "/" + this.userRelation.mutePost, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
+                    })
+        },
+        muteStory(){
+            this.axios.put(MUTE_STORY_PATH + "/" + this.username + "/" + this.userRelation.muteStory, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
+                    })
+        },
+        notifyPost(){
+            this.axios.put(NOTIFY_POST_PATH + "/" + this.username + "/" + this.userRelation.notifyPost, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
+                    })
+        },
+        notifyStory(){
+            this.axios.put(NOTIFY_STORY_PATH + "/" + this.username + "/" + this.userRelation.notifyStory, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
+                    })
+        },
+
+        checkPermission(bvModalEvt){
+            if(!this.isUserProfile && !this.isFollowing && !this.user.publicProfile)
+                bvModalEvt.preventDefault();
+        }
     }
 }
 
@@ -671,6 +786,9 @@ export default {
     display: inline-block;
     max-width: 200px;
     word-wrap: break-word;
+}
+.dropdown-menu{
+    transform: translate3d(5px, 35px, 0px)!important;
 }
 .profilePic{
     width: 150px;
@@ -687,6 +805,7 @@ export default {
 .mainBtn{
     margin: 5px
 }
+
 #userMedia{
     margin-left: 20px;
     position: absolute;
@@ -726,5 +845,8 @@ export default {
 }
 .red {
     color: red;
+}
+.menu-it{
+    width: 300px;
 }
 </style>

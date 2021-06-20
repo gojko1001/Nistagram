@@ -169,7 +169,7 @@ insert into media_hashtags (media_id, hashtags_id) values (11, 8);
 insert into media_name(file_name, is_image) values ("river1.jpg", true);
 insert into media (description, username, location_id, timestamp) values ("moj drugiiiii story", "gojko", 6, "2021-06-08");
 insert into media_media_name(media_id, media_name_id) values (12, 12);
-insert into story (media_id, for_close_friends, highlighted) values (12, true, false);
+insert into story (media_id, for_close_friends, highlighted) values (12, false, false);
 insert into media_hashtags (media_id, hashtags_id) values (12, 1);
 insert into media_hashtags (media_id, hashtags_id) values (12, 2);
 ---
@@ -215,6 +215,7 @@ insert into collection_favourites (collection_id, favourites_id) values (6, 13);
 ---
 
 -- Inappropriate content
+
 insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "gojko","nikola", 1);
 insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "masa","nikola", 2);
 insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "tasa","nikola", 3);
@@ -222,6 +223,11 @@ insert into inappropriate_content(request_status, requested_by, responded_by,med
 insert into inappropriate_content(request_status, requested_by,media_id) values(0, "gojko", 2);
 insert into inappropriate_content(request_status, requested_by, media_id) values(0, "tasa", 2);
 insert into inappropriate_content(request_status, requested_by, media_id) values(0, "gojko", 4);
+
+insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "gojko","nikola", 8);
+insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(0, "masa","nikola", 9);
+insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(2, "tasa","nikola", 5);
+
 
 
 

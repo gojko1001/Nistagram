@@ -13,4 +13,11 @@ public class UserRelationKey implements Serializable {
     private Long userId;
     @Column(name = "related_user_id")
     private Long relatedUserId;
+
+    public UserRelationKey(){}
+
+    public UserRelationKey(Long userId, Long relatedUserId) {
+        this.userId = userId;
+        this.relatedUserId = relatedUserId;
+    }
 }

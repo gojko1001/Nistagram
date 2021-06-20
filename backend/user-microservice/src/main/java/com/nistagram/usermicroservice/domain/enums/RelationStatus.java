@@ -4,6 +4,5 @@ public enum RelationStatus {
     PENDING,
     FOLLOWING,
     CLOSE_FRIEND,
-    BLOCKED,
-    MUTED
+    BLOCKED
 }

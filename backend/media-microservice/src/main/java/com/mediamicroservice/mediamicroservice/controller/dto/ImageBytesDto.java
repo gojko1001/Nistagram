@@ -1,10 +1,7 @@
 package com.mediamicroservice.mediamicroservice.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mediamicroservice.mediamicroservice.domain.Comment;
-import com.mediamicroservice.mediamicroservice.domain.Hashtag;
-import com.mediamicroservice.mediamicroservice.domain.Like;
-import com.mediamicroservice.mediamicroservice.domain.Location;
+import com.mediamicroservice.mediamicroservice.domain.*;
 import lombok.Data;
 
 import javax.persistence.Temporal;
@@ -26,4 +23,5 @@ public class ImageBytesDto {
     private List<Like> likes;
     private List<ImageByte> imageBytes;
     private Long mediaId;
+    private List<UserTag> userTags;
 }

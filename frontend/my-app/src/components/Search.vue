@@ -1,6 +1,6 @@
 <template>
     <div id="searchPage">
-      <table v-if="searchingType == 'profile' && showProfile==false">
+      <table v-if="searchingType == 'profile'">
       <tbody>
         <tr v-for="(res,i) in profiles" :key="i" :res="res">
           <td><button v-on:click="getProfile(res.username)" variant="primary" style="width:200px;"><i v-if="res.status === 'APPROVED'" class="fas fa-user-check"/> {{res.fullName}}</button></td>
@@ -8,7 +8,7 @@
       </tbody>
     </table>
     <br>
-      <div v-if="searchingType == 'tag' || searchingType == 'location' || showProfile">
+      <div v-if="searchingType == 'tag' || searchingType == 'location'">
          <br>
         <div v-for="(img,i) in info" :key="i">
           <b-card
@@ -61,12 +61,11 @@ export default {
               disliked: false
             }],
             profiles: [],
-            showProfile: false,
         }
     },
   mounted: function(){
-        this.searchingType = this.$route.params.name;
-        this.searchingInput = this.$route.params.find;
+        this.searchingType = localStorage.getItem("name");
+        this.searchingInput = localStorage.getItem("find");
 
         if(this.searchingType == "profile"){
           this.axios.get(SEARCH_USER_PATH + "?username=" + this.searchingInput)
@@ -137,20 +136,9 @@ methods:{
 
   getProfile: function(username) {
         console.log(username);
-        this.axios.get('/media-api/image/profile/' + username)
-                  .then(response => { console.log(response);
-                    this.showProfile = true;
-                    this.searchingType = '';
-                    this.info = response.data;
-                    this.loadResults(response.data.length);                               
-                })
-                  .catch(error => { console.log(error);
-                                    this.makeToast("Error occurred. ", "danger");
-                                  });                  
+        window.location.href = "/user/" + username;               
       },
   },
-
-  
 }
 </script>
 

@@ -1,9 +1,14 @@
 package com.nistagram.usermicroservice.controller;
 
-import com.nistagram.usermicroservice.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.JwtService;
 import com.nistagram.usermicroservice.controller.dto.UserDto;
 import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
+import com.nistagram.usermicroservice.controller.exception.NotFoundException;
+import com.nistagram.usermicroservice.controller.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.controller.mapper.RelationMapper;
+import com.nistagram.usermicroservice.controller.mapper.UserMapper;
+import com.nistagram.usermicroservice.domain.UserRelation;
+import com.nistagram.usermicroservice.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.interfaces.IUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,18 @@ import java.util.List;
 public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
+    @Autowired
+    private JwtService jwtService;
+
+    @GetMapping("/{relatedUsername}")
+    public UserRelationDto getUserRelation(@PathVariable String relatedUsername,
+                                           @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        UserRelation relation = relationService.findRelation(username, relatedUsername);
+        if(relation == null)
+            throw new NotFoundException("No relation found!");
+        return RelationMapper.mapRelationToRelationDto(relation);
+    }
 
     @GetMapping("/followers/{username}")
     public List<UserDto> getFollowers(@PathVariable String username){
@@ -42,39 +59,83 @@ public class UserRelationController {
         return UserMapper.mapUserListToUserDtoList(relationService.getEagerFollowings(username, RelationStatus.CLOSE_FRIEND));
     }
 
-    @PostMapping("/follow")
-    public void followUser(@RequestBody UserRelationDto relationDto){
-        Logger.info("Follow user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.followUser(relationDto);
+    @PostMapping("/follow/{relatedUsername}")
+    public void followUser(@PathVariable String relatedUsername,
+                           @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Follow user: " + relatedUsername, username);
+        relationService.followUser(username, relatedUsername);
     }
 
-    @PutMapping("/accept")
-    public void acceptFollower(@RequestBody UserRelationDto relationDto){
-        Logger.info("Accept follower: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.acceptFollower(relationDto);
+    @PutMapping("/accept/{relatedUsername}")
+    public void acceptFollower(@PathVariable String relatedUsername,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Accept follower: " + relatedUsername, username);
+        relationService.acceptFollower(username, relatedUsername);
     }
 
-    @PutMapping("/block")
-    public void blockUser(@RequestBody UserRelationDto relationDto){
-        Logger.info("Block user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.blockUser(relationDto);
+    @PutMapping("/block/{relatedUsername}")
+    public void blockUser(@PathVariable String relatedUsername,
+                          @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Block user: " + relatedUsername, username);
+        relationService.blockUser(username, relatedUsername);
     }
 
-    @PutMapping("/update")
-    public void updateRelation(@RequestBody UserRelationDto relationDto){
-        Logger.info("Update relation with user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.updateUserRelation(relationDto);
+    @PutMapping("/update/{relatedUsername}/{status}")
+    public void updateRelation(@PathVariable String relatedUsername, @PathVariable RelationStatus status,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update relation with user: " + relatedUsername, username);
+        relationService.updateUserRelation(username, relatedUsername, status);
     }
 
-    @PutMapping("/notifications")
-    public void updateNotifications(@RequestBody UserRelationDto relationDto){
-        Logger.info("Update notifications", relationDto.getUsername());
-        relationService.setNotifications(relationDto);
+    @PutMapping("/mutePost/{relatedUsername}/{isMuted}")
+    public void mutePosts(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                          @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update relation with user: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setMutePost, isMuted);
     }
 
-    @PutMapping("/remove")
-    public void removeRelation(@RequestBody UserRelationDto relationDto){
-        Logger.info("Remove relation with user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.removeUserRelation(relationDto);
+    @PutMapping("/muteStory/{relatedUsername}/{isMuted}")
+    public void muteStories(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                          @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update relation with user: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setMuteStory, isMuted);
     }
+
+    @PutMapping("/notifyPost/{relatedUsername}/{isMuted}")
+    public void notifyPost(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                            @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update post notifications: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setNotifyPost, isMuted);
+    }
+
+    @PutMapping("/notifyStory/{relatedUsername}/{isMuted}")
+    public void notifyStory(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                           @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update story notifications: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setNotifyStory, isMuted);
+    }
+
+    @DeleteMapping("/remove/{relatedUsername}")
+    public void removeRelation(@PathVariable String relatedUsername,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Remove relation with user: " + relatedUsername, username);
+        relationService.removeUserRelation(username, relatedUsername);
+    }
+
+    private String getUsernameFromToken(String tokenHeader){
+        String username = jwtService.extractUsername(tokenHeader);
+        if (username == null)
+            throw new UnauthorizedException("Access denied");
+        return username;
+    }
+
 }

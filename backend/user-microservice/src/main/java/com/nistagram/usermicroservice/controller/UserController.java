@@ -4,7 +4,7 @@ import com.nistagram.usermicroservice.controller.dto.UserDto;
 import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.controller.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.jwtService;
+import com.nistagram.usermicroservice.JwtService;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
     @Autowired
-    private jwtService jwtService;
+    private JwtService jwtService;
 
     @GetMapping
     public List<UserDto> getAll() {

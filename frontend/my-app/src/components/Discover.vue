@@ -6,7 +6,7 @@
               tag="article"
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
-            <h4>@{{img.username}}</h4>
+            <h4 @click="goToProfile(img.username)" class="clickable">@{{img.username}}</h4>
             <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
             <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
               <i class="fa fa-ban fa-fw"></i>
@@ -19,6 +19,11 @@
                 <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
                     The video is not supported by your browser.
                 </video>
+            </div>
+            <div style="margin-top:-30px; margin-left:20px">
+              <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                <i class="fas fa-user-tag"></i> {{tag.username}}
+              </span>
             </div>
 
             <br>
@@ -37,7 +42,7 @@
               <i class="fas fa-bookmark"></i>
             </router-link>
             <b-card-text>
-              <span><b>{{img.username}}:  </b></span>{{img.description}}
+              <span @click="goToProfile(img.username)" class="clickable"><b>{{img.username}}:  </b></span>{{img.description}}
               <br>
               <span v-for="(tag,t) in img.hashtags" :key="t">
                   #{{tag.name}}
@@ -45,7 +50,7 @@
             </b-card-text>
             <hr>
             <span v-for="(comm,c) in img.comments" :key="c">
-              <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+              <span @click="goToProfile(comm.username)" class="clickable"><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
             </span>
           </b-card>              
         </div>
@@ -72,6 +77,7 @@ export default {
                 image:'',
                 imageByte:''
               }],
+              userTags:[{username:''}],
               numLikes:'',
               numDislikes:'',
               liked: false,
@@ -148,6 +154,9 @@ export default {
                                 solid: true,
                                 appendToast: false
                             })
+        },
+        goToProfile(username){
+            window.location.href = "/user/" + username;
         },
         likePost(id, liked) {
         console.log(this.form);

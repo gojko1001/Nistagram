@@ -36,6 +36,8 @@ public class StoryService implements IStoryService {
     private IMediaNameService mediaNameService;
     @Autowired
     private IInappropriateContentService inappropriateContentService;
+    @Autowired
+    private IUserTagService userTagService;
 
 
     private static String uploadDir = "user-photos";
@@ -72,9 +74,20 @@ public class StoryService implements IStoryService {
         media.setLocation(location);
         media.setHashtags(hashtagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
+        List<UserTag> userTags = new ArrayList<>();
+        if(imageDto.getUserTags() != null){
+            for(String username : imageDto.getUserTags()){
+                UserTag userTag = new UserTag();
+                userTag.setUsername(username);
+                userTagService.save(userTag);
+                userTags.add(userTag);
+            }
+        }
+        media.setUserTags(userTags);
         media.setMediaName(mediaNames);
         mediaRepository.save(media);
         story.setMedia(media);
+        story.setForCloseFriends(imageDto.isForCloseFriends());
         save(story);
 
         return new ResponseEntity(HttpStatus.OK);
@@ -124,7 +137,7 @@ public class StoryService implements IStoryService {
         List<StoryBytesDto> storyBytesDto = new ArrayList<>();
         if (stories != null) {
             String filePath = new File("").getAbsolutePath();
-            filePath = filePath.concat("/" + uploadDir + "/");
+            filePath = filePath.concat("/src/main/resources/" + uploadDir + "/");
             for (Story story : stories) {
                 for(MediaName mn : story.getMedia().getMediaName()){
                     if(!isReported(story.getMedia().getId()))
