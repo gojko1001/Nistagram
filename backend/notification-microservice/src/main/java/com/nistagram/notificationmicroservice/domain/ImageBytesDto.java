@@ -1,7 +1,6 @@
-package com.mediamicroservice.mediamicroservice.controller.dto;
+package com.nistagram.notificationmicroservice.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.mediamicroservice.mediamicroservice.domain.*;
 import lombok.Data;
 
 import javax.persistence.Temporal;
@@ -13,15 +12,10 @@ import java.util.List;
 public class ImageBytesDto {
     private Long id;
     private String username;
-    private String description;
-    private Location location;
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+01:00")
     private Date timestamp;
-    private List<Hashtag> hashtags;
     private List<Comment> comments;
-    private List<Like> likes;
     private List<ImageByte> imageBytes;
     private Long mediaId;
-    private List<UserTag> userTags;
 }

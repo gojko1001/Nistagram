@@ -276,4 +276,10 @@ public class PostService implements IPostService {
         return new ResponseEntity(getImagesFiles(discoverPosts), HttpStatus.OK);
     }
 
+    @Override
+    public List<ImageBytesDto> getAllPosts(){
+        List<Post> allPosts = findAll();
+        return getImagesFiles(allPosts);
+    }
+
 }
