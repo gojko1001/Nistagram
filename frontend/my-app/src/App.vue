@@ -37,6 +37,9 @@ export default {
   border: 3px solid lightblue;
   padding: 50px;
 }
+.clickable {
+    cursor:pointer;
+}
 body{
     background-image: linear-gradient(180deg, #ffffff, #e3f2fd, #47b0fa);
     color: white;

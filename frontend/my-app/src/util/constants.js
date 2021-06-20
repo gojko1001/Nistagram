@@ -19,6 +19,7 @@ export const GET_FOLLOWINGS_PATH = USER_RELATION_PATH + "/followings"
 export const GET_BLOCKED_USERS_PATH = USER_RELATION_PATH + "/blocked"
 export const GET_CLOSE_FRIENDS_PATH = USER_RELATION_PATH + "/close_friends"
 export const FOLLOW_PATH = USER_RELATION_PATH + "/follow"
+export const RELATION_STATUS_UPDATE = USER_RELATION_PATH + "/update"
 export const DELETE_RELATION_PATH = USER_RELATION_PATH + "/remove"
 
 

@@ -21,7 +21,7 @@ public interface IUserRelationService {
 
     void blockUser(String username, String relatedUsername);
 
-    void updateUserRelation(UserRelationDto relationDto);
+    void updateUserRelation(String username, String relatedUsername, RelationStatus status);
 
     void removeUserRelation(String username, String relatedUsername);
 

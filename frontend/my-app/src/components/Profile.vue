@@ -9,7 +9,26 @@
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
                   <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
-                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && isFollowing" variant="primary" @click="unfollowUser(username)">Unfollow</b-btn>
+                  <!-- <b-btn class="w-75 mx-3" v-if="!isUserProfile && isFollowing" variant="primary" @click="unfollowUser(username)">Unfollow</b-btn> -->
+                  <b-dropdown menu-class="menu-it" id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
+                    <b-dropdown-text href="#"><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
+                        value="CLOSE_FRIEND"
+                        unchecked-value="FOLLOWING">
+                        Close friend
+                    </b-form-checkbox></b-dropdown-text>
+                    <b-dropdown-divider></b-dropdown-divider>
+                    <b-dropdown-text href="#"><b-form-checkbox v-model="userRelation.mutePost" name="PostMute" switch
+                        value=true
+                        unchecked-value=false>
+                        Mute posts
+                    </b-form-checkbox></b-dropdown-text>
+                    <b-dropdown-text href="#"><b-form-checkbox v-model="userRelation.muteStory" name="StoryMute" switch
+                        value=true
+                        unchecked-value=false>
+                        Mute stories
+                    </b-form-checkbox></b-dropdown-text>
+                    <b-dropdown-item-button @click="unfollowUser(username)" variant="danger">Unfollow</b-dropdown-item-button>
+                  </b-dropdown>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'PENDING'" variant="outline-primary" @click="unfollowUser(username)">Pending</b-btn>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'NOT_FOLLOWING'" variant="primary" @click="followUser()">Follow</b-btn><hr>
             </span>
@@ -19,7 +38,7 @@
                     <i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
                 <b-modal id="modal-followings" title="Following" @show="checkPermission">
                     <div v-for="(follow,p) in followings" :key="p">
-                        <span v-on:click="goToProfile(follow.username)">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <span v-on:click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right" @click="unfollowUser(follow.username)">Unfollow</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
@@ -32,7 +51,7 @@
                     <i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
                 <b-modal id="modal-followers" title="Followers" @show="checkPermission">
                     <div v-for="(follow,p) in followers" :key="p">
-                        <span @click="goToProfile(follow.username)">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
+                        <span @click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
                         <b-btn size="sm" variant="outline-info" class="float-right">Remove</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
@@ -159,7 +178,7 @@
                                 </b-card-text>
                                 <hr>
                                 <span v-for="(comm,c) in img.comments" :key="c">
-                                    <span @click="goToProfile(comm.username)"><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                                    <span @click="goToProfile(comm.username)" class="clickable"><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
                                 </span>
                             </b-card>              
                         </div>
@@ -310,7 +329,7 @@
 
 
 <script>
-import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH } from '../util/constants';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE } from '../util/constants';
 import { getToken, getUsernameFromToken } from '../util/token';
 export default {
     name: 'Profile',
@@ -599,30 +618,6 @@ export default {
                             this.makeToast("Error occured.", "danger");
                           })
         },
-        
-        followUser(){
-            this.axios.post(FOLLOW_PATH + "/" + this.username, null, {   headers:{
-                                                                Authorization: "Bearer " + getToken(),
-                                                            } 
-                    }).then(() => {
-                        this.makeToast("Follow request sent!", "success");
-                        window.location.reload();
-                    }).catch(err => {
-                        this.makeToast(SERVER_NOT_RESPONDING, "danger");
-                    })
-        },
-
-        unfollowUser(toUnfollow){
-            this.axios.delete(DELETE_RELATION_PATH + "/" + toUnfollow,{   headers:{
-                                                                Authorization: "Bearer " + getToken(),
-                                                            }
-                    }).then(() => {
-                        this.makeToast(toUnfollow + " unfollowed!", "success");
-                        window.location.reload();
-                    }).catch(err => {
-                        this.makeToast(err.message, "danger");
-                    })
-        },
         historyOfLikedPosts(){
             this.axios.get('/media-api/like/history/' + this.username)
                         .then(response => { this.history = response.data;
@@ -660,6 +655,47 @@ export default {
                 });
         },
 
+        followUser(){
+            this.axios.post(FOLLOW_PATH + "/" + this.username, null, {   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).then(() => {
+                        this.makeToast("Follow request sent!", "success");
+                        window.location.reload();
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
+        },
+
+        unfollowUser(toUnfollow){
+            this.axios.delete(DELETE_RELATION_PATH + "/" + toUnfollow,{   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            }
+                    }).then(() => {
+                        this.makeToast(toUnfollow + " unfollowed!", "success");
+                        window.location.reload();
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
+        },
+        closeChange(){
+            this.axios.put(RELATION_STATUS_UPDATE + "/" + this.username + "/" + this.userRelation.status, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update relation status!", "danger");
+                    })
+        },
 
         checkPermission(bvModalEvt){
             if(!this.isUserProfile && !this.isFollowing && !this.user.publicProfile)
@@ -693,6 +729,7 @@ export default {
 .mainBtn{
     margin: 5px
 }
+
 #userMedia{
     margin-left: 20px;
     position: absolute;
@@ -732,5 +769,8 @@ export default {
 }
 .red {
     color: red;
+}
+.menu-it{
+    width: 300px;
 }
 </style>

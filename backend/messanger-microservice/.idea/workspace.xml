@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fae89ae-52c2-47ac-a489-3477cbb92c5c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../user-microservice/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../user-microservice/src/main/resources/import.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../authentication-microservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../authentication-microservice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +46,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../user-microservice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
     <configuration name="MessangerMicroserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -66,6 +71,7 @@
       <updated>1623749376953</updated>
       <workItem from="1623749379189" duration="2287000" />
       <workItem from="1623785606866" duration="607000" />
+      <workItem from="1624184822611" duration="672000" />
     </task>
     <servers />
   </component>

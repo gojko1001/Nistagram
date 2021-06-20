@@ -83,10 +83,13 @@ public class UserRelationController {
         relationService.blockUser(username, relatedUsername);
     }
 
-    @PutMapping("/update")
-    public void updateRelation(@RequestBody UserRelationDto relationDto){
-        Logger.info("Update relation with user: " + relationDto.getRelatedUsername(), relationDto.getUsername());
-        relationService.updateUserRelation(relationDto);
+    @PutMapping("/update/{relatedUsername}/{status}")
+    public void updateRelation(@PathVariable String relatedUsername, @PathVariable RelationStatus status,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+
+        Logger.info("Update relation with user: " + relatedUsername, username);
+        relationService.updateUserRelation(username, relatedUsername, status);
     }
 
     @PutMapping("/notifications")

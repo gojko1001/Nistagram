@@ -83,17 +83,16 @@ public class UserRelationService implements IUserRelationService {
         userService.save(user);
     }
 
-    public void updateUserRelation(UserRelationDto relationDto) {
-        if (relationDto.getStatus() != RelationStatus.FOLLOWING && relationDto.getStatus() != RelationStatus.MUTED &&
-                relationDto.getStatus() != RelationStatus.CLOSE_FRIEND ||
-                isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()) ||
-                isBlocked(relationDto.getRelatedUsername(), relationDto.getUsername()))
+    public void updateUserRelation(String username, String relatedUsername, RelationStatus status) {
+        if (status != RelationStatus.FOLLOWING && status != RelationStatus.MUTED && status != RelationStatus.CLOSE_FRIEND ||
+                isBlocked(username, relatedUsername) ||
+                isBlocked(relatedUsername, username))
             throw new InvalidActionException("Invalid action");
-        User user = findUserByUsername(relationDto.getUsername());
-        UserRelation userRelation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
+        User user = findUserByUsername(username);
+        UserRelation userRelation = findRelation(username, relatedUsername);
         if (userRelation == null)
             throw new InvalidActionException("Invalid action");
-        userRelation.setRelationStatus(relationDto.getStatus());
+        userRelation.setRelationStatus(status);
         userService.save(user);
     }
 
