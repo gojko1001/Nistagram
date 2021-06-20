@@ -38,9 +38,13 @@
                             Story notifications
                         </b-form-checkbox></b-dropdown-text>
                     <b-dropdown-item-button @click="unfollowUser(username)" variant="danger">Unfollow</b-dropdown-item-button>
+                    <b-dropdown-item-button @click="blockUser(username)" variant="danger">Block</b-dropdown-item-button>
                   </b-dropdown>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'PENDING'" variant="outline-primary" @click="unfollowUser(username)">Pending</b-btn>
-                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'NOT_FOLLOWING'" variant="primary" @click="followUser()">Follow</b-btn><hr>
+                  <b-dd text="Follow" class="w-75 mx-2" variant="primary" split @click="followUser()" v-if="!isUserProfile && userRelation.status == 'NOT_FOLLOWING'">
+                    <b-dd-item-btn @click="blockUser(username)" variant="danger">Block</b-dd-item-btn>
+                  </b-dd>
+                  <hr>
             </span>
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
@@ -353,7 +357,7 @@
 
 
 <script>
-import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH } from '../util/constants';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH, BLOCK_USER_PATH } from '../util/constants';
 import { getToken, getUsernameFromToken } from '../util/token';
 export default {
     name: 'Profile',
@@ -720,6 +724,22 @@ export default {
                             this.makeToast("Couldn't update relation status!", "danger");
                     })
         },
+
+        blockUser(toBlock){
+            this.axios.put(BLOCK_USER_PATH + "/" + toBlock, null,{   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).then(() => {
+                        this.makeToast("User blocked!", "success");
+                        window.location.reload();
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update relation status!", "danger");
+                    })
+        }, 
 
         mutePost(){
             this.axios.put(MUTE_POST_PATH + "/" + this.username + "/" + this.userRelation.mutePost, null, {   
