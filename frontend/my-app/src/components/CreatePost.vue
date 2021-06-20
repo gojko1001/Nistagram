@@ -7,6 +7,7 @@
             value-field="item"
             text-field="name"
             disabled-field="notEnabled"
+            @change="showStoryOptions()"
           ></b-form-radio-group>
       <br><br>
         <form ref="uploadForm" @submit.prevent="submit">
@@ -36,6 +37,17 @@
             <option v-for="(tag,i) in userTags" :key="'T' + i">{{tag}}</option>
           </select>
           <br>
+          <b-form-checkbox
+            v-if="form.forCloseFriends"
+            id="checkbox-1"
+            v-model="form.forCloseFriends"
+            name="checkbox-1"
+            value="true"
+            unchecked-value="false"
+          >
+            For close friends
+          </b-form-checkbox>
+          <br>
           <br>
           <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
           <b-button type="submit" variant="primary" style="width:200px;" aria-describedby="signup-block">Post</b-button>
@@ -56,6 +68,7 @@ export default {
           description:'',
           tags:[],
           locationName:'',
+          forCloseFriends:false,
           userTags: [],
           location:[{
             name:''
@@ -163,12 +176,14 @@ export default {
           this.makeToast("Please upload image.", "danger");
         }
       },
-      addField(value, fieldType) {
-        fieldType.push({ value: "" });
-      },
-      removeField(index, fieldType) {
-        fieldType.splice(index, 1);
-      },
+      async showStoryOptions(){
+        console.log(this.selected);
+        if(this.selected == 'story'){
+          this.form.forCloseFriends = true;
+        }else{
+          this.form.forCloseFriends = false;
+        }
+      }
     },
 }
 </script>

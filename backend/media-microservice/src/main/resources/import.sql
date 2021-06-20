@@ -169,7 +169,7 @@ insert into media_hashtags (media_id, hashtags_id) values (11, 8);
 insert into media_name(file_name, is_image) values ("river1.jpg", true);
 insert into media (description, username, location_id, timestamp) values ("moj drugiiiii story", "gojko", 6, "2021-06-08");
 insert into media_media_name(media_id, media_name_id) values (12, 12);
-insert into story (media_id, for_close_friends, highlighted) values (12, true, false);
+insert into story (media_id, for_close_friends, highlighted) values (12, false, false);
 insert into media_hashtags (media_id, hashtags_id) values (12, 1);
 insert into media_hashtags (media_id, hashtags_id) values (12, 2);
 ---

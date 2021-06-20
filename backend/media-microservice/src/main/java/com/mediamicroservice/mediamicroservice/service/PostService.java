@@ -130,7 +130,7 @@ public class PostService implements IPostService {
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
         if (posts != null) {
             String filePath = new File("").getAbsolutePath();
-            filePath = filePath.concat("/src/" + uploadDir + "/");
+            filePath = filePath.concat("/src/main/resources/" + uploadDir + "/");
             for (Post post : posts) {
                 if(!isReported(post.getMedia().getId()))
                     imageBytesDtos.add(imageFile(post, filePath));
@@ -144,7 +144,7 @@ public class PostService implements IPostService {
         ImageBytesDto imageBytesDto = new ImageBytesDto();
         if (post != null) {
             String filePath = new File("").getAbsolutePath();
-            filePath = filePath.concat("/src/" + uploadDir + "/");
+            filePath = filePath.concat("/src/main/resources/" + uploadDir + "/");
             imageBytesDto = imageFile(post, filePath);
         }
         return imageBytesDto;
@@ -157,7 +157,7 @@ public class PostService implements IPostService {
         ImageBytesDto imageBytesDtos = new ImageBytesDto();
         if (post != null) {
             String filePath = new File("").getAbsolutePath();
-            filePath = filePath.concat("/src/" + uploadDir + "/");
+            filePath = filePath.concat("/src/main/resources/" + uploadDir + "/");
             imageBytesDtos = imageFile(post, filePath);
         }
         return imageBytesDtos;
