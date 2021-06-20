@@ -435,7 +435,7 @@ export default {
                                 this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
                                             .then(response => {
                                                 this.numFollowers = response.data.length;
-                                                this.followers = response.data;
+                                                this.followers = response.data.reverse();
                                                 this.getPosts();
                                             })
             }).catch(error => { if(!error.response) {
@@ -447,7 +447,7 @@ export default {
         this.axios.get(GET_FOLLOWINGS_PATH + "/" + this.username)
                         .then(response => {
                             this.numFollowing = response.data.length;
-                            this.followings = response.data;    
+                            this.followings = response.data.reverse();    
                         })
         
         
@@ -678,7 +678,6 @@ export default {
                             this.makeToast(err.message, "danger");
                     })
         },
-
         unfollowUser(toUnfollow){
             this.axios.delete(DELETE_RELATION_PATH + "/" + toUnfollow,{   headers:{
                                                                 Authorization: "Bearer " + getToken(),
@@ -742,7 +741,6 @@ export default {
                             this.makeToast("Couldn't update mute status!", "danger");
                     })
         },
-
         notifyStory(){
             this.axios.put(NOTIFY_STORY_PATH + "/" + this.username + "/" + this.userRelation.notifyStory, null, {   
                                                             headers:{
