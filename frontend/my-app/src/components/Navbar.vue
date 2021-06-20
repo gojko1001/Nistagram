@@ -58,7 +58,7 @@
 
 
 <script>
-import { getUsernameFromToken } from '../util/token';
+import { getUsernameFromToken, removeToken } from '../util/token';
 export default {
   name: 'Navbar',
   data() {
@@ -81,7 +81,7 @@ export default {
       window.location.href = "/user/" + this.username;
     },
     logout: function(){
-      localStorage.removeItem('JWT');
+      removeToken();
       window.location.href = "/"
     },
     discoverPage:function(){
