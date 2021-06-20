@@ -28,14 +28,19 @@ public class UserRelation {
     @Column
     private RelationStatus relationStatus;
     @Column
-    private Boolean enableNotification = false;
+    private Boolean mutePost = false;
+    @Column
+    private Boolean muteStory = false;
+    @Column
+    private Boolean notifyPost = false;
+    @Column
+    private Boolean notifyStory = false;
 
     public UserRelation() {}
 
-    public UserRelation(User user, User relatedUser, RelationStatus relationStatus, Boolean enableNotification) {
+    public UserRelation(User user, User relatedUser, RelationStatus relationStatus) {
         this.user = user;
         this.relatedUser = relatedUser;
         this.relationStatus = relationStatus;
-        this.enableNotification = enableNotification;
     }
 }

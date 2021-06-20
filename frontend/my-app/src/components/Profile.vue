@@ -9,24 +9,34 @@
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
                   <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
-                  <!-- <b-btn class="w-75 mx-3" v-if="!isUserProfile && isFollowing" variant="primary" @click="unfollowUser(username)">Unfollow</b-btn> -->
-                  <b-dropdown menu-class="menu-it" id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
-                    <b-dropdown-text href="#"><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
+                  <b-dropdown id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
+                    <b-dropdown-text><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
                         value="CLOSE_FRIEND"
                         unchecked-value="FOLLOWING">
                         Close friend
                     </b-form-checkbox></b-dropdown-text>
                     <b-dropdown-divider></b-dropdown-divider>
-                    <b-dropdown-text href="#"><b-form-checkbox v-model="userRelation.mutePost" name="PostMute" switch
-                        value=true
-                        unchecked-value=false>
-                        Mute posts
-                    </b-form-checkbox></b-dropdown-text>
-                    <b-dropdown-text href="#"><b-form-checkbox v-model="userRelation.muteStory" name="StoryMute" switch
-                        value=true
-                        unchecked-value=false>
-                        Mute stories
-                    </b-form-checkbox></b-dropdown-text>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.mutePost" name="PostMute" switch @change="mutePost()"
+                            value=true
+                            unchecked-value=false>
+                            Mute posts
+                        </b-form-checkbox></b-dropdown-text>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.muteStory" name="StoryMute" switch @change="muteStory()"
+                            value=true
+                            unchecked-value=false>
+                            Mute stories
+                        </b-form-checkbox></b-dropdown-text>
+                    <b-dd-divider></b-dd-divider>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.notifyPost" name="PostNotification" switch @change="notifyPost()"
+                            value=true
+                            unchecked-value=false>
+                            Post notifications
+                        </b-form-checkbox></b-dropdown-text>
+                        <b-dropdown-text><b-form-checkbox v-model="userRelation.notifyStory" name="StoryNotification" switch @change="notifyStory()"
+                            value=true
+                            unchecked-value=false>
+                            Story notifications
+                        </b-form-checkbox></b-dropdown-text>
                     <b-dropdown-item-button @click="unfollowUser(username)" variant="danger">Unfollow</b-dropdown-item-button>
                   </b-dropdown>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'PENDING'" variant="outline-primary" @click="unfollowUser(username)">Pending</b-btn>
@@ -329,7 +339,7 @@
 
 
 <script>
-import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE } from '../util/constants';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH } from '../util/constants';
 import { getToken, getUsernameFromToken } from '../util/token';
 export default {
     name: 'Profile',
@@ -337,7 +347,7 @@ export default {
         return{
             isUserProfile: false,
             isFollowing: false,
-            userRelation: {status: 'NOT_FOLLOWING', enableNotifications: false},
+            userRelation: {status: 'NOT_FOLLOWING', mutePost: false, muteStory: false, notifyPost: false, notifyStory: false},
             user: '',
             username: this.$route.params.pUsername,
             info: [{
@@ -411,8 +421,7 @@ export default {
                                                                         }   
                 
             }).then(response => {
-                                this.userRelation.status = response.data.status,
-                                this.userRelation.enableNotifications = response.data.enableNotifications
+                                this.userRelation = response.data
                                 if(response.data.status == "FOLLOWING" || response.data.status == "MUTED" ||
                                     response.data.status == "CLOSE_FRIEND")
                                     this.isFollowing = true;
@@ -427,7 +436,7 @@ export default {
                                             .then(response => {
                                                 this.numFollowers = response.data.length;
                                                 this.followers = response.data;
-                                                this.getPosts(); // TODO: Hide posts from non followers
+                                                this.getPosts();
                                             })
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
@@ -685,7 +694,7 @@ export default {
                     })
         },
         closeChange(){
-            this.axios.put(RELATION_STATUS_UPDATE + "/" + this.username + "/" + this.userRelation.status, null, {   
+            this.axios.put(RELATION_STATUS_UPDATE_PATH + "/" + this.username + "/" + this.userRelation.status, null, {   
                                                             headers:{
                                                                 Authorization: "Bearer " + getToken(),
                                                             } 
@@ -694,6 +703,56 @@ export default {
                               this.makeToast(SERVER_NOT_RESPONDING, "danger");
                         else
                             this.makeToast("Couldn't update relation status!", "danger");
+                    })
+        },
+
+        mutePost(){
+            this.axios.put(MUTE_POST_PATH + "/" + this.username + "/" + this.userRelation.mutePost, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
+                    })
+        },
+        muteStory(){
+            this.axios.put(MUTE_STORY_PATH + "/" + this.username + "/" + this.userRelation.muteStory, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
+                    })
+        },
+        notifyPost(){
+            this.axios.put(NOTIFY_POST_PATH + "/" + this.username + "/" + this.userRelation.notifyPost, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
+                    })
+        },
+
+        notifyStory(){
+            this.axios.put(NOTIFY_STORY_PATH + "/" + this.username + "/" + this.userRelation.notifyStory, null, {   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update mute status!", "danger");
                     })
         },
 
@@ -713,6 +772,9 @@ export default {
     display: inline-block;
     max-width: 200px;
     word-wrap: break-word;
+}
+.dropdown-menu{
+    transform: translate3d(5px, 35px, 0px)!important;
 }
 .profilePic{
     width: 150px;

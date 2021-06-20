@@ -10,7 +10,10 @@ public class RelationMapper {
         relationDto.setUsername(relation.getUser().getUsername());
         relationDto.setRelatedUsername(relation.getRelatedUser().getUsername());
         relationDto.setStatus(relation.getRelationStatus());
-        relationDto.setEnableNotifications(relation.getEnableNotification());
+        relationDto.setMutePost(relation.getMutePost());
+        relationDto.setMuteStory(relation.getMuteStory());
+        relationDto.setNotifyPost(relation.getNotifyPost());
+        relationDto.setNotifyStory(relation.getNotifyStory());
         return relationDto;
     }
 }

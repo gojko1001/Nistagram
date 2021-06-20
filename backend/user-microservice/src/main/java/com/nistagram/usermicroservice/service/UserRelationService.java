@@ -1,11 +1,10 @@
 package com.nistagram.usermicroservice.service;
 
+import com.nistagram.usermicroservice.controller.exception.InvalidActionException;
 import com.nistagram.usermicroservice.domain.User;
 import com.nistagram.usermicroservice.domain.UserRelation;
 import com.nistagram.usermicroservice.domain.UserRelationKey;
 import com.nistagram.usermicroservice.domain.enums.RelationStatus;
-import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
-import com.nistagram.usermicroservice.controller.exception.*;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.interfaces.IUserRelationService;
 import com.nistagram.usermicroservice.service.interfaces.IUserService;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 @Service
 public class UserRelationService implements IUserRelationService {
@@ -66,7 +66,7 @@ public class UserRelationService implements IUserRelationService {
         RelationStatus status = RelationStatus.PENDING;
         if (relatedUser.isPublicProfile())
             status = RelationStatus.FOLLOWING;
-        UserRelation relation = new UserRelation(user, relatedUser, status, false);
+        UserRelation relation = new UserRelation(user, relatedUser, status);
         relation.setId(new UserRelationKey(user.getId(), relatedUser.getId()));
         user.getUserRelations().add(relation);
         userService.save(user);
@@ -84,7 +84,7 @@ public class UserRelationService implements IUserRelationService {
     }
 
     public void updateUserRelation(String username, String relatedUsername, RelationStatus status) {
-        if (status != RelationStatus.FOLLOWING && status != RelationStatus.MUTED && status != RelationStatus.CLOSE_FRIEND ||
+        if (status != RelationStatus.FOLLOWING && status != RelationStatus.CLOSE_FRIEND ||
                 isBlocked(username, relatedUsername) ||
                 isBlocked(relatedUsername, username))
             throw new InvalidActionException("Invalid action");
@@ -106,7 +106,7 @@ public class UserRelationService implements IUserRelationService {
             relation.setRelationStatus(RelationStatus.BLOCKED);
             relation.setId(new UserRelationKey(user.getId(), relatedUser.getId()));
         } else {
-            relation = new UserRelation(user, relatedUser, RelationStatus.BLOCKED, false);
+            relation = new UserRelation(user, relatedUser, RelationStatus.BLOCKED);
             user.getUserRelations().add(relation);
         }
         userService.save(user);
@@ -120,14 +120,14 @@ public class UserRelationService implements IUserRelationService {
         userService.save(user);
     }
 
-    public void setNotifications(UserRelationDto relationDto) {
-        if (isBlocked(relationDto.getUsername(), relationDto.getRelatedUsername()))
-            throw new InvalidActionException("Notifications can't be received from blocked user");
-        User user = findUserByUsername(relationDto.getUsername());
-        UserRelation userRelation = findRelation(relationDto.getUsername(), relationDto.getRelatedUsername());
+    public void setRelationBoolean(String username, String relatedUsername, BiConsumer<UserRelation, Boolean> relationFunction, Boolean isMuted){
+        if (isBlocked(username, relatedUsername))
+            throw new InvalidActionException("User is blocked!");
+        User user = findUserByUsername(username);
+        UserRelation userRelation = findRelation(username, relatedUsername);
         if (userRelation == null)
-            throw new InvalidActionException("You are not following user: " + relationDto.getRelatedUsername());
-        userRelation.setEnableNotification(relationDto.getEnableNotifications());
+            throw new InvalidActionException("You are not following user: " + relatedUsername);
+        relationFunction.accept(userRelation, isMuted);
         userService.save(user);
     }
 
@@ -140,8 +140,7 @@ public class UserRelationService implements IUserRelationService {
 
     private boolean isRelationFollowingGroup(UserRelation relation) {
         return relation.getRelationStatus() == RelationStatus.FOLLOWING ||
-                relation.getRelationStatus() == RelationStatus.CLOSE_FRIEND ||
-                relation.getRelationStatus() == RelationStatus.MUTED;
+                relation.getRelationStatus() == RelationStatus.CLOSE_FRIEND;
     }
 
     private boolean isBlocked(String username, String relatedUsername) {

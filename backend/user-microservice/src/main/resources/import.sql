@@ -26,11 +26,11 @@ insert into app_user (id, username, full_name, email, phone, web_site, bio, birt
 
 -- UserRelation
 -- maja
-insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 4, false, 1);
-insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 2, false, 3);
-insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 3, false, 0);
-insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 6, false, 1);
-insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (1, 7, false, 1);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (1, 4, 1, false, false, true, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (1, 2, 3, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (1, 3, 0, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (1, 6, 1, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (1, 7, 1, false, false, false, false);
 
 -- to maja
-insert into user_relation (user_id, related_user_id, enable_notification, relation_status) values (3, 1, false, 1);
+insert into user_relation (user_id, related_user_id, relation_status) values (3, 1, 1);

@@ -87,15 +87,40 @@ public class UserRelationController {
     public void updateRelation(@PathVariable String relatedUsername, @PathVariable RelationStatus status,
                                @RequestHeader("Authorization") String jwt) {
         String username = getUsernameFromToken(jwt);
-
         Logger.info("Update relation with user: " + relatedUsername, username);
         relationService.updateUserRelation(username, relatedUsername, status);
     }
 
-    @PutMapping("/notifications")
-    public void updateNotifications(@RequestBody UserRelationDto relationDto){
-        Logger.info("Update notifications", relationDto.getUsername());
-        relationService.setNotifications(relationDto);
+    @PutMapping("/mutePost/{relatedUsername}/{isMuted}")
+    public void mutePosts(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                          @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update relation with user: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setMutePost, isMuted);
+    }
+
+    @PutMapping("/muteStory/{relatedUsername}/{isMuted}")
+    public void muteStories(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                          @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update relation with user: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setMuteStory, isMuted);
+    }
+
+    @PutMapping("/notifyPost/{relatedUsername}/{isMuted}")
+    public void notifyPost(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                            @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update post notifications: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setNotifyPost, isMuted);
+    }
+
+    @PutMapping("/notifyStory/{relatedUsername}/{isMuted}")
+    public void notifyStory(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
+                           @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Update story notifications: " + relatedUsername, username);
+        relationService.setRelationBoolean(username, relatedUsername, UserRelation::setNotifyStory, isMuted);
     }
 
     @DeleteMapping("/remove/{relatedUsername}")
