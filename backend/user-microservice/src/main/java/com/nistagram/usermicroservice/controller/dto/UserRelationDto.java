@@ -8,5 +8,9 @@ public class UserRelationDto {
     private String username;
     private String relatedUsername;
     private RelationStatus status;
-    private Boolean enableNotifications;
+    private Boolean mutePost;
+    private Boolean muteStory;
+    private Boolean notifyPost;
+    private Boolean notifyStory;
+
 }

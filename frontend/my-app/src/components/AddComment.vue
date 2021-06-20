@@ -6,7 +6,7 @@
               tag="article"
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
-            <h4>@{{img.username}}</h4>
+            <h4 @click="goToProfile(img.username)" class="clickable">@{{img.username}}</h4>
             <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
             <p style="color:blue">{{img.location.name}}</p>
 
@@ -56,13 +56,13 @@
                 </b-input-group-append>
               </b-modal>
             <b-card-text>
-                  <span><b>{{img.username}}:  </b></span>{{img.description}}
+                  <span @click="goToProfile(img.username)" class="clickable"><b>{{img.username}}:  </b></span>{{img.description}}
                   <br>
                   <span v-for="(tag,t) in img.tags" :key="t">#{{tag.name}}  </span>
               </b-card-text>
               <hr>
               <span v-for="(comm,c) in img.comments" :key="c">
-                  <span><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
+                  <span @click="goToProfile(comm.username)" class="clickable"><b>{{comm.username}}:  </b></span>{{comm.text}}<br>
               </span>
               <br>
               <b-input-group>
@@ -178,6 +178,9 @@ export default {
                               solid: true,
                               appendToast: false
                           })
+      },
+      goToProfile(username){
+            window.location.href = "/user/" + username;
       },
       onSubmit() {
         console.log(this.form);

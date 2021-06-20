@@ -19,7 +19,13 @@ export const GET_FOLLOWINGS_PATH = USER_RELATION_PATH + "/followings"
 export const GET_BLOCKED_USERS_PATH = USER_RELATION_PATH + "/blocked"
 export const GET_CLOSE_FRIENDS_PATH = USER_RELATION_PATH + "/close_friends"
 export const FOLLOW_PATH = USER_RELATION_PATH + "/follow"
+export const RELATION_STATUS_UPDATE_PATH = USER_RELATION_PATH + "/update"
 export const DELETE_RELATION_PATH = USER_RELATION_PATH + "/remove"
+export const MUTE_POST_PATH = USER_RELATION_PATH + "/mutePost"
+export const MUTE_STORY_PATH = USER_RELATION_PATH + "/muteStory"
+export const NOTIFY_POST_PATH = USER_RELATION_PATH + "/notifyPost"
+export const NOTIFY_STORY_PATH = USER_RELATION_PATH + "/notifyStory"
+
 
 
 export const TAG_PATH = "/media-api/tag"
