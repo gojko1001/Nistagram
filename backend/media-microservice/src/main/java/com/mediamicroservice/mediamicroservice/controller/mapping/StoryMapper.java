@@ -18,6 +18,7 @@ public class StoryMapper {
         storyBytesDto.setMediaId(story.getMedia().getId());
         storyBytesDto.setHighlighted(story.isHighlighted());
         storyBytesDto.setForCloseFriends(story.isForCloseFriends());
+        storyBytesDto.setUserTags(story.getMedia().getUserTags());
         return storyBytesDto;
     }
 }

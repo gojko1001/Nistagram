@@ -137,4 +137,5 @@ public class UserRelationController {
             throw new UnauthorizedException("Access denied");
         return username;
     }
+
 }

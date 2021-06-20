@@ -7,6 +7,7 @@
             value-field="item"
             text-field="name"
             disabled-field="notEnabled"
+            @change="showStoryOptions()"
           ></b-form-radio-group>
       <br><br>
         <form ref="uploadForm" @submit.prevent="submit">
@@ -32,6 +33,21 @@
             <option v-for="(loc,i) in locations" :key="i">{{loc.name}}</option>
           </select>
           <br>
+          <select multiple="false" v-model="form.userTagsObj">
+            <option v-for="(tag,i) in userTags" :key="'T' + i">{{tag}}</option>
+          </select>
+          <br>
+          <b-form-checkbox
+            v-if="form.forCloseFriends"
+            id="checkbox-1"
+            v-model="form.forCloseFriends"
+            name="checkbox-1"
+            value="true"
+            unchecked-value="false"
+          >
+            For close friends
+          </b-form-checkbox>
+          <br>
           <br>
           <b-button variant="danger" style="width:200px;margin-right:20px" @click='back'>Back</b-button>
           <b-button type="submit" variant="primary" style="width:200px;" aria-describedby="signup-block">Post</b-button>
@@ -52,9 +68,12 @@ export default {
           description:'',
           tags:[],
           locationName:'',
+          forCloseFriends:false,
+          userTags: [],
           location:[{
             name:''
           }],
+          userTagsObj:[]
         },
         selected: 'post',
         options: [
@@ -68,19 +87,25 @@ export default {
         description:'',
         value: [],
         formData:null,
-        filesForm: [{}]
+        filesForm: [{}],
+        userTags:[]
       }
     },
   mounted: function(){
-    if(!localStorage.getItem('JWT'))
-      window.location.href = "/";
+    if(!localStorage.getItem('JWT')){
+       window.location.href = "/";
+    }
     this.axios.get('/media-api/location')
-    .then(response => {console.log(response);
-                        this.locations = response.data;
-                      })
-    .catch(error => { console.error(error)
-                      this.makeToast("Error occurred.", "danger");
-    })
+      .then(response => {this.locations = response.data;})
+      .catch(error => { console.error(error)
+                        this.makeToast("Error occurred.", "danger");
+      })
+    var username = getUsernameFromToken();
+    this.axios.get('/media-api/usertag/' + username)
+      .then(response => { this.userTags = response.data;})
+      .catch(error => { console.error(error)
+                        this.makeToast("Error occurred.", "danger");
+      })
     },
     methods:{
       makeToast(message, variant) {
@@ -127,7 +152,9 @@ export default {
         if(this.imageHasBeenUploaded){
           this.form.username = getUsernameFromToken();
           this.form.locationName = this.form.location.toString();
-          console.log(this.selected)
+          for(var i of this.form.userTagsObj){
+            this.form.userTags.push(i.toString());
+          }
           if(this.selected == 'post'){
             this.axios.post('/media-api/image/info', this.form)
                                 .then(response => { console.log(response);
@@ -149,12 +176,14 @@ export default {
           this.makeToast("Please upload image.", "danger");
         }
       },
-      addField(value, fieldType) {
-        fieldType.push({ value: "" });
-      },
-      removeField(index, fieldType) {
-        fieldType.splice(index, 1);
-      },
+      async showStoryOptions(){
+        console.log(this.selected);
+        if(this.selected == 'story'){
+          this.form.forCloseFriends = true;
+        }else{
+          this.form.forCloseFriends = false;
+        }
+      }
     },
 }
 </script>

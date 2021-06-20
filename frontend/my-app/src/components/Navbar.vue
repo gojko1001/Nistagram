@@ -7,9 +7,9 @@
         </a>
         <form style="padding: 0px 0px 0px 60px;">
           <input type="text" class="search-input" v-model="searchInput">
-          <router-link :to="{ name: 'Search', params: { name: this.selected, find: searchInput } }" class="search-btn">
+          <b-button @click="search()" type="submit" class="search-btn">
             <i class="fas fa-search"></i>
-          </router-link>
+          </b-button>
           <br>
           <div>
           <b-form-radio-group
@@ -86,7 +86,12 @@ export default {
     },
     discoverPage:function(){
       window.location.href = "/discover";
-    }
+    },
+    search: function() {
+      localStorage.setItem("name", this.selected);
+      localStorage.setItem("find", this.searchInput);
+      this.$router.push({path: '/search'})        
+    },
   },
 }
 </script>
@@ -121,7 +126,7 @@ export default {
 }
 .search{
   padding: 0.5rem;
-    font-size: 2rem;
+  font-size: 2rem;
 }
 .search:hover{
   border-radius: 0px;
