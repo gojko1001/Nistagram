@@ -1,17 +1,10 @@
 package com.mediamicroservice.mediamicroservice.connection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
 
-@Service
+/*@Service
 public class AuthConnection {
 
     @Autowired
@@ -29,11 +22,11 @@ public class AuthConnection {
         }
         return text;
     }
-}
+}*/
 
-//@FeignClient(value = "authentication-microservice", url = "http://localhost:3031")
-//public interface AuthConnection {
-//
-//    @GetMapping("/verify/{username}")
-//    String verifyUser(@PathVariable String username);
-//}
+@FeignClient(value = "authentication-microservice", url = "http://localhost:3031")
+public interface AuthConnection {
+
+    @GetMapping("/verify/{username}")
+    String verifyUser(@PathVariable String username);
+}

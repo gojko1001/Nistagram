@@ -1,5 +1,6 @@
 package com.mediamicroservice.mediamicroservice.controller;
 
+import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.domain.Post;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
@@ -28,6 +29,12 @@ public class PostController {
     private IPostService postService;
 
     private static String uploadDir = "user-photos";
+
+    // for notification-microservice
+    @GetMapping
+    public List<ImageBytesDto> getAllPosts() {
+        return postService.getAllPosts();
+    }
 
     @PostMapping
     public List<String> saveImage(@RequestParam("file") List<MultipartFile> multipartFiles) throws IOException {
@@ -80,6 +87,8 @@ public class PostController {
         Logger.info("Search location: " + location, "");
         return new ResponseEntity(postService.searchLocation(location), HttpStatus.OK);
     }
+
+
 
 
 }
