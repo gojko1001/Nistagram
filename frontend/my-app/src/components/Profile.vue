@@ -198,7 +198,7 @@
                         </div>
                     </b-tab>
                     <!-- Collections -->
-                    <b-tab title="Collections" @click="getCollections()">
+                    <b-tab v-if="isUserProfile" title="Collections" @click="getCollections()">
                         <div v-for="(coll,c) in collections" :key="c">
                             <p style="font-size:30px">{{coll.name}}:</p>
                             <div v-for="(img,i) in coll.favourites" :key="i">
@@ -253,7 +253,7 @@
                         </div>
                     </b-tab>
                     <!-- Liked posts -->
-                    <b-tab title="Liked posts" @click="historyOfLikedPosts()">
+                    <b-tab v-if="isUserProfile" title="Liked posts" @click="historyOfLikedPosts()">
                         <div v-for="(img,u) in history" :key="u">
                             <b-card
                                 tag="article"
@@ -306,7 +306,7 @@
                         </div>
                     </b-tab>
                     <!-- Story archived -->
-                    <b-tab title="Story archive" @click="getArchivedStories()">
+                    <b-tab v-if="isUserProfile" title="Story archive" @click="getArchivedStories()">
                         <div v-for="(img,j) in archivedStories" :key="j">
                             <b-card
                                 tag="article"
