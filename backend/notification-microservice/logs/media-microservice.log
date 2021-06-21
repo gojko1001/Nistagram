@@ -223,3 +223,7 @@
 2021-06-21 09:47:32,820 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
 2021-06-21 09:47:42,809 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
 2021-06-21 09:47:52,817 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 09:48:02,815 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 09:48:12,813 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 09:48:22,822 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 09:48:32,822 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
