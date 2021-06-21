@@ -1,6 +1,5 @@
 package com.mediamicroservice.mediamicroservice.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;

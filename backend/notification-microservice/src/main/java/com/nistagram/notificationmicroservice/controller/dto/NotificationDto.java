@@ -17,8 +17,4 @@ public class NotificationDto {
         this.receiver = receiver;
     }
 
-    public NotificationDto(String message, Date timestamp) {
-        this.message = message;
-        this.timestamp = timestamp;
-    }
 }

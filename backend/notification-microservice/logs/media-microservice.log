@@ -1,516 +1,296 @@
-2021-06-21 15:15:24,258 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
-2021-06-21 15:15:24,918 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:15:24,918 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:24,919 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:15:24,919 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
-2021-06-21 15:15:26,844 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] GET "/socket/info?t=1624281326840", parameters={masked}
-2021-06-21 15:15:26,845 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:26,845 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624281326840
-2021-06-21 15:15:26,845 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
-2021-06-21 15:15:26,886 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] GET "/socket/276/mfstni1j/websocket", parameters={}
-2021-06-21 15:15:26,887 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:26,887 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: GET http://192.168.1.4:3036/socket/276/mfstni1j/websocket
-2021-06-21 15:15:26,887 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-5] Handshake failed due to invalid Connection header [Keep-Alive]
-2021-06-21 15:15:26,887 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 400 BAD_REQUEST
-2021-06-21 15:15:26,945 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/276/xg33txx1/xhr_streaming?t=1624281326927", parameters={masked}
-2021-06-21 15:15:26,946 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:26,946 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/276/xg33txx1/xhr_streaming?t=1624281326927
-2021-06-21 15:15:26,946 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-6] POST http://192.168.1.4:3036/socket/276/xg33txx1/xhr_streaming?t=1624281326927
-2021-06-21 15:15:26,946 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-6] New XhrStreamingSockJsSession[id=xg33txx1]
-2021-06-21 15:15:26,947 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
-2021-06-21 15:15:27,913 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] GET "/socket/276/va13ro0g/eventsource", parameters={}
-2021-06-21 15:15:27,914 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:27,914 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: GET http://192.168.1.4:3036/socket/276/va13ro0g/eventsource
-2021-06-21 15:15:27,915 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler [http-nio-3036-exec-10] GET http://192.168.1.4:3036/socket/276/va13ro0g/eventsource
-2021-06-21 15:15:27,915 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-10] New EventSourceStreamingSockJsSession[id=va13ro0g]
-2021-06-21 15:15:27,916 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
-2021-06-21 15:15:27,966 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:15:27,967 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:27,967 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:15:27,967 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
-2021-06-21 15:15:28,480 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-3] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:15:28,954 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:15:28,955 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:28,956 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:15:28,956 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
-2021-06-21 15:15:29,490 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/276/pw4igqvp/xhr?t=1624281329486", parameters={masked}
-2021-06-21 15:15:29,490 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:29,491 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr?t=1624281329486
-2021-06-21 15:15:29,491 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-1] POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr?t=1624281329486
-2021-06-21 15:15:29,491 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-1] New PollingSockJsSession[id=pw4igqvp]
-2021-06-21 15:15:29,491 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
-2021-06-21 15:15:29,500 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/276/pw4igqvp/xhr_send?t=1624281329496", parameters={masked}
-2021-06-21 15:15:29,500 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:29,500 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr_send?t=1624281329496
-2021-06-21 15:15:29,500 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 204 NO_CONTENT
-2021-06-21 15:15:29,500 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-138] Processing CONNECT session=pw4igqvp
-2021-06-21 15:15:29,505 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/276/pw4igqvp/xhr?t=1624281329497", parameters={masked}
-2021-06-21 15:15:29,506 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:29,506 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr?t=1624281329497
-2021-06-21 15:15:29,506 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
-2021-06-21 15:15:29,514 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/276/pw4igqvp/xhr?t=1624281329510", parameters={masked}
-2021-06-21 15:15:29,514 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:29,514 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr?t=1624281329510
-2021-06-21 15:15:29,514 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
-2021-06-21 15:15:29,533 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/276/pw4igqvp/xhr_send?t=1624281329530", parameters={masked}
-2021-06-21 15:15:29,533 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:29,533 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr_send?t=1624281329530
-2021-06-21 15:15:29,534 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 204 NO_CONTENT
-2021-06-21 15:15:29,534 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-142] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624281329508-192 session=pw4igqvp, lookupDestination='/topic/server-broadcaster'
-2021-06-21 15:15:29,534 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-141] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624281329508-192 session=pw4igqvp
-2021-06-21 15:15:29,534 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-142] No matching message handler methods.
-2021-06-21 15:15:30,035 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-2] Closed 1 sessions: [w5gopyq2]
-2021-06-21 15:15:35,038 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-2] Closing SockJS session aarrq3vn with CloseStatus[code=3000, reason=Go away!]
-2021-06-21 15:15:35,038 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-2] PollingSockJsSession[id=aarrq3vn] closed with CloseStatus[code=3000, reason=Go away!]
-2021-06-21 15:15:35,038 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-2] Clearing session aarrq3vn
-2021-06-21 15:15:35,039 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-2] Closed 2 sessions: [mfstni1j, aarrq3vn]
-2021-06-21 15:15:35,039 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-145] Processing DISCONNECT session=aarrq3vn
-2021-06-21 15:15:35,039 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-110] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=aarrq3vn}], simpSessionId=aarrq3vn}]
-2021-06-21 15:15:38,460 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-6] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:15:43,457 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] GET "/socket/info?t=1624281343440", parameters={masked}
-2021-06-21 15:15:43,458 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:43,458 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624281343440
-2021-06-21 15:15:43,458 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
-2021-06-21 15:15:43,462 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] GET "/socket/304/i3it11ur/websocket", parameters={}
-2021-06-21 15:15:43,462 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:43,462 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: GET http://192.168.1.4:3036/socket/304/i3it11ur/websocket
-2021-06-21 15:15:43,462 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-9] Handshake failed due to invalid Connection header [Keep-Alive]
-2021-06-21 15:15:43,462 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 400 BAD_REQUEST
-2021-06-21 15:15:43,470 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/304/iq0l0zup/xhr_streaming?t=1624281343466", parameters={masked}
-2021-06-21 15:15:43,471 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:43,471 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/304/iq0l0zup/xhr_streaming?t=1624281343466
-2021-06-21 15:15:43,471 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-4] POST http://192.168.1.4:3036/socket/304/iq0l0zup/xhr_streaming?t=1624281343466
-2021-06-21 15:15:43,471 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] New XhrStreamingSockJsSession[id=iq0l0zup]
-2021-06-21 15:15:43,472 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
-2021-06-21 15:15:44,134 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:15:44,135 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:44,135 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:15:44,135 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
-2021-06-21 15:15:45,080 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] GET "/socket/info?t=1624281345076", parameters={masked}
-2021-06-21 15:15:45,080 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:45,080 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624281345076
-2021-06-21 15:15:45,080 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
-2021-06-21 15:15:45,129 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] GET "/socket/307/lheevbyv/websocket", parameters={}
-2021-06-21 15:15:45,130 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:45,130 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: GET http://192.168.1.4:3036/socket/307/lheevbyv/websocket
-2021-06-21 15:15:45,130 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-10] Handshake failed due to invalid Connection header [Keep-Alive]
-2021-06-21 15:15:45,130 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 400 BAD_REQUEST
-2021-06-21 15:15:45,183 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/307/3btzugjs/xhr_streaming?t=1624281345180", parameters={masked}
-2021-06-21 15:15:45,183 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:45,184 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/307/3btzugjs/xhr_streaming?t=1624281345180
-2021-06-21 15:15:45,184 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-6] POST http://192.168.1.4:3036/socket/307/3btzugjs/xhr_streaming?t=1624281345180
-2021-06-21 15:15:45,184 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-6] New XhrStreamingSockJsSession[id=3btzugjs]
-2021-06-21 15:15:45,185 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
-2021-06-21 15:15:45,896 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/307/wcfnj4jd/eventsource", parameters={}
-2021-06-21 15:15:45,897 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:45,897 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/307/wcfnj4jd/eventsource
-2021-06-21 15:15:45,897 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler [http-nio-3036-exec-7] GET http://192.168.1.4:3036/socket/307/wcfnj4jd/eventsource
-2021-06-21 15:15:45,898 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-7] New EventSourceStreamingSockJsSession[id=wcfnj4jd]
-2021-06-21 15:15:45,898 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
-2021-06-21 15:15:45,939 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:15:45,940 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:45,940 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:15:45,941 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
-2021-06-21 15:15:46,680 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:15:46,681 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:46,681 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:15:46,681 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
-2021-06-21 15:15:47,051 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/307/fmibtyoy/xhr?t=1624281347047", parameters={masked}
-2021-06-21 15:15:47,051 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:47,052 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/307/fmibtyoy/xhr?t=1624281347047
-2021-06-21 15:15:47,052 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-9] POST http://192.168.1.4:3036/socket/307/fmibtyoy/xhr?t=1624281347047
-2021-06-21 15:15:47,053 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] New PollingSockJsSession[id=fmibtyoy]
-2021-06-21 15:15:47,053 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
-2021-06-21 15:15:47,060 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/307/fmibtyoy/xhr_send?t=1624281347057", parameters={masked}
-2021-06-21 15:15:47,061 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:47,061 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/307/fmibtyoy/xhr_send?t=1624281347057
-2021-06-21 15:15:47,061 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 68746 ms. Closing XhrStreamingSockJsSession[id=hfj3lcet].
-2021-06-21 15:15:47,061 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session hfj3lcet with CloseStatus[code=4500, reason=null]
-2021-06-21 15:15:47,061 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] XhrStreamingSockJsSession[id=hfj3lcet] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:15:47,062 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session hfj3lcet
-2021-06-21 15:15:47,062 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-153] Processing CONNECT session=fmibtyoy
-2021-06-21 15:15:47,062 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/307/fmibtyoy/xhr?t=1624281347058", parameters={masked}
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:47,063 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 67913 ms. Closing EventSourceStreamingSockJsSession[id=ezeptfkv].
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-156] Processing DISCONNECT session=hfj3lcet
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session ezeptfkv with CloseStatus[code=4500, reason=null]
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/307/fmibtyoy/xhr?t=1624281347058
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] EventSourceStreamingSockJsSession[id=ezeptfkv] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session ezeptfkv
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-112] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=hfj3lcet}], simpSessionId=hfj3lcet}]
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 204 NO_CONTENT
-2021-06-21 15:15:47,063 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-159] Processing DISCONNECT session=ezeptfkv
-2021-06-21 15:15:47,064 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-113] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=ezeptfkv}], simpSessionId=ezeptfkv}]
-2021-06-21 15:15:47,070 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/307/fmibtyoy/xhr?t=1624281347067", parameters={masked}
-2021-06-21 15:15:47,071 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:47,071 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/307/fmibtyoy/xhr?t=1624281347067
-2021-06-21 15:15:47,071 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
-2021-06-21 15:15:47,099 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/307/fmibtyoy/xhr_send?t=1624281347095", parameters={masked}
-2021-06-21 15:15:47,099 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:47,099 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/307/fmibtyoy/xhr_send?t=1624281347095
-2021-06-21 15:15:47,100 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 204 NO_CONTENT
-2021-06-21 15:15:47,100 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-129] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624281347065-530 session=fmibtyoy
-2021-06-21 15:15:47,100 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-151] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624281347065-530 session=fmibtyoy, lookupDestination='/topic/server-broadcaster'
-2021-06-21 15:15:47,100 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-151] No matching message handler methods.
-2021-06-21 15:15:48,495 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:15:50,029 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-9] Closing SockJS session tthzdxvw with CloseStatus[code=3000, reason=Go away!]
-2021-06-21 15:15:50,029 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-9] PollingSockJsSession[id=tthzdxvw] closed with CloseStatus[code=3000, reason=Go away!]
-2021-06-21 15:15:50,029 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-9] Clearing session tthzdxvw
-2021-06-21 15:15:50,030 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-9] Closed 2 sessions: [i3it11ur, tthzdxvw]
-2021-06-21 15:15:50,030 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-131] Processing DISCONNECT session=tthzdxvw
-2021-06-21 15:15:50,031 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-114] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=tthzdxvw}], simpSessionId=tthzdxvw}]
-2021-06-21 15:15:54,532 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/276/pw4igqvp/xhr?t=1624281354527", parameters={masked}
-2021-06-21 15:15:54,532 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:15:54,532 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr?t=1624281354527
-2021-06-21 15:15:54,533 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
-2021-06-21 15:15:55,031 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-6] Closed 3 sessions: [lheevbyv, hfj3lcet, ezeptfkv]
-2021-06-21 15:15:58,481 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:16:08,459 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-5] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:16:12,205 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/307/fmibtyoy/xhr?t=1624281372202", parameters={masked}
-2021-06-21 15:16:12,206 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:12,206 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/307/fmibtyoy/xhr?t=1624281372202
-2021-06-21 15:16:12,206 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
-2021-06-21 15:16:18,450 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:16:19,549 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/276/pw4igqvp/xhr?t=1624281379545", parameters={masked}
-2021-06-21 15:16:19,550 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:19,550 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr?t=1624281379545
-2021-06-21 15:16:19,551 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
-2021-06-21 15:16:28,474 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-10] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:16:38,484 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-12] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:16:40,876 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] GET "/socket/info?t=1624281400859", parameters={masked}
-2021-06-21 15:16:40,877 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:40,877 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624281400859
-2021-06-21 15:16:40,877 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
-2021-06-21 15:16:40,882 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] GET "/socket/766/hbv5wbqd/websocket", parameters={}
-2021-06-21 15:16:40,882 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:40,882 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: GET http://192.168.1.4:3036/socket/766/hbv5wbqd/websocket
-2021-06-21 15:16:40,882 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-10] Handshake failed due to invalid Connection header [Keep-Alive]
-2021-06-21 15:16:40,882 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 400 BAD_REQUEST
-2021-06-21 15:16:40,892 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/766/cam3zj4b/xhr_streaming?t=1624281400886", parameters={masked}
-2021-06-21 15:16:40,893 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:40,893 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/766/cam3zj4b/xhr_streaming?t=1624281400886
-2021-06-21 15:16:40,893 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-6] POST http://192.168.1.4:3036/socket/766/cam3zj4b/xhr_streaming?t=1624281400886
-2021-06-21 15:16:40,893 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-6] New XhrStreamingSockJsSession[id=cam3zj4b]
-2021-06-21 15:16:40,894 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
-2021-06-21 15:16:41,555 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/766/nmmabvvg/eventsource", parameters={}
-2021-06-21 15:16:41,555 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:41,555 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/766/nmmabvvg/eventsource
-2021-06-21 15:16:41,555 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler [http-nio-3036-exec-7] GET http://192.168.1.4:3036/socket/766/nmmabvvg/eventsource
-2021-06-21 15:16:41,555 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-7] New EventSourceStreamingSockJsSession[id=nmmabvvg]
-2021-06-21 15:16:41,556 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
-2021-06-21 15:16:41,571 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:16:41,571 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:41,571 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:16:41,571 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
-2021-06-21 15:16:42,209 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:16:42,209 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:42,210 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:16:42,210 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
-2021-06-21 15:16:42,534 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/766/advketab/xhr?t=1624281402531", parameters={masked}
-2021-06-21 15:16:42,534 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:42,534 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/766/advketab/xhr?t=1624281402531
-2021-06-21 15:16:42,534 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-9] POST http://192.168.1.4:3036/socket/766/advketab/xhr?t=1624281402531
-2021-06-21 15:16:42,534 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] New PollingSockJsSession[id=advketab]
-2021-06-21 15:16:42,535 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
-2021-06-21 15:16:42,542 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/766/advketab/xhr_send?t=1624281402540", parameters={masked}
-2021-06-21 15:16:42,543 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:42,543 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/766/advketab/xhr_send?t=1624281402540
-2021-06-21 15:16:42,543 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/766/advketab/xhr?t=1624281402540", parameters={masked}
-2021-06-21 15:16:42,543 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:42,543 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/766/advketab/xhr?t=1624281402540
-2021-06-21 15:16:42,543 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
-2021-06-21 15:16:42,544 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 204 NO_CONTENT
-2021-06-21 15:16:42,544 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-161] Processing CONNECT session=advketab
-2021-06-21 15:16:42,552 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/766/advketab/xhr?t=1624281402549", parameters={masked}
-2021-06-21 15:16:42,552 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:42,552 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/766/advketab/xhr?t=1624281402549
-2021-06-21 15:16:42,552 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
-2021-06-21 15:16:42,575 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/766/advketab/xhr_send?t=1624281402574", parameters={masked}
-2021-06-21 15:16:42,575 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:42,575 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/766/advketab/xhr_send?t=1624281402574
-2021-06-21 15:16:42,575 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 204 NO_CONTENT
-2021-06-21 15:16:42,575 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-163] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624281402547-948 session=advketab, lookupDestination='/topic/server-broadcaster'
-2021-06-21 15:16:42,575 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-163] No matching message handler methods.
-2021-06-21 15:16:42,575 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-164] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624281402547-948 session=advketab
-2021-06-21 15:16:44,565 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] POST "/socket/276/pw4igqvp/xhr?t=1624281404563", parameters={masked}
-2021-06-21 15:16:44,565 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:44,565 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: POST http://192.168.1.4:3036/socket/276/pw4igqvp/xhr?t=1624281404563
-2021-06-21 15:16:44,565 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
-2021-06-21 15:16:45,039 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-2] Closing SockJS session fmibtyoy with CloseStatus[code=3000, reason=Go away!]
-2021-06-21 15:16:45,039 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-2] PollingSockJsSession[id=fmibtyoy] closed with CloseStatus[code=3000, reason=Go away!]
-2021-06-21 15:16:45,039 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-2] Clearing session fmibtyoy
-2021-06-21 15:16:45,039 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-2] Closed 1 sessions: [fmibtyoy]
-2021-06-21 15:16:45,039 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-167] Processing DISCONNECT session=fmibtyoy
-2021-06-21 15:16:45,039 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-116] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=fmibtyoy}], simpSessionId=fmibtyoy}]
-2021-06-21 15:16:47,002 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] GET "/socket/info?t=1624281406988", parameters={masked}
-2021-06-21 15:16:47,003 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:47,003 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624281406988
-2021-06-21 15:16:47,003 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
-2021-06-21 15:16:47,009 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] GET "/socket/586/virr32ox/websocket", parameters={}
-2021-06-21 15:16:47,009 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:47,009 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: GET http://192.168.1.4:3036/socket/586/virr32ox/websocket
-2021-06-21 15:16:47,010 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-2] Handshake failed due to invalid Connection header [Keep-Alive]
-2021-06-21 15:16:47,010 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 400 BAD_REQUEST
-2021-06-21 15:16:47,017 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/586/4yt2v5gp/xhr_streaming?t=1624281407014", parameters={masked}
-2021-06-21 15:16:47,017 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:47,017 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/586/4yt2v5gp/xhr_streaming?t=1624281407014
-2021-06-21 15:16:47,017 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-9] POST http://192.168.1.4:3036/socket/586/4yt2v5gp/xhr_streaming?t=1624281407014
-2021-06-21 15:16:47,018 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] New XhrStreamingSockJsSession[id=4yt2v5gp]
-2021-06-21 15:16:47,018 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
-2021-06-21 15:16:47,684 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:16:47,685 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:47,685 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:16:47,685 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
-2021-06-21 15:16:48,337 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] GET "/socket/iframe.html", parameters={}
-2021-06-21 15:16:48,338 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:48,338 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
-2021-06-21 15:16:48,338 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
-2021-06-21 15:16:48,482 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-6] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:16:48,666 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/586/adgzruot/xhr?t=1624281408661", parameters={masked}
-2021-06-21 15:16:48,666 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:48,666 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/586/adgzruot/xhr?t=1624281408661
-2021-06-21 15:16:48,666 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-3] POST http://192.168.1.4:3036/socket/586/adgzruot/xhr?t=1624281408661
-2021-06-21 15:16:48,667 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-3] New PollingSockJsSession[id=adgzruot]
-2021-06-21 15:16:48,667 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
-2021-06-21 15:16:48,675 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/586/adgzruot/xhr_send?t=1624281408671", parameters={masked}
-2021-06-21 15:16:48,675 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:48,675 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/586/adgzruot/xhr?t=1624281408672", parameters={masked}
-2021-06-21 15:16:48,676 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/586/adgzruot/xhr_send?t=1624281408671
-2021-06-21 15:16:48,676 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:48,676 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/586/adgzruot/xhr?t=1624281408672
-2021-06-21 15:16:48,676 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
-2021-06-21 15:16:48,677 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 65206 ms. Closing XhrStreamingSockJsSession[id=iq0l0zup].
-2021-06-21 15:16:48,677 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-170] Processing CONNECT session=adgzruot
-2021-06-21 15:16:48,677 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session iq0l0zup with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,677 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] XhrStreamingSockJsSession[id=iq0l0zup] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,677 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session iq0l0zup
-2021-06-21 15:16:48,677 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-173] Processing DISCONNECT session=iq0l0zup
-2021-06-21 15:16:48,677 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 107769 ms. Closing EventSourceStreamingSockJsSession[id=yyfpd4au].
-2021-06-21 15:16:48,678 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-118] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=iq0l0zup}], simpSessionId=iq0l0zup}]
-2021-06-21 15:16:48,678 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session yyfpd4au with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,678 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] EventSourceStreamingSockJsSession[id=yyfpd4au] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,678 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session yyfpd4au
-2021-06-21 15:16:48,679 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 80762 ms. Closing EventSourceStreamingSockJsSession[id=va13ro0g].
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session va13ro0g with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-176] Processing DISCONNECT session=yyfpd4au
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] EventSourceStreamingSockJsSession[id=va13ro0g] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session va13ro0g
-2021-06-21 15:16:48,679 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 63493 ms. Closing XhrStreamingSockJsSession[id=3btzugjs].
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session 3btzugjs with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-179] Processing DISCONNECT session=va13ro0g
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] XhrStreamingSockJsSession[id=3btzugjs] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session 3btzugjs
-2021-06-21 15:16:48,679 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-119] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=yyfpd4au}], simpSessionId=yyfpd4au}]
-2021-06-21 15:16:48,680 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 84420 ms. Closing XhrStreamingSockJsSession[id=irvydrou].
-2021-06-21 15:16:48,680 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-180] Processing DISCONNECT session=3btzugjs
-2021-06-21 15:16:48,680 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session irvydrou with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,680 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-120] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=va13ro0g}], simpSessionId=va13ro0g}]
-2021-06-21 15:16:48,680 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] XhrStreamingSockJsSession[id=irvydrou] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,680 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session irvydrou
-2021-06-21 15:16:48,680 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 81731 ms. Closing XhrStreamingSockJsSession[id=xg33txx1].
-2021-06-21 15:16:48,680 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-180] Processing DISCONNECT session=irvydrou
-2021-06-21 15:16:48,680 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session xg33txx1 with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] XhrStreamingSockJsSession[id=xg33txx1] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session xg33txx1
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-121] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=3btzugjs}], simpSessionId=3btzugjs}]
-2021-06-21 15:16:48,681 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 108528 ms. Closing XhrStreamingSockJsSession[id=20bg4ptq].
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-180] Processing DISCONNECT session=xg33txx1
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session 20bg4ptq with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] XhrStreamingSockJsSession[id=20bg4ptq] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-122] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=irvydrou}], simpSessionId=irvydrou}]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session 20bg4ptq
-2021-06-21 15:16:48,681 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] No messages received after 62779 ms. Closing EventSourceStreamingSockJsSession[id=wcfnj4jd].
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-180] Processing DISCONNECT session=20bg4ptq
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [http-nio-3036-exec-4] Closing SockJS session wcfnj4jd with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] EventSourceStreamingSockJsSession[id=wcfnj4jd] closed with CloseStatus[code=4500, reason=null]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-4] Clearing session wcfnj4jd
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-169] Processing DISCONNECT session=wcfnj4jd
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-123] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=xg33txx1}], simpSessionId=xg33txx1}]
-2021-06-21 15:16:48,681 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 204 NO_CONTENT
-2021-06-21 15:16:48,682 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-124] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=20bg4ptq}], simpSessionId=20bg4ptq}]
-2021-06-21 15:16:48,682 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-125] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=wcfnj4jd}], simpSessionId=wcfnj4jd}]
-2021-06-21 15:16:48,685 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/586/adgzruot/xhr?t=1624281408683", parameters={masked}
-2021-06-21 15:16:48,686 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:48,686 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/586/adgzruot/xhr?t=1624281408683
-2021-06-21 15:16:48,686 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
-2021-06-21 15:16:48,714 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] POST "/socket/586/adgzruot/xhr_send?t=1624281408711", parameters={masked}
-2021-06-21 15:16:48,715 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@7d1f3fe9
-2021-06-21 15:16:48,715 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: POST http://192.168.1.4:3036/socket/586/adgzruot/xhr_send?t=1624281408711
-2021-06-21 15:16:48,715 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 204 NO_CONTENT
-2021-06-21 15:16:48,715 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-172] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624281408681-742 session=adgzruot, lookupDestination='/topic/server-broadcaster'
-2021-06-21 15:16:48,715 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-172] No matching message handler methods.
-2021-06-21 15:16:48,715 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-174] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624281408681-742 session=adgzruot
-2021-06-21 15:16:50,034 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-1] Closed 1 sessions: [hbv5wbqd]
-2021-06-21 15:16:55,039 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-1] Closed 9 sessions: [yyfpd4au, 20bg4ptq, wcfnj4jd, iq0l0zup, virr32ox, va13ro0g, 3btzugjs, irvydrou, xg33txx1]
-2021-06-21 15:16:58,838 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:17:05,910 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-5] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
-2021-06-21 15:17:05,910 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [MessageBroker-5] Closing SockJS session cam3zj4b with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:05,910 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-5] XhrStreamingSockJsSession[id=cam3zj4b] closed with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:05,910 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-5] Clearing session cam3zj4b
-2021-06-21 15:17:05,910 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-175] Processing DISCONNECT session=cam3zj4b
-2021-06-21 15:17:05,910 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-126] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=cam3zj4b}], simpSessionId=cam3zj4b}]
-2021-06-21 15:17:05,910 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] "INCLUDE" dispatch for POST "/error?t=1624281400886", parameters={masked}
-2021-06-21 15:17:05,918 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-7] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2021-06-21 15:17:05,918 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-7] Found 'Content-Type:application/javascript;charset=UTF-8' in response
-2021-06-21 15:17:05,918 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-7] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
-2021-06-21 15:17:05,918 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Exiting from "INCLUDE" dispatch, status 200
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-9] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] "INCLUDE" dispatch for GET "/error", parameters={}
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [MessageBroker-9] Closing SockJS session nmmabvvg with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-2] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-9] EventSourceStreamingSockJsSession[id=nmmabvvg] closed with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-9] Clearing session nmmabvvg
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-176] Processing DISCONNECT session=nmmabvvg
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-2] Found 'Content-Type:text/event-stream;charset=UTF-8' in response
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-127] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=nmmabvvg}], simpSessionId=nmmabvvg}]
-2021-06-21 15:17:06,568 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-2] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
-2021-06-21 15:17:06,568 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Exiting from "INCLUDE" dispatch, status 200
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] "INCLUDE" dispatch for POST "/error?t=1624281402549", parameters={masked}
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-10] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-10] Closing SockJS session advketab with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-10] PollingSockJsSession[id=advketab] closed with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-10] Clearing session advketab
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-132] Processing DISCONNECT session=advketab
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-1] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-1] Found 'Content-Type:application/javascript;charset=UTF-8' in response
-2021-06-21 15:17:07,558 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-1] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-128] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=advketab}], simpSessionId=advketab}]
-2021-06-21 15:17:07,558 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Exiting from "INCLUDE" dispatch, status 200
-2021-06-21 15:17:08,468 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 15:17:09,574 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-11] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
-2021-06-21 15:17:09,574 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] "INCLUDE" dispatch for POST "/error?t=1624281404563", parameters={masked}
-2021-06-21 15:17:09,574 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-11] Closing SockJS session pw4igqvp with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:09,575 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-11] PollingSockJsSession[id=pw4igqvp] closed with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:09,575 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-11] Clearing session pw4igqvp
-2021-06-21 15:17:09,575 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-9] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2021-06-21 15:17:09,575 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-162] Processing DISCONNECT session=pw4igqvp
-2021-06-21 15:17:09,575 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-9] Found 'Content-Type:application/javascript;charset=UTF-8' in response
-2021-06-21 15:17:09,575 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-9] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
-2021-06-21 15:17:09,576 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Exiting from "INCLUDE" dispatch, status 200
-2021-06-21 15:17:09,576 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-129] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=pw4igqvp}], simpSessionId=pw4igqvp}]
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-6] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] "INCLUDE" dispatch for POST "/error?t=1624281407014", parameters={masked}
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [MessageBroker-6] Closing SockJS session 4yt2v5gp with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-6] XhrStreamingSockJsSession[id=4yt2v5gp] closed with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-6] Clearing session 4yt2v5gp
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-163] Processing DISCONNECT session=4yt2v5gp
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-8] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-130] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=4yt2v5gp}], simpSessionId=4yt2v5gp}]
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-8] Found 'Content-Type:application/javascript;charset=UTF-8' in response
-2021-06-21 15:17:12,038 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-8] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
-2021-06-21 15:17:12,038 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Exiting from "INCLUDE" dispatch, status 200
-2021-06-21 15:17:13,012 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
-com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource$Builder.get(WebResource.java:509) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.getApplicationsInternal(AbstractJerseyEurekaHttpClient.java:194) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.getDelta(AbstractJerseyEurekaHttpClient.java:170) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.getAndUpdateDelta(DiscoveryClient.java:1085) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:967) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.refreshRegistry(DiscoveryClient.java:1479) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient$CacheRefreshThread.run(DiscoveryClient.java:1446) [eureka-client-1.9.8.jar:1.9.8]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
-	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
-	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
-	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	... 29 common frames omitted
-2021-06-21 15:17:13,013 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
-2021-06-21 15:17:13,023 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
-com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource$Builder.put(WebResource.java:529) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.sendHeartBeat(AbstractJerseyEurekaHttpClient.java:102) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:846) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1405) [eureka-client-1.9.8.jar:1.9.8]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
-	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
-	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
-	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	... 26 common frames omitted
-2021-06-21 15:17:13,024 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-12] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-12] Closing SockJS session adgzruot with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-12] PollingSockJsSession[id=adgzruot] closed with CloseStatus[code=1011, reason=null]
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] "INCLUDE" dispatch for POST "/error?t=1624281408683", parameters={masked}
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-12] Clearing session adgzruot
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-168] Processing DISCONNECT session=adgzruot
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-5] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-131] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=adgzruot}], simpSessionId=adgzruot}]
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-5] Found 'Content-Type:application/javascript;charset=UTF-8' in response
-2021-06-21 15:17:13,688 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-5] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
-2021-06-21 15:17:13,688 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Exiting from "INCLUDE" dispatch, status 200
+2021-06-21 15:31:14,648 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-9] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:31:14,663 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-9] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:31:14,664 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-9] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-06-21 15:31:14,697 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-9] Writing [[MediaNotificationDto(id=1, message=New reaction on post by maja, notifyUsername=gojko, actionUserna (truncated)...]
+2021-06-21 15:31:14,702 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 15:31:14,891 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] GET "/socket/info?t=1624282274885", parameters={masked}
+2021-06-21 15:31:14,892 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:14,892 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624282274885
+2021-06-21 15:31:14,892 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 15:31:14,931 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] GET "/socket/394/g5rkdxw0/websocket", parameters={}
+2021-06-21 15:31:14,932 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:14,932 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: GET http://192.168.1.4:3036/socket/394/g5rkdxw0/websocket
+2021-06-21 15:31:14,932 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-1] Handshake failed due to invalid Connection header [Keep-Alive]
+2021-06-21 15:31:14,932 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 400 BAD_REQUEST
+2021-06-21 15:31:14,982 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/394/avtkkagj/xhr_streaming?t=1624282274964", parameters={masked}
+2021-06-21 15:31:14,982 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:14,982 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/394/avtkkagj/xhr_streaming?t=1624282274964
+2021-06-21 15:31:14,982 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-8] POST http://192.168.1.4:3036/socket/394/avtkkagj/xhr_streaming?t=1624282274964
+2021-06-21 15:31:14,983 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-8] New XhrStreamingSockJsSession[id=avtkkagj]
+2021-06-21 15:31:14,983 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
+2021-06-21 15:31:15,643 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] GET "/socket/394/r0o1zemv/eventsource", parameters={}
+2021-06-21 15:31:15,643 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:15,643 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: GET http://192.168.1.4:3036/socket/394/r0o1zemv/eventsource
+2021-06-21 15:31:15,643 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler [http-nio-3036-exec-10] GET http://192.168.1.4:3036/socket/394/r0o1zemv/eventsource
+2021-06-21 15:31:15,643 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-10] New EventSourceStreamingSockJsSession[id=r0o1zemv]
+2021-06-21 15:31:15,644 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 15:31:15,688 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/iframe.html", parameters={}
+2021-06-21 15:31:15,689 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:15,689 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 15:31:15,689 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
+2021-06-21 15:31:16,649 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] GET "/socket/iframe.html", parameters={}
+2021-06-21 15:31:16,650 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:16,650 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 15:31:16,650 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 15:31:17,638 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/394/f14mi0lp/xhr?t=1624282277632", parameters={masked}
+2021-06-21 15:31:17,639 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:17,639 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282277632
+2021-06-21 15:31:17,639 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-2] POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282277632
+2021-06-21 15:31:17,640 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-2] New PollingSockJsSession[id=f14mi0lp]
+2021-06-21 15:31:17,640 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 15:31:17,650 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/394/f14mi0lp/xhr_send?t=1624282277644", parameters={masked}
+2021-06-21 15:31:17,650 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:17,651 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr_send?t=1624282277644
+2021-06-21 15:31:17,651 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/394/f14mi0lp/xhr?t=1624282277644", parameters={masked}
+2021-06-21 15:31:17,651 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 204 NO_CONTENT
+2021-06-21 15:31:17,652 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:17,652 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282277644
+2021-06-21 15:31:17,652 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 15:31:17,653 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-67] Processing CONNECT session=f14mi0lp
+2021-06-21 15:31:17,668 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/394/f14mi0lp/xhr?t=1624282277662", parameters={masked}
+2021-06-21 15:31:17,668 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:17,668 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282277662
+2021-06-21 15:31:17,668 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 15:31:18,650 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/394/f14mi0lp/xhr_send?t=1624282278643", parameters={masked}
+2021-06-21 15:31:18,651 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:18,651 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr_send?t=1624282278643
+2021-06-21 15:31:18,652 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-69] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624282277658-41 session=f14mi0lp, lookupDestination='/topic/server-broadcaster'
+2021-06-21 15:31:18,652 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 204 NO_CONTENT
+2021-06-21 15:31:18,652 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-69] No matching message handler methods.
+2021-06-21 15:31:18,652 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-70] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624282277658-41 session=f14mi0lp
+2021-06-21 15:31:22,211 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-6] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:31:24,620 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-1] Closed 1 sessions: [g5rkdxw0]
+2021-06-21 15:31:31,890 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/207/23tjrpyn/xhr?t=1624282291885", parameters={masked}
+2021-06-21 15:31:31,890 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:31,890 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282291885
+2021-06-21 15:31:31,890 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 15:31:32,200 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:31:42,205 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-5] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:31:42,680 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/394/f14mi0lp/xhr?t=1624282302672", parameters={masked}
+2021-06-21 15:31:42,680 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:42,680 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282302672
+2021-06-21 15:31:42,680 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 15:31:44,609 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-10] Closing SockJS session pjyrxe1d with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 15:31:44,610 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-10] PollingSockJsSession[id=pjyrxe1d] closed with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 15:31:44,610 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-10] Clearing session pjyrxe1d
+2021-06-21 15:31:44,610 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-10] Closed 1 sessions: [pjyrxe1d]
+2021-06-21 15:31:44,610 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-73] Processing DISCONNECT session=pjyrxe1d
+2021-06-21 15:31:44,610 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-39] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=pjyrxe1d}], simpSessionId=pjyrxe1d}]
+2021-06-21 15:31:52,220 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-9] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:31:56,912 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/207/23tjrpyn/xhr?t=1624282316908", parameters={masked}
+2021-06-21 15:31:56,912 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:31:56,912 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282316908
+2021-06-21 15:31:56,912 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
+2021-06-21 15:32:02,207 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-11] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:32:07,701 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/394/f14mi0lp/xhr?t=1624282327694", parameters={masked}
+2021-06-21 15:32:07,701 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:32:07,702 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282327694
+2021-06-21 15:32:07,702 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 15:32:12,196 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-9] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:32:21,925 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/207/23tjrpyn/xhr?t=1624282341921", parameters={masked}
+2021-06-21 15:32:21,925 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:32:21,926 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282341921
+2021-06-21 15:32:21,926 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 15:32:22,188 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:32:32,190 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-10] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:32:32,718 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/394/f14mi0lp/xhr?t=1624282352712", parameters={masked}
+2021-06-21 15:32:32,719 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:32:32,719 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282352712
+2021-06-21 15:32:32,719 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 15:32:42,200 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:32:46,948 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/207/23tjrpyn/xhr?t=1624282366942", parameters={masked}
+2021-06-21 15:32:46,948 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:32:46,948 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282366942
+2021-06-21 15:32:46,948 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
+2021-06-21 15:32:52,186 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:32:57,747 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/394/f14mi0lp/xhr?t=1624282377740", parameters={masked}
+2021-06-21 15:32:57,747 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:32:57,747 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282377740
+2021-06-21 15:32:57,747 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 15:33:02,197 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:33:11,967 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/207/23tjrpyn/xhr?t=1624282391962", parameters={masked}
+2021-06-21 15:33:11,967 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:33:11,967 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282391962
+2021-06-21 15:33:11,967 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
+2021-06-21 15:33:12,190 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-11] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:33:16,685 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] GET "/media/gojko", parameters={}
+2021-06-21 15:33:16,685 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-10] Mapped to public java.util.List<com.nistagram.notificationmicroservice.controller.dto.MediaNotificationDto> com.nistagram.notificationmicroservice.controller.MediaNotificationController.getMediaNotificationsByUsername(java.lang.String)
+2021-06-21 15:33:16,698 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-10] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:33:16,709 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-10] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:33:16,719 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-10] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:33:16,720 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-10] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-06-21 15:33:16,735 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-10] Writing [[MediaNotificationDto(id=1, message=New reaction on post by maja, notifyUsername=gojko, actionUserna (truncated)...]
+2021-06-21 15:33:16,738 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 15:33:22,187 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:33:22,757 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/394/f14mi0lp/xhr?t=1624282402753", parameters={masked}
+2021-06-21 15:33:22,757 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:33:22,757 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282402753
+2021-06-21 15:33:22,757 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 15:33:32,191 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-11] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:33:36,989 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/207/23tjrpyn/xhr?t=1624282416986", parameters={masked}
+2021-06-21 15:33:36,990 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:33:36,990 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282416986
+2021-06-21 15:33:36,990 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 15:33:41,856 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-06-21 15:33:42,207 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-3] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:33:47,773 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/394/f14mi0lp/xhr?t=1624282427765", parameters={masked}
+2021-06-21 15:33:47,774 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:33:47,774 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282427765
+2021-06-21 15:33:47,775 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 15:33:51,130 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] GET "/media/gojko", parameters={}
+2021-06-21 15:33:51,131 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-6] Mapped to public java.util.List<com.nistagram.notificationmicroservice.controller.dto.MediaNotificationDto> com.nistagram.notificationmicroservice.controller.MediaNotificationController.getMediaNotificationsByUsername(java.lang.String)
+2021-06-21 15:33:51,143 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-6] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:33:51,154 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-6] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:33:51,163 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-6] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 15:33:51,164 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-6] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-06-21 15:33:51,179 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-6] Writing [[MediaNotificationDto(id=1, message=New reaction on post by maja, notifyUsername=gojko, actionUserna (truncated)...]
+2021-06-21 15:33:51,182 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 15:33:52,213 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-11] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:34:02,015 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/207/23tjrpyn/xhr?t=1624282442010", parameters={masked}
+2021-06-21 15:34:02,015 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:34:02,015 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282442010
+2021-06-21 15:34:02,015 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
+2021-06-21 15:34:02,185 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:34:12,195 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-11] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:34:12,795 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] POST "/socket/394/f14mi0lp/xhr?t=1624282452787", parameters={masked}
+2021-06-21 15:34:12,795 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:34:12,795 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282452787
+2021-06-21 15:34:12,795 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
+2021-06-21 15:34:22,184 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:34:27,044 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/207/23tjrpyn/xhr?t=1624282467039", parameters={masked}
+2021-06-21 15:34:27,044 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:34:27,044 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282467039
+2021-06-21 15:34:27,044 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 15:34:32,184 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:34:37,808 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/394/f14mi0lp/xhr?t=1624282477805", parameters={masked}
+2021-06-21 15:34:37,808 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:34:37,808 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282477805
+2021-06-21 15:34:37,808 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
+2021-06-21 15:34:42,194 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:34:52,072 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/207/23tjrpyn/xhr?t=1624282492066", parameters={masked}
+2021-06-21 15:34:52,074 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:34:52,074 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282492066
+2021-06-21 15:34:52,074 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 15:34:52,204 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-12] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:35:02,198 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:35:02,833 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/394/f14mi0lp/xhr?t=1624282502826", parameters={masked}
+2021-06-21 15:35:02,833 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:02,833 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282502826
+2021-06-21 15:35:02,833 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 15:35:12,193 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:35:17,097 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/207/23tjrpyn/xhr?t=1624282517094", parameters={masked}
+2021-06-21 15:35:17,097 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:17,097 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282517094
+2021-06-21 15:35:17,097 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 15:35:22,183 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:35:27,852 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/394/f14mi0lp/xhr?t=1624282527844", parameters={masked}
+2021-06-21 15:35:27,852 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:27,852 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/394/f14mi0lp/xhr?t=1624282527844
+2021-06-21 15:35:27,852 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 15:35:32,192 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:35:42,113 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/207/23tjrpyn/xhr?t=1624282542107", parameters={masked}
+2021-06-21 15:35:42,113 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:42,114 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/207/23tjrpyn/xhr?t=1624282542107
+2021-06-21 15:35:42,114 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 15:35:42,182 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:35:52,210 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-12] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:35:53,525 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] GET "/socket/info?t=1624282553518", parameters={masked}
+2021-06-21 15:35:53,526 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:53,526 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624282553518
+2021-06-21 15:35:53,526 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 15:35:53,566 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] GET "/socket/173/ehenogzq/websocket", parameters={}
+2021-06-21 15:35:53,566 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:53,566 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: GET http://192.168.1.4:3036/socket/173/ehenogzq/websocket
+2021-06-21 15:35:53,567 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-8] Handshake failed due to invalid Connection header [Keep-Alive]
+2021-06-21 15:35:53,567 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 400 BAD_REQUEST
+2021-06-21 15:35:53,579 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/173/b33ch1cq/xhr_streaming?t=1624282553571", parameters={masked}
+2021-06-21 15:35:53,579 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:53,579 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/173/b33ch1cq/xhr_streaming?t=1624282553571
+2021-06-21 15:35:53,580 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-10] POST http://192.168.1.4:3036/socket/173/b33ch1cq/xhr_streaming?t=1624282553571
+2021-06-21 15:35:53,581 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-10] New XhrStreamingSockJsSession[id=b33ch1cq]
+2021-06-21 15:35:53,581 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 15:35:54,341 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/173/tibxlydw/eventsource", parameters={}
+2021-06-21 15:35:54,342 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:54,342 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/173/tibxlydw/eventsource
+2021-06-21 15:35:54,342 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler [http-nio-3036-exec-7] GET http://192.168.1.4:3036/socket/173/tibxlydw/eventsource
+2021-06-21 15:35:54,342 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-7] New EventSourceStreamingSockJsSession[id=tibxlydw]
+2021-06-21 15:35:54,343 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
+2021-06-21 15:35:54,355 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] GET "/socket/iframe.html", parameters={}
+2021-06-21 15:35:54,356 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:54,356 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 15:35:54,356 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 15:35:55,118 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] GET "/socket/iframe.html", parameters={}
+2021-06-21 15:35:55,119 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:55,119 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 15:35:55,119 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 15:35:55,518 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/173/upwwvlqh/xhr?t=1624282555510", parameters={masked}
+2021-06-21 15:35:55,518 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:55,519 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/173/upwwvlqh/xhr?t=1624282555510
+2021-06-21 15:35:55,519 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-4] POST http://192.168.1.4:3036/socket/173/upwwvlqh/xhr?t=1624282555510
+2021-06-21 15:35:55,519 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] New PollingSockJsSession[id=upwwvlqh]
+2021-06-21 15:35:55,520 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 15:35:55,528 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/173/upwwvlqh/xhr_send?t=1624282555522", parameters={masked}
+2021-06-21 15:35:55,529 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/173/upwwvlqh/xhr?t=1624282555523", parameters={masked}
+2021-06-21 15:35:55,529 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:55,529 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:55,529 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/173/upwwvlqh/xhr_send?t=1624282555522
+2021-06-21 15:35:55,529 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/173/upwwvlqh/xhr?t=1624282555523
+2021-06-21 15:35:55,529 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 15:35:55,530 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] No messages received after 308909 ms. Closing EventSourceStreamingSockJsSession[id=czccytmg].
+2021-06-21 15:35:55,530 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-76] Processing CONNECT session=upwwvlqh
+2021-06-21 15:35:55,530 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [http-nio-3036-exec-3] Closing SockJS session czccytmg with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,530 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-3] EventSourceStreamingSockJsSession[id=czccytmg] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,530 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] Clearing session czccytmg
+2021-06-21 15:35:55,531 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] No messages received after 309513 ms. Closing XhrStreamingSockJsSession[id=znkhpjda].
+2021-06-21 15:35:55,531 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-3] Closing SockJS session znkhpjda with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,531 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-79] Processing DISCONNECT session=czccytmg
+2021-06-21 15:35:55,531 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-3] XhrStreamingSockJsSession[id=znkhpjda] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,531 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] Clearing session znkhpjda
+2021-06-21 15:35:55,531 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-41] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=czccytmg}], simpSessionId=czccytmg}]
+2021-06-21 15:35:55,532 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] No messages received after 279887 ms. Closing EventSourceStreamingSockJsSession[id=r0o1zemv].
+2021-06-21 15:35:55,532 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [http-nio-3036-exec-3] Closing SockJS session r0o1zemv with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,532 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-82] Processing DISCONNECT session=znkhpjda
+2021-06-21 15:35:55,532 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-3] EventSourceStreamingSockJsSession[id=r0o1zemv] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,532 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] Clearing session r0o1zemv
+2021-06-21 15:35:55,533 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] No messages received after 280547 ms. Closing XhrStreamingSockJsSession[id=avtkkagj].
+2021-06-21 15:35:55,533 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-42] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=znkhpjda}], simpSessionId=znkhpjda}]
+2021-06-21 15:35:55,533 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-85] Processing DISCONNECT session=r0o1zemv
+2021-06-21 15:35:55,533 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-3] Closing SockJS session avtkkagj with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,533 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-3] XhrStreamingSockJsSession[id=avtkkagj] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 15:35:55,533 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-3] Clearing session avtkkagj
+2021-06-21 15:35:55,534 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-43] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=r0o1zemv}], simpSessionId=r0o1zemv}]
+2021-06-21 15:35:55,534 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 204 NO_CONTENT
+2021-06-21 15:35:55,534 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-88] Processing DISCONNECT session=avtkkagj
+2021-06-21 15:35:55,534 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-44] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=avtkkagj}], simpSessionId=avtkkagj}]
+2021-06-21 15:35:55,542 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/173/upwwvlqh/xhr?t=1624282555536", parameters={masked}
+2021-06-21 15:35:55,542 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:55,542 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/173/upwwvlqh/xhr?t=1624282555536
+2021-06-21 15:35:55,542 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 15:35:55,570 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/173/upwwvlqh/xhr_send?t=1624282555563", parameters={masked}
+2021-06-21 15:35:55,570 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@19faedcc
+2021-06-21 15:35:55,570 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/173/upwwvlqh/xhr_send?t=1624282555563
+2021-06-21 15:35:55,571 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 204 NO_CONTENT
+2021-06-21 15:35:55,571 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-90] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624282555533-282 session=upwwvlqh, lookupDestination='/topic/server-broadcaster'
+2021-06-21 15:35:55,571 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-90] No matching message handler methods.
+2021-06-21 15:35:55,571 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-91] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624282555533-282 session=upwwvlqh
+2021-06-21 15:35:59,613 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-10] Closing SockJS session f14mi0lp with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 15:35:59,613 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-10] PollingSockJsSession[id=f14mi0lp] closed with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 15:35:59,613 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-10] Clearing session f14mi0lp
+2021-06-21 15:35:59,614 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-10] Closed 2 sessions: [ehenogzq, f14mi0lp]
+2021-06-21 15:35:59,614 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-94] Processing DISCONNECT session=f14mi0lp
+2021-06-21 15:35:59,614 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-45] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=f14mi0lp}], simpSessionId=f14mi0lp}]
+2021-06-21 15:36:02,395 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:36:04,606 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-8] Closed 4 sessions: [czccytmg, znkhpjda, r0o1zemv, avtkkagj]
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-1] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-1] Closing SockJS session 23tjrpyn with CloseStatus[code=1011, reason=null]
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-1] PollingSockJsSession[id=23tjrpyn] closed with CloseStatus[code=1011, reason=null]
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-1] Clearing session 23tjrpyn
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-97] Processing DISCONNECT session=23tjrpyn
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-46] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=23tjrpyn}], simpSessionId=23tjrpyn}]
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] "INCLUDE" dispatch for POST "/error?t=1624282542107", parameters={masked}
+2021-06-21 15:36:07,121 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-10] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2021-06-21 15:36:07,129 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-10] Found 'Content-Type:application/javascript;charset=UTF-8' in response
+2021-06-21 15:36:07,131 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-10] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
+2021-06-21 15:36:07,131 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Exiting from "INCLUDE" dispatch, status 200
+2021-06-21 15:36:12,201 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 15:36:14,621 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-6] Closed 1 sessions: [23tjrpyn]

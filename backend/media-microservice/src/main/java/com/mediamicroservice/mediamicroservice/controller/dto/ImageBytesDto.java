@@ -1,11 +1,8 @@
 package com.mediamicroservice.mediamicroservice.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mediamicroservice.mediamicroservice.domain.*;
 import lombok.Data;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 

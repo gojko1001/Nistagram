@@ -1,13 +1,15 @@
 <template>
     <div id="notificationPage">
-      <table style="text-align: center;margin: auto;margin-top: 40px;margin-bottom: 40px;width: 50%;">
+      <table style="text-align: center;margin: auto;margin-top: 40px;margin-bottom: 40px;width: 50%; ">
       <tr v-for="(notifi, i) in notifications" :key="i">
         <td style="font-size:20px">{{notifi.message}} <br>{{notifi.timestamp | formatDate}}</td>
         <td>
+          <br>
           <img v-if="notifi.imageByte.image" v-bind:src="notifi.imageByte.imageByte" width="100" height="100" style="display:block; margin-left:auto; margin-right:auto">
           <video autoplay controls v-if="!notifi.imageByte.image" v-bind:src="notifi.imageByte.imageByte" width="100" height="100" style="display:block; margin-left:auto; margin-right:auto">
               The video is not supported by your browser.
           </video>
+          <br>
         </td>
       </tr>
     </table>
@@ -50,8 +52,8 @@ export default {
 
 
 <style scoped>
-table, th, td {
-  border: 0.5px solid black;
+table, td {
   text-align: left;
+  border-bottom: 1px solid black;
 }
 </style>
