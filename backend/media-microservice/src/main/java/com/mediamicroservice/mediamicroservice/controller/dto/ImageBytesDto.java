@@ -1,11 +1,8 @@
 package com.mediamicroservice.mediamicroservice.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mediamicroservice.mediamicroservice.domain.*;
 import lombok.Data;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +12,6 @@ public class ImageBytesDto {
     private String username;
     private String description;
     private Location location;
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+01:00")
     private Date timestamp;
     private List<Hashtag> hashtags;
     private List<Comment> comments;

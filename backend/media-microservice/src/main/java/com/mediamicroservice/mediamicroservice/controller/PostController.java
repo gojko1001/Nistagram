@@ -1,5 +1,7 @@
 package com.mediamicroservice.mediamicroservice.controller;
 
+import com.mediamicroservice.mediamicroservice.controller.dto.ImageByte;
+import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.domain.Post;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
@@ -19,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/image")
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
 
     @Autowired
@@ -28,6 +30,12 @@ public class PostController {
     private IPostService postService;
 
     private static String uploadDir = "user-photos";
+
+    // for notification-microservice
+    @GetMapping
+    public List<ImageBytesDto> getAllPosts() {
+        return postService.getAllPosts();
+    }
 
     @PostMapping
     public List<String> saveImage(@RequestParam("file") List<MultipartFile> multipartFiles) throws IOException {
@@ -80,6 +88,12 @@ public class PostController {
         Logger.info("Search location: " + location, "");
         return new ResponseEntity(postService.searchLocation(location), HttpStatus.OK);
     }
+
+    @GetMapping("/bytes/{mediaId}")
+    public ImageByte getBytes(@PathVariable("mediaId") Long mediaId){
+        return postService.getBytes(mediaId);
+    }
+
 
 
 }

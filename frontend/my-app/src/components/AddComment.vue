@@ -22,7 +22,7 @@
               </span>
             </div>
 
-            <br>
+            <br><br>
             <button class="heart inter" v-bind:class="{'black': !watchLiked, 'red': watchLiked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>
@@ -133,7 +133,6 @@ export default {
                                 this.img.imageBytes[i].imageByte = 'data:video/mp4;base64,' + this.img.imageBytes[i].imageByte;
                               }
                             }
-                            
                             this.img.numLikes = 0;
                             this.img.numDislikes = 0;
                             if(this.img.likes.length > 0){
@@ -189,7 +188,7 @@ export default {
         this.axios.post('/media-api/comment', this.form)
           .then(response => { console.log(response.data);
                               this.makeToast("Comment has been posted.", "success");
-                              window.location.href = '/comment/' + this.form.postId;
+                              setTimeout(()=>{ window.location.href = '/comment/' + this.form.postId}, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -214,8 +213,7 @@ export default {
                               this.watchLiked = false;
                               this.watchDisliked = false;
                             }
-                              
-                            this.makeToast("Liked !!!", "success");
+                            this.makeToast("New reaction on post.", "success");
                             })
         .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -238,7 +236,8 @@ export default {
         this.collection.name = name;
         this.axios.post('/media-api/collection', this.collection)
           .then(response => { console.log(response.data)
-                              this.makeToast("New collection.", "success");
+                              this.makeToast("Created new collection.", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -251,6 +250,7 @@ export default {
         this.axios.post('/media-api/favourite', this.favourite)
           .then(response => { console.log(response.data)
                               this.makeToast("Post has been added to collection.", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");

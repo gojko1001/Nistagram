@@ -10,6 +10,7 @@ import com.mediamicroservice.mediamicroservice.service.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,6 +30,7 @@ public class CommentService implements ICommentService {
         Comment comment = new Comment();
         comment.setUsername(createCommentDto.getUsername());
         comment.setText(createCommentDto.getText());
+        comment.setTimestamp(new Date());
         Logger.infoDb("Try to save comment: " + comment.getId());
         commentRepository.save(comment);
         Post post = imageService.getById(createCommentDto.getPostId());

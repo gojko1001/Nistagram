@@ -8,7 +8,6 @@
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
-                  <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
                   <b-dropdown id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
                     <b-dropdown-text><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
                         value="CLOSE_FRIEND"
@@ -156,7 +155,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -174,7 +173,7 @@
                                     </span>
                                 </div>
 
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -204,7 +203,7 @@
                         </div>
                     </b-tab>
                     <!-- Collections -->
-                    <b-tab title="Collections" @click="getCollections()">
+                    <b-tab v-if="isUserProfile" title="Collections" @click="getCollections()">
                         <div v-for="(coll,c) in collections" :key="c">
                             <p style="font-size:30px">{{coll.name}}:</p>
                             <div v-for="(img,i) in coll.favourites" :key="i">
@@ -213,7 +212,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'C'+q">
@@ -227,7 +226,7 @@
                                         <i class="fas fa-user-tag"></i> {{tag.username}}
                                     </span>
                                 </div>
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -259,14 +258,14 @@
                         </div>
                     </b-tab>
                     <!-- Liked posts -->
-                    <b-tab title="Liked posts" @click="historyOfLikedPosts()">
+                    <b-tab v-if="isUserProfile" title="Liked posts" @click="historyOfLikedPosts()">
                         <div v-for="(img,u) in history" :key="u">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">Reacted on <br>{{img.date | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">Reacted on <br>{{img.date | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -282,7 +281,7 @@
                                         <i class="fas fa-user-tag"></i> {{tag.username}}
                                     </span>
                                 </div>
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -312,14 +311,14 @@
                         </div>
                     </b-tab>
                     <!-- Story archived -->
-                    <b-tab title="Story archive" @click="getArchivedStories()">
+                    <b-tab v-if="isUserProfile" title="Story archive" @click="getArchivedStories()">
                         <div v-for="(img,j) in archivedStories" :key="j">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -510,6 +509,7 @@ export default {
           this.axios.post('/media-api/inappropriate', this.report)
           .then(response => { console.log(response.data);
                               this.makeToast("Reported !!!", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -525,7 +525,8 @@ export default {
             this.formLike.liked = liked;
             this.axios.post('/media-api/like', this.formLike)
             .then(response => { console.log(response.data);
-                                this.makeToast("Liked !!!", "success");
+                                this.makeToast("New reaction on post.", "success");
+                                setTimeout(()=>{ window.location.reload() }, 2000);
                                 })
             .catch(error => { console.log(error);
                                 this.makeToast("Error occured.", "danger");
@@ -617,7 +618,8 @@ export default {
         highlightStory(storyId){
             this.axios.post('/media-api/story/highlight/' + storyId)
                         .then(response => { console.log(response.data); 
-                                            this.makeToast(response.data, "success");                
+                                            this.makeToast(response.data, "success"); 
+                                            setTimeout(()=>{ window.location.reload() }, 2000);               
                         }).catch(error => { console.log(error.message);
                                             this.makeToast(error.message, "danger");
                 });
