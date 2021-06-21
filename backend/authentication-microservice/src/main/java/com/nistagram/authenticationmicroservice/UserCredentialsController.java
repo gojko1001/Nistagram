@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/userCredentials")
@@ -39,6 +40,12 @@ public class UserCredentialsController {
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 
+    //@PreAuthorize("hasAuthority('DEACTIVATE')")
+    @PutMapping("/deactivate/{username}")
+    public void deactivateProfile(@PathVariable String username){
+        userCredentialsService.deactivateProfile(username);
+    }
+
     @PostMapping("/login_google")
     public ResponseEntity<String> loginGoogle(@RequestBody LoginGoogleDto loginGoogleDto) throws IOException {
         Logger.info("Try to login with google.", loginGoogleDto.getEmail());
@@ -52,6 +59,11 @@ public class UserCredentialsController {
         userCredentialsService.create(userReg);
         emailService.verificationPassword(userReg.getUsername(), userReg.getEmail(), userReg.getFullName());
 
+    }
+
+    @GetMapping("/getUsers")
+    public List<String> getUsers(){
+        return userCredentialsService.findCredentialsByRoleUserAndAgent();
     }
 
     @GetMapping("/send_email/{email:.+}")

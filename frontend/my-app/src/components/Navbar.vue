@@ -40,21 +40,32 @@
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
+            <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
+
                 <button class="nav-btn" @click='inappropriateContent'>
                   <i class="fas fa-ban"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
+           <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
+
                 <button class="nav-btn" @click='profileVerification'>
                   <i class="fas fa-user-check"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
+
+            <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
+
                 <button class="nav-btn">
                   <i class="fas fa-user-secret"></i>
                 </button>
             </li>
+            <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
+                <button class="nav-btn" @click='profileDeactivation'>
+                  <i class="fa fa-users"></i>
+                </button>
+            </li>
+
+
             <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
                 <button class="nav-btn" @click='myProfile'>
                   <i class="fas fa-user"></i>
@@ -106,6 +117,9 @@ export default {
     },
     notificationPage:function(){
       window.location.href = "/notification";
+    },
+    profileDeactivation:function(){
+      window.location.href = "/profile_deactivation";
     },
     search: function() {
       localStorage.setItem("name", this.selected);

@@ -1,60 +1,43 @@
 <template>
-    <div id="InappropriateContent">
+    <div id="ProfileDeactivation">
       <br>
-        <div v-for="(img,i) in pending" :key="i">
+        <div v-for="(img,i) in users" :key="i">
           <b-card
               tag="article"
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
-                <h4 style="margin-top:0px; margin-left: 190px">{{img.requestedBy}}</h4>
-                <h4 style="margin-top:0px; margin-left: 210px">{{img.mediaId}}</h4>
+                <h4 style="margin-top:0px; margin-left: 190px">{{img}}</h4>
                 <br/>
                 <br/>
-                <button class="heart inter" @click="confirmation(img.id, 'confirmed')">
-              <i class="fas fa-check"></i>
-            </button>
-            <span>{{img.numLikes}}</span>
-            <button class="heart inter"  style="margin-top:0px; margin-left: 350px" @click="confirmation(img.id, 'unconfirmed')">
-              <i class="fa fa-ban fa-fw"></i>
-            </button>
+                <b-button type="submit" variant="primary"  style="width:200px ; margin-top:0px; margin-left: 170px" aria-describedby="signup-block" @click="deactivate(img)">Deactivate</b-button>
+            
                 
           </b-card>              
         </div>
     </div>
 </template>
 
-
-
 <script>
 import { SERVER_NOT_RESPONDING } from '../util/constants';
 import { getUsernameFromToken } from '../util/token';
 export default {
-  name: 'InappropriateContent',
+  name: 'ProfileDeactivation',
   data(){
         return{
-            pending: [{
-              id:0,
-              requestedBy:'',
-              mediaId:0
-            }],
-            dto: {
-              id:0,
-              confirmedBy:'',
-              confirmed:''
-            },
-            message:'',
+            users:[],
+            username:'',
         }
     },
   mounted: function(){
 
-      this.axios.get('/media-api/inappropriate/pending')
-                  .then(response => { this.pending = response.data;
+      this.axios.get('/authentication-api/userCredentials/getUsers')
+                  .then(response => { this.users = response.data;
                   }).catch(error => { console.log(error);
                                       this.makeToast(SERVER_NOT_RESPONDING, "warning");
           });
 
   },
-  methods:{
+   methods:{
       makeToast(message, variant) {
             this.$bvToast.toast(message, {
                                 title: `Nistagram`,
@@ -65,16 +48,14 @@ export default {
                                 appendToast: false
                             })
         },
-        confirmation(id, message){
+        deactivate(user){
 
-            this.dto.confirmedBy = getUsernameFromToken();
-            this.dto.confirmed = message;
-            this.dto.id = id;
-            if(this.dto.confirmedBy != null){
-          this.axios.post('/media-api/inappropriate/confirmation', this.dto)
+            this.username = getUsernameFromToken();
+            if(this.username != null){
+          this.axios.put('http://localhost:8762/authentication-api/userCredentials/deactivate/' + user)
           .then(response => { console.log(response.data);
-                              window.location.reload();
                               this.makeToast("Success!!!", "success");
+                              window.location.reload();
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -84,7 +65,7 @@ export default {
         }
         },
 
-    }
+   }
 }
 </script>
 
