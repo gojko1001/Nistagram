@@ -40,17 +40,17 @@
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && isAdmin ==true">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
                 <button class="nav-btn" @click='inappropriateContent'>
                   <i class="fas fa-ban"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && isAdmin ==true">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
                 <button class="nav-btn" @click='profileVerification'>
                   <i class="fas fa-user-check"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && isAdmin ==true">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
                 <button class="nav-btn">
                   <i class="fas fa-user-secret"></i>
                 </button>
