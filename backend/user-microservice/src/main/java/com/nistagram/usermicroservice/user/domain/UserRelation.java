@@ -1,7 +1,7 @@
-package com.nistagram.usermicroservice.domain;
+package com.nistagram.usermicroservice.user.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,8 +1,8 @@
-package com.nistagram.usermicroservice.service.interfaces;
+package com.nistagram.usermicroservice.user.service.interfaces;
 
-import com.nistagram.usermicroservice.domain.User;
-import com.nistagram.usermicroservice.domain.UserRelation;
-import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.user.domain.User;
+import com.nistagram.usermicroservice.user.domain.UserRelation;
+import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 
 import java.util.List;
 import java.util.function.BiConsumer;

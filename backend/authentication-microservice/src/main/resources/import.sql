@@ -45,7 +45,7 @@ insert into roles_permission (role_id, permission_id) values (2, 14);
 
 
 -- User Credentials : ADMIN
-insert into user_credentials (id, username, password, verified) values (500, 'lubura', '$2a$10$s3iq1XL.6BS4ckuXO5flkOvwghjLs/ImwrYpY9RRuJXDFs9Z8qjV.', true);
+insert into user_credentials (id, username, password, verified, is_deactivated) values (500, 'lubura', '$2a$10$s3iq1XL.6BS4ckuXO5flkOvwghjLs/ImwrYpY9RRuJXDFs9Z8qjV.', true, false);
 insert into user_role (user_id, role_id) values (500, 2);
 -- pass: Lubura123*
 

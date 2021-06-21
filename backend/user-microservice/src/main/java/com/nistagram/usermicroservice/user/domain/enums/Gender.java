@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice.domain.enums;
+package com.nistagram.usermicroservice.user.domain.enums;
 
 public enum Gender {
     MALE,
