@@ -116,11 +116,13 @@ public class UserCredentialsService implements IUserCredentialsService {
         List<UserCredentials> userCredentials = userCredentialsRepository.findAll();
         List<String> userCredentials1 = new ArrayList<>();
         for(UserCredentials uc:userCredentials){
+            if(uc.getIsDeactivated() == false){
             Collection<Role> roles = uc.getRoles();
             for(Role r:roles) {
                 if (r.getName().equals("ROLE_USER") || r.getName().equals("ROLE_AGENT")) {
                     userCredentials1.add(uc.getUsername());
                 }
+            }
             }
         }
 

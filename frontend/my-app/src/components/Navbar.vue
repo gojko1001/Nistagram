@@ -55,6 +55,11 @@
                   <i class="fas fa-user-secret"></i>
                 </button>
             </li>
+            <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
+                <button class="nav-btn" @click='profileDeactivation'>
+                  <i class="fa fa-users"></i>
+                </button>
+            </li>
 
 
             <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
@@ -108,6 +113,9 @@ export default {
     },
     notificationPage:function(){
       window.location.href = "/notification";
+    },
+    profileDeactivation:function(){
+      window.location.href = "/profile_deactivation";
     },
     search: function() {
       localStorage.setItem("name", this.selected);
