@@ -134,6 +134,15 @@ public class UserService implements IUserService {
         return usernames;
     }
 
+    public List<String> getPublicTaggableUsers() {
+        List<String> usernames = new ArrayList<>();
+        for (User u : getAll()) {
+            if (u.isPublicProfile() && u.isTaggable())
+                usernames.add(u.getUsername());
+        }
+        return usernames;
+    }
+
     public List<User> getUsersWithVerifyRequestPending() {
         List<User> users = userRepository.findAll();
         List<User> userList = new ArrayList<>();

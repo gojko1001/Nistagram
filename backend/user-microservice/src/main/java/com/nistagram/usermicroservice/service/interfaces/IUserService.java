@@ -29,5 +29,7 @@ public interface IUserService {
 
     List<String> getPublicUsers();
 
+    List<String> getPublicTaggableUsers();
+
     List<User> getUsersWithVerifyRequestPending();
 }

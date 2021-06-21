@@ -78,4 +78,9 @@ public class UserController {
         return userService.getPublicUsers();
     }
 
+    @GetMapping("/public/taggable/users")
+    public List<String> getPublicTaggableUsers() {
+        return userService.getPublicTaggableUsers();
+    }
+
 }
