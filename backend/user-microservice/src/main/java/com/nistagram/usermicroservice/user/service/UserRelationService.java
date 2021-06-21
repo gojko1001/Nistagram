@@ -1,13 +1,13 @@
-package com.nistagram.usermicroservice.service;
+package com.nistagram.usermicroservice.user.service;
 
-import com.nistagram.usermicroservice.controller.exception.InvalidActionException;
-import com.nistagram.usermicroservice.domain.User;
-import com.nistagram.usermicroservice.domain.UserRelation;
-import com.nistagram.usermicroservice.domain.UserRelationKey;
-import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.user.controller.exception.InvalidActionException;
+import com.nistagram.usermicroservice.user.domain.User;
+import com.nistagram.usermicroservice.user.domain.UserRelation;
+import com.nistagram.usermicroservice.user.domain.UserRelationKey;
+import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.logger.Logger;
-import com.nistagram.usermicroservice.service.interfaces.IUserRelationService;
-import com.nistagram.usermicroservice.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.user.service.interfaces.IUserRelationService;
+import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

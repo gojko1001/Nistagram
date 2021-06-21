@@ -1,7 +1,7 @@
-package com.nistagram.usermicroservice.controller.mapper;
+package com.nistagram.usermicroservice.user.controller.mapper;
 
-import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
-import com.nistagram.usermicroservice.domain.UserRelation;
+import com.nistagram.usermicroservice.user.controller.dto.UserRelationDto;
+import com.nistagram.usermicroservice.user.domain.UserRelation;
 
 public class RelationMapper {
 

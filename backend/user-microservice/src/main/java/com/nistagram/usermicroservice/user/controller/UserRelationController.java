@@ -1,16 +1,16 @@
-package com.nistagram.usermicroservice.controller;
+package com.nistagram.usermicroservice.user.controller;
 
 import com.nistagram.usermicroservice.JwtUtil;
-import com.nistagram.usermicroservice.controller.dto.UserDto;
-import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
-import com.nistagram.usermicroservice.controller.exception.NotFoundException;
-import com.nistagram.usermicroservice.controller.exception.UnauthorizedException;
-import com.nistagram.usermicroservice.controller.mapper.RelationMapper;
-import com.nistagram.usermicroservice.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.domain.UserRelation;
-import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.user.controller.dto.UserDto;
+import com.nistagram.usermicroservice.user.controller.dto.UserRelationDto;
+import com.nistagram.usermicroservice.user.controller.exception.NotFoundException;
+import com.nistagram.usermicroservice.user.controller.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.user.controller.mapper.RelationMapper;
+import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
+import com.nistagram.usermicroservice.user.domain.UserRelation;
+import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.logger.Logger;
-import com.nistagram.usermicroservice.service.interfaces.IUserRelationService;
+import com.nistagram.usermicroservice.user.service.interfaces.IUserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

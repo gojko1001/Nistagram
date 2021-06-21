@@ -1,6 +1,6 @@
-package com.nistagram.usermicroservice.repository;
+package com.nistagram.usermicroservice.user.repository;
 
-import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.user.domain.User;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

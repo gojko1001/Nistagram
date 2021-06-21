@@ -1,6 +1,6 @@
 package com.nistagram.usermicroservice.verify_account.service.interfaces;
 
-import com.nistagram.usermicroservice.domain.User;
+import com.nistagram.usermicroservice.user.domain.User;
 import com.nistagram.usermicroservice.verify_account.controller.dto.ShowVerifyRequestDto;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationRequest;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice.domain;
+package com.nistagram.usermicroservice.user.domain;
 
 import lombok.Data;
 
