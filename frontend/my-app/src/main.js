@@ -24,6 +24,7 @@ import AddComment from './components/AddComment'
 import Messanger from './components/Messanger'
 import VerificationRequest from './components/VerificationRequest'
 import AllVerificationRequest from './components/AllVerificationRequest'
+import InappropriateContent from './components/InappropriateContentAdmin'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -124,6 +125,11 @@ const router = new VueRouter({
       path: '/all_requests',
       name: 'AllVerificationRequest',
       component: AllVerificationRequest
+    },
+    {
+      path: '/inappropriate_content',
+      name: 'InappropriateContent',
+      component: InappropriateContent
     }
   ]
 });

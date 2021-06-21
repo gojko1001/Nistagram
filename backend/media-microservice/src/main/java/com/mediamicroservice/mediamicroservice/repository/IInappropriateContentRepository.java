@@ -13,4 +13,6 @@ public interface IInappropriateContentRepository extends JpaRepository<Inappropr
 
     List<InappropriateContent> findAll();
 
+    InappropriateContent findInappropriateContentById(Long id);
+
 }

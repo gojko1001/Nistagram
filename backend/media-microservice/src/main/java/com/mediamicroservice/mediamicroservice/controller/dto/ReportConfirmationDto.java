@@ -3,8 +3,8 @@ package com.mediamicroservice.mediamicroservice.controller.dto;
 import lombok.Data;
 
 @Data
-public class CreateInappropriateContentDto {
+public class ReportConfirmationDto {
     private Long id;
-    private String requestedBy;
-    private Long mediaId;
+    private String confirmedBy;
+    private String confirmed;
 }
