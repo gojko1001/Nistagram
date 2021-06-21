@@ -86,7 +86,8 @@
                 <b-button v-b-modal.modal-3 style="font-size:20px;margin-left:20px" @click="getHighlightedStories()">highlighted stories <i class="fas fa-highlighter fa-lg" style="margin-left:15px"></i></b-button>
                 <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
-                     <div v-for="(img,p) in stories" :key="p">
+                    <div v-for="(img,p) in stories" :key="p">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
@@ -112,17 +113,20 @@
                                         #{{tag.name}}
                                     </span>
                                 </b-card-text>
-                            </b-card>              
+                            </b-card>
                         </div>
+                                          
+                    </div>
                 </b-modal>
                 <!-- Highlighted stories -->
                 <b-modal id="modal-3" title="Highlighted stories">
-                     <div v-for="(img,p) in stories" :key="p">
+                    <div v-for="(img,p) in stories" :key="p">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
-                                <h4>@{{img.username}}</h4>
+                                <h4>@{{img.username}}</h4> <i v-if="img.forCloseFriends" class="fas fa-star fa-lg" style="color: #00cc00;"></i>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
@@ -140,8 +144,9 @@
                                         #{{tag.name}}
                                     </span>
                                 </b-card-text>
-                            </b-card>              
-                        </div>
+                            </b-card>
+                        </div>             
+                    </div>
                 </b-modal>
             </div>
             <br>
@@ -317,7 +322,7 @@
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
-                                <h4>@{{img.username}}</h4>
+                                <h4>@{{img.username}}</h4> <i v-if="img.forCloseFriends" class="fas fa-star fa-lg" style="color: #00cc00;"></i>
                                 <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
@@ -431,7 +436,8 @@ export default {
                 liked: false,
                 disliked: false,
                 date:''
-            }]
+            }],
+            isCloseFriend: false
         }
     },
     beforeMount(){
@@ -483,6 +489,13 @@ export default {
                             this.numFollowing = response.data.length;
                             this.followings = response.data.reverse();    
                         })
+        this.axios.get(USER_RELATION_PATH + "/" + this.username + '/' + getUsernameFromToken(), {  headers:{
+                                                                            Authorization: "Bearer " + getToken(),
+                                                                        }   
+            }).then(response => {
+                                if(response.data.status == "CLOSE_FRIEND")
+                                    this.isCloseFriend = true;
+            })
     },
     methods:{
         makeToast(message, variant) {
@@ -570,7 +583,7 @@ export default {
         getStories(){
             this.axios.get('/media-api/story/profile/' + this.username)
                         .then(response => { this.stories = response.data;
-                                            for(let i=0; i< response.data.length; i++){
+                                            for(let i=0; i< this.stories.length; i++){
                                                 for(let j=0; j< this.stories[i].imageBytes.length; j++){
                                                     if(this.stories[i].imageBytes[j].image){
                                                         this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
@@ -586,14 +599,17 @@ export default {
         getArchivedStories(){
             this.axios.get('/media-api/story/archive/' + this.username)
                         .then(response => { this.archivedStories = response.data;
-                                            for(let i=0; i< response.data.length; i++){
-                                                for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
-                                                    if(this.archivedStories[i].imageBytes[j].image){
-                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
-                                                    }else{
-                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
-                                                    } 
+                                            for(let i=0; i< this.archivedStories.length; i++){
+                                                if((this.archivedStories[i].forCloseFriends && this.isCloseFriend) || !this.archivedStories[i].forCloseFriends){
+                                                    for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
+                                                        if(this.archivedStories[i].imageBytes[j].image){
+                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
+                                                        }else{
+                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
+                                                        } 
+                                                    }
                                                 }
+                                                
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
@@ -602,12 +618,14 @@ export default {
         getHighlightedStories(){
             this.axios.get('/media-api/story/highlights/' + this.username)
                         .then(response => { this.stories = response.data;
-                                            for(let i=0; i< response.data.length; i++){
-                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
-                                                    if(this.stories[i].imageBytes[j].image){
-                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
-                                                    }else{
-                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                            for(let i=0; i< this.stories.length; i++){
+                                                if((this.stories[i].forCloseFriends && this.isCloseFriend) || !this.stories[i].forCloseFriends){
+                                                    for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                        if(this.stories[i].imageBytes[j].image){
+                                                            this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                        }else{
+                                                            this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                                        }
                                                     }
                                                 }
                                             }     
