@@ -1,6 +1,397 @@
-2021-06-21 12:38:10,218 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
-2021-06-21 12:38:11,617 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-11] Closed 4 sessions: [r4z3yk2i, nlkoowlq, p11m4t2h, 3duccpwz]
-2021-06-21 12:38:14,308 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
+2021-06-21 13:52:17,567 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 13:52:27,503 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 13:52:36,823 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/884/habacbfd/xhr?t=1624276356817", parameters={masked}
+2021-06-21 13:52:36,823 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:36,826 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/884/habacbfd/xhr?t=1624276356817
+2021-06-21 13:52:36,826 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 13:52:37,513 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-3] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 13:52:42,581 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/481/i2omo24b/xhr?t=1624276362576", parameters={masked}
+2021-06-21 13:52:42,582 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:42,583 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/481/i2omo24b/xhr?t=1624276362576
+2021-06-21 13:52:42,583 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 13:52:43,723 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/media/gojko", parameters={}
+2021-06-21 13:52:43,724 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-7] Mapped to public java.util.List<com.nistagram.notificationmicroservice.controller.dto.MediaNotificationDto> com.nistagram.notificationmicroservice.controller.MediaNotificationController.getMediaNotificationsByUsername(java.lang.String)
+2021-06-21 13:52:43,738 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-7] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 13:52:43,754 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-7] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 13:52:43,756 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-7] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-06-21 13:52:43,769 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-7] Writing [[MediaNotificationDto(id=1, message=New reaction on post by maja, notifyUsername=gojko, actionUserna (truncated)...]
+2021-06-21 13:52:43,772 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
+2021-06-21 13:52:44,018 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] GET "/socket/info?t=1624276364011", parameters={masked}
+2021-06-21 13:52:44,018 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:44,018 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624276364011
+2021-06-21 13:52:44,019 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 13:52:44,045 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] GET "/socket/935/px3pj3kn/websocket", parameters={}
+2021-06-21 13:52:44,045 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:44,045 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: GET http://192.168.1.4:3036/socket/935/px3pj3kn/websocket
+2021-06-21 13:52:44,046 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-3] Handshake failed due to invalid Connection header [Keep-Alive]
+2021-06-21 13:52:44,046 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 400 BAD_REQUEST
+2021-06-21 13:52:44,086 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/935/rkmx3jmk/xhr_streaming?t=1624276364081", parameters={masked}
+2021-06-21 13:52:44,086 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:44,086 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/935/rkmx3jmk/xhr_streaming?t=1624276364081
+2021-06-21 13:52:44,086 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-5] POST http://192.168.1.4:3036/socket/935/rkmx3jmk/xhr_streaming?t=1624276364081
+2021-06-21 13:52:44,087 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-5] New XhrStreamingSockJsSession[id=rkmx3jmk]
+2021-06-21 13:52:44,087 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 13:52:44,743 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] GET "/socket/935/l5d1f5vq/eventsource", parameters={}
+2021-06-21 13:52:44,743 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:44,743 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: GET http://192.168.1.4:3036/socket/935/l5d1f5vq/eventsource
+2021-06-21 13:52:44,743 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler [http-nio-3036-exec-4] GET http://192.168.1.4:3036/socket/935/l5d1f5vq/eventsource
+2021-06-21 13:52:44,743 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-4] New EventSourceStreamingSockJsSession[id=l5d1f5vq]
+2021-06-21 13:52:44,743 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 13:52:44,785 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] GET "/socket/iframe.html", parameters={}
+2021-06-21 13:52:44,786 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:44,786 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 13:52:44,786 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 13:52:45,444 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] GET "/socket/iframe.html", parameters={}
+2021-06-21 13:52:45,444 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:45,445 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 13:52:45,445 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
+2021-06-21 13:52:45,839 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/935/ogeh1czs/xhr?t=1624276365836", parameters={masked}
+2021-06-21 13:52:45,839 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:45,840 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/935/ogeh1czs/xhr?t=1624276365836
+2021-06-21 13:52:45,840 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-10] POST http://192.168.1.4:3036/socket/935/ogeh1czs/xhr?t=1624276365836
+2021-06-21 13:52:45,840 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-10] New PollingSockJsSession[id=ogeh1czs]
+2021-06-21 13:52:45,840 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 13:52:45,849 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/935/ogeh1czs/xhr_send?t=1624276365846", parameters={masked}
+2021-06-21 13:52:45,849 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:45,849 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/935/ogeh1czs/xhr_send?t=1624276365846
+2021-06-21 13:52:45,850 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-81] Processing CONNECT session=ogeh1czs
+2021-06-21 13:52:45,850 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] No messages received after 187808 ms. Closing XhrStreamingSockJsSession[id=31icrfzo].
+2021-06-21 13:52:45,850 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/935/ogeh1czs/xhr?t=1624276365846", parameters={masked}
+2021-06-21 13:52:45,850 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-9] Closing SockJS session 31icrfzo with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,851 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:45,851 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] XhrStreamingSockJsSession[id=31icrfzo] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,851 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] Clearing session 31icrfzo
+2021-06-21 13:52:45,851 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/935/ogeh1czs/xhr?t=1624276365846
+2021-06-21 13:52:45,851 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 13:52:45,851 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-84] Processing DISCONNECT session=31icrfzo
+2021-06-21 13:52:45,851 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] No messages received after 187143 ms. Closing EventSourceStreamingSockJsSession[id=pl34gyue].
+2021-06-21 13:52:45,851 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [http-nio-3036-exec-9] Closing SockJS session pl34gyue with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,852 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] EventSourceStreamingSockJsSession[id=pl34gyue] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,852 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] Clearing session pl34gyue
+2021-06-21 13:52:45,852 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-32] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=31icrfzo}], simpSessionId=31icrfzo}]
+2021-06-21 13:52:45,852 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] No messages received after 187557 ms. Closing XhrStreamingSockJsSession[id=lu1nbtwg].
+2021-06-21 13:52:45,852 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-87] Processing DISCONNECT session=pl34gyue
+2021-06-21 13:52:45,852 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-9] Closing SockJS session lu1nbtwg with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,852 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] XhrStreamingSockJsSession[id=lu1nbtwg] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,853 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] Clearing session lu1nbtwg
+2021-06-21 13:52:45,853 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-33] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=pl34gyue}], simpSessionId=pl34gyue}]
+2021-06-21 13:52:45,853 [INFO] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] No messages received after 180090 ms. Closing XhrStreamingSockJsSession[id=qhjeihrr].
+2021-06-21 13:52:45,853 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [http-nio-3036-exec-9] Closing SockJS session qhjeihrr with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,853 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-90] Processing DISCONNECT session=lu1nbtwg
+2021-06-21 13:52:45,853 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] XhrStreamingSockJsSession[id=qhjeihrr] closed with CloseStatus[code=4500, reason=null]
+2021-06-21 13:52:45,853 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [http-nio-3036-exec-9] Clearing session qhjeihrr
+2021-06-21 13:52:45,854 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-34] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=lu1nbtwg}], simpSessionId=lu1nbtwg}]
+2021-06-21 13:52:45,854 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 204 NO_CONTENT
+2021-06-21 13:52:45,854 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-93] Processing DISCONNECT session=qhjeihrr
+2021-06-21 13:52:45,854 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-35] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=qhjeihrr}], simpSessionId=qhjeihrr}]
+2021-06-21 13:52:45,861 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/935/ogeh1czs/xhr?t=1624276365858", parameters={masked}
+2021-06-21 13:52:45,861 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:45,861 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/935/ogeh1czs/xhr?t=1624276365858
+2021-06-21 13:52:45,861 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 13:52:45,886 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/935/ogeh1czs/xhr_send?t=1624276365883", parameters={masked}
+2021-06-21 13:52:45,887 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:45,887 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/935/ogeh1czs/xhr_send?t=1624276365883
+2021-06-21 13:52:45,887 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-95] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624276365854-156 session=ogeh1czs, lookupDestination='/topic/server-broadcaster'
+2021-06-21 13:52:45,887 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 204 NO_CONTENT
+2021-06-21 13:52:45,887 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-95] No matching message handler methods.
+2021-06-21 13:52:45,888 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-96] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624276365854-156 session=ogeh1czs
+2021-06-21 13:52:47,500 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 13:52:51,952 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-6] Closed 5 sessions: [px3pj3kn, 31icrfzo, pl34gyue, lu1nbtwg, qhjeihrr]
+2021-06-21 13:52:57,522 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-12] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 13:52:57,545 [DEBUG] org.springframework.web.SimpLogging [MessageBroker-12] Processing MESSAGE destination=/topic/server-broadcaster session=null payload={"message":"New reaction on post by maja","timestamp":"2021-06-21T11:52:57.362+0...(truncated)
+2021-06-21 13:52:57,545 [DEBUG] org.springframework.web.SimpLogging [MessageBroker-12] Broadcasting to 3 sessions.
+2021-06-21 13:52:57,558 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/884/habacbfd/xhr?t=1624276377553", parameters={masked}
+2021-06-21 13:52:57,558 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:57,558 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/884/habacbfd/xhr?t=1624276377553
+2021-06-21 13:52:57,559 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 13:52:57,571 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/935/ogeh1czs/xhr?t=1624276377563", parameters={masked}
+2021-06-21 13:52:57,571 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:52:57,571 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/935/ogeh1czs/xhr?t=1624276377563
+2021-06-21 13:52:57,572 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
+2021-06-21 13:53:00,270 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] GET "/media/gojko", parameters={}
+2021-06-21 13:53:00,271 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-5] Mapped to public java.util.List<com.nistagram.notificationmicroservice.controller.dto.MediaNotificationDto> com.nistagram.notificationmicroservice.controller.MediaNotificationController.getMediaNotificationsByUsername(java.lang.String)
+2021-06-21 13:53:00,284 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-5] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 13:53:00,300 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-5] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 13:53:00,313 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [http-nio-3036-exec-5] Reading to [com.nistagram.notificationmicroservice.domain.ImageByte]
+2021-06-21 13:53:00,314 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-5] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-06-21 13:53:00,349 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-3036-exec-5] Writing [[MediaNotificationDto(id=1, message=New reaction on post by maja, notifyUsername=gojko, actionUserna (truncated)...]
+2021-06-21 13:53:00,353 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 13:53:00,553 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] GET "/socket/info?t=1624276380544", parameters={masked}
+2021-06-21 13:53:00,553 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:00,553 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624276380544
+2021-06-21 13:53:00,554 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 13:53:00,568 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] GET "/socket/287/nynsp33l/websocket", parameters={}
+2021-06-21 13:53:00,569 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:00,569 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: GET http://192.168.1.4:3036/socket/287/nynsp33l/websocket
+2021-06-21 13:53:00,569 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-4] Handshake failed due to invalid Connection header [Keep-Alive]
+2021-06-21 13:53:00,569 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 400 BAD_REQUEST
+2021-06-21 13:53:00,644 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/287/wxurxyv0/xhr_streaming?t=1624276380626", parameters={masked}
+2021-06-21 13:53:00,644 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:00,644 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/287/wxurxyv0/xhr_streaming?t=1624276380626
+2021-06-21 13:53:00,645 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-1] POST http://192.168.1.4:3036/socket/287/wxurxyv0/xhr_streaming?t=1624276380626
+2021-06-21 13:53:00,645 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-1] New XhrStreamingSockJsSession[id=wxurxyv0]
+2021-06-21 13:53:00,645 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 13:53:01,245 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] GET "/socket/287/lkogm53a/eventsource", parameters={}
+2021-06-21 13:53:01,245 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:01,245 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: GET http://192.168.1.4:3036/socket/287/lkogm53a/eventsource
+2021-06-21 13:53:01,245 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler [http-nio-3036-exec-8] GET http://192.168.1.4:3036/socket/287/lkogm53a/eventsource
+2021-06-21 13:53:01,245 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-8] New EventSourceStreamingSockJsSession[id=lkogm53a]
+2021-06-21 13:53:01,245 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
+2021-06-21 13:53:01,278 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] GET "/socket/iframe.html", parameters={}
+2021-06-21 13:53:01,278 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:01,278 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 13:53:01,278 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 13:53:01,898 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/iframe.html", parameters={}
+2021-06-21 13:53:01,899 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:01,899 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 13:53:01,899 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
+2021-06-21 13:53:02,254 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/287/2key35bu/xhr?t=1624276382244", parameters={masked}
+2021-06-21 13:53:02,255 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:02,255 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/287/2key35bu/xhr?t=1624276382244
+2021-06-21 13:53:02,255 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-10] POST http://192.168.1.4:3036/socket/287/2key35bu/xhr?t=1624276382244
+2021-06-21 13:53:02,255 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-10] New PollingSockJsSession[id=2key35bu]
+2021-06-21 13:53:02,255 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 13:53:02,266 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/287/2key35bu/xhr_send?t=1624276382257", parameters={masked}
+2021-06-21 13:53:02,267 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:02,267 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/287/2key35bu/xhr_send?t=1624276382257
+2021-06-21 13:53:02,267 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 204 NO_CONTENT
+2021-06-21 13:53:02,268 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-99] Processing CONNECT session=2key35bu
+2021-06-21 13:53:02,275 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/287/2key35bu/xhr?t=1624276382258", parameters={masked}
+2021-06-21 13:53:02,275 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:02,275 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/287/2key35bu/xhr?t=1624276382258
+2021-06-21 13:53:02,275 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
+2021-06-21 13:53:02,284 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/287/2key35bu/xhr?t=1624276382275", parameters={masked}
+2021-06-21 13:53:02,284 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:02,284 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/287/2key35bu/xhr?t=1624276382275
+2021-06-21 13:53:02,284 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 13:53:02,302 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/287/2key35bu/xhr_send?t=1624276382293", parameters={masked}
+2021-06-21 13:53:02,302 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@5ab5924c
+2021-06-21 13:53:02,303 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/287/2key35bu/xhr_send?t=1624276382293
+2021-06-21 13:53:02,303 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 204 NO_CONTENT
+2021-06-21 13:53:02,303 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-101] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624276382273-120 session=2key35bu, lookupDestination='/topic/server-broadcaster'
+2021-06-21 13:53:02,303 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-102] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624276382273-120 session=2key35bu
+2021-06-21 13:53:02,304 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-101] No matching message handler methods.
+2021-06-21 13:53:06,948 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-2] Closing SockJS session i2omo24b with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 13:53:06,948 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-2] PollingSockJsSession[id=i2omo24b] closed with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 13:53:06,948 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-2] Clearing session i2omo24b
+2021-06-21 13:53:06,948 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-2] Closed 2 sessions: [i2omo24b, nynsp33l]
+2021-06-21 13:53:06,948 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-80] Processing DISCONNECT session=i2omo24b
+2021-06-21 13:53:06,948 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-40] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=i2omo24b}], simpSessionId=i2omo24b}]
+2021-06-21 13:53:07,492 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 13:53:17,566 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-6] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 13:53:22,574 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-3] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
+2021-06-21 13:53:22,574 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-12] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
+2021-06-21 13:53:22,575 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-3] Closing SockJS session ogeh1czs with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:22,575 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-12] Closing SockJS session habacbfd with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:22,576 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-3] PollingSockJsSession[id=ogeh1czs] closed with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:22,576 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-12] PollingSockJsSession[id=habacbfd] closed with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:22,576 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-3] Clearing session ogeh1czs
+2021-06-21 13:53:22,576 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-12] Clearing session habacbfd
+2021-06-21 13:53:22,577 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-85] Processing DISCONNECT session=ogeh1czs
+2021-06-21 13:53:22,577 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-86] Processing DISCONNECT session=habacbfd
+2021-06-21 13:53:22,578 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-41] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=ogeh1czs}], simpSessionId=ogeh1czs}]
+2021-06-21 13:53:22,578 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-42] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=habacbfd}], simpSessionId=habacbfd}]
+2021-06-21 13:53:22,585 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
+com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource$Builder.get(WebResource.java:509) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.getApplicationsInternal(AbstractJerseyEurekaHttpClient.java:194) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.getDelta(AbstractJerseyEurekaHttpClient.java:170) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$7.execute(EurekaHttpClientDecorator.java:152) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient.getAndUpdateDelta(DiscoveryClient.java:1085) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient.fetchRegistry(DiscoveryClient.java:967) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient.refreshRegistry(DiscoveryClient.java:1479) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient$CacheRefreshThread.run(DiscoveryClient.java:1446) [eureka-client-1.9.8.jar:1.9.8]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
+	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
+	... 29 common frames omitted
+2021-06-21 13:53:22,586 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
+2021-06-21 13:53:22,587 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] "INCLUDE" dispatch for POST "/error?t=1624276377553", parameters={masked}
+2021-06-21 13:53:22,587 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] "INCLUDE" dispatch for POST "/error?t=1624276377563", parameters={masked}
+2021-06-21 13:53:22,593 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-8] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2021-06-21 13:53:22,593 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-1] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2021-06-21 13:53:22,593 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
+com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource$Builder.put(WebResource.java:529) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.sendHeartBeat(AbstractJerseyEurekaHttpClient.java:102) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:846) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1405) [eureka-client-1.9.8.jar:1.9.8]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
+	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
+	... 26 common frames omitted
+2021-06-21 13:53:22,594 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
+2021-06-21 13:53:22,597 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-8] Found 'Content-Type:application/javascript;charset=UTF-8' in response
+2021-06-21 13:53:22,597 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-1] Found 'Content-Type:application/javascript;charset=UTF-8' in response
+2021-06-21 13:53:22,601 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-8] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
+2021-06-21 13:53:22,601 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-1] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
+2021-06-21 13:53:22,601 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Exiting from "INCLUDE" dispatch, status 200
+2021-06-21 13:53:22,601 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Exiting from "INCLUDE" dispatch, status 200
+2021-06-21 13:53:25,656 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-2] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
+2021-06-21 13:53:25,656 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [MessageBroker-2] Closing SockJS session wxurxyv0 with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:25,656 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] "INCLUDE" dispatch for POST "/error?t=1624276380626", parameters={masked}
+2021-06-21 13:53:25,656 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-2] XhrStreamingSockJsSession[id=wxurxyv0] closed with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:25,656 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-2] Clearing session wxurxyv0
+2021-06-21 13:53:25,656 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-91] Processing DISCONNECT session=wxurxyv0
+2021-06-21 13:53:25,657 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-2] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2021-06-21 13:53:25,657 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-43] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=wxurxyv0}], simpSessionId=wxurxyv0}]
+2021-06-21 13:53:25,657 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-2] Found 'Content-Type:application/javascript;charset=UTF-8' in response
+2021-06-21 13:53:25,657 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-2] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
+2021-06-21 13:53:25,658 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Exiting from "INCLUDE" dispatch, status 200
+2021-06-21 13:53:26,262 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-11] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
+2021-06-21 13:53:26,262 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.EventSourceTransportHandler$EventSourceStreamingSockJsSession [MessageBroker-11] Closing SockJS session lkogm53a with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:26,262 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-11] EventSourceStreamingSockJsSession[id=lkogm53a] closed with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:26,262 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-11] Clearing session lkogm53a
+2021-06-21 13:53:26,262 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] "INCLUDE" dispatch for GET "/error", parameters={}
+2021-06-21 13:53:26,263 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-94] Processing DISCONNECT session=lkogm53a
+2021-06-21 13:53:26,263 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-7] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2021-06-21 13:53:26,263 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-44] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=lkogm53a}], simpSessionId=lkogm53a}]
+2021-06-21 13:53:26,263 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-7] Found 'Content-Type:text/event-stream;charset=UTF-8' in response
+2021-06-21 13:53:26,263 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-7] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
+2021-06-21 13:53:26,263 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Exiting from "INCLUDE" dispatch, status 200
+2021-06-21 13:53:26,687 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
+com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.sun.jersey.api.client.WebResource$Builder.put(WebResource.java:529) ~[jersey-client-1.19.1.jar:1.19.1]
+	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.sendHeartBeat(AbstractJerseyEurekaHttpClient.java:102) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:118) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:79) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:846) [eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1405) [eureka-client-1.9.8.jar:1.9.8]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
+	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
+	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
+	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
+	... 27 common frames omitted
+2021-06-21 13:53:26,687 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
+2021-06-21 13:53:26,688 [ERROR] com.netflix.discovery.DiscoveryClient [DiscoveryClient-HeartbeatExecutor-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - was unable to send heartbeat!
+com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
+	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:846) ~[eureka-client-1.9.8.jar:1.9.8]
+	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1405) [eureka-client-1.9.8.jar:1.9.8]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
+2021-06-21 13:53:26,704 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
 com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
 	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
 	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
@@ -29,8 +420,7 @@ com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Con
 	at com.netflix.discovery.DiscoveryClient.refreshRegistry(DiscoveryClient.java:1479) [eureka-client-1.9.8.jar:1.9.8]
 	at com.netflix.discovery.DiscoveryClient$CacheRefreshThread.run(DiscoveryClient.java:1446) [eureka-client-1.9.8.jar:1.9.8]
 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_292]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
 	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
@@ -53,9 +443,9 @@ Caused by: java.net.ConnectException: Connection refused: connect
 	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
 	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
 	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	... 31 common frames omitted
-2021-06-21 12:38:14,311 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
-2021-06-21 12:38:14,311 [ERROR] com.netflix.discovery.DiscoveryClient [DiscoveryClient-CacheRefreshExecutor-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - was unable to refresh its cache! status = Cannot execute request on any known server
+	... 30 common frames omitted
+2021-06-21 13:53:26,705 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-CacheRefreshExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
+2021-06-21 13:53:26,706 [ERROR] com.netflix.discovery.DiscoveryClient [DiscoveryClient-CacheRefreshExecutor-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - was unable to refresh its cache! status = Cannot execute request on any known server
 com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
 	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-1.9.8.jar:1.9.8]
 	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.getDelta(EurekaHttpClientDecorator.java:149) ~[eureka-client-1.9.8.jar:1.9.8]
@@ -67,331 +457,40 @@ com.netflix.discovery.shared.transport.TransportException: Cannot execute reques
 	at com.netflix.discovery.DiscoveryClient.refreshRegistry(DiscoveryClient.java:1479) [eureka-client-1.9.8.jar:1.9.8]
 	at com.netflix.discovery.DiscoveryClient$CacheRefreshThread.run(DiscoveryClient.java:1446) [eureka-client-1.9.8.jar:1.9.8]
 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_292]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_292]
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
 	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-2021-06-21 12:38:14,348 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
-com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource$Builder.put(WebResource.java:529) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.sendHeartBeat(AbstractJerseyEurekaHttpClient.java:102) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:118) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:79) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:846) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1405) [eureka-client-1.9.8.jar:1.9.8]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
-	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
-	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
-	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	... 28 common frames omitted
-2021-06-21 12:38:14,348 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-HeartbeatExecutor-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
-2021-06-21 12:38:14,348 [ERROR] com.netflix.discovery.DiscoveryClient [DiscoveryClient-HeartbeatExecutor-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - was unable to send heartbeat!
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$3.execute(EurekaHttpClientDecorator.java:92) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.sendHeartBeat(EurekaHttpClientDecorator.java:89) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.renew(DiscoveryClient.java:846) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient$HeartbeatThread.run(DiscoveryClient.java:1405) [eureka-client-1.9.8.jar:1.9.8]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
-	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-2021-06-21 12:38:15,748 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-5] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 12:38:22,080 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-3] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
-2021-06-21 12:38:22,081 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler$XhrStreamingSockJsSession [MessageBroker-3] Closing SockJS session 5f314nmw with CloseStatus[code=1011, reason=null]
-2021-06-21 12:38:22,081 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] "INCLUDE" dispatch for POST "/error?t=1624271802051", parameters={masked}
-2021-06-21 12:38:22,081 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-3] XhrStreamingSockJsSession[id=5f314nmw] closed with CloseStatus[code=1011, reason=null]
-2021-06-21 12:38:22,082 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-3] Clearing session 5f314nmw
-2021-06-21 12:38:22,082 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-4] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
-2021-06-21 12:38:22,082 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-35] Processing DISCONNECT session=5f314nmw
-2021-06-21 12:38:22,083 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-4] Found 'Content-Type:application/javascript;charset=UTF-8' in response
-2021-06-21 12:38:22,083 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-15] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=5f314nmw}], simpSessionId=5f314nmw}]
-2021-06-21 12:38:22,083 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-4] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
-2021-06-21 12:38:22,084 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Exiting from "INCLUDE" dispatch, status 200
-2021-06-21 12:38:25,769 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 12:38:31,047 [INFO] com.netflix.loadbalancer.PollingServerListUpdater [Thread-23] Shutting down the Executor Pool for PollingServerListUpdater
-2021-06-21 12:38:31,047 [INFO] org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry [Thread-19] Unregistering application NOTIFICATION-MICROSERVICE with eureka with status DOWN
-2021-06-21 12:38:31,047 [WARN] com.netflix.discovery.DiscoveryClient [Thread-19] Saw local status change event StatusChangeEvent [timestamp=1624271911047, current=DOWN, previous=UP]
-2021-06-21 12:38:31,047 [INFO] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036: registering service...
-2021-06-21 12:38:31,047 [DEBUG] org.springframework.web.SimpLogging [Thread-19] clientOutboundChannel removed SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2021-06-21 12:38:31,047 [DEBUG] org.springframework.web.SimpLogging [Thread-19] clientInboundChannel removed WebSocketAnnotationMethodMessageHandler[prefixes=[]]
-2021-06-21 12:38:31,047 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [Thread-19] Stopping...
-2021-06-21 12:38:31,047 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [Thread-19] BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
-2021-06-21 12:38:31,047 [DEBUG] org.springframework.web.SimpLogging [Thread-19] clientInboundChannel removed SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
-2021-06-21 12:38:31,047 [DEBUG] org.springframework.web.SimpLogging [Thread-19] brokerChannel removed SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
-2021-06-21 12:38:31,047 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [Thread-19] Stopped.
-2021-06-21 12:38:31,047 [DEBUG] org.springframework.web.SimpLogging [Thread-19] clientInboundChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2021-06-21 12:38:31,047 [DEBUG] org.springframework.web.SimpLogging [Thread-19] brokerChannel removed UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2021-06-21 12:38:31,047 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [Thread-19] Shutting down ExecutorService 'brokerChannelExecutor'
-2021-06-21 12:38:31,047 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [Thread-19] Shutting down ExecutorService 'messageBrokerTaskScheduler'
-2021-06-21 12:38:31,058 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [Thread-19] Shutting down ExecutorService 'clientOutboundChannelExecutor'
-2021-06-21 12:38:31,058 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [Thread-19] Shutting down ExecutorService 'clientInboundChannelExecutor'
-2021-06-21 12:38:31,058 [INFO] com.netflix.util.concurrent.ShutdownEnabledTimer [Thread-19] Shutdown hook removed for: NFLoadBalancer-PingTimer-media-microservice
-2021-06-21 12:38:31,058 [INFO] com.netflix.util.concurrent.ShutdownEnabledTimer [Thread-19] Exception caught (might be ok if at shutdown)
-java.lang.IllegalStateException: Shutdown in progress
-	at java.lang.ApplicationShutdownHooks.remove(ApplicationShutdownHooks.java:82) ~[na:1.8.0_292]
-	at java.lang.Runtime.removeShutdownHook(Runtime.java:239) ~[na:1.8.0_292]
-	at com.netflix.util.concurrent.ShutdownEnabledTimer.cancel(ShutdownEnabledTimer.java:70) ~[netflix-commons-util-0.3.0.jar:0.3.0]
-	at com.netflix.loadbalancer.BaseLoadBalancer.cancelPingTask(BaseLoadBalancer.java:632) [ribbon-loadbalancer-2.3.0.jar:2.3.0]
-	at com.netflix.loadbalancer.BaseLoadBalancer.shutdown(BaseLoadBalancer.java:883) [ribbon-loadbalancer-2.3.0.jar:2.3.0]
-	at com.netflix.loadbalancer.DynamicServerListLoadBalancer.shutdown(DynamicServerListLoadBalancer.java:285) [ribbon-loadbalancer-2.3.0.jar:2.3.0]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_292]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_292]
+2021-06-21 13:53:27,295 [DEBUG] org.springframework.web.socket.sockjs.DisconnectedClient [MessageBroker-8] Looks like the client has gone away: org.apache.catalina.connector.ClientAbortException: java.io.IOException: An existing connection was forcibly closed by the remote host (For a full stack trace, set the log category 'org.springframework.web.socket.sockjs.DisconnectedClient' to TRACE level.)
+2021-06-21 13:53:27,295 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-8] Closing SockJS session 2key35bu with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:27,295 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-8] PollingSockJsSession[id=2key35bu] closed with CloseStatus[code=1011, reason=null]
+2021-06-21 13:53:27,295 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-8] Clearing session 2key35bu
+2021-06-21 13:53:27,295 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] "INCLUDE" dispatch for POST "/error?t=1624276382275", parameters={masked}
+2021-06-21 13:53:27,296 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-97] Processing DISCONNECT session=2key35bu
+2021-06-21 13:53:27,296 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-3036-exec-10] Mapped to public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2021-06-21 13:53:27,296 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-45] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=2key35bu}], simpSessionId=2key35bu}]
+2021-06-21 13:53:27,296 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-3036-exec-10] Found 'Content-Type:application/javascript;charset=UTF-8' in response
+2021-06-21 13:53:27,296 [WARN] org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver [http-nio-3036-exec-10] Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
+2021-06-21 13:53:27,297 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Exiting from "INCLUDE" dispatch, status 200
+2021-06-21 13:53:27,364 [ERROR] org.springframework.scheduling.support.TaskUtils$LoggingErrorHandler [MessageBroker-10] Unexpected error occurred in scheduled task.
+feign.FeignException: status 500 reading MediaConnection#getAllPosts()
+	at feign.FeignException.errorStatus(FeignException.java:78) ~[feign-core-10.1.0.jar:na]
+	at feign.codec.ErrorDecoder$Default.decode(ErrorDecoder.java:93) ~[feign-core-10.1.0.jar:na]
+	at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:149) ~[feign-core-10.1.0.jar:na]
+	at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:78) ~[feign-core-10.1.0.jar:na]
+	at feign.ReflectiveFeign$FeignInvocationHandler.invoke(ReflectiveFeign.java:103) ~[feign-core-10.1.0.jar:na]
+	at com.sun.proxy.$Proxy109.getAllPosts(Unknown Source) ~[na:na]
+	at com.nistagram.notificationmicroservice.service.MediaMediaNotificationService.getAllPosts(MediaMediaNotificationService.java:30) ~[classes/:na]
+	at com.nistagram.notificationmicroservice.controller.WebSocketController.sendMessage(WebSocketController.java:39) ~[classes/:na]
+	at sun.reflect.GeneratedMethodAccessor92.invoke(Unknown Source) ~[na:na]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_292]
 	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_292]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.invokeCustomDestroyMethod(DisposableBeanAdapter.java:337) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:271) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1034) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1027) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1057) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1026) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:975) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:92) [spring-cloud-context-2.1.1.RELEASE.jar:2.1.1.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:256) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1034) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1027) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1057) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1026) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:945) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-2021-06-21 12:38:31,058 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [Thread-19] Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-06-21 12:38:31,058 [INFO] org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl [Thread-19] HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2021-06-21 12:38:31,078 [INFO] com.netflix.discovery.DiscoveryClient [Thread-19] Shutting down DiscoveryClient ...
-2021-06-21 12:38:34,092 [INFO] com.netflix.discovery.DiscoveryClient [Thread-19] Unregistering ...
-2021-06-21 12:38:35,158 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [DiscoveryClient-InstanceInfoReplicator-0] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
-com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource$Builder.post(WebResource.java:570) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.register(AbstractJerseyEurekaHttpClient.java:56) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:118) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:79) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:829) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101) [eureka-client-1.9.8.jar:1.9.8]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84) ~[spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_292]
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180) [na:1.8.0_292]
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293) [na:1.8.0_292]
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308) [na:1.8.0_292]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180) [na:1.8.0_292]
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294) [na:1.8.0_292]
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
 	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
-	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
-	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	... 31 common frames omitted
-2021-06-21 12:38:35,158 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [DiscoveryClient-InstanceInfoReplicator-0] Request execution failed with message: java.net.ConnectException: Connection refused: connect
-2021-06-21 12:38:35,158 [WARN] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - registration failed Cannot execute request on any known server
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:829) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101) [eureka-client-1.9.8.jar:1.9.8]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_292]
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180) [na:1.8.0_292]
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
-	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-2021-06-21 12:38:35,158 [WARN] com.netflix.discovery.InstanceInfoReplicator [DiscoveryClient-InstanceInfoReplicator-0] There was a problem with the instance info replicator
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$1.execute(EurekaHttpClientDecorator.java:59) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.register(EurekaHttpClientDecorator.java:56) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.register(DiscoveryClient.java:829) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.InstanceInfoReplicator.run(InstanceInfoReplicator.java:121) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.InstanceInfoReplicator$1.run(InstanceInfoReplicator.java:101) [eureka-client-1.9.8.jar:1.9.8]
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_292]
-	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_292]
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180) [na:1.8.0_292]
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_292]
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_292]
-	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_292]
-2021-06-21 12:38:38,207 [ERROR] com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient [Thread-19] Request execution error. endpoint=DefaultEndpoint{ serviceUrl='http://localhost:8761/eureka/}
-com.sun.jersey.api.client.ClientHandlerException: java.net.ConnectException: Connection refused: connect
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:187) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.filter.GZIPContentEncodingFilter.handle(GZIPContentEncodingFilter.java:123) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.EurekaIdentityHeaderFilter.handle(EurekaIdentityHeaderFilter.java:27) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.sun.jersey.api.client.Client.handle(Client.java:652) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.handle(WebResource.java:682) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource.access$200(WebResource.java:74) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.sun.jersey.api.client.WebResource$Builder.delete(WebResource.java:591) ~[jersey-client-1.19.1.jar:1.19.1]
-	at com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.cancel(AbstractJerseyEurekaHttpClient.java:76) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.MetricsCollectingEurekaHttpClient.execute(MetricsCollectingEurekaHttpClient.java:73) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.executeOnNewServer(RedirectingEurekaHttpClient.java:118) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RedirectingEurekaHttpClient.execute(RedirectingEurekaHttpClient.java:79) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:120) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:923) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:901) [eureka-client-1.9.8.jar:1.9.8]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_292]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_292]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_292]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_292]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:363) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:321) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:156) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:240) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:233) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:403) [spring-cloud-context-2.1.1.RELEASE.jar:2.1.1.RELEASE]
-	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:142) [spring-cloud-context-2.1.1.RELEASE.jar:2.1.1.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:256) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1034) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1027) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1057) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1026) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:945) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method) ~[na:1.8.0_292]
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_292]
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_292]
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_292]
-	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_292]
-	at java.net.Socket.connect(Socket.java:607) ~[na:1.8.0_292]
-	at org.apache.http.conn.scheme.PlainSocketFactory.connectSocket(PlainSocketFactory.java:121) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:180) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:134) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:605) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:440) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:835) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:118) ~[httpclient-4.5.8.jar:4.5.8]
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56) ~[httpclient-4.5.8.jar:4.5.8]
-	at com.sun.jersey.client.apache4.ApacheHttpClient4Handler.handle(ApacheHttpClient4Handler.java:173) ~[jersey-apache-client4-1.19.1.jar:1.19.1]
-	... 42 common frames omitted
-2021-06-21 12:38:38,207 [WARN] com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient [Thread-19] Request execution failed with message: java.net.ConnectException: Connection refused: connect
-2021-06-21 12:38:38,207 [ERROR] com.netflix.discovery.DiscoveryClient [Thread-19] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - de-registration failedCannot execute request on any known server
-com.netflix.discovery.shared.transport.TransportException: Cannot execute request on any known server
-	at com.netflix.discovery.shared.transport.decorator.RetryableEurekaHttpClient.execute(RetryableEurekaHttpClient.java:112) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator$2.execute(EurekaHttpClientDecorator.java:74) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.SessionedEurekaHttpClient.execute(SessionedEurekaHttpClient.java:77) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.shared.transport.decorator.EurekaHttpClientDecorator.cancel(EurekaHttpClientDecorator.java:71) ~[eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.unregister(DiscoveryClient.java:923) [eureka-client-1.9.8.jar:1.9.8]
-	at com.netflix.discovery.DiscoveryClient.shutdown(DiscoveryClient.java:901) [eureka-client-1.9.8.jar:1.9.8]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_292]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_292]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_292]
-	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_292]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:363) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:321) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:156) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:240) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.run(DisposableBeanAdapter.java:233) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.cloud.context.scope.GenericScope$BeanLifecycleWrapper.destroy(GenericScope.java:403) [spring-cloud-context-2.1.1.RELEASE.jar:2.1.1.RELEASE]
-	at org.springframework.cloud.context.scope.GenericScope.destroy(GenericScope.java:142) [spring-cloud-context-2.1.1.RELEASE.jar:2.1.1.RELEASE]
-	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:256) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1034) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1027) [spring-beans-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1057) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1026) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:945) [spring-context-5.1.7.RELEASE.jar:5.1.7.RELEASE]
-2021-06-21 12:38:38,228 [INFO] com.netflix.discovery.DiscoveryClient [Thread-19] Completed shut down of DiscoveryClient
-2021-06-21 12:38:38,228 [INFO] com.zaxxer.hikari.HikariDataSource [Thread-19] HikariPool-1 - Shutdown initiated...
-2021-06-21 12:38:38,237 [INFO] com.zaxxer.hikari.HikariDataSource [Thread-19] HikariPool-1 - Shutdown completed.

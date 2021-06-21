@@ -1,5 +1,6 @@
 package com.mediamicroservice.mediamicroservice.controller;
 
+import com.mediamicroservice.mediamicroservice.controller.dto.ImageByte;
 import com.mediamicroservice.mediamicroservice.controller.dto.ImageBytesDto;
 import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.domain.Post;
@@ -88,6 +89,10 @@ public class PostController {
         return new ResponseEntity(postService.searchLocation(location), HttpStatus.OK);
     }
 
+    @GetMapping("/bytes/{mediaId}")
+    public ImageByte getBytes(@PathVariable("mediaId") Long mediaId){
+        return postService.getBytes(mediaId);
+    }
 
 
 
