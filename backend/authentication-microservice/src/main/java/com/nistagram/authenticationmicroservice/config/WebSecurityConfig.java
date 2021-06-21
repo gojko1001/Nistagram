@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userCredentials/reset_password/{jwt}").permitAll()
                 .antMatchers("/userCredentials/verify/{username}").permitAll()
                 .antMatchers("/userCredentials/login").permitAll()
+                .antMatchers("/userCredentials/deactivate/{username}").permitAll()
                 .antMatchers("/userCredentials/login_google").permitAll()
                 .antMatchers("/userCredentials/add").permitAll()
                 .antMatchers("/userCredentials/send_email/{email}").permitAll()

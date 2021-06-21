@@ -55,6 +55,11 @@
                   Agent requests
                 </button>
             </li>
+            <li class="nav-item" v-if="username != null && isAdmin ==true">
+                <button class="heart nav-btn" @click='inappropriateContent'>
+                  Users
+                </button>
+            </li>
             <li class="nav-item" v-if="username != null&& isAdmin ==false">
                 <button class="nav-btn" @click='myProfile'>
                   <i class="fas fa-user"></i>

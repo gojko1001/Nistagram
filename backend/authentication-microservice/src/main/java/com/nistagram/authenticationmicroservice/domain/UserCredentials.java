@@ -28,6 +28,8 @@ public class UserCredentials implements UserDetails {
     private Collection<Role> roles;
     @Column
     private Boolean verified;
+    @Column
+    private Boolean isDeactivated = false;
 
     @Override
     public boolean isAccountNonExpired() {

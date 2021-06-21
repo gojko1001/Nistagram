@@ -1,6 +1,7 @@
 package com.nistagram.authenticationmicroservice.service;
 
 import com.nistagram.authenticationmicroservice.connection.UserConnection;
+import com.nistagram.authenticationmicroservice.domain.Role;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
@@ -15,11 +16,16 @@ import com.nistagram.authenticationmicroservice.repoistory.IUserCredentialsRepos
 import com.nistagram.authenticationmicroservice.security.JwtService;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -75,6 +81,8 @@ public class UserCredentialsService implements IUserCredentialsService {
             throw new BadRequestException("Username or password is not correct.");
         if (!userCredentials.getVerified())
             throw new InvalidActionException("The account must be verified.");
+        if(userCredentials.getIsDeactivated())
+            throw new InvalidActionException("Your account is deactivated by admin");
         return userCredentials;
     }
 
@@ -100,6 +108,23 @@ public class UserCredentialsService implements IUserCredentialsService {
         }
 //        emailService.resetPassword(user); TODO: Notification microservice
         return userCredentialsRepository.save(userCredentials);
+
+    }
+
+    @Override
+    public List<String> findCredentialsByRoleUserAndAgent() {
+        List<UserCredentials> userCredentials = userCredentialsRepository.findAll();
+        List<String> userCredentials1 = new ArrayList<>();
+        for(UserCredentials uc:userCredentials){
+            Collection<Role> roles = uc.getRoles();
+            for(Role r:roles) {
+                if (r.getName().equals("ROLE_USER") || r.getName().equals("ROLE_AGENT")) {
+                    userCredentials1.add(uc.getUsername());
+                }
+            }
+        }
+
+        return userCredentials1;
 
     }
 
@@ -146,6 +171,13 @@ public class UserCredentialsService implements IUserCredentialsService {
     public void sendResetPasswordLink(String email) {
         UserDto user = userConnection.getUserByEmail(email);
         emailService.resetPassword(user.getUsername(), user.getEmail(), user.getFullName());
+    }
+
+    @Override
+    public void deactivateProfile(String username) {
+        UserCredentials userCredentials = findByUsername(username);
+        userCredentials.setIsDeactivated(true);
+        userCredentialsRepository.save(userCredentials);
     }
 
     @Override
