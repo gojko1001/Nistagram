@@ -46,6 +46,16 @@ public class UserRelationService implements IUserRelationService {
         return following;
     }
 
+    public List<User> getUserRequests(String username){
+        User user = findUserByUsername(username);
+        List<User> followers = new ArrayList<>();
+        for (UserRelation u : user.getInvertedRelations()) {
+            if (u.getRelationStatus() == RelationStatus.PENDING && !isBlocked(username, u.getUser().getUsername()))
+                followers.add(u.getUser());
+        }
+        return followers;
+    }
+
     public List<User> getEagerFollowings(String username, RelationStatus status) {
         User user = findUserByUsername(username);
         List<User> following = new ArrayList<>();

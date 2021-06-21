@@ -1,4 +1,5 @@
 // Paths
+// Authentication microservice
 export const USER_CREDENTIALS_PATH = "/authentication-api/userCredentials"
 export const REGISTER_USER_PATH = USER_CREDENTIALS_PATH + "/add"
 export const LOGIN_PATH = USER_CREDENTIALS_PATH + "/login"
@@ -8,6 +9,7 @@ export const RESET_PASS_PATH = USER_CREDENTIALS_PATH + "/reset_password"
 export const VERIFY_ACC_PATH = USER_CREDENTIALS_PATH + "/verify"
 
 
+// User microservice
 export const USER_PATH = "/user-api/user"
 export const SEARCH_USER_PATH = USER_PATH + "/search"
 export const VERIFY_USER_PATH = "/user-api/verify"
@@ -16,12 +18,16 @@ export const GET_CATEGORIES_PATH = VERIFY_USER_PATH + "/categories"
 export const USER_RELATION_PATH = "/user-api/user_relation"
 export const GET_FOLLOWERS_PATH = USER_RELATION_PATH + "/followers"
 export const GET_FOLLOWINGS_PATH = USER_RELATION_PATH + "/followings"
+export const GET_REQUESTS_PATH = USER_RELATION_PATH + "/requests"
 export const GET_BLOCKED_USERS_PATH = USER_RELATION_PATH + "/blocked"
 export const GET_CLOSE_FRIENDS_PATH = USER_RELATION_PATH + "/close_friends"
+
 export const FOLLOW_PATH = USER_RELATION_PATH + "/follow"
+export const ACCEPT_FOLLOWER_PATH = USER_RELATION_PATH + "/accept"
 export const RELATION_STATUS_UPDATE_PATH = USER_RELATION_PATH + "/update"
 export const BLOCK_USER_PATH = USER_RELATION_PATH + '/block'
 export const DELETE_RELATION_PATH = USER_RELATION_PATH + "/remove"
+
 export const MUTE_POST_PATH = USER_RELATION_PATH + "/mutePost"
 export const MUTE_STORY_PATH = USER_RELATION_PATH + "/muteStory"
 export const NOTIFY_POST_PATH = USER_RELATION_PATH + "/notifyPost"

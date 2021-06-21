@@ -13,6 +13,8 @@ public interface IUserRelationService {
 
     List<User> getUserFollowings(String username);
 
+    List<User> getUserRequests(String username);
+
     List<User> getEagerFollowings(String username, RelationStatus status);
 
     void followUser(String username, String relatedUsername);

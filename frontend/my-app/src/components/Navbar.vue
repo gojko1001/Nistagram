@@ -36,21 +36,26 @@
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+                <button class="heart nav-btn">
+                  <i class="fas fa-user-plus" v-b-modal.modal-follow-request></i>
+                </button>
+            </li>
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
                 <button class="heart nav-btn" @click="notificationPage">
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && isAdmin ==true">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
                 <button class="nav-btn" @click='inappropriateContent'>
                   <i class="fas fa-ban"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && isAdmin ==true">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
                 <button class="nav-btn" @click='profileVerification'>
                   <i class="fas fa-user-check"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && isAdmin ==true">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
                 <button class="nav-btn">
                   <i class="fas fa-user-secret"></i>
                 </button>
@@ -68,12 +73,26 @@
         </ul>
     </div>
     </nav>
+    <b-modal id="modal-follow-request" title="Following requests">
+        <div v-for="(request,p) in followRequests" :key="p">
+            <span v-on:click="goToProfile(request.username)" class="clickable">@{{request.username}}</span>
+            <b-btn size="sm" variant="outline-info" class="float-right" @click="acceptRequest(request.username)">Accept</b-btn>
+            <b-btn size="sm" variant="outline-danger" class="float-right" @click="unfollowUser(request.username)">Delete</b-btn><hr>
+        </div>
+        <template #modal-footer="{ cancel }">
+            <b-button variant="secondary" @click="cancel()">
+                Cancel
+            </b-button>
+        </template>
+    </b-modal>
   </div>
 </template>
 
 
 <script>
-import { getRoleFromToken, getUsernameFromToken, removeToken } from '../util/token';
+import { use } from 'vue/types/umd';
+import { ACCEPT_FOLLOWER_PATH, GET_REQUESTS_PATH } from '../util/constants';
+import { getRoleFromToken, getToken, getUsernameFromToken, removeToken } from '../util/token';
 export default {
   name: 'Navbar',
   data() {
@@ -85,11 +104,19 @@ export default {
           { item: 'location', name: 'Locations' },
         ],
         username: getUsernameFromToken(),
-        searchInput:'',
         role: getRoleFromToken(),
+        searchInput:'',
+        followRequests: []
       }
   },
-
+  mounted: function(){
+    this.axios.get(GET_REQUESTS_PATH, {  headers:{
+                                            Authorization: "Bearer " + getToken(),
+                                         }   
+    }).then(response => {
+                      this.followRequests = response.data;
+    })
+  },
   methods:{
     myProfile:function(){
       window.location.href = "/user/" + this.username;
@@ -114,6 +141,14 @@ export default {
     },
     profileVerification: function(){
       window.location.href = "/all_requests";
+    },
+    acceptRequest(username){
+      this.axios.put(ACCEPT_FOLLOWER_PATH + "/" + username, null, {  headers:{
+                                            Authorization: "Bearer " + getToken(),
+                                         }  
+      }).then(() => {
+                  
+      })
     }
   },
 }

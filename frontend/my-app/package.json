@@ -20,6 +20,7 @@
     "vue-router": "^3.5.1",
     "vue-simple-search-dropdown": "^1.0.1",
     "vue-stomp": "0.0.5",
+    "vue-types": "^2.0.3",
     "vuelidate": "^0.7.6",
     "webstomp-client": "^1.2.6"
   },
@@ -30,8 +31,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.24.0",
     "eslint-plugin-vue": "^7.9.0",
-    "vue-template-compiler": "^2.6.12",
-    "postcss": ">=8.2.10"
+    "postcss": ">=8.2.10",
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,

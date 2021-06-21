@@ -50,7 +50,7 @@ insert into app_user (id, username, full_name, email, phone, web_site, bio, birt
 -- maja
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 104, 2, false, false, true, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 102, 2, false, false, false, false);
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 103, 0, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 103, 2, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 106, 3, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 205, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 204, 1, false, false, false, false);
@@ -58,9 +58,9 @@ insert into user_relation (user_id, related_user_id, relation_status, mute_post,
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (101, 302, 1, false, false, false, false);
 
 -- tasa
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 101, 1, false, false, false, false);
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 103, 1, false, false, false, false);
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 104, 1, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 101, 2, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 103, 2, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 104, 2, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 108, 0, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 109, 3, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (102, 201, 1, false, false, false, false);
@@ -72,10 +72,11 @@ insert into user_relation (user_id, related_user_id, relation_status, mute_post,
 
 -- masa
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 101, 2, false, false, false, false);
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 102, 1, false, false, false, false);
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 104, 1, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 102, 2, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 104, 2, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 105, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 107, 0, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 108, 0, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 205, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 206, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (103, 207, 1, false, false, false, false);
@@ -86,7 +87,7 @@ insert into user_relation (user_id, related_user_id, relation_status, mute_post,
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 101, 2, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 102, 2, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 103, 2, false, false, false, false);
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 108, 1, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 108, 0, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 109, 0, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 110, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (104, 201, 1, false, false, false, false);
@@ -112,7 +113,7 @@ insert into user_relation (user_id, related_user_id, relation_status, mute_post,
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (106, 105, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (106, 106, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (106, 107, 1, false, false, false, false);
-insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (106, 108, 1, false, false, false, false);
+insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (106, 108, 0, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (106, 250, 1, false, false, false, false);
 insert into user_relation (user_id, related_user_id, relation_status, mute_post, mute_story, notify_post, notify_story) values (106, 251, 1, false, false, false, false);
 

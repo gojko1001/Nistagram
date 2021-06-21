@@ -45,6 +45,13 @@ public class UserRelationController {
         return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowings(username));
     }
 
+    @GetMapping("/requests")
+    public List<UserDto> getFollowRequests(@RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Get pending users.", username);
+        return UserMapper.mapUserListToUserDtoList(relationService.getUserRequests(username));
+    }
+
     @GetMapping("/blocked/{username}")
     public List<UserDto> getBlockedUsers(@PathVariable String username){
         Logger.info("Get blocked users.", username);
