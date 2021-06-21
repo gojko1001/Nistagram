@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -280,6 +281,13 @@ public class PostService implements IPostService {
     public List<ImageBytesDto> getAllPosts(){
         List<Post> allPosts = findAll();
         return getImagesFiles(allPosts);
+    }
+
+    @Override
+    public ImageByte getBytes(Long mediaId){
+        Post post = postRepository.findPostByMedia_Id(mediaId);
+        ImageBytesDto imageBytesDto = getImageFile(post);
+        return imageBytesDto.getImageBytes().get(0);
     }
 
 }

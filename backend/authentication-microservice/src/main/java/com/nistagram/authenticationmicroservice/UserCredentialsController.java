@@ -35,7 +35,7 @@ public class UserCredentialsController {
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
         Logger.info("Try to login.", userReg.getUsername());
         UserCredentials credentials = userCredentialsService.login(userReg.getUsername(), userReg.getPassword());
-        String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getRoles().get(1)*/);
+        String jwt = jwtService.createToken(credentials.getUsername(), credentials.getRoles().get(0));
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 
@@ -43,7 +43,7 @@ public class UserCredentialsController {
     public ResponseEntity<String> loginGoogle(@RequestBody LoginGoogleDto loginGoogleDto) throws IOException {
         Logger.info("Try to login with google.", loginGoogleDto.getEmail());
         UserCredentials credentials = userCredentialsService.loginGoogle(loginGoogleDto);
-        String jwt = jwtService.createToken(credentials.getUsername()/*, credentials.getRoles().get(1)*/);
+        String jwt = jwtService.createToken(credentials.getUsername(), credentials.getRoles().get(0));
         return new ResponseEntity<>(jwt, HttpStatus.OK);
     }
 
@@ -68,8 +68,8 @@ public class UserCredentialsController {
     }
 
     @PreAuthorize("hasAuthority('CHANGE_USERNAME')")
-    @PutMapping("/change_username")
-    public void changeUsername(@RequestBody String newUsername,
+    @PutMapping("/change_username/{newUsername}")
+    public void changeUsername(@PathVariable String newUsername,
                                @RequestHeader("Authorization") String jwt){
         String username = jwtService.extractUsername(jwt.substring(7));
         if(username == null)

@@ -7,7 +7,7 @@
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
             <h4 @click="goToProfile(img.username)" class="clickable">@{{img.username}}</h4>
-            <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+            <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
             <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
               <i class="fa fa-ban fa-fw"></i>
             </button>
@@ -26,7 +26,7 @@
               </span>
             </div>
 
-            <br>
+            <br><br>
             <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>
@@ -65,6 +65,7 @@
 <script>
 import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
 import { getUsernameFromToken, getToken } from '../util/token';
+
 export default {
   name: 'Discover',
   data(){
@@ -92,6 +93,9 @@ export default {
               requestedBy: '',
               mediaId:''
             },
+            received_messages: [],
+            connected: false,
+            notify:[]
         }
     },
   mounted: function(){
@@ -166,7 +170,8 @@ export default {
         if(this.formLike.username != null){
           this.axios.post('/media-api/like', this.formLike)
           .then(response => { console.log(response.data);
-                              this.makeToast("Liked !!!", "success");
+                              this.makeToast("New reaction on post.", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -183,6 +188,7 @@ export default {
           this.axios.post('/media-api/inappropriate', this.report)
           .then(response => { console.log(response.data);
                               this.makeToast("Reported !!!", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -190,7 +196,7 @@ export default {
         }else{
           this.makeToast("Please log in.", "info");
         }
-      }
+      },
     }
 }
 </script>

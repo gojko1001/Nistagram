@@ -1,9 +1,8 @@
 package com.nistagram.usermicroservice.verify_account.service;
 
-import com.nistagram.usermicroservice.domain.User;
-import com.nistagram.usermicroservice.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.user.domain.User;
+import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import com.nistagram.usermicroservice.verify_account.controller.dto.ShowVerifyRequestDto;
-import com.nistagram.usermicroservice.verify_account.controller.dto.VerifyRequestDto;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationRequest;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
 import com.nistagram.usermicroservice.verify_account.repository.VerificationRequestRepository;

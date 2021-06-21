@@ -41,7 +41,7 @@ insert into media_hashtags (media_id, hashtags_id) values (2, 8);
 --Maja's posts
 -- 3
 insert into media_name(file_name, is_image) values ("spongebob1.jpg", true);
-insert into media (description, username, location_id, timestamp) values ("Ko zivi u ananusu na dnu mora?", "maja", 7, "2021-06-02");
+insert into media (description, username, location_id, timestamp) values ("Ko zivi u ananasu na dnu mora?", "maja", 7, "2021-06-02");
 insert into media_media_name(media_id, media_name_id) values (3, 3);
 insert into post (media_id) values (3);
 insert into media_hashtags (media_id, hashtags_id) values (3, 9);
@@ -215,11 +215,6 @@ insert into collection_favourites (collection_id, favourites_id) values (6, 13);
 ---
 
 -- Inappropriate content
-
-insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "gojko","nikola", 1);
-insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "masa","nikola", 2);
-insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "tasa","nikola", 3);
-insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "tasa","nikola", 4);
 insert into inappropriate_content(request_status, requested_by,media_id) values(0, "gojko", 2);
 insert into inappropriate_content(request_status, requested_by, media_id) values(0, "tasa", 2);
 insert into inappropriate_content(request_status, requested_by, media_id) values(0, "gojko", 4);

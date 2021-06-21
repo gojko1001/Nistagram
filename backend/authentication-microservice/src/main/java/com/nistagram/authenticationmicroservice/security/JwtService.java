@@ -1,5 +1,6 @@
 package com.nistagram.authenticationmicroservice.security;
 
+import com.nistagram.authenticationmicroservice.domain.Role;
 import com.nistagram.authenticationmicroservice.logger.Logger;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -35,15 +36,24 @@ public class JwtService {
         return null;
     }
 
-
-    public String createToken(String username/*, Role role*/) {
+    public String createToken(String username) {
         Logger.info("Try to create token for user.", username);
         return Jwts.builder()
                 .setIssuer(APP_NAME)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_PERIOD))
-                //.claim("role", role)
+                .signWith(SignatureAlgorithm.HS256, KEY).compact();
+    }
+
+    public String createToken(String username, Role role) {
+        Logger.info("Try to create token for user.", username);
+        return Jwts.builder()
+                .setIssuer(APP_NAME)
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_PERIOD))
+                .claim("role", role.getName())
                 .signWith(SignatureAlgorithm.HS256, KEY).compact();
     }
 

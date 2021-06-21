@@ -37,10 +37,16 @@
                             Story notifications
                         </b-form-checkbox></b-dropdown-text>
                     <b-dropdown-item-button @click="unfollowUser(username)" variant="danger">Unfollow</b-dropdown-item-button>
+                    <b-dropdown-item-button @click="blockUser(username)" variant="danger">Block</b-dropdown-item-button>
                   </b-dropdown>
                   <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'PENDING'" variant="outline-primary" @click="unfollowUser(username)">Pending</b-btn>
-                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'NOT_FOLLOWING'" variant="primary" @click="followUser()">Follow</b-btn><hr>
+                  <b-btn class="w-75 mx-3" v-if="!isUserProfile && userRelation.status == 'BLOCKED'" variant="outline-primary" @click="unfollowUser(username)">Unblock</b-btn>
+                  <b-dd text="Follow" class="w-75 mx-2" variant="primary" split @click="followUser()" v-if="!isUserProfile && userRelation.status == 'NOT_FOLLOWING'">
+                    <b-dd-item-btn @click="blockUser(username)" variant="danger">Block</b-dd-item-btn>
+                  </b-dd>
+                  <hr>
             </span>
+            <!-- Followings and followers -->
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
                 <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn" >
@@ -74,13 +80,14 @@
         </div>
         <i class="fas fa-photo-video"></i>
         <div class="vl"></div>
-        <div v-if="isUserProfile || isFollowing || user.publicProfile" id="userMedia">
+        <div v-if="isUserProfile || isFollowing || (user.publicProfile && userRelation.status != 'BLOCKED')" id="userMedia">
             <div id="stories">
                 <b-button v-b-modal.modal-2 style="font-size:20px;" @click="getStories()">@{{user.username}}'s stories <i class="fas fa-camera-retro fa-lg" style="margin-left:15px"></i></b-button>
                 <b-button v-b-modal.modal-3 style="font-size:20px;margin-left:20px" @click="getHighlightedStories()">highlighted stories <i class="fas fa-highlighter fa-lg" style="margin-left:15px"></i></b-button>
                 <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
-                     <div v-for="(img,p) in stories" :key="p">
+                    <div v-for="(img,p) in stories" :key="p">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
@@ -106,17 +113,20 @@
                                         #{{tag.name}}
                                     </span>
                                 </b-card-text>
-                            </b-card>              
+                            </b-card>
                         </div>
+                                          
+                    </div>
                 </b-modal>
                 <!-- Highlighted stories -->
                 <b-modal id="modal-3" title="Highlighted stories">
-                     <div v-for="(img,p) in stories" :key="p">
+                    <div v-for="(img,p) in stories" :key="p">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
-                                <h4>@{{img.username}}</h4>
+                                <h4>@{{img.username}}</h4> <i v-if="img.forCloseFriends" class="fas fa-star fa-lg" style="color: #00cc00;"></i>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
@@ -134,8 +144,9 @@
                                         #{{tag.name}}
                                     </span>
                                 </b-card-text>
-                            </b-card>              
-                        </div>
+                            </b-card>
+                        </div>             
+                    </div>
                 </b-modal>
             </div>
             <br>
@@ -149,7 +160,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -167,7 +178,7 @@
                                     </span>
                                 </div>
 
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -206,7 +217,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'C'+q">
@@ -220,7 +231,7 @@
                                         <i class="fas fa-user-tag"></i> {{tag.username}}
                                     </span>
                                 </div>
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -259,7 +270,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">Reacted on <br>{{img.date | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">Reacted on <br>{{img.date | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -275,7 +286,7 @@
                                         <i class="fas fa-user-tag"></i> {{tag.username}}
                                     </span>
                                 </div>
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -311,8 +322,8 @@
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
-                                <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h4>@{{img.username}}</h4> <i v-if="img.forCloseFriends" class="fas fa-star fa-lg" style="color: #00cc00;"></i>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -341,7 +352,7 @@
                 </b-tabs>
             </div>
         </div>
-        <div v-if="!isUserProfile && !isFollowing && !user.publicProfile" id="locked">
+        <div v-if="!isUserProfile && !isFollowing && !user.publicProfile || userRelation.status == 'BLOCKED'" id="locked">
             <img src="../assets/locker.png" class="lockedImg" alt="Profile is private">
             <h3>Profile is private</h3>
         </div>
@@ -352,8 +363,8 @@
 
 
 <script>
-import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH } from '../util/constants';
-import { getToken, getUsernameFromToken } from '../util/token';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH, BLOCK_USER_PATH } from '../util/constants';
+import { getToken, getUsernameFromToken, removeToken } from '../util/token';
 export default {
     name: 'Profile',
     data(){
@@ -425,20 +436,34 @@ export default {
                 liked: false,
                 disliked: false,
                 date:''
-            }]
+            }],
+            isCloseFriend: false
         }
     },
-    mounted: function(){
-        this.isUserProfile = this.username == getUsernameFromToken();
+    beforeMount(){
+        if(getUsernameFromToken() == null){
+            removeToken();
+        }
+        this.isUserProfile = this.username == getUsernameFromToken();   // TODO: Make method awaitable
         if(!this.isUserProfile)
-            this.axios.get(USER_RELATION_PATH + "/" + this.username, {  headers:{
+            this.axios.get(USER_RELATION_PATH +  '/' + this.username + "/" + getUsernameFromToken(), {  headers:{
+                                                                                Authorization: "Bearer " + getToken(),
+                                                                            }   
+                    
+                }).then(response => {
+                                        if(response.data.status == 'BLOCKED')
+                                            window.location.href = "/not-found";
+                });
+    },
+    mounted: function(){
+        if(!this.isUserProfile)
+            this.axios.get(USER_RELATION_PATH + "/" + getUsernameFromToken() + '/' + this.username, {  headers:{
                                                                             Authorization: "Bearer " + getToken(),
                                                                         }   
                 
             }).then(response => {
                                 this.userRelation = response.data
-                                if(response.data.status == "FOLLOWING" || response.data.status == "MUTED" ||
-                                    response.data.status == "CLOSE_FRIEND")
+                                if(response.data.status == "FOLLOWING" || response.data.status == "CLOSE_FRIEND")
                                     this.isFollowing = true;
             })
         this.axios.get(USER_PATH + '/' + this.username, {   headers:{
@@ -464,8 +489,13 @@ export default {
                             this.numFollowing = response.data.length;
                             this.followings = response.data.reverse();    
                         })
-        
-        
+        this.axios.get(USER_RELATION_PATH + "/" + this.username + '/' + getUsernameFromToken(), {  headers:{
+                                                                            Authorization: "Bearer " + getToken(),
+                                                                        }   
+            }).then(response => {
+                                if(response.data.status == "CLOSE_FRIEND")
+                                    this.isCloseFriend = true;
+            })
     },
     methods:{
         makeToast(message, variant) {
@@ -492,6 +522,7 @@ export default {
           this.axios.post('/media-api/inappropriate', this.report)
           .then(response => { console.log(response.data);
                               this.makeToast("Reported !!!", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -507,7 +538,8 @@ export default {
             this.formLike.liked = liked;
             this.axios.post('/media-api/like', this.formLike)
             .then(response => { console.log(response.data);
-                                this.makeToast("Liked !!!", "success");
+                                this.makeToast("New reaction on post.", "success");
+                                setTimeout(()=>{ window.location.reload() }, 2000);
                                 })
             .catch(error => { console.log(error);
                                 this.makeToast("Error occured.", "danger");
@@ -551,7 +583,7 @@ export default {
         getStories(){
             this.axios.get('/media-api/story/profile/' + this.username)
                         .then(response => { this.stories = response.data;
-                                            for(let i=0; i< response.data.length; i++){
+                                            for(let i=0; i< this.stories.length; i++){
                                                 for(let j=0; j< this.stories[i].imageBytes.length; j++){
                                                     if(this.stories[i].imageBytes[j].image){
                                                         this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
@@ -567,14 +599,17 @@ export default {
         getArchivedStories(){
             this.axios.get('/media-api/story/archive/' + this.username)
                         .then(response => { this.archivedStories = response.data;
-                                            for(let i=0; i< response.data.length; i++){
-                                                for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
-                                                    if(this.archivedStories[i].imageBytes[j].image){
-                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
-                                                    }else{
-                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
-                                                    } 
+                                            for(let i=0; i< this.archivedStories.length; i++){
+                                                if((this.archivedStories[i].forCloseFriends && this.isCloseFriend) || !this.archivedStories[i].forCloseFriends){
+                                                    for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
+                                                        if(this.archivedStories[i].imageBytes[j].image){
+                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
+                                                        }else{
+                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
+                                                        } 
+                                                    }
                                                 }
+                                                
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
@@ -583,12 +618,14 @@ export default {
         getHighlightedStories(){
             this.axios.get('/media-api/story/highlights/' + this.username)
                         .then(response => { this.stories = response.data;
-                                            for(let i=0; i< response.data.length; i++){
-                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
-                                                    if(this.stories[i].imageBytes[j].image){
-                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
-                                                    }else{
-                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                            for(let i=0; i< this.stories.length; i++){
+                                                if((this.stories[i].forCloseFriends && this.isCloseFriend) || !this.stories[i].forCloseFriends){
+                                                    for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                        if(this.stories[i].imageBytes[j].image){
+                                                            this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                        }else{
+                                                            this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
+                                                        }
                                                     }
                                                 }
                                             }     
@@ -599,7 +636,8 @@ export default {
         highlightStory(storyId){
             this.axios.post('/media-api/story/highlight/' + storyId)
                         .then(response => { console.log(response.data); 
-                                            this.makeToast(response.data, "success");                
+                                            this.makeToast(response.data, "success"); 
+                                            setTimeout(()=>{ window.location.reload() }, 2000);               
                         }).catch(error => { console.log(error.message);
                                             this.makeToast(error.message, "danger");
                 });
@@ -719,6 +757,22 @@ export default {
                             this.makeToast("Couldn't update relation status!", "danger");
                     })
         },
+
+        blockUser(toBlock){
+            this.axios.put(BLOCK_USER_PATH + "/" + toBlock, null,{   
+                                                            headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            } 
+                    }).then(() => {
+                        this.makeToast("User blocked!", "success");
+                        window.location.reload();
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Couldn't update relation status!", "danger");
+                    })
+        }, 
 
         mutePost(){
             this.axios.put(MUTE_POST_PATH + "/" + this.username + "/" + this.userRelation.mutePost, null, {   

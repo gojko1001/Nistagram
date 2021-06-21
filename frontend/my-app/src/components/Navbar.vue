@@ -30,13 +30,13 @@
                   <i class="fas fa-globe"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null&& isAdmin ==false">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
                 <button class="nav-btn">
                   <i class="fas fa-envelope"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null&& isAdmin ==false">
-                <button class="heart nav-btn">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+                <button class="heart nav-btn" @click="notificationPage">
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
@@ -55,7 +55,7 @@
                   <i class="fas fa-user-secret"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null&& isAdmin ==false">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
                 <button class="nav-btn" @click='myProfile'>
                   <i class="fas fa-user"></i>
                 </button>
@@ -73,8 +73,7 @@
 
 
 <script>
-import { SERVER_NOT_RESPONDING, USER_CREDENTIALS_PATH } from '../util/constants';
-import { getUsernameFromToken, removeToken } from '../util/token';
+import { getRoleFromToken, getUsernameFromToken, removeToken } from '../util/token';
 export default {
   name: 'Navbar',
   data() {
@@ -85,25 +84,12 @@ export default {
           { item: 'tag', name: 'Tags' },
           { item: 'location', name: 'Locations' },
         ],
-        username:'',
+        username: getUsernameFromToken(),
         searchInput:'',
-        isAdmin: true,
+        role: getRoleFromToken(),
       }
   },
-  mounted: function(){
-    this.username = getUsernameFromToken();
-      if(this.username != null){
-        this.axios.get(USER_CREDENTIALS_PATH + '/isAdmin/' + this.username).then(response => {
-                                this.isAdmin = response.data;
-                                console.log(response.data);
-            }).catch(error => { if(!error.response) {
-                                    this.makeToast(SERVER_NOT_RESPONDING, "warning");
-                                    return
-                                }
-            })
-    }
-    
-  },
+
   methods:{
     myProfile:function(){
       window.location.href = "/user/" + this.username;
@@ -117,6 +103,9 @@ export default {
     },
     discoverPage:function(){
       window.location.href = "/discover";
+    },
+    notificationPage:function(){
+      window.location.href = "/notification";
     },
     search: function() {
       localStorage.setItem("name", this.selected);

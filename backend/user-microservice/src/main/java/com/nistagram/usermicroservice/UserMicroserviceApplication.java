@@ -12,10 +12,10 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients
 public class UserMicroserviceApplication {
 
-	@Bean
-	public RestTemplate getRestTemplate(){
-		return new RestTemplate();
-	}
+//	@Bean
+//	public RestTemplate getRestTemplate(){
+//		return new RestTemplate();
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserMicroserviceApplication.class, args);

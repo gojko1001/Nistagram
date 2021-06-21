@@ -25,7 +25,7 @@ public class UserTagService implements IUserTagService {
 
     @Override
     public List<String> getUserTagsByUsername(String username){
-        List<String> publicUsernames = userConnection.getPublicUsers();
+        List<String> publicUsernames = userConnection.getPublicTaggableUsers();
         List<UserDto> followingUsernames = userConnection.getFollowings(username);
         List<String> userTags = new ArrayList<>();
         if(publicUsernames != null){
@@ -35,7 +35,7 @@ public class UserTagService implements IUserTagService {
         }
         if(followingUsernames != null){
             for(UserDto fu : followingUsernames){
-                if(!userTags.contains(fu.getUsername())){
+                if(!userTags.contains(fu.getUsername()) && fu.isTaggable()){
                     userTags.add(fu.getUsername());
                 }
             }
