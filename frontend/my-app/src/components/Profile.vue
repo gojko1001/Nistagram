@@ -492,6 +492,7 @@ export default {
           this.axios.post('/media-api/inappropriate', this.report)
           .then(response => { console.log(response.data);
                               this.makeToast("Reported !!!", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -507,7 +508,8 @@ export default {
             this.formLike.liked = liked;
             this.axios.post('/media-api/like', this.formLike)
             .then(response => { console.log(response.data);
-                                this.makeToast("Liked !!!", "success");
+                                this.makeToast("New reaction on post.", "success");
+                                setTimeout(()=>{ window.location.reload() }, 2000);
                                 })
             .catch(error => { console.log(error);
                                 this.makeToast("Error occured.", "danger");
@@ -599,7 +601,8 @@ export default {
         highlightStory(storyId){
             this.axios.post('/media-api/story/highlight/' + storyId)
                         .then(response => { console.log(response.data); 
-                                            this.makeToast(response.data, "success");                
+                                            this.makeToast(response.data, "success"); 
+                                            setTimeout(()=>{ window.location.reload() }, 2000);               
                         }).catch(error => { console.log(error.message);
                                             this.makeToast(error.message, "danger");
                 });
