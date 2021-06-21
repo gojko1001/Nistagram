@@ -88,11 +88,7 @@ export default {
                               this.makeToast("User has been logged in successfully.", "success");
                               saveToken(response.data);
                               this.checkIsAdmin();
-                              if(this.isAdmin){
-                                window.location.href = "/inappropriate_content";
-                              }else{
-                                window.location.href = "/discover";
-                              }
+                              window.location.href = "/discover";
                             })
           .catch(error => { console.log(error);
                             if(!error.response)
@@ -107,6 +103,9 @@ export default {
       if(this.username != null){
         this.axios.get(USER_CREDENTIALS_PATH + '/isAdmin/' + this.username).then(response => {
                                 this.isAdmin = response.data;
+                                if(this.isAdmin){
+                                  window.location.href = "/inappropriate_content";
+                                }
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
                                     return
