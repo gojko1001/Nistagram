@@ -9,4 +9,6 @@ public interface IRoleService {
     List<Role> findById(Long id);
 
     List<Role> findByName(String name);
+
+    boolean isAdmin(String username);
 }

@@ -9,6 +9,7 @@ import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.security.JwtService;
 import com.nistagram.authenticationmicroservice.service.EmailService;
 import com.nistagram.authenticationmicroservice.service.IUserCredentialsService;
+import com.nistagram.authenticationmicroservice.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/userCredentials")
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserCredentialsController {
     @Autowired
     private IUserCredentialsService userCredentialsService;
@@ -27,6 +28,8 @@ public class UserCredentialsController {
     private JwtService jwtService;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private RoleService roleService;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentialsDto userReg) throws IOException {
@@ -86,5 +89,10 @@ public class UserCredentialsController {
         Logger.info("Verify user.", jwt);
         return userCredentialsService.verifyAccount(jwt);
 
+    }
+
+    @GetMapping("/isAdmin/{username}")
+    public boolean isAdmin(@PathVariable String username){
+        return roleService.isAdmin(username);
     }
 }

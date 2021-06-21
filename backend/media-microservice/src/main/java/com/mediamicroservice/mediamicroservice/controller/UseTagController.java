@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usertag")
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UseTagController {
     @Autowired
     private IUserTagService userTagService;

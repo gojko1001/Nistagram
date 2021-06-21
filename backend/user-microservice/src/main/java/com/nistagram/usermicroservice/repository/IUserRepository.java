@@ -19,8 +19,8 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
 
-    @Query(value = "select u from User u where lower(u.username) like concat('%', lower(:username), '%' ) " +
-            "and u.publicProfile = true")
+    @Query(value = "select distinct u from User u where lower(u.username) like concat('%', lower(:username), '%' ) " +
+            "or lower(u.fullName) like concat('%', lower(:username), '%' ) ")
     List<User> search(String username);
 
     List<User> findByVerificationRequest_Status(VerificationStatus status);

@@ -1,4 +1,4 @@
-const fs = require('fs')
+//const fs = require('fs')
 module.exports = {
     "runtimeCompiler": true,
     chainWebpack: config => {
@@ -12,17 +12,17 @@ module.exports = {
     devServer: {
       proxy: {
         '^/api': {
-          target: 'https://localhost:8762',
+          target: 'http://localhost:8762',
           ws: true,
          
           changeOrigin: true
         }
       },
-      https: {
-        key: fs.readFileSync('src/certs/421623108.pem'),
-        cert: fs.readFileSync('src/certs/421623108.cer'),
-      },
-      public: 'https://localhost:3000/'
+      // https: {
+      //   key: fs.readFileSync('src/certs/421623108.pem'),
+      //   cert: fs.readFileSync('src/certs/421623108.cer'),
+      // },
+      public: 'http://localhost:3000/'
     },
     outputDir: '../../../target/front/public',
 

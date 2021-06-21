@@ -8,7 +8,6 @@
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
-                  <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
                   <b-dropdown id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
                     <b-dropdown-text><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
                         value="CLOSE_FRIEND"
@@ -198,7 +197,7 @@
                         </div>
                     </b-tab>
                     <!-- Collections -->
-                    <b-tab title="Collections" @click="getCollections()">
+                    <b-tab v-if="isUserProfile" title="Collections" @click="getCollections()">
                         <div v-for="(coll,c) in collections" :key="c">
                             <p style="font-size:30px">{{coll.name}}:</p>
                             <div v-for="(img,i) in coll.favourites" :key="i">
@@ -253,7 +252,7 @@
                         </div>
                     </b-tab>
                     <!-- Liked posts -->
-                    <b-tab title="Liked posts" @click="historyOfLikedPosts()">
+                    <b-tab v-if="isUserProfile" title="Liked posts" @click="historyOfLikedPosts()">
                         <div v-for="(img,u) in history" :key="u">
                             <b-card
                                 tag="article"
@@ -306,7 +305,7 @@
                         </div>
                     </b-tab>
                     <!-- Story archived -->
-                    <b-tab title="Story archive" @click="getArchivedStories()">
+                    <b-tab v-if="isUserProfile" title="Story archive" @click="getArchivedStories()">
                         <div v-for="(img,j) in archivedStories" :key="j">
                             <b-card
                                 tag="article"
