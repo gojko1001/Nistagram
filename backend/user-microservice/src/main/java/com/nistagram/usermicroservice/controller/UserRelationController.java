@@ -25,10 +25,8 @@ public class UserRelationController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @GetMapping("/{relatedUsername}")
-    public UserRelationDto getUserRelation(@PathVariable String relatedUsername,
-                                           @RequestHeader("Authorization") String jwt) {
-        String username = getUsernameFromToken(jwt);
+    @GetMapping("/{username}/{relatedUsername}")
+    public UserRelationDto getUserRelation(@PathVariable String username, @PathVariable String relatedUsername) {
         UserRelation relation = relationService.findRelation(username, relatedUsername);
         if(relation == null)
             throw new NotFoundException("No relation found!");

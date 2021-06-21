@@ -111,7 +111,7 @@
       <!-- Block list -->
       <b-tab title="Block list"><b-card-text><h1>Blocked users</h1></b-card-text>
         <div v-for="(user,p) in blockedUsers" :key="p">
-            <span class="clickable">@{{user.username}} </span>
+            <span class="clickable" v-on:click="goToProfile(user.username)">@{{user.username}} </span>
             <b-btn size="sm" variant="outline-info" class="float-right" @click="unBlock(user.username)">Unblock</b-btn><hr>
         </div>
       </b-tab>
@@ -231,6 +231,9 @@ export default {
                             else
                               this.makeToast("Error while updating.", "danger");
                             })
+      },
+      goToProfile(username){
+        window.location.href="/user/" + username;
       },
       unBlock(toUnblock){
         this.axios.delete(DELETE_RELATION_PATH + "/" + toUnblock,{   headers:{

@@ -24,6 +24,7 @@ import AddComment from './components/AddComment'
 import Messanger from './components/Messanger'
 import VerificationRequest from './components/VerificationRequest'
 import AllVerificationRequest from './components/AllVerificationRequest'
+import NotFoundPage from './components/NotFoundPage'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -124,6 +125,10 @@ const router = new VueRouter({
       path: '/all_requests',
       name: 'AllVerificationRequest',
       component: AllVerificationRequest
+    },
+    {
+      path: "*",
+      component: NotFoundPage
     }
   ]
 });
