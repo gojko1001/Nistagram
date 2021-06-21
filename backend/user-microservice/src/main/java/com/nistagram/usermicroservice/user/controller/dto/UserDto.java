@@ -1,6 +1,6 @@
-package com.nistagram.usermicroservice.controller.dto;
+package com.nistagram.usermicroservice.user.controller.dto;
 
-import com.nistagram.usermicroservice.domain.enums.Gender;
+import com.nistagram.usermicroservice.user.domain.enums.Gender;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
 import lombok.Data;
 

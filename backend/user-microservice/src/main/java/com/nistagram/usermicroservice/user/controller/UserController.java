@@ -1,12 +1,12 @@
-package com.nistagram.usermicroservice.controller;
+package com.nistagram.usermicroservice.user.controller;
 
-import com.nistagram.usermicroservice.controller.dto.UserDto;
-import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.controller.exception.UnauthorizedException;
-import com.nistagram.usermicroservice.controller.mapper.UserMapper;
+import com.nistagram.usermicroservice.user.controller.dto.UserDto;
+import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.user.controller.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.logger.Logger;
-import com.nistagram.usermicroservice.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

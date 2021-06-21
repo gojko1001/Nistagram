@@ -1,6 +1,6 @@
-package com.nistagram.usermicroservice.controller.dto;
+package com.nistagram.usermicroservice.user.controller.dto;
 
-import com.nistagram.usermicroservice.domain.enums.RelationStatus;
+import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 import lombok.Data;
 
 @Data
