@@ -1,229 +1,170 @@
-2021-06-21 09:37:59,730 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3036 (http)
-2021-06-21 09:37:59,759 [INFO] org.apache.catalina.core.StandardService [main] Starting service [Tomcat]
-2021-06-21 09:37:59,759 [INFO] org.apache.catalina.core.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/9.0.19]
-2021-06-21 09:37:59,901 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [main] Initializing Spring embedded WebApplicationContext
-2021-06-21 09:37:59,901 [DEBUG] org.springframework.web.context.ContextLoader [main] Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
-2021-06-21 09:37:59,902 [INFO] org.springframework.web.context.ContextLoader [main] Root WebApplicationContext: initialization completed in 1241 ms
-2021-06-21 09:37:59,942 [DEBUG] org.springframework.web.filter.CorsFilter [main] Filter 'corsFilter' configured for use
-2021-06-21 09:38:00,077 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
-2021-06-21 09:38:00,432 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
-2021-06-21 09:38:00,479 [INFO] org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-2021-06-21 09:38:00,541 [INFO] org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.10.Final}
-2021-06-21 09:38:00,543 [INFO] org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
-2021-06-21 09:38:00,684 [INFO] org.hibernate.annotations.common.Version [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
-2021-06-21 09:38:00,807 [INFO] org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2021-06-21 09:38:01,544 [INFO] org.hibernate.tool.schema.internal.SchemaCreatorImpl [main] HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@53982523'
-2021-06-21 09:38:01,548 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-06-21 09:38:01,692 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'clientInboundChannelExecutor'
-2021-06-21 09:38:01,697 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
-2021-06-21 09:38:02,038 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
-2021-06-21 09:38:02,068 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [main] Patterns [/socket/**] in 'stompWebSocketHandlerMapping'
-2021-06-21 09:38:02,073 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'brokerChannelExecutor'
-2021-06-21 09:38:02,109 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [main] 1 message handler methods found on class com.nistagram.notificationmicroservice.controller.WebSocketController: {public java.lang.String com.nistagram.notificationmicroservice.controller.WebSocketController.onSubscribe()={[/topic/server-broadcaster],messageType=[SUBSCRIBE]}}
-2021-06-21 09:38:02,111 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [main] 0 message handler methods found on class org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController: {}
-2021-06-21 09:38:02,153 [WARN] com.netflix.config.sources.URLConfigurationSource [main] No URLs will be polled as dynamic configuration sources.
-2021-06-21 09:38:02,153 [INFO] com.netflix.config.sources.URLConfigurationSource [main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-21 09:38:02,158 [WARN] com.netflix.config.sources.URLConfigurationSource [main] No URLs will be polled as dynamic configuration sources.
-2021-06-21 09:38:02,158 [INFO] com.netflix.config.sources.URLConfigurationSource [main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-21 09:38:02,194 [DEBUG] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/**/favicon.ico] in 'faviconHandlerMapping'
-2021-06-21 09:38:02,255 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2021-06-21 09:38:02,294 [WARN] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-06-21 09:38:02,322 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [main] 2 mappings in 'requestMappingHandlerMapping'
-2021-06-21 09:38:02,335 [DEBUG] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2021-06-21 09:38:02,346 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver [main] ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2021-06-21 09:38:03,184 [INFO] org.springframework.cloud.netflix.eureka.InstanceInfoFactory [main] Setting initial instance status as: STARTING
-2021-06-21 09:38:03,225 [INFO] com.netflix.discovery.DiscoveryClient [main] Initializing Eureka in region us-east-1
-2021-06-21 09:38:03,344 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using JSON encoding codec LegacyJacksonJson
-2021-06-21 09:38:03,344 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using JSON decoding codec LegacyJacksonJson
-2021-06-21 09:38:03,455 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using XML encoding codec XStreamXml
-2021-06-21 09:38:03,456 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using XML decoding codec XStreamXml
-2021-06-21 09:38:03,613 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [main] Resolving eureka endpoints via configuration
-2021-06-21 09:38:03,754 [INFO] com.netflix.discovery.DiscoveryClient [main] Disable delta property : false
-2021-06-21 09:38:03,754 [INFO] com.netflix.discovery.DiscoveryClient [main] Single vip registry refresh property : null
-2021-06-21 09:38:03,754 [INFO] com.netflix.discovery.DiscoveryClient [main] Force full registry fetch : false
-2021-06-21 09:38:03,754 [INFO] com.netflix.discovery.DiscoveryClient [main] Application is null : false
-2021-06-21 09:38:03,754 [INFO] com.netflix.discovery.DiscoveryClient [main] Registered Applications size is zero : true
-2021-06-21 09:38:03,754 [INFO] com.netflix.discovery.DiscoveryClient [main] Application version is -1: true
-2021-06-21 09:38:03,754 [INFO] com.netflix.discovery.DiscoveryClient [main] Getting all instance registry info from the eureka server
-2021-06-21 09:38:03,901 [INFO] com.netflix.discovery.DiscoveryClient [main] The response status is 200
-2021-06-21 09:38:03,904 [INFO] com.netflix.discovery.DiscoveryClient [main] Starting heartbeat executor: renew interval is: 30
-2021-06-21 09:38:03,906 [INFO] com.netflix.discovery.InstanceInfoReplicator [main] InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-06-21 09:38:03,910 [INFO] com.netflix.discovery.DiscoveryClient [main] Discovery Client initialized at timestamp 1624261083909 with initial instances count: 5
-2021-06-21 09:38:03,912 [INFO] org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry [main] Registering application NOTIFICATION-MICROSERVICE with eureka with status UP
-2021-06-21 09:38:03,912 [INFO] com.netflix.discovery.DiscoveryClient [main] Saw local status change event StatusChangeEvent [timestamp=1624261083912, current=UP, previous=STARTING]
-2021-06-21 09:38:03,914 [INFO] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036: registering service...
-2021-06-21 09:38:03,915 [DEBUG] org.springframework.web.SimpLogging [main] clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2021-06-21 09:38:03,915 [DEBUG] org.springframework.web.SimpLogging [main] clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[]]
-2021-06-21 09:38:03,915 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [main] Starting...
-2021-06-21 09:38:03,916 [DEBUG] org.springframework.web.SimpLogging [main] clientInboundChannel added SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
-2021-06-21 09:38:03,916 [DEBUG] org.springframework.web.SimpLogging [main] brokerChannel added SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
-2021-06-21 09:38:03,916 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
-2021-06-21 09:38:03,916 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [main] Started.
-2021-06-21 09:38:03,916 [DEBUG] org.springframework.web.SimpLogging [main] clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2021-06-21 09:38:03,916 [DEBUG] org.springframework.web.SimpLogging [main] brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2021-06-21 09:38:03,950 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3036 (http) with context path ''
-2021-06-21 09:38:03,951 [INFO] org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration [main] Updating port to 3036
-2021-06-21 09:38:03,952 [INFO] com.nistagram.notificationmicroservice.NotificationMicroserviceApplication [main] Started NotificationMicroserviceApplication in 6.631 seconds (JVM running for 7.48)
-2021-06-21 09:38:03,963 [INFO] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - registration status: 204
-2021-06-21 09:38:04,098 [INFO] com.netflix.config.ChainedDynamicProperty [MessageBroker-1] Flipping property: media-microservice.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
-2021-06-21 09:38:04,132 [INFO] com.netflix.util.concurrent.ShutdownEnabledTimer [MessageBroker-1] Shutdown hook installed for: NFLoadBalancer-PingTimer-media-microservice
-2021-06-21 09:38:04,132 [INFO] com.netflix.loadbalancer.BaseLoadBalancer [MessageBroker-1] Client: media-microservice instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=media-microservice,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
-2021-06-21 09:38:04,139 [INFO] com.netflix.loadbalancer.DynamicServerListLoadBalancer [MessageBroker-1] Using serverListUpdater PollingServerListUpdater
-2021-06-21 09:38:04,163 [INFO] com.netflix.config.ChainedDynamicProperty [MessageBroker-1] Flipping property: media-microservice.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
-2021-06-21 09:38:04,165 [INFO] com.netflix.loadbalancer.DynamicServerListLoadBalancer [MessageBroker-1] DynamicServerListLoadBalancer for client media-microservice initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=media-microservice,current list of Servers=[192.168.1.4:3033],Load balancer stats=Zone stats: {defaultzone=[Zone:defaultzone;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
-},Server stats: [[Server:192.168.1.4:3033;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 01:00:00 CET 1970;	First connection made: Thu Jan 01 01:00:00 CET 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
-]}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@55038ea8
-2021-06-21 09:38:04,406 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:38:05,145 [INFO] com.netflix.config.ChainedDynamicProperty [PollingServerListUpdater-0] Flipping property: media-microservice.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
-2021-06-21 09:38:14,126 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:38:24,119 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-3] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:38:34,093 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:38:44,106 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:38:54,110 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-5] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:39:02,073 [INFO] org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-3] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 8, active threads = 1, queued tasks = 1, completed tasks = 6]
-2021-06-21 09:39:04,108 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:39:14,111 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-6] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:39:24,117 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-7] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:39:34,257 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:39:44,153 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:39:54,107 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:40:04,135 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:40:14,108 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:40:24,110 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:40:34,112 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:40:44,112 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:40:54,116 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:41:04,109 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:41:14,113 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:41:24,155 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:41:34,143 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:41:44,113 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:41:54,113 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:42:04,145 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:42:14,101 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:42:24,097 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:42:34,094 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:42:44,112 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:42:54,171 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:43:03,763 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
-2021-06-21 09:43:04,119 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:43:14,134 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:43:24,107 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:43:34,105 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-8] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:43:47,696 [INFO] com.nistagram.notificationmicroservice.NotificationMicroserviceApplication [main] No active profile set, falling back to default profiles: default
-2021-06-21 09:43:48,148 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
-2021-06-21 09:43:48,212 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 57ms. Found 1 repository interfaces.
-2021-06-21 09:43:48,426 [INFO] org.springframework.cloud.context.scope.GenericScope [main] BeanFactory id=a021ee9c-40f7-3654-908e-4073a2b75a1f
-2021-06-21 09:43:48,451 [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'com.nistagram.notificationmicroservice.connection.MediaConnection' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-06-21 09:43:48,519 [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$880789a9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-06-21 09:43:48,537 [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$a4218ca6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-06-21 09:43:48,729 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 3036 (http)
-2021-06-21 09:43:48,750 [INFO] org.apache.catalina.core.StandardService [main] Starting service [Tomcat]
-2021-06-21 09:43:48,750 [INFO] org.apache.catalina.core.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/9.0.19]
-2021-06-21 09:43:48,893 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [main] Initializing Spring embedded WebApplicationContext
-2021-06-21 09:43:48,894 [DEBUG] org.springframework.web.context.ContextLoader [main] Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
-2021-06-21 09:43:48,894 [INFO] org.springframework.web.context.ContextLoader [main] Root WebApplicationContext: initialization completed in 1187 ms
-2021-06-21 09:43:48,938 [DEBUG] org.springframework.web.filter.CorsFilter [main] Filter 'corsFilter' configured for use
-2021-06-21 09:43:49,068 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
-2021-06-21 09:43:49,391 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
-2021-06-21 09:43:49,438 [INFO] org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-2021-06-21 09:43:49,503 [INFO] org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.10.Final}
-2021-06-21 09:43:49,504 [INFO] org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
-2021-06-21 09:43:49,648 [INFO] org.hibernate.annotations.common.Version [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
-2021-06-21 09:43:49,770 [INFO] org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-2021-06-21 09:43:50,461 [INFO] org.hibernate.tool.schema.internal.SchemaCreatorImpl [main] HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@54ccb3'
-2021-06-21 09:43:50,464 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-06-21 09:43:50,599 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'clientInboundChannelExecutor'
-2021-06-21 09:43:50,604 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'clientOutboundChannelExecutor'
-2021-06-21 09:43:50,933 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler [main] Initializing ExecutorService 'messageBrokerTaskScheduler'
-2021-06-21 09:43:50,960 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [main] Patterns [/socket/**] in 'stompWebSocketHandlerMapping'
-2021-06-21 09:43:50,966 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'brokerChannelExecutor'
-2021-06-21 09:43:51,001 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [main] 1 message handler methods found on class com.nistagram.notificationmicroservice.controller.WebSocketController: {public java.lang.String com.nistagram.notificationmicroservice.controller.WebSocketController.onSubscribe()={[/topic/server-broadcaster],messageType=[SUBSCRIBE]}}
-2021-06-21 09:43:51,003 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [main] 0 message handler methods found on class org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController: {}
-2021-06-21 09:43:51,046 [WARN] com.netflix.config.sources.URLConfigurationSource [main] No URLs will be polled as dynamic configuration sources.
-2021-06-21 09:43:51,047 [INFO] com.netflix.config.sources.URLConfigurationSource [main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-21 09:43:51,050 [WARN] com.netflix.config.sources.URLConfigurationSource [main] No URLs will be polled as dynamic configuration sources.
-2021-06-21 09:43:51,050 [INFO] com.netflix.config.sources.URLConfigurationSource [main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-21 09:43:51,083 [DEBUG] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/**/favicon.ico] in 'faviconHandlerMapping'
-2021-06-21 09:43:51,134 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2021-06-21 09:43:51,154 [WARN] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-06-21 09:43:51,175 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [main] 2 mappings in 'requestMappingHandlerMapping'
-2021-06-21 09:43:51,186 [DEBUG] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2021-06-21 09:43:51,194 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver [main] ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2021-06-21 09:43:51,939 [INFO] org.springframework.cloud.netflix.eureka.InstanceInfoFactory [main] Setting initial instance status as: STARTING
-2021-06-21 09:43:51,972 [INFO] com.netflix.discovery.DiscoveryClient [main] Initializing Eureka in region us-east-1
-2021-06-21 09:43:52,064 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using JSON encoding codec LegacyJacksonJson
-2021-06-21 09:43:52,065 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using JSON decoding codec LegacyJacksonJson
-2021-06-21 09:43:52,163 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using XML encoding codec XStreamXml
-2021-06-21 09:43:52,163 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using XML decoding codec XStreamXml
-2021-06-21 09:43:52,317 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [main] Resolving eureka endpoints via configuration
-2021-06-21 09:43:52,470 [INFO] com.netflix.discovery.DiscoveryClient [main] Disable delta property : false
-2021-06-21 09:43:52,470 [INFO] com.netflix.discovery.DiscoveryClient [main] Single vip registry refresh property : null
-2021-06-21 09:43:52,470 [INFO] com.netflix.discovery.DiscoveryClient [main] Force full registry fetch : false
-2021-06-21 09:43:52,470 [INFO] com.netflix.discovery.DiscoveryClient [main] Application is null : false
-2021-06-21 09:43:52,471 [INFO] com.netflix.discovery.DiscoveryClient [main] Registered Applications size is zero : true
-2021-06-21 09:43:52,471 [INFO] com.netflix.discovery.DiscoveryClient [main] Application version is -1: true
-2021-06-21 09:43:52,471 [INFO] com.netflix.discovery.DiscoveryClient [main] Getting all instance registry info from the eureka server
-2021-06-21 09:43:52,620 [INFO] com.netflix.discovery.DiscoveryClient [main] The response status is 200
-2021-06-21 09:43:52,622 [INFO] com.netflix.discovery.DiscoveryClient [main] Starting heartbeat executor: renew interval is: 30
-2021-06-21 09:43:52,625 [INFO] com.netflix.discovery.InstanceInfoReplicator [main] InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-06-21 09:43:52,628 [INFO] com.netflix.discovery.DiscoveryClient [main] Discovery Client initialized at timestamp 1624261432627 with initial instances count: 5
-2021-06-21 09:43:52,630 [INFO] org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry [main] Registering application NOTIFICATION-MICROSERVICE with eureka with status UP
-2021-06-21 09:43:52,630 [INFO] com.netflix.discovery.DiscoveryClient [main] Saw local status change event StatusChangeEvent [timestamp=1624261432630, current=UP, previous=STARTING]
-2021-06-21 09:43:52,632 [INFO] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036: registering service...
-2021-06-21 09:43:52,633 [DEBUG] org.springframework.web.SimpLogging [main] clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2021-06-21 09:43:52,633 [DEBUG] org.springframework.web.SimpLogging [main] clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[]]
-2021-06-21 09:43:52,633 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [main] Starting...
-2021-06-21 09:43:52,634 [DEBUG] org.springframework.web.SimpLogging [main] clientInboundChannel added SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
-2021-06-21 09:43:52,634 [DEBUG] org.springframework.web.SimpLogging [main] brokerChannel added SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]
-2021-06-21 09:43:52,634 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [main] BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [DefaultSubscriptionRegistry[cache[0 destination(s)], registry[0 sessions]]]]
-2021-06-21 09:43:52,634 [INFO] org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler [main] Started.
-2021-06-21 09:43:52,634 [DEBUG] org.springframework.web.SimpLogging [main] clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2021-06-21 09:43:52,634 [DEBUG] org.springframework.web.SimpLogging [main] brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2021-06-21 09:43:52,668 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 3036 (http) with context path ''
-2021-06-21 09:43:52,668 [INFO] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_NOTIFICATION-MICROSERVICE/host.docker.internal:notification-microservice:3036 - registration status: 204
-2021-06-21 09:43:52,669 [INFO] org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration [main] Updating port to 3036
-2021-06-21 09:43:52,670 [INFO] com.nistagram.notificationmicroservice.NotificationMicroserviceApplication [main] Started NotificationMicroserviceApplication in 6.074 seconds (JVM running for 6.963)
-2021-06-21 09:43:52,790 [INFO] com.netflix.config.ChainedDynamicProperty [MessageBroker-1] Flipping property: media-microservice.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
-2021-06-21 09:43:52,816 [INFO] com.netflix.util.concurrent.ShutdownEnabledTimer [MessageBroker-1] Shutdown hook installed for: NFLoadBalancer-PingTimer-media-microservice
-2021-06-21 09:43:52,816 [INFO] com.netflix.loadbalancer.BaseLoadBalancer [MessageBroker-1] Client: media-microservice instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=media-microservice,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
-2021-06-21 09:43:52,822 [INFO] com.netflix.loadbalancer.DynamicServerListLoadBalancer [MessageBroker-1] Using serverListUpdater PollingServerListUpdater
-2021-06-21 09:43:52,844 [INFO] com.netflix.config.ChainedDynamicProperty [MessageBroker-1] Flipping property: media-microservice.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
-2021-06-21 09:43:52,845 [INFO] com.netflix.loadbalancer.DynamicServerListLoadBalancer [MessageBroker-1] DynamicServerListLoadBalancer for client media-microservice initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=media-microservice,current list of Servers=[192.168.1.4:3033],Load balancer stats=Zone stats: {defaultzone=[Zone:defaultzone;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
-},Server stats: [[Server:192.168.1.4:3033;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 01:00:00 CET 1970;	First connection made: Thu Jan 01 01:00:00 CET 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
-]}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@3d916232
-2021-06-21 09:43:53,069 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:43:53,828 [INFO] com.netflix.config.ChainedDynamicProperty [PollingServerListUpdater-0] Flipping property: media-microservice.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
-2021-06-21 09:44:02,829 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:44:12,821 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-3] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:44:22,823 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:44:32,878 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:44:42,851 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-5] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:44:50,965 [INFO] org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-4] WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 8, active threads = 1, queued tasks = 1, completed tasks = 6]
-2021-06-21 09:44:52,815 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-3] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:45:02,817 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:45:12,844 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-5] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:45:22,820 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:45:32,822 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:45:42,819 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:45:52,823 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:46:02,898 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:46:12,846 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:46:22,813 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:46:32,823 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:46:42,823 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:46:52,816 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:47:02,810 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:47:12,822 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:47:22,827 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:47:32,820 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:47:42,809 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:47:52,817 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:48:02,815 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:48:12,813 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:48:22,822 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
-2021-06-21 09:48:32,822 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 11:38:20,851 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 11:38:21,844 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] GET "/socket/iframe.html", parameters={}
+2021-06-21 11:38:21,845 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:21,846 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 11:38:21,846 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 11:38:22,372 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] POST "/socket/892/tey2xpqp/xhr?t=1624268302367", parameters={masked}
+2021-06-21 11:38:22,373 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:22,373 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: POST http://192.168.1.4:3036/socket/892/tey2xpqp/xhr?t=1624268302367
+2021-06-21 11:38:22,373 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-7] POST http://192.168.1.4:3036/socket/892/tey2xpqp/xhr?t=1624268302367
+2021-06-21 11:38:22,374 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-7] New PollingSockJsSession[id=tey2xpqp]
+2021-06-21 11:38:22,375 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
+2021-06-21 11:38:22,383 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/892/tey2xpqp/xhr_send?t=1624268302378", parameters={masked}
+2021-06-21 11:38:22,384 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:22,385 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/892/tey2xpqp/xhr_send?t=1624268302378
+2021-06-21 11:38:22,385 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/892/tey2xpqp/xhr?t=1624268302378", parameters={masked}
+2021-06-21 11:38:22,386 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:22,386 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/892/tey2xpqp/xhr?t=1624268302378
+2021-06-21 11:38:22,387 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 11:38:22,398 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-2] Processing CONNECT session=tey2xpqp
+2021-06-21 11:38:22,401 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 204 NO_CONTENT
+2021-06-21 11:38:22,413 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/892/tey2xpqp/xhr?t=1624268302408", parameters={masked}
+2021-06-21 11:38:22,414 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:22,414 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/892/tey2xpqp/xhr?t=1624268302408
+2021-06-21 11:38:22,414 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 11:38:22,438 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/892/tey2xpqp/xhr_send?t=1624268302433", parameters={masked}
+2021-06-21 11:38:22,438 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:22,438 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/892/tey2xpqp/xhr_send?t=1624268302433
+2021-06-21 11:38:22,439 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-5] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624268302404-162 session=tey2xpqp
+2021-06-21 11:38:22,439 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-4] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624268302404-162 session=tey2xpqp, lookupDestination='/topic/server-broadcaster'
+2021-06-21 11:38:22,439 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 204 NO_CONTENT
+2021-06-21 11:38:22,439 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-4] No matching message handler methods.
+2021-06-21 11:38:24,791 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-3] Closed 1 sessions: [utpk5m2n]
+2021-06-21 11:38:29,008 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 11:38:39,022 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 11:38:40,289 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] GET "/socket/info?t=1624268320279", parameters={masked}
+2021-06-21 11:38:40,290 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:40,290 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624268320279
+2021-06-21 11:38:40,290 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 11:38:40,326 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] GET "/socket/345/pzafnvid/websocket", parameters={}
+2021-06-21 11:38:40,326 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:40,326 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: GET http://192.168.1.4:3036/socket/345/pzafnvid/websocket
+2021-06-21 11:38:40,327 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-3] Handshake failed due to invalid Connection header [Keep-Alive]
+2021-06-21 11:38:40,327 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 400 BAD_REQUEST
+2021-06-21 11:38:40,341 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/345/attpn5k2/xhr_streaming?t=1624268320334", parameters={masked}
+2021-06-21 11:38:40,342 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:40,343 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/345/attpn5k2/xhr_streaming?t=1624268320334
+2021-06-21 11:38:40,343 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-5] POST http://192.168.1.4:3036/socket/345/attpn5k2/xhr_streaming?t=1624268320334
+2021-06-21 11:38:40,344 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-5] New XhrStreamingSockJsSession[id=attpn5k2]
+2021-06-21 11:38:40,344 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 11:38:41,147 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] GET "/socket/iframe.html", parameters={}
+2021-06-21 11:38:41,147 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:41,148 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 11:38:41,148 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 11:38:41,932 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/iframe.html", parameters={}
+2021-06-21 11:38:41,933 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:41,933 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 11:38:41,933 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 200 OK
+2021-06-21 11:38:42,331 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/345/kjudd3ie/xhr?t=1624268322324", parameters={masked}
+2021-06-21 11:38:42,331 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:42,331 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr?t=1624268322324
+2021-06-21 11:38:42,331 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-9] POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr?t=1624268322324
+2021-06-21 11:38:42,332 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] New PollingSockJsSession[id=kjudd3ie]
+2021-06-21 11:38:42,332 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 11:38:42,342 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] POST "/socket/345/kjudd3ie/xhr_send?t=1624268322337", parameters={masked}
+2021-06-21 11:38:42,342 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:42,343 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr_send?t=1624268322337
+2021-06-21 11:38:42,343 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/345/kjudd3ie/xhr?t=1624268322338", parameters={masked}
+2021-06-21 11:38:42,343 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 204 NO_CONTENT
+2021-06-21 11:38:42,343 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-8] Processing CONNECT session=kjudd3ie
+2021-06-21 11:38:42,344 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:42,344 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr?t=1624268322338
+2021-06-21 11:38:42,344 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 11:38:42,356 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/345/kjudd3ie/xhr?t=1624268322351", parameters={masked}
+2021-06-21 11:38:42,357 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:42,357 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr?t=1624268322351
+2021-06-21 11:38:42,357 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 200 OK
+2021-06-21 11:38:42,378 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/345/kjudd3ie/xhr_send?t=1624268322374", parameters={masked}
+2021-06-21 11:38:42,379 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:42,379 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr_send?t=1624268322374
+2021-06-21 11:38:42,380 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 204 NO_CONTENT
+2021-06-21 11:38:42,380 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-11] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624268322348-267 session=kjudd3ie
+2021-06-21 11:38:42,380 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-10] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624268322348-267 session=kjudd3ie, lookupDestination='/topic/server-broadcaster'
+2021-06-21 11:38:42,380 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-10] No matching message handler methods.
+2021-06-21 11:38:47,428 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/892/tey2xpqp/xhr?t=1624268327427", parameters={masked}
+2021-06-21 11:38:47,428 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:47,428 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/892/tey2xpqp/xhr?t=1624268327427
+2021-06-21 11:38:47,428 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 11:38:49,014 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-1] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 11:38:49,791 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-11] Closed 1 sessions: [pzafnvid]
+2021-06-21 11:38:49,839 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] GET "/socket/info?t=1624268329826", parameters={masked}
+2021-06-21 11:38:49,840 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:49,840 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: GET http://192.168.1.4:3036/socket/info?t=1624268329826
+2021-06-21 11:38:49,840 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 200 OK
+2021-06-21 11:38:49,852 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] GET "/socket/352/vxh3fuhb/websocket", parameters={}
+2021-06-21 11:38:49,853 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-7] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:49,853 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-7] Processing transport request: GET http://192.168.1.4:3036/socket/352/vxh3fuhb/websocket
+2021-06-21 11:38:49,854 [ERROR] org.springframework.web.socket.server.support.DefaultHandshakeHandler [http-nio-3036-exec-7] Handshake failed due to invalid Connection header [Keep-Alive]
+2021-06-21 11:38:49,854 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-7] Completed 400 BAD_REQUEST
+2021-06-21 11:38:49,866 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] POST "/socket/352/u2bpydgk/xhr_streaming?t=1624268329858", parameters={masked}
+2021-06-21 11:38:49,867 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-9] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:49,867 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-9] Processing transport request: POST http://192.168.1.4:3036/socket/352/u2bpydgk/xhr_streaming?t=1624268329858
+2021-06-21 11:38:49,867 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrStreamingTransportHandler [http-nio-3036-exec-9] POST http://192.168.1.4:3036/socket/352/u2bpydgk/xhr_streaming?t=1624268329858
+2021-06-21 11:38:49,868 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-9] New XhrStreamingSockJsSession[id=u2bpydgk]
+2021-06-21 11:38:49,869 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-9] Completed 200 OK
+2021-06-21 11:38:50,540 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] GET "/socket/iframe.html", parameters={}
+2021-06-21 11:38:50,541 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-8] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:50,541 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-8] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 11:38:50,541 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-8] Completed 200 OK
+2021-06-21 11:38:51,211 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] GET "/socket/iframe.html", parameters={}
+2021-06-21 11:38:51,213 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:51,214 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: GET http://192.168.1.4:3036/socket/iframe.html
+2021-06-21 11:38:51,214 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 11:38:51,541 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/352/vlbhk1uu/xhr?t=1624268331534", parameters={masked}
+2021-06-21 11:38:51,542 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:51,542 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr?t=1624268331534
+2021-06-21 11:38:51,542 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.XhrPollingTransportHandler [http-nio-3036-exec-1] POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr?t=1624268331534
+2021-06-21 11:38:51,543 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [http-nio-3036-exec-1] New PollingSockJsSession[id=vlbhk1uu]
+2021-06-21 11:38:51,544 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 11:38:51,555 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] POST "/socket/352/vlbhk1uu/xhr_send?t=1624268331548", parameters={masked}
+2021-06-21 11:38:51,556 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-2] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:51,556 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-2] Processing transport request: POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr_send?t=1624268331548
+2021-06-21 11:38:51,556 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] POST "/socket/352/vlbhk1uu/xhr?t=1624268331549", parameters={masked}
+2021-06-21 11:38:51,556 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-4] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:51,557 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-4] Processing transport request: POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr?t=1624268331549
+2021-06-21 11:38:51,557 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-2] Completed 204 NO_CONTENT
+2021-06-21 11:38:51,557 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-4] Completed 200 OK
+2021-06-21 11:38:51,557 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-14] Processing CONNECT session=vlbhk1uu
+2021-06-21 11:38:51,569 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/352/vlbhk1uu/xhr?t=1624268331564", parameters={masked}
+2021-06-21 11:38:51,569 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:51,570 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr?t=1624268331564
+2021-06-21 11:38:51,570 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 11:38:51,593 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] POST "/socket/352/vlbhk1uu/xhr_send?t=1624268331589", parameters={masked}
+2021-06-21 11:38:51,594 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-6] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:51,594 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-6] Processing transport request: POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr_send?t=1624268331589
+2021-06-21 11:38:51,595 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-6] Completed 204 NO_CONTENT
+2021-06-21 11:38:51,595 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-17] Processing SUBSCRIBE /topic/server-broadcaster id=sub-1624268331562-202 session=vlbhk1uu
+2021-06-21 11:38:51,595 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-16] Searching methods to handle SUBSCRIBE /topic/server-broadcaster id=sub-1624268331562-202 session=vlbhk1uu, lookupDestination='/topic/server-broadcaster'
+2021-06-21 11:38:51,595 [DEBUG] org.springframework.web.socket.messaging.WebSocketAnnotationMethodMessageHandler [clientInboundChannel-16] No matching message handler methods.
+2021-06-21 11:38:59,000 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 11:38:59,087 [DEBUG] org.springframework.web.SimpLogging [MessageBroker-2] Processing MESSAGE destination=/topic/server-broadcaster session=null payload={"message":"New reaction on post by maja","timestamp":"2021-06-21T09:38:58.847+0...(truncated)
+2021-06-21 11:38:59,087 [DEBUG] org.springframework.web.SimpLogging [MessageBroker-2] Broadcasting to 3 sessions.
+2021-06-21 11:38:59,111 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] POST "/socket/352/vlbhk1uu/xhr?t=1624268339107", parameters={masked}
+2021-06-21 11:38:59,111 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-10] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:59,112 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-10] Processing transport request: POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr?t=1624268339107
+2021-06-21 11:38:59,112 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-10] Completed 200 OK
+2021-06-21 11:38:59,114 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] POST "/socket/345/kjudd3ie/xhr?t=1624268339110", parameters={masked}
+2021-06-21 11:38:59,114 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-1] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:38:59,114 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-1] Processing transport request: POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr?t=1624268339110
+2021-06-21 11:38:59,115 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-1] Completed 200 OK
+2021-06-21 11:38:59,804 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-5] Closed 1 sessions: [vxh3fuhb]
+2021-06-21 11:39:04,794 [DEBUG] org.springframework.web.socket.sockjs.transport.session.PollingSockJsSession [MessageBroker-5] Closing SockJS session tey2xpqp with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 11:39:04,794 [DEBUG] org.springframework.web.socket.handler.LoggingWebSocketHandlerDecorator [MessageBroker-5] PollingSockJsSession[id=tey2xpqp] closed with CloseStatus[code=3000, reason=Go away!]
+2021-06-21 11:39:04,794 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [MessageBroker-5] Clearing session tey2xpqp
+2021-06-21 11:39:04,794 [DEBUG] org.springframework.web.SimpLogging [clientInboundChannel-20] Processing DISCONNECT session=tey2xpqp
+2021-06-21 11:39:04,794 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [MessageBroker-5] Closed 1 sessions: [tey2xpqp]
+2021-06-21 11:39:04,794 [DEBUG] org.springframework.web.socket.messaging.SubProtocolWebSocketHandler [clientOutboundChannel-7] No session for GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT_ACK, simpDisconnectMessage=GenericMessage [payload=byte[0], headers={simpMessageType=DISCONNECT, stompCommand=DISCONNECT, simpSessionAttributes={org.springframework.messaging.simp.SimpAttributes.COMPLETED=true}, simpSessionId=tey2xpqp}], simpSessionId=tey2xpqp}]
+2021-06-21 11:39:09,033 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-4] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 11:39:09,055 [DEBUG] org.springframework.web.SimpLogging [MessageBroker-4] Processing MESSAGE destination=/topic/server-broadcaster session=null payload={"message":"New reaction on post by maja","timestamp":"2021-06-21T09:39:08.843+0...(truncated)
+2021-06-21 11:39:09,055 [DEBUG] org.springframework.web.SimpLogging [MessageBroker-4] Broadcasting to 2 sessions.
+2021-06-21 11:39:09,072 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] POST "/socket/352/vlbhk1uu/xhr?t=1624268349065", parameters={masked}
+2021-06-21 11:39:09,072 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-3] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:39:09,073 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-3] Processing transport request: POST http://192.168.1.4:3036/socket/352/vlbhk1uu/xhr?t=1624268349065
+2021-06-21 11:39:09,073 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-3] Completed 200 OK
+2021-06-21 11:39:09,074 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] POST "/socket/345/kjudd3ie/xhr?t=1624268349069", parameters={masked}
+2021-06-21 11:39:09,075 [DEBUG] org.springframework.web.socket.server.support.WebSocketHandlerMapping [http-nio-3036-exec-5] Mapped to org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler@16e195cf
+2021-06-21 11:39:09,075 [DEBUG] org.springframework.web.socket.sockjs.transport.handler.DefaultSockJsService [http-nio-3036-exec-5] Processing transport request: POST http://192.168.1.4:3036/socket/345/kjudd3ie/xhr?t=1624268349069
+2021-06-21 11:39:09,075 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-3036-exec-5] Completed 200 OK
+2021-06-21 11:39:17,143 [INFO] org.springframework.web.socket.config.WebSocketMessageBrokerStats [MessageBroker-11] WebSocketSession[6 current WS(0)-HttpStream(4)-HttpPoll(2), 7 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(3)-CONNECTED(3)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 21, active threads = 0, queued tasks = 0, completed tasks = 21], outboundChannel[pool size = 9, active threads = 0, queued tasks = 0, completed tasks = 9], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 8, completed tasks = 25]
+2021-06-21 11:39:19,003 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-2] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]
+2021-06-21 11:39:29,009 [DEBUG] org.springframework.web.client.HttpMessageConverterExtractor [MessageBroker-5] Reading to [java.util.List<com.nistagram.notificationmicroservice.domain.ImageBytesDto>]

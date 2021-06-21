@@ -16,6 +16,7 @@ public class ImageBytesDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+01:00")
     private Date timestamp;
     private List<Comment> comments;
+    private List<Like> likes;
     private List<ImageByte> imageBytes;
     private Long mediaId;
 }

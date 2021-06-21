@@ -12,11 +12,59 @@
 
 <script>
 import Navbar from './components/Navbar'
+import SockJS from 'sockjs-client'
+import Stomp from 'webstomp-client'
+import moment from 'moment'
+import { getUsernameFromToken} from './util/token';
 export default {
   name: 'App',
   components: {
     Navbar,
   },
+  data(){
+        return{
+            received_messages: [],
+            connected: false,
+            notify:[],
+            username:''
+        }
+  },
+  mounted: function(){
+    this.connect();
+  },
+  methods:{
+    connect () {
+        this.username = getUsernameFromToken();
+        if(this.username != null){
+          this.socket = new SockJS('http://localhost:8762/notification-api/socket')
+                  this.stompClient = Stomp.over(this.socket)
+                  this.stompClient.connect({}, (frame) => {
+                    this.connected = true
+                    console.log(frame);
+                    this.stompClient.subscribe('/topic/server-broadcaster', (tick) => {
+                      this.notify = JSON.parse(tick.body);
+                      if(this.notify.receiver == this.username){
+                        this.makeToast(this.notify.message + ' at ' + moment(String(this.notify.timestamp)).format('DD-MM-YYYY hh:mm') , "info");
+                      }
+                      
+                    })
+                  }, (error) => {
+                    console.log(error)
+                    this.connected = false
+                  })
+          }
+    },
+    makeToast(message, variant) {
+            this.$bvToast.toast(message, {
+                                title: `Nistagram`,
+                                autoHideDelay: 5000,
+                                variant: variant,
+                                toaster: 'b-toaster-bottom-right',
+                                solid: true,
+                                appendToast: false
+                            })
+        },
+  }
 }
 </script>
 

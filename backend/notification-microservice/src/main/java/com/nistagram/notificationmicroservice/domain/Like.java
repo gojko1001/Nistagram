@@ -5,23 +5,18 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "likes")
 @Data
-public class MediaNotification {
+public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String message;
+    private String username;
     @Column
-    private String notifyUsername;
-    @Column
-    private String actionUsername;
+    private boolean liked = true;
     @Column
     private Date timestamp;
     @Column
-    private Long mediaId;
-
-
-
+    private Long postId;
 }

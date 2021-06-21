@@ -65,9 +65,6 @@
 <script>
 import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
 import { getUsernameFromToken, getToken } from '../util/token';
-import SockJS from 'sockjs-client'
-import Stomp from 'webstomp-client'
-
 
 export default {
   name: 'Discover',
@@ -97,7 +94,8 @@ export default {
               mediaId:''
             },
             received_messages: [],
-            connected: false
+            connected: false,
+            notify:[]
         }
     },
   mounted: function(){
@@ -114,7 +112,6 @@ export default {
                                     return
                                 }
             })
-    //this.connect();
     }
     this.$nextTick(function () {
       this.axios.get('/media-api/image/discover/' + this.username)
@@ -198,21 +195,6 @@ export default {
           this.makeToast("Please log in.", "info");
         }
       },
-      connect () {
-        this.socket = new SockJS('http://localhost:8762/notiication-api/socket')
-        this.stompClient = Stomp.over(this.socket)
-        this.stompClient.connect({}, (frame) => {
-          this.connected = true
-          console.log(frame)
-          this.stompClient.subscribe('/topic/server-broadcaster', (tick) => {
-            console.log(tick)
-            this.received_messages.push(tick)
-          })
-        }, (error) => {
-          console.log(error)
-          this.connected = false
-        })
-    },
     }
 }
 </script>
