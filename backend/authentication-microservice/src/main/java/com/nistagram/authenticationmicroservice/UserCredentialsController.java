@@ -20,7 +20,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/userCredentials")
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserCredentialsController {
     @Autowired
     private IUserCredentialsService userCredentialsService;
