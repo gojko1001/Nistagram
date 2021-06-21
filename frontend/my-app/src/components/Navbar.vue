@@ -7,9 +7,9 @@
         </a>
         <form style="padding: 0px 0px 0px 60px;">
           <input type="text" class="search-input" v-model="searchInput">
-          <b-button @click="search()" type="submit" class="search-btn">
+          <button @click="search()" type="submit" class="search-btn">
             <i class="fas fa-search"></i>
-          </b-button>
+          </button>
           <br>
           <div>
           <b-form-radio-group
@@ -40,19 +40,19 @@
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
-                <button class="heart nav-btn" @click='inappropriateContent'>
-                  Reports
+            <li class="nav-item" v-if="username != null && isAdmin ==true">
+                <button class="nav-btn" @click='inappropriateContent'>
+                  <i class="fas fa-ban"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
-                <button class="heart nav-btn" @click='profileVerification'>
-                  Profile verification
+            <li class="nav-item" v-if="username != null && isAdmin ==true">
+                <button class="nav-btn" @click='profileVerification'>
+                  <i class="fas fa-user-check"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
-                <button class="heart nav-btn" @click='inappropriateContent'>
-                  Agent requests
+            <li class="nav-item" v-if="username != null && isAdmin ==true">
+                <button class="nav-btn">
+                  <i class="fas fa-user-secret"></i>
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">

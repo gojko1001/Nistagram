@@ -27,7 +27,7 @@
 
 
 <script>
-import { SERVER_NOT_RESPONDING, USER_PATH } from '../util/constants';
+import { SERVER_NOT_RESPONDING, USER_CREDENTIALS_PATH } from '../util/constants';
 import { getUsernameFromToken } from '../util/token';
 export default {
   name: 'AllVerificationRequest',
@@ -58,17 +58,17 @@ export default {
   mounted: function(){
     this.username = getUsernameFromToken();
     if(this.username != null){
-        this.axios.get(USER_PATH + '/' + this.username, {   headers:{
-                                                                Authorization: "Bearer " + localStorage.getItem('JWT'),
-                                                            }                                          
-            }).then(response => {
-                                this.user = response.data;
+        this.axios.get(USER_CREDENTIALS_PATH + '/isAdmin/' + this.username).then(response => {
+                                this.isAdmin = response.data;
+                                if(!this.isAdmin)
+                                  window.location.href="/";
                                 console.log(response.data);
-            }).catch(error => { if(!error.response) {
-                                    this.makeToast(SERVER_NOT_RESPONDING, "warning");
-                                    return
-                                }
-            })
+            }).catch(error => { 
+              if(!error.response) {
+                  this.makeToast(SERVER_NOT_RESPONDING, "warning");
+                  return
+              }
+        })
     }else{
       window.location.href="/";
     }

@@ -43,17 +43,12 @@ public class RoleService implements IRoleService {
 
     @Override
     public boolean isAdmin(String username) {
-        boolean isAdmin=true;
         UserCredentials userCredentials = userCredentialsService.findByUsername(username);
         Collection<Role> roles = userCredentials.getRoles();
         for(Role r:roles){
-            if(r.getName().equals("ROLE_ADMIN")) {
-                isAdmin = true;
-                break;
-            }
-            else
-                isAdmin = false;
+            if(r.getName().equals("ROLE_ADMIN"))
+                return true;
         }
-        return isAdmin;
+        return false;
     }
 }
