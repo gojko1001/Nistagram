@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "authentication-microservice")
-public interface AuthConnection {
+@FeignClient(name = "media-microservice")
+public interface MediaConnection {
 
-    @PutMapping("/userCredentials/change_username/{newUsername}")
+    @PutMapping("/user/{newUsername}")
     void changeUsername(@PathVariable String newUsername,
                         @RequestHeader("Authorization") String jwt);
 }
-

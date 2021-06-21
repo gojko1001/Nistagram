@@ -4,7 +4,7 @@ import com.nistagram.usermicroservice.controller.dto.UserDto;
 import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.controller.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.JwtService;
+import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
     @Autowired
-    private JwtService jwtService;
+    private JwtUtil jwtUtil;
 
     @GetMapping
     public List<UserDto> getAll() {
@@ -54,7 +54,7 @@ public class UserController {
     @PutMapping()
     public UserDto updateProfile(@RequestBody UserDto userDto,
                                  @RequestHeader("Authorization") String jwt) {
-        String username = jwtService.extractUsername(jwt);
+        String username = jwtUtil.extractUsername(jwt);
         if (username == null)
             throw new UnauthorizedException("Access denied");
         Logger.info("Try to edit user: " + username, userDto.getUsername());

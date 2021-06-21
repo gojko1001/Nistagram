@@ -104,9 +104,10 @@ public class UserRelationService implements IUserRelationService {
         UserRelation relation = findRelation(username, relatedUsername);
         if (relation != null) {
             relation.setRelationStatus(RelationStatus.BLOCKED);
-            relation.setId(new UserRelationKey(user.getId(), relatedUser.getId()));
+
         } else {
             relation = new UserRelation(user, relatedUser, RelationStatus.BLOCKED);
+            relation.setId(new UserRelationKey(user.getId(), relatedUser.getId()));
             user.getUserRelations().add(relation);
         }
         userService.save(user);
