@@ -183,6 +183,7 @@ export default {
         this.axios.post('/media-api/like', this.formLike)
         .then(response => { 
           console.log(response.data);
+          this.$router.go();
           this.makeToast("Liked !!!", "success");
         })
         .catch(error => { 
