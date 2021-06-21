@@ -46,7 +46,7 @@
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && isAdmin ==true">
-                <button class="heart nav-btn" @click='inappropriateContent'>
+                <button class="heart nav-btn" @click='profileVerification'>
                   Profile verification
                 </button>
             </li>
@@ -123,6 +123,9 @@ export default {
       localStorage.setItem("find", this.searchInput);
       this.$router.push({path: '/search'})        
     },
+    profileVerification: function(){
+      window.location.href = "/all_requests";
+    }
   },
 }
 </script>

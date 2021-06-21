@@ -8,7 +8,6 @@
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
-                  <b-link v-if="isUserProfile" href="/all_requests">Pending verification requests</b-link>
                   <b-dropdown id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
                     <b-dropdown-text><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
                         value="CLOSE_FRIEND"
