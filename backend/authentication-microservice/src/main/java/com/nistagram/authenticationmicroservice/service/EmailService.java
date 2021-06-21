@@ -43,7 +43,7 @@ public class EmailService {
 
     public void resetPassword(String username, String email, String fullName) throws MailException {
         String jwt = jwtService.createToken(username);
-        String url = "https://localhost:3000/reset_password/" + jwt;
+        String url = "http://localhost:3000/reset_password/" + jwt;
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(mailSender);
         simpleMailMessage.setTo(email);

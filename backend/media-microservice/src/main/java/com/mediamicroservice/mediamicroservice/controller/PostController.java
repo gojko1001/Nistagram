@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/image")
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
 
     @Autowired
