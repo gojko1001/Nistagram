@@ -34,4 +34,6 @@ public interface IPostService {
     List<Post> getPublicPosts();
 
     ResponseEntity getDiscoverImages(String username);
+
+    List<ImageBytesDto> getAllPosts();
 }
