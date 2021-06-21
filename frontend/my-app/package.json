@@ -19,6 +19,7 @@
     "vue-google-login": "^2.0.5",
     "vue-router": "^3.5.1",
     "vue-simple-search-dropdown": "^1.0.1",
+    "vue-stomp": "0.0.5",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {

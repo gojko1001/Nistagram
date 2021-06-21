@@ -149,7 +149,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -167,7 +167,7 @@
                                     </span>
                                 </div>
 
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -206,7 +206,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <p style="color:blue">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'C'+q">
@@ -220,7 +220,7 @@
                                         <i class="fas fa-user-tag"></i> {{tag.username}}
                                     </span>
                                 </div>
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -259,7 +259,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">Reacted on <br>{{img.date | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">Reacted on <br>{{img.date | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -275,7 +275,7 @@
                                         <i class="fas fa-user-tag"></i> {{tag.username}}
                                     </span>
                                 </div>
-                                <br>
+                                <br><br>
                                 <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
@@ -312,7 +312,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
-                                <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+                                <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
@@ -492,6 +492,7 @@ export default {
           this.axios.post('/media-api/inappropriate', this.report)
           .then(response => { console.log(response.data);
                               this.makeToast("Reported !!!", "success");
+                              setTimeout(()=>{ window.location.reload() }, 2000);
                             })
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
@@ -507,7 +508,8 @@ export default {
             this.formLike.liked = liked;
             this.axios.post('/media-api/like', this.formLike)
             .then(response => { console.log(response.data);
-                                this.makeToast("Liked !!!", "success");
+                                this.makeToast("New reaction on post.", "success");
+                                setTimeout(()=>{ window.location.reload() }, 2000);
                                 })
             .catch(error => { console.log(error);
                                 this.makeToast("Error occured.", "danger");
@@ -599,7 +601,8 @@ export default {
         highlightStory(storyId){
             this.axios.post('/media-api/story/highlight/' + storyId)
                         .then(response => { console.log(response.data); 
-                                            this.makeToast(response.data, "success");                
+                                            this.makeToast(response.data, "success"); 
+                                            setTimeout(()=>{ window.location.reload() }, 2000);               
                         }).catch(error => { console.log(error.message);
                                             this.makeToast(error.message, "danger");
                 });

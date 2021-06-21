@@ -36,7 +36,7 @@
                 </button>
             </li>
             <li class="nav-item" v-if="username != null&& isAdmin ==false">
-                <button class="heart nav-btn">
+                <button class="heart nav-btn" @click="notificationPage">
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
@@ -117,6 +117,9 @@ export default {
     },
     discoverPage:function(){
       window.location.href = "/discover";
+    },
+    notificationPage:function(){
+      window.location.href = "/notification";
     },
     search: function() {
       localStorage.setItem("name", this.selected);

@@ -15,4 +15,5 @@ public interface IPostRepository extends JpaRepository<Post, Long> {
     Post findPostById(Long id);
     @Query(value = "select p from Post p where lower(p.media.location.name) like concat('%', lower(:location), '%' )")
     List<Post> searchLocation(String location);
+    Post findPostByMedia_Id(Long id);
 }

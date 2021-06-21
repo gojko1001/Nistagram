@@ -1,6 +1,5 @@
 package com.mediamicroservice.mediamicroservice.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,7 +19,6 @@ public class Media {
     @Column
     private String description;
     @Column
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp;
     @ManyToMany
     private List<Hashtag> hashtags;

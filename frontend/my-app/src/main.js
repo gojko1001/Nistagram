@@ -25,6 +25,7 @@ import Messanger from './components/Messanger'
 import VerificationRequest from './components/VerificationRequest'
 import AllVerificationRequest from './components/AllVerificationRequest'
 import InappropriateContent from './components/InappropriateContentAdmin'
+import Notification from './components/Notification'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -41,7 +42,7 @@ Vue.use(IconsPlugin);
 
 Vue.filter('formatDate', function(value) {
   if (value) {
-    return moment(String(value)).format('DD-MM-YYYY')
+    return moment(String(value)).format('DD-MM-YYYY HH:mm')
   }
 });
 
@@ -130,6 +131,11 @@ const router = new VueRouter({
       path: '/inappropriate_content',
       name: 'InappropriateContent',
       component: InappropriateContent
+    },
+    {
+      path: '/notification',
+      name: 'Notification',
+      component: Notification
     }
   ]
 });
