@@ -20,7 +20,6 @@ public class Media {
     @Column
     private String description;
     @Column
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp;
     @ManyToMany
     private List<Hashtag> hashtags;

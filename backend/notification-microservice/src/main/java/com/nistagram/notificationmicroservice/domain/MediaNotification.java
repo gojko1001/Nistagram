@@ -22,6 +22,4 @@ public class MediaNotification {
     @Column
     private Long mediaId;
 
-
-
 }

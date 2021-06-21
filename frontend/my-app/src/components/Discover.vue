@@ -7,7 +7,7 @@
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
             <h4 @click="goToProfile(img.username)" class="clickable">@{{img.username}}</h4>
-            <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+            <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
             <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
               <i class="fa fa-ban fa-fw"></i>
             </button>
@@ -26,7 +26,7 @@
               </span>
             </div>
 
-            <br>
+            <br><br>
             <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>

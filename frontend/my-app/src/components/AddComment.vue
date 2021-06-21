@@ -22,7 +22,7 @@
               </span>
             </div>
 
-            <br>
+            <br><br>
             <button class="heart inter" v-bind:class="{'black': !watchLiked, 'red': watchLiked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>

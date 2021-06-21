@@ -12,8 +12,6 @@ import java.util.List;
 public class ImageBytesDto {
     private Long id;
     private String username;
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+01:00")
     private Date timestamp;
     private List<Comment> comments;
     private List<Like> likes;

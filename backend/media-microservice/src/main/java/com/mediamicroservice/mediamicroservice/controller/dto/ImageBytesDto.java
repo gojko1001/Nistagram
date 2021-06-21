@@ -15,8 +15,6 @@ public class ImageBytesDto {
     private String username;
     private String description;
     private Location location;
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+01:00")
     private Date timestamp;
     private List<Hashtag> hashtags;
     private List<Comment> comments;
