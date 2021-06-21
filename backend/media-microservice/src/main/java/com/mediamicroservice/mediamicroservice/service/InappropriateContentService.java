@@ -54,6 +54,7 @@ public class InappropriateContentService implements IInappropriateContentService
         for(InappropriateContent ic:all)
             if(ic.getRequestStatus().equals(RequestStatus.PENDING)){
                 CreateInappropriateContentDto createInappropriateContentDto =new CreateInappropriateContentDto();
+                createInappropriateContentDto.setId(ic.getId());
                 createInappropriateContentDto.setMediaId(ic.getMedia().getId());
                 createInappropriateContentDto.setRequestedBy(ic.getRequestedBy());
                 list.add(createInappropriateContentDto);

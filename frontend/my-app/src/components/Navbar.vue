@@ -30,17 +30,32 @@
                   <i class="fas fa-globe"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null">
+            <li class="nav-item" v-if="username != null&& isAdmin ==false">
                 <button class="nav-btn">
                   <i class="fas fa-envelope"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null">
+            <li class="nav-item" v-if="username != null&& isAdmin ==false">
                 <button class="heart nav-btn">
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null">
+            <li class="nav-item" v-if="username != null && isAdmin ==true">
+                <button class="heart nav-btn" @click='inappropriateContent'>
+                  Reports
+                </button>
+            </li>
+            <li class="nav-item" v-if="username != null && isAdmin ==true">
+                <button class="heart nav-btn" @click='inappropriateContent'>
+                  Profile verification
+                </button>
+            </li>
+            <li class="nav-item" v-if="username != null && isAdmin ==true">
+                <button class="heart nav-btn" @click='inappropriateContent'>
+                  Agent requests
+                </button>
+            </li>
+            <li class="nav-item" v-if="username != null&& isAdmin ==false">
                 <button class="nav-btn" @click='myProfile'>
                   <i class="fas fa-user"></i>
                 </button>
@@ -58,6 +73,7 @@
 
 
 <script>
+import { SERVER_NOT_RESPONDING, USER_CREDENTIALS_PATH } from '../util/constants';
 import { getUsernameFromToken, removeToken } from '../util/token';
 export default {
   name: 'Navbar',
@@ -71,10 +87,22 @@ export default {
         ],
         username:'',
         searchInput:'',
+        isAdmin: true,
       }
   },
   mounted: function(){
     this.username = getUsernameFromToken();
+      if(this.username != null){
+        this.axios.get(USER_CREDENTIALS_PATH + '/isAdmin/' + this.username).then(response => {
+                                this.isAdmin = response.data;
+                                console.log(response.data);
+            }).catch(error => { if(!error.response) {
+                                    this.makeToast(SERVER_NOT_RESPONDING, "warning");
+                                    return
+                                }
+            })
+    }
+    
   },
   methods:{
     myProfile:function(){
@@ -83,6 +111,9 @@ export default {
     logout: function(){
       removeToken();
       window.location.href = "/"
+    },
+    inappropriateContent:function(){
+      window.location.href = "/inappropriate_content";
     },
     discoverPage:function(){
       window.location.href = "/discover";
