@@ -11,8 +11,12 @@ public interface IInappropriateContentRepository extends JpaRepository<Inappropr
 
     InappropriateContent save(InappropriateContent inappropriateContent);
 
+    InappropriateContent findInappropriateContentById(Long id);
+
     List<InappropriateContent> findAll();
 
-    InappropriateContent findInappropriateContentById(Long id);
+    List<InappropriateContent> findInappropriateContentsByRequestedBy(String username);
+
+    List<InappropriateContent> findInappropriateContentsByRespondedBy(String username);
 
 }

@@ -24,6 +24,7 @@ import AddComment from './components/AddComment'
 import Messanger from './components/Messanger'
 import VerificationRequest from './components/VerificationRequest'
 import AllVerificationRequest from './components/AllVerificationRequest'
+import NotFoundPage from './components/NotFoundPage'
 import InappropriateContent from './components/InappropriateContentAdmin'
 import Notification from './components/Notification'
 
@@ -136,6 +137,10 @@ const router = new VueRouter({
       path: '/notification',
       name: 'Notification',
       component: Notification
+    },
+    {
+      path: "*",
+      component: NotFoundPage
     }
   ]
 });

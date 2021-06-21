@@ -1,6 +1,6 @@
 package com.nistagram.usermicroservice.controller;
 
-import com.nistagram.usermicroservice.JwtService;
+import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.controller.dto.UserDto;
 import com.nistagram.usermicroservice.controller.dto.UserRelationDto;
 import com.nistagram.usermicroservice.controller.exception.NotFoundException;
@@ -23,12 +23,10 @@ public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
     @Autowired
-    private JwtService jwtService;
+    private JwtUtil jwtUtil;
 
-    @GetMapping("/{relatedUsername}")
-    public UserRelationDto getUserRelation(@PathVariable String relatedUsername,
-                                           @RequestHeader("Authorization") String jwt) {
-        String username = getUsernameFromToken(jwt);
+    @GetMapping("/{username}/{relatedUsername}")
+    public UserRelationDto getUserRelation(@PathVariable String username, @PathVariable String relatedUsername) {
         UserRelation relation = relationService.findRelation(username, relatedUsername);
         if(relation == null)
             throw new NotFoundException("No relation found!");
@@ -132,7 +130,7 @@ public class UserRelationController {
     }
 
     private String getUsernameFromToken(String tokenHeader){
-        String username = jwtService.extractUsername(tokenHeader);
+        String username = jwtUtil.extractUsername(tokenHeader);
         if (username == null)
             throw new UnauthorizedException("Access denied");
         return username;

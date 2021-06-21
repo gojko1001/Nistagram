@@ -3,6 +3,7 @@
   <b-card no-body>
     <b-tabs pills card vertical>
       <b-tab title="Profile Info" active><b-card-text><h1>Edit Profile</h1></b-card-text>
+        <!-- User info -->
         <b-form @submit.prevent="onSubmit" @reset="onReset">
           <table class="w-100 py-2">
             <tr><td>Username:</td>
@@ -35,6 +36,7 @@
           <b-button type="submit" variant="primary" style="width:200px;">Save changes</b-button><br>
         </b-form>
       </b-tab>
+      <!-- Change password -->
       <b-tab title="Change Password"><b-card-text><h1>Change Password</h1></b-card-text>
         <b-form @submit.prevent="resetPass" @reset="onReset">
             <table class="w-100 py-2">
@@ -49,6 +51,7 @@
           <br><b-button type="submit" variant="primary" style="width:200px;">Change</b-button><br>
         </b-form>
       </b-tab>
+       <!-- Privacy  -->
       <b-tab title="Privacy"><b-card-text><h1>Privacy</h1></b-card-text>
         <div style="text-align: left">
           <div>
@@ -105,13 +108,20 @@
         <br>
         <b-button type="submit" variant="primary" style="width:200px;" v-on:click="updatePrivacySettings()">Save changes</b-button><br>
       </b-tab>
+      <!-- Block list -->
+      <b-tab title="Block list"><b-card-text><h1>Blocked users</h1></b-card-text>
+        <div v-for="(user,p) in blockedUsers" :key="p">
+            <span class="clickable" v-on:click="goToProfile(user.username)">@{{user.username}} </span>
+            <b-btn size="sm" variant="outline-info" class="float-right" @click="unBlock(user.username)">Unblock</b-btn><hr>
+        </div>
+      </b-tab>
     </b-tabs>
   </b-card>
 </div>
 </template>
 
 <script>
-import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH } from "./../util/constants"
+import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH } from "./../util/constants"
 import { getToken, getUsernameFromToken, removeToken } from '../util/token';
 
 export default {
@@ -121,6 +131,7 @@ export default {
         username: getUsernameFromToken(),
         form: '',
         privacy:{ username:getUsernameFromToken(), publicProfile:false, publicDM:false, taggable: false},
+        blockedUsers: [],
         resetPassword: {oldPassword:'', password:'', repeatPassword:''},
         genderOpts:[
           { text: 'Male', value: 'MALE' },
@@ -137,7 +148,8 @@ export default {
     }
       
     this.axios.get(USER_PATH + '/' + this.username, {   
-                                                      headers:{ Authorization: "Bearer " + getToken() }                                          
+                                                      headers:{ Authorization: "Bearer " + getToken()
+                                                    }                                          
             }).then(response => {
                                 this.form = response.data;
                                 this.privacy = response.data;
@@ -146,7 +158,18 @@ export default {
                                     return
                                 }
                                 window.location.href = '/home'
-            })
+            });
+    this.axios.get(GET_BLOCKED_USERS_PATH + "/" + this.username, {   
+                                                                  headers:{ Authorization: "Bearer " + getToken()
+                                                                 }
+            }).then(response => {
+                                this.blockedUsers = response.data;
+            }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
     
     },
     methods: {
@@ -208,6 +231,23 @@ export default {
                             else
                               this.makeToast("Error while updating.", "danger");
                             })
+      },
+      goToProfile(username){
+        window.location.href="/user/" + username;
+      },
+      unBlock(toUnblock){
+        this.axios.delete(DELETE_RELATION_PATH + "/" + toUnblock,{   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            }
+                    }).then(() => {
+                        this.makeToast(toUnblock + " unblocked!", "success");
+                        window.location.reload();
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
       },
       makeToast(message, variant) {
       this.$bvToast.toast(message, {

@@ -1,6 +1,7 @@
 package com.nistagram.usermicroservice.service;
 
 import com.nistagram.usermicroservice.connection.AuthConnection;
+import com.nistagram.usermicroservice.connection.MediaConnection;
 import com.nistagram.usermicroservice.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.controller.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.controller.exception.BadRequestException;
@@ -27,6 +28,8 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
     @Autowired
     private AuthConnection authConnection;
+    @Autowired
+    private MediaConnection mediaConnection;
 
     public List<User> getAll() {
         Logger.infoDb("Read all users from database.");
@@ -89,6 +92,7 @@ public class UserService implements IUserService {
 
         if (!user.getUsername().equals(oldUsername)) {
             authConnection.changeUsername(user.getUsername(), jwt);
+            mediaConnection.changeUsername(user.getUsername(), jwt);
         }
         return save(dbUser);
     }
