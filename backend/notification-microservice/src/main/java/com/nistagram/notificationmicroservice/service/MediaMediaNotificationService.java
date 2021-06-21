@@ -26,4 +26,10 @@ public class MediaMediaNotificationService implements IMediaNotificationService 
     public List<ImageBytesDto> getAllPosts(){
         return mediaConnection.getAllPosts();
     }
+
+    @Override
+    public List<MediaNotification> getMediaNotificationsByUsername(String username){
+        return mediaNotificationRepository.getMediaNotificationsByNotifyUsername(username);
+    }
+
 }

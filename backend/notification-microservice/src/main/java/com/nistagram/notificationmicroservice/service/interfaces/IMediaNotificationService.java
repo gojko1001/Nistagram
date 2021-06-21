@@ -8,4 +8,5 @@ import java.util.List;
 public interface IMediaNotificationService {
     MediaNotification save(MediaNotification mediaNotification);
     List<ImageBytesDto> getAllPosts();
+    List<MediaNotification> getMediaNotificationsByUsername(String username);
 }
