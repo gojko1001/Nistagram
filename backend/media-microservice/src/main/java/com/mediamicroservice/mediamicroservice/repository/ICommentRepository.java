@@ -12,4 +12,6 @@ public interface ICommentRepository extends JpaRepository<Comment, Long> {
     Comment save(Comment comment);
 
     List<Comment> findAll();
+
+    List<Comment> findCommentsByUsername(String username);
 }

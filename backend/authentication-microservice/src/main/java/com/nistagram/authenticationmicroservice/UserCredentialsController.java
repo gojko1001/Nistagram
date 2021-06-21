@@ -65,8 +65,8 @@ public class UserCredentialsController {
     }
 
     @PreAuthorize("hasAuthority('CHANGE_USERNAME')")
-    @PutMapping("/change_username")
-    public void changeUsername(@RequestBody String newUsername,
+    @PutMapping("/change_username/{newUsername}")
+    public void changeUsername(@PathVariable String newUsername,
                                @RequestHeader("Authorization") String jwt){
         String username = jwtService.extractUsername(jwt.substring(7));
         if(username == null)

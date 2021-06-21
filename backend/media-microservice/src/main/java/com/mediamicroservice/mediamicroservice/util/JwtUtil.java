@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice;
+package com.mediamicroservice.mediamicroservice.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+public class JwtUtil {
+
     @Value("rlwHsKbnKROj0bg")
     private String KEY;
 
