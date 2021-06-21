@@ -15,27 +15,28 @@
               tag="article"
               style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
               class="mb-2">
-          <h4 @click="goToProfile(img.username)" class="clickable">@{{img.username}}</h4>
-          <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
-          <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
-            <i class="fa fa-ban fa-fw"></i>
-          </button>
-          
-          <p style="color:blue">{{img.location.name}}</p>
+            <h4 @click="goToProfile(img.username)" class="clickable">@{{img.username}}</h4>
+            <h6 style="margin-top:-30px; margin-left: 350px">{{img.timestamp | formatDate}}</h6>
+            <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
+              <i class="fa fa-ban fa-fw"></i>
+            </button>
+            
+            <p style="color:blue">{{img.location.name}}</p>
 
-          <div v-for="(img, q) in img.imageBytes" :key="'D'+q">
-            <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-            <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-              The video is not supported by your browser.
-            </video>
-          </div>
-          <div style="margin-top:-30px; margin-left:20px; background-color: black">
-            <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
-              <i class="fas fa-user-tag"></i> {{tag.username}}
-            </span>
-          </div>
-          <br>
-          <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
+            <div v-for="(img, q) in img.imageBytes" :key="'D'+q">
+                <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                    The video is not supported by your browser.
+                </video>
+            </div>
+            <div style="margin-top:-30px; margin-left:20px">
+              <span v-for="(tag,t) in img.userTags" :key="'UT' + t">
+                <i class="fas fa-user-tag"></i> {{tag.username}}
+              </span>
+            </div>
+
+            <br>
+            <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>
             <span>{{img.numLikes}}</span>
@@ -49,9 +50,9 @@
             <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:240px">
               <i class="fas fa-bookmark"></i>
             </router-link>
-          <b-card-text>
-            <span @click="goToProfile(img.username)" class="clickable"><b>{{img.username}}:  </b></span>{{img.description}}
-            <br>
+            <b-card-text>
+              <span @click="goToProfile(img.username)" class="clickable"><b>{{img.username}}:  </b></span>{{img.description}}
+              <br>
               <span v-for="(tag,t) in img.hashtags" :key="t">
                   #{{tag.name}}
               </span>
@@ -173,6 +174,44 @@ export default {
       })
     },
 
+    likePost(id, liked) {
+      console.log(this.form);
+      this.formLike.postId = id;
+      this.formLike.username = getUsernameFromToken();
+      this.formLike.liked = liked;
+      if(this.formLike.username != null){
+        this.axios.post('/media-api/like', this.formLike)
+        .then(response => { 
+          console.log(response.data);
+          this.makeToast("Liked !!!", "success");
+        })
+        .catch(error => { 
+          console.log(error);
+          this.makeToast("Error occured.", "danger");
+        })
+      }else{
+        this.makeToast("Please log in.", "info");
+      }     
+    },
+
+    reportPost(id){
+      this.report.requestedBy = getUsernameFromToken();
+      this.report.mediaId = id;
+      if(this.report.requestedBy != null){
+      this.axios.post('/media-api/inappropriate', this.report)
+        .then(response => { 
+          console.log(response.data);
+          this.makeToast("Reported !!!", "success");
+        })
+        .catch(error => { 
+          console.log(error);
+          this.makeToast("Error occured.", "danger");
+        })
+      }else{
+        this.makeToast("Please log in.", "info");
+      }
+    },
+
     loadResults: function(length){
       for(let i=0; i < length; i++){
         for(let j=0; j<this.info[i].imageBytes.length; j++){
@@ -208,43 +247,6 @@ export default {
         window.location.href = "/user/" + username;               
       },
   },
-
-  likePost(id, liked) {
-    console.log(this.form);
-    this.formLike.postId = id;
-    this.formLike.username = getUsernameFromToken();
-    this.formLike.liked = liked;
-    if(this.formLike.username != null){
-      this.axios.post('/media-api/like', this.formLike)
-      .then(response => { 
-        console.log(response.data);
-        this.makeToast("Liked !!!", "success");
-      })
-      .catch(error => { 
-        console.log(error);
-        this.makeToast("Error occured.", "danger");
-      })
-    }else{
-      this.makeToast("Please log in.", "info");
-    }     
-  },
-  reportPost(id){
-    this.report.requestedBy = getUsernameFromToken();
-    this.report.mediaId = id;
-    if(this.report.requestedBy != null){
-      this.axios.post('/media-api/inappropriate', this.report)
-      .then(response => { 
-        console.log(response.data);
-        this.makeToast("Reported !!!", "success");
-      })
-      .catch(error => { 
-        console.log(error);
-        this.makeToast("Error occured.", "danger");
-      })
-    }else{
-      this.makeToast("Please log in.", "info");
-    }
-  }
 }
 </script>
 
