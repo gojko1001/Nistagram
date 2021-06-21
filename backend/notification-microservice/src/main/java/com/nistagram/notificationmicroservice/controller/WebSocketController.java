@@ -8,6 +8,7 @@ import com.nistagram.notificationmicroservice.domain.MediaNotification;
 import com.nistagram.notificationmicroservice.service.interfaces.IMediaNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
@@ -28,10 +29,10 @@ public class WebSocketController {
         this.template = template;
     }
 
-    /*@SubscribeMapping(SENDING_URL)
-    public Notification onSubscribe() {
-        return new Notification("Connected", new Date());
-    }*/
+    @SubscribeMapping(SENDING_URL)
+    public String onSubscribe() {
+        return "Saljem sa beka";
+    }
 
     @Scheduled(fixedRate = 10000)
     public void sendMessage() {
@@ -43,7 +44,7 @@ public class WebSocketController {
                 for(Comment comment: imageBytesDto.getComments()){
                     long commentTimestamp = comment.getTimestamp().getTime();
                     if(commentTimestamp <= now.getTime() && commentTimestamp > now.getTime()-10000){
-                        //template.convertAndSend(SENDING_URL, new Notification("New job in " + conn.getName(), now));
+                        template.convertAndSend(SENDING_URL, "Radiiiiii (sa beka)");
                         MediaNotification mediaNotification = new MediaNotification();
                         mediaNotification.setMediaId(imageBytesDto.getMediaId());
                         mediaNotification.setNotifyUsername(imageBytesDto.getUsername());
