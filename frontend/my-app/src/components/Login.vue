@@ -70,7 +70,7 @@ export default {
           this.makeToast("User has been logged in successfully.", "success");
           saveToken(response.data);
         
-          window.location.href = "/discover";
+          window.location.href = "/";
         })
         .catch(error => { console.log(error);
                             if(!error.response)
@@ -88,7 +88,7 @@ export default {
                               this.makeToast("User has been logged in successfully.", "success");
                               saveToken(response.data);
                               this.checkIsAdmin();
-                              window.location.href = "/discover";
+                              window.location.href = "/";
                             })
           .catch(error => { console.log(error);
                             if(!error.response)

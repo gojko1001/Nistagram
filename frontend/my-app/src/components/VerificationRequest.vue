@@ -69,7 +69,7 @@ export default {
         this.axios.post(VERIFY_USER_PATH + '/' + this.username, this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("Your verification request has been sent successfully.", "success");
-                                      window.location.href = "/discover";
+                                      window.location.href = "/";
                                       
                 })
                   .catch(error => { console.log(error);

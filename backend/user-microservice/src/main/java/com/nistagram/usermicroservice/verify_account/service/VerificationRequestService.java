@@ -56,7 +56,7 @@ public class VerificationRequestService implements IVerificationRequestService {
 
     private byte[] getImage(String fileName) {
         String filePath = new File("").getAbsolutePath();
-        filePath = filePath.concat("/" + uploadDir + "/");
+        filePath = filePath.concat("/src/main/resources/" + uploadDir + "/");
 
         File in = new File(filePath + fileName);
         try {
