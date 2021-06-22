@@ -39,7 +39,7 @@
               </span>
             </div>
 
-            <br>
+            <br><br>
             <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>
@@ -48,10 +48,10 @@
               <i class="fas fa-thumbs-down"></i>
             </button>
             <span>{{img.numDislikes}}</span>
-            <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
+            <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
               <i class="far fa-comment"></i>
             </router-link>
-            <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:240px">
+            <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:240px">
               <i class="fas fa-bookmark"></i>
             </router-link>
             <b-card-text>
@@ -235,7 +235,7 @@ export default {
             }else if(!like.liked){
               this.info[i].numDislikes += 1;
             }
-            if(like.username == this.username){
+            if(getUsernameFromToken() != null && like.username == this.username){
               if(like.liked){
                 this.info[i].liked = true;
               }else{

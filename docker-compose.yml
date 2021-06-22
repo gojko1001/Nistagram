@@ -34,28 +34,6 @@ services:
     networks:
       - demo
 
-  media-microservice:
-    image: media-microservice
-    container_name: media-microservice
-    build:
-      context: ./backend/media-microservice
-      dockerfile: Dockerfile
-    tty: true
-    restart: on-failure
-    networks:
-      - demo
-    ports:
-      - "3033:3033"
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
-      DATABASE_USERNAME: root
-      DATABASE_PASSWORD: root
-      DATABASE_DOMAIN: mysql
-      DATABASE_SCHEMA: mediadb?createDatabaseIfNotExist=true&serverTimezone=UTC
-    depends_on:
-      - eureka-server
-      - mysql
-
 
   authentication-microservice:
     image: authentication-microservice
@@ -100,6 +78,53 @@ services:
     depends_on:
       - eureka-server
       - mysql
+
+
+  media-microservice:
+    image: media-microservice
+    container_name: media-microservice
+    build:
+      context: ./backend/media-microservice
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - "3033:3033"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: mediadb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on:
+      - eureka-server
+      - mysql
+
+
+  notification-microservice:
+    image: notification-microservice
+    container_name: notification-microservice
+    build:
+      context: ./backend/notification-microservice
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - "3036:3036"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: notificationdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on:
+      - eureka-server
+      - mysql
+      - media-microservice
 
   mysql:
     image: mysql:8.0.19
