@@ -136,6 +136,14 @@ public class UserRelationController {
         relationService.removeUserRelation(username, relatedUsername);
     }
 
+    @DeleteMapping("/removeRequest/{relatedUsername}")
+    public void removeRequestRelation(@PathVariable String relatedUsername,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Remove relation with user: " + relatedUsername, username);
+        relationService.removeUserRelation(relatedUsername, username);
+    }
+
     private String getUsernameFromToken(String tokenHeader){
         String username = jwtUtil.extractUsername(tokenHeader);
         if (username == null)

@@ -110,9 +110,9 @@
       </b-tab>
       <!-- Block list -->
       <b-tab title="Block list"><b-card-text><h1>Blocked users</h1></b-card-text>
-        <div v-for="(user,p) in blockedUsers" :key="p">
-            <span class="clickable" v-on:click="goToProfile(user.username)">@{{user.username}} </span>
-            <b-btn size="sm" variant="outline-info" class="float-right" @click="unBlock(user.username)">Unblock</b-btn><hr>
+        <div v-for="(user,i) in blockedUsers" :key="i">
+            <span class="clickable" v-on:click="goToProfile(user.username)">@{{user.username}} (<b>{{user.fullName}}</b>)</span>
+            <b-btn size="sm" variant="outline-info" class="float-right" @click="unBlock(user.username, i)">Unblock</b-btn><hr>
         </div>
       </b-tab>
     </b-tabs>
@@ -144,7 +144,7 @@ export default {
   mounted: function(){
     if(getUsernameFromToken() == null){
       removeToken();
-      window.location.href = "/";
+      window.location.href = "/not-found";
     }
       
     this.axios.get(USER_PATH + '/' + this.username, {   
@@ -235,13 +235,13 @@ export default {
       goToProfile(username){
         window.location.href="/user/" + username;
       },
-      unBlock(toUnblock){
+      unBlock(toUnblock, i){
         this.axios.delete(DELETE_RELATION_PATH + "/" + toUnblock,{   headers:{
                                                                 Authorization: "Bearer " + getToken(),
                                                             }
                     }).then(() => {
                         this.makeToast(toUnblock + " unblocked!", "success");
-                        window.location.reload();
+                        this.blockedUsers.splice(i, 1);
                     }).catch(err => {
                         if(!err.response)
                               this.makeToast(SERVER_NOT_RESPONDING, "danger");

@@ -24,6 +24,7 @@ export const GET_CLOSE_FRIENDS_PATH = USER_RELATION_PATH + "/close_friends"
 
 export const FOLLOW_PATH = USER_RELATION_PATH + "/follow"
 export const ACCEPT_FOLLOWER_PATH = USER_RELATION_PATH + "/accept"
+export const DELETE_REQUEST_PATH = USER_RELATION_PATH + "/removeRequest"
 export const RELATION_STATUS_UPDATE_PATH = USER_RELATION_PATH + "/update"
 export const BLOCK_USER_PATH = USER_RELATION_PATH + '/block'
 export const DELETE_RELATION_PATH = USER_RELATION_PATH + "/remove"

@@ -38,7 +38,9 @@
             <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
                 <button class="heart nav-btn">
                   <i class="fas fa-user-plus" v-b-modal.modal-follow-request></i>
+                  <small id="pendingnum" v-if="followRequests.length > 0"><b-badge variant="danger" pill>{{followRequests.length}}</b-badge></small>
                 </button>
+                
             </li>
             <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
                 <button class="heart nav-btn" @click="notificationPage">
@@ -74,10 +76,12 @@
     </div>
     </nav>
     <b-modal id="modal-follow-request" title="Following requests">
-        <div v-for="(request,p) in followRequests" :key="p">
-            <span v-on:click="goToProfile(request.username)" class="clickable">@{{request.username}}</span>
-            <b-btn size="sm" variant="outline-info" class="float-right" @click="acceptRequest(request.username)">Accept</b-btn>
-            <b-btn size="sm" variant="outline-danger" class="float-right" @click="unfollowUser(request.username)">Delete</b-btn><hr>
+      <span v-if="followRequests.length == 0" style="text-align:center; color: blue"><h5>No follow requests!</h5></span>
+        <div v-for="(request,idx) in followRequests" :key="idx">
+            <span v-on:click="goToProfile(request.username)" class="clickable">@{{request.username}} (<b>{{request.fullName}}</b>)</span>
+            <b-btn size="sm" variant="outline-danger" class="float-right" @click="deleteRequest(request.username)">Delete</b-btn>
+            <b-btn size="sm" variant="outline-info" class="float-right" @click="acceptRequest(request.username, idx)">Accept</b-btn>
+            <hr>
         </div>
         <template #modal-footer="{ cancel }">
             <b-button variant="secondary" @click="cancel()">
@@ -90,8 +94,7 @@
 
 
 <script>
-import { use } from 'vue/types/umd';
-import { ACCEPT_FOLLOWER_PATH, GET_REQUESTS_PATH } from '../util/constants';
+import { ACCEPT_FOLLOWER_PATH, GET_REQUESTS_PATH, SERVER_NOT_RESPONDING, DELETE_REQUEST_PATH } from '../util/constants';
 import { getRoleFromToken, getToken, getUsernameFromToken, removeToken } from '../util/token';
 export default {
   name: 'Navbar',
@@ -142,13 +145,34 @@ export default {
     profileVerification: function(){
       window.location.href = "/all_requests";
     },
-    acceptRequest(username){
+    goToProfile(username){
+      window.location.href = "/user/" + username;
+    },
+    acceptRequest(username, idx){
       this.axios.put(ACCEPT_FOLLOWER_PATH + "/" + username, null, {  headers:{
                                             Authorization: "Bearer " + getToken(),
                                          }  
       }).then(() => {
-                  
-      })
+                  this.followRequests.splice(idx, 1);
+      }).catch(err => {
+                        if(!err.response)
+                            this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
+    },
+    deleteRequest(username, idx){
+      this.axios.delete(DELETE_REQUEST_PATH + "/" + username,{   headers:{
+                                                                Authorization: "Bearer " + getToken(),
+                                                            }
+                    }).then(() => {
+                        this.followRequests.splice(idx, 1);
+                    }).catch(err => {
+                        if(!err.response)
+                            this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast(err.message, "danger");
+                    })
     }
   },
 }
