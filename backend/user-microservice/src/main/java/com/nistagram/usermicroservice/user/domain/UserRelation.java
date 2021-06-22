@@ -5,6 +5,7 @@ import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -35,6 +36,8 @@ public class UserRelation {
     private Boolean notifyPost = false;
     @Column
     private Boolean notifyStory = false;
+    @Column
+    private Date timestamp;
 
     public UserRelation() {}
 

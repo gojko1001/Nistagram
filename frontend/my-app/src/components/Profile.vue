@@ -50,11 +50,13 @@
             <span>
                 <b-btn pill variant="outline-dark" class="mainBtn"><i class="fas fa-photo-video"></i>  {{numPost}} Posts</b-btn> <br>
                 <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn" >
-                    <i class="fas fa-users"></i>  {{numFollowing}} Following</b-btn> <br>
+                    <i class="fas fa-users"></i>  {{followings.length}} Following</b-btn> <br>
                 <b-modal id="modal-followings" title="Following" @show="checkPermission">
-                    <div v-for="(follow,p) in followings" :key="p">
+                    <span v-if="followings.length <= 0 && isUserProfile" style="text-align:center; color: blue"><h5>You aren't following anyone!</h5></span>
+                    <span v-if="followings.length <= 0 && !isUserProfile" style="text-align:center; color: blue"><h5>No follwed users!</h5></span>
+                    <div v-for="(follow,i) in followings" :key="i">
                         <span v-on:click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
-                        <b-btn size="sm" variant="outline-info" class="float-right" @click="unfollowUser(follow.username)">Unfollow</b-btn><hr>
+                        <b-btn size="sm" variant="outline-info" class="float-right" v-if="isUserProfile" @click="unfollowUser(follow.username, i)">Unfollow</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
                         <b-button variant="secondary" @click="cancel()">
@@ -63,11 +65,13 @@
                     </template>
                 </b-modal>
                 <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn">
-                    <i class="fas fa-user-friends"></i>  {{numFollowers}} Followers</b-btn>
+                    <i class="fas fa-user-friends"></i>  {{followers.length}} Followers</b-btn>
                 <b-modal id="modal-followers" title="Followers" @show="checkPermission">
-                    <div v-for="(follow,p) in followers" :key="p">
+                    <span v-if="followers.length <= 0 && isUserProfile" style="text-align:center; color: blue"><h5>You have no followers!</h5></span>
+                    <span v-if="followers.length <= 0 && !isUserProfile" style="text-align:center; color: blue"><h5>No followers!</h5></span>
+                    <div v-for="(follow,i) in followers" :key="i">
                         <span @click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
-                        <b-btn size="sm" variant="outline-info" class="float-right">Remove</b-btn><hr>
+                        <b-btn size="sm" variant="outline-info" class="float-right" v-if="isUserProfile" @click="removeFollower(follow.username, i)">Remove</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
                         <b-button variant="secondary" @click="cancel()">
@@ -363,7 +367,7 @@
 
 
 <script>
-import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH, BLOCK_USER_PATH } from '../util/constants';
+import { FOLLOW_PATH, GET_FOLLOWERS_PATH, GET_FOLLOWINGS_PATH, SERVER_NOT_RESPONDING, USER_PATH, DELETE_RELATION_PATH, USER_RELATION_PATH, RELATION_STATUS_UPDATE_PATH, MUTE_POST_PATH, MUTE_STORY_PATH, NOTIFY_POST_PATH, NOTIFY_STORY_PATH, BLOCK_USER_PATH, DELETE_REQUEST_PATH } from '../util/constants';
 import { getToken, getUsernameFromToken, removeToken } from '../util/token';
 export default {
     name: 'Profile',
@@ -411,8 +415,6 @@ export default {
             stories:[],
             archivedStories:[],
             collections:[],
-            numFollowing:0,
-            numFollowers:0,
             followings:[],
             followers:[],
             relationDto: {
@@ -476,19 +478,16 @@ export default {
                                 console.log(response.data);
                                 this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
                                             .then(response => {
-                                                this.numFollowers = response.data.length;
                                                 this.followers = response.data.reverse();
                                                 this.getPosts();
                                             })
-            }).catch(error => { if(!error.response) {
+            }).catch(error => { if(!error.response)
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
-                                    return
-                                }
-                                window.location.href = '/home'
+                                else
+                                    window.location.href = '/home'
             });
         this.axios.get(GET_FOLLOWINGS_PATH + "/" + this.username)
                         .then(response => {
-                            this.numFollowing = response.data.length;
                             this.followings = response.data.reverse();    
                         })
         this.axios.get(USER_RELATION_PATH + "/" + this.username + '/' + getUsernameFromToken(), {  headers:{
@@ -733,19 +732,32 @@ export default {
                             this.makeToast(err.message, "danger");
                     })
         },
-        unfollowUser(toUnfollow){
+        unfollowUser(toUnfollow, i){
             this.axios.delete(DELETE_RELATION_PATH + "/" + toUnfollow,{   headers:{
                                                                 Authorization: "Bearer " + getToken(),
                                                             }
                     }).then(() => {
                         this.makeToast(toUnfollow + " unfollowed!", "success");
-                        window.location.reload();
+                        this.followings.splice(i, 1);
                     }).catch(err => {
                         if(!err.response)
                               this.makeToast(SERVER_NOT_RESPONDING, "danger");
                         else
                             this.makeToast(err.message, "danger");
                     })
+        },
+        removeFollower(username, idx){
+            this.axios.delete(DELETE_REQUEST_PATH + "/" + username,{   headers:{
+                                                                    Authorization: "Bearer " + getToken(),
+                                                                }
+                        }).then(() => {
+                            this.followers.splice(idx, 1);
+                        }).catch(err => {
+                            if(!err.response)
+                                this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                            else
+                                this.makeToast(err.message, "danger");
+                        })
         },
         closeChange(){
             this.axios.put(RELATION_STATUS_UPDATE_PATH + "/" + this.username + "/" + this.userRelation.status, null, {   

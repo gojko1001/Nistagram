@@ -6,12 +6,14 @@ import com.nistagram.usermicroservice.user.domain.UserRelation;
 import com.nistagram.usermicroservice.user.domain.UserRelationKey;
 import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.user.repository.IUserRelationRepository;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserRelationService;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -20,10 +22,20 @@ public class UserRelationService implements IUserRelationService {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IUserRelationRepository relationRepository;
 
     private User findUserByUsername(String username) {
         Logger.infoDb("Read user with username: " + username + ".");
         return userService.findUserByUsername(username);
+    }
+
+    public List<UserRelation> findAllRequestsAndFollowings(){
+        List<UserRelation> relations = new ArrayList<>();
+        for(UserRelation relation : relationRepository.findAll())
+            if(relation.getRelationStatus() == RelationStatus.PENDING || relation.getRelationStatus() == RelationStatus.FOLLOWING)
+                relations.add(relation);
+        return relations;
     }
 
     public List<User> getUserFollowers(String username) {
@@ -44,6 +56,16 @@ public class UserRelationService implements IUserRelationService {
                 following.add(u.getRelatedUser());
         }
         return following;
+    }
+
+    public List<User> getUserRequests(String username){
+        User user = findUserByUsername(username);
+        List<User> followers = new ArrayList<>();
+        for (UserRelation u : user.getInvertedRelations()) {
+            if (u.getRelationStatus() == RelationStatus.PENDING && !isBlocked(username, u.getUser().getUsername()))
+                followers.add(u.getUser());
+        }
+        return followers;
     }
 
     public List<User> getEagerFollowings(String username, RelationStatus status) {
@@ -68,6 +90,7 @@ public class UserRelationService implements IUserRelationService {
             status = RelationStatus.FOLLOWING;
         UserRelation relation = new UserRelation(user, relatedUser, status);
         relation.setId(new UserRelationKey(user.getId(), relatedUser.getId()));
+        relation.setTimestamp(new Date());
         user.getUserRelations().add(relation);
         userService.save(user);
     }
@@ -80,6 +103,7 @@ public class UserRelationService implements IUserRelationService {
         if (relation.getRelationStatus() != RelationStatus.PENDING)
             throw new InvalidActionException("Following request doesn't exist!");
         relation.setRelationStatus(RelationStatus.FOLLOWING);
+        relation.setTimestamp(new Date());
         userService.save(user);
     }
 

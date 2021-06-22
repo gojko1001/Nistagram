@@ -33,6 +33,11 @@ public class UserRelationController {
         return RelationMapper.mapRelationToRelationDto(relation);
     }
 
+    @GetMapping
+    public List<UserRelationDto> getAllRequestsAndFollowings() {
+        return RelationMapper.mapRelationsToRelationsDto(relationService.findAllRequestsAndFollowings());
+    }
+
     @GetMapping("/followers/{username}")
     public List<UserDto> getFollowers(@PathVariable String username){
         Logger.info("Get followers.", username);
@@ -43,6 +48,13 @@ public class UserRelationController {
     public List<UserDto> getFollowings(@PathVariable String username){
         Logger.info("Get followings.", username);
         return UserMapper.mapUserListToUserDtoList(relationService.getUserFollowings(username));
+    }
+
+    @GetMapping("/requests")
+    public List<UserDto> getFollowRequests(@RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Get pending users.", username);
+        return UserMapper.mapUserListToUserDtoList(relationService.getUserRequests(username));
     }
 
     @GetMapping("/blocked/{username}")
@@ -127,6 +139,14 @@ public class UserRelationController {
         String username = getUsernameFromToken(jwt);
         Logger.info("Remove relation with user: " + relatedUsername, username);
         relationService.removeUserRelation(username, relatedUsername);
+    }
+
+    @DeleteMapping("/removeRequest/{relatedUsername}")
+    public void removeRequestRelation(@PathVariable String relatedUsername,
+                               @RequestHeader("Authorization") String jwt) {
+        String username = getUsernameFromToken(jwt);
+        Logger.info("Remove relation with user: " + relatedUsername, username);
+        relationService.removeUserRelation(relatedUsername, username);
     }
 
     private String getUsernameFromToken(String tokenHeader){
