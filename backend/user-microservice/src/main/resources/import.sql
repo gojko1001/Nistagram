@@ -7,12 +7,6 @@ insert into user_category (name) values ('organisation');
 insert into user_category (name) values ('actor');
 insert into user_category (name) values ('musician');
 
--- VerficationRequests
-insert into verification_request (file_path, status, category_id) values ('id1.jpg', 1, 1);
-insert into verification_request (file_path, status, category_id) values ('id2.jpg', 2, 2);
-insert into verification_request (file_path, status, category_id) values ('id3.jpg', 0, 3);
-insert into verification_request (file_path, status, category_id) values ('id4.jpg', 0, 4);
-
 -- User
 -- Role:user
 insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable, verification_request_id) values (101, 'maja', "Maja Stamenic", "maja@mailinator.com", "063/778-55-55", null, null, "1998-11-05", 1, true, true, true, 1)
