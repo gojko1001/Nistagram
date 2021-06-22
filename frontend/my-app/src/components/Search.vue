@@ -288,14 +288,6 @@ export default {
   color: red;
 }
 
-button{
-  background:#007bff;
-  color: white;
-  border-radius: 5px;
-  margin-left: 50%;
-  margin-top: 10%;
-}
-
 .profile{
   text-align: center;
   max-width: 250px;
