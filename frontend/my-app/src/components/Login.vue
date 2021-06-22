@@ -28,9 +28,9 @@
 
 <script>
 import GoogleLogin from 'vue-google-login';
-import { saveToken } from "./../util/token"
-import { LOGIN_PATH, SERVER_NOT_RESPONDING, LOGIN_GOOGLE_PATH, USER_CREDENTIALS_PATH } from "./../util/constants"
-import { getUsernameFromToken } from '../util/token';
+import { getRoleFromToken, saveToken } from "./../util/token"
+import { LOGIN_PATH, SERVER_NOT_RESPONDING, LOGIN_GOOGLE_PATH } from "./../util/constants"
+
 export default {
   name: 'Login',
   components: {
@@ -55,8 +55,7 @@ export default {
           email: '',
         },
         userGoogle: '',
-        show: true,
-        isAdmin:false,
+        show: true
       }
   },
   methods:{
@@ -87,8 +86,10 @@ export default {
           .then(response => { console.log(response);
                               this.makeToast("User has been logged in successfully.", "success");
                               saveToken(response.data);
-                              this.checkIsAdmin();
-                              window.location.href = "/discover";
+                              if(getRoleFromToken() == 'ROLE_ADMIN')
+                                window.location.href = "/inappropriate_content";
+                              else
+                                window.location.href = "/discover";
                             })
           .catch(error => { console.log(error);
                             if(!error.response)
@@ -97,23 +98,6 @@ export default {
                               this.makeToast("Username or password is not correct.", "danger");
                           })
       },
-
-    checkIsAdmin(){
-      this.username = getUsernameFromToken();
-      if(this.username != null){
-        this.axios.get(USER_CREDENTIALS_PATH + '/isAdmin/' + this.username).then(response => {
-                                this.isAdmin = response.data;
-                                if(this.isAdmin){
-                                  window.location.href = "/inappropriate_content";
-                                }
-            }).catch(error => { if(!error.response) {
-                                    this.makeToast(SERVER_NOT_RESPONDING, "warning");
-                                    return
-                                }
-            })
-    }
-    return this.isAdmin;
-    },
     onReset(event) {
         event.preventDefault()
         // Reset our form values

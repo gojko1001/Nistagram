@@ -52,9 +52,11 @@
                 <b-btn v-b-modal.modal-followings pill variant="outline-dark" class="mainBtn" >
                     <i class="fas fa-users"></i>  {{followings.length}} Following</b-btn> <br>
                 <b-modal id="modal-followings" title="Following" @show="checkPermission">
+                    <span v-if="followings.length <= 0 && isUserProfile" style="text-align:center; color: blue"><h5>You aren't following anyone!</h5></span>
+                    <span v-if="followings.length <= 0 && !isUserProfile" style="text-align:center; color: blue"><h5>No follwed users!</h5></span>
                     <div v-for="(follow,i) in followings" :key="i">
                         <span v-on:click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
-                        <b-btn size="sm" variant="outline-info" class="float-right" @click="unfollowUser(follow.username, i)">Unfollow</b-btn><hr>
+                        <b-btn size="sm" variant="outline-info" class="float-right" v-if="isUserProfile" @click="unfollowUser(follow.username, i)">Unfollow</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
                         <b-button variant="secondary" @click="cancel()">
@@ -65,9 +67,11 @@
                 <b-btn v-b-modal.modal-followers pill variant="outline-dark" class="mainBtn">
                     <i class="fas fa-user-friends"></i>  {{followers.length}} Followers</b-btn>
                 <b-modal id="modal-followers" title="Followers" @show="checkPermission">
+                    <span v-if="followers.length <= 0 && isUserProfile" style="text-align:center; color: blue"><h5>You have no followers!</h5></span>
+                    <span v-if="followers.length <= 0 && !isUserProfile" style="text-align:center; color: blue"><h5>No followers!</h5></span>
                     <div v-for="(follow,i) in followers" :key="i">
                         <span @click="goToProfile(follow.username)" class="clickable">@{{follow.username}} (<b>{{follow.fullName}}</b>)</span>
-                        <b-btn size="sm" variant="outline-info" class="float-right" @click="removeFollower(follow.username, i)">Remove</b-btn><hr>
+                        <b-btn size="sm" variant="outline-info" class="float-right" v-if="isUserProfile" @click="removeFollower(follow.username, i)">Remove</b-btn><hr>
                     </div>
                     <template #modal-footer="{ cancel }">
                         <b-button variant="secondary" @click="cancel()">

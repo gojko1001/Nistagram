@@ -1,6 +1,5 @@
-package com.nistagram.usermicroservice.user.controller.dto;
+package com.nistagram.notificationmicroservice.controller.dto;
 
-import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
 import lombok.Data;
 
 import java.util.Date;

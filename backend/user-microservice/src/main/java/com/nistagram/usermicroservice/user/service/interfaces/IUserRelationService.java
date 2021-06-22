@@ -9,6 +9,10 @@ import java.util.function.BiConsumer;
 
 public interface IUserRelationService {
 
+    UserRelation findRelation(String username, String relatedUsername);
+
+    List<UserRelation> findAllRequestsAndFollowings();
+
     List<User> getUserFollowers(String username);
 
     List<User> getUserFollowings(String username);
@@ -28,6 +32,4 @@ public interface IUserRelationService {
     void removeUserRelation(String username, String relatedUsername);
 
     void setRelationBoolean(String username, String relatedUsername, BiConsumer<UserRelation, Boolean> relationFunction, Boolean isMuted);
-
-    UserRelation findRelation(String username, String relatedUsername);
 }

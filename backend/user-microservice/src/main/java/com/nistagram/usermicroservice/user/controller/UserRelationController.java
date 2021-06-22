@@ -33,6 +33,11 @@ public class UserRelationController {
         return RelationMapper.mapRelationToRelationDto(relation);
     }
 
+    @GetMapping
+    public List<UserRelationDto> getAllRequestsAndFollowings() {
+        return RelationMapper.mapRelationsToRelationsDto(relationService.findAllRequestsAndFollowings());
+    }
+
     @GetMapping("/followers/{username}")
     public List<UserDto> getFollowers(@PathVariable String username){
         Logger.info("Get followers.", username);
