@@ -87,7 +87,7 @@
                 <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
                     <div v-for="(img,p) in stories" :key="p">
-                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends || loggedUser == img.username">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
@@ -121,7 +121,7 @@
                 <!-- Highlighted stories -->
                 <b-modal id="modal-3" title="Highlighted stories">
                     <div v-for="(img,p) in stories" :key="p">
-                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends || loggedUser == img.username">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
@@ -573,7 +573,7 @@ export default {
                                                     }else if(!like.liked){
                                                     this.info[i].numDislikes += 1;
                                                     }
-                                                    if(getUsernameFromToken() != null && like.username == this.username){
+                                                    if(getUsernameFromToken() != null && like.username == getUsernameFromToken()){
                                                         if(like.liked){
                                                             this.info[i].liked = true;
                                                         }else{
@@ -607,16 +607,13 @@ export default {
             this.axios.get('/media-api/story/archive/' + this.username)
                         .then(response => { this.archivedStories = response.data;
                                             for(let i=0; i< this.archivedStories.length; i++){
-                                                if((this.archivedStories[i].forCloseFriends && this.isCloseFriend) || !this.archivedStories[i].forCloseFriends){
-                                                    for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
-                                                        if(this.archivedStories[i].imageBytes[j].image){
-                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
-                                                        }else{
-                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
-                                                        } 
-                                                    }
+                                                for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
+                                                    if(this.archivedStories[i].imageBytes[j].image){
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
+                                                    } 
                                                 }
-                                                
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
@@ -626,13 +623,11 @@ export default {
             this.axios.get('/media-api/story/highlights/' + this.username)
                         .then(response => { this.stories = response.data;
                                             for(let i=0; i< this.stories.length; i++){
-                                                if((this.stories[i].forCloseFriends && this.isCloseFriend) || !this.stories[i].forCloseFriends){
-                                                    for(let j=0; j< this.stories[i].imageBytes.length; j++){
-                                                        if(this.stories[i].imageBytes[j].image){
-                                                            this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
-                                                        }else{
-                                                            this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
-                                                        }
+                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                    if(this.stories[i].imageBytes[j].image){
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
                                                     }
                                                 }
                                             }     

@@ -142,7 +142,7 @@ export default {
                                     }else if(!like.liked){
                                       this.img.numDislikes += 1;
                                     }
-                                    if(getUsernameFromToken() != null && like.username == this.username){
+                                    if(getUsernameFromToken() != null && like.username == getUsernameFromToken()){
                                         if(like.liked){
                                             this.img.liked = true;
                                             this.watchLiked = true;
@@ -206,7 +206,7 @@ export default {
         this.item.foo = "masha";
         if(this.formLike.username != null){
           this.axios.post('/media-api/like', this.formLike)
-        .then(response => { this.watch = response.data;
+            .then(response => { this.watch = response.data;
                             console.log(this.watch);
                             if(this.watch.liked == true){
                               this.watchLiked = true;
@@ -220,7 +220,7 @@ export default {
                             }
                             this.makeToast("New reaction on post.", "success");
                             })
-        .catch(error => { console.log(error);
+            .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                         })
         }else{
