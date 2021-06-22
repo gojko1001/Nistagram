@@ -87,7 +87,7 @@
                 <!-- Stories -->
                 <b-modal id="modal-2" title="Stories">
                     <div v-for="(img,p) in stories" :key="p">
-                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends || loggedUser == img.username">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
@@ -121,7 +121,7 @@
                 <!-- Highlighted stories -->
                 <b-modal id="modal-3" title="Highlighted stories">
                     <div v-for="(img,p) in stories" :key="p">
-                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends">
+                        <div v-if="(img.forCloseFriends && isCloseFriend) || !img.forCloseFriends || loggedUser == img.username">
                             <b-card
                                 tag="article"
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
@@ -161,7 +161,7 @@
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
-                                <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
+                                <button v-if="loggedUser != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
                                 <p style="color:blue">{{img.location.name}}</p>
@@ -437,7 +437,8 @@ export default {
                 disliked: false,
                 date:''
             }],
-            isCloseFriend: false
+            isCloseFriend: false,
+            loggedUser:''
         }
     },
     beforeMount(){
@@ -456,6 +457,7 @@ export default {
                 });
     },
     mounted: function(){
+        this.loggedUser = getUsernameFromToken();
         if(!this.isUserProfile)
             this.axios.get(USER_RELATION_PATH + "/" + getUsernameFromToken() + '/' + this.username, {  headers:{
                                                                             Authorization: "Bearer " + getToken(),
@@ -536,7 +538,8 @@ export default {
             this.formLike.postId = id;
             this.formLike.username = getUsernameFromToken();
             this.formLike.liked = liked;
-            this.axios.post('/media-api/like', this.formLike)
+            if(this.formLike.username != null){
+                this.axios.post('/media-api/like', this.formLike)
             .then(response => { console.log(response.data);
                                 this.makeToast("New reaction on post.", "success");
                                 setTimeout(()=>{ window.location.reload() }, 2000);
@@ -544,6 +547,10 @@ export default {
             .catch(error => { console.log(error);
                                 this.makeToast("Error occured.", "danger");
                             })
+            }else{
+                this.makeToast("Please log in.", "info");
+            }
+            
         },
         getPosts(){
             this.axios.get('/media-api/image/profile/' + this.username)
@@ -566,7 +573,7 @@ export default {
                                                     }else if(!like.liked){
                                                     this.info[i].numDislikes += 1;
                                                     }
-                                                    if(like.username == this.username){
+                                                    if(getUsernameFromToken() != null && like.username == getUsernameFromToken()){
                                                         if(like.liked){
                                                             this.info[i].liked = true;
                                                         }else{
@@ -600,16 +607,13 @@ export default {
             this.axios.get('/media-api/story/archive/' + this.username)
                         .then(response => { this.archivedStories = response.data;
                                             for(let i=0; i< this.archivedStories.length; i++){
-                                                if((this.archivedStories[i].forCloseFriends && this.isCloseFriend) || !this.archivedStories[i].forCloseFriends){
-                                                    for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
-                                                        if(this.archivedStories[i].imageBytes[j].image){
-                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
-                                                        }else{
-                                                            this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
-                                                        } 
-                                                    }
+                                                for(let j=0; j< this.archivedStories[i].imageBytes.length; j++){
+                                                    if(this.archivedStories[i].imageBytes[j].image){
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.archivedStories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.archivedStories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.archivedStories[i].imageBytes[j].imageByte;
+                                                    } 
                                                 }
-                                                
                                             }   
                         }).catch(error => { console.log(error.message);
                                             this.makeToast("Error occurred.", "danger");
@@ -619,13 +623,11 @@ export default {
             this.axios.get('/media-api/story/highlights/' + this.username)
                         .then(response => { this.stories = response.data;
                                             for(let i=0; i< this.stories.length; i++){
-                                                if((this.stories[i].forCloseFriends && this.isCloseFriend) || !this.stories[i].forCloseFriends){
-                                                    for(let j=0; j< this.stories[i].imageBytes.length; j++){
-                                                        if(this.stories[i].imageBytes[j].image){
-                                                            this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
-                                                        }else{
-                                                            this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
-                                                        }
+                                                for(let j=0; j< this.stories[i].imageBytes.length; j++){
+                                                    if(this.stories[i].imageBytes[j].image){
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.stories[i].imageBytes[j].imageByte; 
+                                                    }else{
+                                                        this.stories[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.stories[i].imageBytes[j].imageByte;
                                                     }
                                                 }
                                             }     
@@ -826,7 +828,7 @@ export default {
         checkPermission(bvModalEvt){
             if(!this.isUserProfile && !this.isFollowing && !this.user.publicProfile)
                 bvModalEvt.preventDefault();
-        }
+        },
     }
 }
 

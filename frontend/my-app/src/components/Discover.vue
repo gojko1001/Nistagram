@@ -133,7 +133,7 @@ export default {
                                                 }else if(!like.liked){
                                                   this.info[i].numDislikes += 1;
                                                 }
-                                                if(like.username == this.username){
+                                                if(getUsernameFromToken() != null && like.username == this.username){
                                                     if(like.liked){
                                                         this.info[i].liked = true;
                                                     }else{
@@ -163,23 +163,22 @@ export default {
             window.location.href = "/user/" + username;
         },
         likePost(id, liked) {
-        console.log(this.form);
-        this.formLike.postId = id;
-        this.formLike.username = getUsernameFromToken();
-        this.formLike.liked = liked;
-        if(this.formLike.username != null){
-          this.axios.post('/media-api/like', this.formLike)
-          .then(response => { console.log(response.data);
-                              this.makeToast("New reaction on post.", "success");
-                              setTimeout(()=>{ window.location.reload() }, 2000);
+          console.log(this.form);
+          this.formLike.postId = id;
+          this.formLike.username = getUsernameFromToken();
+          this.formLike.liked = liked;
+          if(this.formLike.username != null){
+            this.axios.post('/media-api/like', this.formLike)
+            .then(response => { console.log(response.data);
+                                this.makeToast("New reaction on post.", "success");
+                                setTimeout(()=>{ window.location.reload() }, 2000);
+                              })
+            .catch(error => { console.log(error);
+                              this.makeToast("Error occured.", "danger");
                             })
-          .catch(error => { console.log(error);
-                            this.makeToast("Error occured.", "danger");
-                          })
-        }else{
-          this.makeToast("Please log in.", "info");
-        }
-        
+          }else{
+            this.makeToast("Please log in.", "info");
+          }
       },
       reportPost(id){
         this.report.requestedBy = getUsernameFromToken();
