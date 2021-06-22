@@ -142,7 +142,7 @@ export default {
                                     }else if(!like.liked){
                                       this.img.numDislikes += 1;
                                     }
-                                    if(like.username == this.username){
+                                    if(getUsernameFromToken() != null && like.username == this.username){
                                         if(like.liked){
                                             this.img.liked = true;
                                             this.watchLiked = true;
@@ -185,7 +185,8 @@ export default {
         console.log(this.form);
         this.form.postId = this.postId;
         this.form.username = getUsernameFromToken();
-        this.axios.post('/media-api/comment', this.form)
+        if(this.form.username != null){
+          this.axios.post('/media-api/comment', this.form)
           .then(response => { console.log(response.data);
                               this.makeToast("Comment has been posted.", "success");
                               setTimeout(()=>{ window.location.href = '/comment/' + this.form.postId}, 2000);
@@ -193,6 +194,9 @@ export default {
           .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                           })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
       },
       likePost(id, liked) {
         console.log(this.form);
@@ -200,7 +204,8 @@ export default {
         this.formLike.username = getUsernameFromToken();
         this.formLike.liked = liked;
         this.item.foo = "masha";
-        this.axios.post('/media-api/like', this.formLike)
+        if(this.formLike.username != null){
+          this.axios.post('/media-api/like', this.formLike)
         .then(response => { this.watch = response.data;
                             console.log(this.watch);
                             if(this.watch.liked == true){
@@ -218,6 +223,10 @@ export default {
         .catch(error => { console.log(error);
                             this.makeToast("Error occured.", "danger");
                         })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
+        
       },
       getCollections() {
         var user = getUsernameFromToken();
@@ -234,14 +243,19 @@ export default {
       createCollection(name){
         this.collection.username = getUsernameFromToken();
         this.collection.name = name;
-        this.axios.post('/media-api/collection', this.collection)
-          .then(response => { console.log(response.data)
-                              this.makeToast("Created new collection.", "success");
-                              setTimeout(()=>{ window.location.reload() }, 2000);
-                            })
-          .catch(error => { console.log(error);
-                            this.makeToast("Error occured.", "danger");
-                          })
+        if(this.collection.username != null){
+          this.axios.post('/media-api/collection', this.collection)
+                    .then(response => { console.log(response.data)
+                                        this.makeToast("Created new collection.", "success");
+                                        setTimeout(()=>{ window.location.reload() }, 2000);
+                                      })
+                    .catch(error => { console.log(error);
+                                      this.makeToast("Error occured.", "danger");
+                                    })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
+        
       },
       addToCollection() {
         this.favourite.postId = this.img.id;
