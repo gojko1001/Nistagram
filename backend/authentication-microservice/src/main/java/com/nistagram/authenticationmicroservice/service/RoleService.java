@@ -18,8 +18,6 @@ public class RoleService implements IRoleService {
     @Autowired
     private IRoleRepository roleRepository;
     @Autowired
-    private JwtService jwtService;
-    @Autowired
     private UserCredentialsService userCredentialsService;
 
     @Override

@@ -4,8 +4,10 @@ import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
+import org.apache.catalina.User;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface IUserCredentialsService {
 
@@ -17,6 +19,8 @@ public interface IUserCredentialsService {
 
     UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException;
 
+    List<String> findCredentialsByRoleUserAndAgent();
+
     void changeUsername(String oldUsername, String newUsername);
 
     void changePassword(ResetPasswordDto resetPasswordDto, String jwt);
@@ -24,6 +28,8 @@ public interface IUserCredentialsService {
     void restartPassword(String jwt, ResetPasswordDto resetPasswordDto) throws IOException;
 
     void sendResetPasswordLink(String email) throws IOException;
+
+    void deactivateProfile(String username);
 
     String verifyAccount(String username);
 }
