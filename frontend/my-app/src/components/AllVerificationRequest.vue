@@ -61,7 +61,7 @@ export default {
         this.axios.get(USER_CREDENTIALS_PATH + '/isAdmin/' + this.username).then(response => {
                                 this.isAdmin = response.data;
                                 if(!this.isAdmin)
-                                  window.location.href="/";
+                                  window.location.href="/login";
                                 console.log(response.data);
             }).catch(error => { 
               if(!error.response) {
@@ -70,7 +70,7 @@ export default {
               }
         })
     }else{
-      window.location.href="/";
+      window.location.href="/login";
     }
     this.$nextTick(function () {
       this.axios.get('/user-api/verify')

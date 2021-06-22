@@ -50,7 +50,7 @@ export default {
         this.axios.put('http://localhost:8762/authentication-api/userCredentials/reset_password/' + this.jwt, this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("Password changed successfully.", "success");
-                                      window.location.href = "/";
+                                      window.location.href = "/login";
                                       
                 })
                   .catch(error => { console.log(error);
@@ -65,7 +65,7 @@ export default {
         })
       },
     login:function(){
-      window.location.href = "/";
+      window.location.href = "/login";
     },
     makeToast(message, variant) {
         this.$root.$bvToast.toast(message, {

@@ -14,7 +14,7 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button variant="secondary" style="width:100px" class="mr-3" href="/">Cancel</b-button>
+        <b-button variant="secondary" style="width:100px" class="mr-3" href="/login">Cancel</b-button>
         <b-button type="submit" variant="primary" style="width:200px">Email me link</b-button>
         <br>
       </b-form>
@@ -38,7 +38,7 @@ export default {
             this.axios.get('http://localhost:8762/authentication-api/userCredentials/send_email/'+ this.form.email)
             .then(response => { console.log(response);
                 this.makeToast("Check your email.", "success");
-                window.location.href = "/";
+                window.location.href = "/login";
             })
              .catch(error => { console.log(error);
                                     this.makeToast("Error occurred.", "danger");

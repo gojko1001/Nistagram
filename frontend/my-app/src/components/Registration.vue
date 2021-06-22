@@ -109,7 +109,7 @@ export default {
         this.axios.post(REGISTER_USER_PATH, this.form)
                   .then(response => { console.log(response);
                                       this.makeToast("User has been registered successfully. Check your email.", "success");
-                                      window.location.href = "/";
+                                      window.location.href = "/login";
                                       
                 })
                   .catch(error => { console.log(error);
@@ -128,7 +128,7 @@ export default {
         })
       },
     login:function(){
-      window.location.href = "/";
+      window.location.href = "/login";
     },
     makeToast(message, variant) {
         this.$root.$bvToast.toast(message, {

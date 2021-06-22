@@ -1,13 +1,17 @@
 <template>
     <div id="searchPage">
-      <table v-if="searchingType == 'profile'">
-        <tbody>
-          <tr v-for="(res,i) in profiles" :key="i" :res="res">
-            <td><button v-on:click="goToProfile(res.username)" variant="primary" style="width:200px;"><i v-if="res.status === 'APPROVED'" class="fas fa-user-check"/> {{res.fullName}}</button></td>
-          </tr>
-        </tbody>
-      </table>
-    <br>
+      <div v-if="searchingType == 'profile'">
+        <div class="profile" v-for="(res,i) in profiles" :key="i" :res="res">
+          <div v-on:click="goToProfile(res.username)">
+            <img src="../assets/user-no-picture.png" class="profile_image" alt="Profile picture">
+            <div class="profile_name"><i v-if="res.status === 'APPROVED'" class="fas fa-user-check"/> {{res.fullName}}</div>
+            <div class="profile_title">@{{res.username}}</div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
       <div v-if="searchingType == 'tag' || searchingType == 'location'">
         <br>
         <div v-for="(img,i) in info" :key="i">
@@ -35,7 +39,7 @@
               </span>
             </div>
 
-            <br>
+            <br><br>
             <button class="heart inter" v-bind:class="{'black': !img.liked, 'red': img.liked}" @click="likePost(img.id, true)">
               <i class="fas fa-thumbs-up"></i>
             </button>
@@ -44,10 +48,10 @@
               <i class="fas fa-thumbs-down"></i>
             </button>
             <span>{{img.numDislikes}}</span>
-            <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
+            <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter link">
               <i class="far fa-comment"></i>
             </router-link>
-            <router-link v-if="username != null" :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:240px">
+            <router-link :to="{ name: 'AddComment', params: { id: img.id} }" class="inter" style="margin-left:240px">
               <i class="fas fa-bookmark"></i>
             </router-link>
             <b-card-text>
@@ -231,7 +235,7 @@ export default {
             }else if(!like.liked){
               this.info[i].numDislikes += 1;
             }
-            if(like.username == this.username){
+            if(getUsernameFromToken() != null && like.username == this.username){
               if(like.liked){
                 this.info[i].liked = true;
               }else{
@@ -284,12 +288,38 @@ export default {
   color: red;
 }
 
-button{
-  background:#007bff;
-  color: white;
-  border-radius: 5px;
-  margin-left: 50%;
-  margin-top: 10%;
+.profile{
+  text-align: center;
+  max-width: 250px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 30px;
+  display: inline-block;
+}
+
+.profile_image{
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  display: block;
+}
+
+.profile_name{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.profile_title{
+  margin-bottom: 20px;
+}
+
+.profile_detail{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9em;
 }
 
 </style>

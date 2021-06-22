@@ -79,6 +79,11 @@
                   <i class="fas fa-sign-out-alt"></i>
                 </button>
             </li>
+            <li class="nav-item" v-if="username == null">
+                <button class="nav-btn" @click='login'>
+                  <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </li>
         </ul>
     </div>
     </nav>
@@ -133,13 +138,13 @@ export default {
     },
     logout: function(){
       removeToken();
-      window.location.href = "/"
+      window.location.href = "/login"
     },
     inappropriateContent:function(){
       window.location.href = "/inappropriate_content";
     },
     discoverPage:function(){
-      window.location.href = "/discover";
+      window.location.href = "/";
     },
     notificationPage:function(){
       window.location.href = "/notification";
@@ -154,6 +159,9 @@ export default {
     },
     profileVerification: function(){
       window.location.href = "/all_requests";
+    },
+    login: function(){
+      window.location.href = "/login";
     },
     goToProfile(username){
       window.location.href = "/user/" + username;
@@ -183,8 +191,9 @@ export default {
                         else
                             this.makeToast(err.message, "danger");
                     })
-    }
-  },
+    
+    },
+  }
 }
 </script>
 
