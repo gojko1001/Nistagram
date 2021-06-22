@@ -65,6 +65,11 @@
                   <i class="fas fa-sign-out-alt"></i>
                 </button>
             </li>
+            <li class="nav-item" v-if="username == null">
+                <button class="nav-btn" @click='login'>
+                  <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </li>
         </ul>
     </div>
     </nav>
@@ -114,6 +119,9 @@ export default {
     },
     profileVerification: function(){
       window.location.href = "/all_requests";
+    },
+    login: function(){
+      window.location.href = "/login";
     }
   },
 }
