@@ -144,7 +144,7 @@ export default {
   mounted: function(){
     if(getUsernameFromToken() == null){
       removeToken();
-      window.location.href = "/";
+      window.location.href = "/login";
     }
       
     this.axios.get(USER_PATH + '/' + this.username, {   

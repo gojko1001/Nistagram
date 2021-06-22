@@ -93,7 +93,7 @@ export default {
     },
   mounted: function(){
     if(!localStorage.getItem('JWT')){
-       window.location.href = "/";
+       window.location.href = "/login";
     }
     this.axios.get('/media-api/location')
       .then(response => {this.locations = response.data;})

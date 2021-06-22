@@ -59,7 +59,7 @@ const router = new VueRouter({
       component: Registration 
     },
     {
-      path: '/',
+      path: '/login',
       name: 'Login',
       component: Login
     },
@@ -94,7 +94,7 @@ const router = new VueRouter({
       component: Search,
     },
     {
-      path: '/discover',
+      path: '/',
       name: 'Discover',
       component: Discover,
     },

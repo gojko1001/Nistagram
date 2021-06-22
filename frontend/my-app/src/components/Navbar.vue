@@ -96,13 +96,13 @@ export default {
     },
     logout: function(){
       removeToken();
-      window.location.href = "/"
+      window.location.href = "/login"
     },
     inappropriateContent:function(){
       window.location.href = "/inappropriate_content";
     },
     discoverPage:function(){
-      window.location.href = "/discover";
+      window.location.href = "/";
     },
     notificationPage:function(){
       window.location.href = "/notification";
