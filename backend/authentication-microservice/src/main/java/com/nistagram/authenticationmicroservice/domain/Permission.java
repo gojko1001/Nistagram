@@ -10,6 +10,8 @@ import java.util.Collection;
 @Table
 @Data
 public class Permission implements GrantedAuthority {
+    private static final long serialVersionUID = 8610811500072052061L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

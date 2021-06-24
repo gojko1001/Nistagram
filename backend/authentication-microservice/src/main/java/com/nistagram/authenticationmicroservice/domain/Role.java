@@ -3,12 +3,14 @@ package com.nistagram.authenticationmicroservice.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "roles")
 @Data
-public class Role {
+public class Role implements Serializable {
+    private static final long serialVersionUID = -5029213398184703327L;
 
     @Id
     @Column(name = "id")
