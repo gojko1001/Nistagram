@@ -14,14 +14,11 @@ import com.nistagram.authenticationmicroservice.exception.UnauthorizedException;
 import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.repoistory.IUserCredentialsRepository;
 import com.nistagram.authenticationmicroservice.security.JwtService;
-import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.utility.RandomString;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;

@@ -4,8 +4,6 @@ import com.nistagram.authenticationmicroservice.domain.Role;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.repoistory.IRoleRepository;
-import com.nistagram.authenticationmicroservice.security.JwtService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

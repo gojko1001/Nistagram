@@ -4,7 +4,6 @@ import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
-import org.apache.catalina.User;
 
 import java.io.IOException;
 import java.util.List;
