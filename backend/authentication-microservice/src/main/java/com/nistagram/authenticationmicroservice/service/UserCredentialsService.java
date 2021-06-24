@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -84,7 +83,7 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     @Override
-    public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) throws IOException {
+    public UserCredentials loginGoogle(LoginGoogleDto loginGoogleDto) {
         UserCredentials userCredentials = userCredentialsRepository.findByUsername(loginGoogleDto.getEmail().split("@")[0]);
         if (userCredentials != null)
             return userCredentials;
@@ -113,13 +112,13 @@ public class UserCredentialsService implements IUserCredentialsService {
         List<UserCredentials> userCredentials = userCredentialsRepository.findAll();
         List<String> userCredentials1 = new ArrayList<>();
         for(UserCredentials uc:userCredentials){
-            if(uc.getIsDeactivated() == false){
-            Collection<Role> roles = uc.getRoles();
-            for(Role r:roles) {
-                if (r.getName().equals("ROLE_USER") || r.getName().equals("ROLE_AGENT")) {
-                    userCredentials1.add(uc.getUsername());
+            if(!uc.getIsDeactivated()){
+                Collection<Role> roles = uc.getRoles();
+                for(Role r:roles) {
+                    if (r.getName().equals("ROLE_USER") || r.getName().equals("ROLE_AGENT")) {
+                        userCredentials1.add(uc.getUsername());
+                    }
                 }
-            }
             }
         }
 

@@ -1,4 +1,4 @@
-package com.nistagram.usermicroservice.user.controller.exception;
+package com.nistagram.usermicroservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

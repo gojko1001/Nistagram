@@ -15,6 +15,8 @@ import java.util.Set;
 @Entity
 @Data
 public class UserCredentials implements UserDetails {
+    private static final long serialVersionUID = 1602410207877910587L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

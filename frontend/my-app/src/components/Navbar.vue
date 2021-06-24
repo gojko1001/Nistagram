@@ -125,12 +125,13 @@ export default {
       }
   },
   mounted: function(){
-    this.axios.get(GET_REQUESTS_PATH, {  headers:{
-                                            Authorization: "Bearer " + getToken(),
-                                         }   
-    }).then(response => {
-                      this.followRequests = response.data;
-    })
+    if(this.username != null)
+        this.axios.get(GET_REQUESTS_PATH, {  headers:{
+                                                Authorization: "Bearer " + getToken(),
+                                            }   
+        }).then(response => {
+                          this.followRequests = response.data;
+        })
   },
   methods:{
     myProfile:function(){
