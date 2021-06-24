@@ -46,6 +46,7 @@
               <b-form-input v-model="resetPassword.password" type="password" id="newPass">{{resetPassword.password}}</b-form-input></tr>
               <tr><td>Repeat new password:</td>
               <b-form-input v-model="resetPassword.repeatPassword" type="password" id="newPassRepeat">{{resetPassword.repeatPassword}}</b-form-input></tr>
+              <tr><td></td><td><b-link style="font-size:15px" href="/accRecovery">Forgot password?</b-link></td></tr>
             </table>
           
           <br><b-button type="submit" variant="primary" style="width:200px;">Change</b-button><br>

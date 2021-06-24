@@ -28,7 +28,7 @@
 
 <script>
 import GoogleLogin from 'vue-google-login';
-import { getRoleFromToken, saveToken } from "./../util/token"
+import { getRoleFromToken, getUsernameFromToken, saveToken } from "./../util/token"
 import { LOGIN_PATH, SERVER_NOT_RESPONDING, LOGIN_GOOGLE_PATH } from "./../util/constants"
 
 export default {
@@ -57,6 +57,10 @@ export default {
         userGoogle: '',
         show: true
       }
+  },
+  beforeMount(){
+    if(getUsernameFromToken() != null)
+      window.location.href = "/";
   },
   methods:{
     onSuccess(googleUser) {

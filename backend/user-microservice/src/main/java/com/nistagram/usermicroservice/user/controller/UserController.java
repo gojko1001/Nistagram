@@ -2,7 +2,7 @@ package com.nistagram.usermicroservice.user.controller;
 
 import com.nistagram.usermicroservice.user.controller.dto.UserDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.user.controller.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.logger.Logger;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("user")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
-    // cjel mogu sad da pokrene
+
     @Autowired
     private IUserService userService;
     @Autowired

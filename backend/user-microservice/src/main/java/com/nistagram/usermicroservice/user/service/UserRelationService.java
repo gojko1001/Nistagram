@@ -1,11 +1,11 @@
 package com.nistagram.usermicroservice.user.service;
 
-import com.nistagram.usermicroservice.user.controller.exception.InvalidActionException;
+import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.domain.User;
 import com.nistagram.usermicroservice.user.domain.UserRelation;
 import com.nistagram.usermicroservice.user.domain.UserRelationKey;
 import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
-import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.exception.InvalidActionException;
 import com.nistagram.usermicroservice.user.repository.IUserRelationRepository;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserRelationService;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
