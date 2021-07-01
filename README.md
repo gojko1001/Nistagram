@@ -22,4 +22,4 @@ Social network for sharing photos and videos
 | Campaign-microservice | 3034 | |
 | Search-microservice | 3035 | |
 | Notification-microservice | 3036 | http://localhost:8762/notification-api/ |
-
+| Webshop application | 4000 | |
