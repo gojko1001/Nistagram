@@ -16,8 +16,8 @@ addons:
 
   
 script:
-  - cd backend/authentication-microservice
-#  - cd backend/user-microservice
+#  - cd backend/authentication-microservice
+  - cd backend/user-microservice
 #  - cd backend/media-microservice
 #  - cd backend/campaign-microservice
 #  - cd backend/messanger-microservice
