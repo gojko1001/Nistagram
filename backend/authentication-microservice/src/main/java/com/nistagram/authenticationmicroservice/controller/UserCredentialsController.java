@@ -1,4 +1,4 @@
-package com.nistagram.authenticationmicroservice;
+package com.nistagram.authenticationmicroservice.controller;
 
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;

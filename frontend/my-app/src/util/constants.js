@@ -1,6 +1,7 @@
 // Paths
 // Authentication microservice
 export const USER_CREDENTIALS_PATH = "/authentication-api/userCredentials"
+export const USER_ADMIN_REQUEST = "/authentication-api/agentRequest/add"
 export const REGISTER_USER_PATH = USER_CREDENTIALS_PATH + "/add"
 export const LOGIN_PATH = USER_CREDENTIALS_PATH + "/login"
 export const LOGIN_GOOGLE_PATH = USER_CREDENTIALS_PATH + "/login_google"

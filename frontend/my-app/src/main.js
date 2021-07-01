@@ -28,6 +28,8 @@ import NotFoundPage from './components/NotFoundPage'
 import InappropriateContent from './components/InappropriateContentAdmin'
 import Notification from './components/Notification'
 import ProfileDeactivation from './components/ProfileDeactivationAdmin'
+import AgentRequest from './components/AgentRequest'
+import AllAgentRequests from './components/AllAgentRequests'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -143,6 +145,16 @@ const router = new VueRouter({
       path: '/profile_deactivation',
       name: 'ProfileDeactivation',
       component: ProfileDeactivation
+    },
+    {
+      path: '/agent_request',
+      name: 'AgentRequest',
+      component: AgentRequest
+    },
+    {
+      path: '/all_agent_requests',
+      name: 'AllAgentRequests',
+      component: AllAgentRequests
     },
     {
       path: "*",

@@ -65,6 +65,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userCredentials/deactivate/{username}").permitAll()
                 .antMatchers("/userCredentials/login_google").permitAll()
                 .antMatchers("/userCredentials/add").permitAll()
+                .antMatchers("/agentRequest/add").permitAll()
+                .antMatchers("/agentRequest").permitAll()
                 .antMatchers("/userCredentials/send_email/{email}").permitAll()
                 .antMatchers("**/user/add").permitAll()
                 .antMatchers("**/user/**").permitAll()
@@ -82,11 +84,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
-                "/**/*.css", "/**/*.js","/userCredentials/verify/{username}","/userCredentials/getUsers","/userCredentials/send_email/{email}",
+                "/**/*.css", "/**/*.js","/userCredentials/verify/{username}","/agentRequest","/userCredentials/getUsers","/userCredentials/send_email/{email}",
                 "/userCredentials/**","/userCredentials/add");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "**/user/add",
-                "/userCredentials/**","/userCredentials/add",
+                "/userCredentials/**","/userCredentials/add","/agentRequest/add",
                 "**/user/**",
                 "/userCredentials/login_google/");
     }

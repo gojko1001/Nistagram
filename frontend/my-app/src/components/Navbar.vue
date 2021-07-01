@@ -58,7 +58,7 @@
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
-                <button class="nav-btn">
+                <button class="nav-btn" @click='allAgentRequests'>
                   <i class="fas fa-user-secret"></i>
                 </button>
             </li>
@@ -152,6 +152,9 @@ export default {
     },
     profileDeactivation:function(){
       window.location.href = "/profile_deactivation";
+    },
+    allAgentRequests:function(){
+       window.location.href = "/all_agent_requests";
     },
     search: function() {
       localStorage.setItem("name", this.selected);
