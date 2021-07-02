@@ -1,0 +1,9 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~ngx-toastr/toastr';
+
+body{
+    background: linear-gradient(180deg, #DED9E2, #C0B9DD, #F7F4EA) no-repeat fixed ;
+}
+
+
