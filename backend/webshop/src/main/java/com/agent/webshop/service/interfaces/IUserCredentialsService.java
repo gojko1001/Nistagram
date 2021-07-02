@@ -6,4 +6,5 @@ import org.springframework.http.ResponseEntity;
 public interface IUserCredentialsService {
     UserCredentials save(UserCredentials userCredentials);
     ResponseEntity login(UserCredentials userCredentials);
+    UserCredentials findByUsername(String username);
 }
