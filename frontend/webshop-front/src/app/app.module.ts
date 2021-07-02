@@ -15,12 +15,16 @@ import { DatePipe } from '@angular/common';
 //components
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DiscoverComponent } from './components/discover/discover.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     DiscoverComponent,
+    RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
