@@ -8,7 +8,7 @@ public class UserMapper {
     public static User mapUserRegistrationDtoToUser(UserRegistrationDto regDto) {
         User user = new User();
         user.setUsername(regDto.getUsername());
-        user.setFullName(regDto.getFullName());
+        user.setFullName(regDto.getWebSite());
         user.setEmail(regDto.getEmail());
         return user;
     }

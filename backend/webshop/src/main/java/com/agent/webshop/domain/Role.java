@@ -18,7 +18,7 @@ public class Role implements Serializable {
     private Long id;
     @Column(name = "name")
     private String name;
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     private Collection<UserCredentials> users;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "roles_permission",

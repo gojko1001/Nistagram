@@ -33,11 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
 
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);

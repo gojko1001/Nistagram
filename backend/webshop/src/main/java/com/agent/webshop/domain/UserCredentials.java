@@ -6,10 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -21,11 +18,8 @@ public class UserCredentials implements UserDetails{
     private String username;
     @Column
     private String password;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
+    @ManyToOne
+    private Role role;
     @Column
     private Boolean verified;
     @Column
@@ -54,10 +48,8 @@ public class UserCredentials implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set permissions = new HashSet();
-        for (Role r : roles) {
-            for (Permission p : r.getPermissions()) {
-                permissions.add(new SimpleGrantedAuthority(p.getAuthority()));
-            }
+        for (Permission p : role.getPermissions()) {
+            permissions.add(new SimpleGrantedAuthority(p.getAuthority()));
         }
         return permissions;
     }

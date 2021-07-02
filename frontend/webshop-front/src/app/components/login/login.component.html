@@ -3,10 +3,10 @@
         <form class="ngform" style="width: 600px; margin-top: 150px;">
             <h2><b>Login</b></h2>
             <br>
-            <input type="text" placeholder="Username"  id="username" name="username" style="width: 300px" required>
-            <input type="password" placeholder="Password"  id="pass" name="pass" style="width: 300px" required>
+            <input type="text" placeholder="Username" [(ngModel)]="loginDto.username" id="username" name="username" style="width: 300px" required>
+            <input type="password" placeholder="Password" [(ngModel)]="loginDto.password" id="pass" name="pass" style="width: 300px" required>
             <br><br>
-            <button class="btn btn-outline-dark" style="width: 300px; background-color:#C0B9DD">Login</button>
+            <button class="btn btn-outline-dark" style="width: 300px; background-color:#C0B9DD" (click)="login()">Login</button>
             <br>
             <a href="#" [routerLink]="'/registration'">Don't have an account? Sign up!</a>
         </form>

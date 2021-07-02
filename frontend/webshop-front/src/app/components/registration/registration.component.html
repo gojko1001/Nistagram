@@ -4,12 +4,20 @@
             <h2><b>Register</b></h2>
             <p><i>Just one step away!</i></p>
             <br>
-            <input type="text" placeholder="Username"  id="username" name="username" style="width: 400px" required>
-            <input type="email" placeholder="Email address"  id="email" name="email" style="width: 400px" required>
-            <input type="password" placeholder="Password"  id="pass" name="pass" style="width: 400px" required>
-            <input type="password" placeholder="Repeat password"  id="passRepeat" name="passRepeat" style="width: 400px" required>
+            <input type="text" placeholder="Username" [(ngModel)]="registrationDto.username" id="username" name="username" style="width: 400px" required>
+            <input type="email" placeholder="Email address" [(ngModel)]="registrationDto.email" id="email" name="email" style="width: 400px" required>
+            <input type="password" placeholder="Password" [(ngModel)]="registrationDto.password" id="pass" name="pass" style="width: 400px" required>
+            <input type="password" placeholder="Repeat password" [(ngModel)]="registrationDto.passwordRepeat" id="passRepeat" name="passRepeat" style="width: 400px" required>
+            <br>
+            <br>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="isAgent" id="exampleCheck1" name="enableAuthentication" style="margin-left: 10px;">
+                <label class="form-check-label" style="margin-left: -300px;" for="exampleCheck1">Agent profile</label>
+            </div>
+            <input *ngIf="isAgent" type="text" [(ngModel)]="registrationDto.webSite" placeholder="Website link" name="website" style="width: 400px" required>
+
             <br><br>
-            <button class="btn btn-outline-dark" style="width: 400px; background-color:#C0B9DD" >Register</button>
+            <button class="btn btn-outline-dark" style="width: 400px; background-color:#C0B9DD" (click) = "register()" >Register</button>
             <br>
             <a href="#" [routerLink]="'/login'">Already have an account? Sign in!</a>
         </form>
