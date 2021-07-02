@@ -8,5 +8,6 @@ public class UserRegistrationDto {
     private String email;
     private String password;
     private String repeatPassword;
-    private String fullName;
+    private String webSite;
+    private String role;
 }
