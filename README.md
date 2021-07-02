@@ -19,7 +19,7 @@ Social network for sharing photos and videos
 | Authentication-microservice | 3031 | http://localhost:8762/authentication-api/ |
 | User-microservice | 3032 | http://localhost:8762/user-api/ |
 | Media-microservice | 3033 | http://localhost:8762/media-api/ |
-| Campaign-microservice | 3034 | |
+| Campaign-microservice | 3034 | http://localhost:8762/campaign-api/ |
 | Search-microservice | 3035 | |
 | Notification-microservice | 3036 | http://localhost:8762/notification-api/ |
-
+| Webshop application | 4000 | |
