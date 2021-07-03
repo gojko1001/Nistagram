@@ -41,13 +41,16 @@ export class DiscoverComponent implements OnInit {
     //todo
   }
 
-  deleteItem(itemId: any){
+  deleteItem(itemId: any): void{
+    let currentUrl = this.router.url;
     this.itemService.deleteItem(getUsernameFromToken(), itemId).subscribe(data => {
       this.message = data;
       this.toastrService.success(this.message.error.text);
+      this.redirectTo(currentUrl);
     }, error => {
       if(error.status == 200){
         this.toastrService.success(error.error.text);
+        this.redirectTo(currentUrl);
       }else{
         this.toastrService.error(error.error.text);
       }
@@ -56,6 +59,11 @@ export class DiscoverComponent implements OnInit {
 
   getUsername(){
     return getUsernameFromToken();
+  }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/registration', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
   }
 
 }
