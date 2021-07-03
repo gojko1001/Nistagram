@@ -14,7 +14,7 @@
               <i class="fas fa-check"></i>
             </button>
             <span>{{img.numLikes}}</span>
-            <button class="heart inter"  style="margin-top:0px; margin-left: 350px" @click="unconfirm(img.id)">
+            <button class="heart inter"  style="margin-top:0px; margin-left: 350px" @click="unconfirmed(img.id)">
               <i class="fa fa-ban fa-fw"></i>
             </button>
                 
@@ -25,6 +25,7 @@
 
 <script>
 import { SERVER_NOT_RESPONDING } from '../util/constants';
+import { getUsernameFromToken } from '../util/token';
 
 export default {
   name: 'InappropriateContent',
@@ -38,7 +39,8 @@ export default {
             }],
             dto:{
                 id:0
-            }
+            },
+            username1:''
         }
     },
   mounted: function(){
@@ -63,9 +65,35 @@ export default {
         },
         confirm(id){
             this.dto.id = id;
+            this.username1 = getUsernameFromToken();
+            if(this.username1 != null){
+          this.axios.post('/authentication-api/agentRequest/confirm/'+ this.dto.id)
+          .then(response => { console.log(response.data);
+                              window.location.reload();
+                              this.makeToast("Success!!!", "success");
+                            })
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
         },
         unconfirmed(id){
             this.dto.id = id;
+            this.username1 = getUsernameFromToken();
+            if(this.username1 != null){
+          this.axios.post('/authentication-api/agentRequest/reject/'+ this.dto.id)
+          .then(response => { console.log(response.data);
+                              window.location.reload();
+                              this.makeToast("Success!!!", "success");
+                            })
+          .catch(error => { console.log(error);
+                            this.makeToast("Error occured.", "danger");
+                          })
+        }else{
+          this.makeToast("Please log in.", "info");
+        }
         }
 
     }

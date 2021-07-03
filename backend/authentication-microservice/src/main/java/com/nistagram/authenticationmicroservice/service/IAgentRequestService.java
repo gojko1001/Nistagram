@@ -10,4 +10,8 @@ public interface IAgentRequestService {
     AgentRequest create(AgentRequestDto agentRequest);
 
     List<AgentRequestDto> findAll();
+
+    void confirmRequest(Long id);
+
+    void rejectRequest(Long id);
 }

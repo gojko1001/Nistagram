@@ -125,7 +125,7 @@ insert into user_credentials (id, username, password, verified, is_deactivated) 
 insert into user_role (user_id, role_id) values (302, 3);
 -- pass: Samsung123*
 
-insert into requests(email, username, web_site, is_rejected, is_confirmed)values("mikica@mailinator.com","mikica","www.youtube.com", false, false);
+insert into requests(email, username, web_site, is_rejected, is_confirmed)values("milica@mailinator.com","milica","www.youtube.com", false, false);
 insert into requests(email, username, web_site, is_rejected, is_confirmed)values("maja@mailinator.com","maja","www.emezetta.com", true, false);
 insert into requests(email, username, web_site, is_rejected, is_confirmed)values("masa@mailinator.com","masa","www.weheartit.com", true, false);
 insert into requests(email, username, web_site, is_rejected, is_confirmed)values("gojko@mailinator.com","gojko","www.instagram.com", false, true);

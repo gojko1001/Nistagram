@@ -25,4 +25,13 @@ public class AgentRequestController {
     public List<AgentRequestDto> findAll(){
         return agentRequestService.findAll();
     }
+
+    @PostMapping("/confirm/{id}")
+    public void confirm(@PathVariable Long id) {
+        agentRequestService.confirmRequest(id);
+    }
+    @PostMapping("/reject/{id}")
+    public void reject(@PathVariable Long id) {
+        agentRequestService.rejectRequest(id);
+    }
 }
