@@ -1,0 +1,18 @@
+.nav-btn{
+    color: black;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border:none;
+    background-color: transparent;
+}
+
+.nav-btn:hover{
+    background-color: #C0B9DD;
+    color: white;
+    border-radius: 7px;
+}
+
+.fas{
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
