@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Enable anyone to access methods of Quoted mapping (without Authorisation)
                 .and().authorizeRequests()
                 .antMatchers("**/user/**").permitAll()
+                .antMatchers("**/item/**").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Enable CORS layer (WebMvcConfig class)
@@ -70,8 +71,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Ignores security configurations for Quoted mappings
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js",
-                "/user/**");
+                "/user/**",
+                "/item/**");
         web.ignoring().antMatchers(HttpMethod.POST,
-                "/user/**");
+                "/user/**",
+                "/item/**");
     }
 }
