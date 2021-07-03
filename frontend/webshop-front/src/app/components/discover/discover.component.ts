@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from 'src/app/service/item.service';
+import { getUsernameFromToken } from 'src/app/util/tokenUtil';
 
 @Component({
   selector: 'app-discover',
@@ -37,6 +38,10 @@ export class DiscoverComponent implements OnInit {
 
   addNewItem(){
     //todo
+  }
+
+  getUsername(){
+    return getUsernameFromToken();
   }
 
 }

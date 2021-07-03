@@ -6,7 +6,7 @@
         </a>-->
         </div>
         <div class="card-body">
-            <div>
+            <div *ngIf="getUsername() == item.username">
                 <a class="editBtn">
                     <i class="fas fa-edit fa-lg"></i>
                 </a>
