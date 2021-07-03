@@ -18,6 +18,7 @@ import { DiscoverComponent } from './components/discover/discover.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { EditItemComponent } from './components/edit-item/edit-item.component';
+import { CreateItemComponent } from './components/create-item/create-item.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { EditItemComponent } from './components/edit-item/edit-item.component';
     RegistrationComponent,
     LoginComponent,
     EditItemComponent,
+    CreateItemComponent,
   ],
   imports: [
     BrowserModule,

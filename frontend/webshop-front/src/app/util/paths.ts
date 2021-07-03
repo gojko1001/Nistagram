@@ -7,3 +7,4 @@ export const LOGIN_PATH = USER_PATH + '/login';
 export const ITEM_PATH = BACKEND_PATH + '/item';
 export const SHOW_PATH = ITEM_PATH + '/show';
 export const UPDATE_PATH = ITEM_PATH + '/update';
+export const CREATE_PATH = ITEM_PATH + '/create';

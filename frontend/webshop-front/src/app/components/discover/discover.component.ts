@@ -32,12 +32,12 @@ export class DiscoverComponent implements OnInit {
       }
       console.log(this.items);
     }, error => {
-      this.toastrService.error("Something went wrong. Please check your input!");
+      this.toastrService.error("Error occurred.");
     });
   }
 
-  addNewItem(){
-    //todo
+  createItem(){
+    this.router.navigate(['/create-item']);
   }
 
   deleteItem(itemId: any): void{

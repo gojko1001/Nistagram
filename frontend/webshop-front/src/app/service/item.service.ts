@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ITEM_PATH, SHOW_PATH, UPDATE_PATH } from '../util/paths';
+import { CREATE_PATH, ITEM_PATH, SHOW_PATH, UPDATE_PATH } from '../util/paths';
 
 @Injectable({
   providedIn: 'root'
@@ -24,4 +24,9 @@ export class ItemService {
   updateItem(username: any, item: any){
     return this.httpClient.put(UPDATE_PATH + '/' + username, item);
   }
+
+  createItem(item: any){
+    return this.httpClient.post(CREATE_PATH, item);
+  }
+
 }
