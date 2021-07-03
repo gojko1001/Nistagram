@@ -62,6 +62,11 @@
                   <i class="fas fa-user-secret"></i>
                 </button>
             </li>
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
+                <button class="nav-btn" @click='registerAgent'>
+                  <i class="fa fa-user-plus"></i>
+                </button>
+            </li>
             <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
                 <button class="nav-btn" @click='profileDeactivation'>
                   <i class="fa fa-users"></i>
@@ -163,6 +168,9 @@ export default {
     },
     profileVerification: function(){
       window.location.href = "/all_requests";
+    },
+    registerAgent:function(){
+       window.location.href = "/register_agent";
     },
     login: function(){
       window.location.href = "/login";

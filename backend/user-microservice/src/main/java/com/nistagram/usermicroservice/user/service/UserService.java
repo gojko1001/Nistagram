@@ -2,6 +2,7 @@ package com.nistagram.usermicroservice.user.service;
 
 import com.nistagram.usermicroservice.connection.AuthConnection;
 import com.nistagram.usermicroservice.connection.MediaConnection;
+import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
@@ -66,6 +67,14 @@ public class UserService implements IUserService {
         if (!isGoogleUser)
             verifyUserInput(userReg);
         User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
+        user.setUserRelations(new ArrayList<UserRelation>());
+        user.setInvertedRelations(new ArrayList<UserRelation>());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User registerAgent(AgentDto agentDto) {
+        User user = UserMapper.mapAgentDtoToUser(agentDto);
         user.setUserRelations(new ArrayList<UserRelation>());
         user.setInvertedRelations(new ArrayList<UserRelation>());
         return userRepository.save(user);

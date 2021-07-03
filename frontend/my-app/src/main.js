@@ -30,6 +30,7 @@ import Notification from './components/Notification'
 import ProfileDeactivation from './components/ProfileDeactivationAdmin'
 import AgentRequest from './components/AgentRequest'
 import AllAgentRequests from './components/AllAgentRequests'
+import RegisterAgent from './components/RegisterAgent'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -155,6 +156,11 @@ const router = new VueRouter({
       path: '/all_agent_requests',
       name: 'AllAgentRequests',
       component: AllAgentRequests
+    },
+    {
+      path: '/register_agent',
+      name: 'RegisterAgent',
+      component: RegisterAgent
     },
     {
       path: "*",

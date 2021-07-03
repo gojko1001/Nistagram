@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice.user.controller.mapper;
 
+import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.domain.User;
@@ -54,6 +55,16 @@ public class UserMapper {
         user.setUsername(regDto.getUsername());
         user.setFullName(regDto.getFullName());
         user.setEmail(regDto.getEmail());
+        return user;
+    }
+
+    public static User mapAgentDtoToUser(AgentDto regDto) {
+        User user = new User();
+        user.setUsername(regDto.getUsername());
+        user.setFullName(regDto.getFullName());
+        user.setEmail(regDto.getEmail());
+        user.setWebSite(regDto.getWebSite());
+        user.setPhone(regDto.getPhone());
         return user;
     }
 }

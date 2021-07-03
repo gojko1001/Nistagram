@@ -1,5 +1,6 @@
 package com.nistagram.authenticationmicroservice.connection;
 
+import com.nistagram.authenticationmicroservice.dto.UserCredentialsAgentDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
 import com.nistagram.authenticationmicroservice.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,6 +14,9 @@ public interface UserConnection {
 
     @PostMapping("/user/add")
     void registerUser(@RequestBody UserCredentialsDto userReg);
+
+    @PostMapping("/user/addAgent")
+    void registerAgent(@RequestBody UserCredentialsAgentDto userReg);
 
     @PostMapping("/user/addGoogleUser")
     void registerGoogleUser(@RequestBody UserCredentialsDto userReg);

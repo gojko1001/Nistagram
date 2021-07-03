@@ -1,8 +1,5 @@
 <template>
-  <div id="registrationPage">
-    <h1 class="brandName">Nistagram</h1>
-    <p style="font-size:15px">Sign up to see photos and videos from your friends.</p>
-      <br>
+  <div id="registrationAgent">
       <b-form @submit.prevent="onSubmit" @reset="onReset" v-if="show">
         <b-form-group id="input-group-1">
           <b-form-input
@@ -36,10 +33,17 @@
         </b-form-group>
 
         <b-form-group>
-          <b-form-input v-model="password" @input="checkPassword" type="password" id="password" placeholder="Enter password" required></b-form-input>
+          <b-form-input
+            id="webSite"
+            v-model="webSite"
+            placeholder="Enter web site"
+            required
+          ></b-form-input>
+          <span v-if="msg.username" style="color:red;">{{msg.username}}</span>
         </b-form-group>
+
         <b-form-group>
-          <b-form-input v-model="form.repeatPassword" type="password" id="repeatPassword" placeholder="Enter password again" required></b-form-input>
+          <b-form-input v-model="password" @input="checkPassword" type="password" id="password" placeholder="Enter password" required></b-form-input>
         </b-form-group>
         <ul>
           <li v-bind:class="{ is_valid: contains_eight_characters }">8-20 characters long</li>
@@ -48,13 +52,9 @@
           <li v-bind:class="{ is_valid: contains_special_character }">Contains Special Character</li>
         </ul>
         <br>
-        <b-button type="submit" variant="primary" style="width:200px;" aria-describedby="signup-block">Sign up</b-button>
-        <b-form-text id="signup-block">
-          By signing up, you agree to our Terms, Data Policy and Cookies Policy .
-        </b-form-text>
+        <b-button type="submit" variant="primary" style="width:200px;" aria-describedby="signup-block">Register</b-button>
       </b-form>
       <hr>
-      <b-link style="font-size:15px" @click="login">Have an account? Log in</b-link>
   </div>
 </template>
 
@@ -69,12 +69,13 @@ export default {
           password:'',
           fullName:'',
           username: '',
-          repeatPassword:'',
+          webSite:'',
         },
         email: '',
         password:'',
         username:'',
         fullName:'',
+        webSite:'',
         msg:[],
         show: true,
         reg: /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
@@ -127,9 +128,6 @@ export default {
           this.show = true
         })
       },
-    login:function(){
-      window.location.href = "/login";
-    },
     makeToast(message, variant) {
         this.$root.$bvToast.toast(message, {
                               title: `Nistagram`,
@@ -172,8 +170,7 @@ export default {
         this.contains_eight_characters = true;
       } else {
         this.contains_eight_characters = false;
-			}
-			
+			}			
       this.contains_number = /\d/.test(this.password);
       this.contains_uppercase_lowercase = /[A-Z]/.test(this.password) && /[a-z]/.test(this.password);
 			this.contains_special_character = format.test(this.password);
@@ -194,7 +191,7 @@ export default {
 
 
 <style scoped>
-#registrationPage {
+#registrationAgent {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
