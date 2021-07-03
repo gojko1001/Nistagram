@@ -3,6 +3,7 @@ package com.nistagram.authenticationmicroservice.service;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
+import com.nistagram.authenticationmicroservice.dto.UserCredentialsAgentDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
 
 import java.io.IOException;
@@ -13,6 +14,8 @@ public interface IUserCredentialsService {
     UserCredentials findByUsername(String username);
 
     UserCredentials create(UserCredentialsDto userCredentials);
+
+    UserCredentials createAgent(UserCredentialsAgentDto userCredentials);
 
     UserCredentials login(String username, String password) throws IOException;
 

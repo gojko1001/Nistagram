@@ -30,19 +30,19 @@
                   <i class="fas fa-globe"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER' || role =='ROLE_AGENT'">
                 <button class="nav-btn">
                   <i class="fas fa-envelope"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'|| role =='ROLE_AGENT'">
                 <button class="heart nav-btn">
                   <i class="fas fa-user-plus" v-b-modal.modal-follow-request></i>
                   <small id="pendingnum" v-if="followRequests.length > 0"><b-badge variant="danger" pill>{{followRequests.length}}</b-badge></small>
                 </button>
                 
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'|| role =='ROLE_AGENT'">
                 <button class="heart nav-btn" @click="notificationPage">
                   <i class="fas fa-heart"></i>
                 </button>
@@ -58,8 +58,13 @@
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
-                <button class="nav-btn">
+                <button class="nav-btn" @click='allAgentRequests'>
                   <i class="fas fa-user-secret"></i>
+                </button>
+            </li>
+            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
+                <button class="nav-btn" @click='registerAgent'>
+                  <i class="fa fa-user-plus"></i>
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
@@ -69,7 +74,7 @@
             </li>
 
 
-            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'|| role =='ROLE_AGENT'">
                 <button class="nav-btn" @click='myProfile'>
                   <i class="fas fa-user"></i>
                 </button>
@@ -153,6 +158,9 @@ export default {
     profileDeactivation:function(){
       window.location.href = "/profile_deactivation";
     },
+    allAgentRequests:function(){
+       window.location.href = "/all_agent_requests";
+    },
     search: function() {
       localStorage.setItem("name", this.selected);
       localStorage.setItem("find", this.searchInput);
@@ -160,6 +168,9 @@ export default {
     },
     profileVerification: function(){
       window.location.href = "/all_requests";
+    },
+    registerAgent:function(){
+       window.location.href = "/register_agent";
     },
     login: function(){
       window.location.href = "/login";
