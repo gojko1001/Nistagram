@@ -40,6 +40,26 @@ public class EmailService {
         javaMailSender.send(simpleMailMessage);
     }
 
+    @Async
+    public void verificationPasswordAgent(String username, String email, String fullName, String password) throws MailException {
+        String jwt = jwtService.createToken(username);
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom(mailSender);
+        simpleMailMessage.setTo(email);
+        simpleMailMessage.setSubject("Registration");
+        String url = verifyUrl + jwt;
+        String mailText = "Dear " + fullName + ",\n\n" +
+                "Welcome to Ništagram \n\n" +
+                "Your username is " + username + "\n\n" +
+                "Your password is " + password + "\n\n" +
+                "For your safety please change your password on your first login. \n\n" +
+                "Please verify your account here:" + "\t" +
+                "<a href=\"" + url + "\">Verify your account</a>" + "\n\n" +
+                "Best regards.";
+        simpleMailMessage.setText(mailText);
+        javaMailSender.send(simpleMailMessage);
+    }
+
 
     public void resetPassword(String username, String email, String fullName) throws MailException {
         String jwt = jwtService.createToken(username);

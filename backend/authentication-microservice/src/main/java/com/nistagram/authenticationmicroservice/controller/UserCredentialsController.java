@@ -64,7 +64,7 @@ public class UserCredentialsController {
     @PostMapping("/addAgent")
     public void registerAgent(@RequestBody UserCredentialsAgentDto agent) {
         userCredentialsService.createAgent(agent);
-        emailService.verificationPassword(agent.getUsername(), agent.getEmail(), agent.getFullName());
+        emailService.verificationPasswordAgent(agent.getUsername(), agent.getEmail(), agent.getFullName(), agent.getPassword());
 
     }
 

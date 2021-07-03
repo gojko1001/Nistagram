@@ -35,11 +35,20 @@
         <b-form-group>
           <b-form-input
             id="webSite"
-            v-model="webSite"
+            v-model="form.webSite"
             placeholder="Enter web site"
             required
           ></b-form-input>
           <span v-if="msg.username" style="color:red;">{{msg.username}}</span>
+        </b-form-group>
+
+        <b-form-group>
+          <b-form-input
+            id="phone"
+            v-model="form.phone"
+            placeholder="Enter phone"
+            required
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group>
@@ -59,7 +68,7 @@
 </template>
 
 <script>
-import { REGISTER_USER_PATH } from '../util/constants';
+import { REGISTER_AGENT_PATH } from '../util/constants';
 export default {
   name: 'Registration',
   data() {
@@ -70,12 +79,14 @@ export default {
           fullName:'',
           username: '',
           webSite:'',
+          phone:'',
         },
         email: '',
         password:'',
         username:'',
         fullName:'',
         webSite:'',
+        phone:'',
         msg:[],
         show: true,
         reg: /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
@@ -107,10 +118,9 @@ export default {
   methods:{
     onSubmit() {
         console.log(this.form);
-        this.axios.post(REGISTER_USER_PATH, this.form)
+        this.axios.post(REGISTER_AGENT_PATH, this.form)
                   .then(response => { console.log(response);
-                                      this.makeToast("User has been registered successfully. Check your email.", "success");
-                                      window.location.href = "/login";
+                                      this.makeToast("User has been registered successfully", "success");
                                       
                 })
                   .catch(error => { console.log(error);
