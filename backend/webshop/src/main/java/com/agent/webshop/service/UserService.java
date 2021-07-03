@@ -24,6 +24,9 @@ public class UserService implements IUserService {
 
     @Override
     public ResponseEntity registerUser(UserRegistrationDto userReg) {
+        if(userRepository.findByUsername(userReg.getUsername()) != null){
+            return new ResponseEntity("User with that username already exist.", HttpStatus.BAD_REQUEST);
+        }
         UserCredentials userCredentials = UserMapper.mapUserRegistrationDtoToUserCredentials(userReg);
         userCredentials.setRole(roleService.findRoleByName(userReg.getRole()));
         userCredentialsService.save(userCredentials);
