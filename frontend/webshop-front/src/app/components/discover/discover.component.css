@@ -10,7 +10,6 @@
 
   span{
       color:black;
-      font-size: 18px;
   }
 
 .float{
@@ -31,7 +30,7 @@
 }
 
 .editBtn{
-    margin-top:5px;
+    margin-top:-5px;
     position: absolute;
     top: 50px;
     right: 40px;
@@ -39,7 +38,7 @@
 }
 
 .deleteBtn{
-    margin-top:5px;
+    margin-top:-5px;
     position: absolute;
     top: 50px;
     right: 10px;

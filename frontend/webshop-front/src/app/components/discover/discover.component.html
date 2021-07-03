@@ -15,6 +15,10 @@
                 </button>
             </div>
             <br>
+            <div *ngFor="let img of item.imageBytes; index as j;">
+                <img *ngIf="img.image" [src]="img.imageByte" width="250" height="250" style="display:block; margin-left:auto; margin-right:auto">
+            </div>
+            <br>
             <p style="text-align: left; font-size: 15px;color: #C0B9DD;">
                 Description: <span style="font-style: italic;">{{item.description}}</span><br>
                 Quantity: <span>{{item.quantity}}</span><br>

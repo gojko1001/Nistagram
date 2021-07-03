@@ -19,6 +19,16 @@ export class DiscoverComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.getItems().subscribe((data: any) => {
       this.items = data;
+      
+      for(let i=0; i<this.items.length; i++){
+        for(let j=0; j<this.items[i].imageBytes.length; j++){
+          if(this.items[i].imageBytes[j].image){
+            this.items[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.items[i].imageBytes[j].imageByte; 
+          }else{
+            this.items[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.items[i].imageBytes[j].imageByte;
+          }
+        }
+      }
       console.log(this.items);
     }, error => {
       this.toastrService.error("Something went wrong. Please check your input!");
