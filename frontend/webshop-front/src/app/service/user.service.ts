@@ -10,7 +10,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   register(registerDto : any){
-    return this.httpClient.post('http://localhost:4000/user/register', registerDto);
+    return this.httpClient.post(REGISTRATION_PATH, registerDto);
   }
 
   login(loginDto : any){
