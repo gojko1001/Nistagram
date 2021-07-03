@@ -29,4 +29,8 @@ export class ItemService {
     return this.httpClient.post(CREATE_PATH, item);
   }
 
+  /*saveImage(){
+
+  }*/
+
 }

@@ -4,6 +4,9 @@
         <form class="ngform" style="width: 500px">
             <h2 style="color: #75C9C8;">New item</h2>
             <br><br>
+            <input type="file" ref="uploadImage" (change)="onImageUpload($event)" class="form-control" required>
+            <input type="button" (click)="startupload()" name="Upload" value="Upload" />
+            <br><br>
             <div class="form-group row">
                 <label for="staticId" class="col-sm-4 col-form-label">Created by:</label>
                 <div class="col-sm-3">

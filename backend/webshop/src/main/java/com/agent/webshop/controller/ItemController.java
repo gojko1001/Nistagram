@@ -23,13 +23,11 @@ public class ItemController {
     private static String uploadDir = "images";
 
     @PostMapping
-    public List<String> saveImage(@RequestParam("file") List<MultipartFile> multipartFiles) throws IOException {
+    public List<String> saveImage(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         List<String> fileNames = new ArrayList<>();
-        for(MultipartFile mf : multipartFiles){
-            String fileName = StringUtils.cleanPath(mf.getOriginalFilename().replaceAll("\\s", ""));
-            FileUploadUtil.saveFile(uploadDir, fileName, mf);
-            fileNames.add(fileName);
-        }
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename().replaceAll("\\s", ""));
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        fileNames.add(fileName);
         return fileNames;
     }
 
