@@ -12,4 +12,8 @@ export class ItemService {
   getItems(){
     return this.httpClient.get(ITEM_PATH);
   }
+
+  deleteItem(username: any, itemId: any){
+    return this.httpClient.delete(ITEM_PATH + '/' + username + '/' + itemId);
+  }
 }

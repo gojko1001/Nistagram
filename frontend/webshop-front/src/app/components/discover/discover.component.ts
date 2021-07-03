@@ -12,6 +12,7 @@ import { getUsernameFromToken } from 'src/app/util/tokenUtil';
 export class DiscoverComponent implements OnInit {
 
   items: any[]=[];
+  message: any;
 
   constructor(private itemService: ItemService,
     private toastrService: ToastrService,
@@ -38,6 +39,19 @@ export class DiscoverComponent implements OnInit {
 
   addNewItem(){
     //todo
+  }
+
+  deleteItem(itemId: any){
+    this.itemService.deleteItem(getUsernameFromToken(), itemId).subscribe(data => {
+      this.message = data;
+      this.toastrService.success(this.message.error.text);
+    }, error => {
+      if(error.status == 200){
+        this.toastrService.success(error.error.text);
+      }else{
+        this.toastrService.error(error.error.text);
+      }
+    });
   }
 
   getUsername(){
