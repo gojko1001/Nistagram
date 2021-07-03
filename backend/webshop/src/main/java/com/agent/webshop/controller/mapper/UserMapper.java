@@ -12,6 +12,7 @@ public class UserMapper {
         user.setEmail(regDto.getEmail());
         return user;
     }
+
     public static UserCredentials mapUserRegistrationDtoToUserCredentials(UserRegistrationDto regDto) {
         UserCredentials userCredentials = new UserCredentials();
         userCredentials.setUsername(regDto.getUsername());

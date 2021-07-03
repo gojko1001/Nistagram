@@ -7,7 +7,6 @@ import com.mediamicroservice.mediamicroservice.controller.dto.MediaDto;
 import com.mediamicroservice.mediamicroservice.controller.mapping.PostMapper;
 import com.mediamicroservice.mediamicroservice.domain.*;
 import com.mediamicroservice.mediamicroservice.logger.Logger;
-import com.mediamicroservice.mediamicroservice.repository.IMediaNameRepository;
 import com.mediamicroservice.mediamicroservice.repository.IMediaRepository;
 import com.mediamicroservice.mediamicroservice.repository.IPostRepository;
 import com.mediamicroservice.mediamicroservice.service.interfaces.*;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.File;
 import java.io.FileInputStream;
