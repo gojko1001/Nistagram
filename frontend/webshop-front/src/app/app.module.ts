@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DiscoverComponent } from './components/discover/discover.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
+import { EditItemComponent } from './components/edit-item/edit-item.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LoginComponent } from './components/login/login.component';
     DiscoverComponent,
     RegistrationComponent,
     LoginComponent,
+    EditItemComponent,
   ],
   imports: [
     BrowserModule,

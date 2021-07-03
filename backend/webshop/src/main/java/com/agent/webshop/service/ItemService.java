@@ -69,6 +69,11 @@ public class ItemService implements IItemService {
     }
 
     @Override
+    public Item getItemById(Long id){
+        return itemRepository.findItemById(id);
+    }
+
+    @Override
     public ResponseEntity updateItem(String username, Item newItem){
         Item item = itemRepository.findItemById(newItem.getId());
         if(!item.getUsername().equals(username)){

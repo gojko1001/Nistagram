@@ -21,7 +21,6 @@ export class DiscoverComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.getItems().subscribe((data: any) => {
       this.items = data;
-      
       for(let i=0; i<this.items.length; i++){
         for(let j=0; j<this.items[i].imageBytes.length; j++){
           if(this.items[i].imageBytes[j].image){

@@ -58,4 +58,9 @@ public class ItemController {
         return itemService.delete(username, itemId);
     }
 
+    @GetMapping("/show/{id}")
+    public Item getItemById(@PathVariable("id") Long id) {
+        return itemService.getItemById(id);
+    }
+
 }

@@ -10,6 +10,7 @@ public interface IItemService {
     Item create(Item item);
     List<Item> getItemsByUsername(String username);
     ResponseEntity getItems();
+    Item getItemById(Long id);
     ResponseEntity updateItem(String username, Item newItem);
     ResponseEntity delete(String username, Long itemId);
     List<ImageBytesDto> getImagesFiles(List<Item> items);
