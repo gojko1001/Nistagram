@@ -30,4 +30,6 @@ public class Campaign {
     private boolean active = false;
     @OneToMany(mappedBy = "campaign")
     private List<Ad> ads;
+    @OneToMany(mappedBy = "campaign")
+    private List<TargetAudience> targetAudience;
 }
