@@ -1,0 +1,47 @@
+<div class="page">
+    <div class="form">
+        <br>
+        <form class="ngform" style="width: 500px">
+            <h2 style="color: #75C9C8;">Shipping information</h2>
+            <br><br>
+            <div class="form-group row">
+                <label for="staticId" class="col-sm-4 col-form-label">Username:</label>
+                <div class="col-sm-6">
+                    <input class="form-control" [(ngModel)]="info.username" name="username" disabled>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Full name:</label>
+                <div class="col-sm-6">
+                    <input class="form-control" placeholder="Enter name" [(ngModel)]="info.fullName" name="fullName" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Email:</label>
+                <div class="col-sm-6">
+                    <input class="form-control" placeholder="Enter email" [(ngModel)]="info.email" name="email" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Mobile phone:</label>
+                <div class="col-sm-6">
+                    <input class="form-control" placeholder="Enter mobile phone" [(ngModel)]="info.phone" name="phone" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Adress:</label>
+                <div class="col-sm-6">
+                    <input class="form-control" placeholder="Enter adress" [(ngModel)]="info.adress" name="adress" required>
+                </div>
+            </div>
+            
+            
+            <br><br>
+            <button type="button" class="btn btn-danger" style="margin-right: 20px; font-size: 18px; width: 100px; background-color: #E68A75;" (click)="back()">Back</button>
+            <button type="submit" class="btn btn-info" style="font-size: 18px; width: 100px;background-color: #75C9C8;">Order</button>
+        </form>
+        
+    </div>
+    <div>
+</div>
+

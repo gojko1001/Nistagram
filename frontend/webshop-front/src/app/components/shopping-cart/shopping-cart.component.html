@@ -4,7 +4,7 @@
         <form class="ngform" style="width: 500px">
             <h2 style="color: #75C9C8;">Shopping cart</h2>
             <br><br>
-            <table class="table">
+            <table class="table" *ngIf="shoppingCart != null">
                 <thead>
                 <tr>
                   <th scope="col"></th>
@@ -27,14 +27,12 @@
                 </tbody>
               </table>
             
-            <p style="text-align:right;font-size:20px; margin-top: 15px;color: #80A1D4; font-weight: bold;">
+            <p *ngIf="shoppingCart != null" style="text-align:right;font-size:20px; margin-top: 15px;color: #80A1D4; font-weight: bold;">
                 = {{shoppingCart.totalPrice}} e
             </p>
-            
-            
             <br><br>
             <button type="button" class="btn btn-danger" style="margin-right: 20px; font-size: 18px; width: 100px; background-color: #E68A75;" (click)="back()">Back</button>
-            <button type="button" class="btn btn-info" style="font-size: 18px; width: 100px;background-color: #75C9C8;">Next</button>
+            <button type="submit" class="btn btn-info" style="font-size: 18px; width: 100px;background-color: #75C9C8;" (click)="checkout()" >Checkout</button>
         </form>
         
     </div>

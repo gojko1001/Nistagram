@@ -47,4 +47,13 @@ export class ShoppingCartComponent implements OnInit {
     this.router.navigate([uri]));
   }
 
+  checkout(){
+    if(this.shoppingCart == null){
+      this.toastrService.info("Shopping cart is empty.");
+    }else{
+      this.router.navigate(['shipping-info']);
+    }
+      
+  }
+
 }

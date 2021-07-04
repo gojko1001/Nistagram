@@ -35,4 +35,8 @@ public class UserService implements IUserService {
         return new ResponseEntity("User has registered successfully.", HttpStatus.OK);
     }
 
+    @Override
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
 }
