@@ -52,6 +52,7 @@
                   <i class="fas fa-user"></i>
                 </button>
             </li>
+            
 
             <li class="nav-item" v-if="username != null && isAgent()">
                 <button class="nav-btn" @click='newCampaign'>
@@ -71,8 +72,13 @@
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && isAdmin()">
-                <button class="nav-btn">
+                <button class="nav-btn" @click='allAgentRequests'>
                   <i class="fas fa-user-secret"></i>
+                </button>
+            </li>
+            <li class="nav-item" v-if="username != null && isAdmin()">
+                <button class="nav-btn" @click='registerAgent'>
+                  <i class="fa fa-user-plus"></i>
                 </button>
             </li>
             <li class="nav-item" v-if="username != null && isAdmin()">
@@ -80,6 +86,7 @@
                   <i class="fa fa-users"></i>
                 </button>
             </li>
+
 
             <li class="nav-item" v-if="username != null">
                 <button class="nav-btn" @click="logout">
@@ -160,6 +167,9 @@ export default {
     profileDeactivation:function(){
       window.location.href = "/profile_deactivation";
     },
+    allAgentRequests:function(){
+       window.location.href = "/all_agent_requests";
+    },
     search: function() {
       localStorage.setItem("name", this.selected);
       localStorage.setItem("find", this.searchInput);
@@ -167,6 +177,9 @@ export default {
     },
     profileVerification: function(){
       window.location.href = "/all_requests";
+    },
+    registerAgent:function(){
+       window.location.href = "/register_agent";
     },
     login: function(){
       window.location.href = "/login";

@@ -24,8 +24,8 @@ public class UserController {
     private JwtService jwtService;
 
     @PostMapping("/register")
-    public void register(@RequestBody UserRegistrationDto userReg) {
-        userService.registerUser(userReg);
+    public ResponseEntity register(@RequestBody UserRegistrationDto userReg) {
+        return userService.registerUser(userReg);
     }
 
     @PostMapping("/login")
