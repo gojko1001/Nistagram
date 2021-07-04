@@ -57,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("**/user/**").permitAll()
                 .antMatchers("**/item/**").permitAll()
                 .antMatchers("**/shopping-cart/**").permitAll()
+                .antMatchers("**/order/**").permitAll()
                 // Every other request needs Authorisation
                 .anyRequest().authenticated()
                 // Enable CORS layer (WebMvcConfig class)
@@ -74,18 +75,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/**/*.css", "/**/*.js",
                 "/user/**",
                 "/item/**",
-                "/shopping-cart/**");
+                "/shopping-cart/**",
+                "/order/**");
         web.ignoring().antMatchers(HttpMethod.POST,
                 "/user/**",
                 "/item/**",
-                "/shopping-cart/**");
+                "/shopping-cart/**",
+                "/order/**");
         web.ignoring().antMatchers(HttpMethod.PUT,
                 "/user/**",
                 "/item/**",
-                "/shopping-cart/**");
+                "/shopping-cart/**",
+                "/order/**");
         web.ignoring().antMatchers(HttpMethod.DELETE,
                 "/user/**",
                 "/item/**",
-                "/shopping-cart/**");
+                "/shopping-cart/**",
+                "/order/**");
     }
 }

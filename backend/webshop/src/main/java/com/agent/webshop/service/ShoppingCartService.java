@@ -72,4 +72,9 @@ public class ShoppingCartService implements IShoppingCartService {
         return shoppingCartRepository.save(shoppingCart);
     }
 
+    @Override
+    public void deleteShoppingCart(ShoppingCart shoppingCart){
+        shoppingCartRepository.delete(shoppingCart);
+    }
+
 }

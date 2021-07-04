@@ -13,3 +13,5 @@ export const CREATE_PATH = ITEM_PATH + '/create';
 export const SHOPPING_CART_PATH = BACKEND_PATH + '/shopping-cart';
 export const ADD_ITEM_PATH = SHOPPING_CART_PATH + '/add';
 export const DELETE_ITEM_PATH = SHOPPING_CART_PATH + '/delete';
+
+export const ORDER_PATH = BACKEND_PATH + '/order';

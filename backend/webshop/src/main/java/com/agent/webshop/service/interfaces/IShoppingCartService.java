@@ -7,4 +7,5 @@ public interface IShoppingCartService {
     ShoppingCart getShoppingCartByUsername(String username);
     ShoppingCart addItemInCart(String username, ItemInCart itemInCart);
     ShoppingCart deleteItemFromShoppingCart(String username, Long itemInCartId);
+    void deleteShoppingCart(ShoppingCart shoppingCart);
 }

@@ -29,16 +29,27 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Country:</label>
+                <div class="col-sm-6">
+                    <input class="form-control" placeholder="Enter country" [(ngModel)]="info.country" name="country" required>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="inputPassword" class="col-sm-4 col-form-label">Adress:</label>
                 <div class="col-sm-6">
-                    <input class="form-control" placeholder="Enter adress" [(ngModel)]="info.adress" name="adress" required>
+                    <input class="form-control" placeholder="Enter adress" [(ngModel)]="info.address" name="adress" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Postal code:</label>
+                <div class="col-sm-6">
+                    <input class="form-control" placeholder="Enter postal code" [(ngModel)]="info.postalCode" name="postalCode" required>
                 </div>
             </div>
             
-            
             <br><br>
             <button type="button" class="btn btn-danger" style="margin-right: 20px; font-size: 18px; width: 100px; background-color: #E68A75;" (click)="back()">Back</button>
-            <button type="submit" class="btn btn-info" style="font-size: 18px; width: 100px;background-color: #75C9C8;">Order</button>
+            <button type="submit" class="btn btn-info" style="font-size: 18px; width: 100px;background-color: #75C9C8;" (click)="order()">Order</button>
         </form>
         
     </div>
