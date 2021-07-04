@@ -1,2 +1,9 @@
-package com.agent.webshop.service.interfaces;public interface IShoppingCartService {
+package com.agent.webshop.service.interfaces;
+
+import com.agent.webshop.domain.ItemInCart;
+import com.agent.webshop.domain.ShoppingCart;
+
+public interface IShoppingCartService {
+    ShoppingCart getShoppingCartByUsername(String username);
+    ShoppingCart addItemInCart(String username, ItemInCart itemInCart);
 }
