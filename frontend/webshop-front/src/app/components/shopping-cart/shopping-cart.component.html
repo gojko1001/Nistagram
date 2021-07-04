@@ -1,0 +1,41 @@
+<div class="page">
+    <div class="form">
+        <br>
+        <form class="ngform" style="width: 500px">
+            <h2 style="color: #75C9C8;">Shopping cart</h2>
+            <br><br>
+            <table class="table" *ngIf="shoppingCart != null">
+                <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let itemInCart of shoppingCart.itemsInCart; index as i">
+                    <td><span style="font-style: italic;">{{itemInCart.item.name}}</span></td>
+                    <td><span>{{itemInCart.quantity}}</span></td>
+                    <td><span>{{itemInCart.quantity}} x {{itemInCart.item.price}}</span></td>
+                    <td>
+                        <button class="deleteBtn" style="border: none; background:transparent" (click)="deleteItem(itemInCart.id)">
+                            <i class="fas fa-trash-alt fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+              </table>
+            
+            <p *ngIf="shoppingCart != null" style="text-align:right;font-size:20px; margin-top: 15px;color: #80A1D4; font-weight: bold;">
+                = {{shoppingCart.totalPrice}} e
+            </p>
+            <br><br>
+            <button type="button" class="btn btn-danger" style="margin-right: 20px; font-size: 18px; width: 100px; background-color: #E68A75;" (click)="back()">Back</button>
+            <button type="submit" class="btn btn-info" style="font-size: 18px; width: 100px;background-color: #75C9C8;" (click)="checkout()" >Checkout</button>
+        </form>
+        
+    </div>
+    <div>
+</div>
+

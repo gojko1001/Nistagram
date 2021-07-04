@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from 'src/app/service/item.service';
+import { ShoppingService } from 'src/app/service/shopping.service';
 import { getUsernameFromToken } from 'src/app/util/tokenUtil';
 
 @Component({
@@ -13,10 +14,10 @@ export class DiscoverComponent implements OnInit {
 
   items: any[]=[];
   message: any;
+  itemInCart: any = {item: [], quantity:''};
 
-  constructor(private itemService: ItemService,
-    private toastrService: ToastrService,
-    private router: Router) { }
+  constructor(private itemService: ItemService, private toastrService: ToastrService,
+    private router: Router, private shoppingService: ShoppingService) { }
 
   ngOnInit(): void {
     this.itemService.getItems().subscribe((data: any) => {
@@ -63,6 +64,17 @@ export class DiscoverComponent implements OnInit {
   redirectTo(uri:string){
     this.router.navigateByUrl('/registration', {skipLocationChange: true}).then(()=>
     this.router.navigate([uri]));
+  }
+
+  addItemInCart(item: any){
+    console.log(item);
+    this.itemInCart.item = item;
+    this.shoppingService.addItemInShoppingCart(getUsernameFromToken(), this.itemInCart).subscribe(data => {
+      this.toastrService.success("Item has been added to shopping cart.");
+      console.log(data);
+    }, error => {
+        this.toastrService.error("Error occurred.");
+    });
   }
 
 }
