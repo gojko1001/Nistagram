@@ -11,14 +11,14 @@ import { getUsernameFromToken } from 'src/app/util/tokenUtil';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  items:any;
+  shoppingCart:any;
 
   constructor(private router: Router, private toastrService: ToastrService, private shoppgingService: ShoppingService) { }
 
   ngOnInit(): void {
     this.shoppgingService.getShoppingCart(this.getUsername()).subscribe( data => {
-      this.items = data;
-      console.log(this.items);
+      this.shoppingCart = data;
+      console.log(this.shoppingCart)
     }, error => {
       this.toastrService.error("Error occurred.");
     });

@@ -4,7 +4,26 @@
         <form class="ngform" style="width: 500px">
             <h2 style="color: #75C9C8;">Shopping cart</h2>
             <br><br>
+            <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of shoppingCart.itemsInCart; index as i">
+                    <td><span style="font-style: italic;">{{item.item.name}}</span></td>
+                    <td><span>{{item.quantity}}</span></td>
+                    <td><span>{{item.quantity}} x {{item.item.price}}</span></td>
+                </tr>
+                </tbody>
+              </table>
             
+            <p style="text-align:right;font-size:20px; margin-top: 15px;color: #80A1D4; font-weight: bold;">
+                = {{shoppingCart.totalPrice}} e
+            </p>
             
             
             <br><br>
