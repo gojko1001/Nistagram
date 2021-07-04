@@ -54,4 +54,22 @@ public class ShoppingCartService implements IShoppingCartService {
         shoppingCart.setTotalPrice(shoppingCart.getTotalPrice() + itemInCart.getItem().getPrice());
         return shoppingCartRepository.save(shoppingCart);
     }
+
+    @Override
+    public ShoppingCart deleteItemFromShoppingCart(String username, Long itemInCartId) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findShoppingCartByUsername(username);
+        List<ItemInCart> itemInCartList = shoppingCart.getItemsInCart();
+        for(ItemInCart item : itemInCartList){
+            if(item.getId().equals(itemInCartId)){
+                itemInCartList.remove(item);
+                break;
+            }
+        }
+        ItemInCart itemInCart = itemInCartService.findById(itemInCartId);
+        shoppingCart.setTotalPrice(shoppingCart.getTotalPrice() - (itemInCart.getQuantity() * itemInCart.getItem().getPrice()));
+        itemInCartService.delete(itemInCart);
+        shoppingCart.setItemsInCart(itemInCartList);
+        return shoppingCartRepository.save(shoppingCart);
+    }
+
 }

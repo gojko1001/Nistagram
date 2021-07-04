@@ -32,4 +32,19 @@ export class ShoppingCartComponent implements OnInit {
     return getUsernameFromToken();
   }
 
+  deleteItem(itemInCartId: any){
+    let currentUrl = this.router.url;
+    this.shoppgingService.deleteItemFromShoppingCart(this.getUsername(), itemInCartId).subscribe( data => {
+      this.toastrService.success("Item has been deleted from shopping cart.");
+      this.redirectTo(currentUrl);
+    }, error => {
+      this.toastrService.error("Error occurred.");
+    });
+  }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/registration', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+  }
+
 }

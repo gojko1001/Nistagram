@@ -16,4 +16,10 @@ public class ItemInCartService implements IItemInCartService {
         return itemInCartRepository.save(itemInCart);
     }
 
+    @Override
+    public ItemInCart findById(Long id) { return itemInCartRepository.findItemInCartById(id); }
+
+    @Override
+    public void delete(ItemInCart itemInCart){ itemInCartRepository.delete(itemInCart);}
+
 }

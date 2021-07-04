@@ -1,6 +1,5 @@
 package com.agent.webshop.controller;
 
-import com.agent.webshop.domain.Item;
 import com.agent.webshop.domain.ItemInCart;
 import com.agent.webshop.domain.ShoppingCart;
 import com.agent.webshop.service.interfaces.IShoppingCartService;
@@ -22,6 +21,11 @@ public class ShoppingCartController {
     @PostMapping("/add/{username}")
     public ShoppingCart addItemInCart(@PathVariable("username") String username, @RequestBody ItemInCart itemInCart){
         return shoppingCartService.addItemInCart(username, itemInCart);
+    }
+
+    @DeleteMapping("/delete/{username}/{itemInCartId}")
+    public ShoppingCart deleteItemFromCart(@PathVariable("username") String username, @PathVariable("itemInCartId") Long itemInCartId){
+        return shoppingCartService.deleteItemFromShoppingCart(username, itemInCartId);
     }
 
 }

@@ -10,13 +10,19 @@
                   <th scope="col"></th>
                   <th scope="col">Quantity</th>
                   <th scope="col">Price</th>
+                  <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let item of shoppingCart.itemsInCart; index as i">
-                    <td><span style="font-style: italic;">{{item.item.name}}</span></td>
-                    <td><span>{{item.quantity}}</span></td>
-                    <td><span>{{item.quantity}} x {{item.item.price}}</span></td>
+                <tr *ngFor="let itemInCart of shoppingCart.itemsInCart; index as i">
+                    <td><span style="font-style: italic;">{{itemInCart.item.name}}</span></td>
+                    <td><span>{{itemInCart.quantity}}</span></td>
+                    <td><span>{{itemInCart.quantity}} x {{itemInCart.item.price}}</span></td>
+                    <td>
+                        <button class="deleteBtn" style="border: none; background:transparent" (click)="deleteItem(itemInCart.id)">
+                            <i class="fas fa-trash-alt fa-lg"></i>
+                        </button>
+                    </td>
                 </tr>
                 </tbody>
               </table>
