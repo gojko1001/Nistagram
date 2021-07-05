@@ -14,8 +14,6 @@ public class TargetAudience {
     private Long id;
     @ManyToOne
     private Campaign campaign;
-//    @ElementCollection
-//    private List<Integer> ageRange;
     @Column
     private int fromAge;
     @Column
