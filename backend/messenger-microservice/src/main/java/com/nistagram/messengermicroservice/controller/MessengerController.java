@@ -1,5 +1,6 @@
 package com.nistagram.messengermicroservice.controller;
 
+import com.nistagram.messengermicroservice.controller.dto.MessageDto;
 import com.nistagram.messengermicroservice.service.IMessageService;
 import com.nistagram.messengermicroservice.service.MessageService;
 import lombok.AllArgsConstructor;
@@ -29,5 +30,7 @@ public class MessengerController {
     }
 
     @PostMapping
-    public ResponseEntity createMessage(@RequestBody )
+    public ResponseEntity createMessage(@RequestBody MessageDto messageDto){
+        return null;
+    }
 }

@@ -33,5 +33,6 @@ public interface IUserService {
 
     List<User> getUsersWithVerifyRequestPending();
 
-    List<User> getChatableUsers(String username);
+    List<User> getChatableUsers(String username, String text);
+
 }

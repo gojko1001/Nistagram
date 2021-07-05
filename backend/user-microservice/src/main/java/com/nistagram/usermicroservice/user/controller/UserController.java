@@ -85,10 +85,9 @@ public class UserController {
         return userService.getPublicTaggableUsers();
     }
 
-    @GetMapping("/chatable_users/{username}")
-    public List<UserDto> getAllChatableUsers(@PathVariable String username){
-        return userService.getChatableUsers(username).stream()
+    @GetMapping("/chatable_users/{username}/{searchInput}")
+    public List<UserDto> getAllChatableUsers(@PathVariable String username, @PathVariable String searchInput){
+        return userService.getChatableUsers(username, searchInput).stream()
                 .map(UserMapper::mapUserToUserDto).collect(Collectors.toList());
     }
-
 }

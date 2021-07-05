@@ -4,15 +4,15 @@
 				<div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
 					<div class="card-header">
 						<div class="input-group">
-							<input type="text" placeholder="Search..." name="" class="form-control search">
-							<div class="input-group-prepend">
+							<input v-model="searchInput" type="text" placeholder="Search..." name="" class="form-control search">
+							<div class="input-group-prepend" @click="search">
 								<span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
 							</div>
 						</div>
 					</div>
 					<div class="card-body contacts_body">
 						<ui class="contacts">
-						<li class="active"  v-for="user in users" :key="user.users">
+						<li v-bind:class="{'active': receiver == user.username}" v-for="user in users" :key="user.users">
 							<div class="d-flex bd-highlight" @click="selectReceiver(user)">
 								<div class="img_cont">
 									<img src="../assets/user-no-picture.png" class="rounded-circle user_img">
@@ -83,6 +83,7 @@ export default {
   name: 'Chat',
   data(){
         return{
+			searchInput: '',
             username:'',
 			receiver: '',
 			users: [
@@ -94,10 +95,7 @@ export default {
 	this.username = getUsernameFromToken();
 	console.log(this.username);
     if(this.username != null)
-		this.axios.get('http://localhost:8762/user-api/user/chatable_users/' + this.username).then(response => {
-		this.users = response.data;
-		console.log(response.data);
-		})
+		this.search();
     this.axios.get('http://localhost:8762/messenger-api/' + this.username).then(response => {
 		this.messages = response.data;
 		console.log(response.data);
@@ -107,6 +105,13 @@ export default {
 
 	selectReceiver: function(receiverUser){
 		this.receiver = receiverUser.username;
+	},
+
+	search: function(){
+		this.axios.get('http://localhost:8762/user-api/user/chatable_users/' + this.username + '/' + this.searchInput).then(response =>{
+			console.log(response.data);
+			this.users = response.data;
+		})
 	},
 
     makeToast(message, variant) {
@@ -119,7 +124,7 @@ export default {
                                 appendToast: false
                             })
         },
-  }
+	}
 }
 </script>
 
@@ -236,9 +241,6 @@ export default {
 		right: 0.4em;
 		border:1.5px solid white;
 	}
-	.offline{
-		background-color: #c23616 !important;
-	}
 	.user_info{
 		margin-top: auto;
 		margin-bottom: auto;
@@ -251,16 +253,6 @@ export default {
 	.user_info p{
 	font-size: 10px;
 	color: rgba(255,255,255,0.6);
-	}
-	.video_cam{
-		margin-left: 50px;
-		margin-top: 5px;
-	}
-	.video_cam span{
-		color: white;
-		font-size: 20px;
-		cursor: pointer;
-		margin-right: 20px;
 	}
 	.msg_cotainer{
 		margin-top: auto;
@@ -296,42 +288,6 @@ export default {
 	}
 	.msg_head{
 		position: relative;
-	}
-	#action_menu_btn{
-		position: absolute;
-		right: 10px;
-		top: 10px;
-		color: white;
-		cursor: pointer;
-		font-size: 20px;
-	}
-	.action_menu{
-		z-index: 1;
-		position: absolute;
-		padding: 15px 0;
-		background-color: rgba(0,0,0,0.5);
-		color: white;
-		border-radius: 15px;
-		top: 30px;
-		right: 15px;
-		display: none;
-	}
-	.action_menu ul{
-		list-style: none;
-		padding: 0;
-	margin: 0;
-	}
-	.action_menu ul li{
-		width: 100%;
-		padding: 10px 15px;
-		margin-bottom: 5px;
-	}
-	.action_menu ul li i{
-		padding-right: 10px;
-	}
-	.action_menu ul li:hover{
-		cursor: pointer;
-		background-color: rgba(0,0,0,0.2);
 	}
 	@media(max-width: 576px){
         .contacts_card{

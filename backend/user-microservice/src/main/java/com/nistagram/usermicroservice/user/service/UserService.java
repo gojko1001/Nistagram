@@ -154,10 +154,13 @@ public class UserService implements IUserService {
         return userList;
     }
 
-    public List<User> getChatableUsers(String username) {
-        return userRepository.findAllByPublicDM(true).stream()
-                .filter(user -> (!user.getUsername().equals(username)))
-                .collect(Collectors.toList());
+    public List<User> getChatableUsers(String username, String text) {
+        List<User> users = new ArrayList<>();
+        for(User user: userRepository.findAllByPublicDM(true)){
+            if(!user.getUsername().equals(username) && user.getUsername().contains(text))
+                users.add(user);
+        }
+        return users;
     }
 
     private void verifyUserInput(UserRegistrationDto userReg) {
