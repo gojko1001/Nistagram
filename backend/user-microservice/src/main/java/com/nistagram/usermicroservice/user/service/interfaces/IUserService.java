@@ -1,7 +1,7 @@
 package com.nistagram.usermicroservice.user.service.interfaces;
 
-import com.nistagram.usermicroservice.user.domain.User;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
+import com.nistagram.usermicroservice.user.domain.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,4 +32,6 @@ public interface IUserService {
     List<String> getPublicTaggableUsers();
 
     List<User> getUsersWithVerifyRequestPending();
+
+    List<User> getChatableUsers(String username);
 }

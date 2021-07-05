@@ -2,15 +2,15 @@ package com.nistagram.usermicroservice.user.service;
 
 import com.nistagram.usermicroservice.connection.AuthConnection;
 import com.nistagram.usermicroservice.connection.MediaConnection;
-import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
 import com.nistagram.usermicroservice.exception.InvalidActionException;
 import com.nistagram.usermicroservice.exception.NotFoundException;
+import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.user.domain.User;
 import com.nistagram.usermicroservice.user.domain.UserRelation;
-import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.repository.IUserRepository;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -151,6 +152,12 @@ public class UserService implements IUserService {
                 userList.add(user);
         }
         return userList;
+    }
+
+    public List<User> getChatableUsers(String username) {
+        return userRepository.findAllByPublicDM(true).stream()
+                .filter(user -> (!user.getUsername().equals(username)))
+                .collect(Collectors.toList());
     }
 
     private void verifyUserInput(UserRegistrationDto userReg) {

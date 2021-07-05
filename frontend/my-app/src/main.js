@@ -115,7 +115,7 @@ const router = new VueRouter({
       component: AddComment
     },
     {
-      path: '/messanger',
+      path: '/messenger',
       name: 'Messanger',
       component: Messanger
     },

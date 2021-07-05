@@ -4,7 +4,7 @@ import com.nistagram.usermicroservice.user.controller.dto.UserDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.JwtUtil;
+//import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -21,8 +22,8 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
-    @Autowired
-    private JwtUtil jwtUtil;
+    //@Autowired
+    //private JwtUtil jwtUtil;
 
     @GetMapping
     public List<UserDto> getAll() {
@@ -54,7 +55,8 @@ public class UserController {
     @PutMapping()
     public UserDto updateProfile(@RequestBody UserDto userDto,
                                  @RequestHeader("Authorization") String jwt) {
-        String username = jwtUtil.extractUsername(jwt);
+       // String username = jwtUtil.extractUsername(jwt);
+        String username = "";
         if (username == null)
             throw new UnauthorizedException("Access denied");
         Logger.info("Try to edit user: " + username, userDto.getUsername());
@@ -81,6 +83,12 @@ public class UserController {
     @GetMapping("/public/taggable/users")
     public List<String> getPublicTaggableUsers() {
         return userService.getPublicTaggableUsers();
+    }
+
+    @GetMapping("/chatable_users/{username}")
+    public List<UserDto> getAllChatableUsers(@PathVariable String username){
+        return userService.getChatableUsers(username).stream()
+                .map(UserMapper::mapUserToUserDto).collect(Collectors.toList());
     }
 
 }

@@ -3,10 +3,12 @@ package com.nistagram.usermicroservice.user.service.interfaces;
 import com.nistagram.usermicroservice.user.domain.User;
 import com.nistagram.usermicroservice.user.domain.UserRelation;
 import com.nistagram.usermicroservice.user.domain.enums.RelationStatus;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@Service
 public interface IUserRelationService {
 
     UserRelation findRelation(String username, String relatedUsername);
