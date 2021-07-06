@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { getUsernameFromToken, removeToken } from 'src/app/util/tokenUtil';
+import { getRoleFromToken, getUsernameFromToken, removeToken } from 'src/app/util/tokenUtil';
 
 @Component({
   selector: 'app-navbar',
@@ -18,9 +18,21 @@ export class NavbarComponent implements OnInit {
     return getUsernameFromToken();
   }
 
+  getRole(){
+    return getRoleFromToken();
+  }
+
   logout(){
     removeToken();
     this.router.navigate(['/login'], {skipLocationChange:true});
+  }
+
+  discover(){
+    this.router.navigate(['/discover']);
+  }
+
+  shoppingCart(){
+    this.router.navigate(['/shopping-cart']);
   }
 
 }

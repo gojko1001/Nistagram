@@ -45,10 +45,10 @@
     color: #E68A75;
 }
 
-.showBtn{
-    margin-top:15px;
+
+.addToCartBtn{
+    color: black;
     position: absolute;
-    top: 0px;
-    right: 15px;
-    color: #80A1D4;
+    right: 8px;
+    margin-top: -12px;
 }
