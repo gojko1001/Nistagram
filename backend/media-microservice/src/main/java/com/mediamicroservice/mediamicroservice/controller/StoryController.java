@@ -22,9 +22,9 @@ public class StoryController {
     private IStoryRepository storyRepository;
 
     @PostMapping("/info")
-    public ResponseEntity saveImageInfo(@RequestBody MediaDto mediaDto) {
+    public Long saveStoryImageInfo(@RequestBody MediaDto mediaDto) {
         Logger.info("Save image info.", mediaDto.getUsername());
-        return storyService.saveImageInfo(mediaDto);
+        return storyService.saveImageInfo(mediaDto).getMedia().getId();
     }
 
     @GetMapping("/archive/{username}")

@@ -1,0 +1,54 @@
+.card{
+    margin: 20px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  p{
+      color: lightblue;
+  }
+
+  span{
+      color:black;
+  }
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#C0B9DD;
+	color:white;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
+}
+
+.editBtn{
+    margin-top:-5px;
+    position: absolute;
+    top: 50px;
+    right: 40px;
+    color: #C0B9DD;
+}
+
+.deleteBtn{
+    margin-top:-5px;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    color: #E68A75;
+}
+
+
+.addToCartBtn{
+    color: black;
+    position: absolute;
+    right: 8px;
+    margin-top: -12px;
+}

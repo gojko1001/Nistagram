@@ -35,45 +35,59 @@
                   <i class="fas fa-envelope"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+            <li class="nav-item" v-if="username != null && isUserOrAgent()">
                 <button class="heart nav-btn">
                   <i class="fas fa-user-plus" v-b-modal.modal-follow-request></i>
                   <small id="pendingnum" v-if="followRequests.length > 0"><b-badge variant="danger" pill>{{followRequests.length}}</b-badge></small>
                 </button>
                 
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+            <li class="nav-item" v-if="username != null && isUserOrAgent()">
                 <button class="heart nav-btn" @click="notificationPage">
                   <i class="fas fa-heart"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
+            <li class="nav-item" v-if="username != null && isUserOrAgent()">
+                <button class="nav-btn" @click='myProfile'>
+                  <i class="fas fa-user"></i>
+                </button>
+            </li>
+            
+
+            <li class="nav-item" v-if="username != null && isAgent()">
+                <button class="nav-btn" @click='newCampaign'>
+                  <i class="fas fa-file-contract"></i>
+                </button>
+            </li>
+
+
+            <li class="nav-item" v-if="username != null && isAdmin()">
                 <button class="nav-btn" @click='inappropriateContent'>
                   <i class="fas fa-ban"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
+            <li class="nav-item" v-if="username != null && isAdmin()">
                 <button class="nav-btn" @click='profileVerification'>
                   <i class="fas fa-user-check"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role == 'ROLE_ADMIN'">
-                <button class="nav-btn">
+            <li class="nav-item" v-if="username != null && isAdmin()">
+                <button class="nav-btn" @click='allAgentRequests'>
                   <i class="fas fa-user-secret"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && role=='ROLE_ADMIN'">
+            <li class="nav-item" v-if="username != null && isAdmin()">
+                <button class="nav-btn" @click='registerAgent'>
+                  <i class="fa fa-user-plus"></i>
+                </button>
+            </li>
+            <li class="nav-item" v-if="username != null && isAdmin()">
                 <button class="nav-btn" @click='profileDeactivation'>
                   <i class="fa fa-users"></i>
                 </button>
             </li>
 
 
-            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
-                <button class="nav-btn" @click='myProfile'>
-                  <i class="fas fa-user"></i>
-                </button>
-            </li>
             <li class="nav-item" v-if="username != null">
                 <button class="nav-btn" @click="logout">
                   <i class="fas fa-sign-out-alt"></i>
@@ -106,7 +120,7 @@
 
 
 <script>
-import { ACCEPT_FOLLOWER_PATH, GET_REQUESTS_PATH, SERVER_NOT_RESPONDING, DELETE_REQUEST_PATH } from '../util/constants';
+import { ACCEPT_FOLLOWER_PATH, GET_REQUESTS_PATH, SERVER_NOT_RESPONDING, DELETE_REQUEST_PATH, ROLE_USER, ROLE_AGENT, ROLE_ADMIN } from '../util/constants';
 import { getRoleFromToken, getToken, getUsernameFromToken, removeToken } from '../util/token';
 export default {
   name: 'Navbar',
@@ -153,6 +167,9 @@ export default {
     profileDeactivation:function(){
       window.location.href = "/profile_deactivation";
     },
+    allAgentRequests:function(){
+       window.location.href = "/all_agent_requests";
+    },
     search: function() {
       localStorage.setItem("name", this.selected);
       localStorage.setItem("find", this.searchInput);
@@ -160,6 +177,9 @@ export default {
     },
     profileVerification: function(){
       window.location.href = "/all_requests";
+    },
+    registerAgent:function(){
+       window.location.href = "/register_agent";
     },
     login: function(){
       window.location.href = "/login";
@@ -169,6 +189,9 @@ export default {
     },
     messenger: function(){
       window.location.href = "/messenger";
+    }
+    newCampaign: function(){
+      window.location.href = "/campaign";
     },
     acceptRequest(username, idx){
       this.axios.put(ACCEPT_FOLLOWER_PATH + "/" + username, null, {  headers:{
@@ -197,6 +220,15 @@ export default {
                     })
     
     },
+    isUserOrAgent(){
+      return this.role == ROLE_USER || this.role == ROLE_AGENT
+    },
+    isAgent(){
+      return this.role == ROLE_AGENT
+    },
+    isAdmin(){
+      return this.role == ROLE_ADMIN
+    }
   }
 }
 </script>

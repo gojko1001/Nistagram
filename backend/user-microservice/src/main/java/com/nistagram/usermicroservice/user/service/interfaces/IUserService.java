@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice.user.service.interfaces;
 
+import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.domain.User;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public interface IUserService {
     User findUserByFullName(String fullName);
 
     User registerUser(UserRegistrationDto userReg, boolean isGoogleUser);
+
+    User registerAgent(AgentDto agentDto);
 
     User updateUser(User user, String oldUsername, String jwt);
 

@@ -124,3 +124,9 @@ insert into user_role (user_id, role_id) values (301, 3);
 insert into user_credentials (id, username, password, verified, is_deactivated) values (302, 'samsung', '$2a$10$jDvsku0joAHAfQk9i2Le4.AoW2jsVb5Zcsyx8ieR7hAbuTNl9MsGe', true, false);
 insert into user_role (user_id, role_id) values (302, 3);
 -- pass: Samsung123*
+
+insert into requests(email, username, web_site, is_rejected, is_confirmed)values("milica@mailinator.com","milica","www.youtube.com", false, false);
+insert into requests(email, username, web_site, is_rejected, is_confirmed)values("maja@mailinator.com","maja","www.emezetta.com", true, false);
+insert into requests(email, username, web_site, is_rejected, is_confirmed)values("masa@mailinator.com","masa","www.weheartit.com", true, false);
+insert into requests(email, username, web_site, is_rejected, is_confirmed)values("gojko@mailinator.com","gojko","www.instagram.com", false, true);
+insert into requests(email, username, web_site, is_rejected, is_confirmed)values("tasa@mailinator.com","tasa","www.gdenamore.com", false, false);

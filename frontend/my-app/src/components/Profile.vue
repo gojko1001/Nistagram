@@ -7,6 +7,7 @@
                   {{user.bio}}<br>
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
+                  <b-link v-if="isUserProfile" href="/agent_request">Agent request</b-link><br/>
                   <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
                   <b-dropdown id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
                     <b-dropdown-text><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
@@ -100,7 +101,7 @@
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
-                                <p style="color:blue">{{img.location.name}}</p>
+                                <p style="color:blue" v-if="img.location != null">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
                                     <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
@@ -131,7 +132,7 @@
                                 style="max-width: 30rem; background:transparent; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);display:block; margin-left:auto; margin-right:auto"
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4> <i v-if="img.forCloseFriends" class="fas fa-star fa-lg" style="color: #00cc00;"></i>
-                                <p style="color:blue">{{img.location.name}}</p>
+                                <p style="color:blue" v-if="img.location != null">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'S'+q">
                                     <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
@@ -168,7 +169,7 @@
                                 <button v-if="loggedUser != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
-                                <p style="color:blue">{{img.location.name}}</p>
+                                <p style="color:blue" v-if="img.location != null">{{img.location.name}}</p>
                                 
                                 <div v-for="(img, a) in img.imageBytes" :key="'P'+a">
                                     <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
@@ -222,7 +223,7 @@
                                 class="mb-2">
                                 <h4>@{{img.username}}</h4>
                                 <h6 style="margin-top:-30px; margin-left: 300px">{{img.timestamp | formatDate}}</h6>
-                                <p style="color:blue">{{img.location.name}}</p>
+                                <p style="color:blue" v-if="img.location != null">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'C'+q">
                                     <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
@@ -278,7 +279,7 @@
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
-                                <p style="color:blue">{{img.location.name}}</p>
+                                <p style="color:blue" v-if="img.location != null">{{img.location.name}}</p>
                                 <div v-for="(img, q) in img.imageBytes" :key="'L'+q">
                                     <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
                                     <video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
@@ -331,7 +332,7 @@
                                 <button v-if="username != null" style="margin-top:-30px; margin-left: 390px" class="heart inter" @click="reportPost(img.mediaId)">
                                     <i class="fa fa-ban fa-fw"></i>
                                 </button>
-                                <p style="color:blue">{{img.location.name}}</p>
+                                <p style="color:blue" v-if="img.location != null">{{img.location.name}}</p>
 
                                 <div v-for="(img, q) in img.imageBytes" :key="'SA'+q">
                                     <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">

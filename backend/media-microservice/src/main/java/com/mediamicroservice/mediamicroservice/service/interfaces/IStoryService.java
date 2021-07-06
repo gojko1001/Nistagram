@@ -11,7 +11,7 @@ import java.util.List;
 public interface IStoryService {
     Story save(Story story);
 
-    ResponseEntity saveImageInfo(MediaDto imageDto);
+    Story saveImageInfo(MediaDto imageDto);
 
     List<StoryBytesDto> getImagesFiles(List<Story> stories);
 

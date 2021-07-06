@@ -1,8 +1,9 @@
-package com.nistagram.authenticationmicroservice;
+package com.nistagram.authenticationmicroservice.controller;
 
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
 import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
+import com.nistagram.authenticationmicroservice.dto.UserCredentialsAgentDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
 import com.nistagram.authenticationmicroservice.exception.UnauthorizedException;
 import com.nistagram.authenticationmicroservice.logger.Logger;
@@ -58,6 +59,12 @@ public class UserCredentialsController {
     public void registerUser(@RequestBody UserCredentialsDto userReg) {
         userCredentialsService.create(userReg);
         emailService.verificationPassword(userReg.getUsername(), userReg.getEmail(), userReg.getFullName());
+
+    }
+    @PostMapping("/addAgent")
+    public void registerAgent(@RequestBody UserCredentialsAgentDto agent) {
+        userCredentialsService.createAgent(agent);
+        emailService.verificationPasswordAgent(agent.getUsername(), agent.getEmail(), agent.getFullName(), agent.getPassword());
 
     }
 

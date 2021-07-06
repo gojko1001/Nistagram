@@ -1,6 +1,7 @@
 package com.agent.webshop.controller;
 
 import com.agent.webshop.controller.dto.UserRegistrationDto;
+import com.agent.webshop.domain.User;
 import com.agent.webshop.domain.UserCredentials;
 import com.agent.webshop.security.JwtService;
 import com.agent.webshop.service.interfaces.IUserCredentialsService;
@@ -24,8 +25,8 @@ public class UserController {
     private JwtService jwtService;
 
     @PostMapping("/register")
-    public void register(@RequestBody UserRegistrationDto userReg) {
-        userService.registerUser(userReg);
+    public ResponseEntity register(@RequestBody UserRegistrationDto userReg) {
+        return userService.registerUser(userReg);
     }
 
     @PostMapping("/login")
@@ -33,6 +34,11 @@ public class UserController {
         UserCredentials credentials = userCredentialsService.login(userCredentials);
         String jwt = jwtService.createToken(credentials.getUsername(), credentials.getRole());
         return new ResponseEntity<>(jwt, HttpStatus.OK);
+    }
+
+    @GetMapping("/info/{username}")
+    public User findByUsername(@PathVariable("username") String username){
+        return userService.findByUsername(username);
     }
 
 }

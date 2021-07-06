@@ -15,4 +15,6 @@ public class ShoppingCart {
     private String username;
     @ManyToMany
     private List<ItemInCart> itemsInCart;
+    @Column
+    private float totalPrice;
 }

@@ -2,6 +2,7 @@ package com.nistagram.usermicroservice.user.controller;
 
 import com.nistagram.usermicroservice.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
@@ -44,6 +45,11 @@ public class UserController {
     @PostMapping("/add")
     public void registerUser(@RequestBody UserRegistrationDto userReg) {
         userService.registerUser(userReg, false);
+    }
+
+    @PostMapping("/addAgent")
+    public void registerAgent(@RequestBody AgentDto userReg) {
+        userService.registerAgent(userReg);
     }
 
     @PostMapping("/addGoogleUser")

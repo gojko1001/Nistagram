@@ -3,10 +3,7 @@ package com.nistagram.authenticationmicroservice.service;
 import com.nistagram.authenticationmicroservice.connection.UserConnection;
 import com.nistagram.authenticationmicroservice.domain.Role;
 import com.nistagram.authenticationmicroservice.domain.UserCredentials;
-import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
-import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
-import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
-import com.nistagram.authenticationmicroservice.dto.UserDto;
+import com.nistagram.authenticationmicroservice.dto.*;
 import com.nistagram.authenticationmicroservice.exception.BadRequestException;
 import com.nistagram.authenticationmicroservice.exception.InvalidActionException;
 import com.nistagram.authenticationmicroservice.exception.NotFoundException;
@@ -67,6 +64,22 @@ public class UserCredentialsService implements IUserCredentialsService {
         }
         Logger.infoDb("Try to save user credentials with username: " + userCredentials.getUsername());
         return userCredentialsRepository.save(userCredentials);
+    }
+
+    @Override
+    public UserCredentials createAgent(UserCredentialsAgentDto userCredentials) {
+        UserCredentials userCredentials1 = new UserCredentials();
+        userCredentials1.setUsername(userCredentials.getUsername());
+        userCredentials1.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
+        userCredentials1.setRoles(roleService.findByName("ROLE_AGENT"));
+        userCredentials1.setVerified(false);
+        try{
+           userConnection.registerAgent(userCredentials);
+        }catch (Exception e){
+            throw new BadRequestException("Unsuccessfully added user!");
+        }
+        Logger.infoDb("Try to save user credentials with username: " + userCredentials.getUsername());
+        return userCredentialsRepository.save(userCredentials1);
     }
 
     @Override

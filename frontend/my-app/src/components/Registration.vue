@@ -173,10 +173,6 @@ export default {
       } else {
         this.contains_eight_characters = false;
 			}
-      if(this.password =="Nastasja@98"){
-        alert("You entered black list password");
-        this.valid_password = false;
-      }
 			
       this.contains_number = /\d/.test(this.password);
       this.contains_uppercase_lowercase = /[A-Z]/.test(this.password) && /[a-z]/.test(this.password);

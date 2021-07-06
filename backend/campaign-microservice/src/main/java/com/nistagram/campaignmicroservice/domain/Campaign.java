@@ -14,7 +14,7 @@ public class Campaign {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    @Column(nullable = false)
     private String username;
     @Column
     private CampaignType type;
@@ -28,6 +28,8 @@ public class Campaign {
     private int perDay;
     @Column
     private boolean active = false;
-    @OneToMany(mappedBy = "campaign")
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<Ad> ads;
+    @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+    private List<TargetAudience> targetAudience;
 }

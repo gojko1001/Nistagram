@@ -14,6 +14,8 @@ insert into verification_request (file_path, status, category_id) values ('id3.j
 insert into verification_request (file_path, status, category_id) values ('id4.jpg', 1, 4);
 
 -- User
+-- Role:admin
+insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (100, 'lubura', "Nikola Luburic", "lubura@mailinator.com", "063/000-55-55", null, null, "1988-11-05", 1, true, true, true);
 -- Role:user
 insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable, verification_request_id) values (101, 'maja', "Maja Stamenic", "maja@mailinator.com", "063/778-55-55", null, null, "1998-11-05", 1, true, true, true, 1)
 insert into app_user (id, username, full_name, email, phone, web_site, bio, birth_date, user_gender, public_profile, publicdm, taggable) values (102, 'tasa', "Nastasja Damjanac", "tasa@mailinator.com", "066/522-63-63", null, null, "1998-08-10", 1, false, false, true);

@@ -22,5 +22,5 @@ Social network for sharing photos and videos
 | Campaign-microservice | 3034 | http://localhost:8762/campaign-api/ |
 | Search-microservice | 3035 | |
 | Notification-microservice | 3036 | http://localhost:8762/notification-api/ |
-| Webshop application | 4000 | |
-| Webshop frontend | 4200 | |
+| Webshop application | 4000 |  http://localhost:4000/ |
+| Webshop frontend | 4200 | Frontend for Webshop |

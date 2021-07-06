@@ -53,7 +53,7 @@ public class StoryService implements IStoryService {
     }
 
     @Override
-    public ResponseEntity saveImageInfo(MediaDto imageDto) {
+    public Story saveImageInfo(MediaDto imageDto) {
         Story story = new Story();
         Media media = new Media();
         List<MediaName> mediaNames = new ArrayList<>();
@@ -70,7 +70,8 @@ public class StoryService implements IStoryService {
         media.setDescription(imageDto.getDescription());
         Location location = locationService.findByName(imageDto.getLocationName());
         media.setLocation(location);
-        media.setHashtags(hashtagService.createTags(imageDto.getTags()));
+        if(imageDto.getTags() != null)
+            media.setHashtags(hashtagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
         List<UserTag> userTags = new ArrayList<>();
         if (imageDto.getUserTags() != null) {
@@ -86,9 +87,7 @@ public class StoryService implements IStoryService {
         mediaRepository.save(media);
         story.setMedia(media);
         story.setForCloseFriends(imageDto.isForCloseFriends());
-        save(story);
-
-        return new ResponseEntity(HttpStatus.OK);
+        return save(story);
     }
 
     @Override

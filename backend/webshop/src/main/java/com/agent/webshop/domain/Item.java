@@ -23,5 +23,5 @@ public class Item {
     @Column
     private float price;
     @Column
-    private String image;
+    private String fileName;
 }

@@ -7,6 +7,7 @@ import com.nistagram.usermicroservice.exception.BadRequestException;
 import com.nistagram.usermicroservice.exception.InvalidActionException;
 import com.nistagram.usermicroservice.exception.NotFoundException;
 import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.user.domain.User;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -67,6 +67,14 @@ public class UserService implements IUserService {
         if (!isGoogleUser)
             verifyUserInput(userReg);
         User user = UserMapper.mapUserRegistrationDtoToUser(userReg);
+        user.setUserRelations(new ArrayList<UserRelation>());
+        user.setInvertedRelations(new ArrayList<UserRelation>());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User registerAgent(AgentDto agentDto) {
+        User user = UserMapper.mapAgentDtoToUser(agentDto);
         user.setUserRelations(new ArrayList<UserRelation>());
         user.setInvertedRelations(new ArrayList<UserRelation>());
         return userRepository.save(user);
