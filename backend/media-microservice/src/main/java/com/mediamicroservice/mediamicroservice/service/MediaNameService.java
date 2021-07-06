@@ -12,12 +12,13 @@ public class MediaNameService implements IMediaNameService {
     private IMediaNameRepository albumRepository;
 
 
-
     @Override
     public MediaName save(MediaName mediaName) {
         return albumRepository.save(mediaName);
     }
 
     @Override
-    public MediaName findAlbumById(Long id){return albumRepository.findMediaNameById(id);}
+    public MediaName findAlbumById(Long id) {
+        return albumRepository.findMediaNameById(id);
+    }
 }

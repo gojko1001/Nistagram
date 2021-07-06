@@ -22,12 +22,12 @@ public class InappropriateContentController {
     }
 
     @GetMapping("/pending")
-    public List<CreateInappropriateContentDto> getAllPending(){
+    public List<CreateInappropriateContentDto> getAllPending() {
         return inappropriateContentService.getAllWithPendingStatus();
     }
 
     @PostMapping("/confirmation")
-    public void confirmation(@RequestBody ReportConfirmationDto reportConfirmationDto){
+    public void confirmation(@RequestBody ReportConfirmationDto reportConfirmationDto) {
         inappropriateContentService.reportConfirmation(reportConfirmationDto);
     }
 }

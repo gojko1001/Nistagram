@@ -24,31 +24,31 @@ public class UserService implements IUserService {
 
     @Override
     public void changeUsername(String newUsername, String oldUsername) {
-        for(Collection coll : collectionRepository.findCollectionsByUsername(oldUsername)){
+        for (Collection coll : collectionRepository.findCollectionsByUsername(oldUsername)) {
             coll.setUsername(newUsername);
             collectionRepository.save(coll);
         }
-        for(Comment comm : commentRepository.findCommentsByUsername(oldUsername)){
+        for (Comment comm : commentRepository.findCommentsByUsername(oldUsername)) {
             comm.setUsername(newUsername);
             commentRepository.save(comm);
         }
-        for(InappropriateContent content : inappropriateContentRepository.findInappropriateContentsByRequestedBy(oldUsername)){
+        for (InappropriateContent content : inappropriateContentRepository.findInappropriateContentsByRequestedBy(oldUsername)) {
             content.setRequestedBy(newUsername);
             inappropriateContentRepository.save(content);
         }
-        for(InappropriateContent content : inappropriateContentRepository.findInappropriateContentsByRespondedBy(oldUsername)){
+        for (InappropriateContent content : inappropriateContentRepository.findInappropriateContentsByRespondedBy(oldUsername)) {
             content.setRequestedBy(newUsername);
             inappropriateContentRepository.save(content);
         }
-        for(Like like : likeRepository.findLikesByUsername(oldUsername)){
+        for (Like like : likeRepository.findLikesByUsername(oldUsername)) {
             like.setUsername(newUsername);
             likeRepository.save(like);
         }
-        for(Media media : mediaRepository.findMediaByUsername(oldUsername)){
+        for (Media media : mediaRepository.findMediaByUsername(oldUsername)) {
             media.setUsername(newUsername);
             mediaRepository.save(media);
         }
-        for(UserTag tag : userTagRepository.findUserTagsByUsername(oldUsername)){
+        for (UserTag tag : userTagRepository.findUserTagsByUsername(oldUsername)) {
             tag.setUsername(newUsername);
             userTagRepository.save(tag);
         }

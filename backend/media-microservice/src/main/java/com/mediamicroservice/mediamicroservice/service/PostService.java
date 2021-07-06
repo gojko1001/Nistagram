@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @Service
 public class PostService implements IPostService {
 
+    private static String uploadDir = "user-photos";
     @Autowired
     private IPostRepository postRepository;
     @Autowired
@@ -43,9 +44,6 @@ public class PostService implements IPostService {
     private IInappropriateContentService inappropriateContentService;
     @Autowired
     private IUserTagService userTagService;
-
-
-    private static String uploadDir = "user-photos";
 
     @Override
     public List<Post> getAll() {
@@ -76,14 +74,14 @@ public class PostService implements IPostService {
         return posts;
     }
 
-    public boolean isReported(Long mediaId){
+    public boolean isReported(Long mediaId) {
         boolean isReported = false;
         List<InappropriateContent> inappropriateContentList = inappropriateContentService.getAll();
-        for(InappropriateContent ic:inappropriateContentList) {
+        for (InappropriateContent ic : inappropriateContentList) {
             if (ic.getMedia().getId().equals(mediaId) && ic.getRequestStatus().equals(RequestStatus.ACCEPTED)) {
                 isReported = true;
                 break;
-            }else
+            } else
                 isReported = false;
         }
         return isReported;
@@ -94,7 +92,7 @@ public class PostService implements IPostService {
         Post post = new Post();
         Media media = new Media();
         List<MediaName> mediaNames = new ArrayList<>();
-        for(String fileName : imageDto.getFileNames()){
+        for (String fileName : imageDto.getFileNames()) {
             MediaName mediaName = new MediaName();
             mediaName.setFileName(fileName);
             if (fileName.contains(".mp4")) {
@@ -110,8 +108,8 @@ public class PostService implements IPostService {
         media.setHashtags(tagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
         List<UserTag> userTags = new ArrayList<>();
-        if(imageDto.getUserTags() != null){
-            for(String username : imageDto.getUserTags()){
+        if (imageDto.getUserTags() != null) {
+            for (String username : imageDto.getUserTags()) {
                 UserTag userTag = new UserTag();
                 userTag.setUsername(username);
                 userTagService.save(userTag);
@@ -133,7 +131,7 @@ public class PostService implements IPostService {
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/src/main/resources/" + uploadDir + "/");
             for (Post post : posts) {
-                if(!isReported(post.getMedia().getId()))
+                if (!isReported(post.getMedia().getId()))
                     imageBytesDtos.add(imageFile(post, filePath));
             }
         }
@@ -167,7 +165,7 @@ public class PostService implements IPostService {
     @Override
     public ImageBytesDto imageFile(Post post, String filePath) {
         ImageBytesDto imageBytesDtos = PostMapper.mapPostToImageBytesDto(post);
-        for(MediaName mediaName : post.getMedia().getMediaName()){
+        for (MediaName mediaName : post.getMedia().getMediaName()) {
             File in = new File(filePath + mediaName.getFileName());
             ImageByte imageByte = new ImageByte();
             try {
@@ -225,9 +223,9 @@ public class PostService implements IPostService {
         List<Post> posts = findAll();
         List<String> usernames = userConnection.getPublicUsers();
         List<Post> postsToShow = new ArrayList<>();
-        for(String username : usernames){
+        for (String username : usernames) {
             List<Post> userPosts = postRepository.findPostsByMedia_Username(username);
-            for(Post post : userPosts){
+            for (Post post : userPosts) {
                 postsToShow.add(post);
             }
         }
@@ -258,17 +256,17 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public ResponseEntity getDiscoverImages(String username){
+    public ResponseEntity getDiscoverImages(String username) {
         List<Post> discoverPosts = new ArrayList<>();
-        if(username.equals("null")){  // for guests
+        if (username.equals("null")) {  // for guests
             discoverPosts = getPublicPosts();
-        }else{                      // for logged user
+        } else {                      // for logged user
             List<String> usernames = userTagService.getUserTagsByUsername(username);
             usernames.add(username);
-            for(String u : usernames){
+            for (String u : usernames) {
                 List<Post> posts = postRepository.findPostsByMedia_Username(u);
-                if(posts != null){
-                    for(Post p : posts){
+                if (posts != null) {
+                    for (Post p : posts) {
                         discoverPosts.add(p);
                     }
                 }
@@ -278,13 +276,13 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<ImageBytesDto> getAllPosts(){
+    public List<ImageBytesDto> getAllPosts() {
         List<Post> allPosts = findAll();
         return getImagesFiles(allPosts);
     }
 
     @Override
-    public ImageByte getBytes(Long mediaId){
+    public ImageByte getBytes(Long mediaId) {
         Post post = postRepository.findPostByMedia_Id(mediaId);
         ImageBytesDto imageBytesDto = getImageFile(post);
         return imageBytesDto.getImageBytes().get(0);
