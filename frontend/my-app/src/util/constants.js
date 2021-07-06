@@ -38,15 +38,23 @@ export const NOTIFY_POST_PATH = USER_RELATION_PATH + "/notifyPost"
 export const NOTIFY_STORY_PATH = USER_RELATION_PATH + "/notifyStory"
 
 
-
+// Media microservice
 export const TAG_PATH = "/media-api/tag"
 
 export const LOCATION_PATH = "/media-api/location"
 
 export const IMAGE_PATH = "/media-api/image"
-export const SEARCH_TAG_PATH = IMAGE_PATH + "/search_tag";
-export const SEARCH_LOCATION_PATH = IMAGE_PATH + "/search_location";
+export const SEARCH_TAG_PATH = IMAGE_PATH + "/search_tag"
+export const SEARCH_LOCATION_PATH = IMAGE_PATH + "/search_location"
+
+// Campaign microservice
+export const CAMPAIGN_PATH = "/campaign-api/campaign"
 
 
 // Messages
 export const SERVER_NOT_RESPONDING = "An error has occured while trying to connect to server."
+
+// Roles
+export const ROLE_USER = "ROLE_USER"
+export const ROLE_ADMIN = "ROLE_ADMIN"
+export const ROLE_AGENT = 'ROLE_AGENT'

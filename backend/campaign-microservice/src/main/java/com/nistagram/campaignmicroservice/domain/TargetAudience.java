@@ -14,8 +14,10 @@ public class TargetAudience {
     private Long id;
     @ManyToOne
     private Campaign campaign;
-    @ElementCollection
-    private List<Integer> ageRange;
+    @Column
+    private int fromAge;
+    @Column
+    private int toAge;
     @ElementCollection
     private List<String> hashtags;
     @ElementCollection

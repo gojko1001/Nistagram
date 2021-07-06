@@ -12,7 +12,7 @@ public interface IPostService {
     List<Post> getAll();
     Post save(Post post);
     List<Post> getUserImages(String username);
-    ResponseEntity saveImageInfo(MediaDto imageDto);
+    Post saveImageInfo(MediaDto imageDto);
     List<ImageBytesDto> getImagesFiles(List<Post> posts);
     ImageBytesDto getImageFile(Post post);
     ImageBytesDto imageFile(Post post, String filePath);
