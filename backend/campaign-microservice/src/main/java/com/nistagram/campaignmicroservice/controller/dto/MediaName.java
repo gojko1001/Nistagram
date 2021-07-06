@@ -2,10 +2,10 @@ package com.nistagram.campaignmicroservice.controller.dto;
 
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data
-public class AdDto {
-    private String url;
-    private String description;
+public class MediaName {
     private String fileName;
-    private Long mediaId;
+    private boolean isImage = true;
 }

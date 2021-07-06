@@ -44,7 +44,7 @@ public class PostController {
         for(MultipartFile mf : multipartFiles){
             String fileName = StringUtils.cleanPath(mf.getOriginalFilename().replaceAll("\\s", ""));
             uploadDir = "user-photos";
-            FileUploadUtil.saveFile(uploadDir, fileName, mf);
+            FileUploadUtil.saveFile(uploadDir, fileName, mf);       // TODO: Generate new filename to aviod
             fileNames.add(fileName);
         }
         return fileNames;
@@ -52,9 +52,9 @@ public class PostController {
 
 
     @PostMapping("/info")
-    public ResponseEntity saveImageInfo(@RequestBody MediaDto mediaDto) {
+    public Long saveImageInfo(@RequestBody MediaDto mediaDto) {
         Logger.info("Save image info.", mediaDto.getUsername());
-        return postService.saveImageInfo(mediaDto);
+        return postService.saveImageInfo(mediaDto).getMedia().getId();
     }
 
 

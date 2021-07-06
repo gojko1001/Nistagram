@@ -12,7 +12,7 @@
               <i class="fa fa-ban fa-fw"></i>
             </button>
             
-            <p style="color:blue">{{img.location.name}}</p>
+            <p style="color:blue" v-if="img.location != null">{{img.location.name}}</p>
 
             <div v-for="(img, q) in img.imageBytes" :key="'D'+q">
                 <img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">

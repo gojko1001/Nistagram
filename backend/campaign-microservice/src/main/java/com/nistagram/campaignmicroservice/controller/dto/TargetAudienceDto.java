@@ -6,8 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TargetedAudienceDto {
-    private Long campaignId;
+public class TargetAudienceDto {
     private int fromAge;
     private int toAge;
     private List<String> hashtags;

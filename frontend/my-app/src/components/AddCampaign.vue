@@ -8,7 +8,7 @@
             <tr>
             <td>Campaign type:</td>
               <td><b-form-radio-group
-                v-model="campaign.type"
+                v-model="campaign.campaignType"
                 :options="campType"
                 class="mb-3"
                 value-field="value"
@@ -144,14 +144,14 @@
 
 <script>
 import moment from 'moment'
-import { IMAGE_PATH, ROLE_AGENT } from '../util/constants'
+import { CAMPAIGN_PATH, IMAGE_PATH, ROLE_AGENT, SERVER_NOT_RESPONDING } from '../util/constants'
 import { getRoleFromToken, getUsernameFromToken } from '../util/token'
 export default {
     data(){
         return{
             campaign:{
                 username: getUsernameFromToken(),
-                type: 'POST',
+                campaignType: 'POST',
                 termType:'SHORT_TERM',
                 startDate: '',
                 endDate: null,
@@ -216,6 +216,7 @@ export default {
                 this.campaign.endDate = moment(String(this.campaign.endDate)).format('YYYY-MM-DD');
             }else if(this.campaign.termType == "SHORT_TERM"){
                 this.campaign.startDate = this.campaign.startDate + " " + this.time;
+                // TODO: Doesn't work, probably because of datetime format
             }
             this.onImageUpload();
 
@@ -227,10 +228,18 @@ export default {
             }).then(response => {
                 console.log(response.data);
                 this.makeToast("Medias have been uploaded.", "success");
-                
+                this.axios.post(CAMPAIGN_PATH, this.campaign)
+                    .then(() => {
+                        this.makeToast("Campaign made successfully", "success");
+                        window.location.href = "/user/" + this.campaign.username;
+                        // TODO: Redirect to all campaign page when added
+                    }).catch(err => {
+                        if(!err.response)
+                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                        else
+                            this.makeToast("Something went wrong while creating campaign", "danger");
+                    })
             })
-
-            // TODO: Send data to backend
         },
         addAudience(){
             if(this.targetedAudience.fromAge > this.targetedAudience.toAge){ // TODO: Prevent modal close, prettier validation

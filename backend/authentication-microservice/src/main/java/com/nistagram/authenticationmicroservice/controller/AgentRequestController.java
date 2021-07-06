@@ -1,8 +1,6 @@
 package com.nistagram.authenticationmicroservice.controller;
 
-import com.nistagram.authenticationmicroservice.domain.AgentRequest;
 import com.nistagram.authenticationmicroservice.dto.AgentRequestDto;
-
 import com.nistagram.authenticationmicroservice.service.IAgentRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
