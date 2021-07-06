@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice.verify_account;
 
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -27,5 +28,11 @@ public class FileUploadUtil {
         } catch (IOException ioe) {
             throw new IOException("Could not save image file: " + fileName, ioe);
         }
+    }
+
+    public static String saveImage(MultipartFile multipartFile, String uploadDir) throws IOException {
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename().replaceAll("\\s", ""));
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        return fileName;
     }
 }

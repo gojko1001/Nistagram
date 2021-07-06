@@ -4,20 +4,32 @@
     <b-tabs pills card vertical>
       <b-tab title="Profile Info" active><b-card-text><h1>Edit Profile</h1></b-card-text>
         <!-- User info -->
-        <b-form @submit.prevent="onSubmit" @reset="onReset">
+        <b-form @submit.prevent="onSubmit">
           <table class="w-100 py-2">
+            <tr><td colspan="2">
+            <img v-if="imgUrl == null" src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
+            <img v-if="imgUrl != null" :src="imgUrl" class="profilePic" alt="Profile picture">
+            <b-button v-if="file != null" @click="file = null; imgUrl = null" variant="danger" style="float:right"><i class="fa fa-trash"></i></b-button></td></tr>
+            <tr><td colspan="2"><b-form-file
+                            v-model="file"
+                            :state="Boolean(file)"
+                            accept="image/*"
+                            placeholder="Choose picture or drop it here..."
+                            drop-placeholder="Drop pircture here..."
+                            @change="previewImage"
+                        ></b-form-file></td></tr>
             <tr><td>Username:</td>
-            <td><b-form-input v-model="form.username" type="text" id="username">{{form.username}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.username" type="text" id="username">{{user.username}}</b-form-input></td></tr>
             <tr><td>Full name:</td>
-            <td><b-form-input v-model="form.fullName" type="text" id="fullName" required>{{form.fullName}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.fullName" type="text" id="fullName" required>{{user.fullName}}</b-form-input></td></tr>
             <tr><td>Bio:</td>
-            <td><b-form-input v-model="form.bio" type="text" id="bio">{{form.bio}}</b-form-input></td><br></tr>
+            <td><b-form-input v-model="user.bio" type="text" id="bio">{{user.bio}}</b-form-input></td><br></tr>
             <tr><td>Web site:</td>
-            <td><b-form-input v-model="form.webSite" type="phone" id="webSite">{{form.webSite}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.webSite" type="phone" id="webSite">{{user.webSite}}</b-form-input></td></tr>
             <tr>
             <td>Gender:</td>
               <td><b-form-radio-group
-                v-model="form.userGender"
+                v-model="user.userGender"
                 :options="genderOpts"
                 class="mb-3"
                 value-field="value"
@@ -26,11 +38,11 @@
               ></b-form-radio-group></td>
             </tr>
             <tr><td>Birth date:</td>
-            <td><b-form-input v-model="form.birthDate" value="form.birthDate" type="date" id="birthDate"></b-form-input></td></tr>
+            <td><b-form-input v-model="user.birthDate" value="user.birthDate" type="date" id="birthDate"></b-form-input></td></tr>
             <tr><td>Email:</td>
-            <td><b-form-input v-model="form.email" type="email" id="email">{{form.email}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.email" type="email" id="email">{{user.email}}</b-form-input></td></tr>
             <tr><td>Phone:</td>
-            <td><b-form-input v-model="form.phone" type="phone" id="phone">{{form.phone}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.phone" type="phone" id="phone">{{user.phone}}</b-form-input></td></tr>
           </table>
         
           <b-button type="submit" variant="primary" style="width:200px;">Save changes</b-button><br>
@@ -38,7 +50,7 @@
       </b-tab>
       <!-- Change password -->
       <b-tab title="Change Password"><b-card-text><h1>Change Password</h1></b-card-text>
-        <b-form @submit.prevent="resetPass" @reset="onReset">
+        <b-form @submit.prevent="resetPass">
             <table class="w-100 py-2">
               <tr><td>Current password:</td>
               <b-form-input v-model="resetPassword.oldPassword" type="password" id="pass" required>{{resetPassword.oldPassword}}</b-form-input></tr>
@@ -120,6 +132,7 @@
   </b-card>
 </div>
 </template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 
 <script>
 import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH } from "./../util/constants"
@@ -130,7 +143,7 @@ export default {
   data() {
       return {
         username: getUsernameFromToken(),
-        form: '',
+        user: '',
         privacy:{ username:getUsernameFromToken(), publicProfile:false, publicDM:false, taggable: false},
         blockedUsers: [],
         resetPassword: {oldPassword:'', password:'', repeatPassword:''},
@@ -139,7 +152,8 @@ export default {
           { text: 'Female', value: 'FEMALE' },
           { text: 'Other', value: 'OTHER' }
         ],
-        show: true
+        file: null,
+        imgUrl: null
       }
   },
   mounted: function(){
@@ -152,7 +166,7 @@ export default {
                                                       headers:{ Authorization: "Bearer " + getToken()
                                                     }                                          
             }).then(response => {
-                                this.form = response.data;
+                                this.user = response.data;
                                 this.privacy = response.data;
             }).catch(error => { if(!error.response) {
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
@@ -175,10 +189,25 @@ export default {
     },
     methods: {
         onSubmit() {
-        this.axios.put(USER_PATH, this.form, {headers:{Authorization: "Bearer " + getToken()}})
+          let toUpload = new FormData();
+          toUpload.append("file", this.file)
+          this.axios.post("/user-api/user/profile_pic", toUpload)
+            .then(response => { 
+              this.user.profilePicPath = response.data;
+              this.updateUserInfo()
+             })
+            .catch(() => {
+               this.user.profilePicPath = null;
+               this.makeToast("Error while uploading photo", "danger")
+               this.updateUserInfo()
+            })
+        },
+
+        updateUserInfo(){
+        this.axios.put(USER_PATH, this.user, {headers:{Authorization: "Bearer " + getToken()}})
           .then(response => { console.log(response);
                               this.makeToast("User has been updated successfully.", "success");
-                              if(this.username != this.form.username){
+                              if(this.username != this.user.username){
                                 removeToken();
                                 this.makeToast("Please login.", "info");
                                 window.location.href = "";
@@ -192,20 +221,6 @@ export default {
                               this.makeToast("Error while updating.", "danger");
                             })
         },
-        onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.axios.get(USER_PATH +'/'+ this.username)
-            .then(response => {
-            this.form = response;
-        })
-          this.form.pastUsername = getUsernameFromToken(),
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      },
 
       resetPass(){
         this.axios.put(CHANGE_PASSWORD_PATH, this.resetPassword, {
@@ -250,6 +265,14 @@ export default {
                             this.makeToast(err.message, "danger");
                     })
       },
+
+      previewImage(){
+        setTimeout(() => {  
+          this.imgUrl = URL.createObjectURL(this.file);
+         }, 100);
+      },
+
+
       makeToast(message, variant) {
       this.$bvToast.toast(message, {
                             title: `Nistagram`,
@@ -279,6 +302,13 @@ export default {
   width: 80%;
   border: 3px solid lightblue;
   padding: 20px;
+}
+
+.profilePic{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .optDesc{

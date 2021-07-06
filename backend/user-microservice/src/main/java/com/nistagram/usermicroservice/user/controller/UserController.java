@@ -8,10 +8,13 @@ import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.verify_account.FileUploadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
+    private final String UPLOAD_DIR = "profile-photos";
     @Autowired
     private IUserService userService;
     @Autowired
@@ -55,6 +59,11 @@ public class UserController {
     @PostMapping("/addGoogleUser")
     public void registerGoogleUser(@RequestBody UserRegistrationDto userReg) {
         userService.registerUser(userReg, true);
+    }
+
+    @PostMapping("/profile_pic")
+    public String uploadProfilePic(@RequestParam("file") List<MultipartFile> multipartFile) throws IOException {
+        return FileUploadUtil.saveImage(multipartFile.get(0), UPLOAD_DIR);  // TODO: Set filename to userId
     }
 
     @PutMapping()
