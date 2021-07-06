@@ -302,3 +302,4 @@
 2021-07-06 17:32:33,288 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-3] Mapped to public org.springframework.http.ResponseEntity com.nistagram.messengermicroservice.controller.MessengerController.getAllByUsername(java.lang.String)
 2021-07-06 17:32:33,306 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-3] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
 2021-07-06 17:32:33,397 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-3] Writing [[MessageDto(id=1, content=Cao, sender=maja, receiver=gojko, date=null, viewed=null, imageBytes=[], h (truncated)...]
+2021-07-06 17:32:33,426 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-3] Completed 200 OK
