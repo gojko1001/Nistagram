@@ -1,11 +1,10 @@
 package com.nistagram.usermicroservice.user.controller;
 
+import com.nistagram.usermicroservice.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.controller.dto.UserDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
-//import com.nistagram.usermicroservice.JwtUtil;
-import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +54,7 @@ public class UserController {
     @PutMapping()
     public UserDto updateProfile(@RequestBody UserDto userDto,
                                  @RequestHeader("Authorization") String jwt) {
-       // String username = jwtUtil.extractUsername(jwt);
+        // String username = jwtUtil.extractUsername(jwt);
         String username = "";
         if (username == null)
             throw new UnauthorizedException("Access denied");
@@ -86,7 +85,7 @@ public class UserController {
     }
 
     @GetMapping("/chatable_users/{username}/{searchInput}")
-    public List<UserDto> getAllChatableUsers(@PathVariable String username, @PathVariable String searchInput){
+    public List<UserDto> getAllChatableUsers(@PathVariable String username, @PathVariable String searchInput) {
         return userService.getChatableUsers(username, searchInput).stream()
                 .map(UserMapper::mapUserToUserDto).collect(Collectors.toList());
     }

@@ -5,7 +5,7 @@
 					<div class="card-header">
 						<div class="input-group">
 							<input v-model="searchInput" type="text" placeholder="Search..." name="" class="form-control search">
-							<div class="input-group-prepend" @click="search">
+							<div class="input-group-prepend" @click="search()">
 								<span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
 							</div>
 						</div>
@@ -62,7 +62,7 @@
 						</div>
 						<div class="card-footer">
 							<div class="input-group">
-								<div class="input-group-append">
+								<div v-b-modal.modal-2 class="input-group-append">
 									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
 								</div>
 								<textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
@@ -74,6 +74,12 @@
 					</div>
 				</div>
 			</div>
+			<b-modal id="modal-2" title="Stories">
+				<div>
+					<input type="file" ref="uploadImage" @click="onImageUpload()" class="form-control" required multiple>
+					<input type="button" @click="startupload()" name="Upload" value="Upload" />             
+				</div>
+            </b-modal>
 		</div>
 </template>
 
@@ -89,6 +95,10 @@ export default {
 			users: [
 			],
 			messages: [],
+			formData:null,
+			message: {
+				fileNames: [],
+			},
         }
   },
   mounted: function(){
@@ -102,6 +112,26 @@ export default {
 	})
   },
   methods:{
+
+	onImageUpload(){
+        this.formData = new FormData();
+        for(var i=0; i<this.$refs.uploadImage.files.length; i++){
+          let file = this.$refs.uploadImage.files[i];
+          this.formData.append("file", file);
+        }
+    },
+
+	startupload(){
+        this.axios.post('/messenger-api/image', this.formData, {
+          headers:{
+            Accept: 'application/json',
+            'Content-Type':'multipart/form-data'
+          }
+        }).then(response => {
+          this.message.fileNames = response.data;
+          this.makeToast("Image has been uploaded.", "success");
+        })
+    },
 
 	selectReceiver: function(receiverUser){
 		this.receiver = receiverUser.username;
@@ -124,7 +154,7 @@ export default {
                                 appendToast: false
                             })
         },
-	}
+	},
 }
 </script>
 

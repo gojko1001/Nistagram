@@ -40,3 +40,103 @@
 2021-07-06 01:08:55,066 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-8080-exec-6] Using 'application/json', given [application/json] and supported [application/json, application/*+json, application/json, application/*+json]
 2021-07-06 01:08:55,066 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor [http-nio-8080-exec-6] Writing [[]]
 2021-07-06 01:08:55,067 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-6] Completed 200 OK
+2021-07-06 01:10:37,817 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:14:16,499 [INFO] com.nistagram.messengermicroservice.MessengerMicroserviceApplication [main] No active profile set, falling back to default profiles: default
+2021-07-06 10:14:18,378 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-07-06 10:14:18,644 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 232ms. Found 1 repository interfaces.
+2021-07-06 10:14:19,306 [INFO] org.springframework.cloud.context.scope.GenericScope [main] BeanFactory id=fdc8c052-367f-334e-bdcb-e381c5b3e835
+2021-07-06 10:14:19,514 [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b2006fcd] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-07-06 10:14:19,579 [INFO] org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$ce1a72ca] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-07-06 10:14:19,948 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2021-07-06 10:14:19,984 [INFO] org.apache.catalina.core.StandardService [main] Starting service [Tomcat]
+2021-07-06 10:14:19,984 [INFO] org.apache.catalina.core.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/9.0.19]
+2021-07-06 10:14:20,168 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [main] Initializing Spring embedded WebApplicationContext
+2021-07-06 10:14:20,169 [DEBUG] org.springframework.web.context.ContextLoader [main] Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2021-07-06 10:14:20,169 [INFO] org.springframework.web.context.ContextLoader [main] Root WebApplicationContext: initialization completed in 3632 ms
+2021-07-06 10:14:20,416 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2021-07-06 10:14:21,439 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2021-07-06 10:14:21,557 [INFO] org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-07-06 10:14:21,743 [INFO] org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.10.Final}
+2021-07-06 10:14:21,750 [INFO] org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
+2021-07-06 10:14:22,089 [INFO] org.hibernate.annotations.common.Version [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-07-06 10:14:22,387 [INFO] org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-07-06 10:14:23,239 [INFO] org.hibernate.tool.schema.internal.SchemaCreatorImpl [main] HHH000476: Executing import script 'ScriptSourceInputFromUrl(file:/C:/Users/Laptop/Desktop/Nistagram/backend/messenger-microservice/target/classes/import.sql)'
+2021-07-06 10:14:23,264 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-06 10:14:23,715 [INFO] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator [main] HHH000397: Using ASTQueryTranslatorFactory
+2021-07-06 10:14:23,863 [WARN] com.netflix.config.sources.URLConfigurationSource [main] No URLs will be polled as dynamic configuration sources.
+2021-07-06 10:14:23,863 [INFO] com.netflix.config.sources.URLConfigurationSource [main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-06 10:14:23,874 [WARN] com.netflix.config.sources.URLConfigurationSource [main] No URLs will be polled as dynamic configuration sources.
+2021-07-06 10:14:23,875 [INFO] com.netflix.config.sources.URLConfigurationSource [main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-06 10:14:24,004 [DEBUG] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/**/favicon.ico] in 'faviconHandlerMapping'
+2021-07-06 10:14:24,287 [INFO] org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-06 10:14:24,306 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-07-06 10:14:24,355 [WARN] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-06 10:14:24,412 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [main] 5 mappings in 'requestMappingHandlerMapping'
+2021-07-06 10:14:24,434 [DEBUG] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-07-06 10:14:24,455 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver [main] ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-07-06 10:14:26,190 [INFO] org.springframework.cloud.netflix.eureka.InstanceInfoFactory [main] Setting initial instance status as: STARTING
+2021-07-06 10:14:26,271 [INFO] com.netflix.discovery.DiscoveryClient [main] Initializing Eureka in region us-east-1
+2021-07-06 10:14:26,491 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using JSON encoding codec LegacyJacksonJson
+2021-07-06 10:14:26,492 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using JSON decoding codec LegacyJacksonJson
+2021-07-06 10:14:26,804 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using XML encoding codec XStreamXml
+2021-07-06 10:14:26,804 [INFO] com.netflix.discovery.provider.DiscoveryJerseyProvider [main] Using XML decoding codec XStreamXml
+2021-07-06 10:14:27,115 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [main] Resolving eureka endpoints via configuration
+2021-07-06 10:14:27,558 [INFO] com.netflix.discovery.DiscoveryClient [main] Disable delta property : false
+2021-07-06 10:14:27,558 [INFO] com.netflix.discovery.DiscoveryClient [main] Single vip registry refresh property : null
+2021-07-06 10:14:27,559 [INFO] com.netflix.discovery.DiscoveryClient [main] Force full registry fetch : false
+2021-07-06 10:14:27,559 [INFO] com.netflix.discovery.DiscoveryClient [main] Application is null : false
+2021-07-06 10:14:27,559 [INFO] com.netflix.discovery.DiscoveryClient [main] Registered Applications size is zero : true
+2021-07-06 10:14:27,559 [INFO] com.netflix.discovery.DiscoveryClient [main] Application version is -1: true
+2021-07-06 10:14:27,559 [INFO] com.netflix.discovery.DiscoveryClient [main] Getting all instance registry info from the eureka server
+2021-07-06 10:14:27,952 [INFO] com.netflix.discovery.DiscoveryClient [main] The response status is 200
+2021-07-06 10:14:27,963 [INFO] com.netflix.discovery.DiscoveryClient [main] Starting heartbeat executor: renew interval is: 30
+2021-07-06 10:14:27,971 [INFO] com.netflix.discovery.InstanceInfoReplicator [main] InstanceInfoReplicator onDemand update allowed rate per min is 4
+2021-07-06 10:14:27,990 [INFO] com.netflix.discovery.DiscoveryClient [main] Discovery Client initialized at timestamp 1625559267981 with initial instances count: 1
+2021-07-06 10:14:27,993 [INFO] org.springframework.cloud.netflix.eureka.serviceregistry.EurekaServiceRegistry [main] Registering application MESSENGER-MICROSERVICE with eureka with status UP
+2021-07-06 10:14:27,995 [INFO] com.netflix.discovery.DiscoveryClient [main] Saw local status change event StatusChangeEvent [timestamp=1625559267995, current=UP, previous=STARTING]
+2021-07-06 10:14:27,999 [INFO] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_MESSENGER-MICROSERVICE/host.docker.internal:messenger-microservice: registering service...
+2021-07-06 10:14:28,058 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2021-07-06 10:14:28,060 [INFO] org.springframework.cloud.netflix.eureka.serviceregistry.EurekaAutoServiceRegistration [main] Updating port to 8080
+2021-07-06 10:14:28,063 [INFO] com.nistagram.messengermicroservice.MessengerMicroserviceApplication [main] Started MessengerMicroserviceApplication in 15.274 seconds (JVM running for 18.183)
+2021-07-06 10:14:28,067 [INFO] com.netflix.discovery.DiscoveryClient [DiscoveryClient-InstanceInfoReplicator-0] DiscoveryClient_MESSENGER-MICROSERVICE/host.docker.internal:messenger-microservice - registration status: 204
+2021-07-06 10:19:27,564 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:24:27,577 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:29:27,589 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:34:27,602 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:34:55,874 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-06 10:34:55,875 [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2021-07-06 10:34:55,876 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Detected StandardServletMultipartResolver
+2021-07-06 10:34:55,886 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-07-06 10:34:55,886 [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 10 ms
+2021-07-06 10:34:55,896 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] GET "/gojko", parameters={}
+2021-07-06 10:34:55,903 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-1] Mapped to public org.springframework.http.ResponseEntity com.nistagram.messengermicroservice.controller.MessengerController.getAllByUsername(java.lang.String)
+2021-07-06 10:34:56,007 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-1] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-07-06 10:34:56,008 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-1] Writing [[Message(id=1, content=Cao, sender=maja, receiver=gojko, date=2021-07-01 02:00:00.0), Message(id=2,  (truncated)...]
+2021-07-06 10:34:56,023 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed 200 OK
+2021-07-06 10:36:29,973 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-3] GET "/gojko", parameters={}
+2021-07-06 10:36:29,974 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-3] Mapped to public org.springframework.http.ResponseEntity com.nistagram.messengermicroservice.controller.MessengerController.getAllByUsername(java.lang.String)
+2021-07-06 10:36:29,979 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-3] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-07-06 10:36:29,979 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-3] Writing [[Message(id=1, content=Cao, sender=maja, receiver=gojko, date=2021-07-01 02:00:00.0), Message(id=2,  (truncated)...]
+2021-07-06 10:36:29,981 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-3] Completed 200 OK
+2021-07-06 10:39:27,605 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:44:27,620 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:49:27,630 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:54:27,641 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
+2021-07-06 10:58:02,393 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-5] GET "/gojko", parameters={}
+2021-07-06 10:58:02,394 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-5] Mapped to public org.springframework.http.ResponseEntity com.nistagram.messengermicroservice.controller.MessengerController.getAllByUsername(java.lang.String)
+2021-07-06 10:58:02,408 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-5] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-07-06 10:58:02,409 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-5] Writing [[Message(id=1, content=Cao, sender=maja, receiver=gojko, date=2021-07-01 02:00:00.0), Message(id=2,  (truncated)...]
+2021-07-06 10:58:02,410 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-5] Completed 200 OK
+2021-07-06 10:58:32,648 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-6] GET "/gojko", parameters={}
+2021-07-06 10:58:32,650 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-6] Mapped to public org.springframework.http.ResponseEntity com.nistagram.messengermicroservice.controller.MessengerController.getAllByUsername(java.lang.String)
+2021-07-06 10:58:32,657 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-6] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-07-06 10:58:32,657 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-6] Writing [[Message(id=1, content=Cao, sender=maja, receiver=gojko, date=2021-07-01 02:00:00.0), Message(id=2,  (truncated)...]
+2021-07-06 10:58:32,661 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-6] Completed 200 OK
+2021-07-06 10:59:01,941 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-7] GET "/gojko", parameters={}
+2021-07-06 10:59:01,942 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8080-exec-7] Mapped to public org.springframework.http.ResponseEntity com.nistagram.messengermicroservice.controller.MessengerController.getAllByUsername(java.lang.String)
+2021-07-06 10:59:01,948 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-7] Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-07-06 10:59:01,949 [DEBUG] org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8080-exec-7] Writing [[Message(id=1, content=Cao, sender=maja, receiver=gojko, date=2021-07-01 02:00:00.0), Message(id=2,  (truncated)...]
+2021-07-06 10:59:01,950 [DEBUG] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-7] Completed 200 OK
+2021-07-06 10:59:27,675 [INFO] com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver [AsyncResolver-bootstrap-executor-0] Resolving eureka endpoints via configuration
