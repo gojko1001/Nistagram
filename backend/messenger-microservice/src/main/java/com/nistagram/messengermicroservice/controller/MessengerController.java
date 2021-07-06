@@ -1,7 +1,8 @@
 package com.nistagram.messengermicroservice.controller;
 
-import com.nistagram.messengermicroservice.controller.dto.MessageDto;
-import com.nistagram.messengermicroservice.service.IMessageService;
+import com.nistagram.messengermicroservice.controller.dto.CreateMessageDto;
+import com.nistagram.messengermicroservice.controller.mapping.MessageMapper;
+import com.nistagram.messengermicroservice.service.interfaces.IMessageService;
 import com.nistagram.messengermicroservice.util.FileUploadUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import java.util.List;
 public class MessengerController {
 
     private static final String SENDING_URL = "/topic/server-message";
-    private static String uploadDir = "photos";
+    private static String uploadDir = "message-photos";
 
     //    private final SimpMessagingTemplate template;
     private final IMessageService messageService;
@@ -33,12 +34,13 @@ public class MessengerController {
 
     @GetMapping("/{username}")
     public ResponseEntity getAllByUsername(@PathVariable String username) {
-        return new ResponseEntity(messageService.findAllByUsername(username), HttpStatus.OK);
+        return new ResponseEntity(
+                MessageMapper.getImagesFiles(messageService.findAllByUsername(username)), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity createMessage(@RequestBody MessageDto messageDto){
-        return null;
+    public ResponseEntity createMessage(@RequestBody CreateMessageDto messageDto){
+        return new ResponseEntity(messageService.createMessage(MessageMapper.mapCreateMessageDtoToMessage(messageDto)), HttpStatus.OK);
     }
 
     @PostMapping("/image")
@@ -46,10 +48,15 @@ public class MessengerController {
         List<String> fileNames = new ArrayList<>();
         for(MultipartFile mf : multipartFiles){
             String fileName = StringUtils.cleanPath(mf.getOriginalFilename().replaceAll("\\s", ""));
-            uploadDir = "photos";
+            uploadDir = "message-photos";
             FileUploadUtil.saveFile(uploadDir, fileName, mf);
             fileNames.add(fileName);
         }
         return fileNames;
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity viewedMedia(@PathVariable Long id){
+        return new ResponseEntity(messageService.viewedMedia(id), HttpStatus.OK);
     }
 }

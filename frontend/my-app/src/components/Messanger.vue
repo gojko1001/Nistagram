@@ -45,13 +45,16 @@
 										<img src="../assets/user-no-picture.png" class="rounded-circle user_img_msg">
 									</div>
 									<div class="msg_cotainer">
-										{{message.content}}
+										{{message.content}}<br>
+										<b-button v-if="message.hasMedia && !message.viewed" v-b-modal.modal-1 @click="viewed(message)">Open</b-button>
+										<span class="span-info" v-if="message.hasMedia && message.viewed">Opened</span>
 										<span class="msg_time">{{message.date}}</span>
 									</div>
 								</div>
 								<div v-if="(message.sender == username) && (message.receiver == receiver) " class="d-flex justify-content-end mb-4">
 									<div class="msg_cotainer_send">
 										{{message.content}}
+										<br><span class="span-info" v-if="message.hasMedia">Sent media</span>
 										<span class="msg_time_send">{{message.date}}</span>
 									</div>
 									<div class="img_cont_msg">
@@ -65,8 +68,8 @@
 								<div v-b-modal.modal-2 class="input-group-append">
 									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
 								</div>
-								<textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
-								<div class="input-group-append">
+								<textarea v-model="message.content" name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+								<div class="input-group-append" @click="createMessage">
 									<span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
 								</div>
 							</div>
@@ -74,9 +77,19 @@
 					</div>
 				</div>
 			</div>
-			<b-modal id="modal-2" title="Stories">
+			<b-modal id="modal-1" title="Media">
 				<div>
-					<input type="file" ref="uploadImage" @click="onImageUpload()" class="form-control" required multiple>
+					<div v-for="img in mediaMessage.imageBytes" :key="img">
+                <img v-if="img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                <video autoplay controls v-if="!img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+                    The video is not supported by your browser.
+                </video>
+            </div>        
+				</div>
+            </b-modal>
+			<b-modal id="modal-2" title="Upload media">
+				<div>
+					<input type="file" ref="uploadImage" @change="onImageUpload()" class="form-control" required multiple>
 					<input type="button" @click="startupload()" name="Upload" value="Upload" />             
 				</div>
             </b-modal>
@@ -97,8 +110,12 @@ export default {
 			messages: [],
 			formData:null,
 			message: {
+				content: '',
+				sender: '',
+				receiver: '',
 				fileNames: [],
 			},
+			mediaMessage: {},
         }
   },
   mounted: function(){
@@ -132,6 +149,21 @@ export default {
           this.makeToast("Image has been uploaded.", "success");
         })
     },
+
+	createMessage(){
+		this.message.sender = this.username;
+		this.message.receiver = this.receiver;
+		this.axios.post('/messenger-api', this.message).then(response => {
+			console.log(response);
+		})
+	},
+
+	viewed: function(message){
+		this.mediaMessage = message;
+		this.axios.put('/messenger-api/' + message.id).then(response => {
+			console.log(response);
+		})
+	},
 
 	selectReceiver: function(receiverUser){
 		this.receiver = receiverUser.username;
@@ -318,6 +350,11 @@ export default {
 	}
 	.msg_head{
 		position: relative;
+	}
+	.span-info{
+		background-color: gray;
+		color: white;
+		border-radius: 15px;
 	}
 	@media(max-width: 576px){
         .contacts_card{

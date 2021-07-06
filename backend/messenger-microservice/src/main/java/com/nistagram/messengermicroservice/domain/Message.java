@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -22,4 +23,10 @@ public class Message {
     @Column
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date date;
+    @Column
+    private Boolean hasMedia = false;
+    @ManyToMany
+    private List<MediaName> mediaName;
+    @Column
+    private Boolean viewed = false;
 }

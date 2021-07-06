@@ -12,4 +12,5 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
     @Query(value = "select m from Message m where m.receiver=:username or m.sender=:username")
     List<Message> findAllByUsername(@Param("username")String username);
+    Message findMessageById(Long id);
 }
