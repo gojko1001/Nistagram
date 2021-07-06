@@ -288,4 +288,10 @@ public class PostService implements IPostService {
         return imageBytesDto.getImageBytes().get(0);
     }
 
+    @Override
+    public String getUsernameById(Long id) {
+        Post post = postRepository.findPostById(id);
+        return post.getMedia().getUsername();
+    }
+
 }

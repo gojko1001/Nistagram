@@ -26,7 +26,7 @@
 					</div>
 					<div class="card-footer"></div>
 				</div></div>
-				<div v-if="receiver != ''" class="col-md-8 col-xl-6 chat">
+				<div class="col-md-8 col-xl-6 chat">
 					<div class="card">
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
@@ -45,9 +45,11 @@
 										<img src="../assets/user-no-picture.png" class="rounded-circle user_img_msg">
 									</div>
 									<div class="msg_cotainer">
-										{{message.content}}<br>
+										<span v-if="!message.link">{{message.content}}</span><br>
 										<b-button v-if="message.hasMedia && !message.viewed" v-b-modal.modal-1 @click="viewed(message)">Open</b-button>
-										<span class="span-info" v-if="message.hasMedia && message.viewed">Opened</span>
+										<span class="span-info" v-if="message.hasMedia && message.viewed">Opened</span><br/>
+										<span class="span-info" v-if="message.privateLink">Link is private</span>
+										<span v-if="!message.privateLink">{{message.link}}</span>
 										<span class="msg_time">{{message.date}}</span>
 									</div>
 								</div>
@@ -58,8 +60,13 @@
 										<span class="msg_time_send">{{message.date}}</span>
 									</div>
 									<div class="img_cont_msg">
-								<img src="../assets/user-no-picture.png" class="rounded-circle user_img_msg">
+										<img src="../assets/user-no-picture.png" class="rounded-circle user_img_msg">
 									</div>
+								</div>
+								<div v-if="message.needRequest">
+									<b-button @click="accept(message.id)">Accept</b-button>
+									<b-button @click="denied(message.id)">Denied</b-button>
+									<b-button @click="deleteMessage(message.id)">Delete</b-button>
 								</div>
 							</div>
 						</div>
@@ -80,11 +87,11 @@
 			<b-modal id="modal-1" title="Media">
 				<div>
 					<div v-for="img in mediaMessage.imageBytes" :key="img">
-                <img v-if="img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                <video autoplay controls v-if="!img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-                    The video is not supported by your browser.
-                </video>
-            </div>        
+						<img v-if="img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+						<video autoplay controls v-if="!img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+							The video is not supported by your browser.
+						</video>
+					</div>        
 				</div>
             </b-modal>
 			<b-modal id="modal-2" title="Upload media">
@@ -121,9 +128,14 @@ export default {
   mounted: function(){
 	this.username = getUsernameFromToken();
 	console.log(this.username);
-    if(this.username != null)
-		this.search();
-    this.axios.get('http://localhost:8762/messenger-api/' + this.username).then(response => {
+    if(this.username != null){
+		this.axios.get('http://localhost:8762/user-api/user/chat_users/' + this.username).then(response =>{
+			console.log(response.data);
+			this.users = response.data;
+		})
+	}
+		
+    this.axios.get('http://localhost:8762/messenger-api/' + this.username + '/').then(response => {
 		this.messages = response.data;
 		console.log(response.data);
 	})
@@ -173,6 +185,24 @@ export default {
 		this.axios.get('http://localhost:8762/user-api/user/chatable_users/' + this.username + '/' + this.searchInput).then(response =>{
 			console.log(response.data);
 			this.users = response.data;
+		})
+	},
+
+	accept: function(id){
+		this.axios.put('/messenger-api/request/' + id).then(response => {
+			console.log(response);
+		})
+	},
+
+	denied: function(id){
+		this.axios.put('/messenger-api/request/' + id).then(response => {
+			console.log(response);
+		})
+	},
+
+	deleteMessage: function(id){
+		this.axios.delete('/messenger-api/' + id).then(response => {
+			console.log(response);
 		})
 	},
 

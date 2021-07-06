@@ -171,6 +171,22 @@ public class UserService implements IUserService {
         return users;
     }
 
+    @Override
+    public Boolean isPublic(String username) {
+        User user = findUserByUsername(username);
+        return user.isPublicProfile();
+    }
+
+    @Override
+    public List<User> getChatUsers(String username) {
+        List<User> users = new ArrayList<>();
+        for(User user: userRepository.findAllByPublicDM(true)){
+            if(!user.getUsername().equals(username))
+                users.add(user);
+        }
+        return users;
+    }
+
     private void verifyUserInput(UserRegistrationDto userReg) {
         try {
             User newUser = userRepository.findByUsername(userReg.getUsername());

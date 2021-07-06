@@ -93,5 +93,10 @@ public class PostController {
         return postService.getBytes(mediaId);
     }
 
+    @GetMapping("/username/{id}")
+    public String getUsernameById(@PathVariable Long id){
+        return postService.getUsernameById(id);
+    }
+
 
 }

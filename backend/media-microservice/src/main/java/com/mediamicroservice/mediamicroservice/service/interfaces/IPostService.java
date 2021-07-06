@@ -24,4 +24,5 @@ public interface IPostService {
     ResponseEntity getDiscoverImages(String username);
     List<ImageBytesDto> getAllPosts();
     ImageByte getBytes(Long mediaId);
+    String getUsernameById(Long id);
 }

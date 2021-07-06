@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice.user.controller;
 
+import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.user.controller.dto.UserDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRelationDto;
 import com.nistagram.usermicroservice.exception.NotFoundException;
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("user_relation")
+@RequestMapping("/user_relation")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserRelationController {
     @Autowired
     private IUserRelationService relationService;
-//    @Autowired
-//    private JwtUtil jwtUtil;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping("/{username}/{relatedUsername}")
     public UserRelationDto getUserRelation(@PathVariable String username, @PathVariable String relatedUsername) {
@@ -110,7 +111,7 @@ public class UserRelationController {
 
     @PutMapping("/muteStory/{relatedUsername}/{isMuted}")
     public void muteStories(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
-                          @RequestHeader("Authorization") String jwt) {
+                            @RequestHeader("Authorization") String jwt) {
         String username = getUsernameFromToken(jwt);
         Logger.info("Update relation with user: " + relatedUsername, username);
         relationService.setRelationBoolean(username, relatedUsername, UserRelation::setMuteStory, isMuted);
@@ -118,7 +119,7 @@ public class UserRelationController {
 
     @PutMapping("/notifyPost/{relatedUsername}/{isMuted}")
     public void notifyPost(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
-                            @RequestHeader("Authorization") String jwt) {
+                           @RequestHeader("Authorization") String jwt) {
         String username = getUsernameFromToken(jwt);
         Logger.info("Update post notifications: " + relatedUsername, username);
         relationService.setRelationBoolean(username, relatedUsername, UserRelation::setNotifyPost, isMuted);
@@ -126,7 +127,7 @@ public class UserRelationController {
 
     @PutMapping("/notifyStory/{relatedUsername}/{isMuted}")
     public void notifyStory(@PathVariable String relatedUsername, @PathVariable boolean isMuted,
-                           @RequestHeader("Authorization") String jwt) {
+                            @RequestHeader("Authorization") String jwt) {
         String username = getUsernameFromToken(jwt);
         Logger.info("Update story notifications: " + relatedUsername, username);
         relationService.setRelationBoolean(username, relatedUsername, UserRelation::setNotifyStory, isMuted);
@@ -142,18 +143,22 @@ public class UserRelationController {
 
     @DeleteMapping("/removeRequest/{relatedUsername}")
     public void removeRequestRelation(@PathVariable String relatedUsername,
-                               @RequestHeader("Authorization") String jwt) {
+                                      @RequestHeader("Authorization") String jwt) {
         String username = getUsernameFromToken(jwt);
         Logger.info("Remove relation with user: " + relatedUsername, username);
         relationService.removeUserRelation(relatedUsername, username);
     }
 
     private String getUsernameFromToken(String tokenHeader){
-        //String username = jwtUtil.extractUsername(tokenHeader);
-        String username = "";
+        String username = jwtUtil.extractUsername(tokenHeader);
         if (username == null)
             throw new UnauthorizedException("Access denied");
         return username;
+    }
+
+    @GetMapping("/is_follow/{followerUsername}/{followingUsername}")
+    public boolean isFollow(@PathVariable String followerUsername, @PathVariable String followingUsername){
+        return relationService.isFollow(followerUsername, followingUsername);
     }
 
 }

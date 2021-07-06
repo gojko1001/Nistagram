@@ -5,6 +5,7 @@ import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.domain.User;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -38,4 +39,7 @@ public interface IUserService {
 
     List<User> getChatableUsers(String username, String text);
 
+    Boolean isPublic(String username);
+
+    List<User> getChatUsers(String username);
 }

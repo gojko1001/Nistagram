@@ -21,7 +21,7 @@ public class Message {
     @Column
     private String receiver;
     @Column
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date date;
     @Column
     private Boolean hasMedia = false;
@@ -29,4 +29,6 @@ public class Message {
     private List<MediaName> mediaName;
     @Column
     private Boolean viewed = false;
+    @Column
+    private Boolean needRequest = false;
 }

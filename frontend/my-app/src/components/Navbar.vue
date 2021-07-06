@@ -189,7 +189,7 @@ export default {
     },
     messenger: function(){
       window.location.href = "/messenger";
-    }
+    },
     newCampaign: function(){
       window.location.href = "/campaign";
     },

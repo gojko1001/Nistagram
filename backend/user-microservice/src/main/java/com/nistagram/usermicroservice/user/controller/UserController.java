@@ -9,6 +9,7 @@ import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
@@ -91,8 +92,19 @@ public class UserController {
     }
 
     @GetMapping("/chatable_users/{username}/{searchInput}")
-    public List<UserDto> getAllChatableUsers(@PathVariable String username, @PathVariable String searchInput) {
+    public List<UserDto> getAllChatableUsersSearch(@PathVariable String username, @PathVariable String searchInput) {
         return userService.getChatableUsers(username, searchInput).stream()
                 .map(UserMapper::mapUserToUserDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("/chat_users/{username}")
+    public List<UserDto> getAllChatableUsers(@PathVariable String username) {
+        return userService.getChatUsers(username).stream()
+                .map(UserMapper::mapUserToUserDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("/is_public/{username}")
+    public boolean isPublic(@PathVariable String username){
+        return userService.isPublic(username);
     }
 }

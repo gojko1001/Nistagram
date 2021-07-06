@@ -35,18 +35,18 @@ public class MessengerController {
     @GetMapping("/{username}")
     public ResponseEntity getAllByUsername(@PathVariable String username) {
         return new ResponseEntity(
-                MessageMapper.getImagesFiles(messageService.findAllByUsername(username)), HttpStatus.OK);
+                messageService.getImagesFiles(messageService.findAllByUsername(username)), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity createMessage(@RequestBody CreateMessageDto messageDto){
+    public ResponseEntity createMessage(@RequestBody CreateMessageDto messageDto) {
         return new ResponseEntity(messageService.createMessage(MessageMapper.mapCreateMessageDtoToMessage(messageDto)), HttpStatus.OK);
     }
 
     @PostMapping("/image")
     public List<String> saveImage(@RequestParam("file") List<MultipartFile> multipartFiles) throws IOException {
-        List<String> fileNames = new ArrayList<>();
-        for(MultipartFile mf : multipartFiles){
+        List<String> fileNames = new ArrayList<String>();
+        for (MultipartFile mf : multipartFiles) {
             String fileName = StringUtils.cleanPath(mf.getOriginalFilename().replaceAll("\\s", ""));
             uploadDir = "message-photos";
             FileUploadUtil.saveFile(uploadDir, fileName, mf);
@@ -56,7 +56,18 @@ public class MessengerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity viewedMedia(@PathVariable Long id){
+    public ResponseEntity viewedMedia(@PathVariable Long id) {
         return new ResponseEntity(messageService.viewedMedia(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteMessage(@PathVariable Long id) {
+        messageService.deleteMessage(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping("/request/{id}")
+    public ResponseEntity request(@PathVariable Long id){
+        return new ResponseEntity(messageService.changeRequest(id), HttpStatus.OK);
     }
 }

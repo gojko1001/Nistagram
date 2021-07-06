@@ -34,4 +34,6 @@ public interface IUserRelationService {
     void removeUserRelation(String username, String relatedUsername);
 
     void setRelationBoolean(String username, String relatedUsername, BiConsumer<UserRelation, Boolean> relationFunction, Boolean isMuted);
+
+    boolean isFollow(String followerUsername, String followingUsername);
 }
