@@ -209,14 +209,14 @@ export default {
                             })
         },
         createCampaign(){
-            this.campaign.startDate = moment(String(this.startDate)).format('YYYY-MM-DD');
             if(this.campaign.termType == "LONG_TERM"){
+                this.campaign.startDate = moment(String(this.startDate)).format('YYYY-MM-DD HH:mm');
                 this.campaign.endDate = new Date(this.startDate);
                 this.campaign.endDate.setDate(this.campaign.endDate.getDate() + Number(this.duration));
-                this.campaign.endDate = moment(String(this.campaign.endDate)).format('YYYY-MM-DD');
+                this.campaign.endDate = moment(String(this.campaign.endDate)).format('YYYY-MM-DD HH:mm');
             }else if(this.campaign.termType == "SHORT_TERM"){
+                this.campaign.startDate = moment(String(this.startDate)).format('YYYY-MM-DD');
                 this.campaign.startDate = this.campaign.startDate + " " + this.time;
-                // TODO: Doesn't work, probably because of datetime format
             }
             this.onImageUpload();
 

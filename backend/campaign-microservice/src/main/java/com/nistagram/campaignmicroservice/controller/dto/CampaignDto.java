@@ -15,11 +15,11 @@ public class CampaignDto {
     private String username;
     private CampaignType campaignType;
     private TermType termType;
-//    @Temporal(TemporalType.DATE)
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+01:00")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date startDate;
-//    @Temporal(TemporalType.DATE)
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+01:00")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date endDate;
     private int perDay;
     private List<TargetAudienceDto> audiences;
