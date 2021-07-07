@@ -1,14 +1,14 @@
 <template>
     <div style="padding:30px 20%; width: 100%;">
         <div id="userInfo">
-            <img src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
+            <img v-if="user.imageBytes == null" src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
+            <img v-if="user.imageBytes != null" v-bind:src="user.imageBytes" class="profilePic" alt="Profile picture">
             <span><span class="fullName"><i v-if="user.status == 'APPROVED'" class="fas fa-user-check"/> {{user.fullName}}</span><br>
                   @{{user.username}}<br>
                   {{user.bio}}<br>
                   <a :href="'//' + user.webSite">{{user.webSite}}</a><br>
                   <b-link v-if="isUserProfile" href="/edit_profile">Edit profile</b-link><br/>
-                  <b-link v-if="isUserProfile" href="/agent_request">Agent request</b-link><br/>
-                  <b-link v-if="isUserProfile && user.status != 'APPROVED'" href="/verification_request">Verification request</b-link><br/>
+                  <!-- Notification settings -->
                   <b-dropdown id="dropdown-right" right text="Following" variant="primary" class="w-75 mx-3" v-if="!isUserProfile && isFollowing">
                     <b-dropdown-text><b-form-checkbox v-model="userRelation.status" name="closeFriend" @change="closeChange()"
                         value="CLOSE_FRIEND"
@@ -377,7 +377,16 @@ export default {
             isUserProfile: false,
             isFollowing: false,
             userRelation: {status: 'NOT_FOLLOWING', mutePost: false, muteStory: false, notifyPost: false, notifyStory: false},
-            user: '',
+            user: {
+                username: '',
+                profilePicPath: '',
+                imageBytes: null,
+                fullName: '',
+                webSite: '',
+                bio: '',
+                status: '',
+                publicProfile: false
+            },
             username: this.$route.params.pUsername,
             info: [{
                 username:'',
@@ -476,6 +485,8 @@ export default {
                                                             }                                          
             }).then(response => {
                                 this.user = response.data;
+                                if(response.data.imageBytes != null)
+                                    this.user.imageBytes = 'data:image/jpeg;base64,' + response.data.imageBytes;
                                 console.log(response.data);
                                 this.axios.get(GET_FOLLOWERS_PATH + "/" + this.username)
                                             .then(response => {

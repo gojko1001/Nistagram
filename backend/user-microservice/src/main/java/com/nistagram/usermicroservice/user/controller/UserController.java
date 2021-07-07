@@ -8,10 +8,13 @@ import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.verify_account.FileUploadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -20,6 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
+    private final String PROFILE_PICS_DIR = "profile-photos";
     @Autowired
     private IUserService userService;
     @Autowired
@@ -34,7 +38,10 @@ public class UserController {
     @GetMapping("/{username}")
     public UserDto getUserByUsername(@PathVariable String username) {
         Logger.info("Get user by username", username);
-        return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
+        UserDto userDto = UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
+        if(userDto.getProfilePicPath() != null)
+            userDto.setImageBytes(FileUploadUtil.getImage(userDto.getProfilePicPath(), PROFILE_PICS_DIR));
+        return userDto;
     }
 
     @PostMapping("/find")
@@ -55,6 +62,11 @@ public class UserController {
     @PostMapping("/addGoogleUser")
     public void registerGoogleUser(@RequestBody UserRegistrationDto userReg) {
         userService.registerUser(userReg, true);
+    }
+
+    @PostMapping("/upload_pic")
+    public String uploadProfilePic(@RequestParam("file") List<MultipartFile> multipartFile) throws IOException {
+        return FileUploadUtil.saveImage(multipartFile.get(0), PROFILE_PICS_DIR);  // TODO: Set filename to userId
     }
 
     @PutMapping()

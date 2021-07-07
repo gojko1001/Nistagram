@@ -4,20 +4,32 @@
     <b-tabs pills card vertical>
       <b-tab title="Profile Info" active><b-card-text><h1>Edit Profile</h1></b-card-text>
         <!-- User info -->
-        <b-form @submit.prevent="onSubmit" @reset="onReset">
+        <b-form @submit.prevent="onSubmit">
           <table class="w-100 py-2">
+            <tr><td colspan="2" v-b-tooltip.hover title="Hint: Crop image first if it doesn't fit!">
+              <img v-if="selectedImg == null && imageBytes == null" src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
+              <img v-if="selectedImg == null && imageBytes != null" :src="imageBytes" class="profilePic" alt="Profile picture">
+              <img v-if="selectedImg != null" :src="selectedImg" class="profilePic" alt="Profile picture">
+              <b-button v-if="file != null" @click="file = null; selectedImg = null" variant="danger" style="float:right"><i class="fa fa-trash"></i></b-button></td></tr>
+            <tr><td colspan="2"><b-form-file
+                            v-model="file"
+                            accept="image/*"
+                            placeholder="Choose picture or drop it here..."
+                            drop-placeholder="Drop pircture here..."
+                            @change="previewImage"
+                        ></b-form-file></td></tr>
             <tr><td>Username:</td>
-            <td><b-form-input v-model="form.username" type="text" id="username">{{form.username}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.username" type="text" id="username">{{user.username}}</b-form-input></td></tr>
             <tr><td>Full name:</td>
-            <td><b-form-input v-model="form.fullName" type="text" id="fullName" required>{{form.fullName}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.fullName" type="text" id="fullName" required>{{user.fullName}}</b-form-input></td></tr>
             <tr><td>Bio:</td>
-            <td><b-form-input v-model="form.bio" type="text" id="bio">{{form.bio}}</b-form-input></td><br></tr>
+            <td><b-form-input v-model="user.bio" type="text" id="bio">{{user.bio}}</b-form-input></td><br></tr>
             <tr><td>Web site:</td>
-            <td><b-form-input v-model="form.webSite" type="phone" id="webSite">{{form.webSite}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.webSite" type="phone" id="webSite">{{user.webSite}}</b-form-input></td></tr>
             <tr>
             <td>Gender:</td>
               <td><b-form-radio-group
-                v-model="form.userGender"
+                v-model="user.userGender"
                 :options="genderOpts"
                 class="mb-3"
                 value-field="value"
@@ -26,19 +38,26 @@
               ></b-form-radio-group></td>
             </tr>
             <tr><td>Birth date:</td>
-            <td><b-form-input v-model="form.birthDate" value="form.birthDate" type="date" id="birthDate"></b-form-input></td></tr>
+            <td>
+              <!-- <b-form-input v-model="user.birthDate" value="user.birthDate" type="date" id="birthDate"></b-form-input> -->
+            <b-form-datepicker v-model="user.birthDate" :min="minDate" class="mb-2" id="birthDate"
+            :date-format-options="{ year: 'numeric', month: 'long', day: '2-digit' }"
+            ></b-form-datepicker></td></tr>
             <tr><td>Email:</td>
-            <td><b-form-input v-model="form.email" type="email" id="email">{{form.email}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.email" type="email" id="email">{{user.email}}</b-form-input></td></tr>
             <tr><td>Phone:</td>
-            <td><b-form-input v-model="form.phone" type="phone" id="phone">{{form.phone}}</b-form-input></td></tr>
+            <td><b-form-input v-model="user.phone" type="phone" id="phone">{{user.phone}}</b-form-input></td></tr>
           </table>
-        
+          <b-link v-if="!isAgent()" href="/agent_request" style="text-align: left">Switch to a business account<br></b-link>    
+          <b-link v-if="user.status != 'APPROVED'" href="/verification_request">Verify account</b-link><br/>
+          <br><br>
+
           <b-button type="submit" variant="primary" style="width:200px;">Save changes</b-button><br>
         </b-form>
       </b-tab>
       <!-- Change password -->
       <b-tab title="Change Password"><b-card-text><h1>Change Password</h1></b-card-text>
-        <b-form @submit.prevent="resetPass" @reset="onReset">
+        <b-form @submit.prevent="resetPass">
             <table class="w-100 py-2">
               <tr><td>Current password:</td>
               <b-form-input v-model="resetPassword.oldPassword" type="password" id="pass" required>{{resetPassword.oldPassword}}</b-form-input></tr>
@@ -120,18 +139,34 @@
   </b-card>
 </div>
 </template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 
 <script>
-import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH } from "./../util/constants"
-import { getToken, getUsernameFromToken, removeToken } from '../util/token';
+import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH, UPLOAD_PICTURE_PATH, ROLE_AGENT } from "./../util/constants"
+import { getRoleFromToken, getToken, getUsernameFromToken, removeToken } from '../util/token';
+import moment from 'moment';
 
 export default {
   name: 'EditProfile',
   data() {
       return {
         username: getUsernameFromToken(),
-        form: '',
-        privacy:{ username:getUsernameFromToken(), publicProfile:false, publicDM:false, taggable: false},
+        user: {
+          username: '',
+          fullName: '',
+          email: '',
+          phone: '',
+          webSite: '',
+          bio: '',
+          birthDate: '',
+          userGender: ''
+        },
+        privacy:{ 
+          username: getUsernameFromToken(), 
+          publicProfile: false, 
+          publicDM: false, 
+          taggable: false
+        },
         blockedUsers: [],
         resetPassword: {oldPassword:'', password:'', repeatPassword:''},
         genderOpts:[
@@ -139,7 +174,9 @@ export default {
           { text: 'Female', value: 'FEMALE' },
           { text: 'Other', value: 'OTHER' }
         ],
-        show: true
+        file: null,
+        selectedImg: null,
+        imageBytes: null
       }
   },
   mounted: function(){
@@ -152,13 +189,15 @@ export default {
                                                       headers:{ Authorization: "Bearer " + getToken()
                                                     }                                          
             }).then(response => {
-                                this.form = response.data;
+                                this.user = response.data;
+                                if(response.data.imageBytes != null)
+                                  this.imageBytes = 'data:image/jpeg;base64,' + response.data.imageBytes;
+                                this.user.imageBytes = null;
                                 this.privacy = response.data;
-            }).catch(error => { if(!error.response) {
+            }).catch(error => { if(!error.response)
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
-                                    return
-                                }
-                                window.location.href = '/home'
+                                else
+                                  window.location.href = '/home'
             });
     this.axios.get(GET_BLOCKED_USERS_PATH + "/" + this.username, {   
                                                                   headers:{ Authorization: "Bearer " + getToken()
@@ -175,37 +214,43 @@ export default {
     },
     methods: {
         onSubmit() {
-        this.axios.put(USER_PATH, this.form, {headers:{Authorization: "Bearer " + getToken()}})
-          .then(response => { console.log(response);
-                              this.makeToast("User has been updated successfully.", "success");
-                              if(this.username != this.form.username){
-                                removeToken();
-                                this.makeToast("Please login.", "info");
-                                window.location.href = "";
-                              }
-                              window.location.href = "/user/" + this.username;
-                            })
-          .catch(error => { console.log(error);
-                            if(!error.response)
-                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
-                            else
-                              this.makeToast("Error while updating.", "danger");
-                            })
+          if(this.file == null){
+            this.updateUserInfo();
+            return;
+          }
+          let toUpload = new FormData();
+          toUpload.append("file", this.file)
+          this.axios.post(UPLOAD_PICTURE_PATH, toUpload)
+            .then(response => { 
+              this.user.profilePicPath = response.data;
+              this.updateUserInfo()
+             })
+            .catch(() => {
+               this.user.profilePicPath = null;
+               this.makeToast("Error while uploading photo", "danger")
+               this.updateUserInfo()
+            })
         },
-        onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.axios.get(USER_PATH +'/'+ this.username)
-            .then(response => {
-            this.form = response;
-        })
-          this.form.pastUsername = getUsernameFromToken(),
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      },
+
+        updateUserInfo(){
+          this.user.birthDate = moment(String(this.user.birthDate)).format('YYYY-MM-DD');
+          this.axios.put(USER_PATH, this.user, {headers:{Authorization: "Bearer " + getToken()}})
+            .then(response => { console.log(response);
+                                this.makeToast("User has been updated successfully.", "success");
+                                if(this.username != this.user.username){
+                                  removeToken();
+                                  this.makeToast("Please login.", "info");
+                                  window.location.href = "";
+                                }
+                                window.location.href = "/user/" + this.username;
+                              })
+            .catch(error => { console.log(error);
+                              if(!error.response)
+                                this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                              else
+                                this.makeToast("Error while updating.", "danger");
+                              })
+        },
 
       resetPass(){
         this.axios.put(CHANGE_PASSWORD_PATH, this.resetPassword, {
@@ -250,6 +295,17 @@ export default {
                             this.makeToast(err.message, "danger");
                     })
       },
+
+      previewImage(){
+        setTimeout(() => {  
+          this.selectedImg = URL.createObjectURL(this.file);
+         }, 100);
+      },
+
+      isAgent(){
+        return getRoleFromToken() == ROLE_AGENT;
+      },
+
       makeToast(message, variant) {
       this.$bvToast.toast(message, {
                             title: `Nistagram`,
@@ -279,6 +335,13 @@ export default {
   width: 80%;
   border: 3px solid lightblue;
   padding: 20px;
+}
+
+.profilePic{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .optDesc{
