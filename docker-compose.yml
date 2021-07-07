@@ -126,14 +126,29 @@ services:
       - mysql
       - media-microservice
 
-  frontend2:
-    build: ./monolit-app/webshop-front
-    container_name: frontend2
+
+  campaign-microservice:
+    image: campaign-microservice
+    container_name: campaign-microservice
+    build:
+      context: ./backend/campaign-microservice
+      dockerfile: Dockerfile
+    tty: true
     restart: on-failure
-    ports:
-      - "4200:4200"
     networks:
       - demo
+    ports:
+      - "3034:3034"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: campaigndb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on:
+      - eureka-server
+      - mysql
+      - media-microservice
 
 
   webshop:
