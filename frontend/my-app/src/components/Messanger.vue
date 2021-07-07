@@ -145,12 +145,12 @@ export default {
 	connect () {
         this.username = getUsernameFromToken();
         if(this.username != null){
-          this.socket = new SockJS('http://localhost:8762/messenger-api/socket')
-                  this.stompClient = Stomp.over('/messenger-api/websocket')
+          this.socket = new SockJS('http://localhost:8762/messenger-api/ws')
+                  this.stompClient = Stomp.over(this.socket)
                   this.stompClient.connect({}, function (frame) {
 					this.connected = true
 					console.log(frame);
-                    this.stompClient.subscribe('/topic/server-broadcaster', function(tick) {
+                    this.stompClient.subscribe('/topic/messenger-broadcaster', function(tick) {
 						console.log(tick);
                       this.messages = JSON.parse(tick.body).content;
 						for(let i=0; i< this.messages.length; i++){
