@@ -88,6 +88,7 @@ public class UserService implements IUserService {
             throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
         User dbUser = findUserByUsername(oldUsername);
         dbUser.setUsername(user.getUsername());
+        dbUser.setProfilePicPath(user.getProfilePicPath());
         dbUser.setFullName(user.getFullName());
         dbUser.setEmail(user.getEmail());
         dbUser.setPhone(user.getPhone());

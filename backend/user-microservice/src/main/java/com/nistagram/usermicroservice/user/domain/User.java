@@ -19,6 +19,8 @@ public class User {
     @Column(nullable = false)
     private String username;
     @Column
+    private String profilePicPath;
+    @Column
     private String fullName;
     @Column(nullable = false)
     private String email;

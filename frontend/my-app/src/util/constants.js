@@ -14,6 +14,7 @@ export const VERIFY_ACC_PATH = USER_CREDENTIALS_PATH + "/verify"
 
 // User microservice
 export const USER_PATH = "/user-api/user"
+export const UPLOAD_PICTURE_PATH = USER_PATH + "/upload_pic"
 export const SEARCH_USER_PATH = USER_PATH + "/search"
 export const VERIFY_USER_PATH = "/user-api/verify"
 export const GET_CATEGORIES_PATH = VERIFY_USER_PATH + "/categories"
