@@ -27,10 +27,6 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login'], {skipLocationChange:true});
   }
 
-  discover(){
-    this.router.navigate(['/discover']);
-  }
-
   shoppingCart(){
     this.router.navigate(['/shopping-cart']);
   }

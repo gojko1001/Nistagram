@@ -13,6 +13,10 @@ export class ItemService {
     return this.httpClient.get(ITEM_PATH);
   }
 
+  getItemsByUsername(username: string){
+    return this.httpClient.get(ITEM_PATH + "/" + username);
+  }
+
   getItemById(id: any){
     return this.httpClient.get(SHOW_PATH + '/' + id);
   }

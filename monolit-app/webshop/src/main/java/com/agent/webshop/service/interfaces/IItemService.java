@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IItemService {
     Item create(Item item);
-    List<Item> getItemsByUsername(String username);
+    List<ImageBytesDto> getItemsByUsername(String username);
     ResponseEntity getItems();
     Item getItemById(Long id);
     ResponseEntity updateItem(String username, Item newItem);

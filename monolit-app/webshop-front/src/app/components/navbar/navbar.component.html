@@ -5,21 +5,28 @@
         </a>
         <ul class="navbar-nav mr-auto" style="font-size: 20px;">
             <li class="nav-item">
-                <button class="heart nav-btn" (click)="discover()">
+                <button class="heart nav-btn" [routerLink]="'/discover'">
                     <i class="fas fa-globe"></i>
                 </button>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" *ngIf="getUsername() == null" [routerLink]="'/registration'" routerLinkActive="active" >Registration</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" *ngIf="getUsername() == null" [routerLink]="'/login'" routerLinkActive="active" >Login</a>
+            <li class="nav-item" *ngIf="getUsername() != null && getRole() == 'ROLE_AGENT'">
+                <button class="heart nav-btn" [routerLink]="['/shop', getUsername()]">
+                    <i class="fas fa-store"></i>
+                </button>
             </li>
             <li class="nav-item">
                 <button *ngIf="getUsername() != null && getRole() == 'ROLE_USER'" class="heart nav-btn" (click)="shoppingCart()">
                     <i class="fas fa-shopping-cart"></i>
                 </button>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="getUsername() == null" [routerLink]="'/registration'" routerLinkActive="active" >Registration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="getUsername() == null" [routerLink]="'/login'" routerLinkActive="active" >Login</a>
+            </li>
+            
             <li class="nav-item">
                 <button *ngIf="getUsername() != null" class="heart nav-btn" (click)="logout()">
                     <i class="fas fa-sign-out-alt"></i>
