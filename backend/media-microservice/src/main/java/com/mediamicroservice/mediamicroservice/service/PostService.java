@@ -88,7 +88,7 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public ResponseEntity saveImageInfo(MediaDto imageDto) {
+    public Post saveImageInfo(MediaDto imageDto) {
         Post post = new Post();
         Media media = new Media();
         List<MediaName> mediaNames = new ArrayList<>();
@@ -105,7 +105,8 @@ public class PostService implements IPostService {
         media.setDescription(imageDto.getDescription());
         Location location = locationService.findByName(imageDto.getLocationName());
         media.setLocation(location);
-        media.setHashtags(tagService.createTags(imageDto.getTags()));
+        if(imageDto.getTags() != null)
+            media.setHashtags(tagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
         List<UserTag> userTags = new ArrayList<>();
         if(imageDto.getUserTags() != null){
@@ -120,8 +121,7 @@ public class PostService implements IPostService {
         media.setMediaName(mediaNames);
         mediaRepository.save(media);
         post.setMedia(media);
-        save(post);
-        return new ResponseEntity(HttpStatus.OK);
+        return save(post);
     }
 
     @Override
@@ -286,6 +286,12 @@ public class PostService implements IPostService {
         Post post = postRepository.findPostByMedia_Id(mediaId);
         ImageBytesDto imageBytesDto = getImageFile(post);
         return imageBytesDto.getImageBytes().get(0);
+    }
+
+    @Override
+    public String getUsernameById(Long id) {
+        Post post = postRepository.findPostById(id);
+        return post.getMedia().getUsername();
     }
 
 }

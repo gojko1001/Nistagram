@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IMediaNameRepository extends JpaRepository<MediaName, Long> {
     MediaName save(MediaName mediaName);
+
     MediaName findMediaNameById(Long id);
 }

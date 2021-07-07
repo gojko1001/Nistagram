@@ -24,12 +24,11 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
 
+    private static String uploadDir = "user-photos";
     @Autowired
     private IPostRepository postRepository;
     @Autowired
     private IPostService postService;
-
-    private static String uploadDir = "user-photos";
 
     // for notification-microservice
     @GetMapping
@@ -41,10 +40,10 @@ public class PostController {
     public List<String> saveImage(@RequestParam("file") List<MultipartFile> multipartFiles) throws IOException {
         Logger.info("Save image.", "");
         List<String> fileNames = new ArrayList<>();
-        for(MultipartFile mf : multipartFiles){
+        for (MultipartFile mf : multipartFiles) {
             String fileName = StringUtils.cleanPath(mf.getOriginalFilename().replaceAll("\\s", ""));
             uploadDir = "user-photos";
-            FileUploadUtil.saveFile(uploadDir, fileName, mf);
+            FileUploadUtil.saveFile(uploadDir, fileName, mf);       // TODO: Generate new filename to aviod name conflicts
             fileNames.add(fileName);
         }
         return fileNames;
@@ -52,9 +51,9 @@ public class PostController {
 
 
     @PostMapping("/info")
-    public ResponseEntity saveImageInfo(@RequestBody MediaDto mediaDto) {
+    public Long saveImageInfo(@RequestBody MediaDto mediaDto) {
         Logger.info("Save image info.", mediaDto.getUsername());
-        return postService.saveImageInfo(mediaDto);
+        return postService.saveImageInfo(mediaDto).getMedia().getId();
     }
 
 
@@ -78,22 +77,26 @@ public class PostController {
     }
 
     @GetMapping("/search_tag")
-    public ResponseEntity search_tag(@RequestParam String tag){
+    public ResponseEntity search_tag(@RequestParam String tag) {
         Logger.info("Search tag: " + tag, "");
         return new ResponseEntity(postService.searchTag(tag), HttpStatus.OK);
     }
 
     @GetMapping("/search_location")
-    public ResponseEntity search_location(@RequestParam String location){
+    public ResponseEntity search_location(@RequestParam String location) {
         Logger.info("Search location: " + location, "");
         return new ResponseEntity(postService.searchLocation(location), HttpStatus.OK);
     }
 
     @GetMapping("/bytes/{mediaId}")
-    public ImageByte getBytes(@PathVariable("mediaId") Long mediaId){
+    public ImageByte getBytes(@PathVariable("mediaId") Long mediaId) {
         return postService.getBytes(mediaId);
     }
 
+    @GetMapping("/username/{id}")
+    public String getUsernameById(@PathVariable Long id){
+        return postService.getUsernameById(id);
+    }
 
 
 }

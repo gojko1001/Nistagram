@@ -27,4 +27,6 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     User findByFullName(String fullName);
 
+    List<User> findAllByPublicDM(boolean publicDM);
+
 }

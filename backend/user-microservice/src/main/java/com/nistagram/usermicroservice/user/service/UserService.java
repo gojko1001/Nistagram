@@ -2,16 +2,16 @@ package com.nistagram.usermicroservice.user.service;
 
 import com.nistagram.usermicroservice.connection.AuthConnection;
 import com.nistagram.usermicroservice.connection.MediaConnection;
-import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
-import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
 import com.nistagram.usermicroservice.exception.BadRequestException;
 import com.nistagram.usermicroservice.exception.InvalidActionException;
 import com.nistagram.usermicroservice.exception.NotFoundException;
+import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
+import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
 import com.nistagram.usermicroservice.user.domain.User;
 import com.nistagram.usermicroservice.user.domain.UserRelation;
-import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.repository.IUserRepository;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
@@ -88,6 +88,7 @@ public class UserService implements IUserService {
             throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
         User dbUser = findUserByUsername(oldUsername);
         dbUser.setUsername(user.getUsername());
+        dbUser.setProfilePicPath(user.getProfilePicPath());
         dbUser.setFullName(user.getFullName());
         dbUser.setEmail(user.getEmail());
         dbUser.setPhone(user.getPhone());
@@ -160,6 +161,31 @@ public class UserService implements IUserService {
                 userList.add(user);
         }
         return userList;
+    }
+
+    public List<User> getChatableUsers(String username, String text) {
+        List<User> users = new ArrayList<>();
+        for(User user: userRepository.findAllByPublicDM(true)){
+            if(!user.getUsername().equals(username) && user.getUsername().contains(text))
+                users.add(user);
+        }
+        return users;
+    }
+
+    @Override
+    public Boolean isPublic(String username) {
+        User user = findUserByUsername(username);
+        return user.isPublicProfile();
+    }
+
+    @Override
+    public List<User> getChatUsers(String username) {
+        List<User> users = new ArrayList<>();
+        for(User user: userRepository.findAllByPublicDM(true)){
+            if(!user.getUsername().equals(username))
+                users.add(user);
+        }
+        return users;
     }
 
     private void verifyUserInput(UserRegistrationDto userReg) {

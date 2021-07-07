@@ -36,7 +36,7 @@ public class LikeController {
     }
 
     @GetMapping("/history/{username}")
-    public ResponseEntity history(@PathVariable("username")String username){
+    public ResponseEntity history(@PathVariable("username") String username) {
         Logger.info("Get likes.", username);
         return new ResponseEntity(likeService.history(username), HttpStatus.OK);
     }

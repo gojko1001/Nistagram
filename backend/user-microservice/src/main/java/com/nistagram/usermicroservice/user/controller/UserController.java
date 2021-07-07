@@ -1,29 +1,34 @@
 package com.nistagram.usermicroservice.user.controller;
 
+import com.nistagram.usermicroservice.exception.UnauthorizedException;
+import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
-import com.nistagram.usermicroservice.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
-import com.nistagram.usermicroservice.JwtUtil;
-import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
+import com.nistagram.usermicroservice.verify_account.FileUploadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
+    private final String PROFILE_PICS_DIR = "profile-photos";
     @Autowired
     private IUserService userService;
-    @Autowired
-    private JwtUtil jwtUtil;
+    //@Autowired
+    //private JwtUtil jwtUtil;
 
     @GetMapping
     public List<UserDto> getAll() {
@@ -34,7 +39,10 @@ public class UserController {
     @GetMapping("/{username}")
     public UserDto getUserByUsername(@PathVariable String username) {
         Logger.info("Get user by username", username);
-        return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
+        UserDto userDto = UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
+        if(userDto.getProfilePicPath() != null)
+            userDto.setImageBytes(FileUploadUtil.getImage(userDto.getProfilePicPath(), PROFILE_PICS_DIR));
+        return userDto;
     }
 
     @PostMapping("/find")
@@ -57,10 +65,16 @@ public class UserController {
         userService.registerUser(userReg, true);
     }
 
+    @PostMapping("/upload_pic")
+    public String uploadProfilePic(@RequestParam("file") List<MultipartFile> multipartFile) throws IOException {
+        return FileUploadUtil.saveImage(multipartFile.get(0), PROFILE_PICS_DIR);  // TODO: Set filename to userId
+    }
+
     @PutMapping()
     public UserDto updateProfile(@RequestBody UserDto userDto,
                                  @RequestHeader("Authorization") String jwt) {
-        String username = jwtUtil.extractUsername(jwt);
+        // String username = jwtUtil.extractUsername(jwt);
+        String username = "";
         if (username == null)
             throw new UnauthorizedException("Access denied");
         Logger.info("Try to edit user: " + username, userDto.getUsername());
@@ -89,4 +103,20 @@ public class UserController {
         return userService.getPublicTaggableUsers();
     }
 
+    @GetMapping("/chatable_users/{username}/{searchInput}")
+    public List<UserDto> getAllChatableUsersSearch(@PathVariable String username, @PathVariable String searchInput) {
+        return userService.getChatableUsers(username, searchInput).stream()
+                .map(UserMapper::mapUserToUserDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("/chat_users/{username}")
+    public List<UserDto> getAllChatableUsers(@PathVariable String username) {
+        return userService.getChatUsers(username).stream()
+                .map(UserMapper::mapUserToUserDto).collect(Collectors.toList());
+    }
+
+    @GetMapping("/is_public/{username}")
+    public boolean isPublic(@PathVariable String username){
+        return userService.isPublic(username);
+    }
 }

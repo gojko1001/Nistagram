@@ -24,6 +24,7 @@ import java.util.List;
 
 @Service
 public class StoryService implements IStoryService {
+    private static String uploadDir = "user-photos";
     @Autowired
     private IStoryRepository storyRepository;
     @Autowired
@@ -39,9 +40,6 @@ public class StoryService implements IStoryService {
     @Autowired
     private IUserTagService userTagService;
 
-
-    private static String uploadDir = "user-photos";
-
     @Override
     public Story save(Story story) {
         Logger.infoDb("Try to save story: " + story.getId());
@@ -55,11 +53,11 @@ public class StoryService implements IStoryService {
     }
 
     @Override
-    public ResponseEntity saveImageInfo(MediaDto imageDto) {
+    public Story saveImageInfo(MediaDto imageDto) {
         Story story = new Story();
         Media media = new Media();
         List<MediaName> mediaNames = new ArrayList<>();
-        for(String fileName : imageDto.getFileNames()){
+        for (String fileName : imageDto.getFileNames()) {
             MediaName mediaName = new MediaName();
             mediaName.setFileName(fileName);
             if (fileName.contains(".mp4")) {
@@ -72,11 +70,12 @@ public class StoryService implements IStoryService {
         media.setDescription(imageDto.getDescription());
         Location location = locationService.findByName(imageDto.getLocationName());
         media.setLocation(location);
-        media.setHashtags(hashtagService.createTags(imageDto.getTags()));
+        if(imageDto.getTags() != null)
+            media.setHashtags(hashtagService.createTags(imageDto.getTags()));
         media.setTimestamp(new Date());
         List<UserTag> userTags = new ArrayList<>();
-        if(imageDto.getUserTags() != null){
-            for(String username : imageDto.getUserTags()){
+        if (imageDto.getUserTags() != null) {
+            for (String username : imageDto.getUserTags()) {
                 UserTag userTag = new UserTag();
                 userTag.setUsername(username);
                 userTagService.save(userTag);
@@ -88,9 +87,7 @@ public class StoryService implements IStoryService {
         mediaRepository.save(media);
         story.setMedia(media);
         story.setForCloseFriends(imageDto.isForCloseFriends());
-        save(story);
-
-        return new ResponseEntity(HttpStatus.OK);
+        return save(story);
     }
 
     @Override
@@ -116,20 +113,20 @@ public class StoryService implements IStoryService {
     }
 
     @Override
-    public ResponseEntity highlightStory(Long storyId){
+    public ResponseEntity highlightStory(Long storyId) {
         Story story = storyRepository.findStoryById(storyId);
-        if(story == null)
+        if (story == null)
             return new ResponseEntity("Choosen story doesn't exist.", HttpStatus.BAD_REQUEST);
         String message = "";
-        if(story.isHighlighted()){
+        if (story.isHighlighted()) {
             story.setHighlighted(false);
             message = "Story has been removed from highlights.";
-        }else{
+        } else {
             story.setHighlighted(true);
             message = "Story has been added to highlights.";
         }
         storyRepository.save(story);
-        return  new ResponseEntity(message, HttpStatus.OK);
+        return new ResponseEntity(message, HttpStatus.OK);
     }
 
     @Override
@@ -139,8 +136,8 @@ public class StoryService implements IStoryService {
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("/src/main/resources/" + uploadDir + "/");
             for (Story story : stories) {
-                for(MediaName mn : story.getMedia().getMediaName()){
-                    if(!isReported(story.getMedia().getId()))
+                for (MediaName mn : story.getMedia().getMediaName()) {
+                    if (!isReported(story.getMedia().getId()))
                         storyBytesDto.add(imageFile(story, filePath + mn.getFileName(), mn.isImage()));
                 }
             }
@@ -148,14 +145,14 @@ public class StoryService implements IStoryService {
         return storyBytesDto;
     }
 
-    public boolean isReported(Long mediaId){
+    public boolean isReported(Long mediaId) {
         boolean isReported = false;
         List<InappropriateContent> inappropriateContentList = inappropriateContentService.getAll();
-        for(InappropriateContent ic:inappropriateContentList) {
+        for (InappropriateContent ic : inappropriateContentList) {
             if (ic.getMedia().getId().equals(mediaId) && ic.getRequestStatus().equals(RequestStatus.ACCEPTED)) {
                 isReported = true;
                 break;
-            }else
+            } else
                 isReported = false;
         }
         return isReported;
