@@ -105,6 +105,9 @@
 
 <script>
 import { getUsernameFromToken} from './../util/token';
+import SockJS from 'sockjs-client';
+import Stomp from 'webstomp-client';
+
 export default {
   name: 'Chat',
   data(){
@@ -123,6 +126,7 @@ export default {
 				fileNames: [],
 			},
 			mediaMessage: {},
+			connected: false,
         }
   },
   mounted: function(){
@@ -134,22 +138,37 @@ export default {
 			this.users = response.data;
 		})
 	}
-		
-    this.axios.get('http://localhost:8762/messenger-api/' + this.username + '/').then(response => {
-		this.messages = response.data;
-		for(let i=0; i< response.data.length; i++){
-			for(let j=0; j<this.messages[i].imageBytes.length; j++){
-				if(this.messages[i].imageBytes[j].isImage){
-					this.messages[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.messages[i].imageBytes[j].imageByte; 
-				}else{
-					this.messages[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.messages[i].imageBytes[j].imageByte;
-				}
-			}
-		}
-		console.log(response.data);
-	})
+	this.connect();
   },
   methods:{
+
+	connect () {
+        this.username = getUsernameFromToken();
+        if(this.username != null){
+          this.socket = new SockJS('http://localhost:8762/messenger-api/socket')
+                  this.stompClient = Stomp.over('/messenger-api/websocket')
+                  this.stompClient.connect({}, function (frame) {
+					this.connected = true
+					console.log(frame);
+                    this.stompClient.subscribe('/topic/server-broadcaster', function(tick) {
+						console.log(tick);
+                      this.messages = JSON.parse(tick.body).content;
+						for(let i=0; i< this.messages.length; i++){
+							for(let j=0; j<this.messages[i].imageBytes.length; j++){
+								if(this.messages[i].imageBytes[j].isImage){
+									this.messages[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.messages[i].imageBytes[j].imageByte; 
+								}else{
+									this.messages[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.messages[i].imageBytes[j].imageByte;
+								}
+							}
+						}
+                    })
+                  }, (error) => {
+                    console.log(error)
+                    this.connected = false
+                  })
+          }
+    },
 
 	onImageUpload(){
         this.formData = new FormData();

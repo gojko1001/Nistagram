@@ -25,7 +25,7 @@ public class Message {
     private Date date;
     @Column
     private Boolean hasMedia = false;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<MediaName> mediaName;
     @Column
     private Boolean viewed = false;
