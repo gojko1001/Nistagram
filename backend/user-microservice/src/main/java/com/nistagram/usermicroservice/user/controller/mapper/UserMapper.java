@@ -12,6 +12,7 @@ public class UserMapper {
     public static User mapUserDtoToUser(UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
+        user.setProfilePicPath(userDto.getProfilePicPath());
         user.setFullName(userDto.getFullName());
         user.setEmail(userDto.getEmail());
         user.setPhone(userDto.getPhone());
@@ -28,6 +29,7 @@ public class UserMapper {
     public static UserDto mapUserToUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setUsername(user.getUsername());
+        userDto.setProfilePicPath(user.getProfilePicPath());
         userDto.setFullName(user.getFullName());
         userDto.setEmail(user.getEmail());
         userDto.setPhone(user.getPhone());
