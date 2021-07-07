@@ -10,7 +10,7 @@ services:
       - demo
     ports:
       - "8761:8761"
-  
+
   proxy-server:
     image: proxy-server
     container_name: proxy-server
@@ -126,6 +126,37 @@ services:
       - mysql
       - media-microservice
 
+  frontend2:
+    build: ./monolit-app/webshop-front
+    container_name: frontend2
+    restart: on-failure
+    ports:
+      - "4200:4200"
+    networks:
+      - demo
+
+
+  webshop:
+    image: webshop
+    container_name: webshop
+    build:
+      context: ./monolit-app/webshop
+      dockerfile: Dockerfile
+    tty: true
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: webshopdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    depends_on:
+      - mysql
+
+
   mysql:
     image: mysql:8.0.19
     container_name: mysql
@@ -137,7 +168,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
- 
       
 networks:
   demo:
