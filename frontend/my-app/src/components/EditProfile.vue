@@ -13,7 +13,6 @@
               <b-button v-if="file != null" @click="file = null; selectedImg = null" variant="danger" style="float:right"><i class="fa fa-trash"></i></b-button></td></tr>
             <tr><td colspan="2"><b-form-file
                             v-model="file"
-                            :state="Boolean(file)"
                             accept="image/*"
                             placeholder="Choose picture or drop it here..."
                             drop-placeholder="Drop pircture here..."
@@ -39,13 +38,20 @@
               ></b-form-radio-group></td>
             </tr>
             <tr><td>Birth date:</td>
-            <td><b-form-input v-model="user.birthDate" value="user.birthDate" type="date" id="birthDate"></b-form-input></td></tr>
+            <td>
+              <!-- <b-form-input v-model="user.birthDate" value="user.birthDate" type="date" id="birthDate"></b-form-input> -->
+            <b-form-datepicker v-model="user.birthDate" :min="minDate" class="mb-2" id="birthDate"
+            :date-format-options="{ year: 'numeric', month: 'long', day: '2-digit' }"
+            ></b-form-datepicker></td></tr>
             <tr><td>Email:</td>
             <td><b-form-input v-model="user.email" type="email" id="email">{{user.email}}</b-form-input></td></tr>
             <tr><td>Phone:</td>
             <td><b-form-input v-model="user.phone" type="phone" id="phone">{{user.phone}}</b-form-input></td></tr>
           </table>
-        
+          <b-link v-if="!isAgent()" href="/agent_request" style="text-align: left">Switch to a business account<br></b-link>    
+          <b-link v-if="user.status != 'APPROVED'" href="/verification_request">Verify account</b-link><br/>
+          <br><br>
+
           <b-button type="submit" variant="primary" style="width:200px;">Save changes</b-button><br>
         </b-form>
       </b-tab>
@@ -136,8 +142,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 
 <script>
-import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH, UPLOAD_PICTURE_PATH } from "./../util/constants"
-import { getToken, getUsernameFromToken, removeToken } from '../util/token';
+import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH, UPLOAD_PICTURE_PATH, ROLE_AGENT } from "./../util/constants"
+import { getRoleFromToken, getToken, getUsernameFromToken, removeToken } from '../util/token';
+import moment from 'moment';
 
 export default {
   name: 'EditProfile',
@@ -226,6 +233,7 @@ export default {
         },
 
         updateUserInfo(){
+          this.user.birthDate = moment(String(this.user.birthDate)).format('YYYY-MM-DD');
           this.axios.put(USER_PATH, this.user, {headers:{Authorization: "Bearer " + getToken()}})
             .then(response => { console.log(response);
                                 this.makeToast("User has been updated successfully.", "success");
@@ -292,6 +300,10 @@ export default {
         setTimeout(() => {  
           this.selectedImg = URL.createObjectURL(this.file);
          }, 100);
+      },
+
+      isAgent(){
+        return getRoleFromToken() == ROLE_AGENT;
       },
 
       makeToast(message, variant) {
