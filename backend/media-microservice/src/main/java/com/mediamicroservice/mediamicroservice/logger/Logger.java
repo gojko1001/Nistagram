@@ -5,19 +5,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Logger {
 
-    public static void info(String message, String username){
+    public static void info(String message, String username) {
         log.info("[USER] = " + username + " [MESSAGE] = " + message);
     }
 
-    public static void error(String message, String username){
+    public static void error(String message, String username) {
         log.error("[USER] = " + username + " [MESSAGE] = " + message);
     }
 
-    public static void infoDb(String message){
+    public static void infoDb(String message) {
         log.info("[DATABASE] = " + message);
     }
 
-    public static void errorDb(String message, String exception){
+    public static void errorDb(String message, String exception) {
         log.error("[DATABASE] = " + message + " [EXCEPTION] = " + exception);
     }
 }

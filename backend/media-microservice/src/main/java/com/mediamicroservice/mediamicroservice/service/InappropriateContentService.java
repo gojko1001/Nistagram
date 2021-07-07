@@ -30,10 +30,10 @@ public class InappropriateContentService implements IInappropriateContentService
     @Override
     public InappropriateContent create(CreateInappropriateContentDto inappropriateContent) {
         InappropriateContent inappropriateContent1 = new InappropriateContent();
-        Media media= mediaRepository.findMediaById(inappropriateContent.getMediaId());
+        Media media = mediaRepository.findMediaById(inappropriateContent.getMediaId());
         List<InappropriateContent> inappropriateContentList = getAll();
-        for(InappropriateContent ic:inappropriateContentList){
-            if(ic.getMedia().equals(media) && ic.getRequestedBy().equals(inappropriateContent.getRequestedBy())){
+        for (InappropriateContent ic : inappropriateContentList) {
+            if (ic.getMedia().equals(media) && ic.getRequestedBy().equals(inappropriateContent.getRequestedBy())) {
                 throw new InvalidActionException("You have already reported this content");
             }
         }
@@ -51,9 +51,9 @@ public class InappropriateContentService implements IInappropriateContentService
     public List<CreateInappropriateContentDto> getAllWithPendingStatus() {
         List<CreateInappropriateContentDto> list = new ArrayList<>();
         List<InappropriateContent> all = getAll();
-        for(InappropriateContent ic:all)
-            if(ic.getRequestStatus().equals(RequestStatus.PENDING)){
-                CreateInappropriateContentDto createInappropriateContentDto =new CreateInappropriateContentDto();
+        for (InappropriateContent ic : all)
+            if (ic.getRequestStatus().equals(RequestStatus.PENDING)) {
+                CreateInappropriateContentDto createInappropriateContentDto = new CreateInappropriateContentDto();
                 createInappropriateContentDto.setId(ic.getId());
                 createInappropriateContentDto.setMediaId(ic.getMedia().getId());
                 createInappropriateContentDto.setRequestedBy(ic.getRequestedBy());
@@ -67,20 +67,19 @@ public class InappropriateContentService implements IInappropriateContentService
     public void reportConfirmation(ReportConfirmationDto reportConfirmationDto) {
         InappropriateContent inappropriateContent = inappropriateContentRepository.findInappropriateContentById(reportConfirmationDto.getId());
         List<InappropriateContent> inappropriateContentList = getAll();
-        if(reportConfirmationDto.getConfirmed().equals("confirmed")){
+        if (reportConfirmationDto.getConfirmed().equals("confirmed")) {
             inappropriateContent.setRequestStatus(RequestStatus.ACCEPTED);
             inappropriateContent.setRespondedBy(reportConfirmationDto.getConfirmedBy());
             inappropriateContentRepository.save(inappropriateContent);
-            for(InappropriateContent ic:inappropriateContentList){
-                if(ic.getMedia().getId().equals(inappropriateContent.getMedia().getId()) && ic.getRequestStatus().equals(RequestStatus.PENDING)){
+            for (InappropriateContent ic : inappropriateContentList) {
+                if (ic.getMedia().getId().equals(inappropriateContent.getMedia().getId()) && ic.getRequestStatus().equals(RequestStatus.PENDING)) {
                     ic.setRequestStatus(RequestStatus.DENIED);
                     ic.setRespondedBy(reportConfirmationDto.getConfirmedBy());
                     inappropriateContentRepository.save(ic);
 
                 }
             }
-        }
-        else{
+        } else {
             inappropriateContent.setRequestStatus(RequestStatus.DENIED);
             inappropriateContent.setRespondedBy(reportConfirmationDto.getConfirmedBy());
             inappropriateContentRepository.save(inappropriateContent);

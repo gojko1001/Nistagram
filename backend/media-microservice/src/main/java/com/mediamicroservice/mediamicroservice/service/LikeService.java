@@ -90,7 +90,7 @@ public class LikeService implements ILikeService {
         Logger.infoDb("Try to find likes by username: " + username);
         List<Like> likedPosts = likeRepository.findLikesByUsername(username);
         List<ImageBytesDto> imageBytesDtos = new ArrayList<>();
-        for(Like like : likedPosts){
+        for (Like like : likedPosts) {
             Post post = postService.getById(like.getPostId());
             ImageBytesDto imageBytesDto = postService.getImageFile(post);
             imageBytesDtos.add(imageBytesDto);

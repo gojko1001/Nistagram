@@ -1,15 +1,15 @@
 -- Tag
-insert into hashtag(name) values("pokemon");
-insert into hashtag(name) values("pikachu");
-insert into hashtag(name) values("life");
-insert into hashtag(name) values("photooftheday");
-insert into hashtag(name) values("fashion");
-insert into hashtag(name) values("beautiful");
-insert into hashtag(name) values("friends");
-insert into hashtag(name) values("strong");
-insert into hashtag(name) values("pineapple");
-insert into hashtag(name) values("sponge");
-insert into hashtag(name) values("marvel");
+insert into hashtag(name) values ("pokemon");
+insert into hashtag(name) values ("pikachu");
+insert into hashtag(name) values ("life");
+insert into hashtag(name) values ("photooftheday");
+insert into hashtag(name) values ("fashion");
+insert into hashtag(name) values ("beautiful");
+insert into hashtag(name) values ("friends");
+insert into hashtag(name) values ("strong");
+insert into hashtag(name) values ("pineapple");
+insert into hashtag(name) values ("sponge");
+insert into hashtag(name) values ("marvel");
 
 -- Location
 insert into location(name) values ("The Dunavska street");
@@ -112,7 +112,7 @@ insert into likes(username, liked, timestamp, post_id) values ("maja", true, "20
 insert into post_likes(post_id, likes_id) values (1, 2);
 insert into likes(username, liked, timestamp, post_id) values ("gojko", true, "2021-06-06", 2);
 insert into post_likes(post_id, likes_id) values (2, 3);
-insert into likes(username, liked, timestamp,post_id) values ("maja", true, "2021-06-03", 3);
+insert into likes(username, liked, timestamp, post_id) values ("maja", true, "2021-06-03", 3);
 insert into post_likes(post_id, likes_id) values (3, 4);
 insert into likes(username, liked, timestamp, post_id) values ("masa", true, "2021-06-03", 4);
 insert into post_likes(post_id, likes_id) values (4, 5);
@@ -141,7 +141,7 @@ insert into comment (text, username, timestamp) values ("gojko radi projekat", "
 insert into post_comments (post_id, comments_id) values (2, 3);
 insert into comment (text, username, timestamp) values ("sundjer bob kockalone haha", "masa", "2021-06-03");
 insert into post_comments (post_id, comments_id) values (3, 4);
-insert into comment (text, username, timestamp ) values ("BALONCICI BALONCICI", "tasa", "2021-06-04");
+insert into comment (text, username, timestamp) values ("BALONCICI BALONCICI", "tasa", "2021-06-04");
 insert into post_comments (post_id, comments_id) values (3, 5);
 insert into comment (text, username, timestamp) values ("majica vrednica", "gojko", "2021-06-08");
 insert into post_comments (post_id, comments_id) values (5, 6);
@@ -215,13 +215,13 @@ insert into collection_favourites (collection_id, favourites_id) values (6, 13);
 ---
 
 -- Inappropriate content
-insert into inappropriate_content(request_status, requested_by,media_id) values(0, "gojko", 2);
-insert into inappropriate_content(request_status, requested_by, media_id) values(0, "tasa", 2);
-insert into inappropriate_content(request_status, requested_by, media_id) values(0, "gojko", 4);
+insert into inappropriate_content(request_status, requested_by, media_id) values (0, "gojko", 2);
+insert into inappropriate_content(request_status, requested_by, media_id) values (0, "tasa", 2);
+insert into inappropriate_content(request_status, requested_by, media_id) values (0, "gojko", 4);
 
-insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(1, "gojko","nikola", 8);
-insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(0, "masa","nikola", 9);
-insert into inappropriate_content(request_status, requested_by, responded_by,media_id) values(2, "tasa","nikola", 5);
+insert into inappropriate_content(request_status, requested_by, responded_by, media_id) values (1, "gojko", "nikola", 8);
+insert into inappropriate_content(request_status, requested_by, responded_by, media_id) values (0, "masa", "nikola", 9);
+insert into inappropriate_content(request_status, requested_by, responded_by, media_id) values (2, "tasa", "nikola", 5);
 
 
 

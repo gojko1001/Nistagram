@@ -17,9 +17,9 @@ public class UserController {
 
     @PutMapping("/{newUsername}")
     public void changeUsername(@PathVariable String newUsername,
-                               @RequestHeader("Authorization") String jwt){
+                               @RequestHeader("Authorization") String jwt) {
         String username = jwtUtil.extractUsername(jwt);
-        if(username == null)
+        if (username == null)
             throw new UnauthorizedException("Access denied");
         userService.changeUsername(newUsername, username);
     }

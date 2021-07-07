@@ -30,8 +30,8 @@
                   <i class="fas fa-globe"></i>
                 </button>
             </li>
-            <li class="nav-item" v-if="username != null && isUserOrAgent()">
-                <button class="nav-btn">
+            <li class="nav-item" v-if="username != null && role == 'ROLE_USER'">
+                <button class="nav-btn" @click='messenger'>
                   <i class="fas fa-envelope"></i>
                 </button>
             </li>
@@ -187,8 +187,11 @@ export default {
     goToProfile(username){
       window.location.href = "/user/" + username;
     },
+    messenger: function(){
+      window.location.href = "/messenger";
+    },
     newCampaign: function(){
-      window.location.href = "/campaign"
+      window.location.href = "/campaign";
     },
     acceptRequest(username, idx){
       this.axios.put(ACCEPT_FOLLOWER_PATH + "/" + username, null, {  headers:{

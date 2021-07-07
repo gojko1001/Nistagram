@@ -19,29 +19,29 @@ public class UserTagService implements IUserTagService {
     private UserConnection userConnection;
 
     @Override
-    public UserTag save(UserTag userTag){
+    public UserTag save(UserTag userTag) {
         return userTagRepository.save(userTag);
     }
 
     @Override
-    public List<String> getUserTagsByUsername(String username){
+    public List<String> getUserTagsByUsername(String username) {
         List<String> publicUsernames = userConnection.getPublicTaggableUsers();
         List<UserDto> followingUsernames = userConnection.getFollowings(username);
         List<String> userTags = new ArrayList<>();
-        if(publicUsernames != null){
-            for(String pu : publicUsernames){
+        if (publicUsernames != null) {
+            for (String pu : publicUsernames) {
                 userTags.add(pu);
             }
         }
-        if(followingUsernames != null){
-            for(UserDto fu : followingUsernames){
-                if(!userTags.contains(fu.getUsername()) && fu.isTaggable()){
+        if (followingUsernames != null) {
+            for (UserDto fu : followingUsernames) {
+                if (!userTags.contains(fu.getUsername()) && fu.isTaggable()) {
                     userTags.add(fu.getUsername());
                 }
             }
         }
 
-        if(userTags.contains(username)){
+        if (userTags.contains(username)) {
             userTags.remove(username);
         }
 

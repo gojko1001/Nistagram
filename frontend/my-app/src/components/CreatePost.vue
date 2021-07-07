@@ -85,8 +85,8 @@ export default {
         file1: null,
         file2: null,
         description:'',
-        value: [],
-        formData:null,
+        value: [],formData
+        :null,
         filesForm: [{}],
         userTags:[]
       }

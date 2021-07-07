@@ -156,6 +156,16 @@ public class UserRelationService implements IUserRelationService {
         userService.save(user);
     }
 
+    @Override
+    public boolean isFollow(String followerUsername, String followingUsername) {
+        List<User> users = getUserFollowings(followerUsername);
+        for(User user: users){
+            if(user.getUsername().equals(followingUsername))
+                return true;
+        }
+        return false;
+    }
+
     public UserRelation findRelation(String username, String relatedUsername) {
         for (UserRelation relatedUser : findUserByUsername(username).getUserRelations())
             if (relatedUser.getRelatedUser().getUsername().equals(relatedUsername))
