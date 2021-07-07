@@ -23,7 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-    private final String UPLOAD_DIR = "profile-photos";
+    private final String PROFILE_PICS_DIR = "profile-photos";
     @Autowired
     private IUserService userService;
     @Autowired
@@ -38,7 +38,10 @@ public class UserController {
     @GetMapping("/{username}")
     public UserDto getUserByUsername(@PathVariable String username) {
         Logger.info("Get user by username", username);
-        return UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
+        UserDto userDto = UserMapper.mapUserToUserDto(userService.findUserByUsername(username));
+        if(userDto.getProfilePicPath() != null)
+            userDto.setImageBytes(FileUploadUtil.getImage(userDto.getProfilePicPath(), PROFILE_PICS_DIR));
+        return userDto;
     }
 
     @PostMapping("/find")
@@ -61,9 +64,9 @@ public class UserController {
         userService.registerUser(userReg, true);
     }
 
-    @PostMapping("/profile_pic")
+    @PostMapping("/upload_pic")
     public String uploadProfilePic(@RequestParam("file") List<MultipartFile> multipartFile) throws IOException {
-        return FileUploadUtil.saveImage(multipartFile.get(0), UPLOAD_DIR);  // TODO: Set filename to userId
+        return FileUploadUtil.saveImage(multipartFile.get(0), PROFILE_PICS_DIR);  // TODO: Set filename to userId
     }
 
     @PutMapping()

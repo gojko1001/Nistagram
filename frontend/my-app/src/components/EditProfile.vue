@@ -6,10 +6,11 @@
         <!-- User info -->
         <b-form @submit.prevent="onSubmit">
           <table class="w-100 py-2">
-            <tr><td colspan="2">
-            <img v-if="imgUrl == null" src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
-            <img v-if="imgUrl != null" :src="imgUrl" class="profilePic" alt="Profile picture">
-            <b-button v-if="file != null" @click="file = null; imgUrl = null" variant="danger" style="float:right"><i class="fa fa-trash"></i></b-button></td></tr>
+            <tr><td colspan="2" v-b-tooltip.hover title="Hint: Crop image first if it doesn't fit!">
+              <img v-if="selectedImg == null && imageBytes == null" src="../assets/user-no-picture.png" class="profilePic" alt="Profile picture">
+              <img v-if="selectedImg == null && imageBytes != null" :src="imageBytes" class="profilePic" alt="Profile picture">
+              <img v-if="selectedImg != null" :src="selectedImg" class="profilePic" alt="Profile picture">
+              <b-button v-if="file != null" @click="file = null; selectedImg = null" variant="danger" style="float:right"><i class="fa fa-trash"></i></b-button></td></tr>
             <tr><td colspan="2"><b-form-file
                             v-model="file"
                             :state="Boolean(file)"
@@ -135,7 +136,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 
 <script>
-import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH } from "./../util/constants"
+import { USER_PATH, SERVER_NOT_RESPONDING, CHANGE_PASSWORD_PATH, GET_BLOCKED_USERS_PATH, DELETE_RELATION_PATH, UPLOAD_PICTURE_PATH } from "./../util/constants"
 import { getToken, getUsernameFromToken, removeToken } from '../util/token';
 
 export default {
@@ -143,8 +144,22 @@ export default {
   data() {
       return {
         username: getUsernameFromToken(),
-        user: '',
-        privacy:{ username:getUsernameFromToken(), publicProfile:false, publicDM:false, taggable: false},
+        user: {
+          username: '',
+          fullName: '',
+          email: '',
+          phone: '',
+          webSite: '',
+          bio: '',
+          birthDate: '',
+          userGender: ''
+        },
+        privacy:{ 
+          username: getUsernameFromToken(), 
+          publicProfile: false, 
+          publicDM: false, 
+          taggable: false
+        },
         blockedUsers: [],
         resetPassword: {oldPassword:'', password:'', repeatPassword:''},
         genderOpts:[
@@ -153,7 +168,8 @@ export default {
           { text: 'Other', value: 'OTHER' }
         ],
         file: null,
-        imgUrl: null
+        selectedImg: null,
+        imageBytes: null
       }
   },
   mounted: function(){
@@ -167,12 +183,14 @@ export default {
                                                     }                                          
             }).then(response => {
                                 this.user = response.data;
+                                if(response.data.imageBytes != null)
+                                  this.imageBytes = 'data:image/jpeg;base64,' + response.data.imageBytes;
+                                this.user.imageBytes = null;
                                 this.privacy = response.data;
-            }).catch(error => { if(!error.response) {
+            }).catch(error => { if(!error.response)
                                     this.makeToast(SERVER_NOT_RESPONDING, "warning");
-                                    return
-                                }
-                                window.location.href = '/home'
+                                else
+                                  window.location.href = '/home'
             });
     this.axios.get(GET_BLOCKED_USERS_PATH + "/" + this.username, {   
                                                                   headers:{ Authorization: "Bearer " + getToken()
@@ -189,9 +207,13 @@ export default {
     },
     methods: {
         onSubmit() {
+          if(this.file == null){
+            this.updateUserInfo();
+            return;
+          }
           let toUpload = new FormData();
           toUpload.append("file", this.file)
-          this.axios.post("/user-api/user/profile_pic", toUpload)
+          this.axios.post(UPLOAD_PICTURE_PATH, toUpload)
             .then(response => { 
               this.user.profilePicPath = response.data;
               this.updateUserInfo()
@@ -204,22 +226,22 @@ export default {
         },
 
         updateUserInfo(){
-        this.axios.put(USER_PATH, this.user, {headers:{Authorization: "Bearer " + getToken()}})
-          .then(response => { console.log(response);
-                              this.makeToast("User has been updated successfully.", "success");
-                              if(this.username != this.user.username){
-                                removeToken();
-                                this.makeToast("Please login.", "info");
-                                window.location.href = "";
-                              }
-                              window.location.href = "/user/" + this.username;
-                            })
-          .catch(error => { console.log(error);
-                            if(!error.response)
-                              this.makeToast(SERVER_NOT_RESPONDING, "danger");
-                            else
-                              this.makeToast("Error while updating.", "danger");
-                            })
+          this.axios.put(USER_PATH, this.user, {headers:{Authorization: "Bearer " + getToken()}})
+            .then(response => { console.log(response);
+                                this.makeToast("User has been updated successfully.", "success");
+                                if(this.username != this.user.username){
+                                  removeToken();
+                                  this.makeToast("Please login.", "info");
+                                  window.location.href = "";
+                                }
+                                window.location.href = "/user/" + this.username;
+                              })
+            .catch(error => { console.log(error);
+                              if(!error.response)
+                                this.makeToast(SERVER_NOT_RESPONDING, "danger");
+                              else
+                                this.makeToast("Error while updating.", "danger");
+                              })
         },
 
       resetPass(){
@@ -268,10 +290,9 @@ export default {
 
       previewImage(){
         setTimeout(() => {  
-          this.imgUrl = URL.createObjectURL(this.file);
+          this.selectedImg = URL.createObjectURL(this.file);
          }, 100);
       },
-
 
       makeToast(message, variant) {
       this.$bvToast.toast(message, {
