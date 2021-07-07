@@ -46,7 +46,7 @@
 									</div>
 									<div class="msg_cotainer">
 										<span v-if="!message.link">{{message.content}}</span><br>
-										<b-button v-if="message.hasMedia && !message.viewed" v-b-modal.modal-1 @click="viewed(message)">Open</b-button>
+										<b-button v-if="message.hasMedia && !message.viewed" @click="viewed(message)">Open</b-button>
 										<span class="span-info" v-if="message.hasMedia && message.viewed">Opened</span><br/>
 										<span class="span-info" v-if="message.privateLink">Link is private</span>
 										<span v-if="!message.privateLink">{{message.link}}</span>
@@ -84,14 +84,14 @@
 					</div>
 				</div>
 			</div>
-			<b-modal id="modal-1" title="Media">
+			<b-modal ref="modal-1" id="modal-1" title="Media">
 				<div>
-					<div v-for="img in mediaMessage.imageBytes" :key="img">
-						<img v-if="img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
-						<video autoplay controls v-if="!img.isImage" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+					<div v-for="(img, q) in mediaMessage.imageBytes" :key="'D'+q">
+						<img v-if="img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
+						<video autoplay controls v-if="!img.image" v-bind:src="img.imageByte" width="400" height="400" style="display:block; margin-left:auto; margin-right:auto">
 							The video is not supported by your browser.
 						</video>
-					</div>        
+					</div>
 				</div>
             </b-modal>
 			<b-modal id="modal-2" title="Upload media">
@@ -137,6 +137,15 @@ export default {
 		
     this.axios.get('http://localhost:8762/messenger-api/' + this.username + '/').then(response => {
 		this.messages = response.data;
+		for(let i=0; i< response.data.length; i++){
+			for(let j=0; j<this.messages[i].imageBytes.length; j++){
+				if(this.messages[i].imageBytes[j].isImage){
+					this.messages[i].imageBytes[j].imageByte = 'data:image/jpeg;base64,' + this.messages[i].imageBytes[j].imageByte; 
+				}else{
+					this.messages[i].imageBytes[j].imageByte = 'data:video/mp4;base64,' + this.messages[i].imageBytes[j].imageByte;
+				}
+			}
+		}
 		console.log(response.data);
 	})
   },
@@ -167,15 +176,27 @@ export default {
 		this.message.receiver = this.receiver;
 		this.axios.post('/messenger-api', this.message).then(response => {
 			console.log(response);
+			this.message =  {
+				content: '',
+				sender: '',
+				receiver: '',
+				fileNames: [],
+			};
 		})
 	},
 
 	viewed: function(message){
 		this.mediaMessage = message;
+		console.log(this.mediaMessage);
+		this.$refs['modal-1'].show();
 		this.axios.put('/messenger-api/' + message.id).then(response => {
 			console.log(response);
 		})
 	},
+
+	hideModal() {
+        this.$refs['modal-1'].hide();
+    },
 
 	selectReceiver: function(receiverUser){
 		this.receiver = receiverUser.username;

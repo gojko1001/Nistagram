@@ -78,7 +78,7 @@ public class MessageService implements IMessageService {
             ImageByteDto imageByteDto = new ImageByteDto();
             try {
                 imageByteDto.setImageByte(IOUtils.toByteArray(new FileInputStream(in)));
-                imageByteDto.setIsImage(mediaName.getIsImage());
+                imageByteDto.setImage(mediaName.getIsImage());
                 messageDto.getImageBytes().add(imageByteDto);
             } catch (IOException e) {
                 e.printStackTrace();

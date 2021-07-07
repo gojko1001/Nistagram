@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ImageByteDto {
     private byte[] imageByte;
-    private Boolean isImage;
+    private boolean isImage;
 }
