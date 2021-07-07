@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ItemService } from 'src/app/service/item.service';
 import { ShoppingService } from 'src/app/service/shopping.service';
-import { getUsernameFromToken } from 'src/app/util/tokenUtil';
+import { getRoleFromToken, getUsernameFromToken } from 'src/app/util/tokenUtil';
 
 @Component({
   selector: 'app-discover',
@@ -59,6 +59,10 @@ export class DiscoverComponent implements OnInit {
 
   getUsername(){
     return getUsernameFromToken();
+  }
+
+  getRole(){
+    return getRoleFromToken();
   }
 
   redirectTo(uri:string){
