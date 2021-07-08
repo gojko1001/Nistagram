@@ -273,7 +273,7 @@ export default {
             this.ad = {
                 url: '',
                 description: '',
-                fileNames: []
+                fileName: ''
             }
         },
 

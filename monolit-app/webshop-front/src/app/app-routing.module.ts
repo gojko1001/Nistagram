@@ -10,6 +10,7 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ShippingInfoComponent } from './components/shipping-info/shipping-info.component';
 import { AgentShopComponent } from './components/agent-shop/agent-shop.component';
+import { AddCampaignComponent } from './components/add-campaign/add-campaign.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'/discover', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path:'create-item', component:CreateItemComponent},
   { path:'shopping-cart', component:ShoppingCartComponent},
   { path:'shipping-info', component:ShippingInfoComponent},
-  { path:'shop/:username', component:AgentShopComponent}
+  { path:'shop/:username', component:AgentShopComponent},
+  { path:'add-campaign', component:AddCampaignComponent}
 ];
 
 @NgModule({
