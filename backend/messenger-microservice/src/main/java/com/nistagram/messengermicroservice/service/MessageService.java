@@ -100,6 +100,11 @@ public class MessageService implements IMessageService {
         return messageRepository.save(message);
     }
 
+    @Override
+    public Message save(Message message) {
+        return messageRepository.save(message);
+    }
+
     private MessageDto getLink(Message message, MessageDto messageDto) {
         if (message.getContent().contains(" ")) {
             String[] results = message.getContent().split(" ");
@@ -108,14 +113,14 @@ public class MessageService implements IMessageService {
                     messageDto.setLink(res);
                     Long postId = Long.parseLong(res.split("/")[4]);
                     String username = postConnection.getUsernameById(postId);
-                    messageDto.setPrivateLink(userConnection.isPublic(username));
+                    messageDto.setPrivateLink(!userConnection.isPublic(username));
                 }
             }
         } else if (message.getContent().contains(link)) {
             messageDto.setLink(message.getContent());
             Long postId = Long.parseLong(message.getContent().split("/")[4]);
             String username = postConnection.getUsernameById(postId);
-            messageDto.setPrivateLink(userConnection.isPublic(username));
+            messageDto.setPrivateLink(!userConnection.isPublic(username));
         }
         return messageDto;
     }

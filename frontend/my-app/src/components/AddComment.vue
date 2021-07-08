@@ -124,6 +124,8 @@ export default {
   mounted: function(){
     this.postId = this.$route.params.id;
     this.username = getUsernameFromToken();
+    if(!this.username)
+      window.location.href = "/login";
     this.axios.get('/media-api/image/' + this.postId)
         .then(response => { this.img = response.data;
                             for(let i=0; i<this.img.imageBytes.length; i++){

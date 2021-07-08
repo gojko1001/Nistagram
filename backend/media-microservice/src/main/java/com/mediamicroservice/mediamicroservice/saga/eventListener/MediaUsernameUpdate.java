@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UsernameUpdateDone {
-    private final static String DONE_UPDATE_QUEUE = "done-update-username-queue";
+public class MediaUsernameUpdate {
+    private final static String MEDIA_UPDATE_QUEUE = "media-update-username-queue";
 
     private final RabbitTemplate rabbitTemplate;
-    private final Queue queue = new Queue(DONE_UPDATE_QUEUE);
+    private final Queue queue = new Queue(MEDIA_UPDATE_QUEUE);
 
     public void sendMessageToNewUpdate(UpdateUsernameEvent event) {
         String text = "{}";

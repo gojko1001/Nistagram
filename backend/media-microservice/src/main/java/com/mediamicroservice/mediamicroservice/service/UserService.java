@@ -4,13 +4,13 @@ import com.mediamicroservice.mediamicroservice.domain.*;
 import com.mediamicroservice.mediamicroservice.repository.*;
 import com.mediamicroservice.mediamicroservice.saga.event.GetUsernameEvent;
 import com.mediamicroservice.mediamicroservice.saga.event.MessageFactory;
-import com.mediamicroservice.mediamicroservice.saga.event.UpdateUsernameEvent;
 import com.mediamicroservice.mediamicroservice.saga.eventListener.CancelUpdateListener;
-import com.mediamicroservice.mediamicroservice.saga.eventListener.UsernameUpdateDone;
+import com.mediamicroservice.mediamicroservice.saga.eventListener.MediaUsernameUpdate;
 import com.mediamicroservice.mediamicroservice.service.interfaces.IUserService;
 import com.mediamicroservice.mediamicroservice.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,12 +31,13 @@ public class UserService implements IUserService {
     @Autowired
     private JwtUtil jwtUtil;
     @Autowired
-    private UsernameUpdateDone usernameUpdateDone;
+    private MediaUsernameUpdate usernameUpdateDone;
     @Autowired
     private CancelUpdateListener cancelUpdateListener;
 
 
     @Override
+    @Transactional
     public void changeUsername(String newUsername, String oldUsername) {
         for (Collection coll : collectionRepository.findCollectionsByUsername(oldUsername)) {
             coll.setUsername(newUsername);
@@ -69,6 +70,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void updateUsername(GetUsernameEvent event) {
         try{
             changeUsername(event.getNewUsername(), event.getOldUsername());
@@ -80,6 +82,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void cancelUpdateUsername(GetUsernameEvent event) {
         String oldUsername = event.getOldUsername();
 

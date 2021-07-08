@@ -22,6 +22,7 @@ import com.nistagram.usermicroservice.user.service.interfaces.IUserService;
 import com.nistagram.usermicroservice.verify_account.domain.VerificationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,7 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    @Transactional
     public User updateUser(User user, String oldUsername, String jwt) {
         if (!checkUsername(user.getUsername())) {
             throw new BadRequestException("New username doesn't match the pattern!");
@@ -197,6 +199,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void cancelUpdateUsername(GetUsernameEvent event) {
         User user = userRepository.findByUsername(event.getOldUsername());
         User updatedUser = userRepository.findByUsername(event.getNewUsername());
@@ -207,6 +210,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public void doneUpdateUsername(GetUsernameEvent event) {
         User user = userRepository.findByUsername(event.getOldUsername());
         if(user != null){
