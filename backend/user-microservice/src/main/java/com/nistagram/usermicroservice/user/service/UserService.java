@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice.user.service;
 
+import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.connection.AuthConnection;
 import com.nistagram.usermicroservice.connection.MediaConnection;
 import com.nistagram.usermicroservice.exception.AlreadyExistsException;
@@ -7,6 +8,10 @@ import com.nistagram.usermicroservice.exception.BadRequestException;
 import com.nistagram.usermicroservice.exception.InvalidActionException;
 import com.nistagram.usermicroservice.exception.NotFoundException;
 import com.nistagram.usermicroservice.logger.Logger;
+import com.nistagram.usermicroservice.saga.event.GetUsernameEvent;
+import com.nistagram.usermicroservice.saga.event.MessageFactory;
+import com.nistagram.usermicroservice.saga.event.UpdateUsernameEvent;
+import com.nistagram.usermicroservice.saga.eventListener.NewUpdateListener;
 import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.controller.mapper.UserMapper;
@@ -31,6 +36,8 @@ public class UserService implements IUserService {
     private AuthConnection authConnection;
     @Autowired
     private MediaConnection mediaConnection;
+    @Autowired
+    private NewUpdateListener newUpdateListener;
 
     public List<User> getAll() {
         Logger.infoDb("Read all users from database.");
@@ -86,7 +93,7 @@ public class UserService implements IUserService {
         }
         if (userRepository.findByUsername(user.getUsername()) != null && !user.getUsername().equals(oldUsername))
             throw new InvalidActionException("User with username: " + user.getUsername() + " already exists!");
-        User dbUser = findUserByUsername(oldUsername);
+        User dbUser = userRepository.findByUsername(oldUsername);
         dbUser.setUsername(user.getUsername());
         dbUser.setProfilePicPath(user.getProfilePicPath());
         dbUser.setFullName(user.getFullName());
@@ -101,8 +108,9 @@ public class UserService implements IUserService {
         dbUser.setTaggable(user.isTaggable());
 
         if (!user.getUsername().equals(oldUsername)) {
-            authConnection.changeUsername(user.getUsername(), jwt);
-            mediaConnection.changeUsername(user.getUsername(), jwt);
+            newUpdateListener.sendMessageToNewUpdate(MessageFactory.createUpdateUsernameMessage(user.getUsername(), oldUsername));
+//            authConnection.changeUsername(user.getUsername(), jwt);
+//            mediaConnection.changeUsername(user.getUsername(), jwt);
         }
         return save(dbUser);
     }
@@ -186,6 +194,25 @@ public class UserService implements IUserService {
                 users.add(user);
         }
         return users;
+    }
+
+    @Override
+    public void cancelUpdateUsername(GetUsernameEvent event) {
+        User user = userRepository.findByUsername(event.getOldUsername());
+        User updatedUser = userRepository.findByUsername(event.getNewUsername());
+        if(user == null && updatedUser != null){
+            updatedUser.setUsername(event.getOldUsername());
+            userRepository.save(updatedUser);
+        }
+    }
+
+    @Override
+    public void doneUpdateUsername(GetUsernameEvent event) {
+        User user = userRepository.findByUsername(event.getOldUsername());
+        if(user != null){
+            user.setUsername(event.getNewUsername());
+            userRepository.save(user);
+        }
     }
 
     private void verifyUserInput(UserRegistrationDto userReg) {

@@ -1,5 +1,6 @@
 package com.nistagram.usermicroservice.user.controller;
 
+import com.nistagram.usermicroservice.JwtUtil;
 import com.nistagram.usermicroservice.exception.UnauthorizedException;
 import com.nistagram.usermicroservice.logger.Logger;
 import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
@@ -27,8 +28,8 @@ public class UserController {
     private final String PROFILE_PICS_DIR = "profile-photos";
     @Autowired
     private IUserService userService;
-    //@Autowired
-    //private JwtUtil jwtUtil;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping
     public List<UserDto> getAll() {
@@ -73,8 +74,7 @@ public class UserController {
     @PutMapping()
     public UserDto updateProfile(@RequestBody UserDto userDto,
                                  @RequestHeader("Authorization") String jwt) {
-        // String username = jwtUtil.extractUsername(jwt);
-        String username = "";
+        String username = jwtUtil.extractUsername(jwt);
         if (username == null)
             throw new UnauthorizedException("Access denied");
         Logger.info("Try to edit user: " + username, userDto.getUsername());

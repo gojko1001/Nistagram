@@ -1,5 +1,7 @@
 package com.nistagram.usermicroservice.user.service.interfaces;
 
+import com.nistagram.usermicroservice.saga.event.GetUsernameEvent;
+import com.nistagram.usermicroservice.saga.event.UpdateUsernameEvent;
 import com.nistagram.usermicroservice.user.controller.dto.AgentDto;
 import com.nistagram.usermicroservice.user.controller.dto.UserRegistrationDto;
 import com.nistagram.usermicroservice.user.domain.User;
@@ -42,4 +44,8 @@ public interface IUserService {
     Boolean isPublic(String username);
 
     List<User> getChatUsers(String username);
+
+    void cancelUpdateUsername(GetUsernameEvent event);
+
+    void doneUpdateUsername(GetUsernameEvent event);
 }
