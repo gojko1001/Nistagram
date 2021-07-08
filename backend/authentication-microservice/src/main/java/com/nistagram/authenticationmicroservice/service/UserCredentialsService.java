@@ -10,11 +10,17 @@ import com.nistagram.authenticationmicroservice.exception.NotFoundException;
 import com.nistagram.authenticationmicroservice.exception.UnauthorizedException;
 import com.nistagram.authenticationmicroservice.logger.Logger;
 import com.nistagram.authenticationmicroservice.repoistory.IUserCredentialsRepository;
+import com.nistagram.authenticationmicroservice.saga.event.GetUsernameEvent;
+import com.nistagram.authenticationmicroservice.saga.event.MessageFactory;
+import com.nistagram.authenticationmicroservice.saga.event.UpdateUsernameEvent;
+import com.nistagram.authenticationmicroservice.saga.eventListener.AuthUpdateUsernameListener;
+import com.nistagram.authenticationmicroservice.saga.eventListener.CancelUpdateListener;
 import com.nistagram.authenticationmicroservice.security.JwtService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,6 +44,10 @@ public class UserCredentialsService implements IUserCredentialsService {
     private UserConnection userConnection;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private AuthUpdateUsernameListener updateUsernameListener;
+    @Autowired
+    private CancelUpdateListener cancelUpdateListener;
 
     @Override
     public UserCredentials findByUsername(String username) {
@@ -57,9 +67,9 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentials.setPassword(passwordEncoder.encode(userCredentialsDto.getPassword()));
         userCredentials.setRoles(roleService.findByName("ROLE_USER"));
         userCredentials.setVerified(false);
-        try{
+        try {
             userConnection.registerUser(userCredentialsDto);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new BadRequestException("Unsuccessfully added user!");
         }
         Logger.infoDb("Try to save user credentials with username: " + userCredentials.getUsername());
@@ -73,9 +83,9 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentials1.setPassword(passwordEncoder.encode(userCredentials.getPassword()));
         userCredentials1.setRoles(roleService.findByName("ROLE_AGENT"));
         userCredentials1.setVerified(false);
-        try{
-           userConnection.registerAgent(userCredentials);
-        }catch (Exception e){
+        try {
+            userConnection.registerAgent(userCredentials);
+        } catch (Exception e) {
             throw new BadRequestException("Unsuccessfully added user!");
         }
         Logger.infoDb("Try to save user credentials with username: " + userCredentials.getUsername());
@@ -90,7 +100,7 @@ public class UserCredentialsService implements IUserCredentialsService {
             throw new BadRequestException("Username or password is not correct.");
         if (!userCredentials.getVerified())
             throw new InvalidActionException("The account must be verified.");
-        if(userCredentials.getIsDeactivated())
+        if (userCredentials.getIsDeactivated())
             throw new InvalidActionException("Your account is deactivated by admin");
         return userCredentials;
     }
@@ -110,9 +120,9 @@ public class UserCredentialsService implements IUserCredentialsService {
         userCredentialsDto.setUsername(userCredentials.getUsername());
         userCredentialsDto.setFullName(loginGoogleDto.getName());
         userCredentialsDto.setEmail(loginGoogleDto.getEmail());
-        try{
+        try {
             userConnection.registerGoogleUser(userCredentialsDto);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new BadRequestException("Unsuccessfully added user!");
         }
 //        emailService.resetPassword(user); TODO: Notification microservice
@@ -124,10 +134,10 @@ public class UserCredentialsService implements IUserCredentialsService {
     public List<String> findCredentialsByRoleUserAndAgent() {
         List<UserCredentials> userCredentials = userCredentialsRepository.findAll();
         List<String> userCredentials1 = new ArrayList<>();
-        for(UserCredentials uc:userCredentials){
-            if(!uc.getIsDeactivated()){
+        for (UserCredentials uc : userCredentials) {
+            if (!uc.getIsDeactivated()) {
                 Collection<Role> roles = uc.getRoles();
-                for(Role r:roles) {
+                for (Role r : roles) {
                     if (r.getName().equals("ROLE_USER") || r.getName().equals("ROLE_AGENT")) {
                         userCredentials1.add(uc.getUsername());
                     }
@@ -140,23 +150,23 @@ public class UserCredentialsService implements IUserCredentialsService {
     }
 
     @Override
-    public void changeUsername(String oldUsername, String newUsername){
+    public void changeUsername(String oldUsername, String newUsername) {
         UserCredentials credentials = findByUsername(oldUsername);
         credentials.setUsername(newUsername);
         userCredentialsRepository.save(credentials);
     }
 
     @Override
-    public void changePassword(ResetPasswordDto resetPasswordDto, String jwt){
+    public void changePassword(ResetPasswordDto resetPasswordDto, String jwt) {
         String username = jwtService.extractUsername(jwt.substring(7));
-        if(username == null){
+        if (username == null) {
             throw new UnauthorizedException("Bad credentials!");
         }
         login(username, resetPasswordDto.getOldPassword());
-        if(!resetPasswordDto.getPassword().equals(resetPasswordDto.getRepeatPassword()))
+        if (!resetPasswordDto.getPassword().equals(resetPasswordDto.getRepeatPassword()))
             throw new BadRequestException("Repeated password is incorrect!");
         blackListService.isBlacklisted(resetPasswordDto.getPassword());
-        if(!passwordPatternChecker(resetPasswordDto.getPassword()))
+        if (!passwordPatternChecker(resetPasswordDto.getPassword()))
             throw new BadRequestException("Password is too weak");
 
         UserCredentials user = userCredentialsRepository.findByUsername(username);
@@ -202,6 +212,43 @@ public class UserCredentialsService implements IUserCredentialsService {
         return "Your account has been verified successfully";
     }
 
+    @Override
+    @Transactional
+    public void newUpdateUsername(GetUsernameEvent event) {
+        UserCredentials credentials = findByUsername(event.getOldUsername());
+        credentials.setUsername(event.getNewUsername());
+
+        try {
+            userCredentialsRepository.save(credentials);
+            updateUsernameListener.sendMessageToNewUpdate(
+                    MessageFactory.createUpdateUsernameMessage(event.getNewUsername(), event.getOldUsername()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            cancelUpdateListener.sendMessageToNewUpdate(
+                    MessageFactory.createUpdateUsernameMessage(event.getNewUsername(), event.getOldUsername()));
+        }
+    }
+
+    @Override
+    @Transactional
+    public void usernameUpdateDone(GetUsernameEvent event) {
+        UserCredentials userCredentials = findByUsername(event.getNewUsername());
+        UserCredentials user = findByUsername(event.getOldUsername());
+        if (userCredentials == null && user != null) {
+            user.setUsername(event.getNewUsername());
+            userCredentialsRepository.save(user);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void cancelUpdateUsername(GetUsernameEvent event) {
+        UserCredentials userCredentials = findByUsername(event.getNewUsername());
+        if (userCredentials != null) {
+            userCredentials.setUsername(event.getOldUsername());
+            userCredentialsRepository.save(userCredentials);
+        }
+    }
 
     private boolean passwordPatternChecker(String password) {
         Pattern patternPass = Pattern.compile("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@*:%-_#.&;,+])(?=\\S+$).{8,}");

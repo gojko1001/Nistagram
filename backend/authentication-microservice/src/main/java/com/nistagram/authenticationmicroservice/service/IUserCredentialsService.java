@@ -5,6 +5,8 @@ import com.nistagram.authenticationmicroservice.dto.LoginGoogleDto;
 import com.nistagram.authenticationmicroservice.dto.ResetPasswordDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsAgentDto;
 import com.nistagram.authenticationmicroservice.dto.UserCredentialsDto;
+import com.nistagram.authenticationmicroservice.saga.event.GetUsernameEvent;
+import com.nistagram.authenticationmicroservice.saga.event.UpdateUsernameEvent;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +25,7 @@ public interface IUserCredentialsService {
 
     List<String> findCredentialsByRoleUserAndAgent();
 
-    void changeUsername(String oldUsername, String newUsername);
+    void changeUsername(String newUsername, String jwt);
 
     void changePassword(ResetPasswordDto resetPasswordDto, String jwt);
 
@@ -34,4 +36,10 @@ public interface IUserCredentialsService {
     void deactivateProfile(String username);
 
     String verifyAccount(String username);
+
+    void newUpdateUsername(GetUsernameEvent event);
+
+    void usernameUpdateDone(GetUsernameEvent event);
+
+    void cancelUpdateUsername(GetUsernameEvent event);
 }
