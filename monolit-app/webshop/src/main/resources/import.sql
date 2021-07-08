@@ -2,6 +2,11 @@
 insert into roles (id, name) values (1, "ROLE_USER");
 insert into roles (id, name) values (2, "ROLE_AGENT");
 
+-- Permissions
+insert into permission (id, name) values (10, 'CREATE_CAMPAIGN');
+
+insert into roles_permission (role_id, permission_id) values (2, 10);
+
 
 -- Agents
 insert into app_user (username, full_name, email, phone, web_site, bio) values ('zara', 'Zara Official', 'zara@mailinator.com', '062/133-05-55', 'https://www.zara.com', 'Zara Official Website');

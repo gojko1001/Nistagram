@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { CampaignService } from 'src/app/service/campaign.service';
 import { getRoleFromToken, getUsernameFromToken } from 'src/app/util/tokenUtil';
 
 @Component({
@@ -49,7 +50,8 @@ export class AddCampaignComponent implements OnInit {
   constructor(private toastrService: ToastrService,
               private datePipe: DatePipe,
               private modalService: NgbModal,
-              private router: Router) { }
+              private router: Router,
+              private campaignService: CampaignService) { }
 
   ngOnInit(): void {
     if(getRoleFromToken() != 'ROLE_AGENT')
@@ -88,7 +90,13 @@ export class AddCampaignComponent implements OnInit {
       }
         this.campaign.startDate = this.campaign.startDate + " " + this.formatTime();
     }
-    
+
+    // TODO: Add images to server
+    this.campaignService.createCampaign(this.campaign).subscribe(() => {
+      this.toastrService.success("Campaign made successfully");
+    }, err => {
+      this.toastrService.error("Something went wrong while creating campaign");
+    })
   }
 
   addAd(){
