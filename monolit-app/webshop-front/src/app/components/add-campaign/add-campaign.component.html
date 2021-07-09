@@ -144,14 +144,8 @@
                 <label class="form-check-label">Other</label>
             </div>
             <br>
-            <b>HashTags</b> <!-- TODO: hashtags input-->
-            <!-- <b-form-tags
-                [(ngModel)]="targetedAudience.hashtags"
-                tag-variant="primary"
-                tag-pills
-                separator=" "
-                placeholder="Enter new tags separated by space"
-            ></b-form-tags> -->
+            <b>HashTags</b>
+            <textarea [(ngModel)]="hashtags" type="text" id="hashtags" placeholder="Enter tags separated by space" rows="3" class="form-control"></textarea>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-success" (click)="addAudience()">Add</button>

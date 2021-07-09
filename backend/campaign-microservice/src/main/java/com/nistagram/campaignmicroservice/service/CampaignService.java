@@ -17,6 +17,9 @@ import com.nistagram.campaignmicroservice.service.interfaces.ICampaignService;
 import com.nistagram.campaignmicroservice.service.interfaces.ITargetAudienceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 public class CampaignService implements ICampaignService {
@@ -60,6 +63,12 @@ public class CampaignService implements ICampaignService {
             targetAudienceService.save(audience);
         }
     }
+
+    @Override
+    public List<String> uploadImages(List<MultipartFile> multipartFiles) {
+        return mediaConnection.saveImage(multipartFiles);
+    }
+
 
     private void validateInput(CampaignDto campaignDto){
         if(campaignDto.getTermType() == TermType.LONG_TERM && campaignDto.getStartDate().after(campaignDto.getEndDate()))

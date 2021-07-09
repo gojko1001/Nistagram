@@ -41,6 +41,7 @@ export class AddCampaignComponent implements OnInit {
   isLongTerm: boolean = false;
   time: any = {hours: '', minutes: ''};
   duration: number = 1;
+  hashtags: string = '';
   gender = {
        male: false,
        female: false,
@@ -91,12 +92,23 @@ export class AddCampaignComponent implements OnInit {
         this.campaign.startDate = this.campaign.startDate + " " + this.formatTime();
     }
 
+    this.imagesToUpload = new FormData();
+    for(let file of this.files)
+        this.imagesToUpload.append("file", file);
+
     // TODO: Add images to server
+    this.campaignService.uploadImages(this.imagesToUpload).subscribe(data => {
+      this.toastrService.success("Files added successfully")    
+    }, err => {
+      this.toastrService.error("Something went wrong while creating campaign");
+    })
+
     this.campaignService.createCampaign(this.campaign).subscribe(() => {
       this.toastrService.success("Campaign made successfully");
     }, err => {
       this.toastrService.error("Something went wrong while creating campaign");
     })
+    
   }
 
   addAd(){
@@ -121,6 +133,7 @@ export class AddCampaignComponent implements OnInit {
     this.file = event.target.files[0];
   }
 
+
   removeAd(i: number){
     this.campaign.ads.splice(i, 1);
     this.files.splice(i, 1);
@@ -137,6 +150,8 @@ export class AddCampaignComponent implements OnInit {
       this.targetedAudience.genders.push("FEMALE");
     if(this.gender.other)
       this.targetedAudience.genders.push("OTHER");
+    for(let tag of this.hashtags.split(' '))
+      this.targetedAudience.hashtags.push(tag);
     this.campaign.audiences.push(this.targetedAudience);
     this.targetedAudience = {
         fromAge: 15,
@@ -145,6 +160,7 @@ export class AddCampaignComponent implements OnInit {
         genders: new Array()
     }
     this.gender = {male: false, female: false, other: false}
+    this.hashtags = '';
 }
 
   removeAudience(i: number){

@@ -43,7 +43,7 @@ public class PostController {
         for (MultipartFile mf : multipartFiles) {
             String fileName = StringUtils.cleanPath(mf.getOriginalFilename().replaceAll("\\s", ""));
             uploadDir = "user-photos";
-            FileUploadUtil.saveFile(uploadDir, fileName, mf);       // TODO: Generate new filename to aviod name conflicts
+            FileUploadUtil.saveFile(uploadDir, fileName, mf);       // TODO: Generate new filename to avoid name conflicts
             fileNames.add(fileName);
         }
         return fileNames;
