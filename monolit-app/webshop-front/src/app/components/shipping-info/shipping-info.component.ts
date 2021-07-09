@@ -39,8 +39,8 @@ export class ShippingInfoComponent implements OnInit {
       this.toastrService.success("Successfully ordered.");
       console.log(data)
       this.router.navigate(['/discover']);
-    }, error => {
-      this.toastrService.error("Error occurred.");
+    }, (error:any) => {
+      this.toastrService.error(error.error);
     });
   }
 
