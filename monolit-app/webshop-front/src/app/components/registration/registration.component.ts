@@ -30,8 +30,14 @@ export class RegistrationComponent implements OnInit {
     this.userService.register(this.registrationDto).subscribe(data => {
       this.toastrService.success("You have been registered successfully!");
       this.router.navigate(['/login']);
-    }, error => {
-      this.toastrService.error("Something went wrong. Please check your input!");
+    }, ( error : any) => {
+      if(error.status == 200){
+        this.toastrService.success("You have been registered successfully!");
+        this.router.navigate(['/login']);
+      }else{
+        this.toastrService.error("Something went wrong. Please check your input!");
+      }
+      
     });
   }
 

@@ -63,6 +63,8 @@ public class AgentRequestService implements IAgentRequestService{
         UserCredentials userCredentials = userCredentialsService.findByUsername(agentRequest.getUsername());
         Collection<Role> roles = userCredentials.getRoles();
         Role role = roleService.findByName("ROLE_AGENT");
+        Role role1 = roleService.findByName("ROLE_USER");
+        roles.remove(role1);
         roles.add(role);
         userCredentialsRepository.save(userCredentials);
 

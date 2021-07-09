@@ -1,9 +1,9 @@
 package com.agent.webshop.controller;
 
 import com.agent.webshop.controller.dto.OrderDto;
-import com.agent.webshop.domain.Order;
 import com.agent.webshop.service.interfaces.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,7 +14,7 @@ public class OrderController {
     private IOrderService orderService;
 
     @PostMapping
-    public Order create(@RequestBody OrderDto orderDto){
+    public ResponseEntity create(@RequestBody OrderDto orderDto){
         return orderService.create(orderDto);
     }
 

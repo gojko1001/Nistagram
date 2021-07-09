@@ -23,4 +23,6 @@ public interface IMessageService {
     void deleteMessage(Long id);
 
     Message changeRequest(Long id);
+
+    Message save(Message message);
 }

@@ -93,7 +93,7 @@ public class UserCredentialsController {
         String username = jwtService.extractUsername(jwt.substring(7));
         if(username == null)
             throw new UnauthorizedException("Access denied");
-        userCredentialsService.changeUsername(username, newUsername);
+        userCredentialsService.changeUsername(newUsername, jwt);
     }
 
     @PutMapping("/reset_password/{jwt:.+}")
