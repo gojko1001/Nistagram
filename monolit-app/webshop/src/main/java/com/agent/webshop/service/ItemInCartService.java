@@ -6,6 +6,8 @@ import com.agent.webshop.service.interfaces.IItemInCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemInCartService implements IItemInCartService {
     @Autowired
@@ -21,5 +23,10 @@ public class ItemInCartService implements IItemInCartService {
 
     @Override
     public void delete(ItemInCart itemInCart){ itemInCartRepository.delete(itemInCart);}
+
+    @Override
+    public List<ItemInCart> findAll(){
+        return itemInCartRepository.findAll();
+    }
 
 }
