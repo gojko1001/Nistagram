@@ -15,11 +15,15 @@ import com.nistagram.campaignmicroservice.repository.ICampaignRepository;
 import com.nistagram.campaignmicroservice.service.interfaces.IAdService;
 import com.nistagram.campaignmicroservice.service.interfaces.ICampaignService;
 import com.nistagram.campaignmicroservice.service.interfaces.ITargetAudienceService;
+import com.nistagram.campaignmicroservice.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CampaignService implements ICampaignService {
@@ -31,6 +35,7 @@ public class CampaignService implements ICampaignService {
     private ITargetAudienceService targetAudienceService;
     @Autowired
     private MediaConnection mediaConnection;
+
 
     @Override
     public Campaign findById(Long id) {
@@ -65,10 +70,42 @@ public class CampaignService implements ICampaignService {
     }
 
     @Override
+    public List<Long> getAdvertisements(String username, CampaignType type) {
+        Set<Long> mediaToDisplayId = new HashSet<>();
+        for(Campaign campaign : campaignRepository.findCampaignsByType(type)){
+            if(campaign.getType() != type)
+                continue;
+            if(!campaign.getTargetAudience().isEmpty() &&
+               !targetAudienceService.isUserTargetedAudience(username, campaign.getTargetAudience()))
+                continue;
+
+            if(campaign.getTermType() == TermType.SHORT_TERM && campaign.getStartDate().after(new Date())
+                && campaign.getStartDate().before(DateTimeUtil.addMinutes(new Date(), 30))){
+                mediaToDisplayId.addAll(getMediaIds(campaign.getAds()));
+            }
+            if(campaign.getTermType() == TermType.LONG_TERM && campaign.getStartDate().before(new Date()) && campaign.getEndDate().after(new Date())){
+                for(String time : DateTimeUtil.getDayParts(campaign.getPerDay())){
+                    Date d = DateTimeUtil.mergeDateAndTime(new Date(), DateTimeUtil.getDateFromString(time));
+                    if(d.after(new Date()) && d.before(DateTimeUtil.addMinutes(new Date(),10))){
+                        mediaToDisplayId.addAll(getMediaIds(campaign.getAds()));
+                    }
+                }
+            }
+        }
+        return (List<Long>) mediaToDisplayId;
+    }
+
+    @Override
     public List<String> uploadImages(List<MultipartFile> multipartFiles) {
         return mediaConnection.saveImage(multipartFiles);
     }
 
+    private List<Long> getMediaIds(List<Ad> ads){
+        Set<Long> ids = new HashSet<>();
+        for(Ad ad : ads)
+            ids.add(ad.getMediaId());
+        return (List<Long>) ids;
+    }
 
     private void validateInput(CampaignDto campaignDto){
         if(campaignDto.getTermType() == TermType.LONG_TERM && campaignDto.getStartDate().after(campaignDto.getEndDate()))

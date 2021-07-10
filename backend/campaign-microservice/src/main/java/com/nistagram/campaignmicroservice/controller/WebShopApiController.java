@@ -1,6 +1,6 @@
 package com.nistagram.campaignmicroservice.controller;
 
-import com.nistagram.campaignmicroservice.JwtUtil;
+import com.nistagram.campaignmicroservice.util.JwtUtil;
 import com.nistagram.campaignmicroservice.controller.dto.CampaignDto;
 import com.nistagram.campaignmicroservice.exception.UnauthorizedException;
 import com.nistagram.campaignmicroservice.service.interfaces.ICampaignService;

@@ -17,8 +17,13 @@ public class TagController {
 
     @GetMapping
     public List<Hashtag> getAll() {
-        Logger.info("Get alll tags.", "");
+        Logger.info("Get all tags.", "");
         return tagService.getAll();
+    }
+
+    @GetMapping("/{username}")
+    public List<Hashtag> getLoggedUsersHashtags(@PathVariable String username){
+        return tagService.getHashtagsByUsername(username);
     }
 
     @PostMapping

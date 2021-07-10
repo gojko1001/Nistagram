@@ -27,7 +27,7 @@ public class Campaign {
     @Column
     private int perDay;
     @Column
-    private boolean active = false;
+    private Boolean active = false;
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
     private List<Ad> ads;
     @OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)

@@ -1,4 +1,4 @@
-package com.nistagram.campaignmicroservice;
+package com.nistagram.campaignmicroservice.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
