@@ -59,8 +59,8 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public List<Item> getItemsByUsername(String username){
-        return itemRepository.findItemsByUsername(username);
+    public List<ImageBytesDto> getItemsByUsername(String username){
+        return getImagesFiles(itemRepository.findItemsByUsername(username));
     }
 
     @Override
@@ -105,6 +105,5 @@ public class ItemService implements IItemService {
         // TODO: obrisi taj item u svim korpama
         return new ResponseEntity("Item has been deleted.", HttpStatus.OK);
     }
-
 
 }

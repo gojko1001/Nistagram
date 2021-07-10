@@ -15,3 +15,6 @@ export const ADD_ITEM_PATH = SHOPPING_CART_PATH + '/add';
 export const DELETE_ITEM_PATH = SHOPPING_CART_PATH + '/delete';
 
 export const ORDER_PATH = BACKEND_PATH + '/order';
+
+export const CAMPAIGN_PATH = BACKEND_PATH + '/campaign'
+export const UPLOAD_IMAGE_PATH = CAMPAIGN_PATH + '/upload_img'

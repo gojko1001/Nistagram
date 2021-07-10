@@ -1,0 +1,155 @@
+<div id="form">
+    <h1>New Campaign</h1>
+    <br>
+    <!-- Basic campaign info -->
+    <span style="font-size:20px; font-weight:bold">Basic info</span> <hr>
+    <table class="w-100 py-2">
+        <tr>
+        <td class="right">Campaign type:</td>
+        <td>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="campType" id="post" value="POST" [(ngModel)]="campaign.campaignType">
+                <label class="form-check-label" for="inlineRadio1">Post</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="campType" id="story" value="STORY" [(ngModel)]="campaign.campaignType">
+                <label class="form-check-label" for="inlineRadio2">Story</label>
+            </div>
+        </td></tr>
+        <tr><td></td>
+        <td>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox"
+                [checked]="isLongTerm"
+                (change)="isLongTerm = !isLongTerm"
+                id="termType">
+                <label class="form-check-label" style="float: left;" for="termType">Long term</label>
+            </div>
+        </td></tr>
+        <tr><td class="right">Start date:</td>
+        <td>
+            <input type="date" id="startDate" [(ngModel)]="campaign.startDate" :min="minDate" class="mb-2">
+            <!-- <form class="form-inline d-flex justify-content-center">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="startDate" ngbDatepicker
+                            #d="ngbDatepicker">
+                        <div class="input-group-append" style="height: 10px;">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
+                        </div>
+                    </div>
+                </div>
+            </form> -->
+        </td></tr>
+        <tr *ngIf="!isLongTerm"><td class="right">Choose a time:</td>
+        <td>     
+            <!-- <ngb-timepicker [minuteStep]="15" [(ngModel)]="time" name="timepicker" class="d-flex justify-content-center"></ngb-timepicker>    -->
+            <!-- <b-form-timepicker [(ngModel)]="time" locale="rs" placeholder="Choose a time"></b-form-timepicker> -->
+            <input type="number" [(ngModel)]="time.hours" name="time" placeholder="HH" min="0" max="23" class="form-control"> : 
+            <input type="number" [(ngModel)]="time.minutes" name="time" placeholder="mm" min="0" max="59" class="form-control">
+        </td></tr>
+        <tr *ngIf="isLongTerm"><td class="right">Duration:</td>
+        <td><input [(ngModel)]="duration" type="number" id="duration" min="1" class="form-control"></td></tr>
+        <tr *ngIf="isLongTerm"><td class="right">Display per day:</td>
+        <td><input [(ngModel)]="campaign.perDay" type="number" id="perDay" min="1" max="24" class="form-control"></td></tr>
+    </table>
+    
+    <br>
+
+    <!-- Ads -->
+    <div id="ads">
+        <span style="font-size:20px; font-weight:bold">Advertisments</span>
+        <button class="btn btn-outline-success" style="float:right" (click)="open(adModal)"><i class="fa fa-plus"></i></button>
+        <hr>
+        <div *ngFor="let ad of campaign.ads, index as i" class="left">
+            <button size="sm" class="btn btn-outline-danger" style="float:right" (click)="removeAd(i)"><i class="fa fa-trash"></i></button>
+            <span><i>File:</i> {{ad.fileName}}</span>
+            <span *ngIf="ad.description != ''"><br><i>Description:</i> {{ad.description}} </span>
+            <span *ngIf="ad.url != ''"><br><i>Link:</i> {{ad.url}}</span>
+            <hr>
+        </div>
+    </div>
+    <br>
+
+    <!-- Targeted audience -->
+    <div id="audiences">
+            <span style="font-size:20px; font-weight:bold">Target Audience</span>
+            <button class="btn btn-outline-success" style="float:right" (click)="open(audienceModal)"><i class="fa fa-plus"></i></button>
+            <hr>
+            <div *ngFor="let audience of campaign.audiences, index as i" class="left">
+                <button size="sm" class="btn btn-outline-danger" style="float:right" (click)="removeAudience(i)"><i class="fa fa-trash"></i></button>
+                <span>{{audience.fromAge}} - {{audience.toAge}} yo</span>
+                <span *ngFor="let gender of audience.genders, index as k"> | {{gender.toLowerCase()}} </span> <br>
+                <span *ngFor="let tag of audience.hashtags, index as l"> #{{tag}} </span>
+                <hr>
+            </div>
+    </div>
+    
+    <br>
+    <button type="submit" class="btn btn-primary" style="width:200px;" (click)="createCampaign()">Save changes</button><br>
+    
+    <!-- Ad modal -->
+    <ng-template #adModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="ad-modal-title">Advertisment</h4>
+          <button type="button" class="btn close" aria-label="Close" (click)="modal.close('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <table class="w-100">
+                <tr><td>Choose images:</td><td>
+                <input type="file" ref="image" (change)="onImageUpload($event)" class="form-control" required>
+                </td></tr>
+                <tr><td>Description:</td>
+                <td><textarea [(ngModel)]="ad.description" type="text" id="description" placeholder="Description" rows="3" class="form-control"></textarea></td></tr>
+                <tr><td>Ad URL:</td>
+                <td><input [(ngModel)]="ad.url" type="url" id="link" placeholder="Link" class="form-control"></td></tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="addAd()">Add</button>
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+        </div>
+    </ng-template>
+    <!-- Targeted audience modal -->
+    <ng-template #audienceModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="audience-modal-title">Audience</h4>
+          <button type="button" class="btn close" aria-label="Close" (click)="modal.close('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <b>Age</b>
+            <table class="w-100">
+                <tr><td>From:</td>
+                <td><input [(ngModel)]="targetedAudience.fromAge" type="number" id="fromAge" min="15" max="70" placeholder="From" class="form-control"></td></tr>
+                <tr><td>To:</td>
+                <td><input [(ngModel)]="targetedAudience.toAge" type="number" id="toAge" min="15" max="70" placeholder="To" class="form-control"></td></tr>
+            </table>
+            <br>
+            <b>Gender</b><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="campType" id="male" value="MALE" [(ngModel)]="gender.male">
+                <label class="form-check-label">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="campType" id="female" value="FEMALE" [(ngModel)]="gender.female">
+                <label class="form-check-label">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="campType" id="other" value="OTHER" [(ngModel)]="gender.other">
+                <label class="form-check-label">Other</label>
+            </div>
+            <br>
+            <b>HashTags</b>
+            <textarea [(ngModel)]="hashtags" type="text" id="hashtags" placeholder="Enter tags separated by space" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="addAudience()">Add</button>
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Close</button>
+        </div>
+    </ng-template>
+</div>

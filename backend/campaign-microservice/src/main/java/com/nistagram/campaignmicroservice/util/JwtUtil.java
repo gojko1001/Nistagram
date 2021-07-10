@@ -1,4 +1,4 @@
-package com.agent.webshop.util;
+package com.nistagram.campaignmicroservice.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -9,13 +9,12 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-
-    @Value("rlwHsKbnKROj0bg")
-    private String KEY;
+    @Value("XtyV79iOKFv0GV8")
+    private String API_KEY;
 
 
     public String extractUsername(String tokenHeader) {
-        return extractClaim(tokenHeader.substring(7), Claims::getSubject);
+        return extractClaim(tokenHeader, Claims::getSubject);
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -23,6 +22,6 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(API_KEY).parseClaimsJws(token).getBody();
     }
 }

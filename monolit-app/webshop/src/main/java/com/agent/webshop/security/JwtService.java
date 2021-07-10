@@ -15,11 +15,14 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("Nistagram")
+    @Value("NWebShop")
     private String APP_NAME;
 
-    @Value("rlwHsKbnKROj0bg")
+    @Value("5d6Zcg2vP73nWWa")
     private String KEY;
+
+    @Value("XtyV79iOKFv0GV8")
+    private String API_KEY;
 
     @Value("3600000")
     private int EXPIRATION_PERIOD;
@@ -35,15 +38,6 @@ public class JwtService {
         return null;
     }
 
-    public String createToken(String username) {
-        return Jwts.builder()
-                .setIssuer(APP_NAME)
-                .setSubject(username)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_PERIOD))
-                .signWith(SignatureAlgorithm.HS256, KEY).compact();
-    }
-
     public String createToken(String username, Role role) {
         return Jwts.builder()
                 .setIssuer(APP_NAME)
@@ -52,6 +46,14 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_PERIOD))
                 .claim("role", role.getName())
                 .signWith(SignatureAlgorithm.HS256, KEY).compact();
+    }
+
+    public String createApiToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_PERIOD))
+                .signWith(SignatureAlgorithm.HS256, API_KEY).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {

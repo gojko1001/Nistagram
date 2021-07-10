@@ -3,15 +3,15 @@
     text-align: center;
     display: inline-block;
     vertical-align: top;
-  }
+}
 
-  p{
-      color: lightblue;
-  }
+p{
+    color: lightblue;
+}
 
-  span{
-      color:black;
-  }
+span{
+    color:black;
+}
 
 .float{
 	position:fixed;

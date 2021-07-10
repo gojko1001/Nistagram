@@ -1,5 +1,6 @@
 package com.agent.webshop.controller;
 
+import com.agent.webshop.controller.dto.ImageBytesDto;
 import com.agent.webshop.domain.Item;
 import com.agent.webshop.service.interfaces.IItemService;
 import com.agent.webshop.util.FileUploadUtil;
@@ -42,7 +43,7 @@ public class ItemController {
     }
 
     @GetMapping("/{username}")
-    public List<Item> getItemsByUsername(@PathVariable("username") String username) {
+    public List<ImageBytesDto> getItemsByUsername(@PathVariable("username") String username) {
         return itemService.getItemsByUsername(username);
     }
 
